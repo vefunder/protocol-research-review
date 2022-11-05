@@ -10,15 +10,20 @@
 
 *[Liquity: Decentralized Borrowing Platform](https://docsend.com/view/bwiczmy) (Whitepaper)*
 
-Liquity is a decentralized borrowing protocol that allows interest-free loans against ETH as collateral. Loans are paid out in LUSD and need to maintain a minimum collateral ratio (CR) of 110%. The loans are secured by a Stability Pool containing LUSD that caters the liquidations.
+Liquity is a decentralized borrowing protocol that allows interest-free loans against ETH as collateral. The loans are subjected to Bowworing fees and Redemption fees; both of them being a function of the redemption rate. The borrowing fee is paid in LUSD and ranges from 0.5% to 5% whereas the Redemption fee is paid in ETH and ranges from 0.5% to infinity. As the redemption volume of LUSD increases the fees move away from their lower limit of 0.5%. On top of the Borrowing fees, 200 LUSD is charged as a [Liquidation Reserve](https://docs.liquity.org/faq/borrowing#what-is-the-liquidation-reserve) which will be returned when the debt is repaid. 
+
+![Trove creation demonstration for understanding fee at the time of borrowing](https://lh3.googleusercontent.com/ABVAaBAyu-5EXrFCtXZH8v0QUss7gJF54Dwx6GHHG-e_monuGsCq2-OKxNNXNVeGGhyeKwS_69GR7I8b99PONo-tZG4UTNEwMpYMu1UtlxE5Ds27qdCe6400ig4bYx3043aKMZXqvTInslV7qu9Z551P_DQG2NysLOBndXkSf9AEV250ttxJENfrP22vhg)
+Liquity allows a minimum debt of 2,000 LUSD. Considering that the Trove is immediately liquidated upon creation, a maximum loss of 0.5% Borrowing fee will be 18.55% and 21.7% in the case of maximum borrowing fees.  
+
+To avoid liquidations, the debt holder needs to maintain a minimum collateral ratio (CR) of 110% or 150% in the case when recovery mode is active (Recovery mode is further explained at the end of this section). The loans are secured by a Stability Pool containing LUSD that handles the liquidations.
 
 Borrowers on Liquity open and maintain a vault called a “Trove” for their debt positions. The Stability Pool is a source of liquidity that is used to repay debt from liquidated Troves. When any Trove is liquidated, an amount of LUSD corresponding to the remaining debt of the Trove is burned from the Stability Pool’s balance to repay the Trove’s debt. In exchange, the entire collateral from the Trove is transferred to the Stability Pool. The Stability Pool is funded by users (called Stability Providers) transferring LUSD into it. Over time, Stability Providers lose a pro-rata share of their LUSD deposits, while gaining a pro-rata share from liquidated Troves.
 
-![Demand Supply flow-diagram for Liquity protocol](https://lh5.googleusercontent.com/MnSjLTcQzoWsjZgKvLYA67mF4uG8odRIfTtOE4U24lZpPx-vQ5uKF_Fn1kAlHYE18coYH4vh-bB5PbdMOYufDmg50a1J7cdxVBip4WbVQCaSGPEmUtt7nT79ggQjqfJMgtt7Vv8nkbeCt10YJl0hYRXx54cPBeEc8XBNaVk92_5fckd47B0axGZAeiGYRQ)
+![Demand Supply flow-diagram for Liquity protocol](https://lh3.googleusercontent.com/FKGFlQaNnZNWyjdwPHTOZlKd4TYSh6HlDK1kHj_ar6SEb5O2YdwjBNiU5-v25qK_4nt_5We2dQUGO1Dp9VaMwvP2uRdmd0dQxzOxIBl-okYQBCusO_pfHV7L1ol4OrlrTckVT9Yi_WWTyb446LgPr8IFPLIw_PtDrtculTuCp4rc31cUEpkKs0ZK4Ycl9Q)
 
 Liquidation rewards are evenly distributed to the LUSD deposited in the Stability Pool. When the ETH price drops quickly, heavy liquidations might get triggered. If people are not confident with exposure to ETH, they might not deposit their LUSD in the stability pool. When the stability pool is empty, the debt obligation is transferred to other LUSD debt holders, reducing their collateral ratio. In the best case, the debt is transferred at a 110% collateral ratio, but in a flash crash, the ratio might drop lower than 110% reducing the collateral ratio for other debt holders.
 
-In an undesirable scenario where the Stability Pool has no funds to facilitate the liquidations, the debt obligation from a Trove that is deemed to be liquidated might get transferred to other LUSD debt holders. Transferring this debt obligation will reduce the health factor (collateral ratio) of the remaining Troves making them vulnerable to liquidation if the ETH price chooses to go down.
+In an undesirable scenario where the Stability Pool has no funds to facilitate the liquidations, the debt obligation from a Trove that is deemed to be liquidated might get transferred to other LUSD debt holders. Transferring this debt obligation will reduce the health factor (collateral ratio) of the remaining Troves making them vulnerable to liquidation if the ETH price drops.
 
 ![Debt trasnfer in case of insufficient funds under Stability Pool](https://lh5.googleusercontent.com/dsMYpvcTpi81p2KC3WNCcD0cWwUfAjtGPN7Uyo3KoI_vu54ELjImim8tCw7Wjf25iVU-MvIeQPxG8_vOWiXDHCkfqKPmODh0kDXAIXz6UwJ4HnQiQGhDSMxDHqPVUK5kO4zcpfHG9lwrnS5PQY9L0n5SLS8iaF7_-z8aTca7v-xEUadX0DKl0Y7UAI487w)
 
@@ -26,7 +31,7 @@ In an undesirable scenario where the Stability Pool has no funds to facilitate t
 >
 > **Liquity Whitepaper**
 
-The above ensures that when risky debt is redistributed to the existing debt holders, Recovery Mode is triggered. Recovery Mode is activated when the protocol's Total Collateral Ratio (TCR) falls below 150%. In this undesirable mode of operation, Troves with a collateral ratio between the current TCR and 110% also become subject to liquidation.
+The above ensures that Recovery Mode is triggered when risky debts are redistributed to the existing debt holders. Recovery Mode is activated when the protocol's Total Collateral Ratio (TCR) falls below 150%. In this undesirable mode of operation, Troves with a collateral ratio between the current TCR and 110% also become subject to liquidation.
 
 These liquidations are carried at 110% CR and excess collateral can be reclaimed by the borrower.
 
@@ -46,7 +51,7 @@ Chicken Bonds were launched to ensure there are funds available in the Stability
 
 Chicken Bonds are a novel mechanism for projects to bootstrap protocol-owned liquidity at no cost while boosting yield opportunities for end users. The amplified value accrual to bTKN is achieved by investing the funds under protocol-owned liquidity and the bonds’ (underlying tokens (TKN)).  
 
-Users may deposit TKN in exchange for an accruing balance of bTKN. At any time, bond-holders can either retrieve their principal foregoing the accrued amount (“chicken out”) or trade it in for the accrued bTKN (“chicken in”). Here, a portion of the TKN acquired by the system backs the bTKN supply, and this portion depends on the time of chicken_in.
+Users may deposit TKN in exchange for an accruing balance of bTKN. At any time, bond-holders can either retrieve their principal foregoing the accrued amount (“chicken out”) or trade it in for the accrued bTKN (“chicken in”). Here, a portion of the TKN acquired by the system backs the bTKN supply, and this portion depends on the time of chicken in.
 
 The protocol operates a Treasury consisting of three logical parts (“buckets”): Pending Bucket, Reserve Bucket, and Permanent Bucket.
 
@@ -56,7 +61,7 @@ The protocol operates a Treasury consisting of three logical parts (“buckets�
     
 -   The Permanent bucket can be considered a protocol-owned vault that stores the other portion of the TKN gathered from the former bondholders. Similar to protocol-owned liquidity, funds in this vault decide the maximum liquidity of LUSD that can be transferred to the [LUSD3CRV pool](https://curve.fi/lusd) as liquidity through [Yearn vault](https://yearn.finance/#/vault/0x5fA5B62c8AF877CB37031e0a3B2f34A78e3C56A6). The yield earned by the Permanent bucket is credited to the Reserve bucket.
 
-The schematic shows the behavior of the protocol and what choices the user has when 1000 LUSD are bonded and chicken_in at time t1.
+The schematic shows the behavior of the protocol and what choices the user has when 1000 LUSD are bonded and chicken in at time t1.
 
 ![Chicken Bonds mechanism breakdown](https://lh6.googleusercontent.com/ZIZUjpj4yUH2lTPfJgC7jmBVJkkegK4eEksZf_2knaZDFrQNeLCUCS1WAoDeaI436GjWWbrHfILcqGECNYI0ABXLP6f_a4LmG_9xcWareS_WHyWxtC7O_CnUC8DgQ7wWOjl9Zd-FgoR_Lt3VdZ1ld-6oIJcC0fYFBORiaAxgv5Zqee43PycL3LzjGoXIEA)
 
@@ -111,7 +116,7 @@ The amplified yield comes from the yield generated through the funds in the pend
 
 As of Nov 2nd, 2022
 
-The market price of bLUSD can be influenced by this ability to amplify the yield amount in the pending bucket i.e. funds that are bonded but have yet to chicken_in or chicken_out.
+The market price of bLUSD can be influenced by this ability to amplify the yield amount in the pending bucket i.e. funds that are bonded but have yet to chicken in or chicken_out.
 
 The impact of the market price of bLUSD will be discussed further in the article.
 
@@ -145,12 +150,12 @@ Lowering the alpha would cause the accrual of bLUSD to speed up thus bringing th
 
 ## A consequence of lowering the alpha
 
-A major reason for greater bond age is people not willing to take an action (CI or CO), in other words, people are not convinced with the currently accrued bLUSD is profitable enough to chicken_in. When the [current weighted average bond age](https://dune.com/queries/1460655) is greater than the target age which is 15 days, the controller would lower the alpha.
+A major reason for greater bond age is people not willing to take an action (Chicken in or Chicken out), in other words, people not convinced enough that the bLUSD accrued so far is profitable enough to chicken in. When the [current weighted average bond age](https://dune.com/queries/1460655) is greater than the target age which is 15 days, the controller would lower the alpha.
 
-Lowering the alpha will change the non-profitable chicken_in trade to a profitable chicken_in trade by accelerating the bLUSD accrual. If we were to create a bond for 1000 LUSD on Nov 2nd the break-even time (value of accrued bLUSD = value of LUSD bonded) considering the market price of bLUSD as $1.20 turn out on Nov 25th.
+Lowering the alpha will change the non-profitable chicken in trade to a profitable chicken in trade by accelerating the bLUSD accrual. If we were to create a bond for 1000 LUSD on Nov 2nd the break-even time (value of accrued bLUSD = value of LUSD bonded) considering the market price of bLUSD as $1.20 turn out on Nov 25th.
 ![Demonstartion of expected bond age with breeak even point and rebonding time with 1000 LUSD as on November 2nd 2022](https://lh6.googleusercontent.com/wl-7yMaLz2OLSAYuQ2vmZCFnKliQOPv5YHwXogI61kj4UM_WeXuy1rJ78K7L8c-J3fVKivEiMUvOe1mReWhDtoNG_uK5Q8tmbg-seV1gIxVvJq5CrRZr0z6mO8-vqRWUZUa7EP8eKtqgNoudnHDrUrcbKxKp7b68CPOlLNWehQ_6iNOlWbW2jl3SYziFXw)
 
-Considering a zero-sum game, if there is only 1 user currently bonding with a considerable amount of LUSD. When his/her non-profitable trade is converted to a profitable one and when he/she chicken_in, the extra profit that he/she would gain will come from the bLUSD market price.
+Considering a zero-sum game, if there is only 1 user currently bonding with a considerable amount of LUSD. When his/her non-profitable trade is converted to a profitable one and when he/she chicken in, the extra profit that he/she would gain will come from the bLUSD market price.
 
 Now consider the same scenario when there is almost negligible liquidation. The market price might drop beyond the floor price triggering the arb bots to empty the Reserve bucket.
 
@@ -178,9 +183,9 @@ Other than smart contract risk, LP might face a risk associated with bLUSD price
 
 Impermanent loss is basically the loss that is equivalent to the upside gained on holding the token instead of providing liquidity. In other words, it is an opportunity cost that may occur while providing liquidity, due to the price shift of one asset of the liquidity pool, versus holding the assets. It does depend on the ratio in which the liquidity was provided, the amount of liquidity, and the depth of that liquidity pool.
 
-Ideally, bLUSD’s ever-increasing floor price should drive the market price up and LUSD being a pegged asset there exists a clear impermanent loss while providing liquidity.
+Ideally, bLUSD’s ever-increasing floor price should drive the market price up and LUSD being a pegged asset there exists a clear impermanent loss while providing liquidity. While providing liquidity as 50% in bLUSD and 50% in LUSD, if the market price of bLUSD increases, the ROI generated without considering the trading fees would be less than simply holding bLUSD for the same value.
 
-While providing liquidity as 50% in bLUSD and 50% in LUSD, if the market price of bLUSD increases, the ROI generated without considering the trading fees would be less than simply holding bLUSD for the same value.
+If there are huge positions chickening in, there is high probability that they find the current bLUSD price suitable to exit and Curve bLUSD-LUSD3CRV is the pool where they would swap their bLUSD at. LP are exposed to impermanent loss when bond holders swap their huge bLUSD position on the Curve pool which will bring the bLUSD price down. 
 
 ### The risk associated with the bLUSD price
 
