@@ -16,7 +16,7 @@ Asset Risk Assessment - Paladin / Warden
  [Podcast: Voting Markets, with Paladin's Romain Figuereo](https://anchor.fm/i-pledge-allegiance/episodes/Voting-Markets--with-Paladins-Romain-Figuereo-e1foigm)
 
 ## Abstract
-With the introduction of lendable governance power Paladin fills a yet unfilled niche of governance voting markets. In this review we will cover both Paladin and Warden and assess the relevant risks veCRV holders and LPs.
+With the introduction of lendable governance power, Paladin fills a yet unfilled niche of governance voting markets. In the first part of this review, we will cover Paladin and assess the relevant risks for its users including LPs. Lastly, we will assess the Warden products which were designed to cater veTokens due to their fundamental differences to classic governance tokens, i.e. no possibility to lend generalized gov. power.
 
 ### Paladin protocol overview
 The Paladin protocol allows users to non-custodially lend the governance power of various protocols. The way it operates resembles that of a lending protocol. When a user deposits his tokens into a pool, they are released for borrowing. When a user borrows the governance rights, the [PalPool](https://doc.paladin.vote/paladin-protocol/palpool) creates a [PalLoan](https://doc.paladin.vote/paladin-protocol/palloan) (ERC-721) which represents the borrowing position. The borrowing fees are paid in advance by the user after which the governance rights are delegated to the borrower.
@@ -73,11 +73,11 @@ The Warden quest product offers a solution that allows protocols to set a budget
 
 For more information on how to create a quest or claim rewards see the [documentation](https://doc.paladin.vote/warden-quest/introduction).
 
-The [audit for Warden quest](https://github.com/spearbit/portfolio/blob/master/pdfs/Paladin-Spearbit-Security-Review.pdf) was carried out by Spearbit whereby all except one issue were resolved. This is due to the fact that Paladin wanted to give its users the possibility to accumulate their earnings over several voting periods. Because the gauge contract does not store information about past votes a high reliance on an accurate Merkle Tree generation persists.
+The [audit for Warden quest](https://github.com/spearbit/portfolio/blob/master/pdfs/Paladin-Spearbit-Security-Review.pdf) was carried out by Spearbit whereby all except one issue were resolved. This is due to the fact that Paladin wanted to give its users the possibility to accumulate their earnings over several voting periods. Because the gauge contract does not store information about the past votes of a user, additional work is required to keep track of the votes. For that to happen, a manual (off-chain) effort is required to create the [Merkle Trees](https://medium.com/crypto-0-nite/merkle-proofs-explained-6dd429623dc5) which are needed for operational gas efficiency. Thus, high reliance on an accurate Merkle Tree generation persists.
 
 ## Conclusion
 As far as the Warden products are concerned, no noteworthy risks could be identified. Both products do not represent a veCRV derivative but contracts that only manage the functional aspects of veCRV. This non-custodial property limits even worst-case hypothetical risks (e.g. the inability to claim bribe rewards due to faulty Merkle Trees) to a minimum.
 
-As for the risks regarding Paladin, these are mainly confined within the powers of the multisig. Since trust assumptions can be made by virtue of the reputation and knownness of the multisig participants, the risk can likewise be considered minimal in this case.
+As for the risks regarding Paladin, these are mainly confined within the powers of the multisig. Since trust assumptions can be made by virtue of the reputation and public disclosure of the multisig participants, the risk can likewise be considered minimal in this case.
 
 In summary, the Paladin protocol primarily targets the pain point of governance scalability within DAOs that can be effectively solved through delegation. Thus, it can be said that the Paladin protocol contributes a positive value add to governance within the DeFi ecosystem.
