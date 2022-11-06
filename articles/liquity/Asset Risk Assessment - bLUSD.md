@@ -39,6 +39,33 @@ Recovery Mode generates more liquidation with a capped discount. If the funds in
 
 Chicken Bonds were launched to ensure there are funds available in the Stability Pool to facilitate liquidation and to ensure the LUSD peg in harsh conditions.
 
+## LUSD peg stability
+
+![LUSD Price history](https://lh5.googleusercontent.com/2NL2bc3JNY3ii4igTPPt90Tr_h2sMYU3OoZeycfVkEwoVYtuSLgOeWJIHFyjiVDMSz90hmJKv3G3BTnWlWba-Ju8hOzqRHXSw1RL95st-2Ds-qy1g-LbhsC6z9XP5mn1U-0hYicwhv_t90C_yWcia0qds0-FJL2QITf-AsAGuX_y-f6KAaJ_coSUz4dw9Q)
+Image [Source](https://www.coingecko.com/en/coins/liquity-usd)
+
+![Source: https://www.liquity.org/blog/on-price-stability-of-liquity](https://lh6.googleusercontent.com/7RUygHVopKPhdCqEUUJU5i-TJVCNOktQZl_mfw5vZXwkJ7hFQW9H3T3Ov4odAE_DaTHBMDMWlDxyEo-7tFJgXmlcDvXyS5OjKATSC8fD9RqYFsOS020AG6pAFaukrhCtOP9QJSBaTKTMcjJ6obBpBJthgw-QAdxDGjp2MM-SGBY4LX6B_pg25dagBuDLQw "LUSD hard peg and soft peg distinction")
+
+Image [Source](https://www.liquity.org/blog/on-price-stability-of-liquity)
+
+### Hard peg stability
+
+The ability to redeem LUSD for ETH at face value (i.e. 1 LUSD for $1 of ETH) and the minimum collateral ratio of 110% create a price floor and price ceiling (respectively) through arbitrage opportunities. We call these "hard peg mechanisms" since they are based on direct processes.
+
+In order to ensure that the LUSD price does not drop below $1, there is a 110% minimum collateral ratio. This means that for every $100 worth of LUSD, there must be at least $110 worth of collateral in the system. This creates a price floor of $1 for the LUSD.
+
+If the LUSD price rises beyond $1.10, there would be an arbitrage opportunity with the borrowed LUSD to make a profit by redeeming it for Ether. When redeemed, the system uses the LUSD to repay the riskiest Trove(s) with the currently lowest collateral ratio and transfers the respective amount of Ether from the affected positions to the redeemer. In other words, the Ether is drawn from the Troves’ collateral, starting from the position with the lowest collateral ratio.
+
+### Soft peg stability
+
+Liquity is a system where users view the 1:1 dollar peg of LUSD as a Schelling Point. This means that the system usually returns to this point after temporary deviations. If the price of LUSD goes above $1, it makes borrowing more attractive because the user expects to repay at a rate of $1 or lower. If the price goes below $1, it incentivizes repaying existing debts because this state is likely to be short-lived.
+
+Higher Borrowing fees immediately make new loans less attractive and thus throttle the generation of LUSD if there is not enough demand to keep up with the supply. 
+
+If the redemption mechanism succeeds to push a lower price back to parity, new loans will become more attractive (see above “Parity as a Schelling Point”). 
+
+A certain fraction of the entire LUSD supply will be inside the Stability Pool and thus outside regular circulation. However, the pooled fraction of LUSD may depend on the current LUSD: USD exchange rate. The higher the price of LUSD in USD, the lower will be the (expected) collateral surplus gains in case of liquidations, since the conversion is based on the nominal value of LUSD being equal to USD.  As the price of LUSD approaches USD 1.10, the risk of a potential loss for depositors increases accordingly, and stability deposits become less attractive. In this way, more LUSD will flow into the system.
+
 # Chicken Bonds
 
 *[Resouces]*
@@ -155,7 +182,7 @@ A major reason for greater bond age is people not willing to take an action (Chi
 Lowering the alpha will change the non-profitable chicken in trade to a profitable chicken in trade by accelerating the bLUSD accrual. If we were to create a bond for 1000 LUSD on Nov 2nd the break-even time (value of accrued bLUSD = value of LUSD bonded) considering the market price of bLUSD as $1.20 turn out on Nov 25th.
 ![Demonstartion of expected bond age with breeak even point and rebonding time with 1000 LUSD as on November 2nd 2022](https://lh6.googleusercontent.com/wl-7yMaLz2OLSAYuQ2vmZCFnKliQOPv5YHwXogI61kj4UM_WeXuy1rJ78K7L8c-J3fVKivEiMUvOe1mReWhDtoNG_uK5Q8tmbg-seV1gIxVvJq5CrRZr0z6mO8-vqRWUZUa7EP8eKtqgNoudnHDrUrcbKxKp7b68CPOlLNWehQ_6iNOlWbW2jl3SYziFXw)
 
-Considering a zero-sum game, if there is only 1 user currently bonding with a considerable amount of LUSD. When his/her non-profitable trade is converted to a profitable one and when he/she chicken in, the extra profit that he/she would gain will come from the bLUSD market price.
+Considering a zero-sum game, if there is only 1 user currently bonding with a considerable amount of LUSD, their non-profitable trade will be converted to a profitable one (based on the mechanic discussed above). When they chicken in, the extra profit (which otherwise would not be generated if  was not to be lowered) will come from the bLUSD inflation.
 
 Now consider the same scenario when there is almost negligible liquidation. The market price might drop beyond the floor price triggering the arb bots to empty the Reserve bucket.
 
