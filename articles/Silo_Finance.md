@@ -144,32 +144,22 @@ The team is working on new features to improve this, but it will take some time.
 
 The Silo team aims to issue a new over-collateralized stablecoin with a soft peg to the US Dollar called XAI. The main use case for XAI is to serve as a second bridge token alongside ETH. Thus, enabling users to borrow XAI to bridge from token A to token B.
 
-SiloDAO is the only entity that controls XAI. The DAO can choose to mint unlimited XAI and deposit it into any number of silos via executive proposals. The DAO can also burn XAI that is extended to any silos via governance proposals. Hence, when minting XAI into a silo, the SiloDAO effectively determines XAI’s backing, which can also be reversed by burning XAI from a silo.
+SiloDAO is the only entity that controls XAI. The DAO can choose to mint unlimited XAI and deposit it into any number of silos via executive proposals. The DAO can also burn XAI that is extended to any silos via governance proposals. Hence, when minting XAI into a silo, the SiloDAO effectively determines XAI’s backing, which can also be reversed by burning XAI from a silo. In the beginning, Silo will only enable XAI as a bridge asset for USDC and ETH. This strongly reduces the collateral risk of XAI.
 
 
 ## Minting XAI
 
-XAI is an ERC-20 [token contract](https://etherscan.io/address/0xd7C9F0e536dC865Ae858b0C0453Fe76D13c3bEAc#code) owned by the Silo Timelock Controller contract:
+XAI is an ERC-20 [token contract](https://etherscan.io/address/0xd7C9F0e536dC865Ae858b0C0453Fe76D13c3bEAc#code) owned by the Silo Timelock Controller contract.
 
 
-
-<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image2.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image2.png "image_tooltip")
-
+![Etherscan_XAI_contract_owner](https://user-images.githubusercontent.com/89845409/200542967-4c7f3e9d-651f-4fbc-86bb-b561b95fbc44.png)
 
 (source: [Etherscan](https://etherscan.io/address/0xd7C9F0e536dC865Ae858b0C0453Fe76D13c3bEAc#readContract))
 
-The Timelock Controller is controlled by SiloDAO (i.e. SILO token holders voting via [Tally](https://www.tally.xyz/governance/eip155:1:0xA89163F7B2D68A8fbA6Ca36BEEd32Bd4f3EeAf61)), who control the XAI in circulation through the mint and burn function:
+The Timelock Controller is controlled by SiloDAO (i.e. SILO token holders voting via [Tally](https://www.tally.xyz/governance/eip155:1:0xA89163F7B2D68A8fbA6Ca36BEEd32Bd4f3EeAf61)), who control the XAI in circulation through the mint and burn function. Timelock duration is two days.
 
 
-
-<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image3.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image3.png "image_tooltip")
-
+![Silo_mint_function](https://user-images.githubusercontent.com/89845409/200542642-f6bb7ee8-7774-4771-b359-5c5cb752350d.png)
 
 (source: [ContractRveader XAI](https://www.contractreader.io/contract/0xd7C9F0e536dC865Ae858b0C0453Fe76D13c3bEAc) )
 
@@ -188,11 +178,7 @@ Silo Protocol smart contracts have a modular design and the protocol consists of
 
 
 
-<p id="gdcalert4" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image4.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert5">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image4.png "image_tooltip")
-
+![Silo_Repository_immutable](https://user-images.githubusercontent.com/89845409/200543353-4a07e9fc-c0ac-4e5f-bb65-2a6319024608.png)
 
 (source: [SiloLens.sol](https://etherscan.io/address/0xf12C3758c1eC393704f0Db8537ef7F57368D92Ea#code))
 
@@ -205,31 +191,23 @@ Silo Protocol smart contracts have a modular design and the protocol consists of
 * The permission system registry consists of three smart contracts: GuardedLaunch.sol, TwoStepOwnable.sol, and Manageable.sol
 
 
-
-<p id="gdcalert5" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image5.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert6">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image5.png "image_tooltip")
-
+![Silo_protocol_architecture](https://user-images.githubusercontent.com/89845409/200553725-5b4d8b26-ee1b-4914-b6c2-a1ec803063a0.png)
 
 (source: [Certora Formal Verification Document](https://www.silo.finance/_files/ugd/fd5034_98066b4c70ea46b5862a00670179f067.pdf))
 
 
 # SILO Governance
 
-The governance process follows a standard procedure of forum discussion, Snapshot vote, and finally on-chain vote. For more details visit the [docs](https://silopedia.silo.finance/governance/silodao). In practice, however, Snapshot is mostly applied for decisions concerning expenditures of the DAO’s funds, whereas changes that affect the protocol itself are directly voted on via an on-chain proposal on [Tally](https://www.tally.xyz/governance/eip155:1:0xA89163F7B2D68A8fbA6Ca36BEEd32Bd4f3EeAf61).
+The governance process follows a standard procedure of forum discussion, Snapshot vote, and finally on-chain vote. For more details visit the [docs](https://silopedia.silo.finance/governance/silodao). In practice, however, Snapshot is mostly applied for decisions concerning expenditures of the DAO’s funds, whereas changes that affect the protocol itself are directly voted on via an on-chain proposal on [Tally](https://www.tally.xyz/governance/eip155:1:0xA89163F7B2D68A8fbA6Ca36BEEd32Bd4f3EeAf61). The funds are managed by a 2-of-3 multi-sig (owners: [signer1](https://etherscan.io/address/0x9b8b04B6f82cD5e1dae58cA3614d445F93DeFc5c), [signer2](https://etherscan.io/address/0x66B416a3114A737f0353DC74d1E12a7e23f686F9), [signer3](https://etherscan.io/address/0xe153437bC974cfE3E06C21c08AeBbf30abaefa2E)).
 
 The screenshot below displays all governance parameters.
 
 
-
-<p id="gdcalert6" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image6.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert7">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image6.png "image_tooltip")
+![Governance_Parameters](https://user-images.githubusercontent.com/89845409/200553857-48031700-9fce-41a9-a485-5679ccb1e77a.png)
 
 
-Notably, the voting period for proposals is three days. Plus a voting delay of two days for on-chain proposals. This is in line with best practices and seems to be a reasonable time frame.
+Notably, the voting period for proposals is three days. Plus a voting delay of two days for on-chain proposals. This is in line with best practices and seems to be a reasonable time frame. A quorum of 10M equals 5% of tokens in circulation (~180M SILO) or 1% of the max token supply (1B SILO).
+The only thing that is required to participate in on-chain governance is to delegate SILO tokens to one's wallet or to a delegate. There is currently no vote-lock or staking solution in place. However, governance attacks via flash loans are prevented through the delegation mechanism, as new delegates cannot participate in votes that are already live at the time the delegate function is called. Moreover, the team expressed the intention to move to a vote-escrowed tokenomics system a while ago, however, the last update was from April 2022.
 
 
 # Risk Vectors
@@ -246,39 +224,21 @@ There is no direct custody risk because SiloDAO as the owner of the core contrac
 * setFees - The SiloDAO (as onlyOwner) can decide to set and adjust certain fees, such as borrow-entry-fees, protocol-share-fees, and liquidation-fees. These fees can affect borrowers and users when getting liquidated.
 
     
-
-<p id="gdcalert7" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image7.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert8">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image7.png "image_tooltip")
-
-
+![Silo_setfees_contract](https://user-images.githubusercontent.com/89845409/200585411-7f8a2d79-db9d-49d8-81f1-5b5c2b2ebeb6.png)
 
     (source: [siloRepository.sol](https://www.contractreader.io/contract/0xd998C35B7900b344bbBe6555cc11576942Cf309d))
 
 * setPriceProvidersRepository - The chosen oracle solution can also affect users' deposits. The DAO must ensure that to select the best oracle options for each silo.
 
     
-
-<p id="gdcalert8" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image8.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert9">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image8.png "image_tooltip")
-
-
+![Silo_setpriceprovidersrepository_contract](https://user-images.githubusercontent.com/89845409/200585691-6be4baaf-fa50-4bd4-9088-db54c1621290.png)
 
     (source: [siloRepository.sol](https://www.contractreader.io/contract/0xd998C35B7900b344bbBe6555cc11576942Cf309d))
 
 * GuardedLaunch.sol - a contract which is part of Silo’s permission system - enables the SiloDAO (as Timelock Controller) to implement security and risk-averse functions. For instance, it allows the contract manager (onlyManager) to pause specific silos in case of an exploit. If that happens, users deposited in the paused silos are at risk of liquidation, if their collateral value decreases below the liquidation threshold, after a new start (remove pause).
 
 
-
-<p id="gdcalert9" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image9.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert10">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image9.png "image_tooltip")
-
-
+![Silo_guardedlaunch_contract](https://user-images.githubusercontent.com/89845409/200585914-4e62d274-8151-4f6e-b583-d6dfc0164c0e.png)
 
 ## (source: [SiloRepository.sol (GuardedLaunch.sol)](https://www.contractreader.io/contract/0xd998C35B7900b344bbBe6555cc11576942Cf309d))
 
@@ -301,20 +261,15 @@ In summary, governance has extensive and very far-reaching powers over Silo. Hen
 For this to happen, the party would need to accrue a substantial amount of SILO tokens (or get voting power delegated). Presuming that the team and SILO investors only vote in the best interest of the DAO, the answer is: The possibility is very low. The chart below shows the voting power of all delegators. It’s important to note that to participate in on-chain voting, one has to delegate SILO to one's wallet or another delegate.
 
 
-
-<p id="gdcalert10" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image10.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert11">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image10.png "image_tooltip")
-
+![SILO_delegatvote_distribution](https://user-images.githubusercontent.com/89845409/200591116-79f9739f-57ee-4ffc-9c89-583cd36f335d.png)
 
 (source: [Boardroom - Delegates Voting Power Distribution](https://boardroom.io/silo/delegates))
 
-As seen in the chart, the top three delegates control 51.2% of the overall voting power that is currently eligible to vote. This is quite a high concentration of power (basically a [Nakamoto coefficient](https://news.earn.com/quantifying-decentralization-e39db233c28e) of 3). With a bit of forensics on etherscan, using the [vested token overview](https://docs.google.com/spreadsheets/d/1IcvYQlWQ34kIFIfIKWzJwGlw-Jv33_TMBDKCI0ziEa8/edit#gid=1565912853), it becomes clear that the address with the most delegated voting power is controlled by the founding team. The same is true for ranks 4, 7, and 10. The rest seem to be investors and community members.
+As seen in the chart, the top three delegates control 51.2% of the overall voting power that is currently eligible to vote. This is quite a high concentration of power (basically a [Nakamoto coefficient](https://news.earn.com/quantifying-decentralization-e39db233c28e) of 3). With a bit of forensics on etherscan, using the [vested token overview](https://docs.google.com/spreadsheets/d/1IcvYQlWQ34kIFIfIKWzJwGlw-Jv33_TMBDKCI0ziEa8/edit#gid=1565912853), it becomes clear that the address with the most delegated voting power is controlled by the founding team. The same is true for ranks 4, 7, and 10. The second and third largest delegates seem to be whales and the rest are investors and community members
 
 This does not come as a surprise, given that the founding team will receive 27% of all tokens in circulation (vested over 3 years) according to the [vesting schedule](https://docs.google.com/spreadsheets/d/1IcvYQlWQ34kIFIfIKWzJwGlw-Jv33_TMBDKCI0ziEa8/edit#gid=1565912853) [side note: the team allocation stated in their [docs](https://silopedia.silo.finance/governance/token-allocation-and-vesting) is 5.25% lower (21.75%). Those tokens are currently sitting in a vesting contract untouched].
 
-In summary, the team has by far the largest allocation. All other stakeholder groups don’t even come close, even all investors combined only achieve 6.3% voting power. While it’s not up to us to judge what token allocation is fair, it still leads to the conclusion that SiloDAO is fully controlled by the founding team, and will be for the foreseeable future.
+In summary, the team has by far the largest allocation. All other stakeholder groups don’t even come close, even all investors combined only achieve 6.3% voting power. Two whales currently also hold significant voting power, however, it still leads to the conclusion that SiloDAO is controlled by the founding team. There are plans to dilute the team share via a veSILO tokenomics issuance scheme, until those become a reality there is a large trust factor put onto the Silo founding team - who unfortunately is not doxxed. The team as listed on their website is anon. However, they managed to attract well-known investors and advisors, which adds to the credibility of the team.
 
 
 ## Smart Contract Risk
@@ -327,31 +282,7 @@ Useful links:
 * [ABDK audit report](https://drive.google.com/file/d/1WXaB3ICLv4rSEX86POK3-NaOIxXwyq9l/view) 
 * [Quantstamp audit report](https://drive.google.com/file/d/10GyfA-nBJ5jqLWW9LEYJQeFem8qSgNH6/view) 
 
-Silo has undergone two audits by ABDK and Quantstamp, and has tested the smart contracts against formal verification rules with Certora. This process revealed a few critical vulnerabilities that the team was able to resolve.
-
-
-
-<p id="gdcalert11" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image11.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert12">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image11.png "image_tooltip")
-
-
-(source: [Certora Formal Verification Audit](https://www.silo.finance/_files/ugd/fd5034_98066b4c70ea46b5862a00670179f067.pdf))
-
-
-# 
-
-<p id="gdcalert12" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image12.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert13">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image12.png "image_tooltip")
-
-
-(source: [Certora Formal Verification Audit](https://www.silo.finance/_files/ugd/fd5034_98066b4c70ea46b5862a00670179f067.pdf))
-
-There is also a $100k bug bounty program live on [Immunefi](https://immunefi.com/bounty/silofinance/).
-
+Silo has undergone two audits by ABDK and Quantstamp, and has tested the smart contracts against formal verification rules with Certora. This process revealed a few critical vulnerabilities that the team was able to resolve. There is also a $100k bug bounty program live on [Immunefi](https://immunefi.com/bounty/silofinance/).
 Overall Silo is taking security seriously and has taken the necessary measures to circumvent vulnerabilities. However, both audits were limited to Silo’s lending platform before XAI was introduced. It can be argued that XAI is a standard mint/burn contract controlled by the DAO that doesn’t need an audit, however, it must be highlighted nonetheless as a potential risk.
 
 
@@ -426,7 +357,9 @@ Silo Finance has introduced some innovative new primitives that are mostly targe
 
 Silo is still in an early stage, the beta version of its siloed lending market only went live at the end of August 2022. And the stablecoin XAI is just about to be created as we write this report. Even though adoption is still low, Silo has a promising use case and a great setup to be successful. Another promising sign is that Silo has already implemented on-chain governance. Thus, SILO voters are already in control. Even though voting power is rather centralized around the team, it is great to see a protocol implementing decentralized governance early on.
 
-As already mentioned, we did not find any concerning signs related to Silo's security or anything that’d indicate the potential for a rug pull. Although the team is entirely anon, they managed to bring on board some well-known advisors and investors, adding to Silo's credibility.
+Although the basics look promising, Silo still has to prove its use cases and grow significantly to achieve its goals. As of today, the lending platform has very little  TVL or borrowing volume. 
+
+As already mentioned, we did not find any concerning signs related to Silo's security or anything that’d indicate the potential for a rug pull. Although the team is entirely anon, they managed to bring on board some well-known advisors and investors, adding to Silo's credibility. One factor that would add to Silo’s credibility, however, is either a doxxed team or a more decentralized power structure.
 
 
 ## Sources
