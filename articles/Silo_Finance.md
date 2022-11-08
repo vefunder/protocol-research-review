@@ -80,7 +80,7 @@ You have 10 H1 headings. You may want to use the "H1 -> H2" option to demote all
 
 # Abstract
 
-Silo is a permissionless and non-custodial lending protocol that allows the borrowing of any asset using any other asset as collateral. This is enabled through the creation of isolated (siloed) lending markets whereby the pool consists of only two assets, the unique token plus ETH. Silos are then connected through the bridge asset (currently only ETH).
+Silo is a permissionless and non-custodial lending protocol that allows the borrowing of any asset using any other asset as collateral. This is enabled through the creation of isolated (siloed) lending markets whereby the pool consists of only two assets, the unique token plus ETH. Silos are then connected through the bridge asset (currently only ETH and soon XAI).
 
 **A quick TL;DR of our findings:**
 
