@@ -102,15 +102,9 @@ Silo is a permissionless and non-custodial lending protocol that allows the crea
 
 Inside an isolated market, both assets can be used interchangeably as collateral and loan. In other words, when lending token A, one can only borrow the bridge asset ETH against it. The bridge asset ETH can then be used as collateral in another silo, to borrow token B. Thus, one can borrow any token with any collateral, while isolating the risks related to the collateral token within one pool.
 
-In comparison, 1st generation lending markets like Compound or Aave have all collateral in one pool (shared pool), hence the impact of exploits - e.g. through price manipulation - can be much higher. This results in a few drawbacks (e.g.,  limitation in listing new assets, high parameter maintenance cost, cumbersome collateral [listing process](https://medium.com/primedao/enabling-collateral-in-defi-lending-why-your-favorite-token-might-not-be-listed-yet-a1ef27fd19bb), or low capital efficiency). Silo aims to unlock long-tail assets to be lent and borrowed using their new design.
+In comparison, 1st generation lending markets like Compound or Aave have all collateral in one pool (shared pool), hence the impact of exploits - e.g. through price manipulation - can be much higher. This weakness was exploited by hackers multiple times, the lending platform Cream serves as an unholy example. Other drawbacks of the original shared-pool design include limitations in listing new assets, high parameter maintenance cost, cumbersome collateral listing process, and low capital efficiency. Silo aims to improve these systemic risks and drawbacks and unlock long-tail assets to be lent and borrowed.
 
-
-
-<p id="gdcalert1" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image1.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert2">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image1.png "image_tooltip")
-
+![Silo_Tweet](https://user-images.githubusercontent.com/89845409/200534791-ea63c74d-8da9-485d-bee9-73c10f6b31e8.png))
 
 (source: [Twitter](https://twitter.com/DefiIgnas/status/1586978700171452418?s=20&t=ObKc98elioQcJCEQ8rIetg))
 
@@ -135,7 +129,15 @@ Conversely, [dTokens](https://silopedia.silo.finance/borrow/debt-tokens-dtokens)
 
 In summary, Silo introduces a few innovations and a new money market primitive aiming to make lending markets less risky, while simultaneously improving market access for long-tail assets. The ability to protect tokens from borrowers can be a very interesting feature for other DAOs to deploy their tokens and borrow tokens against them.
 
-The risk reduction, however, has one trade-off with the current design: Borrowing at Silo can result in up to six transactions. First, &lt;allow deposit> and &lt;deposit> of the collateral, then &lt;borrow> the bridge asset, then again &lt;allow deposit> and &lt;deposit> the bridge asset, before finally the targeted asset can be &lt;borrowed>. This can be quite costly on the Ethereum mainnet and might be a blocker for smaller accounts to use Silo as intended. The team is working on new features to improve this, but it will take some time.
+The risk reduction, however, has one trade-off with the current design: Borrowing at Silo can result in up to six transactions. First, <allow deposit> and <deposit> of the collateral, then <borrow> the bridge asset, then again <allow deposit> and <deposit> the bridge asset, before finally the targeted asset can be <borrowed>.
+The image below displays an example of the Silo dashboard for depositing APE, borrowing ETH, then depositing ETH to borrow CVX.
+ 
+![Silo_Dashboard](https://user-images.githubusercontent.com/89845409/200535504-2d97c75a-aeb7-4025-8c3c-3c31626f8288.png)
+
+(source: Blog)
+
+This splits the risk for the user into two. For instance, if CVX moons to the point that the user might get liquidated, the originally deposited APE is still safe. On the other hand, this can be rather costly, especially on the Ethereum mainnet, and might be a blocker for smaller accounts to use Silo as intended.
+The team is working on new features to improve this, but it will take some time. The introduction of XAI as a bridge asset might improve this too, as most users are typically looking to borrow stable assets. They can now do that where XAI is enabled as a bridge asset, but more on that in the next section.
 
 
 # The XAI Stablecoin
