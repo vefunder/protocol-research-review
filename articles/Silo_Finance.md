@@ -71,26 +71,27 @@ You have 10 H1 headings. You may want to use the "H1 -> H2" option to demote all
 * [Silo Governance Forum](https://gov.silo.finance/)
 * [Oracle - price providers](https://github.com/silo-finance/silo-core-v1/tree/master/contracts/priceProviders) (Chainlink as default price provider, UniswapV3 TWAP and BalancerV2 TWAP)
 * [Timelock Controller](https://etherscan.io/address/0xe1F03b7B0eBf84e9B9f62a1dB40f1Efb8FaA7d22#code)
-* [Development Fund Multisig](https://etherscan.io/address/0xdff2aea378e41632e45306a6de26a7e0fd93ab07#tokentxns) (2-out-of-3)
-* Multisig owners - [Signer1](https://etherscan.io/address/0x9b8b04B6f82cD5e1dae58cA3614d445F93DeFc5c), [Signer2](https://etherscan.io/address/0x66B416a3114A737f0353DC74d1E12a7e23f686F9), [Signer3](https://etherscan.io/address/0xe153437bC974cfE3E06C21c08AeBbf30abaefa2E)
 * [Vesting Contracts](https://docs.google.com/spreadsheets/d/1IcvYQlWQ34kIFIfIKWzJwGlw-Jv33_TMBDKCI0ziEa8/edit?usp=sharing) (Contributors, Advisors, and Investors)
-* GitHub
+* [GitHub](https://github.com/silo-finance)
 * [File list of 57 New Silos for deploying](https://docs.google.com/spreadsheets/d/1KkFXRRc_KiEwWIUYaSfjWa8Hk75WyRWrepWq2s_4bus/edit#gid=1510778453) - for community review
+* [LinkedIn](https://www.linkedin.com/company/silo-finance/people/)
+* [Twitter](https://twitter.com/SiloFinance)
+* [Coingecko](https://www.coingecko.com/en/coins/silo-finance)
 
 
 # Abstract
 
-Silo is a permissionless and non-custodial lending protocol that allows the borrowing of any asset using any other asset as collateral. This is enabled through the creation of isolated (siloed) lending markets whereby the pool consists of only two assets, the unique token plus ETH. Silos are then connected through the bridge asset (currently only ETH and soon XAI).
+Silo is a permissionless and non-custodial lending protocol that allows the borrowing of any asset using any other asset as collateral. This is enabled through the creation of isolated (siloed) lending markets whereby a pool consists of only three assets: The unique token plus ETH and XAI. Both ETH and the new stablecoin XAI function as bridge assets to connect the different silos.
 
 **A quick TL;DR of our findings:**
 
 
 
-* Silo Finance introduces a new money market design with isolated markets (silos) for every unique token. These isolated markets are paired with the same counterparty asset called bridge asset (ETH or XAI). Bridge assets represent a concentrated part of liquidity bridged across all isolated markets which facilitates the onboarding (listing) of any token, especially long-tail assets. The isolation of high-risk assets almost completely removes protocol systemic risk, while bridge assets prevent fractured liquidity and keep the protocol liquid and fluid.
+* Silo Finance introduces a new money market design with isolated markets (silos) for every unique token. These isolated markets are paired with the same counterpart asset called bridge asset (ETH or XAI). Bridge assets represent a concentrated part of liquidity bridged across all isolated markets which facilitates the onboarding (listing) of any token, especially long-tail assets. The isolation of high-risk assets almost completely removes protocol systemic risk, while bridge assets prevent fractured liquidity and keep the protocol liquid and fluid.
 * Silo allows permissionless listing and parameter customization for each silo through governance. Every newly created silo needs to have a reliable price feed source and starts with default collateral factors for Loan-to-Value (LTV), Liquidation Threshold, and Liquidation Penalty.
 * The Silo team takes security very seriously. The core smart contracts were fully audited by Quantstamp and ABDK and tested by the core team through a formal verification process using Certora Prover.
-* Silo recently introduced a new stablecoin named XAI, which will serve as the second bridge asset alongside ETH. XAI can be minted and burnt by the SiloDAO via a governance vote (using Tally).
-* Silo is very progressive in its endeavor to become a decentralized and trustless protocol. They have already fully transitioned to on-chain governance so that SILO token holders are in full control over most of the protocol's functions.
+* Silo recently introduced a new stablecoin named XAI, which will serve as the second bridge asset alongside ETH. XAI can be minted and burnt by the SiloDAO via governance (using Tally).
+* Silo is very progressive in its endeavor to become a decentralized and trustless protocol. They have already fully transitioned to on-chain governance so that SILO token holders are in full control over all of the protocol's functions.
 
 
 # Silo Finance - An Introduction
@@ -98,11 +99,11 @@ Silo is a permissionless and non-custodial lending protocol that allows the borr
 
 ## Siloed Lending Markets
 
-Silo is a permissionless and non-custodial lending protocol that allows the creation of isolated (siloed) lending markets. The protocol is designed to support two types of asset categories, Unique Tokens and Bridge Assets. Unique tokens have their liquidity isolated in dedicated silos (1 silo for each token), while the bridge asset (currently ETH) is paired with every unique token across all isolated silos.
+Silo is a permissionless and non-custodial lending protocol that allows the creation of isolated (siloed) lending markets. The protocol is designed to support two types of asset categories, Unique Tokens and Bridge Assets. Unique tokens have their liquidity isolated in dedicated silos (1 silo for each token), while the bridge assets (currently ETH and XAI) are paired with every unique token across all isolated silos.
 
-Inside an isolated market, both assets can be used interchangeably as collateral and loan. In other words, when lending token A, one can only borrow the bridge asset ETH against it. The bridge asset ETH can then be used as collateral in another silo, to borrow token B. Thus, one can borrow any token with any collateral, while isolating the risks related to the collateral token within one pool.
+Inside an isolated market, the three assets can be used interchangeably as collateral and loan. In other words, when lending token A, one can only borrow the bridge assets against it (ETH, XAI, or both). The bridge assets can then be used as collateral in another silo, to borrow token B. Thus, one can borrow any token with any collateral, while isolating the risks related to the collateral token within one pool.
 
-In comparison, 1st generation lending markets like Compound or Aave have all collateral in one pool (shared pool), hence the impact of exploits - e.g. through price manipulation - can be much higher. This weakness was exploited by hackers multiple times, the lending platform Cream serves as an unholy example. Other drawbacks of the original shared-pool design include limitations in listing new assets, high parameter maintenance cost, cumbersome collateral listing process, and low capital efficiency. Silo aims to improve these systemic risks and drawbacks and unlock long-tail assets to be lent and borrowed.
+In comparison, 1st generation lending markets like Compound or Aave have all collateral in one pool (shared pool), hence the impact of exploits - e.g. through price manipulation - can be much higher. This weakness was exploited by hackers multiple times, the lending platform Cream serves as an unholy [example](https://rekt.news/cream-rekt-2/). Other drawbacks of the original shared-pool design include limitations in listing new assets, high parameter maintenance cost, cumbersome collateral [listing process](https://medium.com/primedao/enabling-collateral-in-defi-lending-why-your-favorite-token-might-not-be-listed-yet-a1ef27fd19bb), and low capital efficiency. Silo aims to improve these systemic risks and drawbacks and unlock long-tail assets to be lent and borrowed.
 
 ![Silo_Tweet](https://user-images.githubusercontent.com/89845409/200534791-ea63c74d-8da9-485d-bee9-73c10f6b31e8.png))
 
@@ -129,12 +130,12 @@ Conversely, [dTokens](https://silopedia.silo.finance/borrow/debt-tokens-dtokens)
 
 In summary, Silo introduces a few innovations and a new money market primitive aiming to make lending markets less risky, while simultaneously improving market access for long-tail assets. The ability to protect tokens from borrowers can be a very interesting feature for other DAOs to deploy their tokens and borrow tokens against them.
 
-The risk reduction, however, has one trade-off with the current design: Borrowing at Silo can result in up to six transactions. First, <allow deposit> and <deposit> of the collateral, then <borrow> the bridge asset, then again <allow deposit> and <deposit> the bridge asset, before finally the targeted asset can be <borrowed>.
+The risk reduction, however, has one trade-off with the current design: Borrowing at Silo can initially result in up to six transactions. First, <allow deposit> and <deposit> of the collateral, then <borrow> the bridge asset, then again <allow deposit> and <deposit> the bridge asset, before finally the targeted asset can be <borrowed>. Reversing it will incur another four transactions.
 The image below displays an example of the Silo dashboard for depositing APE, borrowing ETH, then depositing ETH to borrow CVX.
  
 ![Silo_Dashboard](https://user-images.githubusercontent.com/89845409/200535504-2d97c75a-aeb7-4025-8c3c-3c31626f8288.png)
 
-(source: Blog)
+(source: [Blog](https://medium.com/silo-protocol/silo-is-live-in-beta-mainnet-94b6b0164258))
 
 This splits the risk for the user into two. For instance, if CVX moons to the point that the user might get liquidated, the originally deposited APE is still safe. On the other hand, this can be rather costly, especially on the Ethereum mainnet, and might be a blocker for smaller accounts to use Silo as intended.
 The team is working on new features to improve this, but it will take some time. The introduction of XAI as a bridge asset might improve this too, as most users are typically looking to borrow stable assets. They can now do that where XAI is enabled as a bridge asset, but more on that in the next section.
@@ -142,7 +143,7 @@ The team is working on new features to improve this, but it will take some time.
 
 # The XAI Stablecoin
 
-The Silo team aims to issue a new over-collateralized stablecoin with a soft peg to the US Dollar called XAI. The main use case for XAI is to serve as a second bridge token alongside ETH. Thus, enabling users to borrow XAI to bridge from token A to token B.
+The Silo team has issued a new over-collateralized stablecoin with a soft peg to the US Dollar called XAI. The main use case for XAI is to serve as a second bridge token alongside ETH. Thus, enabling users to borrow XAI to bridge from token A to token B.
 
 SiloDAO is the only entity that controls XAI. The DAO can choose to mint unlimited XAI and deposit it into any number of silos via executive proposals. The DAO can also burn XAI that is extended to any silos via governance proposals. Hence, when minting XAI into a silo, the SiloDAO effectively determines XAI’s backing, which can also be reversed by burning XAI from a silo. In the beginning, Silo will only enable XAI as a bridge asset for USDC and ETH. This strongly reduces the collateral risk of XAI.
 
@@ -184,10 +185,10 @@ Silo Protocol smart contracts have a modular design and the protocol consists of
 
 
 
-* **[Silo ](https://etherscan.io/address/0xd998C35B7900b344bbBe6555cc11576942Cf309d#code)**is the main component of the protocol that acts as a vault for assets, implementing the lending logic, managing and isolating the risk, and performing liquidations.
-* **[PriceProviderRepository](https://etherscan.io/address/0x7C2ca9D502f2409BeceAfa68E97a176Ff805029F#code)** manages the oracle modules and the price request routing for each silo. It can support many protocols and sources. Currently, it supports three oracle sources: [Chainlink](https://etherscan.io/address/0xe37B8c83138caF12E57632D19c06Eb561D47e423#code) (default price provider), UniswapV3 TWAP, and BalancerV2 TWAP.
-* **[Interest Rate Model](https://etherscan.io/address/0x7e9e7ea94e1ff36e216a703d6d66ece356a5fd44#code)**. Silo Finance uses a dynamic interest rates model which is described in more detail in this [Interest Rate Model paper](https://drive.google.com/file/d/11jzbdIQ9KGm_ZVFIUwUu44O1ktWx5R30/view?pli=1).
-* **[Silo Router](https://etherscan.io/address/0xb2374f84b3cEeFF6492943Df613C9BcF45322a0c#code) **is a utility contract that can batch any number or combination of actions (Deposit, Withdraw, Borrow, Repay) and execute in a single transaction.
+* [Silo](https://etherscan.io/address/0xd998C35B7900b344bbBe6555cc11576942Cf309d#code) is the main component of the protocol that acts as a vault for assets, implementing the lending logic, managing and isolating the risk, and performing liquidations.
+* [PriceProviderRepository](https://etherscan.io/address/0x7C2ca9D502f2409BeceAfa68E97a176Ff805029F#code) manages the oracle modules and the price request routing for each silo. It can support many protocols and sources. Currently, it supports three oracle sources: [Chainlink](https://etherscan.io/address/0xe37B8c83138caF12E57632D19c06Eb561D47e423#code) (default price provider), UniswapV3 TWAP, and BalancerV2 TWAP.
+* [Interest Rate Model](https://etherscan.io/address/0x7e9e7ea94e1ff36e216a703d6d66ece356a5fd44#code) Silo Finance uses a dynamic interest rates model which is described in more detail in this [Interest Rate Model paper](https://drive.google.com/file/d/11jzbdIQ9KGm_ZVFIUwUu44O1ktWx5R30/view?pli=1).
+* [Silo Router](https://etherscan.io/address/0xb2374f84b3cEeFF6492943Df613C9BcF45322a0c#code) is a utility contract that can batch any number or combination of actions (Deposit, Withdraw, Borrow, Repay) and execute in a single transaction.
 * The permission system registry consists of three smart contracts: GuardedLaunch.sol, TwoStepOwnable.sol, and Manageable.sol
 
 
@@ -207,7 +208,7 @@ The screenshot below displays all governance parameters.
 
 
 Notably, the voting period for proposals is three days. Plus a voting delay of two days for on-chain proposals. This is in line with best practices and seems to be a reasonable time frame. A quorum of 10M equals 5% of tokens in circulation (~180M SILO) or 1% of the max token supply (1B SILO).
-The only thing that is required to participate in on-chain governance is to delegate SILO tokens to one's wallet or to a delegate. There is currently no vote-lock or staking solution in place. However, governance attacks via flash loans are prevented through the delegation mechanism, as new delegates cannot participate in votes that are already live at the time the delegate function is called. Moreover, the team expressed the intention to move to a vote-escrowed tokenomics system a while ago, however, the last update was from April 2022.
+The only thing that is required to participate in on-chain governance is to delegate SILO tokens to one's wallet or to a delegate. There is currently no vote-lock or staking solution in place. However, governance attacks via flash loans are prevented through the delegation mechanism, as new delegates cannot participate in votes that are already live at the time the delegate function is called. Moreover, the team expressed the intention to move to a vote-escrowed tokenomics system a while ago, however, the last update was from [April 2022](https://gov.silo.finance/t/tokenomics-proposal-vesilo-v2/226).
 
 
 # Risk Vectors
@@ -221,7 +222,7 @@ There is no direct custody risk because SiloDAO as the owner of the core contrac
 
 
 
-* setFees - The SiloDAO (as onlyOwner) can decide to set and adjust certain fees, such as borrow-entry-fees, protocol-share-fees, and liquidation-fees. These fees can affect borrowers and users when getting liquidated.
+* setFees - The SiloDAO (as onlyOwner) can decide to set and adjust certain [fees](https://silopedia.silo.finance/support/faqs#q-does-silo-impose-any-protocol-fees-today), such as borrow-entry-fees, protocol-share-fees, and liquidation-fees. These fees can affect borrowers and users when getting liquidated. Currently, those fees are not activated and are set to 0.
 
     
 ![Silo_setfees_contract](https://user-images.githubusercontent.com/89845409/200585411-7f8a2d79-db9d-49d8-81f1-5b5c2b2ebeb6.png)
@@ -233,14 +234,14 @@ There is no direct custody risk because SiloDAO as the owner of the core contrac
     
 ![Silo_setpriceprovidersrepository_contract](https://user-images.githubusercontent.com/89845409/200585691-6be4baaf-fa50-4bd4-9088-db54c1621290.png)
 
-    (source: [siloRepository.sol](https://www.contractreader.io/contract/0xd998C35B7900b344bbBe6555cc11576942Cf309d))
+(source: [siloRepository.sol](https://www.contractreader.io/contract/0xd998C35B7900b344bbBe6555cc11576942Cf309d))
 
 * GuardedLaunch.sol - a contract which is part of Silo’s permission system - enables the SiloDAO (as Timelock Controller) to implement security and risk-averse functions. For instance, it allows the contract manager (onlyManager) to pause specific silos in case of an exploit. If that happens, users deposited in the paused silos are at risk of liquidation, if their collateral value decreases below the liquidation threshold, after a new start (remove pause).
 
 
 ![Silo_guardedlaunch_contract](https://user-images.githubusercontent.com/89845409/200585914-4e62d274-8151-4f6e-b583-d6dfc0164c0e.png)
 
-## (source: [SiloRepository.sol (GuardedLaunch.sol)](https://www.contractreader.io/contract/0xd998C35B7900b344bbBe6555cc11576942Cf309d))
+(source: [SiloRepository.sol](https://www.contractreader.io/contract/0xd998C35B7900b344bbBe6555cc11576942Cf309d))
 
 
 ## Governance Risk
@@ -249,11 +250,11 @@ As mentioned above, all changes that affect the Silo protocol and its parameters
 
 
 
-* Deployment of new markets (silos),
-* Setting/adjusting silo parameters (LTV, LT, interest model, price feed),
+* Deployment of new markets (silos)
+* Setting/adjusting silo parameters (LTV, LT, interest model, price feed)
 * Minting/redeeming XAI
 * Turning on/off fees
-* Deploying new bridge assets,
+* Deploying new bridge assets
 * and even increasing the supply of SILO tokens
 
 In summary, governance has extensive and very far-reaching powers over Silo. Hence, the question arises “how likely is it that a malicious party can obtain a majority voting influence to instigate harmful changes to the protocol” (e.g. mint infinite XAI)?
@@ -269,7 +270,7 @@ As seen in the chart, the top three delegates control 51.2% of the overall votin
 
 This does not come as a surprise, given that the founding team will receive 27% of all tokens in circulation (vested over 3 years) according to the [vesting schedule](https://docs.google.com/spreadsheets/d/1IcvYQlWQ34kIFIfIKWzJwGlw-Jv33_TMBDKCI0ziEa8/edit#gid=1565912853) [side note: the team allocation stated in their [docs](https://silopedia.silo.finance/governance/token-allocation-and-vesting) is 5.25% lower (21.75%). Those tokens are currently sitting in a vesting contract untouched].
 
-In summary, the team has by far the largest allocation. All other stakeholder groups don’t even come close, even all investors combined only achieve 6.3% voting power. Two whales currently also hold significant voting power, however, it still leads to the conclusion that SiloDAO is controlled by the founding team. There are plans to dilute the team share via a veSILO tokenomics issuance scheme, until those become a reality there is a large trust factor put onto the Silo founding team - who unfortunately is not doxxed. The team as listed on their website is anon. However, they managed to attract well-known investors and advisors, which adds to the credibility of the team.
+In summary, the team has by far the largest allocation. All other stakeholder groups don’t even come close, even all investors combined only achieve 6.3% voting power. Two whales currently also hold significant voting power, however, it still leads to the conclusion that SiloDAO is highly influenced by the core team. There are plans to dilute the team share via a veSILO tokenomics issuance scheme, until those become a reality there is a large trust factor put onto the Silo founding [team](https://www.silo.finance/) - who is partially [doxxed](https://www.linkedin.com/company/silo-finance/people/). The team as listed on their website is anon. However, they managed to attract well-known investors and advisors, which adds to the credibility of the team.
 
 
 ## Smart Contract Risk
@@ -303,20 +304,20 @@ We’ll discuss the collateral risk (1) in more detail in the next section. The 
 
 
 
-* XAI is an over-collateralized stablecoin. At first only USDC and ETH will serve as collateral for XAI
+* XAI is an over-collateralized stablecoin. At first only USDC and ETH will serve as collateral for XAI. As the usage of XAI expands to other pools, this will change and XAI can be backed by more volatile assets too
 * Arbitrage possibilities are given and liquidity in the open market will be seeded by the DAO and incentivized through CVX gauges (see [proposal](https://gov.silo.finance/t/building-on-chain-liquidity-for-xai/309))
 * The DAO influences XAI via parameter adjustments, such as borrow rate, adding/removing collateral, increasing/decreasing XAI availability
 
 The only measure that is missing is a concrete fallback solution, that the DAO can execute in case things go south (e.g. use SILO as a backup to stabilize the stablecoin). However, this can also come at a later stage, once XAI has achieved some product market fit.
 
-The last thing to highlight related to stability is that Silo’s TVL is currently around ~$1M. More than half of that TVL was [seeded by the DAO](https://snapshot.org/#/silofinance.eth/proposal/0x013bbb154af9317ab7a78b72a498d16e069fdba5e78b710e6785fc938d644e76) itself. There needs to be significant growth in TVL to enable sufficient backing of a stablecoin that aims to facilitate bridging between 60+ assets (10 assets are already live and [57 assets](https://gov.silo.finance/t/deploying-57-new-silos-to-the-protocol/306/2) will be added soon). While there are plans to incentivize liquidity for XAI, there is currently no plan presented that defines anything specific about how the DAO plans to attract more TVL for its long-tail asset silos (a potential [veTokenomics](https://gov.silo.finance/t/tokenomics-proposal-vesilo-v2/226) discussion seems to be stuck).
+The last thing to highlight related to stability is that Silo’s TVL is currently around ~$2.6M. However, most of that TVL was [seeded by the DAO](https://snapshot.org/#/silofinance.eth/proposal/0x013bbb154af9317ab7a78b72a498d16e069fdba5e78b710e6785fc938d644e76) itself. There needs to be significant growth in TVL to enable sufficient backing of a stablecoin that aims to facilitate bridging between 60+ assets (10 assets are already live and [57 assets](https://gov.silo.finance/t/deploying-57-new-silos-to-the-protocol/306/2) will be added soon). While there are plans to incentivize liquidity for XAI, there is currently no plan presented that defines anything specific about how the DAO plans to attract more TVL for its long-tail asset silos (a potential [veTokenomics](https://gov.silo.finance/t/tokenomics-proposal-vesilo-v2/226) discussion seems to be stuck).
 
 
 ## Collateral Risk
 
 In the beginning, the only collateral enabled to borrow XAI will be USDC and ETH. Thus, eliminating other risks that come with long tail assets (e.g., low asset liquidity, high price volatility, depeg of the collateral, etc.).
 
-Both ETH and USDC are the highest-tier assets with more than enough liquidity to offset potential liquidations. Even when XAI will be enabled as a bridge asset for more silos, the collateral risk is limited only to those isolated markets.
+Both ETH and USDC are highest-tier assets with more than enough liquidity to offset potential liquidations. Even when XAI will be enabled as a bridge asset for more silos, the collateral risk is limited only to those isolated markets.
 
 We currently don’t see any risks related to collateral, however, anyone can propose to add new credit lines. [Credit lines](https://silopedia.silo.finance/welcome/cross-silos-stablecoin) describe the process of allowing silos to use XAI as a bridge asset. While new credit lines need to be approved by governance first, this process can change the composition of XAI’s backing. Potential risks occur in cases where XAI supports illiquid and highly volatile assets. Hence, we recommend that each credit line and silo addition be carefully considered. Silo should also think about installing or incentivizing more detailed risk assessments for each collateral. A bad debt dashboard (as provided by RiskDAO for instance), is another option to better inform users about the health of individual silos.
 
@@ -325,7 +326,8 @@ We currently don’t see any risks related to collateral, however, anyone can pr
 
 Silo also aims to enable XAI as collateral within the protocol. As highlighted above, for XAI to become a low-risk collateral, there needs to be enough liquidity in the open market. This will help to facilitate potential liquidations and arbitrage, which is needed to support XAi’s stability.
 
-The team is working on two [initiatives](https://gov.silo.finance/t/building-on-chain-liquidity-for-xai/309) that will ensure the initial provisions of adequate liquidity. First, seeding the initial Curve pool with $3M (50% USDC / 50% XAI) from their development fund. And secondly, Silo will use 130k of their own vlCVX to vote for incentivization of their pool. Hence, we believe there will be enough liquidity for XAI’s early stage.
+The team is working on two [initiatives](https://gov.silo.finance/t/building-on-chain-liquidity-for-xai/309) that will ensure the initial provisions of adequate liquidity. First, seeding the initial USDC silo with $1.875M USDC to mint $1.5M XAI. Deposit the minted $1.5M XAI plus an additional $1.5M USDC into a [Uniswap V3 pool](https://info.uniswap.org/#/pools/0x55bb9904df17f3b07551aa117841b3bbfc66646d). The Uni pool is only temporary and will ensure smooth liquidations until the Curve pool XAI/FRAXGP gauge is live.
+And secondly, Silo will use 130k of their own vlCVX to vote for incentivization of their pool. Hence, we believe there will be enough liquidity for the early stage of XAI.
 
 
 # Discussion and Conclusion
@@ -353,13 +355,13 @@ Yes, but the team was able to remove them. The issues were discovered in a [form
 
 # Summary
 
-Silo Finance has introduced some innovative new primitives that are mostly targeted toward the more risk-aware DeFi users. In general, we gained the impression that Silo is very focused on reducing risks and increasing security where possible.
+* Silo Finance has introduced some innovative new primitives that are mostly targeted toward the more risk-aware DeFi users. In general, we gained the impression that Silo is very focused on reducing risks and increasing security where possible.
 
-Silo is still in an early stage, the beta version of its siloed lending market only went live at the end of August 2022. And the stablecoin XAI is just about to be created as we write this report. Even though adoption is still low, Silo has a promising use case and a great setup to be successful. Another promising sign is that Silo has already implemented on-chain governance. Thus, SILO voters are already in control. Even though voting power is rather centralized around the team, it is great to see a protocol implementing decentralized governance early on.
+* Silo is still in an early stage, the beta version of its siloed lending market only went live at the end of August 2022. And the stablecoin XAI is just about to be created as we write this report. Even though adoption is still low, Silo has a promising use case and a great setup to be successful. Another promising sign is that Silo has already implemented on-chain governance. Thus, SILO voters are already in control. Even though voting power is rather centralized around the team, it is great to see a protocol implementing decentralized governance early on.
 
-Although the basics look promising, Silo still has to prove its use cases and grow significantly to achieve its goals. As of today, the lending platform has very little  TVL or borrowing volume. 
+* Although the basics look promising, Silo still has to prove its use cases and grow significantly to achieve its goals. As of today, the lending platform has very little organic TVL or borrowing volume. 
 
-As already mentioned, we did not find any concerning signs related to Silo's security or anything that’d indicate the potential for a rug pull. Although the team is entirely anon, they managed to bring on board some well-known advisors and investors, adding to Silo's credibility. One factor that would add to Silo’s credibility, however, is either a doxxed team or a more decentralized power structure.
+* As already mentioned, we did not find any concerning signs related to Silo's security or anything that’d indicate the potential for a rug pull. Although the team is entirely anon, they managed to bring on board some well-known advisors and investors, adding to Silo's credibility. One factor that would add to Silo’s credibility, however, is either a doxxed team or a more decentralized power structure.
 
 
 ## Sources
@@ -379,5 +381,8 @@ As already mentioned, we did not find any concerning signs related to Silo's sec
 * [Development Fund Multisig](https://etherscan.io/address/0xdff2aea378e41632e45306a6de26a7e0fd93ab07#tokentxns) (2-out-of-3)
 * Multisig owners - [Signer1](https://etherscan.io/address/0x9b8b04B6f82cD5e1dae58cA3614d445F93DeFc5c), [Signer2](https://etherscan.io/address/0x66B416a3114A737f0353DC74d1E12a7e23f686F9), [Signer3](https://etherscan.io/address/0xe153437bC974cfE3E06C21c08AeBbf30abaefa2E)
 * [Vesting Contracts](https://docs.google.com/spreadsheets/d/1IcvYQlWQ34kIFIfIKWzJwGlw-Jv33_TMBDKCI0ziEa8/edit?usp=sharing) (Contributors, Advisors, and Investors)
-* GitHub
+* [GitHub](https://github.com/silo-finance)
 * [File list of 57 New Silos for deploying](https://docs.google.com/spreadsheets/d/1KkFXRRc_KiEwWIUYaSfjWa8Hk75WyRWrepWq2s_4bus/edit#gid=1510778453) - for community review
+* [LinkedIn](https://www.linkedin.com/company/silo-finance/people/)
+* [Twitter](https://twitter.com/SiloFinance)
+* [Coingecko](https://www.coingecko.com/en/coins/silo-finance)
