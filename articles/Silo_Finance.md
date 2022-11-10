@@ -275,7 +275,7 @@ The chart below shows the voting power of all delegators. It’s important to no
 
 (source: [Boardroom - Delegates Voting Power Distribution](https://boardroom.io/silo/delegates))
 
-As seen in the chart, the top three delegates control 51.2% of the overall voting power that is currently eligible to vote. This is quite a high concentration of power (basically a [Nakamoto coefficient](https://news.earn.com/quantifying-decentralization-e39db233c28e) of 3). With a bit of forensics on etherscan, using the [vested token overview](https://docs.google.com/spreadsheets/d/1IcvYQlWQ34kIFIfIKWzJwGlw-Jv33_TMBDKCI0ziEa8/edit#gid=1565912853), it becomes clear that the address with the most delegated voting power is controlled by the founding team. The same is true for ranks 4, 7, and 10. The second and third largest delegates seem to be whales and the rest are investors and community members.
+As seen in the chart, the top three delegates control 51.2% of the overall voting power that is currently eligible to vote. This is quite a high concentration of power (basically a [Nakamoto coefficient](https://news.earn.com/quantifying-decentralization-e39db233c28e) of 3). With a bit of forensics on etherscan, using the [vested token overview](https://docs.google.com/spreadsheets/d/1IcvYQlWQ34kIFIfIKWzJwGlw-Jv33_TMBDKCI0ziEa8/edit#gid=1565912853), it becomes clear that the address with the most delegated voting power is controlled by the founding team. The same is true for ranks 4 (6.3%), 7 (4.6%), and 10 (2.9%), adding up to at least 40% of the voting power that is currently controlled by the core team. The second and third largest delegates seem to be whales and the rest are investors and community members.
 
 This does not come as a surprise, given that the founding team will receive 27% of all tokens in circulation (vested over 3 years) according to the [vesting schedule](https://docs.google.com/spreadsheets/d/1IcvYQlWQ34kIFIfIKWzJwGlw-Jv33_TMBDKCI0ziEa8/edit#gid=1565912853) [side note: the team allocation as stated in their [docs](https://silopedia.silo.finance/governance/token-allocation-and-vesting) is only 21.75%, that’s 5.25% lower than the actual allocation. Those 52.5M tokens are currently sitting in a vesting contract untouched].
 
@@ -370,7 +370,7 @@ Yes, but the team was able to remove them. The issues were discovered in a [form
 
 * Although the basics look promising, Silo still has to prove its use cases and grow significantly to achieve its goals. As of today, the lending platform has very little organic TVL or borrowing volume. 
 
-* As already mentioned, we did not find any concerning signs related to Silo's security or anything that’d indicate the potential for a rug pull. Although the team is entirely anon, they managed to bring on board some well-known advisors and investors, adding to Silo's credibility. One factor that would add to Silo’s credibility, however, is either a doxxed team or a more decentralized power structure.
+* As already mentioned, we did not find any concerning signs related to Silo's security or anything that’d indicate the potential for a rug pull. The team is partially doxxed and they managed to bring on board some well-known advisors and investors, adding to Silo's credibility. One factor that would increase Silo’s credibility further, however, is a more decentralized distribution of governance influence.
 
 
 ## Sources
