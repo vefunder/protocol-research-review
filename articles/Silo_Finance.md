@@ -130,15 +130,23 @@ Conversely, [dTokens](https://silopedia.silo.finance/borrow/debt-tokens-dtokens)
 
 In summary, Silo introduces a few innovations and a new money market primitive aiming to make lending markets less risky, while simultaneously improving market access for long-tail assets. The ability to protect tokens from borrowers can be a very interesting feature for other DAOs to deploy their tokens and borrow tokens against them.
 
-The risk reduction, however, has one trade-off with the current design: Borrowing at Silo can initially result in up to six transactions. First, <allow deposit> and <deposit> of the collateral, then <borrow> the bridge asset, then again <allow deposit> and <deposit> the bridge asset, before finally the targeted asset can be <borrowed>. Reversing it will incur another four transactions.
-The image below displays an example of the Silo dashboard for depositing APE, borrowing ETH, then depositing ETH to borrow CVX.
+The risk reduction, however, has one trade-off with the current desig, that is borrowing at Silo can initially result in up to six transactions. A typical transaction sequence might be:
+
+* `allow deposit` of collateral (only required the first time)
+* `deposit` collateral
+* `borrow` the bridge asset
+* `allow deposit` of bridged asset (only required the first time)
+* `deposit` bridged asset
+* `borrow` target asset
+
+Reversing it will incur another four transactions. The image below displays an example of the Silo dashboard for depositing APE, borrowing ETH, then depositing ETH to borrow CVX.
  
 ![Silo_Dashboard](https://user-images.githubusercontent.com/89845409/200535504-2d97c75a-aeb7-4025-8c3c-3c31626f8288.png)
 
 (source: [Blog](https://medium.com/silo-protocol/silo-is-live-in-beta-mainnet-94b6b0164258))
 
 This splits the risk for the user into two. For instance, if CVX moons to the point that the user might get liquidated, the originally deposited APE is still safe. On the other hand, this can be rather costly, especially on the Ethereum mainnet, and might be a blocker for smaller accounts to use Silo as intended.
-The team is working on new features to improve this, but it will take some time. The introduction of XAI as a bridge asset might improve this too, as most users are typically looking to borrow stable assets. They can now do that where XAI is enabled as a bridge asset, but more on that in the next section.
+When talking to the team they revealed that they are working on a swap-like feature to improve this. And the long-term vision is to enable a unified health-factor, that will allow all isolated positions to be unified and managed as one, but this will take time to build. The introduction of XAI as a bridge asset might improve this too, as most users are typically looking to borrow stable assets. They can now do that where XAI is enabled as a bridge asset, but more on that in the next section.
 
 
 # The XAI Stablecoin
@@ -157,7 +165,7 @@ XAI is an ERC-20 [token contract](https://etherscan.io/address/0xd7C9F0e536dC865
 
 (source: [Etherscan](https://etherscan.io/address/0xd7C9F0e536dC865Ae858b0C0453Fe76D13c3bEAc#readContract))
 
-The Timelock Controller is controlled by SiloDAO (i.e. SILO token holders voting via [Tally](https://www.tally.xyz/governance/eip155:1:0xA89163F7B2D68A8fbA6Ca36BEEd32Bd4f3EeAf61)), who control the XAI in circulation through the mint and burn function. Timelock duration is two days.
+The Timelock Controller is controlled by SiloDAO (i.e. SILO token holders voting via [Tally](https://www.tally.xyz/governance/eip155:1:0xA89163F7B2D68A8fbA6Ca36BEEd32Bd4f3EeAf61)), who control the XAI in circulation through the mint and burn function. Timelock duration is two days (after a voting period of three days).
 
 
 ![Silo_mint_function](https://user-images.githubusercontent.com/89845409/200542642-f6bb7ee8-7774-4771-b359-5c5cb752350d.png)
@@ -199,7 +207,7 @@ Silo Protocol smart contracts have a modular design and the protocol consists of
 
 # SILO Governance
 
-The governance process follows a standard procedure of forum discussion, Snapshot vote, and finally on-chain vote. For more details visit the [docs](https://silopedia.silo.finance/governance/silodao). In practice, however, Snapshot is mostly applied for decisions concerning expenditures of the DAO’s funds, whereas changes that affect the protocol itself are directly voted on via an on-chain proposal on [Tally](https://www.tally.xyz/governance/eip155:1:0xA89163F7B2D68A8fbA6Ca36BEEd32Bd4f3EeAf61). The funds are managed by a 2-of-3 multi-sig (owners: [signer1](https://etherscan.io/address/0x9b8b04B6f82cD5e1dae58cA3614d445F93DeFc5c), [signer2](https://etherscan.io/address/0x66B416a3114A737f0353DC74d1E12a7e23f686F9), [signer3](https://etherscan.io/address/0xe153437bC974cfE3E06C21c08AeBbf30abaefa2E)).
+The governance process follows a standard procedure of forum discussion, Snapshot vote, and finally on-chain vote. For more details visit the [docs](https://silopedia.silo.finance/governance/silodao). In practice, however, Snapshot is mostly applied for decisions concerning expenditures of the DAO’s funds, whereas changes that affect the protocol itself are directly voted on via an on-chain proposal on [Tally](https://www.tally.xyz/governance/eip155:1:0xA89163F7B2D68A8fbA6Ca36BEEd32Bd4f3EeAf61). The developer fund is controlled by a 2-of-3 multi-sig (owners: [signer1](https://etherscan.io/address/0x9b8b04B6f82cD5e1dae58cA3614d445F93DeFc5c), [signer2](https://etherscan.io/address/0x66B416a3114A737f0353DC74d1E12a7e23f686F9), [signer3](https://etherscan.io/address/0xe153437bC974cfE3E06C21c08AeBbf30abaefa2E)).
 
 The screenshot below displays all governance parameters.
 
@@ -207,7 +215,7 @@ The screenshot below displays all governance parameters.
 ![Governance_Parameters](https://user-images.githubusercontent.com/89845409/200553857-48031700-9fce-41a9-a485-5679ccb1e77a.png)
 
 
-Notably, the voting period for proposals is three days. Plus a voting delay of two days for on-chain proposals. This is in line with best practices and seems to be a reasonable time frame. A quorum of 10M equals 5% of tokens in circulation (~180M SILO) or 1% of the max token supply (1B SILO).
+Notably, the voting period for proposals is three days. Plus a voting delay of two days for on-chain proposals. This is in line with best practices and seems to be a reasonable time frame. A quorum of 10M equals 5% of tokens in circulation (~180M SILO) or 1% of the max token supply (1B SILO). There is currently no emergency function or admin with the power to veto in case of an attack or issue.
 The only thing that is required to participate in on-chain governance is to delegate SILO tokens to one's wallet or to a delegate. There is currently no vote-lock or staking solution in place. However, governance attacks via flash loans are prevented through the delegation mechanism, as new delegates cannot participate in votes that are already live at the time the delegate function is called. Moreover, the team expressed the intention to move to a vote-escrowed tokenomics system a while ago, however, the last update was from [April 2022](https://gov.silo.finance/t/tokenomics-proposal-vesilo-v2/226).
 
 
@@ -259,18 +267,19 @@ As mentioned above, all changes that affect the Silo protocol and its parameters
 
 In summary, governance has extensive and very far-reaching powers over Silo. Hence, the question arises “how likely is it that a malicious party can obtain a majority voting influence to instigate harmful changes to the protocol” (e.g. mint infinite XAI)?
 
-For this to happen, the party would need to accrue a substantial amount of SILO tokens (or get voting power delegated). Presuming that the team and SILO investors only vote in the best interest of the DAO, the answer is: The possibility is very low. The chart below shows the voting power of all delegators. It’s important to note that to participate in on-chain voting, one has to delegate SILO to one's wallet or another delegate.
+For this to happen, the party would need to accrue a substantial amount of SILO tokens (or get voting power delegated). Presuming that the core team and SILO investors only vote in the best interest of the DAO, the answer is: The chances of success are rather low since the team has quite a strong token position (see chart below). However, in case a malicious governance proposal should pass successfully, the only recourse to users is the two-day timelock. There is currently no privileged actor that can veto a malicious proposal.
+The chart below shows the voting power of all delegators. It’s important to note that to participate in on-chain voting, one has to delegate SILO to one's wallet or to another delegate.
 
 
 ![SILO_delegatvote_distribution](https://user-images.githubusercontent.com/89845409/200591116-79f9739f-57ee-4ffc-9c89-583cd36f335d.png)
 
 (source: [Boardroom - Delegates Voting Power Distribution](https://boardroom.io/silo/delegates))
 
-As seen in the chart, the top three delegates control 51.2% of the overall voting power that is currently eligible to vote. This is quite a high concentration of power (basically a [Nakamoto coefficient](https://news.earn.com/quantifying-decentralization-e39db233c28e) of 3). With a bit of forensics on etherscan, using the [vested token overview](https://docs.google.com/spreadsheets/d/1IcvYQlWQ34kIFIfIKWzJwGlw-Jv33_TMBDKCI0ziEa8/edit#gid=1565912853), it becomes clear that the address with the most delegated voting power is controlled by the founding team. The same is true for ranks 4, 7, and 10. The second and third largest delegates seem to be whales and the rest are investors and community members
+As seen in the chart, the top three delegates control 51.2% of the overall voting power that is currently eligible to vote. This is quite a high concentration of power (basically a [Nakamoto coefficient](https://news.earn.com/quantifying-decentralization-e39db233c28e) of 3). With a bit of forensics on etherscan, using the [vested token overview](https://docs.google.com/spreadsheets/d/1IcvYQlWQ34kIFIfIKWzJwGlw-Jv33_TMBDKCI0ziEa8/edit#gid=1565912853), it becomes clear that the address with the most delegated voting power is controlled by the founding team. The same is true for ranks 4, 7, and 10. The second and third largest delegates seem to be whales and the rest are investors and community members.
 
-This does not come as a surprise, given that the founding team will receive 27% of all tokens in circulation (vested over 3 years) according to the [vesting schedule](https://docs.google.com/spreadsheets/d/1IcvYQlWQ34kIFIfIKWzJwGlw-Jv33_TMBDKCI0ziEa8/edit#gid=1565912853) [side note: the team allocation stated in their [docs](https://silopedia.silo.finance/governance/token-allocation-and-vesting) is 5.25% lower (21.75%). Those 52.5M tokens are currently sitting in a vesting contract untouched].
+This does not come as a surprise, given that the founding team will receive 27% of all tokens in circulation (vested over 3 years) according to the [vesting schedule](https://docs.google.com/spreadsheets/d/1IcvYQlWQ34kIFIfIKWzJwGlw-Jv33_TMBDKCI0ziEa8/edit#gid=1565912853) [side note: the team allocation as stated in their [docs](https://silopedia.silo.finance/governance/token-allocation-and-vesting) is only 21.75%, that’s 5.25% lower than the actual allocation. Those 52.5M tokens are currently sitting in a vesting contract untouched].
 
-In summary, the team has by far the largest allocation. All other stakeholder groups don’t even come close, even all investors combined only achieve 6.3% voting power. Two whales currently also hold significant voting power, however, it still leads to the conclusion that SiloDAO is highly influenced by the core team. There are plans to dilute the team share via a veSILO tokenomics issuance scheme, until those become a reality there is a large trust factor put onto the Silo founding [team](https://www.silo.finance/) - who is partially [doxxed](https://www.linkedin.com/company/silo-finance/people/). The team as listed on their website is anon. However, they managed to attract well-known investors and advisors, which adds to the credibility of the team.
+In summary, the team has by far the largest allocation. All other stakeholder groups don’t even come close, even all investors combined only achieve 6.3% voting power. Two whales currently also hold significant voting power, however, it still leads to the conclusion that SiloDAO is highly influenced by the core team. There are plans to dilute the team share via a veSILO tokenomics issuance scheme, however, until this becomes a reality there is a large trust factor put onto the Silo core [team](https://www.silo.finance/) - who is partially [doxxed](https://www.linkedin.com/company/silo-finance/people/). In addition, they managed to attract well-known investors and advisors, which adds to the credibility of the team.
 
 
 ## Smart Contract Risk
@@ -317,7 +326,7 @@ The last thing to highlight related to stability is that Silo’s TVL is current
 
 In the beginning, the only collateral enabled to borrow XAI will be USDC and ETH. Thus, eliminating other risks that come with long tail assets (e.g., low asset liquidity, high price volatility, depeg of the collateral, etc.).
 
-Both ETH and USDC are highest-tier assets with more than enough liquidity to offset potential liquidations. Even when XAI will be enabled as a bridge asset for more silos, the collateral risk is limited only to those isolated markets.
+Both ETH and USDC are quality assets with more than enough liquidity to offset potential liquidations. Even when XAI will be enabled as a bridge asset for more silos, the collateral risk is limited only to those isolated markets.
 
 We currently don’t see any risks related to collateral, however, anyone can propose to add new credit lines. [Credit lines](https://silopedia.silo.finance/welcome/cross-silos-stablecoin) describe the process of allowing silos to use XAI as a bridge asset. While new credit lines need to be approved by governance first, this process can change the composition of XAI’s backing. Potential risks occur in cases where XAI supports illiquid and highly volatile assets. Hence, we recommend that each credit line and silo addition be carefully considered. Silo should also think about installing or incentivizing more detailed risk assessments for each collateral. A bad debt dashboard (as provided by RiskDAO for instance), is another option to better inform users about the health of individual silos.
 
@@ -326,7 +335,7 @@ We currently don’t see any risks related to collateral, however, anyone can pr
 
 Silo also aims to enable XAI as collateral within the protocol. As highlighted above, for XAI to become a low-risk collateral, there needs to be enough liquidity in the open market. This will help to facilitate potential liquidations and arbitrage, which is needed to support XAi’s stability.
 
-The team is working on two [initiatives](https://gov.silo.finance/t/building-on-chain-liquidity-for-xai/309) that will ensure the initial provisions of adequate liquidity. First, seeding the initial USDC silo with $1.875M USDC to mint $1.5M XAI. Deposit the minted $1.5M XAI plus an additional $1.5M USDC into a [Uniswap V3 pool](https://info.uniswap.org/#/pools/0x55bb9904df17f3b07551aa117841b3bbfc66646d). The Uni pool is only temporary and will ensure smooth liquidations until the Curve pool XAI/FRAXGP gauge is live.
+The team is working on two [initiatives](https://gov.silo.finance/t/building-on-chain-liquidity-for-xai/309) that will ensure the initial provisions of adequate liquidity. First, seeding the initial USDC silo with $1.875M USDC to mint $1.5M XAI. Deposit the minted $1.5M XAI plus an additional $1.5M USDC into a [Uniswap V3 pool](https://info.uniswap.org/#/pools/0x55bb9904df17f3b07551aa117841b3bbfc66646d). The Uni pool is only temporary to ensure smooth liquidations. Once Silo’s own liquidation engine is able to support Curve pools, they will migrate liquidity to the XAI/FRAXBP pool. However, this might take a few weeks to finalize.
 And secondly, Silo will use 130k of their own vlCVX to vote for incentivization of their pool. Hence, we believe there will be enough liquidity for the early stage of XAI.
 
 
@@ -336,7 +345,7 @@ And secondly, Silo will use 130k of their own vlCVX to vote for incentivization 
 
 1. Is it possible for a single entity to rug its users?
 
-No, SiloDAO does not have access to user funds. It can, however, mint XAI to silos or redeem XAI. The DAO also controls the interest rates, LTV, and other parameters of XAI. Thus, having a strong influence on the price stability of XAI.
+No, SiloDAO does not have access to user funds and cannot touch users' collateral. It can, however, mint XAI to silos or redeem the minted XAI that is not borrowed. The DAO also controls the interest rates, LTV, and other parameters of XAI. Thus, playing a vital role in ensuring the price stability of XAI. It’s also worth reiterating that the core team has a strong influence over the DAO, given their large token allocation.
 
 
 
