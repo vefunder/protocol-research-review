@@ -214,4 +214,4 @@ Stacking different protocols for yield generation can increase the risk surface 
 
 ### Opportunity cost
 
-People trading b/w bLUSD and LUSD doesn't make sense at a point where people do not bond anymore. This would lead to 0 chicken in fee gauge incentives for LPs almost negligible vAPY.
+As we discussed in the earlier sections the system might reach a state where bonding will not be profitable. Thus negligible chicken in fees, and when bonding-rebonding doesn't happen, trades b/w bLUSD-LUSD are hardly expected resulting in negligible vAPY.
