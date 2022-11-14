@@ -1,10 +1,9 @@
 # Asset Risk Assessment bLUSD
 
-### Chicken Bonds are designed to generate amplified yields for the users and protocol-owned liquidity that can strengthen the subjected asset.
+### Chicken Bonds are designed to generate amplified yields for the users and protocol-owned liquidity that can strengthen the underlying asset.
 
-# Liquity protocol overview
 
-_[Resources]_
+# Resources
 
 _[Official Liquity Documentation](https://docs.liquity.org/) (Docs)_
 
@@ -16,14 +15,15 @@ _[Audit by Coinspect](https://www.coinspect.com/liquity-audit/) (Audit)_
 
 _[Trail of Bits Liquity Protocol and Stability Pool Final Report](https://github.com/trailofbits/publications/blob/master/reviews/LiquityProtocolandStabilityPoolFinalReport.pdf) (Audit)_
 
+# Liquity protocol overview
+
 Liquity is a decentralized borrowing protocol that allows interest-free loans against ETH as collateral.
 
-The loans are subjected to Borrowing and Redemption fees, both functions of the redemption rate. The borrowing fee is paid in LUSD and ranges from 0.5% to 5%, and the redemption fee is in ETH (ranging between 0.5% and infinity). As the redemption volume of LUSD increases, the fees move away from their lower limit of 0.5%. On top of the Borrowing fees, 200 LUSD is charged as a [Liquidation Reserve](https://docs.liquity.org/faq/borrowing#what-is-the-liquidation-reserve) to be returned when the debt is repaid.
+Loans are subjected to Borrowing and Redemption fees, both functions of the redemption rate. The borrowing fee is paid in LUSD and ranges from 0.5% to 5%, and the redemption fee is in ETH (ranging from 0.5% to infinity). As the redemption volume of LUSD increases, suggesting LUSD is trading below its peg, borrowing fees begin to increase to discourage borrowing. The redemption fee regulates redemption velocity by increasing when redemptions take place, and decreasing over time since a fee event. On top of the Borrowing fees, 200 LUSD is charged as a [Liquidation Reserve](https://docs.liquity.org/faq/borrowing#what-is-the-liquidation-reserve) to be returned when the debt is repaid. Liquity requires a minimum debt of 2,000 LUSD.
 
 ![Trove creation demonstration for an understanding fee at the time of borrowing](https://lh3.googleusercontent.com/ABVAaBAyu-5EXrFCtXZH8v0QUss7gJF54Dwx6GHHG-e_monuGsCq2-OKxNNXNVeGGhyeKwS_69GR7I8b99PONo-tZG4UTNEwMpYMu1UtlxE5Ds27qdCe6400ig4bYx3043aKMZXqvTInslV7qu9Z551P_DQG2NysLOBndXkSf9AEV250ttxJENfrP22vhg)
-Liquity allows a minimum debt of 2,000 LUSD. Assuming that the Trove is immediately liquidated upon creation, a maximum loss of 0.5% Borrowing fee will be 18.55% and 21.7% in the case of maximum borrowing fees (5%).
 
-To avoid liquidations, the debt holder needs to maintain their "Trove" at a minimum collateral ratio (CR) of 110% or 150% in the case when recovery mode is active (Recovery mode is further explained at the end of this section). The loans are secured by a Stability Pool containing LUSD that handles the liquidations.
+To avoid liquidations, the debt holder needs to maintain their "Trove" (similar concept to a CPD or vault) at a minimum collateral ratio (CR) of 110% during normal conditions, or 150% in the case when recovery mode is active (Recovery mode is further explained at the end of this section). The loans are secured by a Stability Pool containing LUSD that handles the liquidations.
 
 The Stability Pool is a liquidity source used to repay debt from liquidated Troves. When any Trove is liquidated, an amount of LUSD corresponding to the remaining debt of the Trove is burned from the Stability Pool's balance to repay the Trove's debt. In exchange, the entire collateral from the Trove is transferred to the Stability Pool.
 
@@ -37,16 +37,13 @@ In an undesirable scenario where the Stability Pool has no funds to facilitate t
 >
 > **Liquity Whitepaper**
 
-Recovery Mode is activated when the protocol's Total Collateral Ratio (TCR) falls below 150%. In this regime, the protocol liquidates troves with collateralization ratios between the current TCR and 110%.
+Recovery Mode is activated when the protocol's Total Collateral Ratio (TCR) falls below 150%. In this event, the protocol liquidates troves with collateralization ratios between the current TCR and 110%.
 
 These liquidations are carried at 110% CR, and the borrower can reclaim excess collateral. Recovery Mode generates more liquidations with a capped discount. A lack of sufficient funds in the Stability Pool prevents liquidations, potentially leading to the market stress testing LUSD's peg.
 
-The motivation for designing Chicken Bonds was to ensure that the Stability Pool had sufficient liquidity to facilitate liquidation and to ensure the LUSD peg in harsh conditions.
+The motivation for designing Chicken Bonds was to ensure that the Stability Pool has sufficient liquidity to facilitate liquidation and to ensure the LUSD peg in harsh conditions.
 
 ## LUSD peg stability
-
-![LUSD Price history](https://lh5.googleusercontent.com/2NL2bc3JNY3ii4igTPPt90Tr_h2sMYU3OoZeycfVkEwoVYtuSLgOeWJIHFyjiVDMSz90hmJKv3G3BTnWlWba-Ju8hOzqRHXSw1RL95st-2Ds-qy1g-LbhsC6z9XP5mn1U-0hYicwhv_t90C_yWcia0qds0-FJL2QITf-AsAGuX_y-f6KAaJ_coSUz4dw9Q)
-Image [Source](https://www.coingecko.com/en/coins/liquity-usd)
 
 ![Source: https://www.liquity.org/blog/on-price-stability-of-liquity](https://lh6.googleusercontent.com/7RUygHVopKPhdCqEUUJU5i-TJVCNOktQZl_mfw5vZXwkJ7hFQW9H3T3Ov4odAE_DaTHBMDMWlDxyEo-7tFJgXmlcDvXyS5OjKATSC8fD9RqYFsOS020AG6pAFaukrhCtOP9QJSBaTKTMcjJ6obBpBJthgw-QAdxDGjp2MM-SGBY4LX6B_pg25dagBuDLQw "LUSD hard peg and soft peg distinction")
 
@@ -54,14 +51,19 @@ Image [Source](https://www.liquity.org/blog/on-price-stability-of-liquity)
 
 ### Hard peg stability
 
-- The ability to redeem LUSD for ETH at face value (i.e. 1 LUSD for $1
-  of ETH) and a minimum collateral ratio of 110% range-bounds LUSD (respectively) through arbitrage opportunities.
+- Any LUSD holder has the ability to redeem LUSD for ETH at face value (i.e. 1 LUSD for $1
+  of ETH). The system will use the LUSD to pay off debt and draw collateral from the riskiest Troves. Direct arbitrage creates a price floor for LUSD at $1. 
+- A minimum collateral ratio of 110% sets an upper price of LUSD at $1.10. Above that price, arbs can deposit $110 worth of ETH and sell 100 LUSD (worth >$110) at a profit. 
 
 ### Soft peg stability
 
 - If the price of LUSD goes above $1, borrowing is more attractive as the user expects to repay at a lower rate or arbitrage it on some DEXs.
 - Higher redemption volume implies higher Borrowing fees which make new loans less attractive, thus limiting the supply.
 - As LUSD moves close to $1.10, the gains from liquidations on the stability pool will taper off; users would remove LUSD from the stability pool, increasing its circulating supply.
+
+In practice, LUSD has typically remained rangebound, as predicted, between the $1 - $1.10 "hard peg". 
+![LUSD Price history](https://lh5.googleusercontent.com/2NL2bc3JNY3ii4igTPPt90Tr_h2sMYU3OoZeycfVkEwoVYtuSLgOeWJIHFyjiVDMSz90hmJKv3G3BTnWlWba-Ju8hOzqRHXSw1RL95st-2Ds-qy1g-LbhsC6z9XP5mn1U-0hYicwhv_t90C_yWcia0qds0-FJL2QITf-AsAGuX_y-f6KAaJ_coSUz4dw9Q)
+Image [Source](https://www.coingecko.com/en/coins/liquity-usd)
 
 ---
 
