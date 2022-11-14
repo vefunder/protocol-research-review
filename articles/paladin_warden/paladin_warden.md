@@ -34,7 +34,7 @@ Further risks for LPs arise from individual protocol-related risks for which the
     
 
 * **For lenders/borrowers**
-The Paladin protocol has been [audited by Pessimistic on 1st Oct 2021](https://github.com/pessimistic-io/audits/blob/914e35fdfc879451a61d2a3969f3be839b8c808f/Paladin%20Security%20Analysis%20by%20Pessimistic.pdf) However, what users should be aware of are the elevated rights of the multisig (as per the audit):
+The Paladin protocol has been [audited by Pessimistic on 1st Oct 2021](https://github.com/pessimistic-io/audits/blob/914e35fdfc879451a61d2a3969f3be839b8c808f/Paladin%20Security%20Analysis%20by%20Pessimistic.pdf) whereby no critical issues were found. However, what users should be aware of are the elevated rights of the multisig (as per the audit):
 > In the [PaladinController](https://etherscan.io/address/0xCf131548B18D55Fb29DF2df47b360C41389EbB2b#code) contract, an admin can:
 > * Withdraw all tokens from the reserve using `removeReserve()` function.
 > * Block pool transactions by providing an incorrect controller address in `setPoolsNewController()` function or by removing the pool with `removePool()` function call.
