@@ -1,6 +1,6 @@
 # Asset Risk Assessment bLUSD
 
-### Chicken Bonds are designed to generate amplified yields for the users and protocol-owned liquidity that can strengthen the underlying asset.
+### Chicken Bonds directs amplified yields to their bTKN (bLUSD). This report focuses on how safe is it for the users to utilise bLUSD i.e. bonding as well as providing liquidity in bLUSD-LUSD3CRV pool.
 
 Chicken Bonds is designed to generate amplified yields to the bLUSD token and build up protocol-owned liquidity that can strengthen the subjected asset's position in the market. It is first applied to Liquity’s LUSD where bonding is the primary use case, allowing users to acquire bLUSD at a discount upon depositing tokens. 
 
