@@ -16,10 +16,10 @@ Asset Risk Assessment - Paladin / Warden
  [Podcast: Voting Markets, with Paladin's Romain Figuereo](https://anchor.fm/i-pledge-allegiance/episodes/Voting-Markets--with-Paladins-Romain-Figuereo-e1foigm)
 
 ## Abstract
-With the introduction of lendable governance power, Paladin fills a yet unfilled niche of governance voting markets. In the first part of this review, we will cover Paladin and assess the relevant risks for its users including LPs. Lastly, we will assess the Warden products which were designed to cater veTokens due to their fundamental differences to classic governance tokens, i.e. no possibility to lend generalized gov. power.
+With the introduction of lendable governance power, Paladin fills a yet unfilled niche within governance voting markets. In the first part of this review, we will cover Paladin and assess the relevant risks for its users including LPs. Lastly, we will assess the Warden products, which were designed for veTokens due to their fundamental differences from classic governance tokens, i.e. no possibility to lend generalized governance power.
 
 ### Paladin protocol overview
-The Paladin protocol allows users to non-custodially lend the governance power of various protocols. The way it operates resembles that of a lending protocol. When a user deposits his tokens into a pool, they are released for borrowing. When a user borrows the governance rights, the [PalPool](https://doc.paladin.vote/paladin-protocol/palpool) creates a [PalLoan](https://doc.paladin.vote/paladin-protocol/palloan) (ERC-721) which represents the borrowing position. The borrowing fees are paid in advance by the user after which the governance rights are delegated to the borrower.
+The Paladin protocol allows users to non-custodially lend the governance power of various protocols. The way it operates resembles that of a lending protocol. When a user deposits his tokens into a pool, they are released for borrowing. When a user borrows the governance rights, the [PalPool](https://doc.paladin.vote/paladin-protocol/palpool) creates a [PalLoan](https://doc.paladin.vote/paladin-protocol/palloan) (ERC-721) which represents the borrowing position. The borrowing fees are paid in advance by the user, after which the governance rights are delegated to the borrower.
 
 At any time, the borrower can change the recipient of his borrowed governance rights, extend or close the borrowing position. All unused fees will be returned to the borrower should he close his position earlier than initially desired. Conversely, the borrowing position is automatically closed if all fees (that were prepaid and held in custody) are used up.
 
@@ -28,9 +28,9 @@ Since not every protocol allows users to unstake their governance tokens without
 
 #### Risk summary:
 * **For LPs**
-Significant depegs (e.g. PalStkAave/Aave) do not pose too much risk for liquidity providers, since in the case of a lopsided pool balance the LP can rebalance the pool within 10 days. This can be achieved at no cost by withdrawing PalStkAave, unwrapping, unstaking Aave, and redepositing back into the pool. Ideally, this rebalancing should occur before the pool enters a lopsided state to provide sufficient depth (which translates into volume & fees) at all times.
-    
-    Further risks for LPs arise from individual protocol-related risks for which the liquidity is provided. For example, in the case of StkAave, should there be any shortfall event, [Aave will slash up to 30% of SkAave to cover the deficit](https://docs.aave.com/aavenomics/safety-module), which in turn would cause PalStkAave (like any other StkAave derivative) to depeg.
+Significant depegs (e.g. PalStkAave/Aave) do not pose too much risk for liquidity providers, since in the case of a lopsided pool balance the LP can rebalance the pool within 10 days. This can be achieved at no cost by withdrawing PalStkAave, unwrapping, unstaking Aave, and redepositing back into the pool. Ideally, this rebalancing should occur before the pool enters a lopsided state to provide sufficient depth (which translates into volume & fees) at all times. 
+
+Further risks for LPs arise from individual protocol-related risks for which the liquidity is provided. For example, in the case of StkAave, should there be any shortfall event, [Aave will slash up to 30% of SkAave to cover the deficit](https://docs.aave.com/aavenomics/safety-module), which in turn would cause PalStkAave (like any other StkAave derivative) to depeg.
     
 
 * **For lenders/borrowers**
@@ -57,9 +57,9 @@ Because the [multisig](https://etherscan.io/address/0x0792dCb7080466e4Bbc678Bdb8
 In the future, the Paladin DAO intends to transfer the control over to the DAO once governance processes are refined and deployed on-chain.
 
 ## The Warden protocol
-While the idea of lendable governance power introduces improvements to more trivially designed governance models, the opposite is the case for the vote-escrowed model. In the forefront of a high degree of (or absolute) permissionlesness within DAOs the veModel acts as a protection mechanism against malicious governance behavior. By linking governance power to the duration of the lock period, an effort is made to align the long-term incentives between the DAO and the governance participants. An essential component to maintain the integrity of this mechanism is a whitelist that only allows contracts selected by the DAO to lock in CRV. Accordingly, [it is intended that the locking mechanism cannot be circumvented](https://cryptorisks.substack.com/p/the-vetoken-standard), e.g. through tradable veCRV derivatives.
+While the idea of lendable governance power introduces improvements to more trivially designed governance models, the opposite is the case for the vote-escrowed model. Given a high degree of (or absolute) permissionlessness within DAOs, the veModel acts as a protection mechanism against malicious governance behavior. By linking governance power to the duration of the lock period, an effort is made to align the long-term incentives between the DAO and the governance participants. An essential component to maintain the integrity of this mechanism is a whitelist that only allows contracts selected by the DAO to lock CRV. Accordingly, [it is intended that the locking mechanism cannot be circumvented](https://cryptorisks.substack.com/p/the-vetoken-standard), e.g. through tradable veCRV derivatives.
 
-This is a significant difference from other governance models which was also the reason why separate products labeled “Warden” were developed to specifically cater veCRV and other veTokens.
+This is a significant difference from other governance models, which was also the reason why separate products labeled “Warden” were developed to specifically cater to veCRV and other veTokens.
 
 ### Warden boost
 In a nutshell, Warden boost allows the [boosting element of veCRV](https://resources.curve.fi/reward-gauges/boosting-your-crv-rewards) to be rented/leased independently of the underlying voting rights ([see docs for more details](https://doc.paladin.vote/warden/boost-market)). As can be seen from the image below, the lease offer can be configured very precisely.
@@ -78,6 +78,8 @@ The [audit for Warden quest](https://github.com/spearbit/portfolio/blob/master/p
 ## Conclusion
 As far as the Warden products are concerned, no noteworthy risks could be identified. Both products do not represent a veCRV derivative but contracts that only manage the functional aspects of veCRV. This non-custodial property limits even worst-case hypothetical risks (e.g. the inability to claim bribe rewards due to faulty Merkle Trees) to a minimum.
 
-As for the risks regarding Paladin, these are mainly confined within the powers of the multisig. Since trust assumptions can be made by virtue of the reputation and public disclosure of the multisig participants, the risk can likewise be considered minimal in this case.
+As for the risks regarding Paladin, these are mainly confined within the powers of the multisig. Since trust assumptions can be made by virtue of the reputation and public disclosure of the multisig participants (doxxed to the [fund](https://twitter.com/Greenfield1One)), the risk can likewise be considered minimal in this case.
 
 In summary, the Paladin protocol primarily targets the pain point of governance scalability within DAOs that can be effectively solved through delegation. Thus, it can be said that the Paladin protocol contributes a positive value add to governance within the DeFi ecosystem.
+
+
