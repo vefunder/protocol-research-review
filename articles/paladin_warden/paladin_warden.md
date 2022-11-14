@@ -78,6 +78,8 @@ The [audit for Warden quest](https://github.com/spearbit/portfolio/blob/master/p
 ## Conclusion
 As far as the Warden products are concerned, no noteworthy risks could be identified. Both products do not represent a veCRV derivative but contracts that only manage the functional aspects of veCRV. This non-custodial property limits even worst-case hypothetical risks (e.g. the inability to claim bribe rewards due to faulty Merkle Trees) to a minimum.
 
-As for the risks regarding Paladin, these are mainly confined within the powers of the multisig. Since trust assumptions can be made by virtue of the reputation and public disclosure of the multisig participants (doxxed to the fund), the risk can likewise be considered minimal in this case.
+As for the risks regarding Paladin, these are mainly confined within the powers of the multisig. Since trust assumptions can be made by virtue of the reputation and public disclosure of the multisig participants (doxxed to the [fund](https://twitter.com/Greenfield1One)), the risk can likewise be considered minimal in this case.
 
 In summary, the Paladin protocol primarily targets the pain point of governance scalability within DAOs that can be effectively solved through delegation. Thus, it can be said that the Paladin protocol contributes a positive value add to governance within the DeFi ecosystem.
+
+
