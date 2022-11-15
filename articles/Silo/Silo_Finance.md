@@ -32,12 +32,14 @@ Silo is a permissionless and non-custodial lending protocol that allows the borr
 
 **A quick TL;DR of our findings:**
 
+* Silo Finance introduces a new money market design with isolated markets (silos) for every unique token. These isolated markets are paired with the same counterpart asset called a bridge asset (ETH or XAI). Bridge assets represent concentrated liquidity bridged across all isolated markets, which facilitates the onboarding of any token, especially long-tail assets. The isolation of high-risk assets greatly reduces protocol systemic risk, while bridge assets prevent fractured liquidity and keep the protocol liquid and fluid.
 
-
-* Silo Finance introduces a new money market design with isolated markets (silos) for every unique token. These isolated markets are paired with the same counterpart asset called bridge asset (ETH or XAI). Bridge assets represent a concentrated part of liquidity bridged across all isolated markets which facilitates the onboarding (listing) of any token, especially long-tail assets. The isolation of high-risk assets almost completely removes protocol systemic risk, while bridge assets prevent fractured liquidity and keep the protocol liquid and fluid.
 * Silo allows permissionless listing and parameter customization for each silo through governance. Every newly created silo needs to have a reliable price feed source and starts with default collateral factors for Loan-to-Value (LTV), Liquidation Threshold, and Liquidation Penalty.
+
 * The core smart contracts were fully audited by Quantstamp and ABDK and tested by the core team through a formal verification process using Certora Prover.
+
 * Silo recently introduced a new stablecoin named XAI, which will serve as the second bridge asset alongside ETH. XAI can be minted and burnt by the SiloDAO via governance (using Tally).
+
 * Silo has notably high levels of governance decentralization compared to most early stage protocols. All core protocol functions are managed by SILO token holders via on-chain governance.
 
 
