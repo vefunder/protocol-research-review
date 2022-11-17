@@ -1,5 +1,6 @@
 # Asset Risk Assessment bLUSD
 
+
 ### Chicken Bonds directs amplified yields to their bTKN (bLUSD). This report focuses on how safe is it for the users to utilise bLUSD i.e. bonding as well as providing liquidity in bLUSD-LUSD3CRV pool.
 
 Chicken Bonds is designed to generate amplified yields to the bLUSD token and build up protocol-owned liquidity that can strengthen the subjected asset's position in the market. It is first applied to Liquity’s LUSD where bonding is the primary use case, allowing users to acquire bLUSD at a discount upon depositing tokens. 
@@ -91,6 +92,7 @@ Image [Source](https://www.coingecko.com/en/coins/liquity-usd)
 ---
 
 # Chicken Bonds
+
 
 _**Useful Links**_
 
@@ -219,7 +221,9 @@ bLUSD is exposed to the risks at B.Protocol and Yearn used for generating yield.
 
 #### B.Protocol
 
+
 _**Useful Links**_
+
 
 _[B.AMM Protocol Liquity Integration Assessment](https://github.com/Fixed-Point-Solutions/published-work/blob/master/SmartContractAudits/FPS_B.AMM_Liquity_Assessment_FINAL.pdf) (Audit)_
 
@@ -237,6 +241,7 @@ Here is the audit report to learn more: [B.AMM Protocol Liquity Integration Asse
 
 #### Yearn LUSD vault
 
+
 LUSD in the LUSD3CRV pool shares risks with the 3CRV pool as well, where the crypto risk team concludes to depreciate the 3pool if free-floating DAI is inevitable. Here is the [DAI risk assessment report](https://cryptorisks.substack.com/p/makerdao-endgame-and-its-repercussions) to learn more.
 
 Stacking different protocols for yield generation can increase the risk surface as well. The vault contract has been live for more than five months, and Yearn protocol can be considered as time-tested since Feb 2021.
@@ -245,6 +250,7 @@ Stacking different protocols for yield generation can increase the risk surface 
 
 As we discussed in the earlier sections the system might reach a state where bonding will not be profitable. Thus negligible chicken in fees, and when bonding-rebonding doesn't happen, trades b/w bLUSD-LUSD are hardly expected resulting in negligible vAPY.
 
+
 # Conclusion
 
 Chicken bonds and Liquity integration heavily rely on the Curve protocol when it comes to yield generation and price discovery of bLUSD. 
@@ -252,3 +258,4 @@ Chicken bonds and Liquity integration heavily rely on the Curve protocol when it
 Impermanent loss resulting from the price volatility of bLUSD, depreciation of 3pool by the Curve protocol harming the immutable nature of Chicken bonds, and the opportunity cost resulting from negligible trading activities are significant real risks.
 
 Risks associated with B.Protocol and LUSD price can be considered as black swan events but cannot be ignored.
+

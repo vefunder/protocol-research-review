@@ -37,6 +37,7 @@ More about bLUSD: https://www.chickenbonds.org/blog-posts/what-makes-the-btokens
 2/14
 
 ---
+
 A 3% fee collected from the bonders at the time of chicken in is used to incentivize the LPs.
 
 Initially, when there is low liquidity on the bLUSD-LUSD3CRV pool, bLUSD sell pressure can impact the price of bLUSD in a negative way incurring an impermanent loss.
@@ -44,6 +45,7 @@ Initially, when there is low liquidity on the bLUSD-LUSD3CRV pool, bLUSD sell pr
 3/14
 
 ---
+
 Chicken bonds invest the LUSD to generate yield. This yield is diverted into increasing the floor price of bLUSD.
 
 When a user bonds their LUSD, they accrue virtual bLUSD and have a chance to get accrued bLUSD or exit with initially bonded LUSD.
@@ -73,18 +75,20 @@ When they chicken in, the extra profit (which otherwise would not be generated i
 6/14
 
 ---
-It is likely that the market price of bLUSD drops and trades near the floor price in the long run. 
+Speeding the bLUSD accrual will change the non-profitable chicken in trade to a profitable one (Check the attached graph).
 
 When the market price trades near the floor price, trading activity between bLUSD & LUSD will slow down resulting in an opportunity cost as well as IL for the LPs.
 
 7/14
 
 ---
+
 Some more factors that can impact the bLUSD market price negatively if not true are:
 
 - Bonding volume is greater than the chicken in volume.
 - Users chicken out after bonding for a considerable time.
 - Users chicken in early.
+
 
 8/14
 
@@ -92,6 +96,7 @@ Some more factors that can impact the bLUSD market price negatively if not true 
 When people are not confident in holding ETH in a flash crash there exists a chance that LUSD might get depegged.
 
 Though the historic performance of LUSD has been prolific, it can’t be ignored.
+
 
 9/14
 
@@ -106,6 +111,7 @@ In an adverse situation, the collateral might get liquidated at less than 110% (
 The B.Protocol's integration with Liquity was audited in July 2021 and does offer an Immunefi bounty of $100k. https://immunefi.com/bounty/bprotocol/
 
 Moreover, the integration is live on the main net since Aug 2021.
+
 
 11/14
 
@@ -128,6 +134,7 @@ The vault contract is live for more than 5 months and Yearn protocol can be cons
 
 ---
 ![](https://typefully-user-uploads.s3.amazonaws.com/img/original/46439/88d3411f-c1c4-45ed-b548-f5386d809c07.png?response-cache-control=no-cache&AWSAccessKeyId=AKIAVTJZGL3H4SWWVYIT&Signature=9WL1XokoaWCKi96IvfyEAp15psI%3D&Expires=1668488798)
+
 14/14
 
 ---
