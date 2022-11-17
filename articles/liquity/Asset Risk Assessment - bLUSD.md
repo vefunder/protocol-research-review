@@ -1,9 +1,35 @@
 # Asset Risk Assessment bLUSD
 
-### Chicken Bonds are designed to generate amplified yields for the users and protocol-owned liquidity that can strengthen the underlying asset.
 
+### Chicken Bonds directs amplified yields to their bTKN (bLUSD). This report focuses on how safe is it for the users to utilise bLUSD i.e. bonding as well as providing liquidity in bLUSD-LUSD3CRV pool.
 
-# Resources
+Chicken Bonds is designed to generate amplified yields to the bLUSD token and build up protocol-owned liquidity that can strengthen the subjected asset's position in the market. It is first applied to Liquity’s LUSD where bonding is the primary use case, allowing users to acquire bLUSD at a discount upon depositing tokens. 
+
+Index
+- Liquity protocol overview
+  - LUSD peg stability
+    - Hard peg stability
+    - Soft peg stability
+- Chicken Bonds
+  - Yield generation for bLUSD
+  - bLUSD accrual mechanism
+    - A consequence of lowering the accrual parameter
+- Risks to LPs of bLUSD-LUSD3CRV
+  - Impermanent Loss
+    - The risk associated with the bLUSD price
+    - The risk associated with the LUSD price
+   - The risk associated with the yield generation
+      - B.Protocol - stability pool
+      - Yearn LUSD vault
+   - Opportunity cost
+- Conclusion
+
+The core purpose of this report is to make users aware of the product/services and its risks. This should not, in any way, be treated as financial/investment advice. 
+
+The research was spearheaded by DiligentDeer.
+
+# Liquity protocol overview
+_**Useful Links**_
 
 _[Official Liquity Documentation](https://docs.liquity.org/) (Docs)_
 
@@ -14,8 +40,6 @@ _[Trail of Bits Security Assessment](https://github.com/trailofbits/publications
 _[Audit by Coinspect](https://www.coinspect.com/liquity-audit/) (Audit)_
 
 _[Trail of Bits Liquity Protocol and Stability Pool Final Report](https://github.com/trailofbits/publications/blob/master/reviews/LiquityProtocolandStabilityPoolFinalReport.pdf) (Audit)_
-
-# Liquity protocol overview
 
 Liquity is a decentralized borrowing protocol that allows interest-free loans against ETH as collateral.
 
@@ -69,7 +93,8 @@ Image [Source](https://www.coingecko.com/en/coins/liquity-usd)
 
 # Chicken Bonds
 
-_[Resouces]_
+
+_**Useful Links**_
 
 _[Chicken Bonds: Self-Bootstrapping Liquidity](https://docsend.com/view/dakurpcuv3259bnx) (Whitepaper)_
 
@@ -85,13 +110,15 @@ _[Coinspect - Smart Contract Audit v3](https://github.com/liquity/ChickenBond/bl
 
 _[Dedaub - Smart Contract Audit](https://github.com/liquity/ChickenBond/blob/main/LUSDChickenBonds/audits/Dedaub_Chicken%20Bonds%20Audit.pdf) (Audit)_
 
+_[B.AMM Protocol Liquity Integration Assessment](https://github.com/Fixed-Point-Solutions/published-work/blob/master/SmartContractAudits/FPS_B.AMM_Liquity_Assessment_FINAL.pdf)(Audit)_
+
 Chicken Bonds are a novel mechanism for projects to bootstrap protocol-owned liquidity at no cost while boosting yield opportunities for end users.
 
 Users may deposit LUSD in exchange for an accruing balance of bLUSD. At any time, bond-holders can either:
-Retrieve their principal and forego the accrued amount ("chicken out"), or
-Trade it in for the accrued bLUSD ("chicken in"). Here, a portion of the LUSD acquired by the system backs the bLUSD supply, and this portion depends on the time of chicken-in.
+Retrieve their principal and forego the accrued amount "**chicken out**", or
+Trade it in for the accrued bLUSD "**chicken in**". Here, a portion of the LUSD acquired by the system backs the bLUSD supply, and this portion depends on the time of chicken in.
 
-The protocol operates a Treasury consisting of three logical parts ("buckets" ): Pending Bucket, Reserve Bucket, and Permanent Bucket.
+The protocol operates a Treasury consisting of three logical parts "buckets": Pending Bucket, Reserve Bucket, and Permanent Bucket.
 
 - The Pending Bucket (protocol-controlled vault) stores LUSD for the people who have yet to decide on their bonds. The funds are invested in the stability pool.
 - The Reserve bucket (protocol-controlled vault) stores a portion of the LUSD gathered from the former bondholders after a" chicken in" event. Yields generated with the funds in every bucket are directed here, which supports bLUSD's supply.
@@ -194,7 +221,9 @@ bLUSD is exposed to the risks at B.Protocol and Yearn used for generating yield.
 
 #### B.Protocol
 
-_[Resources]_
+
+_**Useful Links**_
+
 
 _[B.AMM Protocol Liquity Integration Assessment](https://github.com/Fixed-Point-Solutions/published-work/blob/master/SmartContractAudits/FPS_B.AMM_Liquity_Assessment_FINAL.pdf) (Audit)_
 
@@ -212,8 +241,21 @@ Here is the audit report to learn more: [B.AMM Protocol Liquity Integration Asse
 
 #### Yearn LUSD vault
 
+
+LUSD in the LUSD3CRV pool shares risks with the 3CRV pool as well, where the crypto risk team concludes to depreciate the 3pool if free-floating DAI is inevitable. Here is the [DAI risk assessment report](https://cryptorisks.substack.com/p/makerdao-endgame-and-its-repercussions) to learn more.
+
 Stacking different protocols for yield generation can increase the risk surface as well. The vault contract has been live for more than five months, and Yearn protocol can be considered as time-tested since Feb 2021.
 
 ### Opportunity cost
 
 As we discussed in the earlier sections the system might reach a state where bonding will not be profitable. Thus negligible chicken in fees, and when bonding-rebonding doesn't happen, trades b/w bLUSD-LUSD are hardly expected resulting in negligible vAPY.
+
+
+# Conclusion
+
+Chicken bonds and Liquity integration heavily rely on the Curve protocol when it comes to yield generation and price discovery of bLUSD. 
+
+Impermanent loss resulting from the price volatility of bLUSD, depreciation of 3pool by the Curve protocol harming the immutable nature of Chicken bonds, and the opportunity cost resulting from negligible trading activities are significant real risks.
+
+Risks associated with B.Protocol and LUSD price can be considered as black swan events but cannot be ignored.
+
