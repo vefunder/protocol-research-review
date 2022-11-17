@@ -245,10 +245,7 @@ Source: [B.AMM Protocol Liquity Integration Assessment.](https://github.com/Fixe
 
 #### Yearn LUSD vault
 
-
-LUSD in the LUSD3CRV pool shares risks with the 3CRV pool as well, where the crypto risk team concludes to depreciate the 3pool if free-floating DAI is inevitable. Here is the [DAI risk assessment report](https://cryptorisks.substack.com/p/makerdao-endgame-and-its-repercussions) to learn more.
-
-Stacking different protocols for yield generation can increase the risk surface as well. The vault contract has been live for more than five months, and Yearn protocol can be considered as time-tested since Feb 2021.
+Stacking different protocols for yield generation can increase the risk surface as well. The vault contract has been live for more than five months. Though Yearn has suffered a [hack in the past](https://thedefiant.io/yearn-loses-11m-in-2021s-first-defi-hack), its since been patched and is now reasonably battle tested, but there exist contract risk that can lead to losses.
 
 ### Opportunity cost
 
@@ -259,7 +256,7 @@ As we discussed in the earlier sections the system might reach a state where bon
 
 Chicken bonds and Liquity integration heavily rely on the Curve protocol when it comes to yield generation and price discovery of bLUSD. 
 
-Impermanent loss resulting from the price volatility of bLUSD, depreciation of 3pool by the Curve protocol harming the immutable nature of Chicken bonds, and the opportunity cost resulting from negligible trading activities are significant real risks.
+Impermanent loss resulting from the price volatility of bLUSD, and the opportunity cost resulting from negligible trading activities are risks that shouldn't be overlooked.
 
-Risks associated with B.Protocol and LUSD price can be considered as black swan events but cannot be ignored.
+Risks associated with stability pool investment (B.Protocol) and LUSD price can be considered as black swan events but cannot be ignored.
 
