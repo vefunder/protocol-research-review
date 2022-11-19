@@ -46,6 +46,7 @@ Liquity is a decentralized borrowing protocol that allows interest-free loans ag
 Loans are subjected to Borrowing and Redemption fees, both functions of the redemption rate. The borrowing fee is paid in LUSD and ranges from 0.5% to 5%, and the redemption fee is in ETH (ranging from 0.5% to infinity). As the redemption volume of LUSD increases, suggesting LUSD is trading below its peg, borrowing fees begin to increase to discourage borrowing. The redemption fee regulates redemption velocity by increasing when redemptions take place, and decreasing over time since a fee event. On top of the Borrowing fees, 200 LUSD is charged as a [Liquidation Reserve](https://docs.liquity.org/faq/borrowing#what-is-the-liquidation-reserve) to be returned when the debt is repaid. Liquity requires a minimum debt of 2,000 LUSD.
 
 ![Trove creation demonstration for an understanding fee at the time of borrowing](https://lh3.googleusercontent.com/ABVAaBAyu-5EXrFCtXZH8v0QUss7gJF54Dwx6GHHG-e_monuGsCq2-OKxNNXNVeGGhyeKwS_69GR7I8b99PONo-tZG4UTNEwMpYMu1UtlxE5Ds27qdCe6400ig4bYx3043aKMZXqvTInslV7qu9Z551P_DQG2NysLOBndXkSf9AEV250ttxJENfrP22vhg)
+Source: [Defisaver](https://app.defisaver.com/liquity/smart-wallet/manage)
 
 To avoid liquidations, the debt holder needs to maintain their "Trove" (similar concept to a CPD or vault) at a minimum collateral ratio (CR) of 110% during normal conditions, or 150% in the case when recovery mode is active (Recovery mode is further explained at the end of this section). The loans are secured by a Stability Pool containing LUSD that handles the liquidations.
 
@@ -56,6 +57,7 @@ The Stability Pool is a liquidity source used to repay debt from liquidated Trov
 In an undesirable scenario where the Stability Pool has no funds to facilitate the liquidations, the debt obligation from a Trove that is deemed to be liquidated might get transferred to other LUSD debt holders. Transferring this debt obligation will reduce the remaining Troves' health factor (collateral ratio), making them vulnerable to liquidation if the ETH price drops further.
 
 ![Debt trasnfer in case of insufficient funds under Stability Pool](https://lh5.googleusercontent.com/dsMYpvcTpi81p2KC3WNCcD0cWwUfAjtGPN7Uyo3KoI_vu54ELjImim8tCw7Wjf25iVU-MvIeQPxG8_vOWiXDHCkfqKPmODh0kDXAIXz6UwJ4HnQiQGhDSMxDHqPVUK5kO4zcpfHG9lwrnS5PQY9L0n5SLS8iaF7_-z8aTca7v-xEUadX0DKl0Y7UAI487w)
+Source: [Liquity whitepaper](https://docsend.com/view/bwiczmy)
 
 > The redistribution of the collateral and debt is done proportionally to the recipient Trove's collateral amount. Troves with higher collateralization receive more debt and collateral from liquidated positions. This distribution design ensures that the system does not create cascading liquidations.
 >
@@ -69,9 +71,8 @@ The motivation for designing Chicken Bonds was to ensure that the Stability Pool
 
 ## LUSD peg stability
 
-![Source: https://www.liquity.org/blog/on-price-stability-of-liquity](https://lh6.googleusercontent.com/7RUygHVopKPhdCqEUUJU5i-TJVCNOktQZl_mfw5vZXwkJ7hFQW9H3T3Ov4odAE_DaTHBMDMWlDxyEo-7tFJgXmlcDvXyS5OjKATSC8fD9RqYFsOS020AG6pAFaukrhCtOP9QJSBaTKTMcjJ6obBpBJthgw-QAdxDGjp2MM-SGBY4LX6B_pg25dagBuDLQw "LUSD hard peg and soft peg distinction")
-
-Image [Source](https://www.liquity.org/blog/on-price-stability-of-liquity)
+![Peg stability mechanism](https://lh6.googleusercontent.com/7RUygHVopKPhdCqEUUJU5i-TJVCNOktQZl_mfw5vZXwkJ7hFQW9H3T3Ov4odAE_DaTHBMDMWlDxyEo-7tFJgXmlcDvXyS5OjKATSC8fD9RqYFsOS020AG6pAFaukrhCtOP9QJSBaTKTMcjJ6obBpBJthgw-QAdxDGjp2MM-SGBY4LX6B_pg25dagBuDLQw "LUSD hard peg and soft peg distinction")
+Source: [Liquity](https://www.liquity.org/blog/on-price-stability-of-liquity)
 
 ### Hard peg stability
 
@@ -87,7 +88,7 @@ Image [Source](https://www.liquity.org/blog/on-price-stability-of-liquity)
 
 In practice, LUSD has typically remained rangebound, as predicted, between the $1 - $1.10 "hard peg". 
 ![LUSD Price history](https://lh5.googleusercontent.com/2NL2bc3JNY3ii4igTPPt90Tr_h2sMYU3OoZeycfVkEwoVYtuSLgOeWJIHFyjiVDMSz90hmJKv3G3BTnWlWba-Ju8hOzqRHXSw1RL95st-2Ds-qy1g-LbhsC6z9XP5mn1U-0hYicwhv_t90C_yWcia0qds0-FJL2QITf-AsAGuX_y-f6KAaJ_coSUz4dw9Q)
-Image [Source](https://www.coingecko.com/en/coins/liquity-usd)
+Source: [Coingecko](https://www.coingecko.com/en/coins/liquity-usd)
 
 ---
 
@@ -160,6 +161,7 @@ The amount of LUSD bonded is considered after reducing the 3% chicken in fees fr
 Moreover, there is a function where alpha is reduced to accelerate the bLUSD accrual rate. When the [current weighted average bond age](https://dune.com/queries/1460655) is greater than the target age of 15 days, the controller will lower the alpha. A major reason for greater bond age is people unwilling to take action (Chicken in or Chicken out); in other words, people aren't convinced that the bLUSD accrued so far is profitable enough to chicken in.
 
 ![Controller logic for triggering the accrual parameter](https://lh4.googleusercontent.com/k3o7OuY1SC95kNCOCsNumC7Lx1gjbdQkyLl4HCL4-oizhUWdB9gK93Hj60Hd0ha8w_7DTDtEdPsZn3WMFSDNIDEX1_kTVOLRmtMwu2P2pOkzYM15ymjMfkJcKKtbvuQLboZMUjxHGmz-FPBTt2MmJJV-6TjarZAhM_kGG16EcnHbRhN_AIHHey4C_2DMfg)
+Source: [Controller logic for triggering the accrual parameter](https://github.com/liquity/ChickenBond#controller)
 
 Lowering the alpha would cause the accrual of bLUSD to speed up, thus bringing the break-even point and the optimal rebonding time close.
 
@@ -176,6 +178,7 @@ They claim that after a certain period, people would not bond anymore due to non
 Lowering $\alpha$ might produce a situation where bonding gets less attractive due to non-profitability.
 
 ![Conclusion decribing the Chicken Bonds equilibrium state](https://lh5.googleusercontent.com/YhDfpfJGCjwHeZg8jgClLB9IdStaqiQFTR1nKQ1Nog-vptqm4fJW-4rpKE66hjsx3VwXHUu-_TyOPZFJATLtM5bpIx-S2YbUUiM9ZplOE_5k7q3X4vrAxqMVlnuw68V3CA9xv4eUdnivm59Ze8h1daR5YOeiJE1Y4Af7dlQrVo07JYUPZuU3MNVgcovAEQ)
+Source: [Technical paper by The Risk DAO](https://github.com/Risk-DAO/Reports/blob/main/Chicken%20bonds%20analysis.pdf)
 
 ---
 
@@ -236,13 +239,11 @@ Since liquidations are driven based on the price of collateral, oracle is a key 
 Here is the audit report to learn more: [B.AMM Protocol Liquity Integration Assessment](https://github.com/Fixed-Point-Solutions/published-work/blob/master/SmartContractAudits/FPS_B.AMM_Liquity_Assessment_FINAL.pdf).
 
 ![](https://lh6.googleusercontent.com/3SIAUAnnITcZE3V9qYz1F3s6jYA4ApwURZco1KJRsEGMEQ6NvdEWvJCj44IzGgTnyGZsVtKKuxL1iZAXMG_jydNTejx2dIcxZJmA9_H9DTWiXrWgzHXokylaHlzYqsX0JD7fD5bLS_-NyXcwoWjBXvYu6g0LrSJ7OPrAlVO1tbUS8bHjT9dKnmufi9Aaig)
+Source: [B.AMM Protocol Liquity Integration Assessment.](https://github.com/Fixed-Point-Solutions/published-work/blob/master/SmartContractAudits/FPS_B.AMM_Liquity_Assessment_FINAL.pdf)
 
 #### Yearn LUSD vault
 
-
-LUSD in the LUSD3CRV pool shares risks with the 3CRV pool as well, where the crypto risk team concludes to depreciate the 3pool if free-floating DAI is inevitable. Here is the [DAI risk assessment report](https://cryptorisks.substack.com/p/makerdao-endgame-and-its-repercussions) to learn more.
-
-Stacking different protocols for yield generation can increase the risk surface as well. The vault contract has been live for more than five months, and Yearn protocol can be considered as time-tested since Feb 2021.
+Stacking different protocols for yield generation can increase the risk surface as well. The vault contract has been live for more than five months. Though Yearn has suffered a [hack in the past](https://thedefiant.io/yearn-loses-11m-in-2021s-first-defi-hack), its since been patched and is now reasonably battle tested, but there exist contract risk that can lead to losses.
 
 ### Opportunity cost
 
@@ -253,7 +254,7 @@ As we discussed in the earlier sections the system might reach a state where bon
 
 Chicken bonds and Liquity integration heavily rely on the Curve protocol when it comes to yield generation and price discovery of bLUSD. 
 
-Impermanent loss resulting from the price volatility of bLUSD, depreciation of 3pool by the Curve protocol harming the immutable nature of Chicken bonds, and the opportunity cost resulting from negligible trading activities are significant real risks.
+Impermanent loss resulting from the price volatility of bLUSD, and the opportunity cost resulting from negligible trading activities are risks that shouldn't be overlooked.
 
-Risks associated with B.Protocol and LUSD price can be considered as black swan events but cannot be ignored.
+Risks associated with stability pool investment (B.Protocol) and LUSD price can be considered as black swan events but cannot be ignored.
 
