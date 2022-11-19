@@ -122,7 +122,7 @@ The vault contract is live for more than 5 months and Yearn protocol can be cons
 
 
 ---
-![](https://typefully-user-uploads.s3.amazonaws.com/img/original/46439/bf7ff077-746a-4f03-b9e8-aa0cc65313e7.png?response-cache-control=no-cache&AWSAccessKeyId=AKIAVTJZGL3H4SWWVYIT&Signature=t1rurUDyIA392zBjld7ono%2BCdK4%3D&Expires=1668768452)
+![image](https://user-images.githubusercontent.com/51072084/202838490-63b108c6-d8be-4c53-8ade-57ed639e103c.png)
 
 13/13
 
