@@ -235,7 +235,9 @@ The B.Protocol's integration with Liquity was audited in July 2021 and currently
 
 The LUSD Chicken Bonds Protocol makes use of B.Protocol to store funds in the stability pool whilst generating yield.
 
-Since liquidations are driven by the price of collateral, the oracle pricefeed is a key point to consider. The audit report points out this risk vector that might affect the liquidation process as a whole.
+In extreme market conditions, it is theoretically possible that stability pool investments (B.Protocol) could incur a loss from liquidation when the ETH price crashes heavily and liquidations happen below a 100% collateral ratio.
+
+Moreover, since liquidations are driven by the price of collateral, the oracle pricefeed is a key point to consider. The audit report points out this risk vector that might affect the liquidation process as a whole.
 
 Here is the audit report to learn more: [B.AMM Protocol Liquity Integration Assessment](https://github.com/Fixed-Point-Solutions/published-work/blob/master/SmartContractAudits/FPS_B.AMM_Liquity_Assessment_FINAL.pdf).
 
