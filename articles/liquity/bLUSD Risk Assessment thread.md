@@ -21,7 +21,7 @@ TL;DR
     
     • Risks associated with the LUSD peg
     
-• Risks associated with yield sources
+• Risks associated with yield sources (B.Protocol/Yearn)
 
 • Opportunity cost
 
@@ -30,7 +30,7 @@ TL;DR
 1/13
 
 ---
-Liquidity in bLUSD-LUSD3CRV is crucial for Chicken bonds as the bLUSD market price is derived from this pool which ultimately impacts the user's decision on whether to hold the bond, chicken in, or chicken out.
+Liquidity in bLUSD-LUSD3CRV is crucial for Chicken bonds. The bLUSD market price is derived from this pool, which ultimately impacts the user's decision either to hold the bond, chicken in, or chicken out.
 
 More about bLUSD: https://www.chickenbonds.org/blog-posts/what-makes-the-btokens-valuable
 
@@ -40,7 +40,7 @@ More about bLUSD: https://www.chickenbonds.org/blog-posts/what-makes-the-btokens
 
 A 3% fee collected from the bonders at the time of chicken in is used to incentivize the LPs.
 
-Initially, when there is low liquidity on the bLUSD-LUSD3CRV pool, bLUSD sell pressure can impact the price of bLUSD in a negative way incurring an impermanent loss.
+Initially, when there is low liquidity on the bLUSD-LUSD3CRV pool, bLUSD sell pressure can impact the price of bLUSD in a negative way, incurring an impermanent loss.
 
 3/13
 
@@ -75,14 +75,11 @@ When they chicken in, the extra profit (which otherwise would not be generated i
 6/13
 
 ---
-Speeding the bLUSD accrual will change the non-profitable chicken in trade to a profitable one (Check the attached graph).
-
 When the market price trades near the floor price, trading activity between bLUSD & LUSD will slow down resulting in an opportunity cost as well as IL for the LPs.
 
 7/13
 
 ---
-
 Some more factors that can impact the bLUSD market price negatively if not true are:
 
 - Bonding volume is greater than the chicken in volume.
@@ -93,7 +90,7 @@ Some more factors that can impact the bLUSD market price negatively if not true 
 8/13
 
 ---
-When people are not confident in holding ETH in a flash crash there exists a chance that LUSD might get depegged.
+When people are not confident in holding ETH in a flash crash, there exists a chance that LUSD might get depegged.
 
 Though the historic performance of LUSD has been prolific, it can’t be ignored.
 
@@ -103,7 +100,7 @@ Though the historic performance of LUSD has been prolific, it can’t be ignored
 ---
 The LUSD ChickenBonds Protocol makes use of B.Protocol to invest funds in the stability pool for generating yield. 
 
-In an adverse situation, the collateral might get liquidated at less than 110% (minus discount) which can cause losses for the stability pool depositors.
+In an adverse situation, the collateral might get liquidated at a loss, which is borne by the Reserve and therefore bLUSD holders.
 
 10/13
 
@@ -112,13 +109,12 @@ The B.Protocol's integration with Liquity was audited in July 2021 and does offe
 
 Moreover, the integration is live on the main net since Aug 2021.
 
-
 11/13
 
 ---
 Chicken bond uses Yearn's LUSD vault as a yield source.
 
-stacking protocols for yield generation (Yearn's LUSD vault) can increase the risk surface. 
+Stacking protocols for yield generation (Yearn's LUSD vault) can increase the risk surface. 
 
 The vault contract is live for more than 5 months and Yearn protocol can be considered as time-tested since Feb 2021.
 
