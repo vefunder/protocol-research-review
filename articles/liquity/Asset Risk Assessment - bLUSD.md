@@ -1,11 +1,13 @@
-# Asset Risk Assessment bLUSD
+# Asset Risk Assessment: Liquity Chicken Bonds
 
 
-### Chicken Bonds directs amplified yields to their bTKN (bLUSD). This report focuses on how safe is it for the users to utilise bLUSD i.e. bonding as well as providing liquidity in bLUSD-LUSD3CRV pool.
+### Chicken Bonds direct amplified yields to bLUSD. This report addresses risks to users who utilise bLUSD through bonding and/or providing liquidity in the Curve bLUSD-LUSD3CRV pool.
 
-Chicken Bonds is designed to generate amplified yields to the bLUSD token and build up protocol-owned liquidity that can strengthen the subjected asset's position in the market. It is first applied to Liquity’s LUSD where bonding is the primary use case, allowing users to acquire bLUSD at a discount upon depositing tokens. 
+_**The core purpose of this report is to make users aware of the product/services and its risks. This should not, in any way, be treated as financial/investment advice.**_ 
 
-Index
+The research was spearheaded by [@DiligentDeer](https://twitter.com/diligentdeer).
+
+### Index
 - Liquity protocol overview
   - LUSD peg stability
     - Hard peg stability
@@ -24,11 +26,9 @@ Index
    - Opportunity cost
 - Conclusion
 
-The core purpose of this report is to make users aware of the product/services and its risks. This should not, in any way, be treated as financial/investment advice. 
 
-The research was spearheaded by DiligentDeer.
 
-# Liquity protocol overview
+# Liquity Protocol Overview
 _**Useful Links**_
 
 _[Official Liquity Documentation](https://docs.liquity.org/) (Docs)_
@@ -69,18 +69,19 @@ These liquidations are carried at 110% CR, and the borrower can reclaim excess c
 
 The motivation for designing Chicken Bonds was to ensure that the Stability Pool has sufficient liquidity to facilitate liquidation and to ensure the LUSD peg in harsh conditions.
 
-## LUSD peg stability
+## LUSD Peg Stability
 
 ![Peg stability mechanism](https://lh6.googleusercontent.com/7RUygHVopKPhdCqEUUJU5i-TJVCNOktQZl_mfw5vZXwkJ7hFQW9H3T3Ov4odAE_DaTHBMDMWlDxyEo-7tFJgXmlcDvXyS5OjKATSC8fD9RqYFsOS020AG6pAFaukrhCtOP9QJSBaTKTMcjJ6obBpBJthgw-QAdxDGjp2MM-SGBY4LX6B_pg25dagBuDLQw "LUSD hard peg and soft peg distinction")
+
 Source: [Liquity](https://www.liquity.org/blog/on-price-stability-of-liquity)
 
-### Hard peg stability
+### Hard Peg Stability
 
 - Any LUSD holder has the ability to redeem LUSD for ETH at face value (i.e. 1 LUSD for $1
   of ETH). The system will use the LUSD to pay off debt and draw collateral from the riskiest Troves. Direct arbitrage creates a price floor for LUSD at $1. 
 - A minimum collateral ratio of 110% sets an upper price of LUSD at $1.10. Above that price, arbs can deposit $110 worth of ETH and sell 100 LUSD (worth >$110) at a profit. 
 
-### Soft peg stability
+### Soft Peg Stability
 
 - If the price of LUSD goes above $1, borrowing is more attractive as the user expects to repay at a lower rate or arbitrage it on some DEXs.
 - Higher redemption volume implies higher Borrowing fees which make new loans less attractive, thus limiting the supply.
@@ -115,15 +116,15 @@ _[B.AMM Protocol Liquity Integration Assessment](https://github.com/Fixed-Point-
 
 Chicken Bonds are a novel mechanism for projects to bootstrap protocol-owned liquidity at no cost while boosting yield opportunities for end users.
 
-Users may deposit LUSD in exchange for an accruing balance of bLUSD. At any time, bond-holders can either retrieve their principal and forego the accrued amount ("**chicken out**"), or trade it in for the accrued bLUSD ("**chicken in**"). Here, a portion of the LUSD acquired by the system backs the bLUSD supply, and this portion depends on the time of chicken in.
+Users may deposit LUSD in exchange for an accruing balance of bLUSD. At any time, bond-holders retain the right to retrieve their principal and forego the accrued amount ("**chicken out**"), or trade it in for the accrued bLUSD ("**chicken in**"). Here, a portion of the LUSD acquired by the system backs the bLUSD supply, and this portion depends on the time of chicken in.
 
 The protocol operates a Treasury consisting of three logical parts, termed "buckets": Pending Bucket, Reserve Bucket, and Permanent Bucket.
 
-- The Pending Bucket (protocol-controlled vault) stores LUSD for the people who have yet to decide on their bonds. The funds are invested in the stability pool.
-- The Reserve bucket (protocol-controlled vault) stores a portion of the LUSD gathered from the former bondholders after a "chicken in" event. Yields generated with the funds in every bucket are directed here, which supports bLUSD's supply.
-- The Permanent bucket (protocol-owned vault) stores the other portion of the LUSD gathered from the former bondholders.
+- The **Pending Bucket** (protocol-controlled vault) stores LUSD for the depositors who have yet to chicken in/out. The funds are invested in the stability pool.
+- The **Reserve bucket** (protocol-controlled vault) stores a portion of the LUSD gathered from the former bondholders after a "chicken in" event. Yields generated with the funds in every bucket are directed here, which supports bLUSD's supply.
+- The **Permanent bucket** (protocol-owned vault) stores the other portion of the LUSD gathered from the former bondholders.
 
-The schematic shows the protocol's behaviour and the user's choices when 1000 LUSD are bonded and chicken in at time t1.
+This schematic shows the protocol's behaviour and the user's choices when 1000 LUSD are bonded and chicken in at time t1.
 
 ![Chicken Bonds mechanism breakdown](https://lh6.googleusercontent.com/ZIZUjpj4yUH2lTPfJgC7jmBVJkkegK4eEksZf_2knaZDFrQNeLCUCS1WAoDeaI436GjWWbrHfILcqGECNYI0ABXLP6f_a4LmG_9xcWareS_WHyWxtC7O_CnUC8DgQ7wWOjl9Zd-FgoR_Lt3VdZ1ld-6oIJcC0fYFBORiaAxgv5Zqee43PycL3LzjGoXIEA)
 
@@ -133,7 +134,7 @@ The Reserve bucket backs the bLUSD supply, and thus bLUSD has a growing hard pri
 >
 > **Chicken bond Whitepaper**
 
-## Yield generation
+## Yield Generation
 
 The yield is generated by investing the funds in two sources:
 
@@ -149,23 +150,23 @@ The yield is generated by investing the funds in two sources:
 
 - The transfer of LUSD to the LUSD3CRV Curve pool can be used as a peg reinforcing mechanism by moving funds in the Reserve bucket and Permanent bucket to Yearn vaults to balance the demand and supply of LUSD in the LUSD3CRRV pool. Funds deposited in Curve would never exceed the quantity of LUSD present in the Permanent bucket. Learn more about the shifter function [here](https://github.com/liquity/ChickenBond#shifter-functions). E.g. if there are 900 in Reserve and 100 in Permanent, up to 100 LUSD can be invested in Yearn. If 100 LUSD is invested, there will be 90 from Reserve and ten from Permanent in Yearn vault.
 
-## bLUSD accrual mechanism
+## bLUSD Accrual Mechanism
 
 A user who bonds LUSD will get nothing but a promise of redeeming accrued bLUSD at the time of chicken-in, foregoing the bonded LUSD. This accrual of bLUSD depends on the variables like time, bonded amount, chicken in fees, accrual parameter (alpha), and redemption price of bLUSD.
 
-This is how a change in accrual parameter looks on a graph:
-**![](https://lh4.googleusercontent.com/BWceh8sIda2E5deOwTxHul32KGtKhhySKozv33WRKaSvnokLdQb5zFLI06S2md50UaoWrvHrUF3crY4nefMyTdmnjBnAab_Xo8PUm5KbaaUljndUnHKeteO1FfwpydGA5lcGEqwDIPgCFc2urkdpuqi3DWfq2YKSGIDOBfch_N6AtDpNCUqKmQ26iYEQhw)**
-
-The amount of LUSD bonded is considered after reducing the 3% chicken in fees from the actual bond value for the calculation of bLUSD accrual. The accrual rate might vary based on the current redemption price (LUSD in the Reserve bucket / bLUSD supply).
+The amount of LUSD bonded is considered after accounting for the 3% chicken in fees from the actual bond value for the calculation of bLUSD accrual. The accrual rate might vary based on the current redemption price (LUSD in the Reserve bucket / bLUSD supply).
 
 Moreover, there is a function where alpha is reduced to accelerate the bLUSD accrual rate. When the [current weighted average bond age](https://dune.com/queries/1460655) is greater than the target age of 15 days, the controller will lower the alpha. A major reason for greater bond age is people unwilling to take action (Chicken in or Chicken out); in other words, people aren't convinced that the bLUSD accrued so far is profitable enough to chicken in.
 
 ![Controller logic for triggering the accrual parameter](https://lh4.googleusercontent.com/k3o7OuY1SC95kNCOCsNumC7Lx1gjbdQkyLl4HCL4-oizhUWdB9gK93Hj60Hd0ha8w_7DTDtEdPsZn3WMFSDNIDEX1_kTVOLRmtMwu2P2pOkzYM15ymjMfkJcKKtbvuQLboZMUjxHGmz-FPBTt2MmJJV-6TjarZAhM_kGG16EcnHbRhN_AIHHey4C_2DMfg)
 Source: [Controller logic for triggering the accrual parameter](https://github.com/liquity/ChickenBond#controller)
 
-Lowering the alpha would cause the accrual of bLUSD to speed up, thus bringing the break-even point and the optimal rebonding time close.
+This is how a change in accrual parameter looks on a graph:
+**![](https://lh4.googleusercontent.com/BWceh8sIda2E5deOwTxHul32KGtKhhySKozv33WRKaSvnokLdQb5zFLI06S2md50UaoWrvHrUF3crY4nefMyTdmnjBnAab_Xo8PUm5KbaaUljndUnHKeteO1FfwpydGA5lcGEqwDIPgCFc2urkdpuqi3DWfq2YKSGIDOBfch_N6AtDpNCUqKmQ26iYEQhw)**
 
-## A consequence of lowering the alpha
+Lowering the alpha would cause the accrual of bLUSD to speed up, thus speeding up arrival at the break-even point and the optimal rebonding time.
+
+## A Consequence of Lowering the Alpha
 
 Lowering the alpha will change the non-profitable chicken in trade to a profitable one by accelerating the bLUSD accrual.
 
@@ -182,28 +183,28 @@ Source: [Technical paper by The Risk DAO](https://github.com/Risk-DAO/Reports/bl
 
 ---
 
-# Risks to LPs of bLUSD-LUSD3CRV
+# Risks to LPs of [bLUSD-LUSD3CRV](https://curve.fi/#/ethereum/pools/factory-crypto-134/deposit)
 
-Besides smart contract risk, LP might face a risk associated with bLUSD price fluctuation, LUSD peg, risks at the point of yield generation, and other assets in the liquidity pool.
+Besides smart contract risk, LPs might face a risk associated with bLUSD price fluctuation, LUSD peg, risks at the point of yield generation, and other assets in the liquidity pool.
 
 ### Impermanent Loss
 
-Impermanent loss refers to the opportunity cost incurred when providing liquidity to a pool due to the price shift of one asset versus holding the assets. It does depend on the ratio in which the liquidity was provided, the amount of liquidity, and the depth of that liquidity pool.
+Impermanent loss refers to the opportunity cost incurred when providing liquidity to a pool due to the price shift of one asset versus holding the assets. It depends on the ratio in which the liquidity was provided, the amount of liquidity, and the depth of that liquidity pool. Note that the bLUSD Curve pool is a V2 pool, which seeks to mitigate the effects of impermananet loss by only updating price scale when it has offset losses by trading fees earned.
 
 The following cases can lead to IL:
 
-- Based on the claim that bLUSD's floor would always rise, The change
+- Based on the claim that bLUSD's floor would always rise, the change
   in the price of bLUSD, w.r.t LUSD would generate IL.
 - Variation in bLUSD and LUSD's price gap.
 
-#### The risk associated with the bLUSD price
+### bLUSD Price Risk
 
 Low liquidity on bLUSD-LUSD3CRV will cause a higher price impact. A higher price impact will lead to a higher bLUSD price drop when selling bLUSD.
 
 With ever-increasing floor price, the gap between bLUSD's market price and the floor price would increase if:
 
 - Bonding volume is greater than the chicken in volume.
-- More users bond, i.e. more funds in pending bucked, thus high amplification.
+- More users bond, i.e. more funds in pending bucket, thus high amplification.
 - Users chicken out after bonding for a considerable time.
 - Users chicken in early.
 
@@ -211,10 +212,10 @@ If these factors are not true, it is likely that the market price of bLUSD will 
 
 It is important to note that lowering the accrual parameter will lower the market price of the bLUSD near the floor price due to the high supply in the system.
 
-#### The risk associated with the LUSD price
+### The risk associated with the LUSD price
 
 When people are not confident in holding ETH in a flash crash, there exists a chance that LUSD might get depegged.
-Though the historical performance of LUSD has been prolific, it can't be ignored.
+Though LUSD has historically traded at or above its peg, this can't be ignored.
 
 ### The risk associated with the yield-generating protocols
 
@@ -232,9 +233,9 @@ _[Dedaub - B.protocol Chicken Bond integration](https://github.com/liquity/Chick
 
 The B.Protocol's integration with Liquity was audited in July 2021 and currently has an ongoing [Immunefi bounty of $100k](https://immunefi.com/bounty/bprotocol/). Moreover, the integration has been live on the main net since Aug 2021.
 
-The LUSD ChickenBonds Protocol makes use of B.Protocol to store funds in the stability pool whilst generating yield.
+The LUSD Chicken Bonds Protocol makes use of B.Protocol to store funds in the stability pool whilst generating yield.
 
-Since liquidations are driven based on the price of collateral, oracle is a key point to consider. The audit report clears the assumptions (potential risk vectors if they don't hold true) that might affect the liquidation process as a whole.
+Since liquidations are driven by the price of collateral, the oracle pricefeed is a key point to consider. The audit report points out this risk vector that might affect the liquidation process as a whole.
 
 Here is the audit report to learn more: [B.AMM Protocol Liquity Integration Assessment](https://github.com/Fixed-Point-Solutions/published-work/blob/master/SmartContractAudits/FPS_B.AMM_Liquity_Assessment_FINAL.pdf).
 
@@ -243,11 +244,11 @@ Source: [B.AMM Protocol Liquity Integration Assessment.](https://github.com/Fixe
 
 #### Yearn LUSD vault
 
-Stacking different protocols for yield generation can increase the risk surface as well. The vault contract has been live for more than five months. Though Yearn has suffered a [hack in the past](https://thedefiant.io/yearn-loses-11m-in-2021s-first-defi-hack), its since been patched and is now reasonably battle tested, but there exist contract risk that can lead to losses.
+Stacking different protocols for yield generation can increase the risk surface as well. The vault contract has been live for more than five months. Though Yearn has suffered a [hack in the past](https://thedefiant.io/yearn-loses-11m-in-2021s-first-defi-hack), it has since been patched and is now reasonably battle tested. However, there always exists the possiblity of smart contract bugs that can lead to losses.
 
 ### Opportunity cost
 
-As we discussed in the earlier sections the system might reach a state where bonding will not be profitable. Thus negligible chicken in fees, and when bonding-rebonding doesn't happen, trades b/w bLUSD-LUSD are hardly expected resulting in negligible vAPY.
+As we discussed in the earlier sections, the system might reach a state where bonding will not be profitable. Assuming negligible chicken in fees, halting bonding-rebonding, trades between bLUSD-LUSD are hardly expected resulting in negligible vAPY.
 
 
 # Conclusion
@@ -256,5 +257,5 @@ Chicken bonds and Liquity integration heavily rely on the Curve protocol when it
 
 Impermanent loss resulting from the price volatility of bLUSD, and the opportunity cost resulting from negligible trading activities are risks that shouldn't be overlooked.
 
-Risks associated with stability pool investment (B.Protocol) and LUSD price can be considered as black swan events but cannot be ignored.
+Risks associated with stability pool investment (B.Protocol/Yearn) and LUSD price can be considered as black swan events but cannot be ignored.
 
