@@ -1,56 +1,3 @@
-<!-- Output copied to clipboard! -->
-
-<!-----
-
-You have some errors, warnings, or alerts. If you are using reckless mode, turn it off to see inline alerts.
-* ERRORs: 0
-* WARNINGs: 0
-* ALERTS: 12
-
-Conversion time: 2.224 seconds.
-
-
-Using this Markdown file:
-
-1. Paste this output into your source file.
-2. See the notes and action items below regarding this conversion run.
-3. Check the rendered output (headings, lists, code blocks, tables) for proper
-   formatting and use a linkchecker before you publish this page.
-
-Conversion notes:
-
-* Docs to Markdown version 1.0β33
-* Mon Nov 07 2022 10:26:51 GMT-0800 (PST)
-* Source doc: Asset Risk Assessment: Silo Finance-V1.0
-* This document has images: check for >>>>>  gd2md-html alert:  inline image link in generated source and store images to your server. NOTE: Images in exported zip file from Google Docs may not appear in  the same order as they do in your doc. Please check the images!
-
-
-WARNING:
-You have 10 H1 headings. You may want to use the "H1 -> H2" option to demote all headings by one level.
-
------>
-
-
-<p style="color: red; font-weight: bold">>>>>>  gd2md-html alert:  ERRORs: 0; WARNINGs: 1; ALERTS: 12.</p>
-<ul style="color: red; font-weight: bold"><li>See top comment block for details on ERRORs and WARNINGs. <li>In the converted Markdown or HTML, search for inline alerts that start with >>>>>  gd2md-html alert:  for specific instances that need correction.</ul>
-
-<p style="color: red; font-weight: bold">Links to alert messages:</p><a href="#gdcalert1">alert1</a>
-<a href="#gdcalert2">alert2</a>
-<a href="#gdcalert3">alert3</a>
-<a href="#gdcalert4">alert4</a>
-<a href="#gdcalert5">alert5</a>
-<a href="#gdcalert6">alert6</a>
-<a href="#gdcalert7">alert7</a>
-<a href="#gdcalert8">alert8</a>
-<a href="#gdcalert9">alert9</a>
-<a href="#gdcalert10">alert10</a>
-<a href="#gdcalert11">alert11</a>
-<a href="#gdcalert12">alert12</a>
-
-<p style="color: red; font-weight: bold">>>>>> PLEASE check and correct alert issues and delete this message and the inline alerts.<hr></p>
-
-
-
 # Asset Risk Assessment: Silo Finance
 
 
@@ -85,13 +32,15 @@ Silo is a permissionless and non-custodial lending protocol that allows the borr
 
 **A quick TL;DR of our findings:**
 
+* Silo Finance introduces a new money market design with isolated markets (silos) for every unique token. These isolated markets are paired with the same counterpart asset called a bridge asset (ETH or XAI). Bridge assets represent concentrated liquidity bridged across all isolated markets, which facilitates the onboarding of any token, especially long-tail assets. The isolation of high-risk assets greatly reduces protocol systemic risk, while bridge assets prevent fractured liquidity and keep the protocol liquid and fluid.
 
-
-* Silo Finance introduces a new money market design with isolated markets (silos) for every unique token. These isolated markets are paired with the same counterpart asset called bridge asset (ETH or XAI). Bridge assets represent a concentrated part of liquidity bridged across all isolated markets which facilitates the onboarding (listing) of any token, especially long-tail assets. The isolation of high-risk assets almost completely removes protocol systemic risk, while bridge assets prevent fractured liquidity and keep the protocol liquid and fluid.
 * Silo allows permissionless listing and parameter customization for each silo through governance. Every newly created silo needs to have a reliable price feed source and starts with default collateral factors for Loan-to-Value (LTV), Liquidation Threshold, and Liquidation Penalty.
-* The Silo team takes security very seriously. The core smart contracts were fully audited by Quantstamp and ABDK and tested by the core team through a formal verification process using Certora Prover.
+
+* The core smart contracts were fully audited by Quantstamp and ABDK and tested by the core team through a formal verification process using Certora Prover.
+
 * Silo recently introduced a new stablecoin named XAI, which will serve as the second bridge asset alongside ETH. XAI can be minted and burnt by the SiloDAO via governance (using Tally).
-* Silo is very progressive in its endeavor to become a decentralized and trustless protocol. They have already fully transitioned to on-chain governance so that SILO token holders are in full control over all of the protocol's functions.
+
+* Silo has notably high levels of governance decentralization compared to most early stage protocols. All core protocol functions are managed by SILO token holders via on-chain governance.
 
 
 # Silo Finance - An Introduction
