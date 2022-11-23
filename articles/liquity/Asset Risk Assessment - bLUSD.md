@@ -6,7 +6,7 @@
 
 The research was spearheaded by [@DiligentDeer](https://twitter.com/diligentdeer).
 
-## Index
+### Index
 - Liquity protocol overview
   - LUSD peg stability
     - Hard peg stability
@@ -95,7 +95,7 @@ Source: [Coingecko](https://www.coingecko.com/en/coins/liquity-usd)
 # Chicken Bonds
 
 
-_**Useful Links**_
+### Useful Links
 
 _[Chicken Bonds: Self-Bootstrapping Liquidity](https://docsend.com/view/dakurpcuv3259bnx) (Whitepaper)_
 
@@ -186,7 +186,7 @@ Source: [Technical paper by The Risk DAO](https://github.com/Risk-DAO/Reports/bl
 
 Besides smart contract risk, LPs might face a risk associated with bLUSD price fluctuation, LUSD peg, risks at the point of yield generation, and other assets in the liquidity pool.
 
-### Impermanent Loss
+## Impermanent Loss
 
 Impermanent loss refers to the opportunity cost incurred when providing liquidity to a pool due to the price shift of one asset versus holding the assets. It depends on the ratio in which the liquidity was provided, the amount of liquidity, and the depth of that liquidity pool. Note that the bLUSD Curve pool is a V2 pool, which seeks to mitigate the effects of impermananet loss by only updating price scale when it has offset losses by trading fees earned.
 
@@ -211,19 +211,19 @@ If these factors are not true, it is likely that the market price of bLUSD will 
 
 It is important to note that lowering the accrual parameter will lower the market price of the bLUSD near the floor price due to the high supply in the system.
 
-### The risk associated with the LUSD price
+### The Risk Associated with the LUSD Price
 
 When people are not confident in holding ETH in a flash crash, there exists a chance that LUSD might get depegged.
 Though LUSD has historically traded at or above its peg, this can't be ignored.
 
-### The risk associated with the yield-generating protocols
+## The Risk Associated with the Yield-Generating Protocols
 
 bLUSD is exposed to the risks at B.Protocol and Yearn used for generating yield. Loss of funds from these protocols/vaults for any reason can severely impact the bLUSD floor price.
 
-#### B.Protocol
+### B.Protocol
 
 
-_**Useful Links**_
+#### Useful Links
 
 
 _[B.AMM Protocol Liquity Integration Assessment](https://github.com/Fixed-Point-Solutions/published-work/blob/master/SmartContractAudits/FPS_B.AMM_Liquity_Assessment_FINAL.pdf) (Audit)_
@@ -243,13 +243,13 @@ Here is the audit report to learn more: [B.AMM Protocol Liquity Integration Asse
 ![](https://lh6.googleusercontent.com/3SIAUAnnITcZE3V9qYz1F3s6jYA4ApwURZco1KJRsEGMEQ6NvdEWvJCj44IzGgTnyGZsVtKKuxL1iZAXMG_jydNTejx2dIcxZJmA9_H9DTWiXrWgzHXokylaHlzYqsX0JD7fD5bLS_-NyXcwoWjBXvYu6g0LrSJ7OPrAlVO1tbUS8bHjT9dKnmufi9Aaig)
 Source: [B.AMM Protocol Liquity Integration Assessment.](https://github.com/Fixed-Point-Solutions/published-work/blob/master/SmartContractAudits/FPS_B.AMM_Liquity_Assessment_FINAL.pdf)
 
-#### Yearn LUSD vault
+### Yearn LUSD vault
 
 Stacking different protocols for yield generation can increase the risk surface as well. The vault contract has been live for more than five months. Though Yearn has suffered a [hack in the past](https://thedefiant.io/yearn-loses-11m-in-2021s-first-defi-hack), it has since been patched and is now reasonably battle tested. However, there always exists the possiblity of smart contract bugs that can lead to losses.
 
-### Opportunity cost
+## Opportunity Cost
 
-As we discussed in the earlier sections, the system might reach a state where bonding will not be profitable. Assuming negligible chicken in fees, halting bonding-rebonding, trades between bLUSD-LUSD are hardly expected resulting in negligible vAPY.
+The technical paper by [The Risk DAO](https://github.com/Risk-DAO/Reports/blob/main/Chicken%20bonds%20analysis.pdf) concluded that the system might reach a state where bonding will not be profitable. Assuming negligible chicken in fees, halting bonding-rebonding, trades between bLUSD-LUSD may stagnate, resulting in negligible vAPY.
 
 
 # Conclusion
