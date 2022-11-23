@@ -92,7 +92,7 @@ Some more factors that can impact the bLUSD market price negatively if not true 
 ---
 When people are not confident in holding ETH in a flash crash, there exists a chance that LUSD might get depegged.
 
-Though the historic performance of LUSD has been prolific, it can’t be ignored.
+Though LUSD has historically traded above its peg, the risk can’t be ignored.
 
 
 9/13
@@ -116,7 +116,7 @@ Chicken bond uses Yearn's LUSD vault as a yield source.
 
 Stacking protocols for yield generation (Yearn's LUSD vault) can increase the risk surface. 
 
-The vault contract is live for more than 5 months and Yearn protocol can be considered as time-tested since Feb 2021.
+The vault contract has been live for more than 5 months and Yearn protocol has been time-tested since Feb 2021.
 
 12/13
 
