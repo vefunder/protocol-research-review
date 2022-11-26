@@ -119,7 +119,7 @@ Users may deposit LUSD in exchange for an accruing balance of bLUSD. At any time
 
 The protocol operates a Treasury consisting of three logical parts, termed "buckets": Pending Bucket, Reserve Bucket, and Permanent Bucket.
 
-- The **Pending Bucket** (protocol-controlled vault) stores LUSD for the depositors who have yet to chicken in/out. The funds are invested in the stability pool.
+- The **Pending Bucket** (protocol-controlled vault) stores LUSD for the depositors who have yet to chicken in/out. The funds are invested into B.Protocol, which then immediately deposits into the Liquity Stability Pool.
 - The **Reserve Bucket** (protocol-controlled vault) stores a portion of the LUSD gathered from the former bondholders after a "chicken in" event. Yields generated with the funds in every bucket are directed here, which supports bLUSD's supply.
 - The **Permanent Bucket** (protocol-owned vault) stores the other portion of the LUSD gathered from the former bondholders.
 
@@ -247,6 +247,8 @@ Source: [B.AMM Protocol Liquity Integration Assessment.](https://github.com/Fixe
 
 Stacking different protocols for yield generation can increase the risk surface as well. The vault contract has been live for more than five months. Though Yearn has suffered a [hack in the past](https://thedefiant.io/yearn-loses-11m-in-2021s-first-defi-hack), it has since been patched and is now reasonably battle tested. However, there always exists the possiblity of smart contract bugs that can lead to losses.
 
+Only funds residing in the Permanent Bucket can be deposited into the Yearn vault, so the risk posed by Yearn is contained and represents a small proportion of overall TVL. As of November 2022, Chicken Bonds TVL is around 50m LUSD, with only 500k LUSD exposed to the Permanent Bucket.
+
 ## Opportunity Cost
 
 The technical paper by [The Risk DAO](https://github.com/Risk-DAO/Reports/blob/main/Chicken%20bonds%20analysis.pdf) concluded that the system might reach a state where bonding will not be profitable. Assuming negligible chicken in fees, halting bonding-rebonding, trades between bLUSD-LUSD may stagnate, resulting in negligible vAPY.
@@ -258,6 +260,8 @@ Chicken bonds and Liquity integration heavily rely on the Curve protocol when it
 
 Impermanent loss resulting from the price volatility of bLUSD, and the opportunity cost resulting from negligible trading activities are risks that shouldn't be overlooked.
 
-Risks associated with stability pool investment (B.Protocol/Yearn) and LUSD price can be considered as black swan events but cannot be ignored.
+Risks associated with stability pool investment into B.Protocol and LUSD price can be considered as black swan events but cannot be ignored. B.Protocol has been extensively audited, including the [integration with Liquity](https://github.com/Fixed-Point-Solutions/published-work/blob/master/SmartContractAudits/FPS_B.AMM_Liquity_Assessment_FINAL.pdf), however there exists the possibility of economic black swan (liquidation failure leading to losses) or technical black swan (smart contract bug). 
+
+Overall, Chicken Bonds accomplish a high degree of trustlessness, given the complexity of the product. This should be a consolation to users who surely have the egregious failures of CeFi trust assumptions fresh in their minds. This is, nevertheless, an experimental product, and users should take time to understand the Chicken Bond mechanics, and the risks involved. 
 
 _**The core purpose of this report is to make users aware of the product/services and its risks. This should not, in any way, be treated as financial/investment advice.**_ 
