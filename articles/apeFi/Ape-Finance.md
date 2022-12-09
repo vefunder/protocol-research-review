@@ -249,9 +249,19 @@ Ape Finance uses Chainlink as the price-feed [provider](https://data.chain.link/
 That “trade-off” does not represent a significant risk, because borrowed $ApeUSD on the lending protocol is over-collateralized with an LTV that is set to a conservative 60%.
 
 
-# Discussion and Conclusion
+# Conclusion
+
+Ape.fi leaves the impression of a rather risky protocol that is still mostly under development. This comes from a few observations:
+
+* The project's documentation is clear and informative but isn’t very detailed. In general, their communication and promises are sometimes inconsistent with their execution. For instance: no APEFI token distribution as promised, rather intransparent funding, governance NFTs are still not active, and general intransparency regarding collateralization of ApeUSD.
+* There seems to be no community or any attempts to build DAO-like structures. Ape.fi has no Discord (only a Telegram chat). There is no forum, no governance process, and the [Snapshot](https://vote.ape.fi/#/) page is only used to vote on ApeCoin DAO meta-governance decisions (with very little participation).
+* Influence over the protocol is limited to the initial group of developers. The team controls the multi-sig and has full control over the entire protocol.
+* The vast majority of ApeUSD is minted via the stabilizer contract. However, in contrast to other protocols applying the AMO concept, the majority of the circulating stablecoins are created this way and thus have no APE as backing. The collateralization ratio of (~60-70%) is recovering, but still rather low. Plus there are no emergency or other stability mechanisms in place.
+* As of today, the protocol has not found a clear product-market fit. There’s little native TVL of APE tokens. There is no use case for ApeUSD outside the Curve factory pool. Most of the circulating stablecoins belong to the protocol and are used to farm CRV, CVX, and FXS. The protocol’s treasury is rewarded chiefly through their farming activities, but there is no community to profit from those rewards.
+* ApeFinance is a fork of forks that has not been audited and they only refer to a CREAM audit. The team stated that they are currently conducting an audit, although this is an unverified claim.
 
 
+# apeFi Gauge Criteria
 
 1. Is it possible for a single entity to rug its users?
 
@@ -271,16 +281,8 @@ Probably not, because Ape Finance’s multi-sig controls most of the protocol’
 
 No audit was performed on Ape Finance smart contracts directly.
 
+# Risk Team Recommendation
 
-# Conclusion
+Given the reasonable possibility that a single anonymous actor has the power to rug [ApeUSD-FraxBP] pool LPs, we urge the ApeFi team to reconfigure the protocol multisig. The unverified owners should be replaced by representatives from external, trusted stakeholders, such as team members from Convex, Curve, Frax, and/or the Crypto Risk team.
 
-In conclusion, Ape.fi leaves the impression of a rather risky protocol that is still mostly under development. This comes from a few observations:
-
-
-
-* The project's documentation is clear and informative but isn’t very detailed. In general, their communication and promises are sometimes inconsistent with what is actually happening. For instance, no APEFI token distribution as promised, rather intransparent funding, and governance NFTs are still not active, generally intransparent regarding collateralization of ApeUSD. That’s usually a red flag.
-* There seems to be no community or any attempts to build DAO-like structures. Ape.fi has no Discord (only a Telegram chat). There is no forum, no governance process, and the [Snapshot](https://vote.ape.fi/#/) page is only used to vote on ApeCoin DAO meta-governance decisions (with very little participation). It’s a fully centralized project.
-* Nobody outside the initial group of developers has any influence over Ape.fi whatsoever. The team controls the multi-sig and has full control over the entire protocol.
-* The vast majority of ApeUSD is minted via the stabilizer contract. However, in contrast to other protocols applying the AMO concept, the majority of the circulating stablecoins are created this way and thus have no APE as backing. The collateralization ratio of (~60-70%) is recovering, but still rather low. Plus there are no emergency or other stability mechanisms in place.
-* As of today, the protocol has not found a clear product-market fit. There’s little native TVL of APE tokens. There is no use case for ApeUSD outside the Curve factory pool. Most of the circulating stablecoins belong to the protocol and are used to farm CRV, CVX, and FXS. The protocol’s treasury certainly is rewarded chiefly through their farming activities, but there is no community to profit from those rewards.
-* ApeFinance is a fork of forks that has not been audited and they only refer to a CREAM audit. Even though the team stated that they are currently conducting an audit, this is considered another red flag until proven otherwise.
+**Barring a good faith effort, we believe ApeFi does not meet the necessary criteria to have a Curve gauge.**
