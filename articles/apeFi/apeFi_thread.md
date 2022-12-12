@@ -78,6 +78,6 @@ For more details, read the full report.
 [LINK]
 ___
 
-13/ This research was done in collaboration with @Prime_Rating
+12/ This research was done in collaboration with @Prime_Rating
 
 If you found this report useful, follow the authors: @Lavi_54 and @dabar_90
