@@ -1,6 +1,6 @@
 1/ @apedotfi is a stablecoin lending protocol built for the ApeCoin community.
 
-But is it actually used by BAYC and MAYC holders? And what are the risks?
+But are BAYC and MAYC holders actually its primary users? And what are the risks?
 
 A summarizing “thread emoji”
 
@@ -12,6 +12,7 @@ ___
 $ApeUSD is soft-pegged to the US dollar. And $APE is the only collateral that is enabled.
 
 Ape.Fi operates a Curve Factory Pool, with $USDC and $FRAX as counterparty assets.
+
 ___
 
 3/ The protocol applies a concept similar to Automated Market Operations (AMO), pioneered by Frax, to ensure liquidity and peg stability via a Curve factory pool.
@@ -19,23 +20,23 @@ ___
 The team behind Ape Finance regularly uses this mechanism.
 ___
 
-4/  The team uses the ApeUSD which is not borrowed, to deploy it into Curve and balance the amount in the factory pool.
+4/  The team deploys ApeUSD (which is not borrowed) into Curve and regularly rebalance the factory pool.
 
-Through this, they own most of the pool, which lets them farm $CRV, $CVX, and $FXS rewards.
+They own most of the pool, which lets them farm $CRV, $CVX, and $FXS rewards.
 
 This has worked to stabilize the peg, BUT…
 ___
 
 5/ …as a result, the majority of ApeUSD in circulation is not backed by $APE.
 
-When starting our research, the collateral ratio (CR) was roughly around 40%, and even lower before that.
+When starting our research, the collateral ratio (CR) was around 40%, and even lower before that.
 
-Most recently (after contacting the team), the CR started to recover.
+Recently (after contacting the team), the CR started to recover.
 ___
 
 6/ Besides low backing, our investigation uncovered some other concerns:
 
-Ape.Fi is fully centralized and controlled by anon developers via a 2-of-4 multi-sig.
+Ape.Fi is controlled by anon developers via a 2-of-4 multi-sig.
 
 Only one signer is a known ApeCoin community member. The other EOAs have no activity.
 ___
@@ -48,36 +49,33 @@ Their $APEFI token is not used for governance. It’s used for bribing incentivi
 ___
 
 
-8/ Governance NFTs (as detailed in their docs) were not issued yet.
+8/ Governance NFTs (as detailed in their docs) have not yet been issued.
 
-~97% of the $APEFI token is still in their multi-sig. The distribution as defined in their docs has not taken place.
+~97% of the $APEFI token are still in their multi-sig. The distribution as defined in their docs has not taken place.
 
 And…
 ___
 
 9/ - Ape.fi has not been audited. According to the team, the first audit is underway.
 
-Proof is yet to be provided. 
+The claim has yet to be substantiated. 
 
 There is also no bug bounty program.
 ___
 
-10/ Side note: Ape Finance is one of many (so far mostly unsuccessful) projects that received funding from @machibigbrother.
+10/ In summary, Ape.fi has several attributes we consider to be high risk to users.
 
-Initially, the plan was to build Ape.Fi with a grant from ApeCoin DAO. But the proposal never went to a vote.
-___
-
-11/ In summary, Ape.fi makes the impression of a highly risky project.
-
-Concerns mostly stem from the centralized control by the anon team, the fact that they could rug users, and the unaudited core contracts. Which btw are all forks of Compound, Cream, and Iron Bank.
+Concerns mostly stem from the centralized control by the anon team, the fact that they could rug users, and the unaudited core contracts.
 ___
 
 
-12/ The team claims to be working on improving all of this, but there is no tangible evidence as of today.
+11/ We recommend replacing the unverified msig owners with team members from Curve, Convex, and/or Frax.
 
 Barring a good faith effort, we believe $ApeUSD does not meet the necessary criteria to have a Curve gauge.
 
-For more details, we recommend the full report.
+For more details, read the full report.
+
+[LINK]
 ___
 
 13/ This research was done in collaboration with @Prime_Rating
