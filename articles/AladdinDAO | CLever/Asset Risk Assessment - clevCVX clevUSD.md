@@ -48,6 +48,11 @@ If the amount of deposited clevTKN is greater than the TKN generated from the yi
 
 If a user wishes to exchange their clevTKN (yields or borrowings), they have two options. They can use a liquidity pool, although this can result in a loss (if clevTKN is valued lower than TKN). Alternatively, the user can use the furnace to swap their clevTKN, but this will require them to pay an equivalent amount in time. The choice between "loss of time" or "loss of value" quoted above is significant to the expected valuation for clevTokens. The annual percentage rate (APR) numbers on the CLever website are calculated under the assumption that clevTKN is equal to TKN, which is unlikely to be achieved in practice.
 
+**![](https://lh5.googleusercontent.com/9nzn-Vu6KKO3ocaGLGa87OCsNnjakAOBmlN5Lrox0A-YF-Sp6urXZMCmUhRw7uqvIkhMGQTg4g7dOfHhCj1oAeaK0I4tkTvyT-oWh6hmMwynkUKWnnxPJyChvulVOWFWBQvTIqLfB8BFiUxJ_VR1kx6qP2snM2hg2yW_hvel50De9ca46Ewyd2sbg_7ZoQ)**
+Source: Clever - [clevCVX Vault](https://clever.aladdin.club/#/clever/cleverCVX)
+
+In the above image the 33% APR is calculated based on the assumption that the clevCVX equivalent to CVX which is clearly not true.
+
 **Liquidity incentives in the form of CLEV (48.25% allocation) can be used to limit the deposit of clevTKN into the furnace and improve liquidity. Implementing a Curve gauge to distribute CRV rewards on the clevTKN-TKN liquidity pool can also help with liquidity and limit the deposit of clevTKN in the furnace.**
 
 
@@ -56,6 +61,10 @@ CLever currently has two strategic vaults:
 2. clevUSD
 
 # clevCVX
+
+**Useful Links**
+CLever [clevCVX Vault](https://clever.aladdin.club/#/clever/cleverCVX)
+CLever Medium Blog explaining clevCVX strategy - [A CLever Token Offering](https://medium.com/@0xC_Lever/a-clever-token-offering-2d775943e23c)
 
 The clevCVX strategy has the following key attributes:
 
@@ -68,9 +77,14 @@ The clevCVX strategy has the following key attributes:
 Here is a comparison of the four different strategies with CLever:
 
 - CVX Locking without borrowing: This strategy involves locking CVX without borrowing any additional funds.
-- Maximum borrowing without depositing in the furnace (Curve/Balancer farming): This strategy involves borrowing the maximum amount possible, but not depositing the borrowed funds into the furnace. Instead, the borrowed funds are used for farming elsewhere.
+	-  Users may use this strategy in order to stay liquid (to a larget extent) as compared to other strategies that are possible with CLever
+- Maximum borrowing without depositing in the furnace (farming elsewhere): This strategy involves borrowing the maximum amount possible, but not depositing the borrowed funds into the furnace. Instead, the borrowed funds are used for farming elsewhere.
+	- Users may deposit their borrowed clevTKN into liquidity pool to capture the incentives. This can bee a viable option in the case wher a user feels that yield from farming can generate better returns than simply putting their clevTKN into the furnace to swap it for TKN. 
+	- This kind for farming is only viable when a borrower is confident with their leverage position.
 - Maximum borrowing and depositing in the furnace (leverage farming): This strategy involves borrowing the maximum amount possible and depositing the borrowed funds into the furnace, also known as leverage farming.
+	- Users may deposit their borrowed clevTKN into the furnace when the swaps (from clevTKN to TKN) take less time to execute. User may go for this strategy when the yiels through liquidity farming are diluted and the funace offer a better deal to swap their clevTKN to TKN. 
 - Votium Delegation: This strategy involves delegating vlCVX to Votium to generate bribe yield.
+	- This strategy doesn't use CLever but is more of a comparison to understand a perspective of opportunity cost.
  
 **![](https://lh4.googleusercontent.com/oH9GcxQRyTs-KWWvucB_m8E7UvfR_MQlcZinyhKb5112vBfGfDnzBM1klfa6ZAwfkeoPa7nn7uE5fzkl8NYctkQks_6W11QAW7hcaBe0Mz1NdcgC3-BADNpNV8hxKweJmzEAKoc5BA1pcON5ol8fV_L394v0jzvmr5ujBJk8rHEg0jO8kZ40TsfgxmGjnA)** 
 
@@ -78,7 +92,7 @@ Source: [Google sheet](https://docs.google.com/spreadsheets/d/1eeGXJ_GCIPc9YVCqt
 
 Each of these strategies has its own pros and cons, and it is up to the individual to determine which strategy is the most suitable based on their specific goals and circumstances.
 
-It can be concluded that, **with a 20% harvest fee, it is not advisable to use CLever without borrowing.**
+As we can see in the sheet above, depositing 1000 CVX can generate a yield of 12 clevCVX where as 1000 vlCVX delegated on votium will yield almost 15 CVX. It can be concluded with the above that, **with a 20% harvest fee, it is not advisable to use CLever without borrowing.**
 
 ## The clevCVX-CVX peg
 
@@ -94,13 +108,18 @@ Another factor that can contribute to volatility is the yield obtained from brib
 
 # clevUSD
 
+**Useful Links**
+CLever clevUSD Vaults - [Frax-USDC](https://clever.aladdin.club/#/clever/Frax-USDC), [LUSDFraxBP](https://clever.aladdin.club/#/clever/LUSDFraxBP), [TUSDFraxBP](https://clever.aladdin.club/#/clever/TUSDFraxBP)
+CLever Medium Blog explaingni clevUSD - [FRAX and CLever: The Future of Stable Farming is Now](https://medium.com/@0xC_Lever/frax-and-clever-the-future-of-stable-farming-is-now-c03501f941b6), [Higher Stablecoin Yields: Get CLever with Frax](https://medium.com/@0xC_Lever/higher-stablecoin-yields-get-clever-with-frax-7cc0d72a848d)
+
 The clevUSD strategy has the following key attributes:
 
  - Staked LP tokens of [FRAXUSDC](https://curve.fi/#/ethereum/pools/fraxusdc/deposit), [LUSDFRAXBP](https://curve.fi/#/ethereum/pools/factory-v2-137/deposit), and [TUSDFRAXBP](https://curve.fi/#/ethereum/pools/factory-v2-144/deposit) on Concentrator act as a yield-bearing token.
--   The yield is derived from the Concentrator compounded yield from Curve and Convex.
+- The yield is derived from the Concentrator compounded yield from Curve and Convex.
 - Users can borrow up to 30% of the future yield.
 - Withdrawals can be instant.
-- ~~The current harvest fee is 2% and will soon be increased to 20%.~~
+- The current harvest fee is 2% (beta period) and will soon be increased to 20% one there is a gauge allocated to the liquidity poool.
+- CLever USD will limit total borrowing during the beta period to $100K.
 
 CLever deposits the user's collateral to the selected autocompounding Concentrator strategy vault. CLever periodically claims the accrued yield from Concentrator, converts it to FRAX, and distributes an equivalent amount of newly minted clevUSD proportionally to all depositors. clevUSD holders are able to redeem their tokens for FRAX in the Furnace in the same manner as with CVX.
 
