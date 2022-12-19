@@ -51,7 +51,7 @@ If a user wishes to exchange their clevTKN (yields or borrowings), they have two
 **![](https://lh5.googleusercontent.com/9nzn-Vu6KKO3ocaGLGa87OCsNnjakAOBmlN5Lrox0A-YF-Sp6urXZMCmUhRw7uqvIkhMGQTg4g7dOfHhCj1oAeaK0I4tkTvyT-oWh6hmMwynkUKWnnxPJyChvulVOWFWBQvTIqLfB8BFiUxJ_VR1kx6qP2snM2hg2yW_hvel50De9ca46Ewyd2sbg_7ZoQ)**
 Source: Clever - [clevCVX Vault](https://clever.aladdin.club/#/clever/cleverCVX)
 
-In the above image the 33% APR is calculated based on the assumption that the clevCVX equivalent to CVX which is clearly not true.
+In the above image, the 33% APR is calculated based on the assumption that the clevCVX equivalent to CVX which is clearly not true.
 
 **Liquidity incentives in the form of CLEV (48.25% allocation) can be used to limit the deposit of clevTKN into the furnace and improve liquidity. Implementing a Curve gauge to distribute CRV rewards on the clevTKN-TKN liquidity pool can also help with liquidity and limit the deposit of clevTKN in the furnace.**
 
@@ -63,7 +63,9 @@ CLever currently has two strategic vaults:
 # clevCVX
 
 **Useful Links**
+
 CLever [clevCVX Vault](https://clever.aladdin.club/#/clever/cleverCVX)
+
 CLever Medium Blog explaining clevCVX strategy - [A CLever Token Offering](https://medium.com/@0xC_Lever/a-clever-token-offering-2d775943e23c)
 
 The clevCVX strategy has the following key attributes:
@@ -109,7 +111,9 @@ Another factor that can contribute to volatility is the yield obtained from brib
 # clevUSD
 
 **Useful Links**
+
 CLever clevUSD Vaults - [Frax-USDC](https://clever.aladdin.club/#/clever/Frax-USDC), [LUSDFraxBP](https://clever.aladdin.club/#/clever/LUSDFraxBP), [TUSDFraxBP](https://clever.aladdin.club/#/clever/TUSDFraxBP)
+
 CLever Medium Blog explaingni clevUSD - [FRAX and CLever: The Future of Stable Farming is Now](https://medium.com/@0xC_Lever/frax-and-clever-the-future-of-stable-farming-is-now-c03501f941b6), [Higher Stablecoin Yields: Get CLever with Frax](https://medium.com/@0xC_Lever/higher-stablecoin-yields-get-clever-with-frax-7cc0d72a848d)
 
 The clevUSD strategy has the following key attributes:
@@ -123,7 +127,7 @@ The clevUSD strategy has the following key attributes:
 
 CLever deposits the user's collateral to the selected autocompounding Concentrator strategy vault. CLever periodically claims the accrued yield from Concentrator, converts it to FRAX, and distributes an equivalent amount of newly minted clevUSD proportionally to all depositors. clevUSD holders are able to redeem their tokens for FRAX in the Furnace in the same manner as with CVX.
 
-With every addition of a Concentrator vault under clevUSD strategy users are stacks more risk exposure coming from the participating pool assets and the yield generating sources.
+Though the yield from multiple cconcentrator vaults are used in the clevUSD strategy, if one of those pools get exploited, only the user who are invested in that particular pool are affected. The overall yield generation will also get affected negatively and consequently clevUSD might trade at a high discount due to lowering of the yield.
 
 ## Concentrator Vaults
 
@@ -172,16 +176,15 @@ Source: [Google Sheet](https://docs.google.com/spreadsheets/d/1JtXtL26nCaC5js5WF
 # Conclusion
 
 - clevTKN circulating supply will eventually reach the amount of CR (collateral ratio) x TKN locked in Clever vault.
-- There is a risk of maturity (time value) associated with clevTKN, which represents TKN in the future and this risk will vary based on the yield variables of the specific strategy or vault.
-- The clevTKN can rarely trade at the same value as TKN unless the amount of clevTKN deposited in the furnace is less than the TKN generated from the yield.
-- If the Furnace takes a long time to swap clevTKN, the market will value clevTKN lower due to the time value of money. If a large proportion of clevTKN is used as liquidity, the price of clevTKN in the liquidity pool will decrease. A balance between these factors will eventually be achieved, but if it is disrupted, users may suffer losses in the form of impermanent loss, price impact on DEXs, or opportunity cost.
-- It is unlikely that impermanent loss will be zero as CLever has no control over the generated yields (one of the varible that can distort the balance stated in the above point), despite what is stated on their blog.
+- Users are exposed to maturity risk when holding clevTKN, this maturity risk can be compensated through time or value because The clevTKN can rarely trade at the same value as TKN unless the amount of clevTKN deposited in the furnace is less than the TKN generated from the yield.
+- When the incentives for providing clevTKN as liquidity are similar to that of clevTKN swap in the furnace the system will acchieve a equilibrium, but if this equilibrium is disrupted, users may suffer losses in the form of impermanent loss, price impact on DEXs, or opportunity cost.
+- It is unlikely that impermanent loss will be zero as CLever has no control over the generated yields (one of the varible that can distort the equilibrium stated in the above point), despite what is stated on their blog.
 > ...For the liquidity farmer, this is an important distinction, because it means that, on a long enough time scale, both your CVX and your clevCVX are the same, so there is **zero impermanent loss!**
 > Source: [CLever Medium Blog](https://medium.com/@0xC_Lever/clever-cvx-yields-without-locking-c0fc0638a00c) 
 
-- Integrating multiple Concentrator's vaults into CLever can result in a stacked risk exposure streaming from the participating pool tokens and or the yield generating sources (protocols other than Concentrator).
+- Integrating multiple Concentrator's vaults into CLever can result in a stacked risk exposure streaming from the participating pool tokens and/or the yield generating sources (protocols other than Concentrator).
 - The platform fees, debt ceiling, collateral ratio, and repayment fees can be changed based on the team's discretion. 
-- In addition to the above, the vlCVX delegation (presently Votium) can also be revoked by the team through a DAO vote.
+- In addition to the above, the vlCVX delegation (presently Votium) can also be revoked by the team through a snapshot vote.
 - ~~veCLEV holds voting powers and there exists a phase where this voting power can be misused due to it being concentrated in the hands of AladdingDAO and the CLever team.~~ 
 
 # Risk Team Recommendation
