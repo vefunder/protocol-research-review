@@ -96,6 +96,8 @@ Each of these strategies has its own pros and cons, and it is up to the individu
 
 As we can see in the sheet above, depositing 1000 CVX can generate a yield of 12 clevCVX where as 1000 vlCVX delegated on votium will yield almost 15 CVX. It can be concluded with the above that, **with a 20% harvest fee, it is not advisable to use CLever without borrowing.**
 
+With this [Desmos Simulator](https://www.desmos.com/calculator/vtc88qmbdz) you can analyze your position with almost all the variabilites involved in clevTKN vaults. Moreover, it will also show you how much time it takes to repay the debt as well as the time it would take to swap your clevTKN deposit in the furnace.
+
 ## The clevCVX-CVX peg
 
 Aside from redemption in the Furnace, the only utility of clevCVX is to provide liquidity on Curve or Balancer. As a result, there is a high likelihood that users will deposit clevTKN in liquidity pools to farm the liquidity mining rewards.
