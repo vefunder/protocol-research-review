@@ -24,13 +24,15 @@
 * [CLever Medium](https://medium.com/@0xC_Lever) Blog
 * [Audit Reports](https://github.com/AladdinDAO/aladdin-v3-contracts/tree/main/audit-reports) - Compilation on Github 
 
-[CLever](https://clever.aladdin.club/#/clever) enables leverage farming through the use of a yield-bearing asset (TKN) or its derivative. By borrowing the future yield in the form of clevTKN, users can take advantage of this feature. ClevTKN can be exchanged for TKN using the [Furnace](https://clever.aladdin.club/#/furnace) or a liquidity pool ([Curve](https://curve.fi/#/ethereum/pools/factory-v2-209/deposit) & [Balancer](https://app.balancer.fi/#/ethereum/pool/0x69671c808c8f1c1490a4c9e0145884dfb5631378000200000000000000000392)). The system considers clevTKN to be equivalent to the collateral (TKN), so it carries no risk of liquidation and is not affected by price oracles. To leverage their farming, a user can simply deposit TKNs in a strategy vault, borrow the future yield in the form of clevTKN, swap it for TKN, and repeat the process.
+[CLever](https://clever.aladdin.club/#/clever) enables leverage farming through the use of a yield-bearing asset (TKN) or its derivative by allowing users to borrow its future yield in the form of clevTKN. ClevTKN can be redeemed for TKN using the [Furnace](https://clever.aladdin.club/#/furnace) or exchanged in a liquidity pool ([Curve](https://curve.fi/#/ethereum/pools/factory-v2-209/deposit) & [Balancer](https://app.balancer.fi/#/ethereum/pool/0x69671c808c8f1c1490a4c9e0145884dfb5631378000200000000000000000392)). The system considers clevTKN to be equivalent to the collateral (TKN), so it carries no risk of liquidation and does not require a price oracle. To leverage farm, a user can deposit TKNs in a strategy vault, borrow clevTKN, swap it for TKN, and repeat the process.
 
-Borrowers are required to keep at least twice the amount of their claimed future yields locked in the system until they are earned. If borrowers choose to repay their claimed future yields before they are earned, a **5% repayment fee** will be applied. To access their funds, borrowers can simply make an unlock request. The length of time it takes for the request to be processed will depend on the asset being used.
+Depositors can borrow up to 50% of their collateral value. If borrowers choose to repay their debt before future yields are earned, a **5% repayment fee** will be applied. In the case of CVX, borrowers must make an unlock request to withdraw their deposit. CVX is locked in 16 week epochs as vlCVX for yield generation purposes, so withdrawal processing duration depends on the remaining lock time.
 
-Clever charges a fee on the yield harvest instead of charging interest on the debt. The majority of this fee goes to veCLEV holders (veCLEV is a locked CLEV similar to a vote escrow model pioneered by Curve Finance).
+## CLEV and veCLEV
 
-CLEV is a native token for CLever protocol with a capped supply of 2 million. The token distribution for CLEV is as follows:
+CLEV is the native token for CLever protocol with a capped supply of 2 million. veCLEV is locked CLEV, similar to a vote escrow model pioneered by Curve Finance. Clever charges a fee on the yield harvest instead of charging interest on the debt. The majority of this fee goes to veCLEV holders.
+
+The token distribution for CLEV is as follows:
 
 ![](https://miro.medium.com/max/875/1*U9C04jrl3PYTJNwT6cvgQw.png)
 
