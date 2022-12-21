@@ -19,13 +19,13 @@ A quick TL;DR of our findings:
 
 * Monerium offers a EURe stablecoin which can be on- and off-boarded using an [IBAN](https://en.wikipedia.org/wiki/International_Bank_Account_Number) (International Bank Account Number). When registering  with Monerium you get a personal IBAN that you can fund in order to receive EURe on your on-chain wallet. In the same way, you can off-board EURe by funding your on-chain wallet and sending the EURe via the Monerium app to an IBAN. By doing that the EURe is directly burnt from your wallet.
 * Monerium is regulated as an electronic money institution (EMI) for the issuance of e-money.
-* An EMI must meet a number of regulatory requirements, such as over-collateralization with €350k and a 2% buffer based on the outstanding issued amount of e-money, segregating the EMIs funds and reserves by using different custodians and investing the reserves into secure, low-risk assets denominated in euro.
+* An EMI must meet a number of regulatory requirements, such as over-collateralization with at least €350k or (whichever is more) a 2%  based on the outstanding issued amount of e-money, segregating the EMIs funds and reserves by using different custodians and investing the reserves into secure, low-risk assets denominated in euro.
 * We identified two centralization vectors in the Monerium smart contracts that allow infinite mints of EURe. We communicated our concerns to the team and were able to work out solutions to mitigate these issues. According to Monerium, these will be implemented with high urgency in the coming weeks.
 
 ## What is e-money?
 
 In the context of European regulation ([e-money directive 2](https://eur-lex.europa.eu/legal-content/en/TXT/?uri=CELEX%3A32009L0110)), e-money (electronic money) represents a blanket term for any "electronic store of value ... that can be widely used to make payments to entities other than the e-money issuer." ([ECB, 1998](https://www.ecb.europa.eu/pub/pdf/other/emoneyen.pdf)). Here, an "electronic store of monetary value on a technical device" can be understood as the digitization of an asset such as cash or bank deposits. To obtain an EMI license (electronic money institution), explicit approval by the European central bank (ECB) and a national financial services supervisory authority like the German BaFin e.g. is required. Furthermore, an EMI must meet a number of regulatory requirements to be allowed to issue e-money, these include:
-- (Own funds) [A minimum capital contribution of €350,000](https://eur-lex.europa.eu/legal-content/en/TXT/?uri=CELEX%3A32009L0110#d1e519-7-1) and [a 2 % buffer based on the avg. outstanding e-money](https://eur-lex.europa.eu/legal-content/en/TXT/?uri=CELEX%3A32009L0110#d1e529-7-1)
+- (Own funds) [A minimum capital contribution of €350,000](https://eur-lex.europa.eu/legal-content/en/TXT/?uri=CELEX%3A32009L0110#d1e519-7-1) or (whichever is more) [a 2 % buffer based on the avg. outstanding e-money](https://eur-lex.europa.eu/legal-content/en/TXT/?uri=CELEX%3A32009L0110#d1e529-7-1)
 - [Fund segregation between the EMIs funds and the reserves](https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=celex:32007L0064#:~:text=they%20shall%20be%20insulated%20in%20accordance%20with%20national%20law%20in%20the%20interest%20of%20the%20payment%20service%20users%20against%20the%20claims%20of%20other%20creditors%20of%20the%20payment%20institution%2C%20in%20particular%20in%20the%20event%20of%20insolvency) backing the e-money.
 - [Safeguarding of reserves](https://eur-lex.europa.eu/legal-content/en/TXT/?uri=CELEX%3A32009L0110#d1e646-7-1) for example by nature of investing into secure, low-risk assets (denominated in Euro) falling into one of the categories set out in [Table 1 of point 14 of Annex I to Directive 2006/49/EC](https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=celex:32006L0049#d1e251-219-1)
 
@@ -94,7 +94,7 @@ or debt securities issued by AAA to A-rated corporates
 
 ### Risk Summary E-money:
 
-It is important to note that there are residual risks associated with e-money, such as defaulting governments or banks. However, considering that an EMI is likely banking with systemic relevant banks and investing in AAA-rated gov. bonds the remaining risks can be practically disregarded. As a matter of fact, e-money is considerably less risky than the systemic relevant banks which operate in the EU. Firstly, unlike banks that operate under the fractional reserve system, e-money is over-collateralized with 2% of the outstanding issued e-money, as well as a capital contribution of 350k. Secondly, most of the assets are invested into high-quality liquid assets and only the necessary amount is kept at a bank to meet regular withdrawals (as part of a prudent practice), whereby the reserves are also segregated from the EMI. Thirdly, gov. bonds are secured through the ability of the government to tax its citizens, while banks do not have such an option. And lastly, you have diversification benefits by nature of investing in multiple different gov. bonds. All of these factors combined make the case for money that provides a more secure money scheme than demand deposits.
+It is important to note that there are residual risks associated with e-money, such as defaulting governments or banks. However, considering that an EMI is likely banking with systemic relevant banks and investing in AAA-rated gov. bonds the remaining risks can be practically disregarded. As a matter of fact, e-money is considerably less risky than the systemic relevant banks which operate in the EU. Firstly, unlike banks that operate under the fractional reserve system, e-money is over-collateralized with 2% of the outstanding issued e-money. Secondly, Thirdly, most of the assets are invested into high-quality liquid assets and only the necessary amount is kept at a bank to meet regular withdrawals (as part of a prudent practice which is also followed by Monerium), whereby the reserves are also segregated from the EMI. Fourthly, gov. bonds are secured through the ability of the government to tax its citizens, while banks do not have such an option. And lastly, you have diversification benefits by nature of investing in multiple different gov. bonds. All of these factors combined make the case for money that provides a more secure money scheme than demand deposits.
 
 ## Monerium
 
@@ -138,18 +138,20 @@ What we found was the following:
 * [A SystemAccount](https://etherscan.io/address/0x882145b1f9764372125861727d7be616c84010ef) is able to (infinitely) mint EURe.
 * [The controller contract](https://etherscan.io/address/0x914C6a264bC3cC68966C33BBD6630F011E7a47cF) is not verified on etherscan.
 
-Followed by identifying the above, we reached out to the Monerium team to discuss the issues and how they could potentially be resolved. The result of this discussion was satisfactory in the sense that we were promised that all the issues listed above will be taken care of. This includes:
+Though all of these findings are technically non-critical for Monerium since (for now) withdrawals above a low 3-figure amount are manually reviewed they still pose critical risks for EURe LPs. By being able to infinitely mint EURe and selling into the pool it is possible (for the EOA or the SystemAccount) to rug LPs.
+
+Followed by identifying the above, we reached out to the Monerium team to discuss the issues and how they could potentially be resolved. The result of this discussion was satisfactory in the sense that we were able to work out solutions to mitigate the issues. We were promised that these will be implemented in the coming weeks. This includes:
 
 * Replacing the owner of the EURe contract with a multi-sig
 * Keeping the SystemAccount as an EOA (for operational reasons > automating mints/burns), however implementing changes into the controller that would put a limit on how much EURe can be minted. This would greatly reduce the repercussions of a compromised SystemAccount.
 * The hiring of an auditor to review the smart contracts
 
+We will monitor the deliveries in the coming weeks and will notify the DAO should Monerium fail to live up to their promises. 
+
 ### Conclusion:
 
-Looking at the stringent regulations for European stablecoins it can be said that these are likely amongst the most prudent and sound ones compared to the rest of the world. By deploying its stablecoins under the e-money directive Monerium has positioned itself with foresight in terms of future regulatory compliance. 
-
-However, at this point in time, there are still a few issues to work through in order to reduce operational risks and gain the trust of the DeFi community. Considering the reputable set-up of Monerium, we are convinced that the previously mentioned commitments will be met. 
+In principle, the stringent regulatory framework under which Monerium operates provides a sound foundation for a stablecoin. However, at this point, there are still a few issues to work through to reduce the non-negligible operational risks.
  
 As for the risks regarding the elevated rights within the EURe contracts, these will be mainly confined within the powers of the multi-sig, yet to be deployed. Since trust assumptions can be made by virtue of the regulatory compliance and reputation of the company (as with Circle or Stasis), the associated risks can be considered minimal.
 
-We are convinced that bridging highly regulated TradFi rooted form of money into DeFi is a good, inevitable, and the next logical step, especially against the background of uncertainties raised towards existing stablecoin providers. We think Monerium is a good contender within the euro (and other) stablecoins and are looking forward to seeing them grow into the DeFi ecosystem.
+We are convinced that bridging regulated TradFi rooted form of money into DeFi is a good, inevitable, and the next logical step, especially against the background of uncertainties raised towards existing and unregulated stablecoin providers. We think Monerium is a good contender within the euro (and other) stablecoins and are looking forward to seeing them grow into the DeFi ecosystem.
