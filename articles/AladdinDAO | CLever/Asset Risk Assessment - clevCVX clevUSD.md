@@ -40,18 +40,13 @@ Source: Medium article by CLever - [A CLever Token Offering](https://medium.com/
 
 ## Furnace (Facilitating extended swap from clevTKN to TKN)
 
-The [Furnace](https://clever.aladdin.club/#/furnace)  can be used to exchange clevTKN for TKN by simply depositing clevTKN in it. If there are sufficient tokens available for claiming in the Furnace, redemption is facilitated immediately at 1:1. If the Furnace is oversubscribed, meaning more clevTKN is awaiting redemption than available TKN, the swap time is determined by the APR of all collateral in the strategic vault and by how many other claimants are processing redemptions. 
+The [Furnace](https://clever.aladdin.club/#/furnace)  can be used to exchange clevTKN for TKN by simply depositing clevTKN in it. Anyone with clevTKN can redeem through the furnace, even if they do not have collateral in CLever. If there are sufficient tokens available for claiming in the Furnace, redemption is facilitated immediately at 1:1. If the Furnace is oversubscribed, meaning more clevTKN is awaiting redemption than available TKN, the swap time is determined by the APR of all collateral in the strategic vault and by how many other claimants are processing redemptions. 
 
 With each yield harvest, a portion of clevTKN is converted into additional TKNs, a fee is charged on this yield harvest, and the TKNs are gradually (over 2 weeks) streamed into the furnace to facilitate the exchange from clevTKN to TKN and to distribute yields to TKN depositors in the form of clevTKN. When TKNs are streamed into the furnace, an equal amount of clevTKN is minted. The newly minted clevTKN is given to TKN depositors as yield, and the new TKNs (generated from a yield-bearing asset) are used to facilitate the exchange from clevTKN to TKN.
 
 If the amount of deposited clevTKN is greater than the TKN generated from the yield, it can take a substantial amount of time to exchange the tokens. Indeed, it is possible that oversubscription of the Furnace will occur due to the utility of clevTKN. **clevTKN will likely trade at a discount unless there are no clevTKN left in the furnace.** Conversely, as the number of clevTKN deposited in the furnace approaches 0; the value of 1 clevTKN in the market will approach the value of 1 TKN.
 
-If a user wishes to exchange their clevTKN (yields or borrowings), they have two options. They can use a liquidity pool, although this can result in a loss (if clevTKN is valued lower than TKN). Alternatively, the user can use the furnace to redeem their clevTKN, but this will require them to pay an equivalent amount in time. The choice between "loss of time" or "loss of value" quoted above is significant to the expected valuation for clevTokens. The annual percentage rate (APR) numbers on the CLever website are calculated under the assumption that clevTKN is equal to TKN, which is unlikely to be achieved in practice.
-
-**![](https://lh5.googleusercontent.com/9nzn-Vu6KKO3ocaGLGa87OCsNnjakAOBmlN5Lrox0A-YF-Sp6urXZMCmUhRw7uqvIkhMGQTg4g7dOfHhCj1oAeaK0I4tkTvyT-oWh6hmMwynkUKWnnxPJyChvulVOWFWBQvTIqLfB8BFiUxJ_VR1kx6qP2snM2hg2yW_hvel50De9ca46Ewyd2sbg_7ZoQ)**
-Source: Clever - [clevCVX Vault](https://clever.aladdin.club/#/clever/cleverCVX)
-
-In the above image, the 33% APR is calculated based on the assumption that the clevCVX is equivalent to CVX which is empirically false.
+If a user wishes to exchange their clevTKN (yields or borrowings), they have two options. They can use a liquidity pool, although this can result in a loss (if clevTKN is priced lower than TKN). Alternatively, the user can use the furnace to redeem their clevTKN, but this will require them to pay an equivalent amount in time. The choice between "loss of time" or "loss of value" is significant to the expected valuation for clevTokens. 
 
 Liquidity incentives in the form of CLEV (48.25% allocation) can be used to limit the deposit of clevTKN into the furnace and improve liquidity. Implementing a Curve gauge to distribute CRV rewards on the clevTKN-TKN liquidity pool can also help with liquidity and limit the deposit of clevTKN in the furnace.
 
@@ -88,7 +83,7 @@ Here is a comparison of the three different strategies with CLever:
 
 Compare the above strategies with manual vlCVX harvesting:
 -  **Votium Delegation**: This strategy involves delegating vlCVX to Votium to generate bribe yield denominated in CVX.
-	- This strategy doesn't use CLever but is more of a comparison to understand a perspective of opportunity cost.
+	- This strategy doesn't use CLever but serves to compare the opportunity cost involved.
  
 ![](https://lh5.googleusercontent.com/tx5n33wNo2KSDZKc50j2Fa_ygndOI44q0jCxqH04ziuH_Ob9Q-dPYd9jTbazMSgg1DM340t6yGXy83p6r1TTcnloaBEJPDudDvCbmGc4BhV-IK7TOHPxokkgQ5qCnFMMAHyOd871qU7pfNTxs779Cg52g6RnsZAKWOLsN6IXwCp12vSZACRUlBEcsoPu9g) 
 
@@ -96,7 +91,7 @@ Source: [Google sheet](https://docs.google.com/spreadsheets/d/1eeGXJ_GCIPc9YVCqt
 
 Each of these strategies has its pros and cons, and it is up to the individual to determine which strategy is the most suitable based on their specific goals and circumstances.
 
-As we can see in the sheet above, depositing 1000 CVX can generate a yield of 12 clevCVX whereas 1000 vlCVX delegated on Votium will yield almost 15 CVX. It can be concluded from the above that, **with a 20% harvest fee, it is not advisable to use CLever without borrowing.**
+As we can see in the sheet above, depositing 1000 CVX can generate a yield of 12 clevCVX whereas 1000 vlCVX delegated on Votium will yield almost 15 CVX. It can be concluded from the above that, with a 20% harvest fee, viable strategies with CLever require borrowing.
 
 With this [Desmos Simulator](https://www.desmos.com/calculator/vtc88qmbdz), you can analyze your position with almost all the variables involved in clevTKN vaults. Moreover, it will also show you how much time it takes to repay the debt as well as the time it would take to swap your clevTKN deposit in the furnace.
 
@@ -156,7 +151,7 @@ Concentrator has undergone several [audits](https://github.com/AladdinDAO/aladdi
 
 As discussed in the clevCVX-CVX peg section, the market will eventually reach a balance between the time value for the Furnace to swap clevUSD for FRAX, the discount on clevUSD in liquidity pools, and the incentives to store clevUSD in either the Furnace or the liquidity pool. Whenever the variables change, it will impact this balance, ultimately affecting the pricing of clevUSD-FRAX.
 
-Due to several layers of swaps between assets and variables to generate yield, it is hard to speculate on the behavior of the market. With CVX gauge weighting from FRAX, possible CRV rewards from Curve, liquidity mining rewards from CLever, and a low issuance cap of 100K clevUSD, the initial discount on clevUSD is likely to be reasonably modest.
+Due to multiple swaps between assets and variables to generate yield, it is hard to speculate on the behavior of the market. With CVX gauge weighting from FRAX, possible CRV rewards from Curve, liquidity mining rewards from CLever, and a low issuance cap of 100K clevUSD, the initial discount on clevUSD is likely to be reasonably modest.
 
 # Centralization Vectors
 
@@ -178,7 +173,6 @@ Source: [Google Sheet](https://docs.google.com/spreadsheets/d/1JtXtL26nCaC5js5WF
 
 # Conclusion
 
-- clevTKN circulating supply will eventually reach the amount of CR (collateral ratio) x TKN locked in CLever vault.
 - Users are exposed to maturity risk when holding clevTKN. This maturity risk can be realized through time or value because the clevTKN can rarely trade at the same value as TKN unless the amount of clevTKN deposited in the furnace is less than the TKN generated from the yield.
 - The inverse relationship between the quantity of TKN in the Furnace and the presumed market price of clevTKN suggests that a high reliance on liquidity incentives will be required to support the peg.
 - When the incentives for providing clevTKN as liquidity are similar to that of clevTKN redemption in the furnace, the system will achieve an equilibrium. However, if this equilibrium is disrupted, users may suffer losses in the form of impermanent loss, price impact on DEXs, or opportunity cost.
@@ -186,8 +180,8 @@ Source: [Google Sheet](https://docs.google.com/spreadsheets/d/1JtXtL26nCaC5js5WF
 > ...For the liquidity farmer, this is an important distinction, because it means that, on a long enough time scale, both your CVX and your clevCVX are the same, so there is **zero impermanent loss!**
 > Source: [CLever Medium Blog](https://medium.com/@0xC_Lever/clever-cvx-yields-without-locking-c0fc0638a00c) 
 
-- Integrating multiple Concentrator vaults into CLever can result in additional risk exposure, compounding risk from the participating pool tokens and/or the yield-generating sources (protocols other than Concentrator).
-- The platform fees, debt ceiling, collateral ratio, repayment fees, and vlCVX delegation can be changed based on the team's discretion (6-of-9 multisig). 
+- Integrating multiple Concentrator vaults into CLever can result in additional risk exposure, compounding risk from LP tokens with the yield-generating sources.
+- The platform fees, debt ceiling, collateral ratio, repayment fees, and vlCVX delegation can be changed based on the team's discretion (6-of-9 multisig). This level of team control is not atypical for an early stage DeFi application, however the current centralization should be noted.  
 
 
 # Risk Team Recommendation
