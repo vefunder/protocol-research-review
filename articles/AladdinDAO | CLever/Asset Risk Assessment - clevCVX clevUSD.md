@@ -192,9 +192,17 @@ Source: [Google Sheet](https://docs.google.com/spreadsheets/d/1JtXtL26nCaC5js5WF
 
 # Risk Team Recommendation
 
-The clevCVX Curve pool is a V1 pool with A=100. The clevUSD Curve pool is a V1 pool with A=200. These are both pool configurations for assets that are easily redeemable and are expected to maintain a strong reversion to the 1:1 peg. clevCVX pool is currently (Dec.18, 2022) unbalanced 9:91 with clevCVX trading at .87 CVX. clevCVX has a much higher early repayment fee compared to clevUSD (5% vs. .5%), impeding arbitrage of the peg. 
+The [clevCVX Curve pool](https://curve.fi/#/ethereum/pools/factory-v2-209/deposit) is a V1 pool with A=100. The [clevUSD Curve pool](https://curve.fi/#/ethereum/pools/factory-v2-237/deposit) is a V1 pool with A=200. These are both pool configurations for assets that are easily redeemable and are expected to maintain a strong reversion to the 1:1 peg. 
 
-Therefore we recommend reducing clevCVX pool to A=50 and maintaining clevUSD pool at A=200. We have discussed the reduction of A for the clevCVX-CVX pool with the CLever team, and we have agreed that a reduction from 100 to 50 is sensible. We may recommend reducing A further if price doesn't stabilize going forward.
+## clevCVX
+
+clevCVX pool is currently (Dec.18, 2022) unbalanced 9:91 with clevCVX trading at .87 CVX. clevCVX has a much higher early repayment fee compared to clevUSD (5% vs. .5%), impeding arbitrage of the peg. 
+
+Therefore we recommend reducing clevCVX pool to A=50. We have discussed the reduction of A for the clevCVX-CVX pool with the CLever team, and they agree that a reduction from 100 to 50 is sensible. We may recommend reducing A further if price doesn't stabilize going forward.
 
 The following graph from the Curve Research team shows the price (y-axis) as a function of pool balance (x-axis) for a V1 pool with different A values. The black horizontal line shows the current price of clevCVX/CVX:
 ![IMAGE 2022-12-19 20:29:30](https://user-images.githubusercontent.com/51072084/208583931-4f8c2ef6-01d2-42b3-955c-aa7f9b780378.jpg)
+
+## clevUSD
+
+The clevUSD market price depends on the willingness of users to repay the debt (early repayment fee of 0.5%). We have discussed with the CLever team about reducing the early repayment fee to 0%, which will facilitate debt repayment and support the peg. They have agreed to remove the early repayment fee for the FraxBP LP. So long as the team follows through on this commitment, we feel A=200 is justified. Otherwise we may recommend reduction of A for this pool.
