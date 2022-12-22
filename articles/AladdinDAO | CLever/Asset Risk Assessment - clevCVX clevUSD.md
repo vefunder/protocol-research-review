@@ -170,7 +170,7 @@ Additionally, CLever can revoke its vlCVX delegation from Votium and make use of
 
 **![](https://lh5.googleusercontent.com/jlKbp814RPv0A5ftLYuL4h6X6FHnWWnom1nz_gFp5_2QHahGvV_6XImWIAW5JUSAFcP5mrgU4rj_Oy6aVM_PqqtfVMaPDHRezwRiDMGAGclFsmFFb1QZm2tSqhj064Oo-w1CJyfvYLbKO4riMLOqMiC8PvrO3XhzrxDK3U5WkbqjO67E_ggqgIfFZKeUyQ)**
 
-With the token distribution, there exist a time period when the veCLEV voting power is greater that that of the CLEV community. Following graph shows Aladdin DAO & Treasury Reserve under **DAO/Team owned CLEV**, Partnership offerings, and rest all allocation under **Community CLEV**.
+With the token distribution, there exist a time period when the team owned veCLEV voting power is greater that that of the CLEV community. The following graph shows Aladdin DAO & Treasury Reserve under **DAO/Team owned CLEV**, along with partnership offerings, and community owned CLEV:
 
 ![](https://lh4.googleusercontent.com/OCln8uYyXsf0rDl8XUfOkE7m9bEOcupXrGdDWuDC1ZEWHlHPd_D80ukhYwFiLYFL17UNGEAhJTH-1SL2ZrxolPTjDwj5aytQ5DbDsGkUGwJXoTo4aXJ3vBnJivtuKdAXOArYl1TdXNEf2iCZQ6w8Mkd0l-i7GGTTE9bYcyPQjOtxEj6RmZNocdPaadYpnQ)
 
