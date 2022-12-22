@@ -120,7 +120,7 @@ The clevUSD strategy has the following key attributes:
 - The yield is derived from the Concentrator compounded yield from Curve and Convex.
 - Users can borrow up to 30% of the future yield.
 - Withdrawals can be instant.
-- The current harvest fee is 2% (beta period) and will soon be increased to 20% once there is a gauge allocated to the liquidity pool.
+- The current harvest fee is 2% (beta period) and will soon be increased to 10-15% (yet to decide) once there is a gauge allocated to the liquidity pool.
 - CLever USD will limit total borrowing during the beta period to $100K.
 - Early Repayment fee = .5%
 
