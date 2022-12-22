@@ -182,6 +182,7 @@ Source: [Google Sheet](https://docs.google.com/spreadsheets/d/1JtXtL26nCaC5js5WF
 
 - Integrating multiple Concentrator vaults into CLever can result in additional risk exposure, compounding risk from LP tokens with the yield-generating sources.
 - The platform fees, debt ceiling, collateral ratio, repayment fees, and vlCVX delegation can be changed based on the team's discretion (6-of-9 multisig). This level of team control is not atypical for an early stage DeFi application, however the current centralization should be noted.  
+- CLever's strategy vaults have undergone thorough auditing, and the Concentrator protocol utilized in clevUSD vaults has also undergone auditing. These ensure reasonable precautionary efforts against smart contract exploitation.
 
 
 # Risk Team Recommendation
