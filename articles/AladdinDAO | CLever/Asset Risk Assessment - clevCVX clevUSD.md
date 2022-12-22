@@ -90,7 +90,7 @@ Compare the above strategies with manual vlCVX harvesting:
 -  **Votium Delegation**: This strategy involves delegating vlCVX to Votium to generate bribe yield denominated in CVX.
 	- This strategy doesn't use CLever but is more of a comparison to understand a perspective of opportunity cost.
  
-**![](https://lh4.googleusercontent.com/oH9GcxQRyTs-KWWvucB_m8E7UvfR_MQlcZinyhKb5112vBfGfDnzBM1klfa6ZAwfkeoPa7nn7uE5fzkl8NYctkQks_6W11QAW7hcaBe0Mz1NdcgC3-BADNpNV8hxKweJmzEAKoc5BA1pcON5ol8fV_L394v0jzvmr5ujBJk8rHEg0jO8kZ40TsfgxmGjnA)** 
+![](https://lh5.googleusercontent.com/tx5n33wNo2KSDZKc50j2Fa_ygndOI44q0jCxqH04ziuH_Ob9Q-dPYd9jTbazMSgg1DM340t6yGXy83p6r1TTcnloaBEJPDudDvCbmGc4BhV-IK7TOHPxokkgQ5qCnFMMAHyOd871qU7pfNTxs779Cg52g6RnsZAKWOLsN6IXwCp12vSZACRUlBEcsoPu9g) 
 
 Source: [Google sheet](https://docs.google.com/spreadsheets/d/1eeGXJ_GCIPc9YVCqt61F8TISN4K59DdRPD0xcrPiKsg/edit?usp=sharing) by @diligentdeer
 
@@ -170,10 +170,9 @@ Additionally, CLever can revoke its vlCVX delegation from Votium and make use of
 
 **![](https://lh5.googleusercontent.com/jlKbp814RPv0A5ftLYuL4h6X6FHnWWnom1nz_gFp5_2QHahGvV_6XImWIAW5JUSAFcP5mrgU4rj_Oy6aVM_PqqtfVMaPDHRezwRiDMGAGclFsmFFb1QZm2tSqhj064Oo-w1CJyfvYLbKO4riMLOqMiC8PvrO3XhzrxDK3U5WkbqjO67E_ggqgIfFZKeUyQ)**
 
-~~With the token distribution, CLEV holding is centralized in the initial phase where DAO votes can be manipulated through veCLEV holdings from Aladdin DAO & Treasury Reserve. Following graph shows Aladdin DAO & Treasury Reserve under **Centralized CLEV**, Partnership offerings, and rest all allocation under **Community CLEV**.~~ 
+With the token distribution, there exist a time period when the veCLEV voting power is greater that that of the CLEV community. Following graph shows Aladdin DAO & Treasury Reserve under **DAO/Team owned CLEV**, Partnership offerings, and rest all allocation under **Community CLEV**.
 
-
-![](https://lh4.googleusercontent.com/h0lJpKdaSiXISEhEriu-736CfVQJFGsUndfnkq4Tb85Q4X6OwlywLROfNlDfukiM8bKmquhWeB0XXUpgddx0wxWbAIrtKezQnGw-xzBmNXXy6YDNITFESp2CtK4G3UC-P_AIXiai33GhCiHImazlgtyKv_x0IcrfCYLogebRuMJs2WkJspid_1XDlJox1w)
+![](https://lh4.googleusercontent.com/OCln8uYyXsf0rDl8XUfOkE7m9bEOcupXrGdDWuDC1ZEWHlHPd_D80ukhYwFiLYFL17UNGEAhJTH-1SL2ZrxolPTjDwj5aytQ5DbDsGkUGwJXoTo4aXJ3vBnJivtuKdAXOArYl1TdXNEf2iCZQ6w8Mkd0l-i7GGTTE9bYcyPQjOtxEj6RmZNocdPaadYpnQ)
 
 Source: [Google Sheet](https://docs.google.com/spreadsheets/d/1JtXtL26nCaC5js5WFYCZrzBMXIjhtBnY8s9VeKnsXUs/edit?usp=sharing) by @diligentdeer
 
