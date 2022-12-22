@@ -121,13 +121,13 @@ Beyond the 1B Eur mark of issued e-money [among other conditions for the classif
 These [additional obligations](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A52020PC0593#:~:text=Article%2052%0ASpecific%20additional%20obligations%20for%20issuers%20of%20significant%20e%2Dmoney%20tokens) emphasize [enhanced safeguarding measures](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A52020PC0593#:~:text=in%20Article%2019.-,Article%2033,-Custody%20of%20reserve) such as [due diligence to select a reasonable and appropriate partner bank](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A52020PC0593#:~:text=Issuers%20of%20asset%2Dreferenced%20tokens%20shall%20exercise%20all%20due%20skill%2C%20care%20and%20diligence%20in%20the%20selection%2C%20appointment%20and%20review%20of%20credit%20institutions%20and%20crypto%2Dasset%20providers%20appointed%20as%20custodians%20of%20the%20reserve%20assets%20in%20accordance%20with%20paragraph%202.) for the custody of the funds. Other noteworthy  requirements include:
 
 * [Another bank shall act as the custodian of the funds than the one used by the EMI.](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A52020PC0593#:~:text=Issuers%20of%20significant%20asset%2Dreferenced%20tokens%20shall%20ensure,on%20a%20fair%2C%20reasonable%20and%20non%2Ddiscriminatory%20basis.)
-* [The equirement to monitor liquidity needs to meet ad-hoc redemption requests.](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A52020PC0593#:~:text=Issuers%20of%20significant%20asset%2Dreferenced%20tokens%20shall%20assess%20and%20monitor%20the%20liquidity%20needs%20to%20meet%20redemption%20requests%20or%20the%20exercise%20of%20rights%2C%20as%20referred%20to%20in%20Article%2034%2C%20by%20holders%20of%20asset%2Dreferenced%20tokens.)
+* [The requirement to monitor liquidity needs to meet ad-hoc redemption requests.](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A52020PC0593#:~:text=Issuers%20of%20significant%20asset%2Dreferenced%20tokens%20shall%20assess%20and%20monitor%20the%20liquidity%20needs%20to%20meet%20redemption%20requests%20or%20the%20exercise%20of%20rights%2C%20as%20referred%20to%20in%20Article%2034%2C%20by%20holders%20of%20asset%2Dreferenced%20tokens.)
 * [The over-collateralization percentage shall be 3% instead of 2%](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A52020PC0593#:~:text=The%20percentage%20referred%20to%20in%20Article%C2%A031(1)%2C%20point%20(b)%2C%20shall%20be%20set%20at%203%25%20of%20the%20average%20amount%20of%20the%20reserve%20assets%20for%20issuers%20of%20significant%20asset%2Dreferenced%20tokens.)
 * [A plan should be in place to be able to orderly wind down the company's activities.](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A52020PC0593#:~:text=Chapter%206-,Orderly%20wind%2Ddown,-Article%2042%0AOrderly)
 
-### Smart Contracts
+### Review / Smart Contracts
 
-There were no smart contract audits being provided for Monerium's EURe. However, we decided to analyze the contracts ourselves, specifically looking for centralization vectors and elevated rights.
+While we were able to determine that Monerium has an EMI license and thus has to comply with strict safeguarding requirements we still have to emphasize the importance of trust assumptions that apply in this case. Currently, there are no publicly available proof-of-reserves attestations, audits or similar documents. Moreover, there were no smart contract audits being provided for Monerium's EURe contracts. However, we decided to analyze the contracts ourselves, specifically looking for centralization vectors and elevated rights.
 
 What we found was the following:
 
@@ -145,6 +145,7 @@ Followed by identifying the above, we reached out to the Monerium team to discus
 * Replacing the owner of the EURe contract with a multi-sig
 * Keeping the SystemAccount as an EOA (for operational reasons > automating mints/burns), however implementing changes into the controller that would put a limit on how much EURe can be minted. This would greatly reduce the repercussions of a compromised SystemAccount.
 * The hiring of an auditor to review the smart contracts
+* Publish regular proof-of-reserves attestations from an auditor [or through other ways](https://gov.curve.fi/t/proposal-to-add-ageur-eure-on-ethereum-to-the-gauge-controller/4544/7?u=knows)
 
 We will monitor the deliveries in the coming weeks and will notify the DAO should Monerium fail to live up to their promises. 
 
