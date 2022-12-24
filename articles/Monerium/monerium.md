@@ -2,7 +2,7 @@ Asset Risk Assessment - Monerium
 ===============
 ### A risk assessment of e-money, the Monerium (EURe) stablecoin, and its risks for Curve LPs
  
-This research was spearheaded by [@evmknows](https://twitter.com/evmknows).
+This research was spearheaded by [@evmknows](https://twitter.com/evmknows) and was funded by the Curve DAO. The research is meant to inform users of risks associated with the platforms researched, and should not be used standalone to make investment decisions. The author holds no ANGLE tokens or Monerium equity.
  
 ## Useful links
  
@@ -19,7 +19,7 @@ A quick TL;DR of our findings:
 
 * Monerium offers a EURe stablecoin which can be on- and off-boarded using an [IBAN](https://en.wikipedia.org/wiki/International_Bank_Account_Number) (International Bank Account Number). When registering  with Monerium you get a personal IBAN that you can fund in order to receive EURe on your on-chain wallet. In the same way, you can off-board EURe by funding your on-chain wallet and sending the EURe via the Monerium app to an IBAN. By doing that the EURe is directly burnt from your wallet.
 * Monerium is regulated as an electronic money institution (EMI) for the issuance of e-money.
-* An EMI must meet a number of regulatory requirements, such as over-collateralization with at least €350k or (whichever is more) a 2%  based on the outstanding issued amount of e-money, segregating the EMIs funds and reserves by using different custodians and investing the reserves into secure, low-risk assets denominated in euro.
+* An EMI must meet a number of regulatory requirements, such as over-collateralization of the reserves with at least €350k or (whichever is more) a 2%  based on the outstanding issued amount of e-money, segregating the EMIs funds and reserves by using different custodians and investing the reserves into secure, low-risk assets denominated in euro.
 * We identified two centralization vectors in the Monerium smart contracts that allow infinite mints of EURe. We communicated our concerns to the team and were able to work out solutions to mitigate these issues. According to Monerium, these will be implemented with high urgency in the coming weeks.
 
 ## What is e-money?
@@ -76,7 +76,7 @@ Now the last outstanding question is probably, what exactly are secure, low-risk
 > 1,60 % (residual term to final maturity exceeding 24 months)
 
 Excursus:
-A risk capital charge is a measure of the amount of money that a financial institution is required to hold in reserve in order to protect itself and its creditors against the possibility of losses on its investments or other activities. This capital is often referred to as "risk-weighted" because it is based on the level of risk associated with the institution's various assets and activities.
+A risk capital charge is a measure of the amount of money that a financial institution is required to hold in reserve in order to protect itself and its creditors against the possibility of losses on its investments or other activities. This capital is often referred to as "risk-weighted" because it is based on the level of risk associated with various assets or institutions.
 
 Now without going into the details of what step 1-3 under the rules of risk weighting exactly means and how it is calculated, we will boil down the variation of possible and relevant secure and low-risk liquid assets to the table below for the sake of simplicity:
 
@@ -106,7 +106,7 @@ First, a customer needs to register at https://monerium.com/ and go through the 
 
 In a similar manner, EURe can be off-boarded. For that, a user needs to hold EURe on the on-chain address which corresponds to his IBAN. He then initiates the withdrawal process to a bank account, whereupon an equivalent amount is automatically burned from the on-chain wallet.
 
-Currently, the process of burning/withdrawing the stablecoins is being approved by hand. In the future, this process will be scaled to allow automatic withdrawals up to a certain threshold that will also be cleared within seconds through SEPA Instant.
+Currently, the process of burning/withdrawing the stablecoins is being approved by hand for amounts higher than low 3 figures. In the future, this process will be scaled to allow automatic withdrawals up to a certain threshold that will also be cleared within seconds through SEPA Instant.
 
 Furthermore, Monerium will add the option to change the on-chain address to enhance the privacy of its customers.
 
@@ -125,6 +125,8 @@ These [additional obligations](https://eur-lex.europa.eu/legal-content/EN/TXT/?u
 * [The over-collateralization percentage shall be 3% instead of 2%](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A52020PC0593#:~:text=The%20percentage%20referred%20to%20in%20Article%C2%A031(1)%2C%20point%20(b)%2C%20shall%20be%20set%20at%203%25%20of%20the%20average%20amount%20of%20the%20reserve%20assets%20for%20issuers%20of%20significant%20asset%2Dreferenced%20tokens.)
 * [A plan should be in place to be able to orderly wind down the company's activities.](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A52020PC0593#:~:text=Chapter%206-,Orderly%20wind%2Ddown,-Article%2042%0AOrderly)
 
+Since Monerium operates as a regulated entity it is obliged to comply with law enforcement agencies and regulators. This means that, just like in other centralized stablecoins, Monerium can blacklist any address from transferring. In that regard, we asked specifically what would happen if a hacker deposited or swapped into a Monerium pool - Would the pool contract be blacklisted? And should LPs worry about clawbacks? The answer was **no** since it's technically and practically impossible to carry out proper clawbacks DeFi as there is no possibility to revise transactions without breaking the entire stablecoin system.
+
 ### Review / Smart Contracts
 
 While we were able to determine that Monerium has an EMI license and thus has to comply with strict safeguarding requirements we still have to emphasize the importance of trust assumptions that apply in this case. Currently, there are no publicly available proof-of-reserves attestations, audits or similar documents. Moreover, there were no smart contract audits being provided for Monerium's EURe contracts. However, we decided to analyze the contracts ourselves, specifically looking for centralization vectors and elevated rights.
@@ -138,7 +140,7 @@ What we found was the following:
 * [A SystemAccount](https://etherscan.io/address/0x882145b1f9764372125861727d7be616c84010ef) is able to (infinitely) mint EURe.
 * [The controller contract](https://etherscan.io/address/0x914C6a264bC3cC68966C33BBD6630F011E7a47cF) is not verified on etherscan.
 
-Though all of these findings are technically non-critical for Monerium since (for now) withdrawals above a low 3-figure amount are manually reviewed they still pose critical risks for EURe LPs. By being able to infinitely mint EURe and selling into the pool it is possible (for the EOA or the SystemAccount) to rug LPs.
+Though all of these findings are technically non-critical for Monerium since (for now) withdrawals above a low 3-figure amount are manually reviewed they still pose critical risks for EURe LPs. By being able to infinitely mint EURe and sell into the pool it is possible (for the EOA or the SystemAccount) to rug LPs.
 
 Followed by identifying the above, we reached out to the Monerium team to discuss the issues and how they could potentially be resolved. The result of this discussion was satisfactory in the sense that we were able to work out solutions to mitigate the issues. We were promised that these will be implemented in the coming weeks. This includes:
 
@@ -147,7 +149,7 @@ Followed by identifying the above, we reached out to the Monerium team to discus
 * The hiring of an auditor to review the smart contracts
 * Publish regular proof-of-reserves attestations from an auditor [or through other ways](https://gov.curve.fi/t/proposal-to-add-ageur-eure-on-ethereum-to-the-gauge-controller/4544/7?u=knows)
 
-We will monitor the deliveries in the coming weeks and will notify the DAO should Monerium fail to live up to their promises. 
+We will monitor the deliveries in the coming weeks and will notify the DAO should Monerium fail to live up to their promises.
 
 ### Conclusion:
 
