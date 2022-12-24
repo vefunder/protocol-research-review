@@ -4,7 +4,7 @@ LINK
 
 Credits: @evmknows
 
-2/ Monerium is regulated as an electronic money institution (EMI) for the issuance of e-money. This means that it must meet certain regulatory requirements, such as over-collateralization, segregating own funds and reserves and other safeguarding requirements.
+2/ Monerium is regulated as an electronic money institution (EMI) for the issuance of e-money. This means that it must meet certain regulatory requirements, such as over-collateralization, segregation of own funds and reserves and other safeguarding requirements.
 
 3/ The users can register with Monerium to receive a personal IBAN and then fund it to receive EURe on their on-chain wallet. They can also off-board EURe by sending it from their on-chain wallet to an IBAN, which burns the EURe directly from the wallet.
 
