@@ -94,16 +94,17 @@ or debt securities issued by AAA to A-rated corporates
 
 ### Risk Summary E-money:
 
-It is important to note that there are residual risks associated with e-money, such as defaulting governments or banks. Although EMI's operate under heightened regulatory scrutiny, technology is rapidly developing, and therefore require regulators to continually adapt to an ever-evolving landscape. Fabio Panetta, member of the Executive Board of the ECB, [issued a statement on the digital Euro](https://www.ecb.europa.eu/press/key/date/2022/html/ecb.sp220615~0b859eb8bc.en.html), highlighting the dangers presented by poorly regulated stablecoins and ongoing negotions for EU Regulation on Markets in Crypto-Assets (MiCA). 
+It is important to note that there are residual risks associated with e-money, such as defaulting governments or banks. Although EMIs operate under heightened regulatory scrutiny, technology is rapidly developing, and therefore requires regulators to continually adapt to an ever-evolving landscape. Nonetheless, considering that an EMI is likely banking with systemically important banks and investing in AAA-rated government bonds, the remaining risks have significant regulatory oversight. In certain regards, EMIs introduce additional operational risk since their products are built on top of other financial institutions.
 
-However, considering that an EMI is likely banking with systemically important banks and investing in AAA-rated government bonds, the remaining risks have significant regulatory oversight. In certain regards, e-money introduce minimal additional risk beyond the systemically important banks which operate in the EU. 
+If we disregard these unquantifiable operational risks, which could e.g involve malicious conspiracy, the counterparty credit risk could, under certain circumstances, be even lower than with banks.
 
-- In contrast to the fractional reserve banking system, e-money is over-collateralized 2% in excess of the outstanding issued e-money. 
+In the case of Monerium:
+- As opposed to the fractional reserve banking system, e-money is over-collateralized 2% in excess of the outstanding issued e-money. 
 - Most holdings are invested into high-quality liquid assets, whereby the reserves are also segregated from the EMI, and only the necessary amount is kept at a bank to meet regular withdrawals.
-- Government bonds are secured through the ability of the government to tax its citizens, while banks do not have such an option. 
+- Government bonds are secured through the ability of the government to tax its citizens, while banks do not have such an option and solely rely on trust, both in customers and risk management.
 - Reduced risk from diversification in multiple government bonds. 
 
-All of these factors combined make the case for money that provides similar protections to consumers as demand deposits.
+All of these factors combined can make the case for (e)-money that provides better protections to consumers than demand deposits. However, it is worth noting that such assumptions stand and fall with transparency efforts from the EMI.
 
 ## Monerium
 
