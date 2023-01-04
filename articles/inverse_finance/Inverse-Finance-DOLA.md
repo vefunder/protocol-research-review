@@ -57,7 +57,7 @@ Over the past six months, the team has mostly focused on dealing with the conseq
 
 ## Inverse Exploits
 
-In April 2022, Anchor suffered from a severe exploit. Via a sophisticated and capital-intensive oracle manipulation, a hacker was able to withdraw over [$15.6M](https://twitter.com/inversefinance/status/1510282040809299972) in user funds. By successfully manipulating the price of $INV, the hacker heavily inflated the value of INV which was used as collateral. This allowed them to borrow millions from Anchor’s pools. According to [DeFi Safety](https://www.defisafety.com/app/pqrs/199) and [rekt.news](https://rekt.news/inverse-finance-rekt/), the hacker’s rather professional tactic revealed an unforeseen attack vector. In other words, this was not an obvious vulnerability. Altogether, the hacker was able to run away with 1,588 ETH, 94 WBTC, 39 YFI, and 3,999,669 DOLA (worth $15.6M at the time).
+In April 2022, Anchor suffered from a severe exploit. Via a sophisticated and capital-intensive market manipulation, a hacker was able to withdraw over [$15.6M](https://twitter.com/inversefinance/status/1510282040809299972) in user funds. By successfully manipulating the price of $INV, the hacker heavily inflated the value of INV which was used as collateral. This allowed them to borrow millions from Anchor’s pools. According to [DeFi Safety](https://www.defisafety.com/app/pqrs/199) and [rekt.news](https://rekt.news/inverse-finance-rekt/), the hacker’s rather professional tactic revealed an unforeseen attack vector. In other words, this was not an obvious vulnerability. Altogether, the hacker was able to run away with 1,588 ETH, 94 WBTC, 39 YFI, and 3,999,669 DOLA (worth $15.6M at the time).
 
 The second exploit happened two months later. This time a flash loan attack led to [$5.8M](https://rekt.news/inverse-rekt2/) lost overall. The hacker was able to run away with $1.2M. This second attack was deemed “foreseeable” by DFS. The image below shows the TVL drop after the first exploit.
 
@@ -67,7 +67,7 @@ The second exploit happened two months later. This time a flash loan attack led 
 
 (source: [DeFi Llama](https://defillama.com/protocol/inverse-finance))
 
-The two attacks left many Frontier users stuck with IOU tokens (called anTokens). Over 24% of the TVL at that time was stolen, leaving Inverse with a significant pile of bad debt. As an initial response, Frontier was paused and the team began working on solutions to repay the bad debt and reimburse affected users. According to RiskDAO’s [dashboard](https://bad-debt.riskdao.org/), Inverse Finance still has over $14.4M in bad debt today.
+The two attacks left many Anchor users stuck with IOU tokens (called anTokens). Over 24% of the TVL at that time was stolen, leaving Inverse with a significant pile of bad debt. As an initial response, Anchor was paused and the team began working on solutions to repay the bad debt and reimburse affected users. According to RiskDAO’s [dashboard](https://bad-debt.riskdao.org/), Inverse Finance still has over $14.4M in bad debt today.
 
 
 ## Reimbursing Users
@@ -90,24 +90,22 @@ As mentioned above, Inverse regularly refills both contracts. The funds are deri
 (source: [Arkham Intelligence](https://platform.arkhamintelligence.com/visualizer/0x9eb6BF2E582279cfC1988d3F2043Ff4DF18fa6A0))
 
 
-The DebtConverter has had similarly sparse usage. Only 10 addresses have withdrawn some DOLA, and mostly in small amounts at a discount. In total $29.5k DOLA has been transferred from Inverse to this reserve.
+The DebtConverter has had similarly sparse usage. Only 10 addresses have withdrawn some DOLA, and mostly in small amounts at a discount. In total $29.5k DOLA has been deposited to this reserve by Inverse.
 
 ![DebtConverter-Visualizer-Arkham](https://user-images.githubusercontent.com/89845409/210051063-dfb97027-9d17-49df-92c8-29c7d3016dc6.png)
 
 (source: [Arkham Intelligence](https://platform.arkhamintelligence.com/visualizer/0x1ff9c712B011cBf05B67A6850281b13cA27eCb2A))
 
 
-In summary, these efforts are honorable, but modest in relation to the total bad debt. There is still more than [$13M](https://www.inverse.finance/transparency/shortfalls) in bad debt remaining.
+In summary, these efforts are honorable, but modest in relation to the total bad debt. There is still more than [$14M](https://www.inverse.finance/transparency/shortfalls) in bad debt remaining.
 
 As seen in the images above, the main source of funding for both debt repayer contracts is the [Treasury Working Group (TWG) multi-sig](https://www.inverse.finance/transparency/multisigs). The second funder is the Inverse [Anchor Treasury](https://etherscan.io/address/0x926dF14a23BE491164dCF93f4c468A50ef659D5B) (the DAO’s main treasury), which also funds the TWG’s multi-sig.
 
-The TWG is tasked with managing liquidity and treasury operations. Liquidity operations include deploying funds to various protocols, which can generate multiple income streams. Most income is derived from [yield farming](https://debank.com/profile/0x9d5df30f475cea915b1ed4c0cca59255c897b61b).
+The [TWG](https://debank.com/profile/0x9d5df30f475cea915b1ed4c0cca59255c897b61b) is tasked with managing liquidity and treasury operations. Liquidity operations include deploying funds to various protocols, which can generate multiple income streams. Most income is derived from yield farming. The following is a rundown of the major TWG activities:
 
-
-
-* The majority (~$780k) TWG funds are in the DOLA/DBR and a DOLA/ETH Balancer pool, staked on Aura Finance. This is further incentivized via their vote-locked Aura position. Some of the earned $BAL rewards are swapped for $AURA (which is locked) and some are swapped for stables or WETH.
-* A DOLA/FRAX/USDC Curve pool staked on Convex, with additional vote-locked CVX boosting incentives for their pool. The earned $CRV is kept or swapped for $CVX (which is mostly locked again).
-* The TWG deposited some $WBTC, $ETH, and $YFI into Frontier, in order to provide exit liquidity for attack-affected users.
+* ~$469k of TWG funds sit in the [DOLA/INV](https://app.balancer.fi/#/ethereum/pool/0x441b8a1980f2f2e43a9397099d15cc2fe6d3625000020000000000000000035f) Balancer pool staked on [Aura Finance](https://app.aura.finance/#/). This is further incentivized via their vote-locked Aura position (~$204k). Some of the earned $BAL rewards are swapped for $AURA ([example](https://etherscan.io/tx/0x2a038f4b67cd176b0c778323cb689920a31c3ff5fb391fa1f9f08787549ed4b6)).
+* About ~$217k in CVX is vote-locked CVX on Convex, boosting their pool. The earned $CRV is mostly kept and currently the second largest position in their treasury (after USDC).
+* The TWG also deposited some $WBTC, $ETH, and $YFI into Frontier, in order to provide exit liquidity for attack-affected users.
 
 The majority of the income used to refund their debt is generated via their Olympus Pro [bonding service](https://www.inverse.finance/bonds). By selling $INV at a discount, the treasury is buying $DOLA as well as INV-DOLA Sushi LP tokens. The $DOLA purchased this way is transferred back to their [main treasury](https://platform.arkhamintelligence.com/explorer/address/0x926dF14a23BE491164dCF93f4c468A50ef659D5B) via the [BondsManager](https://etherscan.io/address/0x9de7b925247c9bd98ecee5abb7ea06a4aa7d13cd) contract. From there it is used to cover operational expenses and to fund the two repayment contracts mentioned above.
 
@@ -121,7 +119,7 @@ DOLA is a stablecoin soft-pegged to the US-Dollar. DOLA originally started as a 
 
 From their [docs](https://docs.inverse.finance/inverse-finance/using-dola/dola-faq#where-does-the-dola-that-i-borrow-come-from): “_Inverse Finance Fed contracts mint DOLA directly to the supply side of lending markets, to the DOLA-3CRV[ Curve](https://curve.fi/factory/27) pool, or other fed-enabled liquidity pools in response to market DOLA demand_.”
 
-In short, the minting and burning of DOLA is done by [Fed](https://docs.inverse.finance/inverse-finance/technical/the-dola-fed) contracts. The contracts have three main functions to control the DOLA supply:
+In short, the minting and burning of DOLA is done by [Fed](https://docs.inverse.finance/inverse-finance/technical/the-dola-fed) contracts. ALl Fed's are controlled by a multi-sig (Fed chair). The contracts have three main functions to control the DOLA supply:
 
 
 
@@ -205,8 +203,6 @@ After the two exploits of the Frontier lending protocol, Inverse Finance turned 
 
 There is also a strong emphasis on protocol security, which was the weakest point in Frontier's design. The most significant FiRM features are:
 
-
-
 * Fixed interest rates
 * DOLA borrowing rights (DBR)
 * Personal collateral escrows
@@ -248,6 +244,12 @@ Both the Pause Guardian and governance can pause borrowing for a market, but onl
 ![Contractreader-DolaBorrowingRights](https://user-images.githubusercontent.com/89845409/210051398-cca693ad-d553-465e-bb52-e48f3c166bd2.png)
 
 (source: [DolaBorrowingRights.sol](https://www.contractreader.io/contract/0xAD038Eb671c44b853887A7E32528FaB35dC5D710))
+
+DBRs are a new DeFi primitive that still needs to prove their viability. In short, DBRs are minted by Inverse and sold to the market (later they may be distributed through other means). Holders of DBR are allowed to borrow DOLA at a fixed-interest rate for one year. 1 DBR allows holding 1 DOLA for one year, or 2 DOLA for six months, or 4 DOLA for three months, and so on. The DBR amount in the user's wallet is steadily declining.
+
+If a borrower of DOLA does not have enough DBR in their wallet, additional DBR will be added by a third party, according to the [docs](https://docs.inverse.finance/inverse-finance/dbr-dola-borrowing-rights). The costs of the DBR recharging are paid by increasing the DOLA loan of the borrower. In addition, the DBRs added via recharging are at a premium to the market price.
+
+In other words, the interest rate of DOLA is now defined by the price of DBRs. Thus, allowing fixed-interest rates, as the DBRs are bought in advance and then used up (as long as the loan is not expanded over time).
 
 
 Another newly deployed smart contract is the FiRM [Fed contract](https://etherscan.io/address/0x2b34548b865ad66a2b046cb82e59ee43f75b90fd#code), which has the same functions as the old one used for Frontier. The new [oracle contract](https://etherscan.io/address/0xabe146cf570fd27ddd985895ce9b138a7110cce8#code) also uses Chainlink’s price feed interface. It’s possible to use other oracles as well and the new Fed uses a pessimistic price oracle (PPO) solution. The PPO uses the lower of either the available collateral prices on Chainlink or the 48-hour low price as observed by the PPO, divided by the collateral factor. The implementation of the new oracle model represents an additional layer of security to the FiRM protocol.
@@ -332,13 +334,6 @@ As of December 16, a new stability mechanism was introduced together with FiRM. 
 (source: [FiRM Whitepaper](https://www.inverse.finance/firm.pdf))
 
 
-DBRs are a new DeFi primitive that still needs to prove their viability. In short, DBRs are minted by Inverse and sold to the market (later they may be distributed through other means). Holders of DBR are allowed to borrow DOLA at a fixed-interest rate for one year. 1 DBR allows holding 1 DOLA for one year, or 2 DOLA for six months, or 4 DOLA for three months, and so on. The DBR amount in the user's wallet is then steadily declining.
-
-If a borrower of DOLA does not have enough DBR in their wallet, additional DBR will be added by a third party, according to the [docs](https://docs.inverse.finance/inverse-finance/dbr-dola-borrowing-rights). The costs of the DBR recharging are paid by increasing the DOLA loan of the borrower. In addition, the DBRs added via recharging are at a premium to the market price.
-
-In other words, the interest rate of DOLA is now defined by the price of DBRs. Thus, allowing fixed-interest rates, as the DBRs are bought in advance and then used up (as long as the loan is not expanded over time).
-
-
 ## Collateral Risk
 
 As mentioned above, the collateral backing DOLA is negligible. At the time of writing, the collateral on Frontier is mostly $INV and $DOLA (overall [87.12%](https://www.inverse.finance/transparency/overview) of the total TVL). 99.9% of that belongs to Inverse itself. Plus Frontier will be deprecated anyway.
@@ -361,7 +356,7 @@ This provides an improvement to the previous oracle implementation. It needs to 
 
 1. Is it possible for a single entity to rug its users?
 
-No. FiRM is non-custodial and it appears not to have any central access points. However, as mentioned above, the product just launched a week into writing this report and it was not the main focus of this risk assessment.
+In theory, the 2-of-6 multi-sig controlling the Fed chair could mint infinte DOLA. This would certainly harm users and LPs. However, there is no logical reason to do this. FiRM on the other hand is non-custodial and it appears not to have any central access points. However, as mentioned above, the product just launched a week into writing this report and it was not the main focus of this risk assessment.
 
 
 
