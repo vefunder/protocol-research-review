@@ -83,14 +83,14 @@ Both contracts were [audited](https://drive.google.com/file/d/1LWNG08mib2GcI1Wqn
 
 ## Repaying Bad Debt
 
-As mentioned above, Inverse regularly refills both contracts. The funds are derived from several income streams. So far the DebtRepayer has been sponsored with 44.7 WETH, 3.19 WBTC, and 1.08 YFI. In total, roughly $138k worth of collateral tokens. But user interaction with the contract is rather limited. Only 11 addresses have used it. These users accepted a hefty haircut, as there was little funding in the contracts. The image below shows the funding of the DebtRepayer (green arrows) and the withdrawals (red arrows).
+As mentioned above, Inverse regularly refills both contracts. The funds are derived from several income streams. So far the [DebtRepayer](https://etherscan.io/address/0x9eb6BF2E582279cfC1988d3F2043Ff4DF18fa6A0#readContract) has been sponsored with 44.7 WETH, 3.19 WBTC, and 1.08 YFI. In total, roughly $138k worth of collateral tokens. But user interaction with the contract is rather limited. Only 11 addresses have used it. These users accepted a hefty haircut, as there was little funding in the contracts. The image below shows the funding of the DebtRepayer (green arrows) and the withdrawals (red arrows).
 
 ![DebtRepayer-Visualizer-Arkham](https://user-images.githubusercontent.com/89845409/210051023-e2d9d644-3cf6-477d-8141-96596c67a611.png)
 
 (source: [Arkham Intelligence](https://platform.arkhamintelligence.com/visualizer/0x9eb6BF2E582279cfC1988d3F2043Ff4DF18fa6A0))
 
 
-The DebtConverter has had similarly sparse usage. Only 10 addresses have withdrawn some DOLA, and mostly in small amounts at a discount. In total $29.5k DOLA has been deposited to this reserve by Inverse.
+The [DebtConverter](https://etherscan.io/address/0x1ff9c712B011cBf05B67A6850281b13cA27eCb2A) has had similarly sparse usage. Only 10 addresses have withdrawn some DOLA, and mostly in small amounts at a discount. In total $29.5k DOLA has been deposited to this reserve by Inverse.
 
 ![DebtConverter-Visualizer-Arkham](https://user-images.githubusercontent.com/89845409/210051063-dfb97027-9d17-49df-92c8-29c7d3016dc6.png)
 
@@ -103,8 +103,8 @@ As seen in the images above, the main source of funding for both debt repayer co
 
 The [TWG](https://debank.com/profile/0x9d5df30f475cea915b1ed4c0cca59255c897b61b) is tasked with managing liquidity and treasury operations. Liquidity operations include deploying funds to various protocols, which can generate multiple income streams. Most income is derived from yield farming. The following is a rundown of the major TWG activities:
 
-* ~$469k of TWG funds sit in the [DOLA/INV](https://app.balancer.fi/#/ethereum/pool/0x441b8a1980f2f2e43a9397099d15cc2fe6d3625000020000000000000000035f) Balancer pool staked on [Aura Finance](https://app.aura.finance/#/). This is further incentivized via their vote-locked Aura position (~$204k). Some of the earned $BAL rewards are swapped for $AURA ([example](https://etherscan.io/tx/0x2a038f4b67cd176b0c778323cb689920a31c3ff5fb391fa1f9f08787549ed4b6)).
-* About ~$217k in CVX is vote-locked CVX on Convex, boosting their pool. The earned $CRV is mostly kept and currently the second largest position in their treasury (after USDC).
+* Roughly $469k of TWG funds sit in the [DOLA/INV](https://app.balancer.fi/#/ethereum/pool/0x441b8a1980f2f2e43a9397099d15cc2fe6d3625000020000000000000000035f) Balancer pool staked on [Aura Finance](https://app.aura.finance/#/). This is further incentivized via their vote-locked Aura position (~$204k). Some of the earned $BAL rewards are swapped for $AURA ([example](https://etherscan.io/tx/0x2a038f4b67cd176b0c778323cb689920a31c3ff5fb391fa1f9f08787549ed4b6)).
+* About $217k in CVX is vote-locked CVX on Convex, boosting their pool. The earned $CRV is mostly kept and currently the second largest position in their treasury (after USDC).
 * The TWG also deposited some $WBTC, $ETH, and $YFI into Frontier, in order to provide exit liquidity for attack-affected users.
 
 The majority of the income used to refund their debt is generated via their Olympus Pro [bonding service](https://www.inverse.finance/bonds). By selling $INV at a discount, the treasury is buying $DOLA as well as INV-DOLA Sushi LP tokens. The $DOLA purchased this way is transferred back to their [main treasury](https://platform.arkhamintelligence.com/explorer/address/0x926dF14a23BE491164dCF93f4c468A50ef659D5B) via the [BondsManager](https://etherscan.io/address/0x9de7b925247c9bd98ecee5abb7ea06a4aa7d13cd) contract. From there it is used to cover operational expenses and to fund the two repayment contracts mentioned above.
@@ -119,7 +119,7 @@ DOLA is a stablecoin soft-pegged to the US-Dollar. DOLA originally started as a 
 
 From their [docs](https://docs.inverse.finance/inverse-finance/using-dola/dola-faq#where-does-the-dola-that-i-borrow-come-from): “_Inverse Finance Fed contracts mint DOLA directly to the supply side of lending markets, to the DOLA-3CRV[ Curve](https://curve.fi/factory/27) pool, or other fed-enabled liquidity pools in response to market DOLA demand_.”
 
-In short, the minting and burning of DOLA is done by [Fed](https://docs.inverse.finance/inverse-finance/technical/the-dola-fed) contracts. ALl Fed's are controlled by a multi-sig (Fed chair). The contracts have three main functions to control the DOLA supply:
+In short, the minting and burning of DOLA is done by [Fed](https://docs.inverse.finance/inverse-finance/technical/the-dola-fed) contracts. All Feds are controlled by a multi-sig (Fed chair). The contracts have three main functions to control the DOLA supply:
 
 
 
@@ -171,7 +171,7 @@ The image below shows the only publicly accessible Yearn vault, which is the alm
 
 (source: [yearn.finance](https://yearn.finance/vaults))
 
-In conclusion, DOLA paints a rather fragile picture. There is basically no DOLA natively backed by collateral. Frontier, which was supposed to hold DOLA’s collateral, has over 90% of its TVL in $INV and $DOLA. The rest of the [TVL](https://defillama.com/protocol/inverse-finance) (~$600k) is too little to back the circulating DOLA supply (~$34M). FiRM just released as a guarded launched with negligible TVL at this time. In other words, all DOLA in circulation entered the market via Fed contracts, most notably via Curve and Balancer. The [Fed](https://etherscan.io/address/0x8f97cca30dbe80e7a8b462f1dd1a51c32accdfc8) chair can simply expand and contract the DOLA supply to these pools.
+In conclusion, DOLA paints a rather fragile picture. There is basically no DOLA natively backed by collateral. Frontier, which was supposed to hold DOLA’s collateral, has over 90% of its TVL in $INV and $DOLA. The rest of the [TVL](https://defillama.com/protocol/inverse-finance) (\~$600k) is too little to back the circulating DOLA supply (~$34M). FiRM just released as a guarded launched with negligible TVL at this time. In other words, all DOLA in circulation entered the market via Fed contracts, most notably via Curve and Balancer. The [Fed](https://etherscan.io/address/0x8f97cca30dbe80e7a8b462f1dd1a51c32accdfc8) chair can simply expand and contract the DOLA supply to these pools.
 
 
 ## DOLA Peg Stability
@@ -181,7 +181,7 @@ Inverse keeps DOLA at a 1:1 peg to the US-Dollar and manages its supply with the
 
 
 1. **Fed Contracts** - Minting (or recalling) DOLA to Inverse’s own products (Frontier and FiRM) and to external protocols/partners (Curve, Balancer, Yearn, Rari, Aura, Velodrome).
-2. **Liquidity Pools** - on Curve ([DOLA/FRAXBP](https://curve.fi/#/ethereum/pools/factory-v2-176/deposit)), Balancer ([DOLA/bb-a-USD](https://app.balancer.fi/#/ethereum/pool/0x5b3240b6be3e7487d61cd1afdfc7fe4fa1d81e6400000000000000000000037b) and [DOLA/INV](https://app.balancer.fi/#/ethereum/pool/0x441b8a1980f2f2e43a9397099d15cc2fe6d3625000020000000000000000035f).
+2. **Liquidity Pools** - on Curve ([DOLA/FRAXBP](https://curve.fi/#/ethereum/pools/factory-v2-176/deposit)), Balancer ([DOLA/bb-a-USD](https://app.balancer.fi/#/ethereum/pool/0x5b3240b6be3e7487d61cd1afdfc7fe4fa1d81e6400000000000000000000037b)) and [DOLA/INV](https://app.balancer.fi/#/ethereum/pool/0x441b8a1980f2f2e43a9397099d15cc2fe6d3625000020000000000000000035f).
 3. **Amplification Factor** - A relatively high amplification parameter of 200 on Curve and Balancer allows DOLA to be off-balance with regards to the other pool counterparty assets without it losing its peg. This reduces slippage in normal pool operation, but would not protect against a loss of confidence in the peg. 
 
 The Curve and Balancer pools serve as the main liquidity venues. Both are metapools, which allows DOLA to be paired with the base Curve and Balancer pools with deep liquidity (e.g. FRAXBP). Yield farmers who want to use DOLA earn interest on one of the protocols must acquire DOLA from one of the existing metapools.
@@ -192,9 +192,9 @@ As mentioned above, metapools are the largest DOLA holders. In the current state
 
 (source: [Balancer](https://app.balancer.fi/#/ethereum/pool/0x5b3240b6be3e7487d61cd1afdfc7fe4fa1d81e6400000000000000000000037b))
 
-In this composable pool, DOLA has an amplification factor of [200](https://app.balancer.fi/#/ethereum/pool/0x5b3240b6be3e7487d61cd1afdfc7fe4fa1d81e6400000000000000000000037b), similar to the Curve metapool.
+In this composable pool, DOLA has an amplification factor of [200](https://app.balancer.fi/#/ethereum/pool/0x5b3240b6be3e7487d61cd1afdfc7fe4fa1d81e6400000000000000000000037b), similar to the Curve metapool. The Inverse team had proposed in August 2022 to [increase the DOLA Curve pool A parameter from 100 to 450](https://gov.curve.fi/t/proposal-to-raise-a-parameter-on-dola-to-450/4204), although a more modest increase was ultimately agreed upon.
 
-The peg stability during normal operation is supported by a high amplification factor (i.e. [A = 200](https://curve.fi/#/ethereum/pools/factory-v2-176/deposit)) in both metapools. This helps to keep the DOLA peg for a larger range of imbalance within the pool. However, a high amplification value does NOT protect against potential depegs during black swan events when confidence in the peg may evaorate. In such a case, higher amplification can lead to severely reduced liquidity as the pool balance reaches the shoulder of the bonding curve. Members of the Inverse team have made statements on concentrated liquidity in the Curve pool that demonstrate a common misunderstanding about the usefulness of amplification and incentives to support the peg. **Such mechanisms should never be relied upon as an assurance of a stablecoin's peg.**
+The peg stability during normal operation is strengthened by a high amplification factor (i.e. [A = 200](https://curve.fi/#/ethereum/pools/factory-v2-176/deposit)) in both metapools. This helps to keep the DOLA peg for a larger range of imbalance within the pool. However, the amplification value constitutes a leveraged bet on peg stability, rather than an enforcement of the peg. In times of distress, higher amplification can lead to severely reduced liquidity as the pool balance reaches the shoulder of the bonding curve.
 
 
 # FiRM - Fixed Rate Market Protocol
@@ -320,7 +320,7 @@ To better manage daily operations, Inverse has many permissioned roles. Most are
 * **Bug Bounty Program** - Handles rewards for bug bounties (4/5 [multi-sig](https://etherscan.io/address/0x943dbdc995add25a1728a482322f9b3c575b16fb)**).**
 * **Inversedao.eth EOA** -  has a governance guardian role which means that it can cancel governance proposals.
 
-It’s worth pointing out that the Fed chair has far-reaching powers. As eluded above, it can mint DOLA into any gov-approved Fed. This contract is managed by a 2-of-6 [multi-sig](https://etherscan.io/address/0x8f97cca30dbe80e7a8b462f1dd1a51c32accdfc8). A second centralized point is the GovGuardian. As mentioned above, it can veto any proposals. It’s controlled by a single EOA wallet (inversedao.eth).
+It’s worth pointing out that the Fed chair has far-reaching powers. As alluded above, it can mint DOLA into any gov-approved Fed. This contract is managed by a 2-of-6 [multi-sig](https://etherscan.io/address/0x8f97cca30dbe80e7a8b462f1dd1a51c32accdfc8). A second centralized point is the GovGuardian. As mentioned above, it can veto any proposals. It’s controlled by a single EOA wallet (inversedao.eth).
 
 
 ## Depeg Risk
@@ -362,19 +362,22 @@ In theory, the 2-of-6 multi-sig controlling the Fed chair could mint infinte DOL
 
 2. If the team vanishes, can the project continue?
 
-Some parts of it can probably continue. FiRM might survive, as the protocol is either governed by on-chain voting or via multi-sig wallets. If, however, all multi-sig signers disappear, it would be difficult for the protocol to survive. Access to the TWG treasury would be disabled. It also doesn’t look very good for DOLA. The stablecoin requires active management from the Fed chair, which is the team (2-of-6 msig). In theory, the Fed chair could be replaced by a governance vote without permission of the multi-sig. But it is questionable whether anyone outside the team could actually manage the complex Fed situation.
+Some parts of it can probably continue. FiRM might survive, as the protocol is either governed by on-chain voting or via multi-sig wallets. If, however, all multi-sig signers disappear, it would be difficult for the protocol to survive. Access to the TWG treasury would be disabled. It would also cause difficulties for DOLA. The stablecoin requires active management from the Fed chair, which is the team (2-of-6 msig). In theory, the Fed chair could be replaced by a governance vote without permission of the multi-sig, but it is questionable at this time whether anyone outside the team could actually manage the complex Fed situation.
 
 
 
 3. Does the protocol rely on CRV or other incentives to keep its peg?
 
-For the large part yes. Curve and Balancer pools are used to keep DOLA’s stability. Without the rewards for these pools, it will be difficult to attract counterparty assets at scale.
+For the large part yes. Curve and Balancer pools are used to keep DOLA’s stability. Without the rewards for these pools, it will be difficult to attract counterparty assets at scale. Members of the Inverse team have publicly recognized that the system's bad debt will likely cause a depeg in the absence of incentives.
 
+![DOLA CRV incentives](https://media.discordapp.net/attachments/1037395545506984067/1059870781653397606/7B929F76-7121-4CEC-9FD3-E56EB69A024E.jpg)
+
+The DOLA/FRAXBP pool has been incentivized by bribes, with an average weekly allotment of [$28k in INV over the past 5 weeks](https://votemarket.stakedao.org/analytics), and is the 4th most bribed pool on the StakeDAO Votemarket.
 
 
 4. Do audits reveal any concerning signs?
 
-The repayment contracts were audited by Peckshield and didn’t show any concerning signs. The newly deployed product FiRM underwent a Code4arena contest, with no severe bug or vulnerability findings (18 mediocre and 54 low-impact issues).
+The repayment contracts were audited by Peckshield and didn’t show any concerning signs. The newly deployed product FiRM underwent a Code4rena contest, with no severe bug or vulnerability findings (18 mediocre and 54 low-impact issues). Code4rena is a crowd-sourced auditing platform, and may not match the quality offered by a reputable auditing firm.
 
 
 # Conclusion
@@ -390,7 +393,7 @@ As mentioned a few times, the protocol is putting efforts into reducing its bad 
 
 # Risk Team Recommendation
 
-Given the state of Inverse's substantial bad debt, leading to the majority of DOLA in circulation being uncollateralized, which has created a cycle of dependence on CRV emissions and other yield farming strategies to support the peg, we question the organic viability of the stablecoin. The release of the FiRM lending platform is a step in the right direction toward sustainability, but it is too early to determine the product's success. Although we appreciate the efforts made by the Inverse team to provide transparency and to protect its users in the wake of the previous exploits, we do not believe DOLA currently merits a gauge. We recommend to kill the DOLA gauge until it has achieved 100% collateralization and has demonstrated itself to be organically sustainable.
+Given the state of Inverse's substantial bad debt, leading to the majority of DOLA in circulation being uncollateralized, creating a cycle of dependence on CRV gauge emissions and other yield farming strategies to support the peg, we question the organic viability of the stablecoin. The release of the FiRM lending platform is a step in the right direction toward sustainability, but it is too early to determine the product's success. Although we appreciate the efforts made by the Inverse team to provide transparency and to protect its users in the wake of the previous exploits, we do not believe DOLA currently merits a gauge. We recommend to kill the DOLA gauge until it has achieved 100% collateralization and has demonstrated itself to be organically sustainable.
 
 # Sources
 
