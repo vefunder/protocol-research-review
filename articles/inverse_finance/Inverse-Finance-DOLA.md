@@ -97,7 +97,7 @@ The [DebtConverter](https://etherscan.io/address/0x1ff9c712B011cBf05B67A6850281b
 (source: [Arkham Intelligence](https://platform.arkhamintelligence.com/visualizer/0x1ff9c712B011cBf05B67A6850281b13cA27eCb2A))
 
 
-In summary, these efforts are honorable, but modest in relation to the total bad debt. There is still more than [$14M](https://www.inverse.finance/transparency/shortfalls) in bad debt remaining.
+In summary, these efforts are honorable, but modest in relation to the total bad debt. So far, roughly 6.5% of the initial bad debt was eliminated over the second half of 2022, mostly through liquidations at a discount. However, there is still more than [$14M](https://www.inverse.finance/transparency/shortfalls) in bad debt remaining.
 
 As seen in the images above, the main source of funding for both debt repayer contracts is the [Treasury Working Group (TWG) multi-sig](https://www.inverse.finance/transparency/multisigs). The second funder is the Inverse [Anchor Treasury](https://etherscan.io/address/0x926dF14a23BE491164dCF93f4c468A50ef659D5B) (the DAO’s main treasury), which also funds the TWG’s multi-sig.
 
