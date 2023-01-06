@@ -354,19 +354,26 @@ This provides an improvement to the previous oracle implementation. It needs to 
 
 
 
-1. Is it possible for a single entity to rug its users?
+**1. Is it possible for a single entity to rug its users?**
 
-In theory, the 2-of-6 multi-sig controlling the Fed chair could mint infinte DOLA. This would certainly harm users and LPs. However, there is no logical reason to do this. FiRM on the other hand is non-custodial and it appears not to have any central access points. However, as mentioned above, the product just launched a week into writing this report and it was not the main focus of this risk assessment.
+In theory, the 2-of-6 multi-sig controlling the Fed chair could mint infinte DOLA. While we have no reason to believe the Inverse team has any malicious intention, there are theoretical rug vectors that could arise from abuse of Fed chair privileges. For instance:
+
+- Fed chair mints Xm DOLA into curve pool, flashloan Xm USDC into Dola pool, Fed chair burns Xm DOLA from pool, remove USDC and pay back loan.
+- Borrow Xm DOLA against ETH collateral, sell Xm DOLA for Xm (-fees and slippage) FRAXBP, Fed chair mints infinite DOLA into the pool, buy DOLA with less FRAXBP, repay loan. (This vector is not currently viable thanks to low borrow limits during FiRM's guarded launch)
+
+Absence of a timelock for mints/burns, the small number of signatures required by the current Fed chair, and the GovGuardian EOA's ability to veto on-chain DAO votes are factors to be aware of when considering the rug potential. 
+
+FiRM on the other hand is non-custodial and it appears not to have any central access points. However, as mentioned above, the product just launched a week into writing this report and it was not the main focus of this risk assessment.
 
 
 
-2. If the team vanishes, can the project continue?
+**2. If the team vanishes, can the project continue?**
 
-Some parts of it can probably continue. FiRM might survive, as the protocol is either governed by on-chain voting or via multi-sig wallets. If, however, all multi-sig signers disappear, it would be difficult for the protocol to survive. Access to the TWG treasury would be disabled. It would also cause difficulties for DOLA. The stablecoin requires active management from the Fed chair, which is the team (2-of-6 msig). In theory, the Fed chair could be replaced by a governance vote without permission of the multi-sig, but it is questionable at this time whether anyone outside the team could actually manage the complex Fed situation.
+If all multi-sig signers disappear, it would be challenging, but possible, for the protocol to survive. Access to the TWG treasury would be disabled. It would also cause difficulties for DOLA. The stablecoin requires active management from the Fed chair multi-sig. The Fed chair could be replaced by a governance vote without permission of the multi-sig, but it is questionable at this time whether anyone outside the team could actually manage the complex Fed situation. Inverse is designed to empower trusted actors while retaining a decentralized fallback mechanism. There would certainly be headwinds to restructure, but this contingency has been accounted for.
 
 
 
-3. Does the protocol rely on CRV or other incentives to keep its peg?
+**3. Does the protocol rely on CRV or other incentives to keep its peg?**
 
 For the large part yes. Curve and Balancer pools are used to keep DOLA’s stability. Without the rewards for these pools, it will be difficult to attract counterparty assets at scale. Members of the Inverse team have publicly recognized that the system's bad debt will likely cause a depeg in the absence of incentives.
 
@@ -375,7 +382,7 @@ For the large part yes. Curve and Balancer pools are used to keep DOLA’s stabi
 The DOLA/FRAXBP pool has been incentivized by bribes, with an average weekly allotment of [$28k in INV over the past 5 weeks](https://votemarket.stakedao.org/analytics), and is the 4th most bribed pool on the StakeDAO Votemarket.
 
 
-4. Do audits reveal any concerning signs?
+**4. Do audits reveal any concerning signs?**
 
 The repayment contracts were audited by Peckshield and didn’t show any concerning signs. The newly deployed product FiRM underwent a Code4rena contest, with no severe bug or vulnerability findings (18 mediocre and 54 low-impact issues). Code4rena is a crowd-sourced auditing platform, and may not match the quality offered by a reputable auditing firm.
 
@@ -393,7 +400,7 @@ As mentioned a few times, the protocol is putting efforts into reducing its bad 
 
 # Risk Team Recommendation
 
-Given the state of Inverse's substantial bad debt, leading to the majority of DOLA in circulation being uncollateralized, creating a cycle of dependence on CRV gauge emissions and other yield farming strategies to support the peg, we question the organic viability of the stablecoin. The release of the FiRM lending platform is a step in the right direction toward sustainability, but it is too early to determine the product's success. Although we appreciate the efforts made by the Inverse team to provide transparency and to protect its users in the wake of the previous exploits, we do not believe DOLA currently merits a gauge. We recommend to kill the DOLA gauge until it has achieved 100% collateralization and has demonstrated itself to be organically sustainable.
+Given the state of Inverse's substantial bad debt, leading to the majority of DOLA in circulation being uncollateralized, creating a cycle of dependence on CRV gauge emissions and other yield farming strategies to support the peg, we question the organic viability of the stablecoin. The release of the FiRM lending platform is a step in the right direction toward sustainability, but it is too early to determine the product's success. Although we appreciate the efforts made by the Inverse team to provide transparency and to protect its users in the wake of the previous exploits, we do not believe DOLA currently merits a gauge. We recommend to kill the DOLA gauge until it has achieved 100% collateralization and has demonstrated itself to be organically sustainable. The status of its Curve gauge does not preclude Inverse from incentivizing in their own token while on their path to sustainability.
 
 # Sources
 
