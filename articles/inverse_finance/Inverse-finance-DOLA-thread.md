@@ -2,9 +2,9 @@ Twitter Thread
 
 1/ @InverseFinance is a DeFi protocol that has developed various financial tools, including a lending market and a stablecoin (DOLA).
 
-We did a deep-dive to shed some light onto the complex doings of Inverse.
+We did a deep-dive to shed some light onto the complex inner workings of Inverse.
 
-Here’s a summarizing thread
+Here’s a summarizing thread:
 
 LINK to Article
 
@@ -54,7 +54,7 @@ ___
 
 FiRM comes with new features, increased security, and a new primitive for fixed-rate borrowing of DOLA.
 
-It underwent a bug-bounty contest. But was not audited by a reputable auditing firm yet.
+It underwent a bug-bounty contest. But has not been audited by a reputable auditing firm yet.
 
 ___
 
@@ -74,4 +74,4 @@ ___
 
 10/ For the complete assessment, our findings, and recommendation, read the full report here: LINK
 
-This analysis was spearheaded by @Lavi_54 and @dabar_90. Give them a following if you like what you read.
+This analysis was spearheaded by @Lavi_54 and @dabar_90. Give them a follow if you like what you read.
