@@ -28,7 +28,7 @@
 
 Inverse Finance is a protocol that manages and develops multiple DeFi products and tools. Its main products are a lending market and the stablecoin DOLA. The Frontier lending market was paused after two exploits earlier this year. Since then, Inverse has prioritized reducing its bad debt that resulted from these hacks. At the same time, it developed and just released its newest product FiRM (Fixed-Rate Money Market). FiRM is an improved version of Frontier with additional features, increased security, and a new primitive to facilitate fixed-rate borrowing of DOLA. 
 
-DOLA is the hybrid collateralized/uncollateralized stablecoin integrated with all of Inverse's other products. It is partially collateralized by deposits in its lending markets, and partially issued by Inverse to regulate the balance of DOLA in a variety of liquidity pools. During the period after Frontier was paused, all minting and burning of DOLA has been managed by Inverse's Fed Chair multisig. All protocol-controlled DOLA is deployed through the Fed contracts, each of which employ a liquidity pool strategy that deposits DOLA directly into those pools.
+DOLA is the hybrid collateralized/uncollateralized stablecoin integrated with all of Inverse's other products. It is partially collateralized by deposits in its lending markets and partially issued by Inverse to regulate the balance of DOLA in a variety of liquidity pools. During the period after Frontier was paused, all minting and burning of DOLA has been managed by Inverse's Fed Chair multisig. All protocol-controlled DOLA is deployed through the Fed contracts, each of which employs a liquidity pool strategy that deposits DOLA directly into those pools.
 
 
 ### A quick TL;DR of our findings:
@@ -36,9 +36,9 @@ DOLA is the hybrid collateralized/uncollateralized stablecoin integrated with al
 
 
 * Inverse Finance is focused on developing DeFi primitives and financial tools, such as lending markets, a stablecoin, fixed-interest products, and more.
-* The protocol is a rather complex apparatus with many moving parts and a history of swiftly pivoting and introducing new products. Their first product DCA was stopped to develop Anchor (later renamed to Frontier), which was paused and is being replaced by FiRM. The stablecoin DOLA has persisted throughout but has undergone several transformations. It began as a collateral-backed stablecoin. Currently, it’s not backed by exogenous collateral but holds the peg via AMM pool management (through Fed contracts). Currently it is transitioning to a hybrid model by lending DOLA through FiRM with variable and fixed lending rates, in addition to AMM injections via Feds.
+* The protocol is a rather complex apparatus with many moving parts and a history of swiftly pivoting and introducing new products. Their first product DCA was stopped to develop Anchor (later renamed to Frontier), which was paused and is being replaced by FiRM. The stablecoin DOLA has persisted throughout but has undergone several transformations. It began as a collateral-backed stablecoin. Currently, it’s not backed by exogenous collateral but holds the peg via AMM pool management (through Fed contracts). It is transitioning to a hybrid model by lending DOLA through FiRM with variable and fixed lending rates, in addition to AMM injections via Feds.
 * DOLA has liquidity pools on Curve, Balancer, Velodrome (Optimism), and Sushi. Curve and Balancer AMMs are the most significant “stability mechanisms”, as there is almost no exogenous collateral backing the stablecoin.
-* Inverse suffered from two exploits in April (~$15.6M) and June (~$5.8M) 2022, due to oracle price manipulation. The deployment of two debt-repayment contracts allows affected users to redeem small portions of their collateral. The income for the repayments stems mostly from Inverses’ bonds (i.e. an Olympus Pro integration). The largest bad debt position is the DOLA portion (approx. $9.5M). 
+* Inverse suffered from two exploits in April (\~$15.6M) and June (~$5.8M) 2022, due to oracle price manipulation. The deployment of two debt-repayment contracts allows affected users to redeem small portions of their collateral. The income for the repayments stems mostly from Inverses’ bonds (i.e. an Olympus Pro integration). The largest bad debt position is the DOLA portion (approx. $9.5M). 
 * After the exploits, Inverse minimized Frontier’s operations and started the development of a new lending protocol called FiRM (Fixed Rate Market). FiRM comes with security improvements (i.e. pessimistic oracle, isolated market pools, borrowing rights). It also has a novel architecture and introduces new DeFi primitives DBRs and PCE.
 * $INV is the protocol’s governance token that can be staked (xINV). Both INV and xINV provide voting rights and can be used as collateral in the Frontier lending market.
 * The two debt-repayment contracts have undergone an audit by Peckshield. FiRM went through a bug bounty contest at code4arena, whereby some issues of mediocre and low severity were found and resolved.
@@ -97,15 +97,15 @@ The [DebtConverter](https://etherscan.io/address/0x1ff9c712B011cBf05B67A6850281b
 (source: [Arkham Intelligence](https://platform.arkhamintelligence.com/visualizer/0x1ff9c712B011cBf05B67A6850281b13cA27eCb2A))
 
 
-In summary, these efforts are honorable, but modest in relation to the total bad debt. So far, roughly 6.5% of the initial bad debt was eliminated over the second half of 2022, mostly through liquidations at a discount. However, there is still more than [$14M](https://www.inverse.finance/transparency/shortfalls) in bad debt remaining.
+In summary, these efforts are honorable, but modest compared to the total bad debt. So far, roughly 6.5% of the initial bad debt was eliminated over the second half of 2022, mostly through liquidations at a discount. However, there is still more than [$14M](https://www.inverse.finance/transparency/shortfalls) in bad debt remaining.
 
 As seen in the images above, the main source of funding for both debt repayer contracts is the [Treasury Working Group (TWG) multi-sig](https://www.inverse.finance/transparency/multisigs). The second funder is the Inverse [Anchor Treasury](https://etherscan.io/address/0x926dF14a23BE491164dCF93f4c468A50ef659D5B) (the DAO’s main treasury), which also funds the TWG’s multi-sig.
 
 The [TWG](https://debank.com/profile/0x9d5df30f475cea915b1ed4c0cca59255c897b61b) is tasked with managing liquidity and treasury operations. Liquidity operations include deploying funds to various protocols, which can generate multiple income streams. Most income is derived from yield farming. The following is a rundown of the major TWG activities:
 
 * Roughly $469k of TWG funds sit in the [DOLA/INV](https://app.balancer.fi/#/ethereum/pool/0x441b8a1980f2f2e43a9397099d15cc2fe6d3625000020000000000000000035f) Balancer pool staked on [Aura Finance](https://app.aura.finance/#/). This is further incentivized via their vote-locked Aura position (~$204k). Some of the earned $BAL rewards are swapped for $AURA ([example](https://etherscan.io/tx/0x2a038f4b67cd176b0c778323cb689920a31c3ff5fb391fa1f9f08787549ed4b6)).
-* About $217k in CVX is vote-locked CVX on Convex, boosting their pool. The earned $CRV is mostly kept and currently the second largest position in their treasury (after USDC).
-* The TWG also deposited some $WBTC, $ETH, and $YFI into Frontier, in order to provide exit liquidity for attack-affected users.
+* About $217k in CVX is vote-locked CVX on Convex, boosting their pool. The earned $CRV is mostly kept and currently is the second-largest position in their treasury (after USDC).
+* The TWG also deposited some $WBTC, $ETH, and $YFI into Frontier, to provide exit liquidity for attack-affected users.
 
 The majority of the income used to refund their debt is generated via their Olympus Pro [bonding service](https://www.inverse.finance/bonds). By selling $INV at a discount, the treasury is buying $DOLA as well as INV-DOLA Sushi LP tokens. The $DOLA purchased this way is transferred back to their [main treasury](https://platform.arkhamintelligence.com/explorer/address/0x926dF14a23BE491164dCF93f4c468A50ef659D5B) via the [BondsManager](https://etherscan.io/address/0x9de7b925247c9bd98ecee5abb7ea06a4aa7d13cd) contract. From there it is used to cover operational expenses and to fund the two repayment contracts mentioned above.
 
@@ -147,13 +147,13 @@ Originally, DOLA was issued in exchange for collateral deposited into Frontier. 
 
 
 
-* **Borrowing DOLA** - DOLA can be borrowed through FiRM against WETH, or via the supply side of partnering money markets. These integrations are enabled by the Fed contracts. As of today, the only public lending Fed still active is the Fuse6 pool on Rari. The other two Feds are Inverse’s own Frontier (to be deprecated) and the new FiRM product.
+* **Borrowing DOLA** - DOLA can be borrowed through FiRM against WETH, or via the supply side of partnering money markets. These integrations are enabled by the Fed contracts. As of today, the only public lending Fed still active is the Fuse6 pool on Rari. The other two Feds are Inverse’s Frontier (to be deprecated) and the new FiRM product.
 * **Liquidity Pools** - The second venue to obtain DOLA is through one of the liquidity pools on Curve or Balancer. The Curve pool acts as the main funnel for adding and removing DOLA into/from circulation, by injecting it into the factory pool: [DOLA/FRAXBP](https://curve.fi/#/ethereum/pools/factory-v2-176/deposit). With over $18.8M in DOLA, the pool is the largest holder of DOLA, closely followed by the Balancer [DOLA-bb-a-USD](https://app.balancer.fi/#/ethereum/pool/0x5b3240b6be3e7487d61cd1afdfc7fe4fa1d81e6400000000000000000000037b) pool (holding $5M DOLA).
 * **The Stabilizer** - Finally, DOLA can be minted with $DAI using the Stabilizer contract. A [0.4% fee](https://docs.inverse.finance/inverse-finance/using-dola/how-to-acquire-dola) on each transaction generates some income for the DAO. However, it hasn't accrued any [profits](https://www.inverse.finance/transparency/stabilizer) in the past three months. Nonetheless, it can serve as a protection tool in case of a positive depeg (meaning DOLA is above 1 dollar).
 
 This leaves us with four injection points, the Curve [FraxBP](https://curve.fi/#/ethereum/pools/factory-v2-176/deposit) factory pool, the Balancer [DOLA-bb-a-USD](https://app.balancer.fi/#/ethereum/pool/0x5b3240b6be3e7487d61cd1afdfc7fe4fa1d81e6400000000000000000000037b) pool, the [Rari Fed](https://etherscan.io/address/0xe3277f1102c1ca248ad859407ca0cbf128db0664), and the FiRM Fed.
 
-Only the first two are relevant today. In fact, the majority of the DOLA [supply](https://etherscan.io/token/tokenholderchart/0x865377367054516e17014ccded1e7d814edc9ce4) ($34.7M) is held by Inverse itself. In other words, all DOLA in circulation belongs to Inverse and is lent out via the Fed contracts. A deeper look at the DOLA distribution confirms this:
+Only the first two are relevant today. The majority of the DOLA [supply](https://etherscan.io/token/tokenholderchart/0x865377367054516e17014ccded1e7d814edc9ce4) ($34.7M) is held by Inverse itself. In other words, all DOLA in circulation belongs to Inverse and is lent out via the Fed contracts. A deeper look at the DOLA distribution confirms this:
 
 
 
@@ -171,7 +171,7 @@ The image below shows the only publicly accessible Yearn vault, which is the alm
 
 (source: [yearn.finance](https://yearn.finance/vaults))
 
-In conclusion, DOLA paints a rather fragile picture. There is basically no DOLA natively backed by collateral. Frontier, which was supposed to hold DOLA’s collateral, has over 90% of its TVL in $INV and $DOLA. The rest of the [TVL](https://defillama.com/protocol/inverse-finance) (\~$600k) is too little to back the circulating DOLA supply (~$34M). FiRM just released as a guarded launched with negligible TVL at this time. In other words, all DOLA in circulation entered the market via Fed contracts, most notably via Curve and Balancer. The [Fed](https://etherscan.io/address/0x8f97cca30dbe80e7a8b462f1dd1a51c32accdfc8) chair can simply expand and contract the DOLA supply to these pools.
+In conclusion, DOLA paints a rather fragile picture. There is practically no DOLA natively backed by collateral. Frontier, which was supposed to hold DOLA’s collateral, has over 90% of its TVL in $INV and $DOLA. The rest of the [TVL](https://defillama.com/protocol/inverse-finance) (\~$600k) is too little to back the circulating DOLA supply (~$34M). FiRM was just released as a guarded launch with negligible TVL at this time. In other words, all DOLA in circulation entered the market via Fed contracts, most notably via Curve and Balancer. The [Fed](https://etherscan.io/address/0x8f97cca30dbe80e7a8b462f1dd1a51c32accdfc8) chair can simply expand and contract the DOLA supply to these pools.
 
 
 ## DOLA Peg Stability
@@ -180,11 +180,11 @@ Inverse keeps DOLA at a 1:1 peg to the US-Dollar and manages its supply with the
 
 
 
-1. **Fed Contracts** - Minting (or recalling) DOLA to Inverse’s own products (Frontier and FiRM) and to external protocols/partners (Curve, Balancer, Yearn, Rari, Aura, Velodrome).
-2. **Liquidity Pools** - on Curve ([DOLA/FRAXBP](https://curve.fi/#/ethereum/pools/factory-v2-176/deposit)), Balancer ([DOLA/bb-a-USD](https://app.balancer.fi/#/ethereum/pool/0x5b3240b6be3e7487d61cd1afdfc7fe4fa1d81e6400000000000000000000037b)) and [DOLA/INV](https://app.balancer.fi/#/ethereum/pool/0x441b8a1980f2f2e43a9397099d15cc2fe6d3625000020000000000000000035f).
-3. **Amplification Factor** - A relatively high amplification parameter of 200 on Curve and Balancer allows DOLA to be off-balance with regards to the other pool counterparty assets without it losing its peg. This reduces slippage in normal pool operation, but would not protect against a loss of confidence in the peg. 
+1. **Fed Contracts** - Minting (or recalling) DOLA to Inverse’s products (Frontier and FiRM) and external protocols/partners (Curve, Balancer, Yearn, Rari, Aura, Velodrome).
+2. **Liquidity Pools** - on Curve ([DOLA/FRAXBP](https://curve.fi/#/ethereum/pools/factory-v2-176/deposit)), Balancer ([DOLA/bb-a-USD](https://app.balancer.fi/#/ethereum/pool/0x5b3240b6be3e7487d61cd1afdfc7fe4fa1d81e6400000000000000000000037b)), and [DOLA/INV](https://app.balancer.fi/#/ethereum/pool/0x441b8a1980f2f2e43a9397099d15cc2fe6d3625000020000000000000000035f).
+3. **Amplification Factor** - A relatively high amplification parameter of 200 on Curve and Balancer allows DOLA to be off-balance with regard to the other pool counterparty assets without it losing its peg. This reduces slippage in normal pool operation, but would not protect against a loss of confidence in the peg. 
 
-The Curve and Balancer pools serve as the main liquidity venues. Both are metapools, which allows DOLA to be paired with the base Curve and Balancer pools with deep liquidity (e.g. FRAXBP). Yield farmers who want to use DOLA earn interest on one of the protocols must acquire DOLA from one of the existing metapools.
+The Curve and Balancer pools serve as the main liquidity venues. Both are metapools, which allows DOLA to be paired with the base Curve and Balancer pools with deep liquidity (e.g. FRAXBP). Yield farmers who want to use DOLA to earn interest on one of the protocols must acquire DOLA from one of the existing metapools.
 
 As mentioned above, metapools are the largest DOLA holders. In the current state, it is enough to use the Curve TWAP price feed, to keep DOLA stablecoin pegged to $1. In addition to the Curve pool, Inverse also uses Balancer’s version of metapool called "Composable Pools". On Balancer, DOLA is paired with the [bb-a-USD](https://etherscan.io/token/0xa13a9247ea42d743238089903570127dda72fe44) base pool (Balancer Aave Boosted StablePool):
 
@@ -356,12 +356,12 @@ This provides an improvement to the previous oracle implementation. It needs to 
 
 **1. Is it possible for a single entity to rug its users?**
 
-In theory, the 2-of-6 multi-sig controlling the Fed chair could mint infinte DOLA. While we have no reason to believe the Inverse team has any malicious intention, there are theoretical rug vectors that could arise from abuse of Fed chair privileges. For instance:
+In theory, the 2-of-6 multi-sig controlling the Fed chair could mint infinite DOLA. While we have no reason to believe the Inverse team has any malicious intention, there are theoretical rug vectors that could arise from the abuse of Fed chair privileges. For instance:
 
-- Fed chair mints Xm DOLA into curve pool, flashloan Xm USDC into Dola pool, Fed chair burns Xm DOLA from pool, remove USDC and pay back loan.
-- Borrow Xm DOLA against ETH collateral, sell Xm DOLA for Xm (-fees and slippage) FRAXBP, Fed chair mints infinite DOLA into the pool, buy DOLA with less FRAXBP, repay loan. (This vector is not currently viable thanks to low borrow limits during FiRM's guarded launch)
+- Fed chair mints Xm DOLA into the Dola pool, flashloan Xm USDC into the pool, Fed chair burns Xm DOLA from the pool, remove USDC and pay back the loan.
+- Borrow Xm DOLA against ETH collateral, sell Xm DOLA for Xm (-fees and slippage) FRAXBP, Fed chair mints infinite DOLA into the pool, buy DOLA with less FRAXBP, repay the loan. (This vector is not currently viable thanks to low borrow limits during FiRM's guarded launch)
 
-Absence of a timelock for mints/burns, the small number of signatures required by the current Fed chair, and the GovGuardian EOA's ability to veto on-chain DAO votes are factors to be aware of when considering the rug potential. 
+The absence of a timelock for mints/burns, the small number of signatures required by the current Fed chair, and the GovGuardian EOA's ability to veto on-chain DAO votes are factors to be aware of when considering the rug potential. 
 
 FiRM on the other hand is non-custodial and it appears not to have any central access points. However, as mentioned above, the product just launched a week into writing this report and it was not the main focus of this risk assessment.
 
@@ -369,7 +369,7 @@ FiRM on the other hand is non-custodial and it appears not to have any central a
 
 **2. If the team vanishes, can the project continue?**
 
-If all multi-sig signers disappear, it would be challenging, but possible, for the protocol to survive. Access to the TWG treasury would be disabled. It would also cause difficulties for DOLA. The stablecoin requires active management from the Fed chair multi-sig. The Fed chair could be replaced by a governance vote without permission of the multi-sig, but it is questionable at this time whether anyone outside the team could actually manage the complex Fed situation. Inverse is designed to empower trusted actors while retaining a decentralized fallback mechanism. There would certainly be headwinds to restructure, but this contingency has been accounted for.
+If all multi-sig signers disappear, it would be challenging, but possible, for the protocol to survive. Access to the TWG treasury would be disabled. It would also cause difficulties for DOLA. The stablecoin requires active management from the Fed chair multi-sig. The Fed chair could be replaced by a governance vote without permission of the multi-sig, but it is questionable at this time whether anyone outside the team could manage the complex Fed situation. Inverse is designed to empower trusted actors while retaining a decentralized fallback mechanism. There would certainly be headwinds to restructure, but this contingency has been accounted for.
 
 
 
@@ -389,7 +389,7 @@ The repayment contracts were audited by Peckshield and didn’t show any concern
 
 # Conclusion
 
-Inverse Finance is a rather complex protocol with many moving parts and a difficult history. The pace at which new products are added and removed is impressive but also peculiar. For a short period, the lending market Frontier seemed to attract a good amount of TVL. However, this mostly vanished after two exploits. Since then, Inverse paused most lending services, and the recently launched FiRM (as well as DOLA, for that matter) still have to prove their product market fit.
+Inverse Finance is a rather complex protocol with many moving parts and a difficult history. The pace at which new products are added and removed is impressive but also peculiar. For a short period, the lending market Frontier seemed to attract a good amount of TVL. However, this mostly vanished after two exploits. Since then, Inverse paused most lending services, and the recently launched FiRM (as well as DOLA, for that matter) still has to prove its product market fit.
 
 The protocol puts a lot of effort into creating transparency, but at the same time manages to be rather intransparent through complexity. For example, the management of DOLA supply expansion and contraction is more or less a black box. There is partially outdated information on the website and in the docs. Users have to manage a flood of data and despite all the information, Inverse manages to cloud the collateral situation around DOLA (e.g. the effective collateralization ratio is not visible anywhere).
 
@@ -400,7 +400,7 @@ As mentioned a few times, the protocol is putting efforts into reducing its bad 
 
 # Risk Team Recommendation
 
-Given the state of Inverse's substantial bad debt, leading to the majority of DOLA in circulation being uncollateralized, creating a cycle of dependence on CRV gauge emissions and other yield farming strategies to support the peg, we question the organic viability of the stablecoin. The release of the FiRM lending platform is a step in the right direction toward sustainability, but it is too early to determine the product's success. Although we appreciate the efforts made by the Inverse team to provide transparency and to protect its users in the wake of the previous exploits, we do not believe DOLA currently merits a gauge. We recommend to kill the DOLA gauge until it has achieved 100% collateralization and has demonstrated itself to be organically sustainable. The status of its Curve gauge does not preclude Inverse from incentivizing in their own token while on their path to sustainability.
+Given the state of Inverse's substantial bad debt, leading to the majority of DOLA in circulation being uncollateralized, creating a cycle of dependence on CRV gauge emissions and other yield farming strategies to support the peg, we question the organic viability of the stablecoin. The release of the FiRM lending platform is a step in the right direction toward sustainability, but it is too early to determine the product's success. Although we appreciate the efforts made by the Inverse team to provide transparency and to protect its users in the wake of the previous exploits, we do not believe DOLA currently merits a gauge. We recommend to kill the DOLA gauge until it has achieved 100% collateralization and has demonstrated itself to be organically sustainable. The status of its Curve gauge does not preclude Inverse from incentivizing in its own token while on its path to sustainability.
 
 # Sources
 
