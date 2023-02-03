@@ -8,24 +8,24 @@ A deep dive into cross-chain router Multichain, its complex ecosystem, and how C
 
 
 
-* [Multichain website](https://multichain.org/) / [Docs](https://docs.multichain.org/getting-started/introduction) / [GitHub](https://github.com/anyswap) / [Security Model](https://docs.multichain.org/getting-started/security/security-model) / [Bug Bounty](https://docs.multichain.org/getting-started/security/bug-bounty-immunefi) / [Medium](https://medium.com/multichainorg)
-* Coingecko - [$MULTI](https://www.coingecko.com/en/coins/multichain)
+* [Multichain website](https://multichain.org/) / [Docs](https://docs.multichain.org/getting-started/introduction) / [GitHub](https://github.com/anyswap) / [Security Model](https://docs.multichain.org/getting-started/security/security-model) / [Bug Bounty](https://docs.multichain.org/getting-started/security/bug-bounty-immunefi) / [Medium](https://medium.com/multichainorg) / [Coingecko - $MULTI](https://www.coingecko.com/en/coins/multichain)
 * Multichain Dashboards - [Tokens](https://scan.multichain.org/#/tokens) / [Network](https://scan.multichain.org/#/network) / [Dashboard](https://scan.multichain.org/#/dashboard) / [dApp](https://app.multichain.org/#/pool)
-* Multichain - [anyCall whitepaper](https://drive.google.com/file/d/1NFFFecAjStbGMyvJVDez3xmsGSHYvNYv/view)
-* Multichain Gitbook - [anyCall](https://multidao.gitbook.io/anycall/) 
-* Multichain Github - [Audit Reports](https://github.com/anyswap/Anyswap-Audit)
-* LI.FI Blog - [Multichain - A Deep Dive](https://li.fi/knowledge-hub/multichain-a-deep-dive/)
-* Publish0x - [MultiChain Deep Dive](https://www.publish0x.com/lifi/multichain-a-deep-dive-all-you-need-to-know-about-multichain-xelworv)
-* TheDefiant - [Questions on Multichain Funds](https://thedefiant.io/questions-on-multichain-funds)
-* Etherscan - Multichain [Deployer 1](https://etherscan.io/address/0x4464fc279180045b1f57beacfa0d82e9cd4235cd), [Deployer 2](https://etherscan.io/address/0x49addc76569402cf893c015ac69a177aaf4e822b), [Deployer 3](https://etherscan.io/address/0x8132d337977f8d145a7b9cfac393df123c0f0e43), [Deployer 4](https://etherscan.io/address/0xfa9da51631268a30ec3ddd1ccbf46c65fad99251)
-* Etherscan - [anyCall v6 Proxy](https://etherscan.io/address/0xc10ef9f491c9b59f936957026020c321651ac078#contracts) / [Contract Reader](https://www.contractreader.io/contract/0xC10Ef9F491C9B59f936957026020C321651ac078)
-* Etherscan - [Root Gauge Factory](https://etherscan.io/address/0xabc000d88f23bb45525e447528dbf656a9d55bf5#_blank)
-* Etherscan - [Gauge Controller Contract](https://etherscan.io/address/0x2F50D538606Fa9EDD2B11E2446BEb18C9D5846bB#code)
-* Curve Github - [Cross-chain Gauges Factory](https://github.com/curvefi/curve-xchain-factory)
-* Curve Medium - [Curve anyCall](https://medium.com/multichainorg/curve-x-anycall-cross-chain-gauges-e657c1c6e5b5)
-* Curve Forum - [Multichain Gauges](https://gov.curve.fi/t/cip-62-63-multi-chain-gauges-to-spread-the-crv-love-on-side-chains-and-l2s/1747) (CIP 62/ CIP 63)
-* Curve - [Gauges for EVM chain](https://curve.readthedocs.io/dao-gauges-sidechain.html)
-* Twitter -[ Barket.eth](https://twitter.com/bkiepuszewski/status/1572537869536989184)
+* Multichain anyCall - [Whitepaper](https://drive.google.com/file/d/1NFFFecAjStbGMyvJVDez3xmsGSHYvNYv/view) / [Gitbook](https://multidao.gitbook.io/anycall/) / [Audit Reports](https://github.com/anyswap/Anyswap-Audit)
+* Articles:
+  * LI.FI Blog - [Multichain - A Deep Dive](https://li.fi/knowledge-hub/multichain-a-deep-dive/)
+  * Publish0x - [MultiChain Deep Dive](https://www.publish0x.com/lifi/multichain-a-deep-dive-all-you-need-to-know-about-multichain-xelworv)
+  * TheDefiant - [Questions on Multichain Funds](https://thedefiant.io/questions-on-multichain-funds)
+* Etherscan:
+  * Multichain [Deployer 1](https://etherscan.io/address/0x4464fc279180045b1f57beacfa0d82e9cd4235cd), [Deployer 2](https://etherscan.io/address/0x49addc76569402cf893c015ac69a177aaf4e822b), [Deployer 3](https://etherscan.io/address/0x8132d337977f8d145a7b9cfac393df123c0f0e43), [Deployer 4](https://etherscan.io/address/0xfa9da51631268a30ec3ddd1ccbf46c65fad99251)
+  * anyCall [anyCall v6 Proxy](https://etherscan.io/address/0xc10ef9f491c9b59f936957026020c321651ac078#contracts) / [Contract Reader](https://www.contractreader.io/contract/0xC10Ef9F491C9B59f936957026020C321651ac078)
+  * Curve [Root Gauge Factory](https://etherscan.io/address/0xabc000d88f23bb45525e447528dbf656a9d55bf5#_blank)
+  * Curve [Gauge Controller Contract](https://etherscan.io/address/0x2F50D538606Fa9EDD2B11E2446BEb18C9D5846bB#code)
+* Curve: 
+  * Github - [Cross-chain Gauges Factory](https://github.com/curvefi/curve-xchain-factory)
+  * Medium - [Curve anyCall](https://medium.com/multichainorg/curve-x-anycall-cross-chain-gauges-e657c1c6e5b5)
+  * Forum - [Multichain Gauges](https://gov.curve.fi/t/cip-62-63-multi-chain-gauges-to-spread-the-crv-love-on-side-chains-and-l2s/1747) (CIP 62/ CIP 63)
+  * Dev docs - [Gauges for EVM chain](https://curve.readthedocs.io/dao-gauges-sidechain.html)
+* Tweet thread highlighting Multichain concerns - [Barket.eth](https://twitter.com/bkiepuszewski/status/1572537869536989184)
 
 
 ## TL:DR of our Findings
