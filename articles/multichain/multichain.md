@@ -256,7 +256,7 @@ In conclusion, users have to rely on the reputation of the node operators. A lis
 
 1. Is it possible for a single entity to rug its users?
 
-No, users can only be rugged by a coordinated attack of SMPC node validators. Currently, we can't state that this type of attack is impossible, because of [past events](https://thedefiant.io/questions-on-multichain-funds). The protocol used escrow funds to transfer liquidity without the user’s consent. However, a rug is highly unlikely. The team is doxxed and it still requires more than just the team to collude (i.e. 11 out of 21 nodes). In addition, the new fastMPC is planned to replace the SMPC network. fastMPC comes with a higher number of notes (40+), which will increase the decentralization of the network.
+No, users can only be rugged by a coordinated attack of SMPC node validators. Currently, we can't state that this type of attack is impossible, because of [past events](https://thedefiant.io/questions-on-multichain-funds). The protocol used escrow funds to transfer liquidity without the user’s consent. However, a rug is highly unlikely. The team is doxxed and it still requires more than just the team to collude (i.e. 11 out of 21 nodes). In addition, the new fastMPC is planned to replace the SMPC network. fastMPC comes with a higher number of nodes (40+), which will increase the decentralization of the network.
 
 
 
