@@ -83,7 +83,7 @@ Besides the above products, Multichain provides additional infrastructure and to
 
 # Multichain’s Integrations
 
-As mentioned above, Multichain has a market-leading position in terms of asset bridging and routing. Over 3000 unique bridges were deployed, whereby Fantom, Ethereum, and Binance (BNB) hold the most [TVL](https://defillama.com/protocol/multichain). The most active [user addresses](https://dune.com/Howard_Peng/multi-chain-on-chain-data) are on BNB, Ethereum, and Polygon. With around [$1.81B](https://scan.multichain.org/#/charts/charts-home) in TVL, Multichain almost makes it into the top 10 of protocols with the highest TVL (Compound is currently ranked [#10](https://defillama.com/) with $1.89B TVL).
+Multichain has a market-leading position in terms of asset bridging and routing. Over 3000 unique bridges have been deployed, whereby Fantom, Ethereum, and Binance (BNB) hold the most [TVL](https://defillama.com/protocol/multichain). The most active [user addresses](https://dune.com/Howard_Peng/multi-chain-on-chain-data) are on BNB, Ethereum, and Polygon. With around [$1.8B](https://scan.multichain.org/#/charts/charts-home) in TVL, Multichain almost makes it into the top 10 of protocols by TVL (Compound is currently ranked [#10](https://defillama.com/) with $1.89B TVL).
 
 The majority of funds are on Fantom ([~43%](https://scan.multichain.org/#/charts/charts-home)). Fantom was one of the first bridges supported by Multichain and many tokens on Fantom consider Multichain bridged tokens as the “standard token”. For instance, nearly 100% of all [USDC](https://ftmscan.com/token/0x04068da6c83afcfa0e13ba15a6696662335d5b75#readContract) on Fantom was transferred via [Multichain](https://scan.multichain.org/#/tokens) (see image below). 
 
@@ -91,35 +91,35 @@ The majority of funds are on Fantom ([~43%](https://scan.multichain.org/#/charts
 
 (source: [ftmscan](https://ftmscan.com/token/0x04068da6c83afcfa0e13ba15a6696662335d5b75#readContract))
 
-The same is true for $MIM on [Avalanche](https://snowtrace.io/token/0x130966628846bfd36ff31a822705796e8cb8c18d), $DAI and USDT on Fantom, and many other [coins](https://scan.multichain.org/#/tokens) that use Multichain. Thus, making Multichain a systemically relevant technology for many tokens on several EVM-compatible chains.
+The same is true for $MIM on [Avalanche](https://snowtrace.io/token/0x130966628846bfd36ff31a822705796e8cb8c18d), $DAI and $USDT on Fantom, and many other [tokens](https://scan.multichain.org/#/tokens) that use Multichain. Thus, Multichain is a systemically important technology for many tokens on several EVM-compatible chains.
 
 
 ## What TVL is correct?
 
-The numbers above are to be taken with a grain of salt. First, one has to agree on the correct way to measure the TVL. This can be tricky for a hybrid bridge like Multichain, where the lock-and-mint method is used in combination with a liquidity network. But the question is essential because all “external” data providers report significantly lower TVL. For instance,  according to DeFi Llama Multichains TVL is only [$809M](https://defillama.com/protocol/multichain). That’s over $1B lower. L2Beat reports even less ([$594M](https://l2beat.com/bridges/tvl)). Cryptoflows finds only [$370M](https://cryptoflows.info/bridges) in TVL, and also Messari comes up with a non-identical number ([$805M](https://messari.io/protocol/multichain)).
+The numbers above should be taken with a grain of salt. First, one has to agree on the correct way to measure the TVL. This can be tricky for a hybrid bridge like Multichain, where the lock-and-mint method is used in combination with a liquidity network. All “external” data providers report significantly lower TVL. According to DeFi Llama, Multichain's TVL is only [$809M](https://defillama.com/protocol/multichain)- $1B lower than Multichain reports. L2Beat reports even less ([$594M](https://l2beat.com/bridges/tvl)). Cryptoflows finds only [$370M](https://cryptoflows.info/bridges) in TVL, and Messari comes up with a non-identical number ([$805M](https://messari.io/protocol/multichain)).
 
-These data providers don’t claim to be up-to-date. DeFi Llama did [sunset](https://twitter.com/DefiLlama/status/1608948358579617794?s=20&t=c_UX5Y94fDz6GipRKnx4Kw) their bridge dashboard a while ago, due to high maintenance efforts. What is apparent though, is that Multichain’s own TVL dashboard shows more than double what all other sources report.
+These data providers don’t claim to be up-to-date. DeFi Llama did [sunset](https://twitter.com/DefiLlama/status/1608948358579617794?s=20&t=c_UX5Y94fDz6GipRKnx4Kw) their bridge dashboard due to high maintenance efforts. Notably, Multichain’s own TVL dashboard asserts more than double what any other source reports.
 
-This results from applying a different method for measuring TVL. Multichain’s bridges store native tokens. Usually on the respective source chain. The protocol also has liquidity pools on destination chains. On top of that are the synthetic wrapped tokens and the anyTokens (IOUs minted via the Anyswap bridge contract). Multichain accounts all of these tokens toward its TVL. One could argue that Multichain thus shows the “available liquidity” within its ecosystem. However, it’s questionable whether this should be equated to TVL (i.e. value locked by users). Put differently, Multichain accounts for user deposits and outstanding IOU tokens together. This can result in double accounting.
+This results from applying a different method for measuring TVL. Multichain’s bridges store native tokens, usually on the respective source chain. The protocol also has liquidity pools on destination chains. On top of that are the synthetic wrapped tokens and the anyTokens (IOUs minted via the Anyswap bridge contract). Multichain accounts all of these tokens toward its TVL. One could argue that Multichain thus shows the “available liquidity” within its ecosystem. However, it’s questionable whether this equates to TVL (i.e. value locked by users). Put differently, Multichain conflates user deposits with outstanding IOU tokens. This can result in double accounting.
 
-Given the high number of EOAs that store the native assets, the high number of deployed bridges, chains, and liquidity pools, it becomes a mammoth task to calculate Multichain's actual TVL. However, it’s clearly lower than reported on their website.
+Given the high number of deployed bridges, chains, liquidity pools, and EOAs that store the native assets, it becomes a mammoth task to calculate Multichain's actual TVL. However, it’s clearly lower than figures reported on their website.
 
 
 ## Increasing Complexity
 
-Multichain is already a very large and complex ecosystem. Another point of recent discussions complicates things further. The issue is that Multichain’s SMPC network does not always burn its minted tokens. This problem is well summarized in a thread from bartek.eth.
+Multichain is already a very large and complex ecosystem. To complicate matters further, the Multichain’s SMPC network does not always burn its minted tokens. This problem is well summarized in a thread from bartek.eth.
 
 ![twitter-bartek-thread](https://user-images.githubusercontent.com/89845409/216052949-b3eeaf56-c6fa-4b2c-984f-f8c6bac50c6c.png)
 
 (source: [Twitter](https://twitter.com/bkiepuszewski/status/1572537821487058944))
 
-To better understand the situation, it helps to differentiate between the three token types. Taking $DAI and the Fantom bridge as an example, the following tokens are used:
+To better understand the situation, it helps to differentiate between the three token types. Using $DAI and the Fantom bridge as an example, the following tokens are used:
 
 
 
-1. The original Ethereum-based DAI. Which is held in escrow on Multichain’s [MPC Fantom bridge](https://etherscan.io/address/0xC564EE9f21Ed8A2d8E7e76c085740d5e4c5FaFbE) contract.
+1. The original Ethereum-based DAI held in escrow on Multichain’s [MPC Fantom bridge](https://etherscan.io/address/0xC564EE9f21Ed8A2d8E7e76c085740d5e4c5FaFbE) contract.
 2. The “[wrapped-Fantom-DAI](https://ftmscan.com/address/0x8d11ec38a3eb5e956b052f67da8bdc9bef8abf3e#readContract)”. All Fantom-based DAI can only be minted via Multichain. In theory, Fantom-DAI is only minted when someone deposits DAI into the MPC bridge on Ethereum. And vice-versa. It is burned when someone withdraws DAI.
-3. Lastly, there is [anyDAI](https://etherscan.io/token/0x739ca6d71365a08f584c8fc4e1029045fa8abc4b#balances) that can have two functions. (1) It can be minted to a chain where DAI already exists. Here anyDAI is used by the router and is exchangeable for “real” DAI via Multichains liquidity pools. (2) It also functions as an IOU token. This can happen when there is not enough liquidity to send the user actual DAI. In this case, users receive anyDAI, which represents a claim to a share of the liquidity pool.
+3. Lastly, there is [anyDAI](https://etherscan.io/token/0x739ca6d71365a08f584c8fc4e1029045fa8abc4b#balances) that can have two functions. (1) It can be minted to a chain where DAI already exists. Here anyDAI is used by the router and is exchangeable for “real” DAI via Multichain's liquidity pools. (2) It also functions as an IOU token. This can happen when there is not enough liquidity to send the user actual DAI. In this case, users receive anyDAI, which represents a claim to a share of the liquidity pool.
 
 In short, the issue described by Bartek is that Multichain allegedly transferred the underlying Ethereum-based DAI in escrow, to provide liquidity elsewhere. Essentially, the network is moving user funds without their permission. The story was also picked up by [The Defiant](https://thedefiant.io/questions-on-multichain-funds). According to Multichain, this was done to efficiently distribute liquidity within the Multichain ecosystem. They also ensure that the funds are safe and enough DAI is still available. However, in addition to moving DAI, Multichain didn’t burn the corresponding wDAI on Fantom. In other words, the MPC network can circumvent the burn function.
 
