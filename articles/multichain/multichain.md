@@ -239,14 +239,14 @@ Multichain further installed a [security fund](https://medium.com/multichainorg/
 
 ## Technology and Smart Contracts Risk
 
-As mentioned in the beginning, Multichain suffered from two exploits. While they were not insignificant, the stolen amount was rather “small” when compared to other bridge exploits. Rekt.news leaderboard [infamously](https://rekt.news/de/leaderboard/) displays that bridges are a much-liked target for hackers. The largest exploits were all bridges. In other words, Multichain is the largest cross-chain protocol that hasn’t suffered from a major exploit yet.
+Multichain has suffered from two exploits. While they were not insignificant, the stolen amount was rather “small” when compared to other bridge exploits. Rekt.news leaderboard [infamously](https://rekt.news/de/leaderboard/) displays that bridges are an appealing target for hackers. The largest exploits have all been bridges. Multichain is the largest cross-chain protocol that hasn’t suffered from a major exploit yet.
 
-Multichain's code was audited by several auditors, including TrailOfBits, PeckShield, and Slow Mist. This strongly reduces the risk of faulty smart contracts. However, as with all protocols, there is always the possibility that false code remains undiscovered. And given the complexity of bridge operations, there is always a technology risk outside the general smart contract bugs. These risks relate to software failure, human error, spam, and malicious attacks that can possibly disrupt Multichain's operations.
+Multichain's code was audited by several auditors, including TrailOfBits, PeckShield, and Slow Mist. This strongly reduces the risk of faulty smart contracts. However, as with all protocols, there is always the possibility that bugs remains undiscovered. Given the complexity of bridge operations, there is always a technology risk beyond general smart contract bugs. These risks relate to software failure, human error, spam, and malicious attacks that can possibly disrupt Multichain's operations.
 
 
 ## Governance Risk
 
-Currently, there is no direct governance risk. Multichain hints here and there that it aims to move toward a DAO. However, besides the introduction of [veMULTI](https://medium.com/multichainorg/vemulti-proposal-stake-multi-get-multichain-fees-rewards-d8d13b9e20cb), there are few signs of an active DAO, in the sense that the protocol is steered by anybody else than the team. For instance, the [governance forum](https://multichaindao.org/) is not in use. Discord has no governance channel. There is no on-chain governance tool, and [Snapshot](https://snapshot.org/#/multichaindao.eth/) had only a few signaling votes. In conclusion, the control over the protocol is in the hands of the 21 SMPC nodes and the team.
+Currently, there is no direct governance risk. Multichain hints here and there that it aims to move toward a DAO. However, besides the introduction of [veMULTI](https://medium.com/multichainorg/vemulti-proposal-stake-multi-get-multichain-fees-rewards-d8d13b9e20cb), there are few signs of an active DAO, in the sense that the protocol is steered by anybody other than the team. For instance, the [governance forum](https://multichaindao.org/) is not in use. Discord has no governance channel. There is no on-chain governance tool, and [Snapshot](https://snapshot.org/#/multichaindao.eth/) had only a few signaling votes. In conclusion, control over the protocol is in the hands of the 21 SMPC nodes and the team.
 
 
 ## Custody and Network Risk
@@ -255,6 +255,10 @@ As highlighted above, Multichain’s MPC network controls the protocol. This put
 
 In conclusion, users have to rely on the reputation of the node operators. A list of all nodes is public on the Multichain [website](https://scan.multichain.org/#/network). Many are part of the team, which is mostly doxxed. From the perspective of Curve, the risk is reduced to the weekly CRV gauge rewards.
 
+
+## anySwap Risk to Curve Governance
+
+Curve is rather limited in its cross-chain governance features, including ramping A, changing fees, eventually being able to modify ema params, gauge ownership, implementations etc. While anySwap could be employed to enable such governance features (and indeed these are features Curve will require to be a truly cross-chain platform), it is not advisable to do so. Where anySwap has been integrated, for cross-chain rewards boosting, the risk is siloed by the limited number of CRV bridged each week. In the worst case, a bad blockhash could give someone 100% boosted CRV for a short duration, but all other pool behaviors would be unaffected. The Curve team and LlamaRisk agree that the security guaruntees of anySwap are not sufficient to allow it unbridled custody of Curve's governance across all chains. (Thanks to Curve dev @Skellet0r for his perspective on this subject)
 
 # Discussion
 
