@@ -81,6 +81,26 @@ Besides the above products, Multichain provides additional infrastructure and to
 * The recently launched [Co-Mint](https://medium.com/multichainorg/co-mint-multichains-universal-cross-chain-bridge-48da559a96b7) feature allows multiple bridges to co-mint the same assets.
 
 
+## Secure Multi-Party Computing (SMPC) Network
+
+The off-chain component is the network that transmits the messages. As mentioned above, SMPC consists of 21 [nodes](https://scan.multichain.org/#/network), which are open for public participation. MPC (Multi-Party Computing) is a method where a single private key is subdivided and encrypted across several nodes, making it impossible for bad actors to access or reveal the private key by reverse-engineering transactions. According to Multichain, the nodes are run by different organizations, institutions, and individuals. However, many of them are members of the Multichain team.
+
+Together, the MPC network controls all EOAs (containing user funds). Further, they control all transfers of assets between chains, sign transactions, and transmit cross-chain messages. The nodes control the private keys to perform all these actions. For the signatures, the protocol implemented a [TTS](https://docs.multichain.org/getting-started/how-it-works) (Threshold Signature Schemes) algorithm. Each node selected from the network independently receives part of the private keys (to an EOA) that is required for signing transactions. This TSS is denoted as (t, n), where for n possible signatories a minimum of t - (n/2+1≤ t ≤ n) is required. Only “t” colluding players can forge the signature. In other words, validating transactions on the SMPC network requires a majority of nodes to sign the transaction.
+
+Essentially, the security of Multichain is in the hands of the 21 nodes, therefore requiring that a majority of the network (11) is always honest.
+
+## anyCall
+
+anyCall is a collection of on-chain and off-chain components that work together to perform cross-chain messaging. The on-chain components consist of the anyCall and anyExec smart contracts, and the API.
+
+The anyCall contract resides on the source chain storing information such as instructions, data, and events. These need to be executed on the destination chain. The anyExec contract contains instructions that understand the source chain’s contract standards. It makes the information compatible with the destination chain where the information is used to execute the respective functions. anyCall plugs into an API to access the contracts on the source chain and the anyExec contract on the target chain.
+
+![multichain-gitbook-anycall-v7-workflow](https://user-images.githubusercontent.com/89845409/216053625-ae5217f1-effa-4052-9887-d12628e9f393.png)
+
+(source: [MultiDAO Gitbook](https://multidao.gitbook.io/anycall/the-latest-version/v7))
+
+
+
 # Multichain’s Integrations
 
 Multichain has a market-leading position in terms of asset bridging and routing. Over 3000 unique bridges have been deployed, whereby Fantom, Ethereum, and Binance (BNB) hold the most [TVL](https://defillama.com/protocol/multichain). The most active [user addresses](https://dune.com/Howard_Peng/multi-chain-on-chain-data) are on BNB, Ethereum, and Polygon. With around [$1.8B](https://scan.multichain.org/#/charts/charts-home) in TVL, Multichain almost makes it into the top 10 of protocols by TVL (Compound is currently ranked [#10](https://defillama.com/) with $1.89B TVL).
@@ -157,7 +177,7 @@ It’s worth mentioning that this report only took a closer look at DAI. Multich
 
 Curve leverages three Multichain products to enable cross-chain gauges: The AnyCall app, the cross-chain bridge, and the router. (see [proposal](https://gov.curve.fi/t/cip-62-63-multi-chain-gauges-to-spread-the-crv-love-on-side-chains-and-l2s/1747)).
 
-Curve uses anyCall to assign cross-chain boosted CRV rewards based on relative veCRV in a pool, just as boosting functions on mainnet. Before the anyCall implementation, Curve could transfer weekly emissions via the cross-chain bridge, but without boosting capability.
+Curve uses anyCall to assign cross-chain boosted CRV rewards based on relative veCRV owned by pool LPs, just as boosting functions on mainnet. Before the anyCall implementation, Curve could transfer weekly emissions via the cross-chain bridge, but without boosting capability.
 
 With the implementation of cross-chain gauges, CRV rewards originate from the mainnet gauge system, and are transferred weekly to childchains. The cross-chain gauge logic consists of two contracts: The [Root Liquidity Gauge](https://github.com/curvefi/curve-xchain-factory/blob/master/contracts/RootGaugeFactory.vy) contract deployed on Ethereum and the [Child Liquidity Gauge](https://github.com/curvefi/curve-xchain-factory/blob/master/contracts/ChildGaugeFactory.vy) contract deployed on other L1s, L2s, and sidechains. Curve’s origin hub is Ethereum, and all other chains are connected via a child gauge.
 
@@ -196,25 +216,6 @@ Assume a user provides liquidity to a Curve pool on a destination chain (e.g. Fa
 
 Curve doesn’t use Multichain for all chains. But for those where Multichain is used, CRV is transferred to the ChildStreamerContract via the bridge or the router. The user then receives the claimed CRV.
 
-
-## AnyCall
-
-In summary, AnyCall is a collection of on-chain and off-chain components that work together to perform cross-chain messaging. The on-chain components consist of the anyCall and anyExec smart contracts, and the API.
-
-The anyCall contract resides on the source chain storing information, such as instructions, data, and events. These need to be executed on the destination chain. The anyExec contract contains instructions that understand the source chain’s contract standards. It makes the information compatible with the destination chain, where the information is used to execute the respective functions. AnyCall plugs into an API to access the contracts on the source chain and the anyExec contract on the target chain.
-
-![multichain-gitbook-anycall-v7-workflow](https://user-images.githubusercontent.com/89845409/216053625-ae5217f1-effa-4052-9887-d12628e9f393.png)
-
-(source: [MultiDAO Gitbook](https://multidao.gitbook.io/anycall/the-latest-version/v7))
-
-
-## Secure Multi-Party Computing (SMPC) Network
-
-The off-chain component is the network that transmits the messages. As mentioned above, SMPC consists of 21 [nodes](https://scan.multichain.org/#/network), which are open for public participation. MPC (Multi-Party Computing) is a method where a single private key is subdivided and encrypted across several nodes. Making it impossible for bad actors to access or reveal the private key by reverse-engineering transactions. According to Multichain, the nodes are run by different organizations, institutions, and individuals. However, many of them are members of the Multichain team.
-
-Together, the MPC network controls all EOAs (containing user funds). Further, they control all transfers of assets between chains, sign transactions, and transmit cross-chain messages. The nodes control the private keys to perform all these actions. For the signatures, the protocol implemented a [TTS](https://docs.multichain.org/getting-started/how-it-works) (Threshold Signature Schemes) algorithm. Each node selected from the network independently receives part of the private keys (to an EOA) that is required for signing transactions. This TSS is denoted as (t, n), where for n possible signatories a minimum of t - (n/2+1≤ t ≤ n) is required. Only “t” colluding players can forge the signature. In other words, validating transactions on the SMPC network requires a majority of nodes to sign the transaction.
-
-Essentially, this puts the security of Multichain into the hands of the 21 nodes. The protocol relies on them to not collude and act maliciously. Thus trusting that a majority of the network (11) is always honest.
 
 
 # Multichain Security Measures
