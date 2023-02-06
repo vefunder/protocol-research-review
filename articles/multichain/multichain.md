@@ -177,9 +177,9 @@ It’s worth mentioning that this report only took a closer look at DAI. Multich
 
 Curve leverages three Multichain products to enable cross-chain gauges: The AnyCall app, the cross-chain bridge, and the router. (see [proposal](https://gov.curve.fi/t/cip-62-63-multi-chain-gauges-to-spread-the-crv-love-on-side-chains-and-l2s/1747)).
 
-Curve uses anyCall to assign cross-chain boosted CRV rewards based on relative veCRV owned by pool LPs, just as boosting functions on mainnet. Before the anyCall implementation, Curve could transfer weekly emissions via the cross-chain bridge, but without boosting capability.
+For cross-chain gauges, CRV gauge emissions are minted on Ethereum and transferred weekly to childchains. The cross-chain gauge logic consists of two contracts: The [Root Liquidity Gauge](https://github.com/curvefi/curve-xchain-factory/blob/master/contracts/RootGaugeFactory.vy) contract deployed on Ethereum and the [Child Liquidity Gauge](https://github.com/curvefi/curve-xchain-factory/blob/master/contracts/ChildGaugeFactory.vy) contract deployed on other L1s, L2s, and sidechains.
 
-With the implementation of cross-chain gauges, CRV rewards originate from the mainnet gauge system, and are transferred weekly to childchains. The cross-chain gauge logic consists of two contracts: The [Root Liquidity Gauge](https://github.com/curvefi/curve-xchain-factory/blob/master/contracts/RootGaugeFactory.vy) contract deployed on Ethereum and the [Child Liquidity Gauge](https://github.com/curvefi/curve-xchain-factory/blob/master/contracts/ChildGaugeFactory.vy) contract deployed on other L1s, L2s, and sidechains. Curve’s origin hub is Ethereum, and all other chains are connected via a child gauge.
+Curve uses anyCall to assign cross-chain boosted CRV rewards based on relative veCRV owned by pool LPs, similar to boosting functionality on mainnet. This funcionality is not currently available from the Curve UI, and has so far seen limited use.
 
 The image below shows an example of a cross-chain gauge setup. From Fantom (child gauge) to Ethereum (root gauge).
 
