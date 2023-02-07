@@ -177,9 +177,9 @@ It’s worth mentioning that this report only took a closer look at DAI. Multich
 
 Curve leverages three Multichain products to enable cross-chain gauges: The AnyCall app, the cross-chain bridge, and the router. (see [proposal](https://gov.curve.fi/t/cip-62-63-multi-chain-gauges-to-spread-the-crv-love-on-side-chains-and-l2s/1747)).
 
-For cross-chain gauges, CRV gauge emissions are minted on Ethereum and transferred weekly to childchains. The cross-chain gauge logic consists of two contracts: The [Root Liquidity Gauge](https://github.com/curvefi/curve-xchain-factory/blob/master/contracts/RootGaugeFactory.vy) contract deployed on Ethereum and the [Child Liquidity Gauge](https://github.com/curvefi/curve-xchain-factory/blob/master/contracts/ChildGaugeFactory.vy) contract deployed on other L1s, L2s, and sidechains.
+For cross-chain gauges, CRV gauge emissions are minted on Ethereum and transferred weekly to alt chains. The cross-chain gauge logic consists of four contracts: The [Root Liquidity Gauge](https://github.com/curvefi/curve-xchain-factory/blob/master/contracts/implementations/RootGauge.vy) and [bridger](https://github.com/curvefi/curve-xchain-factory/tree/master/contracts/bridgers) contracts deployed on Ethereum, and the [Child Liquidity Gauge](https://github.com/curvefi/curve-xchain-factory/blob/master/contracts/implementations/ChildGauge.vy) and [Child Liquidity Gauge Factory](https://github.com/curvefi/curve-xchain-factory/blob/master/contracts/ChildGaugeFactory.vy) deployed on the alt chain.
 
-Curve uses anyCall to assign cross-chain boosted CRV rewards based on relative veCRV owned by pool LPs, similar to boosting functionality on mainnet. This funcionality is not currently available from the Curve UI, and has so far seen limited use.
+Curve uses Multichain's anyCallProxy to automate gauge deployment across chains and bridge emissions when requested from the alt chain. Additionally anyCall can be used to assign cross-chain boosted CRV rewards based on relative veCRV owned by pool LPs, similar to boosting functionality on mainnet. This funcionality is not currently available from the Curve UI, and has so far seen limited use.
 
 The image below shows an example of a cross-chain gauge setup. From Fantom (child gauge) to Ethereum (root gauge).
 
@@ -190,32 +190,35 @@ The image below shows an example of a cross-chain gauge setup. From Fantom (chil
 
 ## How it works
 
-Assume a user provides liquidity to a Curve pool on a destination chain (e.g. Fantom). Once the user wants to claim the accrued CRV rewards, the following steps take place:
+Suppose a user provides liquidity to a Tricrypto Curve pool on Fantom. In order to process CRV rewards, the following steps take place:
 
 
-
-1. The user makes a request to the child gauge to claim the CRV rewards. The child gauge initiates a cross-chain request by calling the anyCall interface deployed on the sidechain.
-
-![github-curve-rootgauge-factory](https://user-images.githubusercontent.com/89845409/216053382-78653ba2-c66e-4949-a79b-828b25f9efc2.png)
-
-(source: [RootGaugeFactory.vy](https://github.com/curvefi/curve-xchain-factory/blob/master/contracts/ChildGaugeFactory.vy) Github)
+1. A new epoch week begins and a call is made to the `user_checkpoint` function at the `RootGauge` Fantom Tricrypto contract on Ethereum. This calculates the CRV gauge emissions allotted to the gauge from the previous week. ([tx](https://etherscan.io/tx/0x2ec5247479cd0e9d0e5162f0bef4de43fc588d51fdcc840397fe4a33d9195068/advanced)) 
 
 
+![Fantom-RootGauge-user_checkpoint](https://user-images.githubusercontent.com/51072084/217114790-5ac3a60d-c937-4cec-b625-bc343c8ac7fd.png)
 
-2. AnyCall transmits the message across chains via the SMPC network. The receiver is anyExec, an API interface deployed on Ethereum. Through anyExec, the child gauge can call the root gauge contract and pass the request to claim the rewards.
-
-
-![contractreader-root-gauge-vyper](https://user-images.githubusercontent.com/89845409/216053521-dc6b78e7-4f05-4517-b6a9-876ebe2ca9a3.png)
-
-(Source: [Root Liquidity Gauge - vyper](https://www.contractreader.io/contract/0xabC000d88f23Bb45525E447528DBF656A9D55bf5))
+(source: [Fantom TriCrypto RootGauge](https://etherscan.io/address/0x319e268f0a4c85d404734ee7958857f5891506d7/advanced#code) Etherscan)
 
 
+2. `transmit_emissions` mints and transfers the CRV to the Multichain Fantom Bridge via the `bridger` contract.
 
-3. The root gauge contract takes the data from the message, summarizes the liquidity pool data on Ethereum, calculates the user’s contribution to the total liquidity of two chains (root and sidechain), and gets the user’s CRV rewards.
-4. The weekly [minted](https://etherscan.io/address/0xd061D61a4d941c39E5453435B6345Dc261C2fcE0#code) CRV is then bridged to the sidechain.
+![Fantom-RootGauge-transmit_emissions](https://user-images.githubusercontent.com/51072084/217122636-e42cea44-e2b2-4852-a507-b3f6fea93a1e.png)
 
-Curve doesn’t use Multichain for all chains. But for those where Multichain is used, CRV is transferred to the ChildStreamerContract via the bridge or the router. The user then receives the claimed CRV.
+(source: [Fantom TriCrypto RootGauge](https://etherscan.io/address/0x319e268f0a4c85d404734ee7958857f5891506d7/advanced#code) Etherscan)
 
+
+3. Multichain bridge transmits the message across chains via the SMPC network. Wrapped CRV is minted to the Fantom `ChildGauge`, and is transferred to the `ChildGaugeFactory`. ([tx1](https://ftmscan.com/tx/0x8d0f9fdc3f92a382b704f1ed41a5843807b8f27e797de47d64bb738bdb39d004), [tx2](https://ftmscan.com/tx/0x97839cf6ce72a39d833a2db11f089e92001dc3ba2b16ffe3e5012329f5308fd6))
+
+![Fantom-ChildGaugeFactory-mint](https://user-images.githubusercontent.com/51072084/217117844-54462adc-b4fb-4b99-85f8-09aff71fec17.png)
+
+(Source: [Fantom Tricrypto ChildGaugeFactory](https://ftmscan.com/address/0xabc000d88f23bb45525e447528dbf656a9d55bf5#code) Etherscan)
+
+
+4. Wrapped CRV resides in the `ChildGaugeFactory` contract, which acts as a pseudo-CRV minter where LPs can call `mint` to claim their accumulated CRV rewards.
+
+
+Curve doesn’t use Multichain for all chains, as L2's have native bridges. For sidechains and alt L1's, this is the architecture as described in the [Curve Xchain Factory](https://github.com/curvefi/curve-xchain-factory) github repo.
 
 
 # Multichain Security Measures
