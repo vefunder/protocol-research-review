@@ -1,4 +1,4 @@
-Asset Risk Assessment - USV (USDC Saving Vault by Phuture)
+# Asset Risk Assessment - USV (USDC Saving Vault by Phuture)
 
 ### USV is the Phuture Savings Vault's first product which is powered by Notional Finance, a fixed rate lending and borrowing platform.
 
@@ -21,6 +21,9 @@ Asset Risk Assessment - USV (USDC Saving Vault by Phuture)
 - Conclusion
 - Appendix
   - Trade calculation
+
+## Relation to Curve  
+In January 2023, Phuture made a [proposal](https://gov.curve.fi/t/proposal-to-add-usv-fraxbp-to-the-gauge-controller/8687) on the Curve governance forum to add the USV/FraxBP pool to the Gauge Controller. This report seeks to identify relevant risks to Curve’s liquidity providers. 
 
 ## Phuture - USDC Saving Vault Overview
 
