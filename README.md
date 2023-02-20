@@ -54,18 +54,9 @@ Should you ever need to pull any changes in the upstream repository, always `reb
 2. Use grammarly before submissions!
 3. Provide appropriate citations.
 4. If research involves code, pleae add working code to your submission (no data! that would bloat the repo).
-5. Try to follow the template:
-  * Title
-  * Subtitle
-  * An acknowledgement of people involved in the research
-  * Useful links
-  * Definitions
-  * Abstract
-  * Introduction
-  * ...
-  * Conclusions
+5. Try to follow the [template](https://github.com/vefunder/protocol-research-review/blob/main/admin/templates/Report_template.md)
 
-When in doubt, please follow the template used in the articles in the Cryptorisks substack.
+When in doubt, please follow the template used in the articles in the [Cryptorisks substack](https://cryptorisks.substack.com/).
 
 Good luck! It is thanks to your efforts that we can self-police and decentralise our economy.
 
