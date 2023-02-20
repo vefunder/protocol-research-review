@@ -5,6 +5,7 @@
 ## Index
 
 - General overview on Phuture
+  - Noteworthy Findings   
 - Notional Finance
   - fCash
   - Liquidity Pool & Interactions
@@ -51,6 +52,26 @@ Phuture does have a centralization vector with its ownership authority around th
 Source: [Convex Finance Discord (CVX-Voting)](https://discord.com/channels/820795644494610432/885859948402208798/1069564071411732501)
 
 Phuture [proposed](https://gov.curve.fi/t/proposal-to-add-usv-fraxbp-to-the-gauge-controller/8687) a CRV rewards gauge for their USV-FraxBP pool and the vote was raised and passed through the convex snapshot vote, here is the Curve [DAO vote](https://dao.curve.fi/vote/ownership/274).
+
+## Noteworthy Findings
+
+After conducting a thorough analysis of the USV-FraxBP pool, the findings show that the pool has not generated any trade volumes since its inception. This has been confirmed in [query](https://dune.com/queries/1982268), which provides further analytics.
+
+It is important to note that currently, 100% of the liquidity in the pool is supplied by the Phuture team. Specifically, 99% is provided by a multi-sig owned by Phuture ([0x237a4d2166Eb65cB3f9fabBe55ef2eb5ed56bdb9](https://etherscan.io/address/0x237a4d2166Eb65cB3f9fabBe55ef2eb5ed56bdb9)), while the remaining 1% is provided by one of the multi-sig owners ([0x9fD6Ac607AE0B13e066a609f6e5f2d41c3d04A5F](https://etherscan.io/address/0x9fD6Ac607AE0B13e066a609f6e5f2d41c3d04A5F)).
+
+Additionally, out of the total USV supply of 375,659, only 1.2% of USV is held by wallets other than the Phuture multi-sig, after deducting the 271,208 USV held by their multi-sig and the 100,000 USV provided as liquidity by their multi-sig.
+
+Phuture has also stated that they will deploy the remaining USV in their treasury to the liquidity pool once the CRV gauge is allocated.
+
+Phuture has another product known as PDI, an index token, built on the Ethereum chain. The introduction of PDI might provide insight into the community's willingness to adopt new products from Phuture.
+
+Upon analyzing the distribution of PDI tokens, we observed that the majority of the PDI supply, approximately 79%, is held in the multi-sig treasury mentioned earlier. As of February 18th, the total PDI supply stands at 1389.5 tokens, of which 139.37 PDI is held in a wallet, 800 PDI is supplied as liquidity on Uniswap V3, and 111.99 PDI is parked in bPDI by the treasury multi-sig.
+
+Here is how the supply change over time correlated with the no. of holder overtime:
+
+![image](https://user-images.githubusercontent.com/117331039/219812142-a9057f87-c24f-49f8-b171-c3ca387bf12d.png)
+
+Source: [PDI Supply and Holders Data [v2-5]](https://dune.com/queries/2014104/3333813)
 
 ## Notional Finance
 
@@ -199,6 +220,8 @@ Similarly, if the market balance for lending/borrowing is continually changing, 
 - Notional uses unprocessed Chainlink price feed to facilitate liquidations and Even if the borrower's collateral is only slightly under the required level, the liquidator can purchase at least 40% of it.
   
 - The platform has been audited, has an active Bug Bounty ($1,000,000) with immunefi and certified by industry leaders including Certora, ABDK, Code Arena & OpenZeppelin. Notional Finance has an on-chain reserve fund that can be utilized to help cover any losses as the possibility of insolvency in an unexpected events cannot be ignored.
+
+- Given the current successful vote in favor of allocating a CRV gauge for USV-FraxBP, it is in community's interest to monitor the performance of the pool to ensure that it does not attract opportunistic LPs. In the event that the pool fails to generate adequate volume, it may be prudent to consider discontinuing the CRV reward stream. Such a decision would be made in the best interest of maintaining a sustainable and equitable ecosystem for all stakeholders involved.
   
 
 ## Appendix
