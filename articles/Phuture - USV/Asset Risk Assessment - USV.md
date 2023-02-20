@@ -24,9 +24,9 @@
   - Trade calculation
 
 ## Relation to Curve  
-In January 2023, Phuture made a [proposal](https://gov.curve.fi/t/proposal-to-add-usv-fraxbp-to-the-gauge-controller/8687) on the Curve governance forum to add the USV/FraxBP pool to the Gauge Controller. This report seeks to identify relevant risks to Curve’s liquidity providers. 
+In January 2023, Phuture made a [proposal](https://gov.curve.fi/t/proposal-to-add-usv-fraxbp-to-the-gauge-controller/8687) on the Curve governance forum to add the [USV/FraxBP](https://curve.fi/#/ethereum/pools/factory-crypto-202/deposit) pool to the Gauge Controller. This report seeks to identify relevant risks to Curve’s liquidity providers. 
 
-## Phuture - USDC Saving Vault Overview
+## Phuture - USDC Saving Vault (USV) Overview
 
 **Useful Links**
 
@@ -36,38 +36,28 @@ In January 2023, Phuture made a [proposal](https://gov.curve.fi/t/proposal-to-ad
 - [Phuture Github](https://github.com/Phuture-finance)
 - [Phuture Audits](https://docs.phuture.finance/protocol/audits)
 - [Phuture USV Contract Addresses](https://docs.phuture.finance/protocol/contract-addresses#phuture-savings-vaults)
+- [Phuture 2-of-3 multisig](https://app.safe.global/eth:0x6575A93aBdFf85e5A6b97c2DB2b83bCEbc3574eC/home)
 
-Many initiatives are underway to build services for stable coins, including liquidity provisioning, lending and borrowing, and RWA-based investments, with a focus on generating yields on stable coins.
+Phuture is a crypto index platform that offers its users exposure to baskets of DeFi tokens through its on-chain index funds and savings vaults. Its newest product, the USDC Savings Vault (USV), seeks to simplify stable coin services. By incorporating liquidity provisioning, lending and borrowing, and RWA-based investments, it aims to reliably generate yields on USDC.
 
-Phuture is among the companies taking this approach, utilizing the power of Notional Finance to introduce their first savings vault product for USDC. The USDC Savings Vault (USV) offers an optimized interest rate by dynamically investing in a blend of 3 and 6-month bonds. The USV product is predominantly exposed to Notional Finance out of the box, and the tokens used for deposits come from a centralized entity.
+Phuture utilizes Notional Finance, a fixed yield DeFi lending platform, to introduce their savings vault product for USDC. USV offers an optimized interest rate by dynamically investing in a blend of 3 and 6-month bonds. Since the USV product is predominantly exposed to Notional Finance, a large portion of this report will cover that platform.
 
-When USDC is deposited into Phuture, it is lent towards the most liquid fcash tenors (3-month and 6-month tenors). Idle USDC deposits occur once a minimum threshold of USDC is ready to be invested in an active and eligible fcash tenor. During the redemption process, USV utilizes a waterfall structure that first pays out any available USDC before selling USV's fcash positions. To protect future returns, USV will sell fcash positions sorted by the lowest yielding tenor first.
+When USDC is deposited into Phuture, it is lent on Notional to the most liquid tenors (between 3-month and 6-month tenors). USDC deposits may sit idle until a minimum threshold of USDC is ready to be invested in an active and eligible tenor. During the redemption process, USV utilizes a waterfall structure that first pays out any available USDC before selling positions. To protect future returns, USV will sell positions sorted by the lowest yielding tenor first.
 
-It's important to note that users, or USDC depositors/USV LPs, should be willing to accept the exposure of the pressure from regulatory authorities in case of any regulatory uncertainty.
 
-Phuture does have a centralization vector with its ownership authority around the multi-sig. C2tP points this in the following discord convo:
+## USV and Phuture Product Adoption
 
-![](https://user-images.githubusercontent.com/117331039/219155367-2db25323-d395-47f0-8604-5b685dec4cc0.png)
-
-Source: [Convex Finance Discord (CVX-Voting)](https://discord.com/channels/820795644494610432/885859948402208798/1069564071411732501)
-
-Phuture [proposed](https://gov.curve.fi/t/proposal-to-add-usv-fraxbp-to-the-gauge-controller/8687) a CRV rewards gauge for their USV-FraxBP pool and the vote was raised and passed through the convex snapshot vote, here is the Curve [DAO vote](https://dao.curve.fi/vote/ownership/274).
-
-## Noteworthy Findings
-
-After conducting a thorough analysis of the USV-FraxBP pool, the findings show that the pool has not generated any trade volumes since its inception. This has been confirmed in [query](https://dune.com/queries/1982268), which provides further analytics.
+After conducting a thorough analysis of the USV-FraxBP pool, our findings show that as of 2/18/23, the pool has not generated any trade volumes since its inception. This has been confirmed by this [query](https://dune.com/queries/1982268), which provides further analytics.
 
 It is important to note that currently, 100% of the liquidity in the pool is supplied by the Phuture team. Specifically, 99% is provided by a multi-sig owned by Phuture ([0x237a4d2166Eb65cB3f9fabBe55ef2eb5ed56bdb9](https://etherscan.io/address/0x237a4d2166Eb65cB3f9fabBe55ef2eb5ed56bdb9)), while the remaining 1% is provided by one of the multi-sig owners ([0x9fD6Ac607AE0B13e066a609f6e5f2d41c3d04A5F](https://etherscan.io/address/0x9fD6Ac607AE0B13e066a609f6e5f2d41c3d04A5F)).
 
-Additionally, out of the total USV supply of 375,659, only 1.2% of USV is held by wallets other than the Phuture multi-sig, after deducting the 271,208 USV held by their multi-sig and the 100,000 USV provided as liquidity by their multi-sig.
+Additionally, out of the 401,309 total USV supply, only 7.5% of USV is held by wallets other than the Phuture multi-sig, after deducting the 271,208 USV held by their multi-sig and the 100,000 USV provided as liquidity by their multi-sig. Phuture has stated that they will deploy the remaining USV in their treasury to the liquidity pool once the CRV gauge is allocated.
 
-Phuture has also stated that they will deploy the remaining USV in their treasury to the liquidity pool once the CRV gauge is allocated.
-
-Phuture has another product known as PDI, an index token, built on the Ethereum chain. The introduction of PDI might provide insight into the community's willingness to adopt new products from Phuture.
+Phuture has another product known as PDI, an index token built on Ethereum. The introduction of PDI might provide insight into the community's willingness to adopt new products from Phuture.
 
 Upon analyzing the distribution of PDI tokens, we observed that the majority of the PDI supply, approximately 79%, is held in the multi-sig treasury mentioned earlier. As of February 18th, the total PDI supply stands at 1389.5 tokens, of which 139.37 PDI is held in a wallet, 800 PDI is supplied as liquidity on Uniswap V3, and 111.99 PDI is parked in bPDI by the treasury multi-sig.
 
-Here is how the supply change over time correlated with the no. of holder overtime:
+Here is how the supply change over time correlated with the no. of holders overtime:
 
 ![image](https://user-images.githubusercontent.com/117331039/219812142-a9057f87-c24f-49f8-b171-c3ca387bf12d.png)
 
@@ -205,6 +195,19 @@ Notional Finance, on the other hand, sets lending and borrowing rates based on t
 Balancing incentives for liquidity providers is crucial for smooth pool interactions and healthy liquidity to support borrowing and lending. Various factors affect incentives and demand, including risk adjustments on collateral assets, borrowing and lending rates, minimum collateral ratio, liquidation mechanism, NOTE rewards, and liquidity pool/AMM parameters. Balancing these parameters with risk and the overall market is essential for steady yield for lenders and for the Phuture USDC saving vault.
 
 It is important to consider the impact of changing parameters, such as raising the anchor rate, which may attract more lenders but could also distort the pool and lead to high slippage. This can impact the usability of the protocol, leading to a decrease in lending/borrowing and liquidity provision. Continual changes in the market rate for lending and borrowing necessitate a lower scalar factor to cover a wider spread of interest rate fluctuations. High fluctuations can result in the protocol's failure to capture demand for borrowing/lending due to high slippage, particularly if the scalar factor is high.
+
+
+## Risks
+
+It's important to note that USDC depositors and/or USV LPs may be affected by regulatory uncertainty, depending on their legal jurisdiction.
+
+Phuture does have a centralization vector with its ownership authority around the multi-sig. C2tP points this in the following discord convo:
+
+![](https://user-images.githubusercontent.com/117331039/219155367-2db25323-d395-47f0-8604-5b685dec4cc0.png)
+
+Source: [Convex Finance Discord (CVX-Voting)](https://discord.com/channels/820795644494610432/885859948402208798/1069564071411732501)
+
+Phuture [proposed](https://gov.curve.fi/t/proposal-to-add-usv-fraxbp-to-the-gauge-controller/8687) a CRV rewards gauge for their USV-FraxBP pool and the vote was raised and passed through the convex snapshot vote, here is the Curve [DAO vote](https://dao.curve.fi/vote/ownership/274).
 
 ## Conclusion
 
