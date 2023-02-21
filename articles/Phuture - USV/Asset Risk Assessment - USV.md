@@ -85,7 +85,28 @@ fCash is minted in pairs of assets and liabilities, which are settled on a prede
 +fCash is a claim on the asset at maturity, typically held by a lender, which indicates that a user will receive the underlying assets back upon maturity. In contrast, -fCash represents an obligation to repay the capital at maturity, typically held by a borrower, which should eventually be paid back.
 
 
-### Liquidity Pool & Interactions
+### Notional Market Participants
+
+The three market participants in the system are lenders, borrowers, and liquidity providers. Phuture interacts with the protocol as a lender, depositing USDC in exchange for the promise of a fixed rate yield.
+
+
+#### Lender
+
+In the Notional Finance platform, lenders have the option to exchange their assets in the form of cTokens for +fCash, which is a claim on their capital plus interest at maturity. Lenders can select from a variety of active tenors, which offer different maturity dates and associated interest rates. Upon maturity, the lender's fCash will stop earning the fixed interest rate, and will earn only the lower, variable rate from their underlying Compound cToken position.
+
+It is possible also to redeem the underlying cToken before maturity, and this can be determined by discounting the face value of the fCash to the present by a TWAP oracle rate which corresponds with the fCash maturity date. While early redemption does not guarantee the quoted rate, the lender has an assurance to retrieve their principal plus interest. Realized interest may vary depending on changes in demand for borrowing and lending.
+
+
+#### Borrower
+
+In order to borrow funds on the Notional protocol, a borrower must first mint both positive and negative fCash tokens based on their chosen collateral and maturity. These tokens will represent their obligation to repay the borrowed funds at a later date.
+
+Once the fCash tokens have been minted, the borrower can then exchange the positive fCash for cTokens, which will allow them to access the funds they need. At the end of the trade, the borrower will be left with cTokens and negative fCash, which represents their obligation to repay the capital.
+
+If a borrower is unable to repay the funds they have borrowed by the maturity date, they will be subject to a penalty rate of 2.5%, or 250 basis points, and may be forcibly auto-rolled by a third party. It is possible for the borrower to roll their debt to a future maturity at the prevailing interest rate for that maturity at any time.
+
+
+#### Liquidity Provider
 
 Notional maintains on-chain liquidity pools that serve as a ready counter-party for borrowers and lenders at all time. The exchange rate between USDC and fUSDC at the specific maturity represents the fixed interest rate that users receive on Notional. In other words, the interest rate for lending and borrowing on Notional V2 is defined by the fCash Markets.
 
@@ -93,7 +114,7 @@ Liquidity providers play a crucial role in contributing cTokens and fCash to liq
 
 Liquidity providers are important for stabilizing interest rates and they bear the risk of impermanent loss depending on the demand for lending and borrowing. Every borrow/lend action will incur some slippage in the interest rate, with the magnitude determined by the size of the loan compared to the overall liquidity in the pool. It is therefore essential that liquidity providers are adequately incentivized to ensure that the fixed-rate borrowing and lending market is stable.
 
-It's worth noting that both liquidity providers and borrowers can mint fCash. The borrower sells +fCash into the pool in exchange for currency, and holds the obligation (-fCash) to repay at the predefined future date. By contrast, liquidity providers serve as counterparty to both parties by making the underlying asset available to borrowers and +fCash available to lenders.  
+Both liquidity providers and borrowers can mint fCash. Borrowers sell +fCash into the pool in exchange for currency, and holds the obligation (-fCash) to repay at the predefined future date. By contrast, liquidity providers serve as counterparty to both parties by making the underlying asset available to borrowers and +fCash available to lenders.  
 
 ![](https://3597103031-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-MX2K6zXuGl2Zi-qgoUj%2F-MfKPITPv8YEBxbZh665%2F-MfKPizWILHrStwWO4Uc%2Fuser_types.png?alt=media&token=b2225422-a74b-4672-91f6-7f9efb1113b0)
 
@@ -124,7 +145,7 @@ Source: Notional Finance [Whitepaper](https://docs.notional.finance/developers/w
 
 #### Pool Governance Parameters
 
-Liquidity pool governance parameters have a significant influence on the shape of the AMM curve and the liquidity allocation toward each pool.
+Liquidity pool governance parameters have a significant influence on the shape of the AMM curve and the liquidity allocation toward each pool. Notional's governance is controlled by a 3-of-5 multisig consisting of two team members and three community members.
 
 - **Deposit shares** represent the proportion of incoming liquidity allocated among active pools. Deposit shares should add up to 1 (100%). For USDC, deposit shares are set at 45% for a 3-month maturity, 40% for a 6-month maturity, and 15% for a 1-year maturity.
   
@@ -144,21 +165,15 @@ Source: Notional Finance [Whitepaper](https://docs.notional.finance/developers/w
 
 #### Interest Rate Oracle
 
-The most recent trade executed on the pool is the implied interest rate. It is important to note that this rate can be subject to manipulation, especially over short time frames, such as through the use of flash loans. Such manipulation can result in a distorted or inaccurate portrayal of the true interest rate of the pool.
+The most recent trade executed on the pool implies the current interest rate. It is important to note that this rate is vulnerable to manipulation, especially over short time frames, such as through the use of flash loans. Such manipulation can result in a distorted or inaccurate portrayal of the true interest rate of the pool.
 
-To address this issue, an oracle rate is used to minimize the risk of price manipulation. The oracle rate provides a dampened price feed, lagged behind the last traded rate, which converges to the true interest rate of the pool over a set time window determined by governance. By providing a more stable and accurate representation of the interest rate, the oracle rate helps to maintain the integrity of the liquidity pool and protect its participants.
+To address this issue, a TWAP oracle rate is used to minimize the risk of price manipulation. The oracle rate provides a lagging price feed, which converges on the true interest rate of the pool over a set time window determined by governance. By providing a more stable and manipulation resistant representation of the interest rate, the oracle rate helps to maintain the integrity of the liquidity pool and protect its participants.
 
-#### Borrower
-
-In order to borrow funds on the Notional protocol, a borrower must first mint both positive and negative fCash tokens based on their chosen collateral and maturity. These tokens will represent their obligation to repay the borrowed funds at a later date.
-
-Once the fCash tokens have been minted, the borrower can then exchange the positive fCash for cTokens, which will allow them to access the funds they need. However, it is important to note that at the end of the trade, the borrower will be left with cTokens and negative fCash, which represents their obligation to repay the capital.
-
-If a borrower is unable to repay the funds they have borrowed by the maturity date, they will be subject to a penalty rate of 2.5%, or 250 basis points, and may be forcibly auto-rolled by a third party. It is possible for the borrower to roll their debt to a future maturity at the prevailing interest rate for that maturity at any time.
 
 **Collateralization:**
 
 Notional strives to ensure that lenders have a high likelihood of earning the expected returns by requiring borrowers to pay back their debt at maturity. The required amount of collateral that borrowers must hold against their debt is determined based on the risk level of their collateral. For example, DAI requires a lower collateralization ratio of 120% compared to ETH's 150%.
+
 
 **Liquidations:**
 
@@ -170,18 +185,9 @@ In the unlikely scenario where market volatility delays the liquidation process 
 
 The NOTE treasury can be tracked from [here](https://info.notional.finance/treasury).
 
-#### Lender
 
 
-In the Notional Finance platform, lenders have the option to exchange their assets in the form of cTokens for +fCash, which is a claim on their capital plus interest at maturity.
 
-As with any smart contract-based financial platform, Notional Finance carries inherent risks. While the platform has been audited, has an active Bug Bounty with immunefi and certified by industry leaders including Certora, ABDK, Code Arena & OpenZeppelin, it is important to acknowledge the possibility of insolvency in the event of borrower defaults. In such a scenario, lenders may be affected as well. However, Notional Finance has taken steps to mitigate these risks through a robust liquidation protocol and infrastructure, which aim to minimize potential losses.
-
-In the unlikely event that the liquidation procedure allows a borrower to become insolvent, Notional Finance has an on-chain reserve fund that can be utilized to help cover any losses that may arise on the platform. This on-chain reserve fund is in the form of sNOTE, which stands for staked NOTE/ETH 80/20 LP tokens. If the platform experiences losses, NOTE token holders can participate in an on-chain vote to take 50% of the assets held in the sNOTE pool and use them to recapitalize the system.
-
-In this scenario, sNOTE holders would bear a loss of up to 50% of their assets. While it's important to understand the risks involved in using any financial platform, Notional Finance has taken steps to ensure that its users are protected to the best of its ability.
-
-The pool holding can be verified here: [Notional Info - sNOTE](https://info.notional.finance/s-note)
 
 ## Demand-Supply Balance
 
@@ -195,6 +201,15 @@ It is important to consider the impact of changing parameters, such as raising t
 
 
 ## Risks
+___
+As with any smart contract-based financial platform, Notional Finance carries inherent risks. While the platform has been audited, has an active Bug Bounty with immunefi and certified by industry leaders including Certora, ABDK, Code Arena & OpenZeppelin, it is important to acknowledge the possibility of insolvency in the event of borrower defaults. In such a scenario, lenders may be affected as well. However, Notional Finance has taken steps to mitigate these risks through a robust liquidation protocol and infrastructure, which aim to minimize potential losses.
+
+In the unlikely event that the liquidation procedure allows a borrower to become insolvent, Notional Finance has an on-chain reserve fund that can be utilized to help cover any losses that may arise on the platform. This on-chain reserve fund is in the form of sNOTE, which stands for staked NOTE/ETH 80/20 LP tokens. If the platform experiences losses, NOTE token holders can participate in an on-chain vote to take 50% of the assets held in the sNOTE pool and use them to recapitalize the system.
+
+In this scenario, sNOTE holders would bear a loss of up to 50% of their assets. While it's important to understand the risks involved in using any financial platform, Notional Finance has taken steps to ensure that its users are protected to the best of its ability.
+
+The pool holding can be verified here: [Notional Info - sNOTE](https://info.notional.finance/s-note)
+___
 
 It's important to note that USDC depositors and/or USV LPs may be affected by regulatory uncertainty, depending on their legal jurisdiction.
 
