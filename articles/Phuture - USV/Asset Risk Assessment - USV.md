@@ -89,9 +89,6 @@ fCash is minted in pairs of assets and liabilities, which are settled on a prede
 
 Notional maintains on-chain liquidity pools that serve as a ready counter-party for borrowers and lenders at all time. The exchange rate between USDC and fUSDC at the specific maturity represents the fixed interest rate that users receive on Notional. In other words, the interest rate for lending and borrowing on Notional V2 is defined by the fCash Markets.
 
-
-#### Liquidity Provider
-
 Liquidity providers play a crucial role in contributing cTokens and fCash to liquidity pools. The LP mints a pair of fCash tokens (these cancel out at maturity), and they deposit cToken and +fCash into the pool. In return for their contribution, these providers are entitled to earn fees every time a borrower or lender trades between cTokens and fCash within the pool. 
 
 Liquidity providers are important for stabilizing interest rates and they bear the risk of impermanent loss depending on the demand for lending and borrowing. Every borrow/lend action will incur some slippage in the interest rate, with the magnitude determined by the size of the loan compared to the overall liquidity in the pool. It is therefore essential that liquidity providers are adequately incentivized to ensure that the fixed-rate borrowing and lending market is stable.
@@ -114,9 +111,9 @@ To mint nTokens, a user deposits cTokens into the nToken account. The account th
 Source: Notional Finance [Docs](https://docs.notional.finance/notional-v2/ntokens/minting-ntokens)
 
 
-### Notional AMM and Interest rate oracle
+### Notional AMM
 
-To optimize the trading experience, the AMM curve used by Notional must be designed with a balance between flatness and flexibility. A relatively flat curve ensures that normal trading conditions result in reasonable levels of slippage, while allowing for accommodating market repricings requires a more flexible curve.
+To optimize the trading experience, the AMM curve used by Notional is designed with a balance between flatness and flexibility. A relatively flat curve ensures that normal trading conditions result in reasonable levels of slippage, while also allowing for market repricings with a more flexible curve.
 
 Notional's AMM curve resembles that of Curve's stable swap invariant, which is designed to handle large changes in the equilibrium interest rate while still maintaining a relatively flat curve most of the time. This approach aims to provide a smoother trading experience for users under various market conditions.
 
@@ -124,32 +121,30 @@ Notional's AMM curve resembles that of Curve's stable swap invariant, which is d
 
 Source: Notional Finance [Whitepaper](https://docs.notional.finance/developers/whitepaper/whitepaper)
 
-Notional ensures that the exchange rate following a trade matches the prevailing exchange rate. The exchange rate used by Notional during the trade is an estimation of what the exchange rate will be once the trade is complete.
 
-#### Liquidity pool governance parameters
+#### Pool Governance Parameters
 
+Liquidity pool governance parameters have a significant influence on the shape of the AMM curve and the liquidity allocation toward each pool.
 
-Liquidity pool governance parameters have a significant influence on the shape of the AMM curve and the liquidity allocation of each liquidity pool.
-
-- **Deposit shares** represent the percentages of incoming liquidity allocated among active liquidity pools. It is important to note that deposit shares should add up to 1 (100%). For example, for USDC, deposit shares are set at 45% for a 3-month maturity, 40% for a 6-month maturity, and 15% for a 1-year maturity.
+- **Deposit shares** represent the proportion of incoming liquidity allocated among active pools. Deposit shares should add up to 1 (100%). For USDC, deposit shares are set at 45% for a 3-month maturity, 40% for a 6-month maturity, and 15% for a 1-year maturity.
   
-- **Anchor rate**, on the other hand, determines the position of the AMM curves in the X-Y plane. It influences the tradable interest rate range. In the case of USDC, the anchor rate is set at 3.5%.
+- **Anchor rate** determines the position of the AMM curves in the X-Y plane. It influences the tradable interest rate range. In the case of USDC, the anchor rate is set at 3.5%.
   
 
 ![](https://3597103031-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-MX2K6zXuGl2Zi-qgoUj%2F-MeyxH0O2F9LIC6MRCp6%2F-Mez1bvxQl21m0dDHvZj%2Fimage.png?alt=media&token=e3dff1ec-5e6e-4465-8b30-79667fd82bc7)
 
 Source: Notional Finance [Whitepaper](https://docs.notional.finance/developers/whitepaper/whitepaper)
 
-- The scalar rate is the parameter that affects the steepness of the AMM curves. A high scalar value corresponds to flatter AMM curves with lower interest rate sensitivity and lower slippage. Conversely, low scalar values correspond to steeper AMM curves with higher interest rate sensitivity and higher slippage. The scalar rate for USDC is set at 48.
+- **Scalar rate** is the parameter that affects the steepness of the AMM curve. A high scalar value corresponds to a flatter curve with lower interest rate sensitivity and lower slippage. Conversely, a low scalar value corresponds to a steeper curve with higher interest rate sensitivity and higher slippage. The scalar rate for USDC is set at 48.
 
 ![](https://3597103031-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-MX2K6zXuGl2Zi-qgoUj%2F-MeyxH0O2F9LIC6MRCp6%2F-Mez1Qz91Eu3q-RZkPt5%2Fimage.png?alt=media&token=21c201e6-1162-41f0-8ce3-c45225d51dd4)
 
 Source: Notional Finance [Whitepaper](https://docs.notional.finance/developers/whitepaper/whitepaper)
 
+
 #### Interest Rate Oracle
 
-
-In the context of liquidity pools, the last traded rate is the implied interest rate that results from the most recent trade executed on the pool. It is important to note that this rate can be subject to manipulation, especially over short time frames, such as through the use of flash loans. Such manipulation can result in a distorted or inaccurate portrayal of the true interest rate of the pool.
+The most recent trade executed on the pool is the implied interest rate. It is important to note that this rate can be subject to manipulation, especially over short time frames, such as through the use of flash loans. Such manipulation can result in a distorted or inaccurate portrayal of the true interest rate of the pool.
 
 To address this issue, an oracle rate is used to minimize the risk of price manipulation. The oracle rate provides a dampened price feed, lagged behind the last traded rate, which converges to the true interest rate of the pool over a set time window determined by governance. By providing a more stable and accurate representation of the interest rate, the oracle rate helps to maintain the integrity of the liquidity pool and protect its participants.
 
