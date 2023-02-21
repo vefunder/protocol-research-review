@@ -38,24 +38,25 @@ In January 2023, Phuture made a [proposal](https://gov.curve.fi/t/proposal-to-ad
 - [Phuture USV Contract Addresses](https://docs.phuture.finance/protocol/contract-addresses#phuture-savings-vaults)
 - [Phuture 2-of-3 multisig](https://app.safe.global/eth:0x6575A93aBdFf85e5A6b97c2DB2b83bCEbc3574eC/home)
 
-Phuture is a crypto index platform that offers its users exposure to baskets of DeFi tokens through its on-chain index funds and savings vaults. Its newest product, the USDC Savings Vault (USV), seeks to simplify stable coin services. By incorporating liquidity provisioning, lending and borrowing, and RWA-based investments, it aims to reliably generate yields on USDC.
+Phuture is a crypto index platform that offers its users exposure to baskets of DeFi tokens through its on-chain index funds and savings vaults. Its newest product, the USDC Savings Vault (USV), seeks to simplify stable coin services. Users simply deposit USDC into the vault and receive the USV receipt token. By incorporating liquidity provisioning, lending and borrowing, and RWA-based investments under the hood, Phuture aims to reliably generate yields on USDC.
 
 Phuture utilizes Notional Finance, a fixed yield DeFi lending platform, to introduce their savings vault product for USDC. USV offers an optimized interest rate by dynamically investing in a blend of 3 and 6-month bonds. Since the USV product is predominantly exposed to Notional Finance, a large portion of this report will cover that platform.
 
 When USDC is deposited into Phuture, it is lent on Notional to the most liquid tenors (between 3-month and 6-month tenors). USDC deposits may sit idle until a minimum threshold of USDC is ready to be invested in an active and eligible tenor. During the redemption process, USV utilizes a waterfall structure that first pays out any available USDC before selling positions. To protect future returns, USV will sell positions sorted by the lowest yielding tenor first.
 
+The following flowchart shows the strategy employed by USV:
+
+![USV_strategy_20230220](https://user-images.githubusercontent.com/51072084/220230334-e1e0a50c-dbe7-453a-a5b4-94b2afa39033.png)
 
 ## USV and Phuture Product Adoption
 
 After conducting a thorough analysis of the USV-FraxBP pool, our findings show that as of 2/18/23, the pool has not generated any trade volumes since its inception. This has been confirmed by this [query](https://dune.com/queries/1982268), which provides further analytics.
 
-It is important to note that currently, 100% of the liquidity in the pool is supplied by the Phuture team. Specifically, 99% is provided by a multi-sig owned by Phuture ([0x237a4d2166Eb65cB3f9fabBe55ef2eb5ed56bdb9](https://etherscan.io/address/0x237a4d2166Eb65cB3f9fabBe55ef2eb5ed56bdb9)), while the remaining 1% is provided by one of the multi-sig owners ([0x9fD6Ac607AE0B13e066a609f6e5f2d41c3d04A5F](https://etherscan.io/address/0x9fD6Ac607AE0B13e066a609f6e5f2d41c3d04A5F)).
+Currently, 100% of the liquidity in the pool is supplied by the Phuture team. Specifically, 99% is provided by a multi-sig owned by Phuture ([0x237a4d2166Eb65cB3f9fabBe55ef2eb5ed56bdb9](https://etherscan.io/address/0x237a4d2166Eb65cB3f9fabBe55ef2eb5ed56bdb9)), while the remaining 1% is provided by one of the multi-sig owners ([0x9fD6Ac607AE0B13e066a609f6e5f2d41c3d04A5F](https://etherscan.io/address/0x9fD6Ac607AE0B13e066a609f6e5f2d41c3d04A5F)).
 
-Additionally, out of the 401,309 total USV supply, only 7.5% of USV is held by wallets other than the Phuture multi-sig, after deducting the 271,208 USV held by their multi-sig and the 100,000 USV provided as liquidity by their multi-sig. Phuture has stated that they will deploy the remaining USV in their treasury to the liquidity pool once the CRV gauge is allocated.
+When accounting for the 271,208 USV held by their multi-sig and the 100,000 USV provided as liquidity by their multi-sig, only 7.5% out of the 401,309 total USV supply is held by wallets other than the Phuture multi-sig. Phuture has stated that they will deploy the remaining USV in their treasury to the liquidity pool once the CRV gauge is allocated.
 
-Phuture has another product known as PDI, an index token built on Ethereum. The introduction of PDI might provide insight into the community's willingness to adopt new products from Phuture.
-
-Upon analyzing the distribution of PDI tokens, we observed that the majority of the PDI supply, approximately 79%, is held in the multi-sig treasury mentioned earlier. As of February 18th, the total PDI supply stands at 1389.5 tokens, of which 139.37 PDI is held in a wallet, 800 PDI is supplied as liquidity on Uniswap V3, and 111.99 PDI is parked in bPDI by the treasury multi-sig.
+Phuture has another product known as PDI, a DeFi index token built on Ethereum. The performance of PDI might provide insight into the community's willingness to adopt new products from Phuture. Upon analyzing the distribution of PDI tokens, we observed that the majority of the PDI supply, approximately 79%, is held in the team multi-sig treasury. As of February 18th, the total PDI supply stands at 1389.5 tokens, of which 139.37 PDI is held in a wallet, 800 PDI is supplied as liquidity on Uniswap V3, and 111.99 PDI is parked in bPDI by the treasury multi-sig.
 
 Here is how the supply change over time correlated with the no. of holders overtime:
 
