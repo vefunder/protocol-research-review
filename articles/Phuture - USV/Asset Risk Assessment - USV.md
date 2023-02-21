@@ -24,7 +24,7 @@
   - Trade calculation
 
 ## Relation to Curve  
-In January 2023, Phuture made a [proposal](https://gov.curve.fi/t/proposal-to-add-usv-fraxbp-to-the-gauge-controller/8687) on the Curve governance forum to add the [USV/FraxBP](https://curve.fi/#/ethereum/pools/factory-crypto-202/deposit) pool to the Gauge Controller. This report seeks to identify relevant risks to Curve’s liquidity providers. 
+In January 2023, Phuture made a [proposal](https://gov.curve.fi/t/proposal-to-add-usv-fraxbp-to-the-gauge-controller/8687) on the Curve governance forum to add the [USV/FraxBP](https://curve.fi/#/ethereum/pools/factory-crypto-202/deposit) pool to the Gauge Controller. The on-chain vote has passed and can be seen [here](https://dao.curve.fi/vote/ownership/274). This report seeks to identify relevant risks to Curve’s liquidity providers. 
 
 ## Phuture - USDC Saving Vault (USV) Overview
 
@@ -103,6 +103,8 @@ In order to borrow funds on the Notional protocol, a borrower must first mint bo
 
 Once the fCash tokens have been minted, the borrower can then exchange the positive fCash for cTokens, which will allow them to access the funds they need. At the end of the trade, the borrower will be left with cTokens and negative fCash, which represents their obligation to repay the capital.
 
+Notional strives to ensure that lenders have a high likelihood of earning the expected returns by requiring borrowers to pay back their debt at maturity. The required amount of collateral that borrowers must hold against their debt is determined based on the risk level of their collateral. For example, DAI requires a lower collateralization ratio of 120% compared to ETH's 150%.
+
 If a borrower is unable to repay the funds they have borrowed by the maturity date, they will be subject to a penalty rate of 2.5%, or 250 basis points, and may be forcibly auto-rolled by a third party. It is possible for the borrower to roll their debt to a future maturity at the prevailing interest rate for that maturity at any time.
 
 
@@ -170,56 +172,54 @@ The most recent trade executed on the pool implies the current interest rate. It
 To address this issue, a TWAP oracle rate is used to minimize the risk of price manipulation. The oracle rate provides a lagging price feed, which converges on the true interest rate of the pool over a set time window determined by governance. By providing a more stable and manipulation resistant representation of the interest rate, the oracle rate helps to maintain the integrity of the liquidity pool and protect its participants.
 
 
-**Collateralization:**
-
-Notional strives to ensure that lenders have a high likelihood of earning the expected returns by requiring borrowers to pay back their debt at maturity. The required amount of collateral that borrowers must hold against their debt is determined based on the risk level of their collateral. For example, DAI requires a lower collateralization ratio of 120% compared to ETH's 150%.
-
-
 **Liquidations:**
 
-In Notional protocol, liquidation is a process where a liquidator buys a portion of the collateral owned by a borrower account that has fallen below a minimum required level, at a discount to the on-chain oracle price. The liquidator then uses this collateral to repay some of the debt owed by the liquidated account. Notably, even if the borrower's collateral is only slightly under the required level, the liquidator can purchase at least 40% of it.
-
-Notional uses unprocessed Chainlink price feed to facilitate liquidations.
+Notional uses unprocessed Chainlink price feed to facilitate liquidations. In Notional protocol, a liquidator buys a portion of the collateral owned by a borrower account that has fallen below a minimum required level at a discount to the on-chain oracle price. The liquidator then uses this collateral to repay some of the debt owed by the liquidated account. Notably, even if the borrower's collateral is only slightly under the required level, the liquidator can purchase at least 40% of it.
 
 In the unlikely scenario where market volatility delays the liquidation process and causes potential losses to lenders, Notional has measures in place to ensure lenders' funds are protected. The protocol can use its own reserve assets or sell its native token, NOTE, to raise the necessary capital to compensate lenders and make sure they are always fully reimbursed.
 
 The NOTE treasury can be tracked from [here](https://info.notional.finance/treasury).
 
 
-
-
-
-## Demand-Supply Balance
-
-The borrowing and lending market is driven by the demand to borrow and if the utility of the borrowed tokens is high, the risk reward for users to take on leveraged position gets favorable. When there is an expectation of high rewards from borrowing, the demand for borrowing increases, which results in the borrowing rate varying depending on the number of lenders willing to lend. Usually, in peer-to-peer or pool-based lending and borrowing services, the lender bears the counterparty risk.
-
-Notional Finance, on the other hand, sets lending and borrowing rates based on the balance of assets in the liquidity pool. Liquidity providers take on the risk to deliver fixed lending and borrowing rates, sharing counterparty risk with lenders. In the event of borrower default or system insolvency, both liquidity providers and lenders bear the loss. Liquidity providers are also exposed to impermanent loss, which can lead to a net borrowing or lending position at the time of withdrawal based on the pool proportion. This net position impacts the overall yield for the liquidity providers, which is why they are incentivized with NOTE rewards.
-
-Balancing incentives for liquidity providers is crucial for smooth pool interactions and healthy liquidity to support borrowing and lending. Various factors affect incentives and demand, including risk adjustments on collateral assets, borrowing and lending rates, minimum collateral ratio, liquidation mechanism, NOTE rewards, and liquidity pool/AMM parameters. Balancing these parameters with risk and the overall market is essential for steady yield for lenders and for the Phuture USDC saving vault.
-
-It is important to consider the impact of changing parameters, such as raising the anchor rate, which may attract more lenders but could also distort the pool and lead to high slippage. This can impact the usability of the protocol, leading to a decrease in lending/borrowing and liquidity provision. Continual changes in the market rate for lending and borrowing necessitate a lower scalar factor to cover a wider spread of interest rate fluctuations. High fluctuations can result in the protocol's failure to capture demand for borrowing/lending due to high slippage, particularly if the scalar factor is high.
-
-
 ## Risks
-___
-As with any smart contract-based financial platform, Notional Finance carries inherent risks. While the platform has been audited, has an active Bug Bounty with immunefi and certified by industry leaders including Certora, ABDK, Code Arena & OpenZeppelin, it is important to acknowledge the possibility of insolvency in the event of borrower defaults. In such a scenario, lenders may be affected as well. However, Notional Finance has taken steps to mitigate these risks through a robust liquidation protocol and infrastructure, which aim to minimize potential losses.
+
+### Notional Finance Risks
+
+#### Insolvency
+
+As with any smart contract-based financial platform, Notional Finance carries inherent risks. While the platform has been audited, has an active Bug Bounty with immunefi and is certified by industry leaders including Certora, ABDK, Code Arena & OpenZeppelin, there exists a possibility of insolvency in the event of borrower defaults. In such a scenario, lenders may be affected. However, Notional Finance has taken steps to mitigate these risks through a robust liquidation protocol and infrastructure, which aim to minimize potential losses.
 
 In the unlikely event that the liquidation procedure allows a borrower to become insolvent, Notional Finance has an on-chain reserve fund that can be utilized to help cover any losses that may arise on the platform. This on-chain reserve fund is in the form of sNOTE, which stands for staked NOTE/ETH 80/20 LP tokens. If the platform experiences losses, NOTE token holders can participate in an on-chain vote to take 50% of the assets held in the sNOTE pool and use them to recapitalize the system.
 
 In this scenario, sNOTE holders would bear a loss of up to 50% of their assets. While it's important to understand the risks involved in using any financial platform, Notional Finance has taken steps to ensure that its users are protected to the best of its ability.
 
 The pool holding can be verified here: [Notional Info - sNOTE](https://info.notional.finance/s-note)
-___
 
-It's important to note that USDC depositors and/or USV LPs may be affected by regulatory uncertainty, depending on their legal jurisdiction.
+#### Operational Risk
 
-Phuture does have a centralization vector with its ownership authority around the multi-sig. C2tP points this in the following discord convo:
+It is crucial to balance liquidity provider incentives for smooth pool interactions and healthy liquidity to support borrowing and lending. Various factors affect incentives and demand, including risk adjustments on collateral assets, borrowing and lending rates, minimum collateral ratio, liquidation mechanism, NOTE rewards, and liquidity pool/AMM parameters. Optimizing these parameters safely within the context of the market is essential to sustain yields for the Phuture USDC saving vault.
+
+It is important to consider the impact of changing parameters, such as raising the anchor rate, which may attract more lenders but could also distort the pool and lead to high slippage. This can impact the usability of the protocol, leading to a decrease in lending/borrowing and liquidity provision. Continual changes in the market rate for lending and borrowing necessitate a lower scalar factor to cover a wider spread of interest rate fluctuations. High fluctuations can result in the protocol's failure to capture demand for borrowing/lending due to high slippage, particularly if the scalar factor is high.
+
+### Compound Risks
+
+### Custody Risk
+
+[Notional Governance Docs](https://docs.notional.finance/developer-documentation/on-chain/notional-governance-reference)
+Notional 3-of-5 treasury: https://etherscan.io/address/0x22341fB5D92D3d801144aA5A925F401A91418A05
+Notional 2-of-3 pause guardian: https://etherscan.io/address/0xD9D5a9dc6a952b7aD6B05a983b399537B7c0Ee88#readProxyContract
+Phuture 2-of-3 multisig: https://etherscan.io/address/0x6575A93aBdFf85e5A6b97c2DB2b83bCEbc3574eC
+
+Both Phuture and Notional have a centralization vector with the ownership authority around the multi-sig. Notional is fully upgradeable, as well as all system parameters are controlled by the treasury multisig. This is composed of two Notional team members (Jeff and Teddy) and three community members. Additionally, the pause guardian multisig can pause all system functions, and is controlled by the Notional company.
+
+The Phuture multisig has significant control over the USV system, and is controlled by members of the Phuture team. It allows the `VAULT_MANAGER_ROLE` to call `setMaxLoss`, `setFeeRecipient`, and `authorizeUpgrade`. Ability to upgrade the USV contract gives the Phuture multisig control over user deposits to USV.
+
+C2tP points this in the following discord convo:
 
 ![](https://user-images.githubusercontent.com/117331039/219155367-2db25323-d395-47f0-8604-5b685dec4cc0.png)
 
 Source: [Convex Finance Discord (CVX-Voting)](https://discord.com/channels/820795644494610432/885859948402208798/1069564071411732501)
 
-Phuture [proposed](https://gov.curve.fi/t/proposal-to-add-usv-fraxbp-to-the-gauge-controller/8687) a CRV rewards gauge for their USV-FraxBP pool and the vote was raised and passed through the convex snapshot vote, here is the Curve [DAO vote](https://dao.curve.fi/vote/ownership/274).
 
 ## Conclusion
 
