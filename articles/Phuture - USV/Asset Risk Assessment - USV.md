@@ -46,7 +46,7 @@ When USDC is deposited into Phuture, it is lent on Notional to the most liquid t
 
 The following flowchart shows the strategy employed by USV:
 
-![USV_strategy_20230220](https://user-images.githubusercontent.com/51072084/220230334-e1e0a50c-dbe7-453a-a5b4-94b2afa39033.png)
+![USV_strategy_20230221_2](https://user-images.githubusercontent.com/51072084/220424330-cbab09a6-ae4e-46b7-8dc6-18cacf251f52.png)
 
 ## USV and Phuture Product Adoption
 
@@ -105,7 +105,8 @@ Notional provides users with a way to passively earn returns by providing liquid
 
 To mint nTokens, a user deposits cTokens into the nToken account. The account then distributes the user's liquidity into the underlying liquidity pools for that currency and holds the resultant liquidity tokens, which represent the nToken account's claim on the user's deposited liquidity. The distribution is based on a set of governance parameters known as "deposit shares," which are percentage figures that determine how much of a user's total liquidity is deposited into each individual market.
 
-![](https://3597103031-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-MX2K6zXuGl2Zi-qgoUj%2F-Me7Mven0A-wvy5XmpvY%2F-Me7OzNEjSv-9CSZLfXJ%2FnTokens_01.png?alt=media&token=e5dc53a0-f2c4-4b02-a918-548f2c452afd)
+
+![assets2F-MX2K6zXuGl2Zi-qgoUj2F-Me7Mven0A-wvy5XmpvY2F-Me7OujUY9QNbjAnUvTI2FnToken_02](https://user-images.githubusercontent.com/51072084/220424899-fc4a3145-4828-4492-a620-9ece3c07f04a.png)
 
 Source: Notional Finance [Docs](https://docs.notional.finance/notional-v2/ntokens/minting-ntokens)
 
