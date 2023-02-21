@@ -40,7 +40,7 @@ In January 2023, Phuture made a [proposal](https://gov.curve.fi/t/proposal-to-ad
 
 Phuture is a crypto index platform that offers its users exposure to baskets of DeFi tokens through its on-chain index funds and savings vaults. Its newest product, the USDC Savings Vault (USV), seeks to simplify stable coin services. Users simply deposit USDC into the vault and receive the USV receipt token. By incorporating liquidity provisioning, lending and borrowing, and RWA-based investments under the hood, Phuture aims to reliably generate yields on USDC.
 
-Phuture utilizes Notional Finance, a fixed yield DeFi lending platform, to introduce their savings vault product for USDC. USV offers an optimized interest rate by dynamically investing in a blend of 3 and 6-month bonds. Since the USV product is predominantly exposed to Notional Finance, a large portion of this report will cover that platform.
+Phuture utilizes Notional Finance, a fixed yield DeFi lending platform, to introduce their savings vault product for USDC. The USV strategy optimizes yield by dynamically investing in a blend of Notional's 3 and 6-month bonds. Notional, in turn, lends deposited funds to Compound for increased capital efficiency. Since the USV product is predominantly exposed to Notional Finance, a large portion of this report will cover that platform.
 
 When USDC is deposited into Phuture, it is lent on Notional to the most liquid tenors (between 3-month and 6-month tenors). USDC deposits may sit idle until a minimum threshold of USDC is ready to be invested in an active and eligible tenor. During the redemption process, USV utilizes a waterfall structure that first pays out any available USDC before selling positions. To protect future returns, USV will sell positions sorted by the lowest yielding tenor first.
 
@@ -50,13 +50,13 @@ The following flowchart shows the strategy employed by USV:
 
 ## USV and Phuture Product Adoption
 
-After conducting a thorough analysis of the USV-FraxBP pool, our findings show that as of 2/18/23, the pool has not generated any trade volumes since its inception. This has been confirmed by this [query](https://dune.com/queries/1982268), which provides further analytics.
+After conducting a thorough analysis of the USV-FraxBP pool, our findings show that as of 2/18/23, the pool has not generated any trade volumes since its inception. This has been confirmed by this [query](https://dune.com/queries/1982268), which provides further analytics. This is not unheard of for new pools preparing to bootstrap with a new gauge, but surely a trend to monitor.
 
 Currently, 100% of the liquidity in the pool is supplied by the Phuture team. Specifically, 99% is provided by a multi-sig owned by Phuture ([0x237a4d2166Eb65cB3f9fabBe55ef2eb5ed56bdb9](https://etherscan.io/address/0x237a4d2166Eb65cB3f9fabBe55ef2eb5ed56bdb9)), while the remaining 1% is provided by one of the multi-sig owners ([0x9fD6Ac607AE0B13e066a609f6e5f2d41c3d04A5F](https://etherscan.io/address/0x9fD6Ac607AE0B13e066a609f6e5f2d41c3d04A5F)).
 
 When accounting for the 271,208 USV held by their multi-sig and the 100,000 USV provided as liquidity by their multi-sig, only 7.5% out of the 401,309 total USV supply is held by wallets other than the Phuture multi-sig. Phuture has stated that they will deploy the remaining USV in their treasury to the liquidity pool once the CRV gauge is allocated.
 
-Phuture has another product known as PDI, a DeFi index token built on Ethereum. The performance of PDI might provide insight into the community's willingness to adopt new products from Phuture. Upon analyzing the distribution of PDI tokens, we observed that the majority of the PDI supply, approximately 79%, is held in the team multi-sig treasury. As of February 18th, the total PDI supply stands at 1389.5 tokens, of which 139.37 PDI is held in a wallet, 800 PDI is supplied as liquidity on Uniswap V3, and 111.99 PDI is parked in bPDI by the treasury multi-sig.
+Phuture has another product known as PDI, a DeFi index token built on Ethereum. The performance of PDI can provide insight into the community's willingness to adopt new products from Phuture. Upon analyzing the distribution of PDI tokens, we observed that the majority of the PDI supply, approximately 79%, is held in the team multi-sig treasury. As of February 18th, the total PDI supply stands at 1389.5 tokens, of which 139.37 PDI is held in a wallet, 800 PDI is supplied as liquidity on Uniswap V3, and 111.99 PDI is parked in bPDI by the treasury multi-sig.
 
 Here is how the supply change over time correlated with the no. of holders overtime:
 
@@ -76,7 +76,7 @@ Source: [PDI Supply and Holders Data [v2-5]](https://dune.com/queries/2014104/33
 - [Notional Analytics](https://info.notional.finance/)
 - [Audit List](https://www.notional.finance/#:~:text=notional.finance.-,RECENT%20AUDITS,-Code%20Arena%2C%20Staked) from their website
 
-Notional is a fixed-rate, fixed-term crypto asset lending and borrowing platform. This is made possible by fCash. The fCash mechanism allows Notional users to commit to transfers of value at specific points in the future. Notional Finance enables the tokenization of payments in various currencies, such as ETH or USDC, at specific future points using fCash. 
+Notional is a fixed-rate, fixed-term crypto asset lending and borrowing platform. This is made possible by fCash. The fCash mechanism allows Notional users to commit to transfers of value at specific points in the future. Notional Finance enables the tokenization of these future payments in various currencies, such as ETH or USDC. 
 
 ### fCash
 
@@ -89,31 +89,32 @@ fCash is minted in pairs of assets and liabilities, which are settled on a prede
 
 Notional maintains on-chain liquidity pools that serve as a ready counter-party for borrowers and lenders at all time. The exchange rate between USDC and fUSDC at the specific maturity represents the fixed interest rate that users receive on Notional. In other words, the interest rate for lending and borrowing on Notional V2 is defined by the fCash Markets.
 
+
 #### Liquidity Provider
 
-Liquidity providers play a crucial role in contributing cTokens and fCash to liquidity pools. The LP mints a pair of fCash tokens (these cancel out at maturity), and they deposit cToken and +fCash into the pool. In return for their contribution, these providers are entitled to earn fees every time a borrower or lender trades between cTokens and fCash within the pool. Liquidity providers are important for stabilizing interest rates and they bear the risk of impermanent loss depending on the demand for lending and borrowing.
+Liquidity providers play a crucial role in contributing cTokens and fCash to liquidity pools. The LP mints a pair of fCash tokens (these cancel out at maturity), and they deposit cToken and +fCash into the pool. In return for their contribution, these providers are entitled to earn fees every time a borrower or lender trades between cTokens and fCash within the pool. 
 
-It's worth noting that both liquidity providers and borrowers can mint fCash. Each fCash token is always minted in pairs, consisting of a +fCash and a -fCash token. These two tokens represent a claim and an obligation, respectively, with the netting to a zero position change.
+Liquidity providers are important for stabilizing interest rates and they bear the risk of impermanent loss depending on the demand for lending and borrowing. Every borrow/lend action will incur some slippage in the interest rate, with the magnitude determined by the size of the loan compared to the overall liquidity in the pool. It is therefore essential that liquidity providers are adequately incentivized to ensure that the fixed-rate borrowing and lending market is stable.
+
+It's worth noting that both liquidity providers and borrowers can mint fCash. The borrower sells +fCash into the pool in exchange for currency, and holds the obligation (-fCash) to repay at the predefined future date. By contrast, liquidity providers serve as counterparty to both parties by making the underlying asset available to borrowers and +fCash available to lenders.  
 
 ![](https://3597103031-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-MX2K6zXuGl2Zi-qgoUj%2F-MfKPITPv8YEBxbZh665%2F-MfKPizWILHrStwWO4Uc%2Fuser_types.png?alt=media&token=b2225422-a74b-4672-91f6-7f9efb1113b0)
 
 Source: Notional Finance [Docs](https://docs.notional.finance/notional-v2/notional-v2-basics/liquidity-pools)
 
+
 #### nToken
 
-Notional provides users with a way to passively earn returns by providing liquidity to their platform, and the primary method for doing so is through nTokens. These tokens automate the process of minting fCash and depositing suitable assets into the liquidity pool with different maturities for the liquidity provider. By holding nTokens, users can earn returns from providing liquidity to Notional across all active maturities without needing to interact with the individual liquidity pools.
+Supplying liquidity to a multitude of markets with different maturity dates would be cumbersome for Notional LPs, so instead it makes use of a passive strategy through nTokens. These tokens automate the process of minting fCash and depositing suitable assets into the liquidity pool with different maturities for the liquidity provider. By holding nTokens, users can earn returns from providing liquidity to Notional across all active maturities without needing to interact with the individual liquidity pools.
 
-To mint nTokens, a user deposits cTokens into the nToken account. The account then distributes the user's liquidity into the underlying liquidity pools for that currency and holds the resultant liquidity tokens, which represent the nToken account's claim on the user's deposited liquidity. The distribution is based on a set of governance parameters known as "deposit shares," which are percentage figures that determine how much of a user's total liquidity is deposited into each individual market.
-
+To mint nTokens, a user deposits cTokens into the nToken account. The account then distributes the user's liquidity into the underlying pools for that currency and holds the resultant liquidity tokens, which represent the nToken account's claim on the user's deposit. The distribution is based on a set of governance parameters known as "deposit shares," which are percentage figures that determine how much of a user's total liquidity is deposited into each individual market.
 
 ![assets2F-MX2K6zXuGl2Zi-qgoUj2F-Me7Mven0A-wvy5XmpvY2F-Me7OujUY9QNbjAnUvTI2FnToken_02](https://user-images.githubusercontent.com/51072084/220424899-fc4a3145-4828-4492-a620-9ece3c07f04a.png)
 
 Source: Notional Finance [Docs](https://docs.notional.finance/notional-v2/ntokens/minting-ntokens)
 
-Providing incentives to liquidity providers is critical to ensure that the essential use case of providing fixed-rate borrowing and lending services is not negatively affected.
 
 ### Notional AMM and Interest rate oracle
-
 
 To optimize the trading experience, the AMM curve used by Notional must be designed with a balance between flatness and flexibility. A relatively flat curve ensures that normal trading conditions result in reasonable levels of slippage, while allowing for accommodating market repricings requires a more flexible curve.
 
