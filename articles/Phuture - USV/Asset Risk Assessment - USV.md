@@ -76,23 +76,22 @@ Source: [PDI Supply and Holders Data [v2-5]](https://dune.com/queries/2014104/33
 - [Notional Analytics](https://info.notional.finance/)
 - [Audit List](https://www.notional.finance/#:~:text=notional.finance.-,RECENT%20AUDITS,-Code%20Arena%2C%20Staked) from their website
 
-Notional is a fixed-rate, fixed-term crypto asset lending and borrowing platform. This is made possible by fCash. fCash offers a simple and reliable mechanism for Notional users to commit to transfers of value at specific points in the future. Trading fCash allows users to efficiently move value back and forth through time.
+Notional is a fixed-rate, fixed-term crypto asset lending and borrowing platform. This is made possible by fCash. The fCash mechanism allows Notional users to commit to transfers of value at specific points in the future. Notional Finance enables the tokenization of payments in various currencies, such as ETH or USDC, at specific future points using fCash. 
 
 ### fCash
 
-Notional Finance enables the tokenization of payments in various currencies, such as ETH or USDC, at specific future points using fCash. The interest rate for lending and borrowing on Notional V2 is defined by the fCash Markets. When users lend or borrow at fixed rates, they deposit or receive cash in exchange for fCash. Essentially, fCash represents a fixed amount of cash that a user is entitled to receive (lending) or obligated to pay (borrowing) at a specific point in time, known as maturity.
+fCash is minted in pairs of assets and liabilities, which are settled on a predefined date. It represents a fixed amount of cash that a user is entitled to receive (lending) or obligated to pay (borrowing) at a specific point in time, known as maturity. When users lend or borrow at fixed rates, they deposit or receive cash in exchange for fCash.  
 
 +fCash is a claim on the asset at maturity, typically held by a lender, which indicates that a user will receive the underlying assets back upon maturity. In contrast, -fCash represents an obligation to repay the capital at maturity, typically held by a borrower, which should eventually be paid back.
 
-The exchange rate between USDC and fUSDC at the specific maturity represents the fixed interest rate that users receive on Notional.
 
 ### Liquidity Pool & Interactions
 
-Notional maintains an on-chain liquidity pools that serve as a ready counter-party for borrowers and lenders at all time.
+Notional maintains on-chain liquidity pools that serve as a ready counter-party for borrowers and lenders at all time. The exchange rate between USDC and fUSDC at the specific maturity represents the fixed interest rate that users receive on Notional. In other words, the interest rate for lending and borrowing on Notional V2 is defined by the fCash Markets.
 
 #### Liquidity Provider
 
-Liquidity providers play a crucial role in contributing cTokens and fCash to liquidity pools. In return for their contribution, these providers are entitled to earn fees every time a borrower or lender trades between cTokens and fCash within the pool.
+Liquidity providers play a crucial role in contributing cTokens and fCash to liquidity pools. The LP mints a pair of fCash tokens (these cancel out at maturity), and they deposit cToken and +fCash into the pool. In return for their contribution, these providers are entitled to earn fees every time a borrower or lender trades between cTokens and fCash within the pool. Liquidity providers are important for stabilizing interest rates and they bear the risk of impermanent loss depending on the demand for lending and borrowing.
 
 It's worth noting that both liquidity providers and borrowers can mint fCash. Each fCash token is always minted in pairs, consisting of a +fCash and a -fCash token. These two tokens represent a claim and an obligation, respectively, with the netting to a zero position change.
 
