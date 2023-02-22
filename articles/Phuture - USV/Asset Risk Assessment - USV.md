@@ -223,17 +223,39 @@ Source: [Convex Finance Discord (CVX-Voting)](https://discord.com/channels/82079
 
 ## Conclusion
 
-- Phuture is launching a savings vault product for USDC that utilizes Notional Finance to invest in a blend of 3 and 6-month bonds and offers an optimized interest rate. The USV product is predominantly exposed to Notional Finance and has a centralization vector with its ownership authority.
+- The USV product is exposed to several DeFi products. It relies most significantly on Notional Finance, although users should be aware that Notional utilizes Compound Finance under the hood. Additionally, the foundation of the USV product is USDC, a custodial stablecoin issued by Circle. 
+
+- USV has a centralization vector with its ownership authority. Both Phuture and Notional are governed by team-controlled multisigs, and in both cases there is a high degree of control afforded to them.  
   
 - Healthy incentives flowing towards liquidity providers and the borrowers at Notional would ensures Lenders get a stable yield. Following the incentives and change in governance parameters associated with LPs and Borrowers can help a user mitigate the risk associated with opportunity cost.
   
-- In liquidity pools, the last traded rate is the implied interest rate resulting from the most recent trade, but it can be subject to manipulation over short time frames. To address this issue, an oracle rate is used to provide a more stable and accurate representation of the interest rate over a set time window determined by governance.
-  
-- Notional uses unprocessed Chainlink price feed to facilitate liquidations and Even if the borrower's collateral is only slightly under the required level, the liquidator can purchase at least 40% of it.
-  
-- The platform has been audited, has an active Bug Bounty ($1,000,000) with immunefi and certified by industry leaders including Certora, ABDK, Code Arena & OpenZeppelin. Notional Finance has an on-chain reserve fund that can be utilized to help cover any losses as the possibility of insolvency in an unexpected events cannot be ignored.
+- The Notional platform has been audited, has an active Bug Bounty ($1,000,000) with immunefi and certified by industry leaders including Certora, ABDK, Code Arena & OpenZeppelin. Notional Finance has an on-chain reserve fund that can be utilized to help cover any losses and reduce insolvency risk.
 
-- Given the current successful vote in favor of allocating a CRV gauge for USV-FraxBP, it is in community's interest to monitor the performance of the pool to ensure that it does not attract opportunistic LPs. In the event that the pool fails to generate adequate volume, it may be prudent to consider discontinuing the CRV reward stream. Such a decision would be made in the best interest of maintaining a sustainable and equitable ecosystem for all stakeholders involved.
+- Given the current successful vote in favor of allocating a CRV gauge for USV-FraxBP, it is in community's interest to monitor the performance of the pool for evidence of organic adoption. In the event that the pool fails to generate adequate volume, it may be prudent to reevaluate the gauge.
+
+
+## LlamaRisk Gauge Criteria
+
+### Centralization Factors
+
+**1) Is it possible for a single entity to rug its users?**
+Yes. USV is governed by a 2-of-3 multisig controlled by the Phuture team. It can upgrade the contract and therefore has complete control over user deposits. It is also indirectly exposed to the Notional multisig, and to Circle as the centralized issuer of USDC.
+
+**2) If the team vanishes, can the project continue?**
+Yes. USV does not require active involvement from the team for day-to-day operations. It does not rely on the team to update price oracles, triggering rebalancing, or investment transactions. Investment into and settlement of Notional fCash positions are handled within the contract. USV could continue processing deposits and withdrawals indefinitely. 
+
+### Economic Factors
+
+**1) Does the project's viability depend on additional incentives?**
+USV doesn't show evidence of having found product-market fit organically. The contract has been live for 5 months, and only ~$30k of non-team users have deposited. The product itself is certainly sustainable without requiring incentives for maintaining peg stability, for example. It simply hasn't demonstrated there to be any demand for this product.
+
+**2) If demand falls to 0 tomorrow, can all users be made whole?**
+Yes. USV can safely process USDC withdrawals without a risk of loss.
+
+### Security Factors
+
+**1) Do audits reveal any concerning signs?**
+The [Peckshield audit report](https://github.com/peckshield/publications/blob/master/audit_reports/PeckShield-Audit-Report-Phuture-FRPVault-v1.0.pdf) from August 2022 found 3 medium issues and 1 low severity issue. Issues were resolved with the exception of the powerful `VAULT_MANAGER_ROLE` privileges. Peckshield recommended the team transfer control to a DAO-like governance contract and impose protective measures such as timelocks. The team instead confirmed they plan to maintain the multisig governance. 
   
 
 ## Appendix
