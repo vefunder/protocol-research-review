@@ -239,22 +239,27 @@ Source: [Convex Finance Discord (CVX-Voting)](https://discord.com/channels/82079
 ### Centralization Factors
 
 **1) Is it possible for a single entity to rug its users?**
+
 Yes. USV is governed by a 2-of-3 multisig controlled by the Phuture team. It can upgrade the contract and therefore has complete control over user deposits. It is also indirectly exposed to the Notional multisig, and to Circle as the centralized issuer of USDC.
 
 **2) If the team vanishes, can the project continue?**
+
 Yes. USV does not require active involvement from the team for day-to-day operations. It does not rely on the team to update price oracles, triggering rebalancing, or investment transactions. Investment into and settlement of Notional fCash positions are handled within the contract. USV could continue processing deposits and withdrawals indefinitely. 
 
 ### Economic Factors
 
 **1) Does the project's viability depend on additional incentives?**
-USV doesn't show evidence of having found product-market fit organically. The contract has been live for 5 months, and only ~$30k of non-team users have deposited. The product itself is certainly sustainable without requiring incentives for maintaining peg stability, for example. It simply hasn't demonstrated there to be any demand for this product.
+
+No. However, USV doesn't show evidence of having found product-market fit organically. The contract has been live for 5 months, and only ~$30k of non-team users have deposited. The product itself is certainly sustainable without requiring incentives for maintaining peg stability, for example. It simply hasn't demonstrated there to be any demand for this product.
 
 **2) If demand falls to 0 tomorrow, can all users be made whole?**
+
 Yes. USV can safely process USDC withdrawals without a risk of loss.
 
 ### Security Factors
 
 **1) Do audits reveal any concerning signs?**
+
 The [Peckshield audit report](https://github.com/peckshield/publications/blob/master/audit_reports/PeckShield-Audit-Report-Phuture-FRPVault-v1.0.pdf) from August 2022 found 3 medium issues and 1 low severity issue. Issues were resolved with the exception of the powerful `VAULT_MANAGER_ROLE` privileges. Peckshield recommended the team transfer control to a DAO-like governance contract and impose protective measures such as timelocks. The team instead confirmed they plan to maintain the multisig governance. 
   
 
