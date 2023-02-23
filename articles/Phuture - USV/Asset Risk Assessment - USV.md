@@ -99,8 +99,11 @@ The three market participants in the system are lenders, borrowers, and liquidit
 
 Notional Finance allows lenders to exchange their assets in the form of cTokens for +fCash, which represents a claim on their capital along with the interest at maturity. Lenders have the flexibility to choose from various active tenors, each with different maturity dates and associated interest rates. At maturity, the fixed interest rate on the lender's fCash will cease, and it will earn only the lower variable rate from their underlying Compound cToken position.
 
-It is possible also to redeem the underlying cToken before maturity, and this can be determined by discounting the face value of the fCash to the present by a TWAP oracle rate which corresponds with the fCash maturity date. While early redemption does not guarantee the quoted rate, the lender has an assurance to retrieve their principal plus interest. Realized interest may vary depending on changes in demand for borrowing and lending.
+It is possible also to redeem the underlying cToken before maturity, and doing so will expose the lender to risk of loss, as Teddy from Notional explains:
 
+![Screen Shot 2023-02-23 at 3 14 55 PM](https://user-images.githubusercontent.com/51072084/221053202-e498c72f-fbc9-4038-96e0-6dd8e440d796.png)
+
+[This google sheet](https://docs.google.com/spreadsheets/d/17J2Nzj-T_S94tMrP-Ak9veFOlH2BMdrnOzgagOJ4stY/edit?usp=sharing) helps to show the magnitude of potential gains/losses from early redemption. USV holders may be affected, as large USV withdrawals will usually require selling fCash positions before maturity.
 
 #### Borrower
 
