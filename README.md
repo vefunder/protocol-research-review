@@ -40,7 +40,7 @@ Research will be reviewed via a pull request. To do this, [please follow instruc
 Should you ever need to pull any changes in the upstream repository, always `rebase`:
 
 ```
-> git remote add upstream https://github.com/vefunder/protocol-research-review.git`
+> git remote add upstream https://github.com/vefunder/protocol-research-review.git
 > git fetch upstream
 > git rebase upstream/main
 > git push origin main --force
