@@ -81,7 +81,7 @@ Source: [PDI Supply and Holders Data [v2-5]](https://dune.com/queries/2014104/33
   * OpenZeppelin [Governance Contracts](https://blog.openzeppelin.com/notional-v2-audit-governance-contracts/)
   * ABDK [Audit 1](https://github.com/notional-finance/contracts-v2/blob/master/audits/ABDK%20-%20Notional%20V2%2C%20Sept%201%202021.pdf), [Audit 2](https://github.com/notional-finance/contracts-v2/blob/master/audits/ABDK%20-%20Notional%20V2%20Fixes%2C%20Nov%201%202021.pdf)
 
-Notional is a fixed-rate, fixed-term crypto asset lending and borrowing platform. This is made possible by fCash. The fCash mechanism allows Notional users to commit to transfers of value at specific points in the future. Notional Finance enables the tokenization of these future payments in various currencies, such as ETH or USDC. 
+Notional is a fixed-rate, fixed-term crypto asset lending and borrowing platform that enables the tokenization of future payments in various currencies, such as ETH or USDC. It is able to offer fixed-rate thanks to its complex AMM that divides liquidity into fixed-term pools called tenors. This is made possible by fCash. The fCash mechanism allows Notional users to commit to transfers of value at specific points in the future.  
 
 ### fCash
 
@@ -97,7 +97,7 @@ The three market participants in the system are lenders, borrowers, and liquidit
 
 #### Lender
 
-Notional Finance allows lenders to exchange their assets in the form of cTokens for +fCash, which represents a claim on their capital along with the interest at maturity. Lenders have the flexibility to choose from various active tenors, each with different maturity dates and associated interest rates. At maturity, the fixed interest rate on the lender's fCash will cease, and it will earn only the lower variable rate from their underlying Compound cToken position.
+Lender deposits are immediately deposited into Compound and the cToken receipt is held by Notional. The lender receives +fCash, which represents a claim on their capital plus the interest at maturity. Lenders have the flexibility to choose from various active tenors, each with different maturity dates and interest rates. At maturity, the fixed interest rate on the lender's fCash will cease, and it will earn only the lower variable rate from their underlying Compound cToken position.
 
 It is possible also to redeem the underlying cToken before maturity, and doing so will expose the lender to risk of loss, as Teddy from Notional explains:
 
@@ -176,7 +176,7 @@ Source: Notional Finance [Whitepaper](https://docs.notional.finance/developers/w
 
 #### Interest Rate Oracle
 
-The most recent trade executed on the pool implies the current interest rate. It is important to note that this rate is vulnerable to manipulation, especially over short time frames, such as through the use of flash loans. Such manipulation can result in a distorted or inaccurate portrayal of the true interest rate of the pool.
+The most recent trade executed on the pool implies the current interest rate. This rate is vulnerable to manipulation, especially over short time frames, such as through the use of flash loans. Such manipulation can result in a distorted or inaccurate portrayal of the true interest rate of the pool.
 
 To address this issue, a TWAP oracle rate is used to minimize the risk of price manipulation. The oracle rate provides a lagging price feed, which converges on the true interest rate of the pool over a set time window determined by governance. By providing a more stable and manipulation resistant representation of the interest rate, the oracle rate helps to maintain the integrity of the liquidity pool and protect its participants.
 
@@ -212,14 +212,13 @@ It is important to consider the impact of changing parameters, such as raising t
 
 #### Market Risk
 
-Funds deposited into USV will either be 1) sitting idle as USDC, 2) deployed as 3-month tenor fCash, or 3) deployed as 6-month tenor fCash. fCash redeemed before maturity will be exposed to market risk from changes in interest rate, as modelled [here](https://www.desmos.com/calculator/zwaw8lr0nm). USV uses a waterfall redemption strategy to first prefer USDC, and then the lowest-yielding tenor for withdrawal. Unless there have been recent deposits, all funds will typically be deployed as fCash. This means users could be exposed to loss on their principal at time of withdrawal, depending on changes in interest rate. USV allows users to specify a minimum output amount and does not place any restriction on a user's ability to withdraw, regardless of market conditions.
+Funds deposited into USV will either be 1) sitting idle as USDC, 2) deployed as 3-month tenor fCash, or 3) deployed as 6-month tenor fCash. fCash redeemed before maturity will be exposed to market risk from changes in interest rate, as modelled [here](https://www.desmos.com/calculator/zwaw8lr0nm). USV uses a waterfall redemption strategy to first prefer USDC, and then the lowest-yielding tenor for withdrawal. All funds will typically be deployed into Notional, as there is no minimum threshold of deposits required by the USV strategy, and the harvesting interval is every 3 days. This means users could be exposed to loss on their principal at time of withdrawal, depending on changes in interest rate. USV allows users to specify a minimum output amount and does not place any restriction on a user's ability to withdraw, regardless of market conditions.
 
 ### Compound Risks
 
-
+There has been little mention of Compound in this report since readers are likely to be quite familiar already, but USV holders should be aware that Notional always converts lender deposits into Compound cTokens. This exposes users to all risks of Compound, including smart contract and insolvency risk. Compound is commonly viewed as a DeFi blue chip, but has had its share of complications, including [$89m in user losses](https://decrypt.co/49657/oracle-exploit-sees-100-million-liquidated-on-compound) from a faulty oracle and a smart contract bug that wrongly distributed [$80m in COMP token](https://rekt.news/compound-rekt/). 
 
 ### Custody Risk
-
 
 * [Notional Governance Docs](https://docs.notional.finance/developer-documentation/on-chain/notional-governance-reference)
 * [Notional 3-of-5 Treasury](https://etherscan.io/address/0x22341fB5D92D3d801144aA5A925F401A91418A05)
@@ -243,9 +242,9 @@ Source: [Convex Finance Discord (CVX-Voting)](https://discord.com/channels/82079
 
 - USV has a centralization vector with its ownership authority. Both Phuture and Notional are governed by team-controlled multi-sigs, and in both cases there is a high degree of control afforded to them.  
   
-- Healthy incentives flowing towards liquidity providers and the borrowers at Notional would ensures lenders get a stable yield. Following the incentives and change in governance parameters associated with LPs and Borrowers can help a user mitigate the risk associated with opportunity cost.
+- Adequate incentives flowing towards Notional liquidity providers and borrowers are essential to support stable, reliable yield for lenders. Following the incentives and change in governance parameters can help a user assess the opportunity cost of their position.
   
-- The Notional platform has been audited, has an active Bug Bounty ($1,000,000) with immunefi and is certified by industry leaders including Certora, ABDK, Code Arena & OpenZeppelin. Notional Finance has an on-chain reserve fund that can be utilized to help cover any losses and reduce insolvency risk.
+- Notional has been audited, has an active Bug Bounty ($1,000,000) with immunefi and is certified by industry leaders including Certora, ABDK, Code Arena & OpenZeppelin. Notional Finance has an on-chain reserve fund that can be utilized to help cover any losses and reduce insolvency risk.
 
 - Given the current successful vote in favor of allocating a CRV gauge for USV-FraxBP, it is in the community's interest to monitor the performance of the pool for evidence of organic adoption. In the event that the pool fails to generate adequate volume, it may be appropriate to reevaluate the gauge.
 
@@ -256,7 +255,7 @@ Source: [Convex Finance Discord (CVX-Voting)](https://discord.com/channels/82079
 
 **1) Is it possible for a single entity to rug its users?**
 
-Yes. USV is governed by a 2-of-3 multi-sig controlled by the Phuture team. It can upgrade the contract and therefore has complete control over user deposits. It is also indirectly exposed to the Notional multi-sig, and to Circle as the centralized issuer of USDC.
+Yes. USV is governed by a 2-of-3 multi-sig controlled by the Phuture team. It can upgrade the contract and therefore has complete control over user deposits. It is also indirectly exposed to the Notional multi-sig and to Circle as the centralized issuer of USDC.
 
 **2) If the team vanishes, can the project continue?**
 
@@ -266,18 +265,21 @@ Yes. USV does not require active involvement from the team for day-to-day operat
 
 **1) Does the project's viability depend on additional incentives?**
 
-No. However, USV doesn't show evidence of having found product-market fit organically. The contract has been live for 5 months, and only ~$30k of non-team users have deposited. The product itself is certainly sustainable without requiring incentives for maintaining peg stability, for example. It simply hasn't demonstrated there to be any demand for this product.
+No. However, it is indirectly reliant on adequate incentives for liquidity providers on Notional. In the absence of liquidity on Notional, interest rates offered by USV may fall or become erratic to the point that the product is unviable.
 
 **2) If demand falls to 0 tomorrow, can all users be made whole?**
 
-Yes. USV can safely process USDC withdrawals without a risk of loss.
+Mostly. USV is always exposed to fCash. If all USV were to be redeemed tomorrow, fCash would be sold before maturity and be exposed to market risk. In normal market conditions, realized losses should be modest (at most, ~1-3% loss of principal). 
 
 ### Security Factors
 
 **1) Do audits reveal any concerning signs?**
 
 The [Peckshield audit report](https://github.com/peckshield/publications/blob/master/audit_reports/PeckShield-Audit-Report-Phuture-FRPVault-v1.0.pdf) from August 2022 found 3 medium issues and 1 low severity issue. Issues were resolved with the exception of the powerful `VAULT_MANAGER_ROLE` privileges. Peckshield recommended the team transfer control to a DAO-like governance contract and impose protective measures such as timelocks. The team instead confirmed they plan to maintain the multi-sig governance. 
-  
+
+## LlamaRisk Recommendation
+
+We see no problem to offer a gauge to a new product in the bootstrapping phase. However, there has been a particularly low level of adoption for USV, as evidenced by the high percentage of team owned tokens and negligible Curve pool utilization. A gauge can improve liquidity, but it can't ensure sustainable adoption if USV is fundamentally a product without demand. We recommend the DAO allow a period of bootstrapping and reevalutate USV adoption and Curve pool performance metrics in six months to determine if the gauge should remain.
 
 ## Appendix
 
