@@ -101,9 +101,10 @@ Notional Finance allows lenders to exchange their assets in the form of cTokens 
 
 It is possible also to redeem the underlying cToken before maturity, and doing so will expose the lender to risk of loss, as Teddy from Notional explains:
 
-![Screen Shot 2023-02-23 at 3 14 55 PM](https://user-images.githubusercontent.com/51072084/221053202-e498c72f-fbc9-4038-96e0-6dd8e440d796.png)
+![teddy](https://user-images.githubusercontent.com/51072084/221062327-0b1e3793-bf68-437d-9234-ae54ed0016d4.png)
 
-[This google sheet](https://docs.google.com/spreadsheets/d/17J2Nzj-T_S94tMrP-Ak9veFOlH2BMdrnOzgagOJ4stY/edit?usp=sharing) helps to show the magnitude of potential gains/losses from early redemption. USV holders may be affected, as large USV withdrawals will usually require selling fCash positions before maturity.
+
+[This desmos graph](https://docs.google.com/spreadsheets/d/17J2Nzj-T_S94tMrP-Ak9veFOlH2BMdrnOzgagOJ4stY/edit?usp=sharing) helps to show the magnitude of potential gains/losses from early redemption (Note that stablecoin rates on Notional have a max range of 0%-13%, and a normal range of 2%-7% as specified by the AMM parameters). USV holders may be affected, as large USV withdrawals will usually require selling fCash positions before maturity.
 
 #### Borrower
 
@@ -211,7 +212,7 @@ It is important to consider the impact of changing parameters, such as raising t
 
 #### Market Risk
 
-Funds deposited into USV will either be 1) sitting idle as USDC, 2) deployed as 3-month tenor fCash, or 3) deployed as 6-month tenor fCash. fCash redeemed before maturity will be exposed to market risk from changes in interest rate, as modelled [here](https://docs.google.com/spreadsheets/d/17J2Nzj-T_S94tMrP-Ak9veFOlH2BMdrnOzgagOJ4stY/edit?usp=sharing). USV uses a waterfall redemption strategy to first prefer USDC, and then the lowest-yielding tenor for withdrawal. Unless there have been recent deposits, all funds will typically be deployed as fCash. This means users could be exposed to loss on their principal at time of withdrawal, depending on changes in interest rate. USV allows users to specify a minimum output amount and does not place any restriction on a user's ability to withdraw, regardless of market conditions.
+Funds deposited into USV will either be 1) sitting idle as USDC, 2) deployed as 3-month tenor fCash, or 3) deployed as 6-month tenor fCash. fCash redeemed before maturity will be exposed to market risk from changes in interest rate, as modelled [here](https://www.desmos.com/calculator/zwaw8lr0nm). USV uses a waterfall redemption strategy to first prefer USDC, and then the lowest-yielding tenor for withdrawal. Unless there have been recent deposits, all funds will typically be deployed as fCash. This means users could be exposed to loss on their principal at time of withdrawal, depending on changes in interest rate. USV allows users to specify a minimum output amount and does not place any restriction on a user's ability to withdraw, regardless of market conditions.
 
 ### Compound Risks
 
