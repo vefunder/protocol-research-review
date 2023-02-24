@@ -209,7 +209,13 @@ It is crucial to balance liquidity provider incentives for smooth pool interacti
 
 It is important to consider the impact of changing parameters, such as raising the anchor rate, which may attract more lenders but could also distort the pool and lead to high slippage. This can impact the usability of the protocol, leading to a decrease in lending/borrowing and liquidity provision. Continual changes in the market rate for lending and borrowing necessitate a lower scalar factor to cover a wider spread of interest rate fluctuations. High fluctuations can result in the protocol's failure to capture demand for borrowing/lending due to high slippage, particularly if the scalar factor is high.
 
+#### Market Risk
+
+Funds deposited into USV will either be 1) sitting idle as USDC, 2) deployed as 3-month tenor fCash, or 3) deployed as 6-month tenor fCash. fCash redeemed before maturity will be exposed to market risk from changes in interest rate, as modelled [here](https://docs.google.com/spreadsheets/d/17J2Nzj-T_S94tMrP-Ak9veFOlH2BMdrnOzgagOJ4stY/edit?usp=sharing). USV uses a waterfall redemption strategy to first prefer USDC, and then the lowest-yielding tenor for withdrawal. Unless there have been recent deposits, all funds will typically be deployed as fCash. This means users could be exposed to loss on their principal at time of withdrawal, depending on changes in interest rate. USV allows users to specify a minimum output amount and does not place any restriction on a user's ability to withdraw, regardless of market conditions.
+
 ### Compound Risks
+
+
 
 ### Custody Risk
 
