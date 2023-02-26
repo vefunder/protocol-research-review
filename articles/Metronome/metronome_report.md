@@ -8,8 +8,6 @@
 
 Metronome Synth Protocol:
 
-
-
 * Metronome Documentation: [https://docs.metronome.io/](https://docs.metronome.io/) 
 * Quantstamp Audit: [https://github.com/autonomoussoftware/metronome-synth-audit](https://github.com/autonomoussoftware/metronome-synth-audit) 
 * Telegram: [https://t.me/metronometoken](https://t.me/metronometoken) 
@@ -19,8 +17,6 @@ Metronome Synth Protocol:
 * LlamaRisk Dune Dash by DiligentDeer: [https://dune.com/diligentdeer/metronome-llamarisk](https://dune.com/diligentdeer/metronome-llamarisk) 
 
 Metronome V1 for historical context: 
-
-
 
 * Prime Rating Report on Metronome V1: [https://primerating.mypinata.cloud/ipfs/QmTAHVmLMTEFpmKSAzsrw13af2SaomaDPMtMYn6ALR3TYK](https://primerating.mypinata.cloud/ipfs/QmTAHVmLMTEFpmKSAzsrw13af2SaomaDPMtMYn6ALR3TYK)
 * Defi Safety Risk Assessment: [https://defisafety.com/app?title=metron](https://defisafety.com/app?title=metron) 
@@ -65,10 +61,8 @@ Vesper is a DeFi yield aggregator, like Yearn Finance, with its own staking deri
 
 With Metronome 2.0, the team has introduced MET, a new “utility token” with three primary use cases: 
 
-
-
 * **Collateral (planned)**: MET will be used in the future as collateral to mint synthetic assets on the Metronome dApp. 
-* **Governance (planned):** MET is intended as the governance token for the Metronome DAO. A MET holder will be able to lock tokens to create and vote on proposals.Currently MET is used in [Snapshot voting](https://snapshot.org/#/metronome.eth).
+* **Governance (in progress):** MET is intended as the governance token for the Metronome DAO. A MET holder will be able to lock tokens to create and vote on proposals. Currently MET is used in [Snapshot voting](https://snapshot.org/#/metronome.eth).
 * **Trading Fee Discounts (planned):** Users will be able to stake MET in a tiered system, in which the number of tokens deposited and the duration of the lockup will give the user a discount on synthetic trading fees.
 
 The team has not published detailed tokenomics for MET. At this time, it’s difficult to assess the token’s value proposition and soundness. Much will depend on the protocol’s implementation. Currently, we have some concerns about the risk introduced by MET as a collateral asset (see the “Economic Risk” section for more detail) and the value of MET in governance (see “Governance”). 
@@ -76,66 +70,39 @@ The team has not published detailed tokenomics for MET. At this time, it’s dif
 
 ## Synthetic assets
 
-The protocol mints its own synthetic assets against deposited collateral. The synths are msUSD, msETH, msBTC and msDOGE, representing USD, ETH, BTC and Doge respectively. The price of the synthetics should maintain a “soft peg” with the underlying assets, generally trading 1:1. This strategy depends on market forces, such as liquidity incentives and arbitrage, to maintain the peg.
+The protocol mints its own synthetic assets against deposited collateral. The synths are [msUSD](https://etherscan.io/address/0xab5eB14c09D416F0aC63661E57EDB7AEcDb9BEFA#readProxyContract), [msETH](https://etherscan.io/address/0x64351fC9810aDAd17A690E4e1717Df5e7e085160#readProxyContract), [msBTC](https://etherscan.io/address/0x8b4F8aD3801B4015Dea6DA1D36f063Cbf4e231c7#readProxyContract) and [msDOGE](https://etherscan.io/address/0x7CEbE35b46b8078e7ffBF754EEc4A48653c47524#readProxyContract#F6), representing USD, ETH, BTC and Doge respectively. The price of the synthetics should maintain a “soft peg” with the underlying assets, generally trading 1:1. This strategy depends on market forces such as liquidity incentives and arbitrage to maintain the peg.
 
 
 ### msETH & msUSD
 
-Metronome has built its liquidity strategy around Curve. There is currently about $1.5 million in the [msETH pool](https://curve.fi/#/ethereum/pools/factory-v2-252/deposit) (582 ETH + 323 msETH) and $780,000 in the [msUSD/FraxBP pool](https://curve.fi/#/ethereum/pools/factory-v2-251/deposit) ($310,000 msUSD + $300,000 FRAX + $170,000 USDC).
+Metronome has built its liquidity strategy around Curve. There is currently about $1.5 million in the [msETH pool](https://curve.fi/#/ethereum/pools/factory-v2-252/deposit) and $1.3m in the [msUSD/FraxBP pool](https://curve.fi/#/ethereum/pools/factory-v2-251/deposit) after CRV incentives have been active for ~3 weeks.
 
-Further, much of the LP in both pools is Protocol-Owned Liquidity. The Metronome team initially seeded the msETH pool with 300 ETH + 300 msETH and the msUSD pool with $150,000 msUSD + $150,000 FraxBP, according to Zane Huffman. The POL in the msETH pool is collateralized by a vaETH position.
+Much of the LP in both pools is Protocol-Owned Liquidity. The Metronome team initially seeded the msETH pool with 300 ETH + 300 msETH and the msUSD pool with $150,000 msUSD + $150,000 FraxBP, according to Zane Huffman. The POL in the msETH pool is collateralized by a vaETH position.
 
-This query shows the value of outstanding synths is still very low, with the combined USD value of msETH and msUSD at under $1m.
+This query shows the value of outstanding synths is still quite low, with the combined USD value of msETH and msUSD at under $1m:
 
 ![Screen Shot 2023-02-25 at 7 17 17 PM](https://user-images.githubusercontent.com/51072084/221390522-38841406-d62e-4049-ab0e-f2ce03d992c7.png)
 
 Source: [LlamaRisk Dune Dash by DiligentDeer](https://dune.com/queries/2050243/3392158)
 
+
 ### Further Synthetics: msBTC and msDOGE
 
-Aside from the synthetic assets that have been added to the Curve Gauge (i.e. msETH & msUSD), Metronome offers msBTC and msDOGE, neither of which is yet tradeable in public markets. Currently, msBTC and msDOGE are only mintable/redeemable within the protocol, where the [total supply of msBTC is 0.25 BTC](https://etherscan.io/token/0x8b4F8aD3801B4015Dea6DA1D36f063Cbf4e231c7#readProxyContract#F10) and [msDOGE has a supply of 0](https://etherscan.io/address/0x7CEbE35b46b8078e7ffBF754EEc4A48653c47524#readProxyContract#F10).These synths can be swapped on Metronome’s internal marketplace, but the Metronome team does not currently have plans to introduce further DeFi integration for these tokens.
+Aside from the synthetic assets that have been added to the Curve Gauge (i.e. msETH & msUSD), Metronome offers msBTC and msDOGE, neither of which is currently tradeable in public markets. The [total supply of msBTC is 0.25 BTC](https://etherscan.io/token/0x8b4F8aD3801B4015Dea6DA1D36f063Cbf4e231c7#readProxyContract#F10) and [msDOGE has a supply of 0](https://etherscan.io/address/0x7CEbE35b46b8078e7ffBF754EEc4A48653c47524#readProxyContract#F10).These synths can only be swapped on Metronome’s internal synth marketplace, and the Metronome team does not currently have plans to introduce further DeFi integration for these tokens.
+
+
+### Synth Marketplace 
+
+The [Synth Marketplace](https://docs.metronome.io/metronome-synth/metronome-synth-protocol/synth-marketplace) is a key feature of the Metronome Synth dApp, where users can swap synthetic assets. Swaps on the marketplace have no slippage and a low trading fee of 0.25%. Users can create long or short positions by swapping between synthetic assets, with individual liquidity limits based on collateral factors. However, liquidity is limited by a mintage cap on each synthetic asset, which prevents excessive concentration in any one synthetic or posted collateral. Synths can be exchanged for other synths at their current market price, provided they do not exceed the global synth mintage limitation, which is designed to maintain the health of the overall ecosystem.
+
+Users should be aware of the history of [oracle frontrunning](https://blog.synthetix.io/frontrunning-synthetix-a-history/) with regard to synthetic asset protocols that depend on an oracle for execution pricing. The .25% fee on swaps does mitigate some frontrunning risk, but Metronome does not have additional protections in place. This can possibly result in losses that may be borne by Curve LPs.
 
 
 ## Collateral assets 
 
-Metrome finance accepts the following assets as collateral and categorises them in their documentation: 
+Metronome finance accepts the following assets as collateral and categorises them in their documentation: 
 
-
-<table>
-  <tr>
-   <td><strong>Stablecoins </strong>
-   </td>
-   <td><strong>Blue chips</strong>
-   </td>
-   <td><strong>Vesper Pool-share tokens</strong>
-   </td>
-  </tr>
-  <tr>
-   <td>USDC, FRAX, DAI
-   </td>
-   <td>ETH, WBTC
-   </td>
-   <td>vaETH, vaUSDC, vaFRAX
-   </td>
-  </tr>
-  <tr>
-   <td>USDC, FRAX and DAI are largely trusted stablecoins with substantial price history and deep liquidity. They can generally be considered safe.
-   </td>
-   <td>ETH is the most pristine collateral in DeFi. WBTC, while recently <a href="https://thedefiant.io/wbtc-depeg">scrutinised</a>, has found wide adoption. 
-   </td>
-   <td>vaAssets are Vesper pool-share tokens deploying aggressive strategies to generate yield. These strategies seek greater returns by depositing ETH, USDC and Frax in a range of different DeFi protocols. Because the strategies are riskier, collateral ratios on these assets are lower.
-   </td>
-  </tr>
-  <tr>
-   <td>75% Collateral Ratio
-   </td>
-   <td>70% Collateral Ratio
-   </td>
-   <td>60% Collateral Ratio
-   </td>
-  </tr>
-</table>
-
+![Screen Shot 2023-02-26 at 1 02 29 PM](https://user-images.githubusercontent.com/51072084/221437144-b6b5605a-f58e-47c5-8931-b156b3bdc5f6.png)
 
 
 ## Vesper
@@ -158,60 +125,53 @@ Within the Vesper pool, multiple strategies are employed in parallel with capita
 
 #### Source: [Vesper's Modular Pool Architecture](https://docs.vesper.finance/vesper-pools-and-strategies/vespers-modular-pool-architecture)
 
-Management of the underlying strategies is handled by the governor (a Vesper 3-of-5 multisig) and by keepers. Regular pool operations, such as adjusting strategy weightings, are done by authorized keepers, which can be added or removed by the governor. Keepers can withdraw assets from a strategy in case of emergency. The governor controls critical functionality, such as pausing or permanently disabling contract execution.
+Management of the underlying strategies is handled by the governor (a Vesper 3-of-5 multisig) and by keepers. Regular pool operations (such as strategy reweightings or to withdraw assets from a strategy in case of emergency) are done by authorized keeper addresses. Keepers can be added or removed by the governor. The governor controls critical system functionality, such as adding new strategies or pausing/permanently disabling contract execution.
 
-Users with exposure to vaToken pools should be aware of the underlying strategies and risks associated with the various protocols where their funds are deployed. They should actively monitor for major updates to the pool strategy, and be willing to place trust in strategy management of the governor (Vesper team) and authorized keepers. The [Vesper UI pool page](https://app.vesper.finance/eth/pools) is a convenient way to check the active strategies and weightings.
+Users with exposure to vaToken pools should be aware of the underlying strategies and risks associated with the various protocols where their funds are deployed. They should actively monitor for major updates to the pool strategy, and be comfortable placing trust in the governor (Vesper team) and authorized keepers. The [Vesper UI pool page](https://app.vesper.finance/eth/pools) is a convenient way to check the active strategies and weightings.
 
 
 ## A closer look at Vesper Pool-share tokens
 
-Vesper pool shares each deploy a unique strategy to generate yield, thus each asset needs to be evaluated individually. Note that the strategies as described are expected to change over time in both weighting and strategy composition.
+Each Vesper pool deploys a unique set of strategies to generate yield, thus each asset needs to be evaluated individually. Note that the strategies as described are expected to change over time in both weighting and strategy composition.
 
 
 ### vaETH
 
-vaETH pool accepts user deposits in ETH. Vesper then splits up the ETH by weight and lends it to various protocols (i.e. Euler, Aave and Alpha Homora Lend). DAI received from Aave and Euler is then deposited into an aggressive Vesper DAI Pool (which in turn is deposited into a Compound leverage strategy). The Alpha Homora Lend strategy directly deposits the ETH into the protocol to earn yield. There is a pool buffer which maintains a balance of undeployed capital to more cheaply facilitate typical withdrawal requests. More information on the strategy is available on [Github](https://github.com/vesperfi/vesper-pool-ops/issues/222) and in the [documentation](https://docs.vesper.finance/vesper-pools-and-strategies/strategies/direct-to-aave-or-compound).
+vaETH pool accepts user deposits in ETH. Vesper then splits up the ETH by weight and lends it to various protocols (i.e. Euler, Aave and Alpha Homora Lend). DAI received from Aave and Euler is then deposited into an aggressive Vesper DAI Pool (which employs a strategy that does 2x leverage yield farming on Compound). The Alpha Homora Lend strategy directly deposits the ETH into the protocol to earn yield. There is a pool buffer which maintains a balance of undeployed capital to more cheaply facilitate typical withdrawal requests. More information on the strategy is available on [Github](https://github.com/vesperfi/vesper-pool-ops/issues/222) and in the [documentation](https://docs.vesper.finance/vesper-pools-and-strategies/strategies/direct-to-aave-or-compound).
 
-
-![image](https://user-images.githubusercontent.com/51072084/221347321-734b5b2f-6908-4b30-a9e5-1bfd115f47f8.png)
-
-
-The strategy has been visualised by @wormholeOracle: 
+We've created a flow chart to help visualize the current vaETH strategy: 
 
 ![image](https://user-images.githubusercontent.com/51072084/221347342-a3ed71d8-a677-497f-8416-66f597a0549d.png)
 
 
 ### vaUSDC
 
-A Vesper user receives vaUSDC when they deposit USDC. The USDC is partially converted into FRAX and DOLA. (The risks of DOLA as an asset have been [previously reviewed](https://cryptorisks.substack.com/p/asset-risk-assessment-dola) by the Curve Risk Team.) The assets are then deposited into the Curve pools [DOLA/FraxBP](https://curve.fi/#/ethereum/pools/factory-v2-176/deposit) and [FRAX/USDC](https://curve.fi/#/ethereum/pools/fraxusdc/deposit), and the resulting LP tokens are deposited into Convex for additional yield.The Convex For Frax strategy additionally locks the Convex LP into Frax for a period of 6 days and 21 hours. A 5% pool buffer is allocated before rebalancing with new deposits. Note the higher buffer compared to vaETH: buffer is higher in newer pools with lower TVL. 
+A Vesper user receives vaUSDC when they deposit USDC. The USDC is partially converted into FRAX and DOLA. (The risks of DOLA as an asset have been [previously reviewed](https://cryptorisks.substack.com/p/asset-risk-assessment-dola) by the Curve Risk Team.) The assets are then deposited into the Curve pools [DOLA/FraxBP](https://curve.fi/#/ethereum/pools/factory-v2-176/deposit) and [FRAX/USDC](https://curve.fi/#/ethereum/pools/fraxusdc/deposit), and the resulting LP tokens are deposited into Convex for additional yield. The "Convex For Frax" strategy additionally locks the Convex LP into Frax for a period of 6 days and 21 hours. A pool buffer requires 5% of USDC deposits to sit idle. Note the higher buffer compared to vaETH: the buffer is typically set higher for newer pools with lower TVL. 
 
-The strategy has been visualised by @wormholeOracle: 
+We've created a flow chart to help visualize the current vaUSDC strategy: 
 
 ![image](https://user-images.githubusercontent.com/51072084/221347429-e805aa2a-bcf3-49d3-9dd1-14392b7c6a9f.png)
 
 
 ### vaFRAX
 
-The user deposits FRAX, which is deposited into the Curve DOLA/FraxBP and Frax/USDC LP pools. The LP tokens are deposited into Convex for extra yield. The Convex For Frax strategy additionally locks the Convex LP into Frax for a period of 6 days and 21 hours.
+The user deposits FRAX, which is deposited into the Curve DOLA/FraxBP and Frax/USDC LP pools. The LP tokens are deposited into Convex for extra yield. The "Convex For Frax" strategy additionally locks the Convex LP into Frax for a period of 6 days and 21 hours.
 
-The strategy has been visualised by @wormholeOracle:
+We've created a flow chart to help visualize the current vaFRAX strategy:
 
 ![image](https://user-images.githubusercontent.com/51072084/221347459-8ea62237-5f5f-493b-8c15-233a080051f6.png)
 
-There is no spot market for synthetic Vesper assets. They have to be redeemed through the protocol, so they do not have a liquid market value. A user or liquidity provider who interacts with these assets should be aware they are taking on multiple layers of smart-contract risk — both from the Vesper contracts and the contracts of the various protocols used in the yield strategies.
 
-Additionally, it’s worth noting that The Metronome and Vesper teams are part of the same overarching company (Bloq). There is potential for bias in the Metronome team’s risk evaluation in accepting Vesper collateral. On the other hand, several large and reputable DeFi projects have also integrated Vesper tokens in a similar capacity, including [Frax](https://medium.com/vesperfinance/this-week-frax-gauge-goes-live-mstable-advances-january-in-review-5847508b253) and [Alchemix](https://medium.com/vesperfinance/you-can-now-use-vesper-with-alchemix-68dd3937f6de). Vesper’s pool contracts are [audited](https://github.com/vesperfi/doc/tree/main/audit/v3%2B).
+### Final Thoughts on Metronome + Vesper
 
-It’s likely that the Curve pool and gauge will substantially increase liquidity for Metronome synths and help maintain the peg, making the assets more attractive to LPs and the protocol more robust. However, Metronome is a young protocol that has yet to prove demand for its Synth product and questions remain whether it will thrive long-term in a competitive market where other synthetics platforms (i.e. Synthetix) are more established, and offer a wider range of features. The Metronome commented that their unique value proposition within the synthetic space lies in the productive collateral niche.
+There is no spot market for synthetic Vesper assets, and must be redeemed through the protocol. A user or liquidity provider who interacts with these assets should be aware they are taking on multiple layers of smart-contract risk — both from the Vesper contracts and the contracts of the various protocols used in the yield strategies.
 
+Additionally, it’s worth noting that the Metronome and Vesper teams are part of the same overarching company (Bloq). There is potential for bias in the Metronome team’s risk evaluation in accepting Vesper collateral. On the other hand, several large and reputable DeFi projects have also integrated Vesper tokens in a similar capacity, including [Frax](https://medium.com/vesperfinance/this-week-frax-gauge-goes-live-mstable-advances-january-in-review-5847508b253) and [Alchemix](https://medium.com/vesperfinance/you-can-now-use-vesper-with-alchemix-68dd3937f6de). Vesper’s pool contracts are [audited](https://github.com/vesperfi/doc/tree/main/audit/v3%2B), and every new strategy first undergoes an audit.
 
-### Synth Marketplace 
-
-The [Synth Marketplace](https://docs.metronome.io/metronome-synth/metronome-synth-protocol/synth-marketplace) is a key feature of the Metronome Synth dApp, where users can swap synthetic assets. Swaps on the marketplace have no slippage and a low trading fee of 0.25%. Users can create long or short positions by swapping between synthetic assets, with individual liquidity limits based on collateral factors. However, liquidity is limited by a mintage cap on each synthetic asset, which prevents excessive concentration in any one synthetic or posted collateral. Additionally, synths can be exchanged for other synths at their current market price, provided they do not exceed the global synth mintage limitation, which is designed to maintain the health of the overall ecosystem.
+It’s likely that the Curve pool and gauge will substantially increase liquidity for Metronome synths and help maintain the peg, making the assets more attractive to LPs and the protocol more robust. However, Metronome is a young protocol that has yet to prove demand for its Synth product. Questions remain whether it will thrive long-term in a competitive market where other synthetics platforms (i.e. Synthetix) are more established and offer a wider range of features. The Metronome team commented that their unique value proposition within the synthetic space lies in the productive collateral niche.
 
 
 # Risk Vectors 
-
 
 ## Governance
 
