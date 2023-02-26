@@ -28,7 +28,7 @@ Metronome V1 for historical context:
 
 ## Relation to Curve  
 
-In January 2023, Metronome submitted a proposal to the Curve governance forum suggesting the inclusion of liquidity pools msUSD/FraxBP and msETH/ETH into the Gauge Controller. The proposed gauge received approval from the community. Ascertaining the potential risks to Curve's liquidity providers from assets in Curve pools is an essential objective of the LlamaRisk Team. In pursuit of this objective, the LlamaRisk Team has been conducting research on the Metronome protocol.
+In January 2023, Metronome submitted a [proposal](https://gov.curve.fi/t/proposal-to-add-msusd-fraxbp-mseth-eth-to-the-gauge-controller/8608) to the Curve governance forum requesting to add gauges for the [msUSD/FraxBP](https://curve.fi/#/ethereum/pools/factory-v2-251/deposit) and [msETH/ETH](https://curve.fi/#/ethereum/pools/factory-v2-252/deposit) pools. The proposed gauges received approval from the community [here](https://dao.curve.fi/vote/ownership/255) and [here](https://dao.curve.fi/vote/ownership/256). Ascertaining the potential risks to Curve's liquidity providers from assets in Curve pools is an essential objective of the LlamaRisk Team. In pursuit of this objective, the LlamaRisk Team has been conducting research on the Metronome protocol.
 
 
 ## Introduction to Metronome 
@@ -38,24 +38,24 @@ Metronome is an Ethereum-based DeFi platform for synthetic assets. By crypto sta
 
 ### Metronome 1.0 (2018-2022)
 
-The initial product suite of Metronome launched in 2018. Metronome is an offshoot of Bloq, a U.S.-based company that provides enterprise clients with blockchain infrastructure: cloud services, analytics, mining, staking, etc. Bloq has strong roots in the Bitcoin community; one of its founders is the former Bitcoin core developer Jeff Garzik, a prominent coder and entrepreneur. Garzik was a Bitcoin core developer from 2010 through 2016 and is one of the only developers who worked directly with Satoshi Nakamoto on Bitcoin’s code.
+The initial Metronome product suite launched in 2018. Metronome is an offshoot of Bloq, a U.S.-based company that provides enterprise clients with blockchain infrastructure: cloud services, analytics, mining, staking, etc. Bloq has strong roots in the Bitcoin community; one of its founders is the former Bitcoin core developer Jeff Garzik, a prominent coder and entrepreneur. Garzik was a Bitcoin core developer from 2010 through 2016 and is one of the only developers who worked directly with Satoshi Nakamoto on Bitcoin’s code.
 
 By 2018, Garzik had become disillusioned with debates about the virtues of Bitcoin versus Ethereum. Along with Bloq co-founder Matt Roszak, an early crypto investor, he launched Metronome to explore the nascent DeFi space at a time before the term “DeFi” really even meant anything.
 
 Garzik initially envisioned Metronome as a cross-chain platform and currency. He sought to connect Bitcoin with the fast-growing world of Ethereum smart contracts by building architecture around a [new kind of token](https://www.ibtimes.com/will-metronome-cryptocurrency-fulfill-jeff-garziks-blockchain-vision-2654089). “Metronome itself is an asset like gold in a warehouse, and moving it across chains is almost the opposite of a swap,” he told reporters at the time. “It’s the same asset moving to a different warehouse.” The Metronome token, then called MTN but later referred to as MET, would be affordable and “[built to last](https://cryptoslate.com/metronome-thousand-year-crypto/).”
 
-Version 1.0 of the protocol launched with a set of Ethereum smart contracts and an AMM DEX that were innovative for their time. The team raised millions through an ICO. However, Metronome 1.0 was unable to find a[ meaningful product-market fit](https://github.com/autonomoussoftware/metronome2-documentation/issues/1).
+Version 1.0 of the protocol launched with a set of Ethereum smart contracts and an AMM DEX that were innovative for their time. The team raised millions through an ICO. However, Metronome 1.0 was unable to find a [meaningful product-market fit](https://github.com/autonomoussoftware/metronome2-documentation/issues/1).
 
 
 ### Metronome 2.0 (2022- )
 
 The protocol was then redesigned from scratch, relaunching in August 2022 as Metronome 2.0, with a roadmap to transition governance to a newly created Metronome DAO. Because Metronome 2.0 bears little resemblance to 1.0, the authors of this report believe it should be viewed as a new protocol.
 
-The first application launched by Metronome 2.0 is a synthetic asset platform called Metronome Synth, currently in public beta. Users deposit a variety of collateral tokens, and Metronome Synth mints its own representations of USD, ETH BTC and DOGE — msUSD, msETH, msBTC, msDOGE — at a specified collateral ratio. These synthetics can then be swapped or farmed for yield.
+The first application launched by Metronome 2.0 is a synthetic asset platform called Metronome Synth, currently in public beta. Users deposit a variety of collateral tokens, and the protocol allows users to mint its own representations of USD, ETH BTC and DOGE — msUSD, msETH, msBTC, msDOGE. These synthetics can then be swapped or farmed for yield.
 
-Though Metronome now has a DAO, governance remains highly centralised (see the “Governance” section below). Although the signers are [fully doxxed](https://www.metronome.io/about), Bloq personnel still direct the protocol. Some Metronome team members are also involved with Vesper Finance (also [doxxed](https://vesper.finance/about/)), another DeFi offshoot of Bloq and a “[sister project](https://medium.com/vesperfinance/metronome-vesper-gateway-to-synthetic-assets-15509ca023b)” of Metronome. 
+Metronome now has a DAO roadmap that emphasizes its commitment to decentralizing its governance, although governance currently remains highly centralised (see the “Governance” section below). It currently relies on a multisig, the signers of which are [fully doxxed](https://www.metronome.io/about) Bloq personnel. Some Metronome team members are also involved with Vesper Finance (also [doxxed](https://vesper.finance/about/)), another DeFi offshoot of Bloq and a “[sister project](https://medium.com/vesperfinance/metronome-vesper-gateway-to-synthetic-assets-15509ca023b)” of Metronome. 
 
-Vesper is a DeFi yield aggregator, like Yearn Finance, with its own staking derivatives of stablecoins and blue chip assets. Launched in February 2021, Vesper offers about 20 different yield-generating pools on Ethereum and additional pools on Polygon and Avalanche. Vesper pool tokens are yield-bearing and can be used in other DeFi protocols. Metronome Synth accepts Vesper derivatives as collateral.
+Vesper is a DeFi yield aggregator, like Yearn Finance, with its own staking derivatives of stablecoins and blue chip assets. Launched in February 2021, Vesper offers about 20 different yield-generating pools on Ethereum and additional pools on Polygon and Avalanche. Vesper pool tokens are yield-bearing and are composable with other DeFi protocols. Metronome Synth accepts Vesper derivatives as collateral.
 
 
 # Assets 
