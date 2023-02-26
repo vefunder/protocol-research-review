@@ -15,7 +15,8 @@ Metronome Synth Protocol:
 * Telegram: [https://t.me/metronometoken](https://t.me/metronometoken) 
 * Discord: [https://discord.gg/metronome](https://discord.gg/metronome) 
 * Github: [https://github.com/autonomoussoftware](https://github.com/autonomoussoftware) 
-* Snapshot: [https://snapshot.org/#/metronome.eth](https://snapshot.org/#/metronome.eth) 
+* Snapshot: [https://snapshot.org/#/metronome.eth](https://snapshot.org/#/metronome.eth)
+* LlamaRisk Dune Dash by DiligentDeer: [https://dune.com/diligentdeer/metronome-llamarisk](https://dune.com/diligentdeer/metronome-llamarisk) 
 
 Metronome V1 for historical context: 
 
@@ -84,6 +85,11 @@ Metronome has built its liquidity strategy around Curve. There is currently abou
 
 Further, much of the LP in both pools is Protocol-Owned Liquidity. The Metronome team initially seeded the msETH pool with 300 ETH + 300 msETH and the msUSD pool with $150,000 msUSD + $150,000 FraxBP, according to Zane Huffman. The POL in the msETH pool is collateralized by a vaETH position.
 
+This query shows the value of outstanding synths is still very low, with the combined USD value of msETH and msUSD at under $1m.
+
+![Screen Shot 2023-02-25 at 7 17 17 PM](https://user-images.githubusercontent.com/51072084/221390522-38841406-d62e-4049-ab0e-f2ce03d992c7.png)
+
+Source: [LlamaRisk Dune Dash by DiligentDeer](https://dune.com/queries/2050243/3392158)
 
 ### Further Synthetics: msBTC and msDOGE
 
@@ -134,7 +140,13 @@ Metrome finance accepts the following assets as collateral and categorises them 
 
 ## Vesper
 
-As a yield-producing collateral type, it’s no surprise that Vesper pool tokens make up the vast majority of collateral backing on Metronome. Therefore, it’s prudent to explain the Vesper system architecture in more detail.
+As a yield-producing collateral type, it’s no surprise that Vesper pool tokens make up the vast majority of collateral backing on Metronome. This query by DiligentDeer finds >92% of Metronome's collateral backing to be by vaAssets:
+
+![Screen Shot 2023-02-25 at 7 07 17 PM](https://user-images.githubusercontent.com/51072084/221390100-7f90bb9f-ef1e-4611-b0ba-51fb28ccbda2.png)
+
+Source: [LlamaRisk Dune Dash by DiligentDeer](https://dune.com/queries/2050368/3393228)
+
+Therefore, it’s prudent to explain the Vesper system architecture in more detail.
 
 Strategies are designed with a modular philosophy. This is done to preserve simplicity for the end user while allowing Vesper the flexibility to continuously optimise as market conditions change. All that is required of the user is to select a “conservative” or “aggressive” pool strategy and deposit their chosen asset into the designated pool. Everything else happens under the hood.
 
