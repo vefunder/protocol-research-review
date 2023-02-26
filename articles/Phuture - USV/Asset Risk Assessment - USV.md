@@ -279,7 +279,7 @@ The [Peckshield audit report](https://github.com/peckshield/publications/blob/ma
 
 ## LlamaRisk Recommendation
 
-We see no problem to offer a gauge to a new product in the bootstrapping phase. However, there has been a particularly low level of user interaction with USV so far, as evidenced by the high percentage of team owned tokens and negligible Curve pool utilization. A gauge can improve liquidity, but it can't ensure sustainable adoption if USV is fundamentally a product without demand. We recommend the DAO allow a period of bootstrapping and reevalutate USV adoption and Curve pool performance metrics in six months to determine if the gauge should remain.
+We see no problem to offer a gauge to a new product in the bootstrapping phase. However, there has been a particularly low level of user interaction with USV so far, as evidenced by the high percentage of team owned tokens and negligible Curve pool utilization. A gauge can improve liquidity, but it can't ensure sustainable adoption if USV is fundamentally a product without demand. We recommend the DAO allow a period of bootstrapping and reevaluate USV adoption and Curve pool performance metrics in six months to determine if the gauge should remain.
 
 ## Appendix
 
