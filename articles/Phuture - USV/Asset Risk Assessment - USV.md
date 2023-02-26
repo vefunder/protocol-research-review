@@ -36,13 +36,14 @@ In January 2023, Phuture made a [proposal](https://gov.curve.fi/t/proposal-to-ad
 - [Github](https://github.com/Phuture-finance)
 - [Audits](https://docs.phuture.finance/protocol/audits)
 - [USV Contract Addresses](https://docs.phuture.finance/protocol/contract-addresses#phuture-savings-vaults)
+- [USV Vault Contract](https://www.contractreader.io/contract/0x4030de8f22f17822e325287ce3c8d97c36982b67)
 - [2-of-3 multi-sig](https://app.safe.global/eth:0x6575A93aBdFf85e5A6b97c2DB2b83bCEbc3574eC/home)
 
-Phuture is a crypto index platform that offers its users exposure to baskets of DeFi tokens through its on-chain index funds and savings vaults. Its newest product, the USDC Savings Vault (USV), seeks to simplify stable coin services. Users simply deposit USDC into the vault and receive the USV receipt token. By incorporating liquidity provisioning, lending, borrowing, and RWA-based investments into a single product, Phuture aims to reliably generate yields on USDC.
+Phuture is a crypto index platform that offers its users exposure to baskets of DeFi tokens through its on-chain index funds and savings vaults. Its newest product, the USDC Savings Vault (USV), seeks to simplify access to fixed-rate stablecoin yields. Users simply deposit USDC into the vault and receive the yield-earning USV receipt token. By automating the process of managing maturities and optimizing yield potential through its lending strategy, Phuture aims to reliably generate yields on USDC.
 
 Phuture utilizes Notional Finance, a fixed yield DeFi lending platform, to introduce their savings vault product for USDC. The USV strategy optimizes yield by dynamically investing in a blend of Notional's 3 and 6-month bonds. Notional, in turn, lends deposited funds to Compound for increased capital efficiency. Given that the USV product is primarily exposed to Notional Finance, a significant portion of this report will focus on the inner workings of this platform.
 
-When USDC is deposited into Phuture, it is lent out to Notional's most liquid tenors, ranging from 3 to 6 months. These deposits may remain idle until a minimum threshold of USDC is reached to be invested in an eligible and active tenor. During the redemption process, USV follows a waterfall structure that prioritizes paying out any available USDC before selling positions. To safeguard future returns, USV sells positions in order of the lowest yielding tenor first.
+When USDC is deposited into Phuture, it is lent out to the highest yielding tenor (either 3 or 6 month tenor). These deposits may remain idle until a minimum threshold of USDC is reached (although currently the threshold is 0, with harvesting done every 3 days). During the redemption process, USV follows a waterfall structure that prioritizes paying out any available USDC before selling positions. To safeguard future returns, USV sells positions in order of the lowest yielding tenor first.
 
 The following flowchart shows the strategy employed by USV:
 
@@ -56,7 +57,7 @@ Currently, 100% of the liquidity in the pool is supplied by the Phuture team. Sp
 
 When accounting for the 271,208 USV held by their multi-sig and the 100,000 USV provided as liquidity by their multi-sig, only 7.5% out of the 401,309 total USV supply is held by wallets other than the Phuture multi-sig. Phuture has stated that they will deploy the remaining USV in their treasury to the liquidity pool once the CRV gauge is allocated.
 
-Phuture has another product known as PDI (Phuture DeFi Index, a DeFi index token built on Ethereum. The performance of PDI can provide insight into the community's willingness to adopt new products from Phuture. Upon analyzing the distribution of PDI tokens, we observed that the majority of the PDI supply, approximately 79%, is held in the team multi-sig treasury. As of February 18th, the total PDI supply stands at 1389.5 tokens, of which 139.37 PDI is held in a wallet, 800 PDI is supplied as liquidity on Uniswap V3, and 111.99 PDI is parked in bPDI by the treasury multi-sig.
+Phuture has another product called PDI (Phuture DeFi Index), a DeFi index token built on Ethereum. The performance of PDI can provide insight into the community's willingness to adopt new products from Phuture. Upon analyzing the distribution of PDI tokens, we observed that the majority of the PDI supply, approximately 79%, is held in the team multi-sig treasury. As of February 18th, the total PDI supply stands at 1389.5 tokens, of which 139.37 PDI is held in a wallet, 800 PDI is supplied as liquidity on Uniswap V3, and 111.99 PDI is parked in bPDI by the treasury multi-sig.
 
 Here is how the supply change over time correlated with the no. of holders overtime:
 
@@ -74,6 +75,7 @@ Source: [PDI Supply and Holders Data [v2-5]](https://dune.com/queries/2014104/33
 - [Developer Docs](https://docs.notional.finance/developer-documentation/)
 - [Blog](https://blog.notional.finance/)
 - [Analytics](https://info.notional.finance/)
+- [Desmos Graph by Diligent Deer](https://www.desmos.com/calculator/dunk4utpir)
 - Audits: 
   * Code4Arena [Audit 1](https://code4rena.com/reports/2022-01-notional/), [Audit 2 Staked Note](https://code4rena.com/reports/2021-08-notional/)
   * Consensys Dilligence [Notional V2.1](https://consensys.net/diligence/audits/2022/03/notional-protocol-v2.1/)
@@ -104,7 +106,7 @@ It is possible also to redeem the underlying cToken before maturity, and doing s
 ![teddy](https://user-images.githubusercontent.com/51072084/221062327-0b1e3793-bf68-437d-9234-ae54ed0016d4.png)
 
 
-[This desmos graph](https://docs.google.com/spreadsheets/d/17J2Nzj-T_S94tMrP-Ak9veFOlH2BMdrnOzgagOJ4stY/edit?usp=sharing) helps to show the magnitude of potential gains/losses from early redemption (Note that stablecoin rates on Notional have a max range of 0%-13%, and a normal range of 2%-7% as specified by the AMM parameters). USV holders may be affected, as large USV withdrawals will usually require selling fCash positions before maturity.
+[This desmos graph](https://www.desmos.com/calculator/dunk4utpir) helps to show the magnitude of potential gains/losses from early redemption (Note that stablecoin rates on Notional have a max range of 0%-13%, and a normal range of 2%-7% as specified by the AMM parameters). USV holders may be affected, as large USV withdrawals will usually require selling fCash positions before maturity.
 
 #### Borrower
 
@@ -227,7 +229,7 @@ There has been little mention of Compound in this report since readers are likel
 
 Both Phuture and Notional have a centralization vector with the ownership authority around the multi-sig. Notional is fully upgradeable, as well as all system parameters are controlled by the treasury multi-sig. This is composed of two Notional team members (Jeff and Teddy) and three community members. Additionally, the pause guardian multi-sig can pause all system functions and is controlled by the Notional company.
 
-The Phuture multi-sig has significant control over the USV system and is controlled by members of the Phuture team. It allows the `VAULT_MANAGER_ROLE` to call `setMaxLoss`, `setFeeRecipient`, and `authorizeUpgrade`. Furthermore the ability to upgrade the USV contract gives the Phuture multi-sig control over user deposits to USV.
+The Phuture multi-sig has significant control over the USV system and is controlled by members of the Phuture team. It allows the `VAULT_MANAGER_ROLE` to call `setMaxLoss`, `setFeeRecipient`, and `authorizeUpgrade`. The ability to upgrade the USV contract gives the Phuture multi-sig control over user deposits to USV.
 
 C2tP points this out in the following discord convo:
 
@@ -238,7 +240,7 @@ Source: [Convex Finance Discord (CVX-Voting)](https://discord.com/channels/82079
 
 ## Conclusion
 
-- The USV product is exposed to several DeFi products. It relies most significantly on Notional Finance, although users should be aware that Notional utilizes Compound Finance under the hood. Additionally, the foundation of the USV product is USDC, a custodial stablecoin issued by Circle. 
+- USV is exposed to several DeFi products. It relies most significantly on Notional Finance, although users should be aware that Notional utilizes Compound Finance under the hood. Additionally, the foundation of the USV product is USDC, a custodial stablecoin issued by Circle. 
 
 - USV has a centralization vector with its ownership authority. Both Phuture and Notional are governed by team-controlled multi-sigs, and in both cases there is a high degree of control afforded to them.  
   
@@ -246,7 +248,9 @@ Source: [Convex Finance Discord (CVX-Voting)](https://discord.com/channels/82079
   
 - Notional has been audited, has an active Bug Bounty ($1,000,000) with immunefi and is certified by industry leaders including Certora, ABDK, Code Arena & OpenZeppelin. Notional Finance has an on-chain reserve fund that can be utilized to help cover any losses and reduce insolvency risk.
 
-- Given the current successful vote in favor of allocating a CRV gauge for USV-FraxBP, it is in the community's interest to monitor the performance of the pool for evidence of organic adoption. In the event that the pool fails to generate adequate volume, it may be appropriate to reevaluate the gauge.
+- Phuture has several [audits](https://docs.phuture.finance/protocol/audits), including a [Peckshield audit](https://github.com/peckshield/publications/blob/master/audit_reports/PeckShield-Audit-Report-Phuture-FRPVault-v1.0.pdf) of the FRPVault contract used by USV. The most significant finding is PVE-004: Trust issue of admin key, which addresses the counter-party risk posed by the `VAULT_MANAGER_ROLE`.
+
+- Given the successful vote in favor of allocating a CRV gauge for USV-FraxBP, it is in the community's interest to monitor the performance of the pool for evidence of organic adoption. In the event that the pool fails to generate adequate volume, it may be appropriate to reevaluate the gauge.
 
 
 ## LlamaRisk Gauge Criteria
@@ -259,27 +263,27 @@ Yes. USV is governed by a 2-of-3 multi-sig controlled by the Phuture team. It ca
 
 **2) If the team vanishes, can the project continue?**
 
-Yes. USV does not require active involvement from the team for day-to-day operations. It does not rely on the team to update price oracles, triggering rebalancing, or investment transactions. Investment into and settlement of Notional fCash positions are handled within the contract. USV could continue processing deposits and withdrawals indefinitely. 
+Yes. USV does not require active involvement from the team for day-to-day operations. It does not rely on the team to update price oracles or to trigger rebalances/investment transactions. Investment into and settlement of Notional fCash positions are handled within the contract. USV could continue processing deposits and withdrawals indefinitely. 
 
 ### Economic Factors
 
 **1) Does the project's viability depend on additional incentives?**
 
-No. However, it is indirectly reliant on adequate incentives for liquidity providers on Notional. In the absence of liquidity on Notional, interest rates offered by USV may fall or become erratic to the point that the product is unviable.
+No. However, it is indirectly reliant on adequate incentives for liquidity providers on Notional. In the absence of liquidity on Notional, interest rates offered by USV may fall or become erratic to the point that the strategy is unviable.
 
 **2) If demand falls to 0 tomorrow, can all users be made whole?**
 
-Mostly. USV is always exposed to fCash. If all USV were to be redeemed tomorrow, fCash would be sold before maturity and be exposed to market risk. In normal market conditions, realized losses should be modest (at most, ~1-3% loss of principal). 
+Mostly. USV is always exposed to fCash. If all USV were to be redeemed tomorrow, fCash would be sold before maturity and become exposed to market risk. In normal market conditions realized losses should be modest, although the further away redemption occurs from maturity date will substantially increase the risk of loss. DiligentDeer created [this Desmos graph](https://www.desmos.com/calculator/dunk4utpir) to visualize interest rate risk to lenders.
 
 ### Security Factors
 
 **1) Do audits reveal any concerning signs?**
 
-The [Peckshield audit report](https://github.com/peckshield/publications/blob/master/audit_reports/PeckShield-Audit-Report-Phuture-FRPVault-v1.0.pdf) from August 2022 found 3 medium issues and 1 low severity issue. Issues were resolved with the exception of the powerful `VAULT_MANAGER_ROLE` privileges. Peckshield recommended the team transfer control to a DAO-like governance contract and impose protective measures such as timelocks. The team instead confirmed they plan to maintain the multi-sig governance. 
+The [Peckshield audit report](https://github.com/peckshield/publications/blob/master/audit_reports/PeckShield-Audit-Report-Phuture-FRPVault-v1.0.pdf) from August 2022 found 3 medium issues and 1 low severity issue. Issues were resolved with the exception of the powerful `VAULT_MANAGER_ROLE` privileges. Peckshield recommended the team transfer control to a DAO-like governance contract and impose protective measures such as timelocks. The team instead confirmed they plan to maintain the multisig governance. 
 
 ## LlamaRisk Recommendation
 
-We see no problem to offer a gauge to a new product in the bootstrapping phase. However, there has been a particularly low level of user interaction with USV so far, as evidenced by the high percentage of team owned tokens and negligible Curve pool utilization. A gauge can improve liquidity, but it can't ensure sustainable adoption if USV is fundamentally a product without demand. We recommend the DAO allow a period of bootstrapping and reevaluate USV adoption and Curve pool performance metrics in six months to determine if the gauge should remain.
+A gauge has already been approved by the DAO to help bootstrap the USV product. However, there have been notably few user interaction with USV until now, as evidenced by the high percentage of team owned tokens and negligible Curve pool utilization. A gauge can improve liquidity, but it can't ensure sustainable adoption if USV is fundamentally a product without demand. We recommend the DAO allow a period of bootstrapping and reevaluate USV adoption and Curve pool performance metrics in six months to determine if the gauge should remain.
 
 ## Appendix
 
