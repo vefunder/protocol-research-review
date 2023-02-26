@@ -173,27 +173,26 @@ It’s likely that the Curve pool and gauge will substantially increase liquidit
 
 # Risk Vectors 
 
+
 ## Governance
 
 Metronome is governed by the MET token, which has existed in two different versions. MET 1.0 was issued when the project first launched in 2018. Later, as part of the 2022 relaunch, the MET DAO was created, along with a new token to govern it: MET 2.0 ([see MIP-001 for more on the tokenomics](https://github.com/autonomoussoftware/metronome2-documentation/issues/1)). The following graph shows how it was distributed:
 
 ![image](https://user-images.githubusercontent.com/51072084/221347582-abc087e1-c841-4dbf-af9f-ea24831ae729.png)
 
-
-#### Source: Metronome docs
+Source: Metronome docs
 
 MET DAO works much like other DAOs: Members can devise and share Metronome Improvement Proposals (MIPs), cast votes on MIPs (off-chain via Snapshot), and participate in forum debates. At this stage of the protocol’s evolution, the DAO is highly centralised, the protocol being governed by a team-owned multisig. However, the Metronome roadmap stresses a commitment to [progressive decentralisation](https://www.metronome.io/post/the-role-of-governance-in-decentralized-finance).
 
 There is an uneven distribution of MET tokens. While 14,377,915 MET currently exist, only 3,756,991 are effectively circulating and able to participate in governance. More than half of the total supply — 8,620,924 MET — is locked in the [treasury](https://etherscan.io/token/0x2ebd53d035150f328bd754d6dc66b99b0edb89aa?a=0xd1de3f9cd4ae2f23da941a67ca4c739f8dd9af33), while 2,000,000 additional MET are used by the protocol in a [Uniswap V3 LP position](https://etherscan.io/token/0x2ebd53d035150f328bd754d6dc66b99b0edb89aa?a=0xceb5c29bde4604296135dd7b027a433fd3633516). It’s unclear how the 8.6 million tokens in the treasury will be distributed.
 
-The 3,756,991 effective circulating tokens are highly concentrated in the hands of team members and project advisors, who own 2,000,000 MET, representing 53% of the effective circulating supply. These tokens have been vested, unlocking [evenly over a 24-month vesting period](https://github.com/autonomoussoftware/metronome2-documentation/issues/1). During that period, however, the team members and advisors are allowed to participate in governance and have done so as seen in past [snapshot votes](https://snapshot.org/#/metronome.eth/proposal/0xd96f4626bdd23a2b0c13315c1d08c9b66796e7c36fcc2cd5c358092c232bdf9b). The other 47% of the effective circulating tokens remain unclaimed in the [token migration contract](https://etherscan.io/token/0x2ebd53d035150f328bd754d6dc66b99b0edb89aa?a=0xe67516417a934b27cf0c14868f8165b1bc94bf73) (1,541,560 MET or 41% of the effective circulating supply). It should be noted that there is no expiration date on the claim to the token migration contract for v1 holders. The remaining 6% of the effective circulating supply is owned by only [125 holders](https://etherscan.io/token/0x2ebd53d035150f328bd754d6dc66b99b0edb89aa#balances) with the largest being a [centralised exchange address (Gate.io)](https://etherscan.io/address/0x0d0707963952f2fba59dd06f2b425ace40b492fe) holding 2%, according to Etherscan.
+The 3,756,991 effective circulating tokens are highly concentrated in the hands of team members and project advisors, who own 2,000,000 MET, representing 53% of the effective circulating supply. These tokens have been vested, unlocking [linearly over a 24-month vesting period](https://github.com/autonomoussoftware/metronome2-documentation/issues/1). During that period, however, the team members and advisors are allowed to participate in governance and have done so as seen in past [snapshot votes](https://snapshot.org/#/metronome.eth/proposal/0xd96f4626bdd23a2b0c13315c1d08c9b66796e7c36fcc2cd5c358092c232bdf9b). The other 47% of the effective circulating tokens remain unclaimed in the [token migration contract](https://etherscan.io/token/0x2ebd53d035150f328bd754d6dc66b99b0edb89aa?a=0xe67516417a934b27cf0c14868f8165b1bc94bf73) (1,541,560 MET or 41% of the effective circulating supply). It should be noted that there is no expiration date on the claim to the token migration contract for v1 holders. The remaining 6% of the effective circulating supply is owned by only [125 holders](https://etherscan.io/token/0x2ebd53d035150f328bd754d6dc66b99b0edb89aa#balances) with the largest being a [centralised exchange address (Gate.io)](https://etherscan.io/address/0x0d0707963952f2fba59dd06f2b425ace40b492fe) holding 2%, according to Etherscan.
 
 ![image](https://user-images.githubusercontent.com/51072084/221347627-ab2ece99-5896-4071-84e5-9c9ab7bcd8f9.png)
 
+Source: Metronome docs + enrichment by authors
 
-#### Source: Metronome docs + enrichment by authors
-
-This lopsided token distribution creates barriers to meaningful community participation in governance. For instance, only one [EOA address](https://etherscan.io/address/0x73f10d7affbab50326441c56d775a075e54698f9) has sufficient voting power — a delegation of at least 25,000 MET — to [bring a proposal to vote](https://docs.metronome.io/metronome-2.0/governance/voting-and-participation) using Snapshot, an off-chain voting tool. And according to MET DAO rules, at least 4% of the circulating supply must vote on a proposal for the vote to be binding. In practical terms, this means that 150,279 MET tokens (3,756,991 * 0.04) must participate in a vote to push any proposal through governance. Although 4% is not high compared to the governance procedures of other projects, the token distribution makes this bar more difficult for a non-team member to reach (while the team could reach it easily). The cost of reaching quorum at the current price of MET ($1.15) is about $170,000. Additionally, even if a community member does push a Snapshot vote through, they must rely on the team to implement the result.
+This lopsided token distribution creates barriers to meaningful community participation in governance. For instance, only one [EOA address](https://etherscan.io/address/0x73f10d7affbab50326441c56d775a075e54698f9) has sufficient voting power — a delegation of at least 25,000 MET — to [bring a proposal to vote](https://docs.metronome.io/metronome-2.0/governance/voting-and-participation) using Snapshot, an off-chain voting tool. According to MET DAO rules, at least 4% of the circulating supply must vote on a proposal for the vote to be binding. In practical terms, this means that 150,279 MET tokens (3,756,991 * 0.04) must participate in a vote to push any proposal through governance. Although 4% is not high compared to the governance procedures of other projects, the token distribution makes this bar more difficult for a non-team member to reach (while the team could reach it easily). The cost of reaching quorum at the current price of MET ($1.15) is about $170,000. Additionally, even if a community member does push a Snapshot vote through, they must rely on the team to implement the result.
 
 Snapshot provides a sentiment check, not meaningful control over the protocol. Realistically, the only way to decentralise governance is to transfer control from the team multisig to an on-chain DAO. At the moment, however, the multisig has very broad authority (see “Centralisation in Operation” below).
 
@@ -208,131 +207,26 @@ There are some concerning similarities between Metronome and Vesper when it come
 
 Metronome is operated by three working groups: Engineering, Growth, and Operations. Their roles are described in [this blog post](https://www.metronome.io/post/the-role-of-governance-in-decentralized-finance):  
 
-
-
 * Engineering maintains the existing Metronome smart contract framework, develops new features, tries to keep the protocol secure, and collaborates with code auditors.
 * Growth focuses on building the DAO community, finding product-market fit, and increasing the user base through marketing and partnerships.
 * Operations handles administrative tasks such as treasury management, operations, and legal.
 
 Each working group has its own multisig wallet with at least three signers. Currently, none of the wallets hold meaningful value except for the Team & Advisor Wallet and Governance Participatory Committee Wallet. When we look at the multisigs, we can see a significant overlap between signers:
 
-
-<table>
-  <tr>
-   <td><strong>multisig</strong>
-   </td>
-   <td><strong>multisig address </strong>
-   </td>
-   <td><strong>Signer 1</strong>
-   </td>
-   <td><strong>Signer 2</strong>
-   </td>
-   <td><strong>Signer 3 </strong>
-   </td>
-   <td><strong>Signer 4</strong>
-   </td>
-  </tr>
-  <tr>
-   <td><strong>Treasury</strong>
-   </td>
-   <td>0xd1DE3F9CD4AE2F23DA941a67cA4C739f8dD9Af33
-   </td>
-   <td>0xea28d5d66AE91f12723D6881ce39D8084E332EAe
-   </td>
-   <td>0x3AD308FF325D397958D4F9d7605085486f9AD3BE
-   </td>
-   <td>0xf3e996C8cd4ab3fDad381584D5Bd90C01Ec3C082
-   </td>
-   <td>0x25FCe091c5b51edEfc7a4A0E765f10ed032e804F
-   </td>
-  </tr>
-  <tr>
-   <td><strong>Operation Workstream</strong>
-   </td>
-   <td>0xbcfa955B023BcA29Bf48568f5107B73d5128a6ab
-   </td>
-   <td>0xea5B602151Ac2db725314503fc3f33c70412735A
-   </td>
-   <td>0x26C369f16DC06AC2ecd9533fE221051Cd605B172
-   </td>
-   <td>0xf3e996C8cd4ab3fDad381584D5Bd90C01Ec3C082
-   </td>
-   <td>N/A
-   </td>
-  </tr>
-  <tr>
-   <td><strong>Growth Workstream</strong>
-   </td>
-   <td>0x993946155060d4324b8Fd6cb6a4d69024c23c10f
-   </td>
-   <td>0xea5B602151Ac2db725314503fc3f33c70412735A
-   </td>
-   <td>0xb3983cDdBa4B127960A4cDD531AB989264509e23
-   </td>
-   <td>0xf3e996C8cd4ab3fDad381584D5Bd90C01Ec3C082
-   </td>
-   <td>N/A
-   </td>
-  </tr>
-  <tr>
-   <td><strong>Engineering Workstream</strong>
-   </td>
-   <td>0xd4e20256096775D05c4852204eF911bB3653afAD
-   </td>
-   <td>0xea5B602151Ac2db725314503fc3f33c70412735A
-   </td>
-   <td>0x26C369f16DC06AC2ecd9533fE221051Cd605B172
-   </td>
-   <td>0xf3e996C8cd4ab3fDad381584D5Bd90C01Ec3C082
-   </td>
-   <td>N/A
-   </td>
-  </tr>
-  <tr>
-   <td><strong>Team & Advisor Wallet </strong>
-   </td>
-   <td>0x390C26B5CB56269DAb8C8dcE693714560d713143
-   </td>
-   <td>0xea5B602151Ac2db725314503fc3f33c70412735A
-   </td>
-   <td>0x26C369f16DC06AC2ecd9533fE221051Cd605B172
-   </td>
-   <td>0xf3e996C8cd4ab3fDad381584D5Bd90C01Ec3C082
-   </td>
-   <td>0x25FCe091c5b51edEfc7a4A0E765f10ed032e804F
-   </td>
-  </tr>
-  <tr>
-   <td><strong>Governance Participatory Commitee</strong>
-   </td>
-   <td>0xf9EEB67238dfb16E6bbF14Ab560D18b740f820a9
-   </td>
-   <td>0xb3983cDdBa4B127960A4cDD531AB989264509e23
-   </td>
-   <td>0x26C369f16DC06AC2ecd9533fE221051Cd605B172
-   </td>
-   <td>0xf3e996C8cd4ab3fDad381584D5Bd90C01Ec3C082
-   </td>
-   <td>N/A
-   </td>
-  </tr>
-</table>
-
+![Screen Shot 2023-02-26 at 1 49 56 PM](https://user-images.githubusercontent.com/51072084/221439512-d45123fb-5245-4a54-b788-459b08a9d911.png)
 
 As shown in the table, out of 20 signers across all project multisig wallets, only 7 are unique. One signer — 0xf3e — is on every multisig. Two other signers appear on 4 of the multisigs.
 
 
-### Operational control 
+### The Treasury Multisig
 
-The most important and powerful multisig is the [2-out-of-4 treasury multisig wallet](https://etherscan.io/address/0xd1DE3F9CD4AE2F23DA941a67cA4C739f8dD9Af33). This wallet holds most of the assets owned by the protocol, including 8.5 million MET and 2,600 ETH. The size of the treasury dwarfs Metronome Synth’s [current TVL](https://defillama.com/protocol/metronome-synth) ($2 million).
+The most important and powerful multisig is the [2-of-4 treasury multisig wallet](https://etherscan.io/address/0xd1DE3F9CD4AE2F23DA941a67cA4C739f8dD9Af33). This wallet holds most of the assets owned by the protocol, including 8.5 million MET and 2,600 ETH. The size of the treasury dwarfs Metronome Synth’s [current TVL](https://defillama.com/protocol/metronome-synth) ($2 million).
 
 ![image](https://user-images.githubusercontent.com/51072084/221347675-e74060aa-4d8b-475b-ba09-c4fe601c4f74.png)
 
-
-#### Source: [Debank Portfolio Tracker](https://debank.com/profile/0xd1de3f9cd4ae2f23da941a67ca4c739f8dd9af33)
+Source: [Debank Portfolio Tracker](https://debank.com/profile/0xd1de3f9cd4ae2f23da941a67ca4c739f8dd9af33)
 
 Beyond simply controlling these assets, the Treasury multisig also governs the smart contracts in the protocol. It has extensive privileges. According to the [Quantstamp audit](https://github.com/autonomoussoftware/metronome-synth-audit/wiki/Audit) of Metronome, the multisig can do the following:  
-
 
 
 * Transfer the governor role of the protocol’s smart contracts. For example, see [PoolRegistry.sol](https://etherscan.io/address/0x11eaD85C679eAF528c9C1FE094bF538Db880048A#writeProxyContract#F8), yet in essence all contracts are affected
@@ -348,22 +242,102 @@ Beyond simply controlling these assets, the Treasury multisig also governs the s
 * [Change the collateralization ratio (from 0% to 100%)](https://etherscan.io/address/0xA77B145c7Fa5B412eb8aD41D587bE892b9c1EFC3#writeProxyContract#F11) and thereby impact the amount of underlying assets that a user receives when withdrawing or depositing
 * Change the [interest rate on debt tokens](https://etherscan.io/address/0xF43de8E0c2596E30c77d69d158842D1d9B937D7c#writeProxyContract#F12) to an arbitrary value 
 
-The [2-out-of-4 treasury multisig wallet](https://etherscan.io/address/0xd1DE3F9CD4AE2F23DA941a67cA4C739f8dD9Af33) effectively controls the entire protocol. If this wallet is compromised, or if two of its signers act maliciously, all user funds and treasury funds would be at risk. The fact that Metronome’s leaders are doxxed gives some “legal” protection to users against the rugging of funds by the team itself. But Metronome possesses an unusually large treasury for a project of its size and TVL, making it an appealing target for social-engineering attacks.
+The [2-of-4 treasury multisig wallet](https://etherscan.io/address/0xd1DE3F9CD4AE2F23DA941a67cA4C739f8dD9Af33) effectively controls the entire protocol. If this wallet is compromised, or if two of its signers act maliciously, all user funds and treasury funds would be at risk. The fact that Metronome’s leaders are doxxed gives some “legal” assurance to users against the rugging of funds by the team itself. But Metronome possesses an unusually large treasury for a project of its size and TVL, making it an appealing target for social-engineering attacks.
 
-Asked about this concern, a team member said that by the time Metronome Synth leaves beta, some functions will be transferred to the community. Users will be able to add new pools, update pool rates, and set deposit/mint caps through an on-chain governance mechanism based on NFTs that represent locked positions. The governance module will be shared by Metronome and Vesper, the team member said.
+Asked about this concern, a team member said that by the time Metronome Synth leaves beta, some functions will be transferred to the community. Users will be able to add new pools, update pool rates, and set deposit/mint caps through an on-chain governance mechanism based on NFTs that represent locked positions. The same governance module is planned to be implemented by both Metronome and Vesper.
 
 
-## Smart contract risk
+## Smart Contract Risk
 
 The Metronome Synth code is audited by Quantstamp. In addition, they are currently running an [Immunefi bug bounty program](https://immunefi.com/bounty/metronome/). The [Quantstamp audit report](https://github.com/autonomoussoftware/metronome-synth-audit/wiki/Audit) is available on Metronome’s GitHub. Quantstamp identified two medium-risk issues, three low-risk issues and 11 informational issues. Out of all 16 issues, 9 have been resolved, according to the report. This section will focus on a subset of selected issues that might impact the protocol. (It should be noted that the code repository audited by Quantstamp seems to have moved since the audit; Metronome’s GitHub does not contain the audited code and the link in the audit report that points to the repo is broken.) 
 
-**Absence of Fallback Oracle: **DeFi platforms depend on oracles to accurately price assets. If an attacker is able to falsify price data, he may deplete the funds by minting more of a synthetic representation (i.e. msETH, msUSDC). In addition, the collateralization ratio may get triggered prematurely or not at all with a falsified price date. In the current deployment of Metronome Synth, the protocol uses a call to Chainlink — masterOracle — to get pricing data. The protocol does not cross-check the data with another source, and there is no fallback oracle in case the Chainlink network falters. Quantstamp classified this issue as Medium risk. The Metronome team responded that they would soon add a fallback oracle, but as of today, there is none.
+**Absence of Fallback Oracle:** DeFi platforms depend on oracles to accurately price assets. If an attacker is able to falsify price data, he may deplete the funds by minting more of a synthetic representation (i.e. msETH, msUSDC). In addition, the collateralization ratio may get triggered prematurely or not at all with a falsified price datapoint. In the current deployment of Metronome Synth, the protocol uses a call to Chainlink — masterOracle — to get pricing data. The protocol does not cross-check the data with another source, and there is no fallback oracle in case the Chainlink network falters. Quantstamp classified this issue as Medium risk. The Metronome team responded that they would soon add a fallback oracle, but as of today, there is none.
 
-**Proxy Contracts: **Smart contracts can give privileged roles to specific Ethereum addresses, such as the owner. There is often good reason to assign such privileges, like enabling contract upgrades or handling emergencies. Still, this can be a risk for the end user, which is why many smart contracts are immutable. All of Metronome’s smart contracts are upgradable, except for the deployed NativeTokenGateway and RewardsDistributor contracts. This means that, in practice, the 2-out-of-4 MET Treasury multisig can change the logic of these contracts at any time. 
+**Proxy Contracts:** Smart contracts can give privileged roles to specific Ethereum addresses, such as the owner. There is often good reason to assign such privileges, like enabling contract upgrades or handling emergencies. Still, this can be a risk for the end user, which is why many smart contracts are immutable. All of Metronome’s smart contracts are upgradable, except for the deployed NativeTokenGateway and RewardsDistributor contracts. This means that, in practice, the 2-out-of-4 MET Treasury multisig can change the logic of these contracts at any time. 
 
 The best practice when using a proxy pattern is to make the owner of the smart contract a [timelock contract](https://wiki.rugdoc.io/docs/timelocks-explained/). This generates trust between the developer and the user because, in theory, the user can exit the smart contract before changes are implemented. The Metronome proxy contract is not connected to a time lock contract. Therefore, the contract can be upgraded as soon as the threshold of two signatures of the treasury wallet is reached.  
 
-**Block Timestamp Manipulation: **The protocol appears to use the block timestamp to calculate the interest accrued on debt or rewards. Quantstamp notes that validators can manipulate the timestamp by 900 seconds (~15 min). This may lead to minor changes in Metronome users’ debt or rewards. This issue could be easily mitigated by using the block height, instead of the timestamp, to calculate interest.
+**Block Timestamp Manipulation:** The protocol appears to use the block timestamp to calculate the interest accrued on debt or rewards. Quantstamp notes that validators can manipulate the timestamp by 900 seconds (~15 min). This may lead to minor changes in Metronome users’ debt or rewards. This issue could be easily mitigated by using the block height, instead of the timestamp, to calculate interest.
+
+
+## Oracle Risk
+
+Metronome relies entirely on Chainlink oracles to price its Synth assets. Chainlink is the market standard for price oracles and is generally considered to be secure. Nevertheless, the user should realise that the proper functioning of the protocol involves a [delegation of trust](https://samczsun.com/so-you-want-to-use-a-price-oracle/) to the Chainlink network of nodes.
+
+The Metronome team [informs users](https://docs.metronome.io/metronome-synth/risks/oracle-disruptions) about oracle risk in the docs, explaining that an oracle disruption can lead to the de-pegging of asset pairs, liquidation of users, and failed transactions on-chain when users try to mint or close synthetics positions.
+
+
+### Oracle Front-running
+
+There is a potential front-running risk associated with the marketplace in the Metronome Synth dApp. (The market leader in this space, Synthetix, has detailed its [multi-year battle](https://blog.synthetix.io/frontrunning-synthetix-a-history/) against front-running.) Traders who persistently front-run oracle updates could harm the pool balance over time and hurt msUSD/USD LPs, who would become unwitting exit liquidity for toxic trade flow.
+
+For example: Imagine, a trader has $1500 worth of collateral in WBTC, which is fully hedged somewhere else. They mint $1000 msBTC, but a sudden 10% BTC price drop causes the value of their collateral to decrease, resulting in the trader owing the protocol $900. The trader then swaps $1000 msBTC to $1000 msUSD without slippage on Synth Marketplace before the oracle can update. After the oracle update, the collateral is only worth $1350. The trader then swaps $1000 msUSD back to $900 msBTC and uses it to retrieve their collateral, incurring no losses due to hedging. The trader has now made $100 profit in msUSD, which they sell for USDC in the msUSDC/USDC Curve LP. 
+
+To deter front-running by making it unprofitable, Metronome has implemented a 0.25% fee on trades. However, the effectiveness of this strategy depends on the volatility between oracle updates being lower than 0.25%. The team says they are also planning a privileged discount system for platforms such as Curve/1inch, in the hopes that most trading will occur on layer 2s.
+
+
+## Economic Attack Vectors
+
+
+### Market Manipulation
+
+We do not see an immediate risk of market manipulators harming the protocol. Assets accepted as collateral (ETH / WBTC / DAI / USDC / FRAX / vaETH / vaUSDC / vaFRAX) are stablecoins, blue chip assets, or synthetic representations from Vesper Finance assets. The markets for the stablecoins and blue chips are deeply liquid. An attacker would need large sums of money to substantially move the price, making an attack costly and inefficient.
+
+However, the future [introduction of MET as collateral](https://docs.metronome.io/metronome-synth/the-metronome-token-usdmet) may pose a risk. The recent attack on Mango Markets, in which an attacker drained the protocol by artificially inflating the price of MNGO, has shown that low-liquidity DAO tokens such as MET can introduce vulnerabilities if used as collateral. For more detail on this risk, see this excellent [breakdown of the Mango attack](https://www.soliduslabs.com/post/mango-hack) by Solidus Labs.
+
+Likewise, Metronome users should be aware that they are taking on smart-contract risk from the project’s reliance on Vesper Finance. If an attacker is able to somehow mint arbitrary amounts of vaETH and use it as collateral in Metronome Synth, loanable assets can be drained. If an attacker can exchange the minted vaETH for msETH or msUSD, he can drain the proposed LP pools on Curve. It should be noted that a maximum supply is in place for collateral (for instance, [vaETH](https://etherscan.io/address/0x45AC59746Ea5Eb74cF782855eca460A8Adc8925a#writeProxyContract#F12) currently has totalSupply=980 ETH and maxTotalSupply=4170 ETH) and for synthetic tokens ([msETH](https://etherscan.io/address/0x64351fC9810aDAd17A690E4e1717Df5e7e085160#writeProxyContract#F11) has totalSupply=327 and maxTotalSupply=1250), yet both parameters can be changed by the [2-of-4 treasury multisig wallet](https://etherscan.io/address/0xd1DE3F9CD4AE2F23DA941a67cA4C739f8dD9Af33). 
+
+
+### The parameterisation of the protocol 
+
+The Metronome docs outline the all-important Liquidation and Collateral factors for debt positions in the protocol. Each position is over-collateralized, meaning that users must deposit more collateral than the value of synthetics they receive. 
+
+Different collateral assets have different collateral factors determining how many synthetics can be generated from a deposit. Poor collateralization factors and liquidation procedures can leave the protocol with bad debt. Normally, when a user’s debt exceeds the value of his collateral, his collateral is typically liquidated by a third party (e.g. a bot). However, if liquidation does not occur fast enough, the collateral might not cover the outstanding debt. Bad debt can also build up if collateralization factors are too high (see this [Risk DAO dashboard](https://bad-debt.riskdao.org/) for more detail on bad debt in crypto projects). When the protocol accrues too much bad debt, some will be unable to withdraw their funds.
+
+Metronome’s [current liquidation and collateral factors](https://docs.metronome.io/metronome-synth/metronome-synth-protocol/liquidations-and-collateral-factors) seem reasonable: 75% for stablecoins, 70% for blue chips and 60% for Vesper Synthetics. However, it appears that Metronome has chosen the collateral factors without testing whether they are optimal. We would like to see the protocol run some simulations on parameter settings, to minimise the risk of bad debt. We also recommend the creation of an insurance fund to make users whole if the worst occurs.
+
+
+# Discussion 
+
+
+
+1. **Is it possible for a single entity to rug its users?**
+
+Yes. Due to the powers of the [2-out-of-4 treasury multisig wallet](https://etherscan.io/address/0xd1DE3F9CD4AE2F23DA941a67cA4C739f8dD9Af33), the entire protocol can essentially be shut down at any moment by two people who work for the same private U.S. company (Bloq). This degree of centralisation may be justifiable at this relatively early stage of Metronome 2.0. Still, it poses a clear risk for users. While the team has outlined plans to decentralise by degrees, this remains mostly just a promise.
+
+
+
+2. **If the team vanishes, can the project continue?** 
+
+In theory, the project could continue. Smart contracts can be forked and maintained by the community. In practice, though, this is unlikely, because if the team vanished, the community would no longer have access to the treasury, the remainder of the MET token supply or the Metronome Synth contracts. It’s worth noting that most of the MET earmarked for longtime community members remains unclaimed in the [migration contract](https://etherscan.io/address/0xe67516417a934b27cf0c14868f8165b1bc94bf73#code), which suggests a lack of engagement by the Metronome community in the first place. 
+
+
+
+3. **Does the project viability depend on additional incentives?**
+
+No. Incentives aren’t fundamental to the project’s success, although it may be difficult to bootstrap adoption without them.
+
+
+
+4. **If demand falls to 0 tomorrow, can the users be made whole?**
+
+Yes, with a caveat: The collateralization ratios have not been tested, increasing the chance that bad debt may build up, which would prevent users from withdrawing funds.
+
+
+
+5. **Do audits reveal any concerning signs?**
+
+The Quantstamp audit reveals some issues with the smart contracts, including the absence of fallback oracles. But the bigger problem is not with the code itself but with the privileges afforded to the [2-of-4 treasury multisig wallet](https://etherscan.io/address/0xd1DE3F9CD4AE2F23DA941a67cA4C739f8dD9Af33). The multisig controls all protocol functions and can “update” it at will without a timelock.
+
+
+# Conclusion
+
+From our perspective, the main issue with Metronome is its considerable degree of centralization. The project team says they are working on this and plan to give users greater autonomy down the line. So far, however, community interest in governance has been lacklustre, raising the question of whether people will participate even if they have the tools for it. Also, because user adoption of Metronome Synth has been slow, it remains unclear if the protocol can effectively compete in the Synthetic assets category. However, the Metronome team has the experience and resources to keep operating and improving. It’s also important to keep in mind that Metronome 2.0 is relatively new and still in beta, implying that this is an early developmental stage of the project.
+
+Right now, Metronome Synth users and Curve LPs are required to put a lot of trust in the team. We encourage the Curve DAO to monitor the team’s stated roadmap to decentralise governance and make sure they are hitting those marks. The DAO should also keep an eye on the adoption rate of msTokens. We recommend that Curve LPs view the current gauge as a bootstrapping mechanism. Progress toward decentralisation and protocol maturity will determine if the gauge should remain.
+
+
+#Appendix: Metronome Contract Addresses
 
 The following are the addresses of key Metronome contracts. Though they are not published in the docs, team members in the project Discord readily gave the addresses when asked.
 
@@ -602,81 +576,3 @@ The following are the addresses of key Metronome contracts. Though they are not 
    </td>
   </tr>
 </table>
-
-
-
-### Oracle Risk 
-
-Metronome relies entirely on Chainlink oracles to price its Synth assets. Chainlink is the market standard for price oracles and is generally considered to be secure. Nevertheless, the user should realise that the proper functioning of the protocol involves a [delegation of trust](https://samczsun.com/so-you-want-to-use-a-price-oracle/) to the Chainlink network of nodes.
-
-The Metronome team [informs users](https://docs.metronome.io/metronome-synth/risks/oracle-disruptions) about oracle risk in the docs, explaining that an oracle disruption can lead to the de-pegging of asset pairs, liquidation of users, and failed transactions on-chain when users try to mint or close synthetics positions.
-
-
-### Front-running risk
-
-There is a potential front-running risk associated with the marketplace in the Metronome Synth dApp. (The market leader in this space, Synthetix, has detailed its [multi-year battle](https://blog.synthetix.io/frontrunning-synthetix-a-history/) against front-running.) Traders who persistently front-run oracle updates could harm the pool balance over time and hurt msUSD/USD LPs, who would become unwitting exit liquidity for toxic trade flow.
-
-For example: Imagine, a trader has $1500 worth of collateral in WBTC, which is fully hedged somewhere else. They mint $1000 msBTC, but a sudden 10% BTC price drop causes the value of their collateral to decrease, resulting in the trader owing the protocol $900. The trader then swaps $1000 msBTC to $1000 msUSD without slippage on Synth Marketplace before the oracle can update. After the oracle update, the collateral is only worth $1350. The trader then swaps $1000 msUSD back to $900 msBTC and uses it to retrieve their collateral, incurring no losses due to hedging. The trader has now made $100 profit in msUSD, which they sell for USDC in the msUSDC/USDC Curve LP. 
-
-To deter front-running by making it unprofitable, Metronome has implemented a 0.25% fee on trades. However, the effectiveness of this strategy depends on the volume between oracle updates being lower than 0.25%. The team says they are also planning a privileged discount system for platforms such as Curve/1inch, in the hopes that most trading will occur on layer 2s.
-
-
-## Economic Attack Vectors
-
-
-### Market Manipulation
-
-We do not see an immediate risk of market manipulators harming the protocol. Assets accepted as collateral (ETH / WBTC / DAI / USDC / FRAX / vaETH / vaUSDC / vaFRAX) are stablecoins, blue chip assets, or synthetic representations from Vesper Finance assets. The markets for the stablecoins and blue chips are deeply liquid. An attacker would need large sums of money to substantially move the price, making an attack costly and inefficient.
-
-However, the future [introduction of MET as collateral](https://docs.metronome.io/metronome-synth/the-metronome-token-usdmet) may pose a risk. The recent attack on Mango Markets, in which an attacker drained the protocol by artificially inflating the price of MNGO, has shown that low-liquidity DAO tokens such as MET can introduce vulnerabilities if used as collateral. For more detail on this risk, see this excellent [breakdown of the Mango attack](https://www.soliduslabs.com/post/mango-hack) by Solidus Labs.
-
-Likewise, Metronome users should be aware that they are taking on smart-contract risk from the project’s reliance on Vesper Finance. If an attacker is able to somehow mint arbitrary amounts of vaETH and use it as collateral in Metronome Synth, loanable assets can be drained. If an attacker can exchange the minted vaETH for msETH or msUSD, he can drain the proposed LP pools on Curve. It should be noted that a maximum supply is in place for collateral (for instance, [vaETH](https://etherscan.io/address/0x45AC59746Ea5Eb74cF782855eca460A8Adc8925a#writeProxyContract#F12) currently has totalSupply=980 ETH and maxTotalSupply= ​​4170 ETH) and for synthetic tokens ([msETH](https://etherscan.io/address/0x64351fC9810aDAd17A690E4e1717Df5e7e085160#writeProxyContract#F11) has totalSupply=327 and maxTotalSupply=1250), yet both parameters can be changed by the [2-out-of-4 treasury multisig wallet](https://etherscan.io/address/0xd1DE3F9CD4AE2F23DA941a67cA4C739f8dD9Af33). 
-
-
-### The parameterisation of the protocol 
-
-The Metronome docs outline the all-important Liquidation and Collateral factors for debt positions in the protocol. Each position is over-collateralized, meaning that users must deposit more collateral than the value of synthetics they receive. 
-
-Different collateral assets have different collateral factors determining how many synthetics can be generated from a deposit. Poor collateralization factors and liquidation procedures can leave the protocol with bad debt. Normally, when a user’s debt exceeds the value of his collateral, his collateral is typically liquidated by a third party (e.g. a bot). However, if liquidation does not occur fast enough, the collateral might not cover the outstanding debt. Bad debt can also build up if collateralization factors are too high (see this [Risk DAO dashboard](https://bad-debt.riskdao.org/) for more detail on bad debt in crypto projects). When the protocol accrues too much bad debt, some will be unable to withdraw their funds.
-
-Metronome’s [current liquidation and collateral factors](https://docs.metronome.io/metronome-synth/metronome-synth-protocol/liquidations-and-collateral-factors) seem reasonable: 75% for stablecoins, 70% for blue chips and 60% for Vesper Synthetics. However, it appears that Metronome has chosen the collateral factors without testing whether they are optimal. We would like to see the protocol run some simulations on parameter settings, to minimise the risk of bad debt. We also recommend the creation of an insurance fund to make users whole if the worst occurs.
-
-
-# Discussion 
-
-
-
-1. **Is it possible for a single entity to rug its users?**
-
-Yes. Due to the powers of the [2-out-of-4 treasury multisig wallet](https://etherscan.io/address/0xd1DE3F9CD4AE2F23DA941a67cA4C739f8dD9Af33), the entire protocol can essentially be shut down at any moment by two people who work for the same private U.S. company (Bloq). This degree of centralisation may be justifiable at this relatively early stage of Metronome 2.0. Still, it poses a clear risk for users. While the team has outlined plans to decentralise by degrees, this remains mostly just a promise.
-
-
-
-2. **If the team vanishes, can the project continue?** 
-
-In theory, the project could continue. Smart contracts can be forked and maintained by the community. In practice, though, this is unlikely, because if the team vanished, the community would no longer have access to the treasury, the remainder of the MET token supply or the Metronome Synth contracts. It’s worth noting that most of the MET earmarked for longtime community members remains unclaimed in the [migration contract](https://etherscan.io/address/0xe67516417a934b27cf0c14868f8165b1bc94bf73#code), which suggests a lack of engagement by the Metronome community in the first place. 
-
-
-
-3. **Does the project viability depend on additional incentives?**
-
-No. Incentives aren’t fundamental to the project’s success, although it may be difficult to bootstrap adoption without them.
-
-
-
-4. **If demand falls to 0 tomorrow, can the users be made whole?**
-
-Yes, with a caveat: The collateralization ratios have not been tested, increasing the chance that bad debt may build up, which would prevent users from withdrawing funds.
-
-
-
-5. **Do audits reveal any concerning signs?**
-
-The Quantstamp audit reveals some issues with the smart contracts, including the absence of fallback oracles. But the bigger problem is not with the code itself but with the privileges afforded to the [2-of-4 treasury multisig wallet](https://etherscan.io/address/0xd1DE3F9CD4AE2F23DA941a67cA4C739f8dD9Af33). The multisig controls all protocol functions and can “update” it at will without a timelock.
-
-
-# Conclusion
-
-From our perspective, the main issue with Metronome is its considerable degree of centralization. The project team says they are working on this and plan to give users greater autonomy down the line. So far, however, community interest in governance has been lacklustre, raising the question of whether people will participate even if they have the tools for it. Also, because user adoption of Metronome Synth has been slow, it remains unclear if the protocol can effectively compete in the Synthetic assets category. However, the Metronome team has the experience and resources to keep operating and improving. It’s also important to keep in mind that Metronome 2.0 is relatively new and still in beta, implying that this is an early developmental stage of the project.
-
-Right now, Metronome Synth users and Curve LPs are required to put a lot of trust in the team. We encourage the Curve DAO to monitor the team’s stated roadmap to decentralise governance and make sure they are hitting those marks. The DAO should also keep an eye on the adoption rate of msTokens. We recommend that Curve LPs view the current gauge as a bootstrapping mechanism. Progress toward decentralisation and protocol maturity will determine if the gauge should remain.
