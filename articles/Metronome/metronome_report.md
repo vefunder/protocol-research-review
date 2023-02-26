@@ -337,7 +337,7 @@ From our perspective, the main issue with Metronome is its considerable degree o
 Right now, Metronome Synth users and Curve LPs are required to put a lot of trust in the team. We encourage the Curve DAO to monitor the team’s stated roadmap to decentralise governance and make sure they are hitting those marks. The DAO should also keep an eye on the adoption rate of msTokens. We recommend that Curve LPs view the current gauge as a bootstrapping mechanism. Progress toward decentralisation and protocol maturity will determine if the gauge should remain.
 
 
-#Appendix: Metronome Contract Addresses
+# Appendix: Metronome Contract Addresses
 
 The following are the addresses of key Metronome contracts. Though they are not published in the docs, team members in the project Discord readily gave the addresses when asked.
 
