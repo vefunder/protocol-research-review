@@ -50,7 +50,7 @@ The protocol was then redesigned from scratch, relaunching in August 2022 as Met
 
 The first application launched by Metronome 2.0 is a synthetic asset platform called Metronome Synth, currently in public beta. Users deposit a variety of collateral tokens, and the protocol allows users to mint its own representations of USD, ETH BTC and DOGE — msUSD, msETH, msBTC, msDOGE. These synthetics can then be swapped or farmed for yield.
 
-Metronome now has a DAO roadmap that emphasizes its commitment to decentralizing its governance, although governance currently remains highly centralised (see the “Governance” section below). It currently relies on a multisig, the signers of which are [fully doxxed](https://www.metronome.io/about) Bloq personnel. Some Metronome team members are also involved with Vesper Finance (also [doxxed](https://vesper.finance/about/)), another DeFi offshoot of Bloq and a “[sister project](https://medium.com/vesperfinance/metronome-vesper-gateway-to-synthetic-assets-15509ca023b)” of Metronome. 
+Metronome now has a DAO roadmap that emphasizes its commitment to decentralising its governance, although governance currently remains highly centralised (see the “Governance” section below). It currently relies on a multisig, the signers of which are [fully doxxed](https://www.metronome.io/about) Bloq personnel. Some Metronome team members are also involved with Vesper Finance (also [doxxed](https://vesper.finance/about/)), another DeFi offshoot of Bloq and a “[sister project](https://medium.com/vesperfinance/metronome-vesper-gateway-to-synthetic-assets-15509ca023b)” of Metronome. 
 
 Vesper is a DeFi yield aggregator, like Yearn Finance, with its own staking derivatives of stablecoins and blue chip assets. Launched in February 2021, Vesper offers about 20 different yield-generating pools on Ethereum and additional pools on Polygon and Avalanche. Vesper pool tokens are yield-bearing and are composable with other DeFi protocols. Metronome Synth accepts Vesper derivatives as collateral.
 
@@ -308,7 +308,7 @@ Metronome’s [current liquidation and collateral factors](https://docs.metronom
 
 1. **Is it possible for a single entity to rug its users?**
 
-Yes. Due to the powers of the [2-of-4 treasury multisig wallet](https://etherscan.io/address/0xd1DE3F9CD4AE2F23DA941a67cA4C739f8dD9Af33), the entire protocol can essentially be shut down at any moment by two people who work for the same private U.S. company (Bloq). This degree of centralisation may be justifiable at this relatively early stage of Metronome 2.0. Still, it poses a clear risk for users. While the team has outlined plans to gradually decentralize, this remains mostly just a promise.
+Yes. Due to the powers of the [2-of-4 treasury multisig wallet](https://etherscan.io/address/0xd1DE3F9CD4AE2F23DA941a67cA4C739f8dD9Af33), the entire protocol can essentially be shut down at any moment by two people who work for the same private U.S. company (Bloq). This degree of centralisation may be justifiable at this relatively early stage of Metronome 2.0. Still, it poses a clear risk for users. While the team has outlined plans to gradually decentralise, this remains mostly just a promise.
 
 
 
@@ -337,9 +337,9 @@ The [Quantstamp audit](https://github.com/autonomoussoftware/metronome-synth-aud
 
 # LlamaRisk Recommendation
 
-The main concern we have with Metronome is its considerable degree of centralization. However, the Metronome team has the experience and resources to keep operating and improving. The project team says they are working to gradually decentralize. We have been told that a token locking module upgrade to the MET token is in audit and will be implemented soon. This will be an encouraging step toward decentralization and a development to monitor.  It’s also important to keep in mind that Metronome 2.0 is relatively new and still in beta, implying that this is an early developmental stage of the project.
+The main concern we have with Metronome is its considerable degree of centralisation. However, the Metronome team has the experience and resources to keep operating and improving. The project team says they are working to gradually decentralise. We have been told that a token locking module upgrade to the MET token is in audit and will be implemented soon. This will be an encouraging step toward decentralisation and a development to monitor.  It’s also important to keep in mind that Metronome 2.0 is relatively new and still in beta, implying that this is an early developmental stage of the project.
 
-We encourage the Curve DAO to monitor the team’s stated roadmap to decentralize governance and make sure they are hitting those marks. The DAO should also keep an eye on the adoption rate of msTokens. We recommend that Curve LPs view the current gauge as a bootstrapping mechanism. Progress toward decentralization and protocol maturity will determine if the gauge should remain.
+We encourage the Curve DAO to monitor the team’s stated roadmap to decentralise governance and make sure they are hitting those marks. The DAO should also keep an eye on the adoption rate of msTokens. We recommend that Curve LPs view the current gauge as a bootstrapping mechanism. Progress toward decentralisation and protocol maturity will determine if the gauge should remain.
 
 
 # Appendix: Metronome Contract Addresses
