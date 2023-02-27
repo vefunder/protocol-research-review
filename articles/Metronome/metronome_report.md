@@ -14,6 +14,7 @@ Metronome Synth Protocol:
 * Discord: [https://discord.gg/metronome](https://discord.gg/metronome) 
 * Github: [https://github.com/autonomoussoftware](https://github.com/autonomoussoftware) 
 * Snapshot: [https://snapshot.org/#/metronome.eth](https://snapshot.org/#/metronome.eth)
+* Treasury Multisig: [Etherscan](https://etherscan.io/address/0xd1DE3F9CD4AE2F23DA941a67cA4C739f8dD9Af33)
 * LlamaRisk Dune Dash by DiligentDeer: [https://dune.com/diligentdeer/metronome-llamarisk](https://dune.com/diligentdeer/metronome-llamarisk) 
 
 Metronome V1 for historical context: 
@@ -297,19 +298,19 @@ Different collateral assets have different collateral factors determining how ma
 Metronome’s [current liquidation and collateral factors](https://docs.metronome.io/metronome-synth/metronome-synth-protocol/liquidations-and-collateral-factors) seem reasonable: 75% for stablecoins, 70% for blue chips and 60% for Vesper Synthetics. However, it appears that Metronome has chosen the collateral factors without testing whether they are optimal. We would like to see the protocol run some simulations on parameter settings, to minimise the risk of bad debt. We also recommend the creation of an insurance fund to make users whole if the worst occurs.
 
 
-# Discussion 
+# LlamaRisk Gauge Criteria 
 
 
 
 1. **Is it possible for a single entity to rug its users?**
 
-Yes. Due to the powers of the [2-out-of-4 treasury multisig wallet](https://etherscan.io/address/0xd1DE3F9CD4AE2F23DA941a67cA4C739f8dD9Af33), the entire protocol can essentially be shut down at any moment by two people who work for the same private U.S. company (Bloq). This degree of centralisation may be justifiable at this relatively early stage of Metronome 2.0. Still, it poses a clear risk for users. While the team has outlined plans to decentralise by degrees, this remains mostly just a promise.
+Yes. Due to the powers of the [2-of-4 treasury multisig wallet](https://etherscan.io/address/0xd1DE3F9CD4AE2F23DA941a67cA4C739f8dD9Af33), the entire protocol can essentially be shut down at any moment by two people who work for the same private U.S. company (Bloq). This degree of centralisation may be justifiable at this relatively early stage of Metronome 2.0. Still, it poses a clear risk for users. While the team has outlined plans to gradually decentralize, this remains mostly just a promise.
 
 
 
 2. **If the team vanishes, can the project continue?** 
 
-In theory, the project could continue. Smart contracts can be forked and maintained by the community. In practice, though, this is unlikely, because if the team vanished, the community would no longer have access to the treasury, the remainder of the MET token supply or the Metronome Synth contracts. It’s worth noting that most of the MET earmarked for longtime community members remains unclaimed in the [migration contract](https://etherscan.io/address/0xe67516417a934b27cf0c14868f8165b1bc94bf73#code), which suggests a lack of engagement by the Metronome community in the first place. 
+The project could theoretically continue, but not develop. Users could continue interacting with the existing contracts to mint, burn and swap msTokens. In order to further develop the platform, smart contracts would need to be forked and maintained by the community, as the treasury multisig responsible for upgrades and important system parameters would be inaccessible.  
 
 
 
@@ -321,20 +322,20 @@ No. Incentives aren’t fundamental to the project’s success, although it may 
 
 4. **If demand falls to 0 tomorrow, can the users be made whole?**
 
-Yes, with a caveat: The collateralization ratios have not been tested, increasing the chance that bad debt may build up, which would prevent users from withdrawing funds.
+Yes, with a caveat: The performance of the synth swap marketplace has not been thoroughly vetted. In the event of successful oracle frontrunning, an excess of msTokens could result in toxic order flow, leaving Curve LPs with a loss.
 
 
 
 5. **Do audits reveal any concerning signs?**
 
-The Quantstamp audit reveals some issues with the smart contracts, including the absence of fallback oracles. But the bigger problem is not with the code itself but with the privileges afforded to the [2-of-4 treasury multisig wallet](https://etherscan.io/address/0xd1DE3F9CD4AE2F23DA941a67cA4C739f8dD9Af33). The multisig controls all protocol functions and can “update” it at will without a timelock.
+The [Quantstamp audit](https://github.com/autonomoussoftware/metronome-synth-audit) reveals some issues with the smart contracts, including the absence of fallback oracles. But the bigger problem is not with the code itself but with the privileges afforded to the [2-of-4 treasury multisig wallet](https://etherscan.io/address/0xd1DE3F9CD4AE2F23DA941a67cA4C739f8dD9Af33). The multisig controls all protocol functions and can “update” it at will without a timelock.
 
 
-# Conclusion
+# LlamaRisk Recommendation
 
-From our perspective, the main issue with Metronome is its considerable degree of centralization. The project team says they are working on this and plan to give users greater autonomy down the line. So far, however, community interest in governance has been lacklustre, raising the question of whether people will participate even if they have the tools for it. Also, because user adoption of Metronome Synth has been slow, it remains unclear if the protocol can effectively compete in the Synthetic assets category. However, the Metronome team has the experience and resources to keep operating and improving. It’s also important to keep in mind that Metronome 2.0 is relatively new and still in beta, implying that this is an early developmental stage of the project.
+The main concern we have with Metronome is its considerable degree of centralization. However, the Metronome team has the experience and resources to keep operating and improving. The project team says they are working to gradually decentralize. We have been told that a token locking module upgrade to the MET token is in audit and will be implemented soon. This will be an encouraging step toward decentralization and a development to monitor.  It’s also important to keep in mind that Metronome 2.0 is relatively new and still in beta, implying that this is an early developmental stage of the project.
 
-Right now, Metronome Synth users and Curve LPs are required to put a lot of trust in the team. We encourage the Curve DAO to monitor the team’s stated roadmap to decentralise governance and make sure they are hitting those marks. The DAO should also keep an eye on the adoption rate of msTokens. We recommend that Curve LPs view the current gauge as a bootstrapping mechanism. Progress toward decentralisation and protocol maturity will determine if the gauge should remain.
+We encourage the Curve DAO to monitor the team’s stated roadmap to decentralize governance and make sure they are hitting those marks. The DAO should also keep an eye on the adoption rate of msTokens. We recommend that Curve LPs view the current gauge as a bootstrapping mechanism. Progress toward decentralization and protocol maturity will determine if the gauge should remain.
 
 
 # Appendix: Metronome Contract Addresses
