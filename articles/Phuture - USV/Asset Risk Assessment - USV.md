@@ -39,9 +39,9 @@ In January 2023, Phuture made a [proposal](https://gov.curve.fi/t/proposal-to-ad
 - [USV Vault Contract](https://www.contractreader.io/contract/0x4030de8f22f17822e325287ce3c8d97c36982b67)
 - [2-of-3 multi-sig](https://app.safe.global/eth:0x6575A93aBdFf85e5A6b97c2DB2b83bCEbc3574eC/home)
 
-Phuture is a crypto index platform that offers its users exposure to baskets of DeFi tokens through its on-chain index funds and savings vaults. Its newest product, the USDC Savings Vault (USV), seeks to simplify access to fixed-rate stablecoin yields. Users simply deposit USDC into the vault and receive the yield-earning USV receipt token. By automating the process of managing maturities and optimizing yield potential through its lending strategy, Phuture aims to reliably generate yields on USDC.
+Phuture is a crypto index platform that offers its users exposure to baskets of DeFi tokens through its on-chain index funds and savings vaults. Its newest product, the USDC Savings Vault (USV), seeks to simplify access to fixed-rate stablecoin yields. Users simply deposit USDC into the vault and receive the yield-earning USV receipt token. By automating the process of managing maturities and optimizing yield through its lending strategy, Phuture aims to reliably generate yields on USDC.
 
-Phuture utilizes Notional Finance, a fixed yield DeFi lending platform, to introduce their savings vault product for USDC. The USV strategy optimizes yield by dynamically investing in a blend of Notional's 3 and 6-month bonds. Notional, in turn, lends deposited funds to Compound for increased capital efficiency. Given that the USV product is primarily exposed to Notional Finance, a significant portion of this report will focus on the inner workings of this platform.
+Phuture utilizes Notional Finance, a fixed yield DeFi lending platform, to power their USDC savings vault. The USV strategy optimizes yield by dynamically investing into a blend of Notional's 3 and 6-month bonds. Notional, in turn, lends all deposited funds to Compound for increased capital efficiency. Given that the USV product is primarily exposed to Notional Finance, a significant portion of this report will focus on the inner workings of this platform.
 
 When USDC is deposited into Phuture, it is lent out to the highest yielding tenor (either 3 or 6 month tenor). These deposits may remain idle until a minimum threshold of USDC is reached (although currently the threshold is 0, with harvesting done every 3 days). During the redemption process, USV follows a waterfall structure that prioritizes paying out any available USDC before selling positions. To safeguard future returns, USV sells positions in order of the lowest yielding tenor first.
 
@@ -51,13 +51,13 @@ The following flowchart shows the strategy employed by USV:
 
 ## USV and Phuture Product Adoption
 
-After conducting a thorough analysis of the USV-FraxBP pool, our findings show that as of 2/18/23, the pool has not generated any trade volume since its inception. This has been confirmed by this [query](https://dune.com/queries/1982268), which provides further analytics. This is not unheard of for new pools preparing to bootstrap with a new gauge, but surely a trend to monitor.
+After conducting an analysis of the USV-FraxBP pool, our findings show that as of 2/18/23, the pool has not generated any trade volume since its inception. This has been confirmed by this [query](https://dune.com/queries/1982268), which provides further analytics. This is not unheard of for new pools preparing to bootstrap with a new gauge, but surely a trend to monitor.
 
-Currently, 100% of the liquidity in the pool is supplied by the Phuture team. Specifically, 99% is provided by a multi-sig owned by Phuture ([0x237a4d...](https://etherscan.io/address/0x237a4d2166Eb65cB3f9fabBe55ef2eb5ed56bdb9)), while the remaining 1% is provided by one of the multi-sig owners ([0x9fD6Ac...](https://etherscan.io/address/0x9fD6Ac607AE0B13e066a609f6e5f2d41c3d04A5F)).
+Currently, 100% of the liquidity in the pool is supplied by the Phuture team. Specifically, 99% is provided by a multisig owned by Phuture ([0x237a4d...](https://etherscan.io/address/0x237a4d2166Eb65cB3f9fabBe55ef2eb5ed56bdb9)), while the remaining 1% is provided by one of the multisig owners ([0x9fD6Ac...](https://etherscan.io/address/0x9fD6Ac607AE0B13e066a609f6e5f2d41c3d04A5F)).
 
-When accounting for the 271,208 USV held by their multi-sig and the 100,000 USV provided as liquidity by their multi-sig, only 7.5% out of the 401,309 total USV supply is held by wallets other than the Phuture multi-sig. Phuture has stated that they will deploy the remaining USV in their treasury to the liquidity pool once the CRV gauge is allocated.
+When accounting for the 271,208 USV held by their multisig and the 100,000 USV provided as liquidity by their multisig, only 7.5% out of the 401,309 total USV supply is held by wallets other than the Phuture multisig. Phuture has stated that they will deploy the remaining USV in their treasury to the liquidity pool once the CRV gauge is allocated.
 
-Phuture has another product called PDI (Phuture DeFi Index), a DeFi index token built on Ethereum. The performance of PDI can provide insight into the community's willingness to adopt new products from Phuture. Upon analyzing the distribution of PDI tokens, we observed that the majority of the PDI supply, approximately 79%, is held in the team multi-sig treasury. As of February 18th, the total PDI supply stands at 1389.5 tokens, of which 139.37 PDI is held in a wallet, 800 PDI is supplied as liquidity on Uniswap V3, and 111.99 PDI is parked in bPDI by the treasury multi-sig.
+Phuture has another product called PDI (Phuture DeFi Index), a DeFi index token built on Ethereum. The performance of PDI can provide insight into the community's willingness to adopt new products from Phuture. Upon analyzing the distribution of PDI tokens, we observed that the majority of the PDI supply, approximately 79%, is held in the team multisig treasury. As of February 18th, the total PDI supply stands at 1389.5 tokens, of which 139.37 PDI is held in a wallet, 800 PDI is supplied as liquidity on Uniswap V3, and 111.99 PDI is parked in bPDI by the treasury multisig.
 
 Here is how the supply change over time correlated with the no. of holders overtime:
 
@@ -83,7 +83,7 @@ Source: [PDI Supply and Holders Data [v2-5]](https://dune.com/queries/2014104/33
   * OpenZeppelin [Governance Contracts](https://blog.openzeppelin.com/notional-v2-audit-governance-contracts/)
   * ABDK [Audit 1](https://github.com/notional-finance/contracts-v2/blob/master/audits/ABDK%20-%20Notional%20V2%2C%20Sept%201%202021.pdf), [Audit 2](https://github.com/notional-finance/contracts-v2/blob/master/audits/ABDK%20-%20Notional%20V2%20Fixes%2C%20Nov%201%202021.pdf)
 
-Notional is a fixed-rate, fixed-term crypto asset lending and borrowing platform that enables the tokenization of future payments in various currencies, such as ETH or USDC. It is able to offer fixed-rate thanks to its complex AMM that divides liquidity into fixed-term pools called tenors. This is made possible by fCash. The fCash mechanism allows Notional users to commit to transfers of value at specific points in the future.  
+Notional is a fixed-rate, fixed-term crypto asset lending and borrowing platform that enables the tokenization of future payments in various currencies, such as ETH or USDC. It is able to offer fixed-rate thanks to its complex AMM that divides liquidity into fixed-term pools called tenors. This is made possible by fCash. The fCash mechanism allows Notional users to commit to transfers of value at specific maturity dates in the future.  
 
 ### fCash
 
@@ -99,9 +99,9 @@ The three market participants in the system are lenders, borrowers, and liquidit
 
 #### Lender
 
-Lender deposits are immediately deposited into Compound and the cToken receipt is held by Notional. The lender receives +fCash, which represents a claim on their capital plus the interest at maturity. Lenders have the flexibility to choose from various active tenors, each with different maturity dates and interest rates. At maturity, the fixed interest rate on the lender's fCash will cease, and it will earn only the lower variable rate from their underlying Compound cToken position.
+Lender deposits are immediately deposited into Compound and the cToken receipt is held by Notional. The lender receives +fCash, which represents a claim on their capital plus the interest at maturity. Lenders have the flexibility to choose from various active tenors, each with different maturity dates and interest rates. At maturity, the fixed interest rate on the lender's fCash will cease, and it will continue earning the lower variable rate from their underlying Compound cToken position.
 
-It is possible also to redeem the underlying cToken before maturity, and doing so will expose the lender to risk of loss, as Teddy from Notional explains:
+It is possible to redeem the underlying cToken before maturity, although doing so requires selling fCash into Notional's interest rate AMM. This will potentially expose the lender to risk of loss, as Teddy from Notional explains:
 
 ![teddy](https://user-images.githubusercontent.com/51072084/221062327-0b1e3793-bf68-437d-9234-ae54ed0016d4.png)
 
@@ -112,7 +112,7 @@ It is possible also to redeem the underlying cToken before maturity, and doing s
 
 In order to borrow funds, a borrower must first mint both positive and negative fCash tokens based on their chosen collateral and maturity. These tokens will represent their obligation to repay the borrowed funds at a later date.
 
-Once the fCash tokens have been minted, the borrower can then exchange the positive fCash for cTokens, which will allow them to access the funds they need. At the end of the trade, the borrower will be left with cTokens and negative fCash, which represents their obligation to repay the capital.
+Once the fCash tokens have been minted, the borrower can then exchange the positive fCash for cTokens, which will allow them to access the funds they need. At the end of the trade, the borrower will receive cTokens and negative fCash, which represents their obligation to repay the capital.
 
 Notional strives to ensure that lenders have a high likelihood of earning the expected returns by requiring borrowers to pay back their debt at maturity. The required amount of collateral that borrowers must hold against their debt is determined based on the risk level of their collateral. For example, DAI requires a lower collateralization ratio of 120% compared to ETH's 150%.
 
@@ -123,7 +123,7 @@ If a borrower is unable to repay the funds they have borrowed by the maturity da
 
 Notional maintains on-chain liquidity pools that serve as a ready counter-party for borrowers and lenders at all time. The exchange rate between USDC and fUSDC at the specific maturity represents the fixed interest rate that users receive on Notional. In other words, the interest rate for lending and borrowing on Notional V2 is defined by the fCash Markets.
 
-Liquidity providers are essential to the functioning of liquidity pools as they contribute cTokens and fCash. By depositing cToken and +fCash into the pool, the LP mints a pair of fCash tokens that cancel out at maturity. In exchange for their contribution, these providers are entitled to earn fees every time a borrower or lender trades between cTokens and fCash within the pool. 
+Liquidity providers are essential to the functioning of liquidity pools by supplying both cTokens and fCash. The LP mints a pair of fCash tokens (these cancel out at maturity), and deposits cToken and +fCash into the pool. In exchange for their contribution, these providers are entitled to earn fees every time a borrower or lender trades between cTokens and fCash within the pool. 
 
 Liquidity providers are important for stabilizing interest rates and they bear the risk of impermanent loss depending on the demand for lending and borrowing. Every borrow/lend action will incur some slippage in the interest rate, with the magnitude determined by the size of the loan compared to the overall liquidity in the pool. It is therefore essential that liquidity providers are adequately incentivized to ensure that the fixed-rate borrowing and lending market is stable.
 
@@ -136,7 +136,7 @@ Source: Notional Finance [Docs](https://docs.notional.finance/notional-v2/notion
 
 #### nToken
 
-Supplying liquidity to a multitude of markets with different maturity dates would be cumbersome for Notional LPs, so instead, it makes use of a passive strategy through nTokens. These tokens automate the process of minting fCash and depositing suitable assets into the liquidity pool with different maturities for the liquidity provider. By holding nTokens, users can earn returns from providing liquidity to Notional across all active maturities without needing to interact with the individual liquidity pools.
+Supplying liquidity to a multitude of markets with different maturity dates would be cumbersome for Notional LPs, so instead, there is a passive strategy through nTokens. These tokens automate the process of minting fCash and depositing suitable assets into the liquidity pool with different maturities for the liquidity provider. By holding nTokens, users can earn returns from providing liquidity to Notional across all active maturities without needing to interact with the individual liquidity pools.
 
 To mint nTokens, a user deposits cTokens into the nToken account. The account then distributes the user's liquidity into the underlying pools for that currency and holds the resultant liquidity tokens, which represent the nToken account's claim on the user's deposit. The distribution is based on a set of governance parameters known as "deposit shares," which are percentage figures that determine how much of a user's total liquidity is deposited into each individual market.
 
@@ -158,7 +158,7 @@ Source: Notional Finance [Whitepaper](https://docs.notional.finance/developers/w
 
 #### Pool Governance Parameters
 
-Liquidity pool governance parameters have a significant influence on the shape of the AMM curve and the liquidity allocation toward each pool. Notional's governance is controlled by a 3-of-5 multi-sig consisting of two team members and three community members.
+Liquidity pool governance parameters have a significant influence on the shape of the AMM curve and the liquidity allocation toward each pool. Notional's governance is controlled by a 3-of-5 multisig consisting of two team members and three community members.
 
 - **Deposit shares** represent the proportion of incoming liquidity allocated among active pools. Deposit shares should add up to 1 (100%). For USDC, deposit shares are set at 45% for a 3-month maturity, 40% for a 6-month maturity, and 15% for a 1-year maturity.
   
@@ -187,7 +187,7 @@ To address this issue, a TWAP oracle rate is used to minimize the risk of price 
 
 Notional uses unprocessed Chainlink price feed to facilitate liquidations. During the liquidation, a liquidator buys a portion of the collateral owned by a borrower account that has fallen below a minimum required level at a discount to the on-chain oracle price. The liquidator then uses this collateral to repay some of the debt owed by the liquidated account. Notably, even if the borrower's collateral is only slightly under the required level, the liquidator can purchase at least 40% of it.
 
-In the unlikely scenario where market volatility delays the liquidation process and causes potential losses to lenders, Notional has measures in place to ensure lenders' funds are protected. The protocol can use its own reserve assets or sell its native token, NOTE, to raise the necessary capital to compensate lenders and make sure they are always fully reimbursed.
+In the unlikely scenario where market volatility delays the liquidation process and causes a potential shortfall, Notional has measures in place to ensure lenders' funds are protected. The protocol can use its own reserve assets or sell its native token, NOTE, to raise the necessary capital to compensate lenders and make sure they are always fully reimbursed.
 
 The NOTE treasury can be tracked from [here](https://info.notional.finance/treasury).
 
@@ -198,7 +198,7 @@ The NOTE treasury can be tracked from [here](https://info.notional.finance/treas
 
 #### Insolvency
 
-As with any smart contract-based financial platform, Notional Finance carries inherent risks. While the platform has been audited, has an active [Bug Bounty with immunefi](https://immunefi.com/bounty/notional/) and is certified by industry leaders including Certora, ABDK, Code Arena & OpenZeppelin, there exists a possibility of insolvency in the event of borrower defaults. In such a scenario, lenders may be affected. However, Notional Finance has taken steps to mitigate these risks through a robust liquidation protocol and infrastructure, which aim to minimize potential losses.
+As with any smart contract-based financial platform, Notional Finance carries inherent risks. While the platform has been audited, has an active [Bug Bounty with immunefi](https://immunefi.com/bounty/notional/) and is certified by industry leaders including Certora, ABDK, Code Arena & OpenZeppelin, there exists a possibility of insolvency in the event of borrower defaults. In such a scenario, lenders (ie. USV depositors) may be affected. However, Notional Finance has taken steps to mitigate these risks through a robust liquidation protocol and infrastructure, which aim to minimize potential losses.
 
 In the unlikely event that the liquidation procedure allows a borrower to become insolvent, Notional Finance has an [on-chain reserve fund](https://info.notional.finance/s-note) that can be utilized to help cover any losses that may arise on the platform. This on-chain reserve fund is in the form of sNOTE, which stands for staked NOTE/ETH 80/20 LP tokens. If the platform experiences losses, NOTE token holders can participate in an on-chain vote to take 50% of the assets held in the sNOTE pool and use them to recapitalize the system.
 
@@ -214,7 +214,7 @@ It is important to consider the impact of changing parameters, such as raising t
 
 #### Market Risk
 
-Funds deposited into USV will either be 1) sitting idle as USDC, 2) deployed as 3-month tenor fCash, or 3) deployed as 6-month tenor fCash. fCash redeemed before maturity will be exposed to market risk from changes in interest rate, as modelled [here](https://www.desmos.com/calculator/zwaw8lr0nm). USV uses a waterfall redemption strategy to first prefer USDC, and then the lowest-yielding tenor for withdrawal. All funds will typically be deployed into Notional, as there is no minimum threshold of deposits required by the USV strategy, and the harvesting interval is every 3 days. This means users could be exposed to loss on their principal at time of withdrawal, depending on changes in interest rate. USV allows users to specify a minimum output amount and does not place any restriction on a user's ability to withdraw, regardless of market conditions.
+Funds deposited into USV will either be 1) sitting idle as USDC, 2) deployed as 3-month tenor fCash, or 3) deployed as 6-month tenor fCash. fCash redeemed before maturity will be exposed to market risk from changes in interest rate, as modelled [here](https://www.desmos.com/calculator/zwaw8lr0nm). USV uses a waterfall redemption strategy to first prefer USDC, and then the lowest-yielding tenor for withdrawal. All funds will typically be deployed into Notional, as there is no minimum threshold of deposits required by the USV strategy, and the harvesting interval is every 3 days. This means users could be exposed to loss on their principal at time of withdrawal, depending on changes in interest rate. Notably, USV allows users to specify a minimum output amount and does not place any restriction on a user's ability to withdraw, regardless of market conditions.
 
 ### Compound Risks
 
@@ -227,9 +227,9 @@ There has been little mention of Compound in this report since readers are likel
 * [Notional 2-of-3 Pause Guardian](https://etherscan.io/address/0xD9D5a9dc6a952b7aD6B05a983b399537B7c0Ee88#readProxyContract)
 * [Phuture 2-of-3 Multi-sig](https://etherscan.io/address/0x6575A93aBdFf85e5A6b97c2DB2b83bCEbc3574eC)
 
-Both Phuture and Notional have a centralization vector with the ownership authority around the multi-sig. Notional is fully upgradeable, as well as all system parameters are controlled by the treasury multi-sig. This is composed of two Notional team members (Jeff and Teddy) and three community members. Additionally, the pause guardian multi-sig can pause all system functions and is controlled by the Notional company.
+Both Phuture and Notional have a centralization vector with the ownership authority around the multisig. Notional is fully upgradeable and all system parameters are controlled by the treasury multisig. This is composed of two Notional team members (Jeff and Teddy) and three community members. Additionally, the pause guardian multisig can pause all system functions and is controlled by the Notional company.
 
-The Phuture multi-sig has significant control over the USV system and is controlled by members of the Phuture team. It allows the `VAULT_MANAGER_ROLE` to call `setMaxLoss`, `setFeeRecipient`, and `authorizeUpgrade`. The ability to upgrade the USV contract gives the Phuture multi-sig control over user deposits to USV.
+The Phuture multisig has significant control over the USV system and is controlled by members of the Phuture team. It allows the `VAULT_MANAGER_ROLE` to call `setMaxLoss`, `setFeeRecipient`, and `authorizeUpgrade`. **The ability to upgrade the USV contract gives the Phuture multisig control over user deposits to USV.**
 
 C2tP points this out in the following discord convo:
 
@@ -242,9 +242,9 @@ Source: [Convex Finance Discord (CVX-Voting)](https://discord.com/channels/82079
 
 - USV is exposed to several DeFi products. It relies most significantly on Notional Finance, although users should be aware that Notional utilizes Compound Finance under the hood. Additionally, the foundation of the USV product is USDC, a custodial stablecoin issued by Circle. 
 
-- USV has a centralization vector with its ownership authority. Both Phuture and Notional are governed by team-controlled multi-sigs, and in both cases there is a high degree of control afforded to them.  
+- USV has a centralization vector with its ownership authority. Both Phuture and Notional are governed by team-controlled multisigs, and in both cases there is a high degree of control afforded to them.  
   
-- Adequate incentives flowing towards Notional liquidity providers and borrowers are essential to support stable, reliable yield for lenders. Following the incentives and change in governance parameters can help a user assess the opportunity cost of their position.
+- Adequate incentives flowing towards Notional liquidity providers and borrowers are essential to support stable, reliable yield for lenders. USV holders should follow changes in Notional LP incentives and adjustments to governance parameters to help assess the opportunity cost of their position.
   
 - Notional has been audited, has an active Bug Bounty ($1,000,000) with immunefi and is certified by industry leaders including Certora, ABDK, Code Arena & OpenZeppelin. Notional Finance has an on-chain reserve fund that can be utilized to help cover any losses and reduce insolvency risk.
 
@@ -259,7 +259,7 @@ Source: [Convex Finance Discord (CVX-Voting)](https://discord.com/channels/82079
 
 **1) Is it possible for a single entity to rug its users?**
 
-Yes. USV is governed by a 2-of-3 multi-sig controlled by the Phuture team. It can upgrade the contract and therefore has complete control over user deposits. It is also indirectly exposed to the Notional multi-sig and to Circle as the centralized issuer of USDC.
+Yes. USV is governed by a 2-of-3 multisig controlled by the Phuture team. It can upgrade the contract and therefore has complete control over user deposits. It is also indirectly exposed to the Notional multisig and to Circle as the centralized issuer of USDC.
 
 **2) If the team vanishes, can the project continue?**
 
