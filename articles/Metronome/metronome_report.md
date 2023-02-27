@@ -229,19 +229,23 @@ Source: [Debank Portfolio Tracker](https://debank.com/profile/0xd1de3f9cd4ae2f23
 
 Beyond simply controlling these assets, the Treasury multisig also governs the smart contracts in the protocol. It has extensive privileges. According to the [Quantstamp audit](https://github.com/autonomoussoftware/metronome-synth-audit/wiki/Audit) of Metronome, the multisig can do the following:  
 
-
+**Governor Privileges**
 * Transfer the governor role of the protocol’s smart contracts. For example, see [PoolRegistry.sol](https://etherscan.io/address/0x11eaD85C679eAF528c9C1FE094bF538Db880048A#writeProxyContract#F8), yet in essence all contracts are affected
 * [Add](https://etherscan.io/address/0x11eaD85C679eAF528c9C1FE094bF538Db880048A#writeProxyContract#F5) and [remove](https://etherscan.io/address/0x11eaD85C679eAF528c9C1FE094bF538Db880048A#writeProxyContract#F10) pools through the PoolRegistry.sol contract
-* [Pause](https://etherscan.io/address/0x11eaD85C679eAF528c9C1FE094bF538Db880048A#writeProxyContract#F4)/ [Unpause](https://etherscan.io/address/0x11eaD85C679eAF528c9C1FE094bF538Db880048A#writeProxyContract#F9) the protocol by disabling/enabling deposits in the PoolRegistry.sol
+* [Pause](https://etherscan.io/address/0x11eaD85C679eAF528c9C1FE094bF538Db880048A#writeProxyContract#F4)/ [Unpause](https://etherscan.io/address/0x11eaD85C679eAF528c9C1FE094bF538Db880048A#writeProxyContract#F9) the protocol by disabling/enabling deposits in PoolRegistry.sol
 * [Shutdown](https://etherscan.io/address/0x11eaD85C679eAF528c9C1FE094bF538Db880048A#writeProxyContract#F6)/ [re-open](https://etherscan.io/address/0x11eaD85C679eAF528c9C1FE094bF538Db880048A#writeProxyContract#F3) the protocol through the PoolRegistry.sol contract by prohibiting/re-enabling calls to liquidate, swap, repay, withdraw, issue debt or deposit  
 * Change the current maximum total supply of [deposit](https://etherscan.io/address/0xA77B145c7Fa5B412eb8aD41D587bE892b9c1EFC3#writeProxyContract#F12), [debt](https://etherscan.io/address/0xF43de8E0c2596E30c77d69d158842D1d9B937D7c#writeProxyContract#F13) and [synthetic](https://etherscan.io/address/0x64351fC9810aDAd17A690E4e1717Df5e7e085160#writeProxyContract#F11) tokens
+* Change the speed of reward emissions through the [RewardDistributor.sol](https://etherscan.io/address/0xb975a3813AaCC7c9A8b61BFf5c3a0276154dDa2e#writeContract#F9)
+* [Change the collateralization ratio (from 0% to 100%)](https://etherscan.io/address/0xA77B145c7Fa5B412eb8aD41D587bE892b9c1EFC3#writeProxyContract#F11) and thereby impact the amount of underlying assets that a user receives when withdrawing or depositing
+* Change the [interest rate on debt tokens](https://etherscan.io/address/0xF43de8E0c2596E30c77d69d158842D1d9B937D7c#writeProxyContract#F12) to an arbitrary value 
+
+The following privileges are not directly afforded to the governor role, but can be controlled via the privileges listed above, for example by deploying an arbitrary pool contract:
+
 * Mint an arbitrary amount of [deposit](https://etherscan.io/address/0xA77B145c7Fa5B412eb8aD41D587bE892b9c1EFC3#writeProxyContract#), [debt](https://etherscan.io/address/0xF43de8E0c2596E30c77d69d158842D1d9B937D7c#writeProxyContract#F5) and [synthetic](https://etherscan.io/address/0x64351fC9810aDAd17A690E4e1717Df5e7e085160#writeProxyContract#F6) tokens (up to a max supply that is itself changeable) to an arbitrary address 
 * Burn an arbitrary amount of [debt](https://etherscan.io/address/0xF43de8E0c2596E30c77d69d158842D1d9B937D7c#writeProxyContract#F3) or [synthetic](https://etherscan.io/address/0x64351fC9810aDAd17A690E4e1717Df5e7e085160#writeProxyContract#F2) tokens from an arbitrary address
 * Arbitrarily move [deposit](https://etherscan.io/address/0xA77B145c7Fa5B412eb8aD41D587bE892b9c1EFC3#writeProxyContract#F10), [debt](https://etherscan.io/address/0xF43de8E0c2596E30c77d69d158842D1d9B937D7c#writeProxyContract#F11) and [synthetic tokens](https://etherscan.io/address/0x64351fC9810aDAd17A690E4e1717Df5e7e085160#writeProxyContract#F10) from one account to another 
-* Change the speed of reward emissions through the [RewardDistributor.sol](https://etherscan.io/address/0xb975a3813AaCC7c9A8b61BFf5c3a0276154dDa2e#writeContract#F9)
 * [Move all deposit, synthetic and underlying tokens](https://etherscan.io/address/0x3691EF68Ba22a854c36bC92f6b5F30473eF5fb0A#writeProxyContract#F2) from the Treasury.sol contract to an arbitrary address
-* [Change the collateralization ratio (from 0% to 100%)](https://etherscan.io/address/0xA77B145c7Fa5B412eb8aD41D587bE892b9c1EFC3#writeProxyContract#F11) and thereby impact the amount of underlying assets that a user receives when withdrawing or depositing
-* Change the [interest rate on debt tokens](https://etherscan.io/address/0xF43de8E0c2596E30c77d69d158842D1d9B937D7c#writeProxyContract#F12) to an arbitrary value 
+
 
 The [2-of-4 treasury multisig wallet](https://etherscan.io/address/0xd1DE3F9CD4AE2F23DA941a67cA4C739f8dD9Af33) effectively controls the entire protocol. If this wallet is compromised, or if two of its signers act maliciously, all user funds and treasury funds would be at risk. The fact that Metronome’s leaders are doxxed gives some “legal” assurance to users against the rugging of funds by the team itself. But Metronome possesses an unusually large treasury for a project of its size and TVL, making it an appealing target for social-engineering attacks.
 
