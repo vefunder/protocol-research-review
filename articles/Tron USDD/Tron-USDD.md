@@ -386,7 +386,7 @@ While conducting this report, it became evident that Tron and USDD repeatedly us
 
 All relevant components of the USDD tech stack have undergone an audit. All smart contract audits were conducted by SlowMist:
 
-The [TRC-20 token audit](https://usdd.io/SlowMistAuditReport-USDDTRC20.pdf) did not find any issues. However, for the [ERC-20 token audit](https://usdd.io/SlowMistAuditReport-USDD.pdf), the report highlighted that the PREDICATE ROLE can mint an unlimited number of tokens. In response, the project team stated that PREDICATED_ROLE is completely decentralized and held by the governance contract of BitTorrent Chain. BitTorrent Chain is governed by [12 validators](https://app.bt.io/staking). At least some of the validators are either controlled (e.g. Huobi) or tightly connected (e.g. Binance) to Justin Sun.
+The [TRC-20 token audit](https://usdd.io/SlowMistAuditReport-USDDTRC20.pdf) did not find any issues. However, for the [ERC-20 token audit](https://usdd.io/SlowMistAuditReport-USDD.pdf), the report highlighted that the `PREDICATE_ROLE` can mint an unlimited number of tokens. In response, the project team stated that `PREDICATE_ROLE` is completely decentralized and held by the governance contract of BitTorrent Chain. BitTorrent Chain is governed by [12 validators](https://app.bt.io/staking). At least some of the validators are either controlled (e.g. Huobi) or tightly connected (e.g. Binance) to Justin Sun.
 
 The [TRX Burning Contract](https://usdd.io/MultiSigFundRaiser.pdf) also passed the audit without any significant issues. The auditors concluded: “_This is the MultiSigFundRaiser contract that contains the BaseMultiSigWallet section. MultiSig users can redeem their TRX tokens to mint and issue USDD. SafeMath security module is used, which is a recommended approach. The contract does not have the Overflow and the Race Conditions issue._” 
 
@@ -395,9 +395,9 @@ Further, Slowmist looked at the [Issuance Contract](https://usdd.io/MultiSigLock
 
 ## Depeg Risk
 
-Since it was launched, the USDD market price deviates under the dollar peg. The reason for this can be summarized by one word: “timing”. As mentioned, USDD was released shortly before the UST crash. Initially as a copy of Terra UST, with a peg design based on a dual-token model. In the aftermath of Terra’s crash, however, many algorithmic stablecoins were struggling. USDD even more so, because Alameda Research - who was also invested in UST and Terra - started to have liquidity issues. Back then, Alameda was still part of the TDR.
+Since it was launched, USDD has struggled to keep its dollar peg. The reason for this can be summarized by one word: “timing”. As mentioned, USDD was released shortly before the UST crash, initially as a copy of Terra UST and with a peg design based on a dual-token model. In the aftermath of Terra’s crash, however, many algorithmic stablecoins were struggling. USDD faced additional tribulations in the wake of the Alameda Research collapse - who was still part of the TDR.
 
-Despite USDD switching its stability mechanism from an algorithmic to an over-collateralized model, it still got hit hard after Terra’s downfall. The figure below shows the volatility of USDD over the past 12 months.
+Despite USDD switching its stability mechanism from an algorithmic to an over-collateralized model, it was still hit hard after Terra’s downfall. The figure below shows the volatility of USDD over the past 12 months.
 
 
 ![tradingview-usdd-depeg](https://user-images.githubusercontent.com/89845409/220380962-69913c0b-4172-40d5-932d-ed9346591f56.png)
@@ -405,15 +405,16 @@ Despite USDD switching its stability mechanism from an algorithmic to an over-co
 
 (source: [TradingView](https://www.tradingview.com/symbols/USDDUSD/?exchange=CRYPTO))
 
-It’s not perfectly proven what caused USDD’s depeg. However, the most named reasons are:
+There are several possible contributors to USDD’s historical struggle with maintaining its peg. The most named reasons are:
 
 
+* (1) The UST crash destroyed confidence in algorithmic stablecoins, especially anything associated with UST.
+* (2) In the aftermath of the UST crash, FTX and Alameda Research experienced a liquidity crunch. Justin Sun [claimed](https://coinmarketcap.com/community/articles/637615e238e8b54c28f2a219/) that the depeg was caused by Alameda, as they sold USDD to cover liquidity at FTX. On-chain data shows that two whales caused a depeg by selling large amounts of USDD for USDT and USDC via the Curve [USDD-3CRV](https://curve.fi/#/ethereum/pools/factory-v2-116/deposit) metapool. This led to an imbalance (82.27% USDD share in the pool). The imbalance [continued](https://www.coindesk.com/markets/2022/12/12/trons-usdd-stablecoin-hits-lowest-since-june/) for over three months (The pool balance has since recovered).
+* (3) The USDD team and the TDR appear unwilling to sell off TRX collateral or any reserves in an attempt to re-establish the peg. Instead, they continue to fill the reserves, attempting to bolster confidence. To make an impact, the TDR would need to allocate funds directly, e.g. depositing into the Curve pool, market buying USDD with its collateral, or putting USDC or USDT into the PSM module.
 
-* (1) The UST crash, which left many algorithmic stablecoins with problems. Especially copy cats of UST.
-* (2) In the aftermath of the UST crash, FTX and Alameda Research, got into liquidity problems. The depeg from November 8th was ascribed to them. Justin Sun [stated](https://coinmarketcap.com/community/articles/637615e238e8b54c28f2a219/) that the depeg was caused by Alameda, as they sold USDD to cover liquidity at FTX. On-chain data shows that two whales caused a depeg, by selling large amounts of USDD for USDT and USDC via the Curve [USDD-3CRV](https://curve.fi/#/ethereum/pools/factory-v2-116/deposit) meta pool. This led to an imbalance (82.27% USDD share in the pool). The imbalance [continued](https://www.coindesk.com/markets/2022/12/12/trons-usdd-stablecoin-hits-lowest-since-june/) for over three months. In terms of balance, the pool looks much better today.
-* (3) The “bids to asks” ratio at the exchange Huobi was below one Dollar for almost four months. And the USDD price dipped again to ~$0.97 on January 6, 2023, as Huobi [announced](https://www.reuters.com/technology/crypto-exchange-huobi-lay-off-20-staff-justin-sun-2023-01-06/?utm_campaign=Research%20newsletter&utm_source=hs_email&utm_medium=email&_hsenc=p2ANqtz-90Ssplxp4ox-c6QnYXD77LRkl03TkMD4VWmGvDL6pP89KqfnSqpOuDVmCSbPoqpAbQ1SYm)  that it was laying off 20% of its staff. That same day, Justin Sun [transferred](https://www.bloomberg.com/news/articles/2023-01-06/sun-moves-100-million-of-crypto-to-support-his-exchange-huobi?utm_campaign=Research%20newsletter&utm_source=hs_email&utm_medium=email&_hsenc=p2ANqtz-90Ssplxp4ox-c6QnYXD77LRkl03TkMD4VWmGvDL6pP89KqfnSqpOuDVmCSbPoqpAbQ1SYm)  $100M in USDC and USDT from Binance to Huobi, in a show of confidence.
+USDD traded below peg on Huobi for almost four months. The USDD price dipped again to ~$0.97 on January 6, 2023 as Huobi [announced](https://www.reuters.com/technology/crypto-exchange-huobi-lay-off-20-staff-justin-sun-2023-01-06/?utm_campaign=Research%20newsletter&utm_source=hs_email&utm_medium=email&_hsenc=p2ANqtz-90Ssplxp4ox-c6QnYXD77LRkl03TkMD4VWmGvDL6pP89KqfnSqpOuDVmCSbPoqpAbQ1SYm)  that it was laying off 20% of its staff. That same day, Justin Sun [transferred](https://www.bloomberg.com/news/articles/2023-01-06/sun-moves-100-million-of-crypto-to-support-his-exchange-huobi?utm_campaign=Research%20newsletter&utm_source=hs_email&utm_medium=email&_hsenc=p2ANqtz-90Ssplxp4ox-c6QnYXD77LRkl03TkMD4VWmGvDL6pP89KqfnSqpOuDVmCSbPoqpAbQ1SYm) $100M in USDC and USDT from Binance to Huobi in a show of confidence.
 
-In conclusion, USDD does not print a healthy image. On the contrary, it has failed to hold its peg since the start. Despite Justin Sun’s crusade to support the peg, Tron’s stablecoin has a hard time recovering from its bumpy start. Among other issues, one of the main problems is the stability mechanisms. It seems that Justin Sun and the TDR are not willing to sell off TRX collateral or any reserves, in an attempt to re-establish the peg. Instead, they continue the fill the reserves, trying to show confidence in their stablecoin. However, these actions only have a symbolic meaning. The assets in the reserve vault don’t impact USDD’s price directly. To cause an impact, the TDR and Justin Sun would need to put their money where it can directly re-establish the peg. For instance, into the Curve pool, by market buying USDD with its collateral, or by putting USDC or USDT into the PSM module, to name a few examples. On the other hand, through such actions, the TDR would indirectly admit that USDD is dependent on its manual interventions. Plus it would put their funds at risk, whereas nothing can happen to their collateral while in the TDR-controlled contracts.
+Despite Justin Sun’s battle to support the peg, Tron’s stablecoin has had a hard time recovering from its bumpy start. One of the main problems is that the stability mechanisms are governed by the TDR members.  On the other hand, by taking action to defend the peg, the TDR would indirectly admit that USDD is dependent on its manual interventions. It would also put their treasury at risk, whereas nothing can happen to their collateral while in the TDR-controlled contracts.
 
 
 ## Custody Risk
@@ -423,14 +424,14 @@ All USDD reserve wallets, including the [TRX “Burning” contract](https://tro
 
 
 * [Amber Group](https://www.ambergroup.io/) - a crypto finance service provider that facilitates liquidity provision, trading, and asset management services.
-* [Poloniex](https://poloniex.com/) - a centralized cryptocurrency exchange, based in the United States. Justin Sun, the founder of the Tron network, is invested in [Poloniex](https://www.coindesk.com/markets/2019/11/12/despite-denials-tron-founder-confirms-investment-in-poloniex-crypto-exchange/).
-* [Ankr](https://www.ankr.com/) - a decentralized web3 infrastructure provider, that helps developers, decentralized applications, and stakers to interact easily with an array of blockchains.
+* [Poloniex](https://poloniex.com/) - a centralized cryptocurrency exchange based in the United States. Justin Sun, the founder of the Tron network, is invested in [Poloniex](https://www.coindesk.com/markets/2019/11/12/despite-denials-tron-founder-confirms-investment-in-poloniex-crypto-exchange/).
+* [Ankr](https://www.ankr.com/) - a decentralized web3 infrastructure provider that helps developers, decentralized applications, and stakers to interact easily with an array of blockchains.
 * [Mirana](https://mirana.xyz/) - a venture, trading, and asset management firm.
 * [Multichain](https://multichain.org/) - a cross-chain router protocol, that provides the infrastructure for arbitrary cross-chain interactions [see our previous [article](https://cryptorisks.substack.com/p/cross-chain-gauges-and-ecosystem) on Multichain].
-* [FalconX](https://falconx.io/) - **an **institutional crypto trading platform, built for larger financial institutions.
-* [TPS Capital](https://www.tpscap.com/) - a trading company that develops and deploys its proprietary trading algorithms, to take advantage of arbitrage opportunities.
+* [FalconX](https://falconx.io/) - an institutional crypto trading platform built for larger financial institutions.
+* [TPS Capital](https://www.tpscap.com/) - a trading company that develops and deploys its proprietary trading algorithms to take advantage of arbitrage opportunities.
 
-Honorable mention: Alameda Research was one of the first members to manage the Tron DAO Reserves. After its collapse, however, the TDR membership was given up.
+Honorable mention: Alameda Research was one of the first members to manage the Tron DAO Reserves. After its collapse, however, its TDR membership was revoked.
 
 
 ![Nasdaq-tdr-alameda-member](https://user-images.githubusercontent.com/89845409/220381058-a045c942-1387-42bc-93b7-c88c0c044f7d.png)
@@ -441,9 +442,9 @@ Honorable mention: Alameda Research was one of the first members to manage the T
 
 ## Collateral Risk
 
-In the current state, the only “official collateral” is TRX deposited into the BurnContract. This accounts for a collateralization ratio of about 85%. Although the Tron DAO Reserve website promotes that USDD is additionally backed by BTC, USDC, and USDT, the situation is a bit more complicated.
+In the current state, the only “official collateral” is TRX deposited into the BurnContract. This accounts for a collateralization ratio of about 85%. Although the Tron DAO Reserve website promotes that USDD is additionally backed by BTC, USDC, and USDT, the reality is a bit more complicated.
 
-All accounts that are supposed to contain USDD’s collateral and reserves are controlled by a 5-of-7 multi-sig. Hence, USDD holders have to fully trust the TDR to react adequately in the event of a significant depeg (see next section). In November 2022, the TDR [announced](https://twitter.com/trondaoreserve/status/1590691862813478912?s=20&t=Cqz8wokUlnQmmQT4GfqRGQ) that it will purchase $1B USDT to “safeguard the crypto market”. This was done by using USDC from the USDD reserves. According to the announcement, the funds were moved to a centralized exchange, making it more difficult to follow what the funds were used for. However, as seen in the image below, reserves backing USDD shrunk drastically in Q4, 2022.
+All accounts that contain USDD’s collateral and reserves are controlled by a 5-of-7 multi-sig. Hence, USDD holders must fully trust the TDR to react adequately in the event of a significant depeg (see next section). In November 2022, the TDR [announced](https://twitter.com/trondaoreserve/status/1590691862813478912?s=20&t=Cqz8wokUlnQmmQT4GfqRGQ) that it will purchase $1B USDT to “safeguard the crypto market”. This was done by using USDC from the USDD reserves. According to the announcement, the funds were moved to a centralized exchange, making it more difficult to follow what the funds were used for. However, as seen in the image below, reserves backing USDD shrunk drastically in Q4, 2022.
 
 
 ![Messari-reserve-withdrawal](https://user-images.githubusercontent.com/89845409/220381134-92a76b47-0bc2-4a17-95b9-cca9879091a2.png)
@@ -451,29 +452,29 @@ All accounts that are supposed to contain USDD’s collateral and reserves are c
 
 (source: [Messari](https://messari.io/report/state-of-usdd-q4-2022?referrer=all-research))
 
-The BTC reserves are also under the control of the TDR members. In theory, those reserves will be used in case the USDD depegs. However, this would require swift coordination of the five signers. It’s unclear how effective this mechanism is in case of emergency. Further, USDC and USDT reserves are used for rehypothecation on JustLend, which carries an additional risk.
+The BTC reserves are also under the control of the TDR members. In theory, those reserves will be used in case USDD depegs. However, this would require swift coordination of the five signers. It’s unclear how effective this mechanism is in case of emergency. Further, USDC and USDT reserves are rehypothecated as deposits on JustLend, which carries an additional risk.
 
 
 ## Governance Risk
 
-USDD is not controlled via decentralized governance. The stablecoin is not even permissionless. As eluded above, the TDR fully controls the issuance of USDD.
+USDD is not controlled via decentralized governance. The stability mechanisms not even permissionless. As eluded above, the TDR fully controls the issuance of USDD.
 
 Everything else is handled by an unknown team. There’s no public information that points to the team behind USDD. Contacting them via Discord and email did not result in further insights. Hence, it can only be assumed that the team consists of Tron developers. And given Justin Suns’ communication, it is very likely that he’s also deeply involved.
 
-In summary, USDDs well-being is fully dependent on an anon team, Justin Sun, and the seven TDR members. Plus of course, the 27 [super representatives](https://developers.tron.network/docs/super-representatives), that make up the Tron validators (i.e. block producers of the Tron blockchain).
+In summary, USDD's well-being is fully dependent on an anon team, Justin Sun, and the seven TDR members. Plus the 27 [super representatives](https://developers.tron.network/docs/super-representatives) that make up the Tron validators (i.e. block producers of the Tron blockchain).
 
 
 # Conclusion
 
-USDD shows every sign of a quickly spun-up copycat, that still hasn’t found its ideal setup. After an initial growth phase, the adoption in the wider ecosystem has slowed down, and the stablecoin is still struggling with problems from its bumpy start.
+After an initial growth phase, adoption has slowed down, and USDD is still struggling with problems from its bumpy start.
 
-There are no attempts to decentralize any components. After over nine months of existence, the project is still centrally steered by an unknown team. There are no decentralized and permissionless elements, despite their marketing claiming otherwise.
+USDD does not inspire confidence in terms of its stability mechanisms. Large sums of money are transferred, without notice, followed by a [Twitter](https://twitter.com/trondaoreserve) announcement stating that it was done to “protect the crypto market”. However, most measures don’t directly impact the price. The strategy seems to revolve around making grand, symbolic gestures that assuage market participants, rather than directly expending the TDR's own reserves (e.g. BTC, USDT, USDC).
 
-The stablecoin does not print a confident image in terms of its stability. Nor regarding the measures to stabilize the price. Large sums of money are transferred, without any notice period, followed by a [Twitter](https://twitter.com/trondaoreserve) announcement stating that it was done to “protect the crypto market”. However, most measures don’t directly impact the price. Leaving the impression of a hands-off approach, that hopes for symbolic effects, to not endanger the reserves (e.g. BTC, USDT, USDC).
+There are no attempts to decentralize any components. After over nine months of existence, the project is still centrally steered by an unknown team. There are no decentralized and permissionless elements, despite marketing claims to the contrary.
 
-From a technical perspective, it appears that the team takes security seriously. The project underwent relevant measures to reduce the risks of a hack. All audit reports are public and there were no issues of high severity found.
+On a positive note, from a technical perspective, it appears that the team takes security seriously. The project underwent relevant measures to reduce the risks of a hack. All audit reports are public and there were no issues of high severity found.
 
-In summary, potential concerns regarding USDD are mostly based on non-technical issues. A long list of red flags such as the intransparent project operations, control by a whitelisted group of institutional insiders, false advertising, non-diversified collateral, anon team, as well as the 6-month long off-peg urge for caution.
+In summary, potential concerns regarding USDD are mostly based on governance rather than technical issues. A long list of red flags include the intransparent project operations, anon team, control by a whitelisted group of institutional insiders, false advertising, non-diversified collateral, and 6-month long struggle with the peg.
 
 
 # Resources
