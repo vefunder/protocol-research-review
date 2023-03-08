@@ -27,7 +27,7 @@ Our investigation highlights significant risks with EURS, in particular notable 
 * underlying bonds trading at a significant discount vs. acquisition cost, resulting in a systematic asset–liability mismatch and making EURS prone to a liquidity crunch (note: Stasis appears to have addressed this immediate concern by liquidating its bond portfolio as of the latest March 7th [verification report](https://stasis-site.s3.amazonaws.com/transparency/2023/BDO_STSS-Malta_random-verification-report_2023-03-07.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJHZ3XKRZIWZ67L2Q%2F20230307%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20230307T184739Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=e360876b710314c3276ea9fffc926725811ea8c37ea87ca4597d9d5b73af9bcf)), and
 * the undisclosed ownership of the multi-sigs controlling the token and treasury contracts.
 
-Our recommendation is for the DAO to address these issues urgently with Stasis. Due to the elaborated risks and the fact that it is possible to operate a EUR stablecoin with enough regulatory clarity (working examples include: EURT and EUROC), we feel Stasis’ internal governance & corp setup can and should be held to a higher standard.
+Our recommendation is for the DAO to address these issues urgently with Stasis. Due to the elaborated risks and the fact that it is possible to operate a EUR stablecoin with enough regulatory clarity (working examples include: EURe, EUROe and EUROC), we feel Stasis’ internal governance & corp setup can and should be held to a higher standard.
 
 
 # Key Findings
@@ -129,13 +129,49 @@ Two companies custody investable assets, involving a portfolio of corporate and 
 
 ## EURS Issuance
 
-EURS issuance is fully permissioned and said to be controlled by STSS LTD (Malta) previously by a [2-of-3 multi-sig contract](https://etherscan.io/address/0x2EbBbc541E8f8F24386FA319c79CedA0579f1Efb) until June 2021, and later by a [3-of-7 gnosis safe](https://app.safe.global/transactions/history?safe=eth:0x1bee4F735062CD00841d6997964F187f5f5F5Ac9) since then. Although the identities of the signers are unknown, two of the three original signers are included in the updated multi-sig.
+EURS issuance is fully permissioned and said to be controlled by STSS LTD (Malta) previously by a [2-of-3 multi-sig contract](https://etherscan.io/address/0x2EbBbc541E8f8F24386FA319c79CedA0579f1Efb) until June 2021, and later upgraded to a [3-of-7 gnosis safe](https://app.safe.global/transactions/history?safe=eth:0x1bee4F735062CD00841d6997964F187f5f5F5Ac9). Although the identities of the signers are unknown, two of the three original signers are included in the updated multi-sig.
 
 The on-ramp process is twofold:
 1. A client makes a wire transfer to the Stasis specified IBAN account
 2. Once it’s confirmed, the Company sends the equivalent amount of EURS stablecoin to the client’s blockchain address 
 
-The issuance of EURS is typically performed via the 3-of-7 [Stasis treasury wallet](https://etherscan.io/address/0x1bee4f735062cd00841d6997964f187f5f5f5ac9). It holds surplus tokens that are not collateralized, as redeemed tokens are not burned but instead held in the treasury. As of the reporting time, it is estimated that the treasury has a surplus of approximately 77m EURS, which they intend to burn in Q2 if market conditions continue. The last time the treasury created new EURS was a tx for [10M EURS on March 3, 2022](https://etherscan.io/tx/0x087897d1a8bf119d94b4df34967585906271383be43ec2be6bb2ab51bf1baa9c). It has been about a year as of the writing of this report since EURS was last sent from the treasury.
+The issuance of EURS is performed via the 3-of-7 [Stasis treasury wallet](https://etherscan.io/address/0x1bee4f735062cd00841d6997964f187f5f5f5ac9). It holds surplus tokens that are not collateralized, as redeemed tokens are not burned but instead held in the treasury. As of the reporting time, it is estimated that the treasury has a surplus of approximately 77m EURS, which they intend to burn in Q2 if market conditions continue. The last time the treasury created new EURS was a tx for [10M EURS on March 3, 2022](https://etherscan.io/tx/0x087897d1a8bf119d94b4df34967585906271383be43ec2be6bb2ab51bf1baa9c). It has been about a year as of the writing of this report since EURS was last sent from the treasury.
+
+### EURS Token contract owners
+
+**Controlled by**: [Multisig contract](https://etherscan.io/address/0x2ebbbc541e8f8f24386fa319c79ceda0579f1efb) (based on sol wallet from Gav Wood)
+> **From**: [June 22, 2018](https://etherscan.io/tx/0x29431e269f522f22f417696afecfb362c16f8dd7c606dfd9d1d703260e19edf8) - [June 28, 2021](https://dashboard.tenderly.co/tx/mainnet/0xa65564234ffe9ed2a12c73a87efe03ce8880d13d5939049c6ad77820268d8093?trace=0.1)
+> 
+> **Threshold**: 2/3
+> 
+> **Signers**:
+> 
+> [0xEeE27C94490162b9b9789B75e0B8a40457117707](https://etherscan.io/address/0xeee27c94490162b9b9789b75e0b8a40457117707)
+> 
+> [0x98CEE9817499595B45eCa740f7fC1da2F9F9280d](https://etherscan.io/address/0x98cee9817499595b45eca740f7fc1da2f9f9280d)
+> 
+> [0x70250fcFEf983C9b912c8EEFB7021B4b7baE836e](https://etherscan.io/address/0x70250fcfef983c9b912c8eefb7021b4b7bae836e)
+
+**Controlled by**: [EURS Treasury Gnosis Safe](https://etherscan.io/address/0x1bee4f735062cd00841d6997964f187f5f5f5ac9)
+> **From**: [June 28, 2021](https://dashboard.tenderly.co/tx/mainnet/0xa65564234ffe9ed2a12c73a87efe03ce8880d13d5939049c6ad77820268d8093?trace=0.1) - Present
+>
+> **Threshold**: 3/7
+>
+> **Signers**:
+> 
+> [0xEeE27C94490162b9b9789B75e0B8a40457117707](https://etherscan.io/address/0xeee27c94490162b9b9789b75e0b8a40457117707)
+> 
+> [0x98CEE9817499595B45eCa740f7fC1da2F9F9280d](https://etherscan.io/address/0x98CEE9817499595B45eCa740f7fC1da2F9F9280d)
+> 
+> [0x111b4772eFD733e7e504A0789df60AF6f2324684](https://etherscan.io/address/0x111b4772efd733e7e504a0789df60af6f2324684)
+> 
+> [0xF02674b1F0D181EcF345aE83Af471b0a3B740f73](https://etherscan.io/address/0xf02674b1f0d181ecf345ae83af471b0a3b740f73)
+> 
+> [0x3a136B05bb654a2E952ff76F611c1B54d30c5Ead](https://etherscan.io/address/0x3a136B05bb654a2E952ff76F611c1B54d30c5Ead)
+> 
+> [0x2123AC812Bb4f08dafbb17931f6843435e319DEE](https://etherscan.io/address/0x2123ac812bb4f08dafbb17931f6843435e319dee)
+> 
+> [0x558cC8752201b5F709f5d200A6F2256Dafc805CC](https://etherscan.io/address/0x558cc8752201b5f709f5d200a6f2256dafc805cc)
 
 ## Collateral backing EURS
 
@@ -152,14 +188,14 @@ Note the most recent report from 2020. Although the audited annual reports and f
 
 Until recently, a significant amount (>93% as per the [January 5th verified statement](https://stasis-site.s3.amazonaws.com/transparency/2023/BDO_STSS-Malta_random-verification-report_2023-01-05.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJHZ3XKRZIWZ67L2Q%2F20230308%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20230308T025625Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=de8292ae3a738d8f025c0b470f80597b88adc7475e0a10d23e8ba000c6aff222)) of EURS collateral was backed by low interest bonds. 
 
-**Current bonds include:**
+**Recent bonds include:**
 * [XS2413696761](https://cbonds.com/bonds/1178943/), 0.125% corporate bond (ING Groep N.V., Nov 2025)
 * [XS2280845491](https://cbonds.com/bonds/914159/) 0% corporate bond (BMW Finance N.V, Jan 2026)
 * [XS2068071641](https://cbonds.com/bonds/619289/) 0% corporate bond (Asian Development Bank, Oct 2029)
 * [AT0000A2NW83](https://www.boerse-frankfurt.de/bond/at0000a2nw83-oesterreich-republik-0-000-21-31) 0% sovereign bond (Austria, Feb 2031)
 * [FR0014002WK3](https://cbonds.com/bonds/989135/) 0% sovereign bond (France, Nov 2031)
 
-Stasis provides a cost basis for the bonds they hold. However, our analysis shows that all bonds most recently held are trading at a significant discount compared to Stasis’ cost basis.
+Stasis provides a cost basis for the bonds they hold. However, our analysis shows that all bonds most recently held have been trading at a significant discount compared to Stasis’ cost basis.
 
 ![](https://i.imgur.com/4FK6hQo.png)
 
@@ -168,11 +204,12 @@ Since Stasis planned to hold the bonds until their maturity date, according to [
 Stasis also claims they have been able to liquidate close to 50% of the bond portfolio in 2022, facing no issues converting bonds into cash. These claims have yet to be validated and would warrant further research as Stasis has not confirmed if the bonds were liquidated at or below PAR, therefore realizing the mark-to-market (MTM) losses.
 
 ## Bond Liquidation Q1 2023
+
 At the time we began our research, the latest verified report was dated January 5th, 2023. On that date there were 50.9M EURS in circulation, roughly 48M backed by holdings in the MFSA bond investment account. This put the overall collateralization at just over 100%. The following image shows the breakdown as of January 5th:
 
 ![](https://i.imgur.com/lg5AJC5.png)
 
-The following report released on March 7th revealed that the entire bond account had been liquidated. The circulating supply of EURS had since fallen slightly to 45.55M EURS. Based on the accounting, the CR appears to be just over 100%. What remains unclear is if a cash infusion was required to cover any shortfall from the sale of assets. The following is the latest report from March 7th: 
+The latest report released on March 7th revealed that the entire bond account has recently been liquidated. The circulating supply of EURS has fallen slightly in the past few months to 45.55M EURS. Based on the accounting, the CR appears to be just over 100%. What remains unclear is if a cash infusion was required to cover any shortfall from the sale of assets. The following is the latest report from March 7th: 
 
 ![image](https://user-images.githubusercontent.com/51072084/223648650-c9a341ce-8b58-4196-8af4-43d0995d6e0c.png)
 
@@ -181,66 +218,52 @@ The following report released on March 7th revealed that the entire bond account
 
 ## Liquidity crunch
 
-Our research found that it would take as little as one percent (1%) net withdrawal pressure to jeopardize EURS backing and make the collateral ratio dip under 1:1.
+Our research found that with the recent bond allocation, it would have taken as little as one percent (1%) net withdrawal pressure to jeopardize EURS backing and make the collateral ratio dip under 1:1. While this has since been rectified, as Stasis has liquidated its bond portfolio, their accounting method does not recognize market risk of its investment accounts. Users should be vigilant when interpreting Stasis' accounting to identify risk of insolvency.
 
 Below is a simulation based on Stasis’ self-disclosed assets on March 1st, 2023, including total cash reserves of €379,892 and bonds ref. XS2413696761, XS2280845491, XS2068071641, FR0014002WK3 and AT0000A2NW83. A 0.5% slippage is assumed to dispose of bonds, as liquidity for these assets can be restricted.
 
 A FIAT redemption of over 25% would be catastrophic for EURS holders as realized losses would amount to €1M, far more than current cash reserves.
 
-The likelihood of a liquidity crunch (bank run) is therefore high due to the long maturities of the bonds and their current market price being far below Stasis’ acquisition cost. Current macroeconomic conditions (rising inflation and rising global interest rates) could push bond prices further down.
+A liquidity crunch (bank run) may have been possible due to the long maturities of the bonds and their current market price being far below Stasis’ acquisition cost. Current macroeconomic conditions (rising inflation and rising global interest rates) could push bond prices further down. Thankfully, Stasis has alleviated immediate concerns and has rebalanced into all cash investment accounts in anticipation of continued adverse market conditions.
 
 ![](https://i.imgur.com/zjRrNSS.png)
 
 ## Smart Contract Risk
 
-## SC Audit
+Smart Contract risk is low. EURS has undergone audit and the proxy contract has been live on Ethereum since [June, 2018](https://etherscan.io/tx/0xb6270a6707da34b048d245fef08bac198dfae729b0f14112a407e1d669ea005e). The current implementation has been live since [April 2021](https://etherscan.io/tx/0x5825493e1ca1df2f8955fc845e2d40892cf31eef5e35377f4c1fa3273323dc57). It has been continuously operating during that time without incident.
+
+### SC Audit
+
 Two audits ([Coinfabrik, June 2018](https://blog.coinfabrik.com/stasis-token-smart-contract-audit/) and [Certik, April 2021](https://www.certik.com/projects/stasis)) have been conducted on the smart contracts. Both only noted minor findings (token contract is fairly standard).
 
-### **EURS Token contract**
+**EURS Token contract**
+
 Proxy: [0xdb25f211ab05b1c97d595516f45794528a807ad8](https://etherscan.io/address/0xdb25f211ab05b1c97d595516f45794528a807ad8)
-Delegate: [0x25d772b21b0e5197f2DC8169E3Aa976B16bE04aC](https://etherscan.io/address/0x25d772b21b0e5197f2dc8169e3aa976b16be04ac#code)
+Current Implementation: [0x25d772b21b0e5197f2DC8169E3Aa976B16bE04aC](https://etherscan.io/address/0x25d772b21b0e5197f2dc8169e3aa976b16be04ac#code)
 
 **Write functions**:
-`approve`, `burnTokens` / `createTokens`, `delegratedTransfer`, `freezeTransfers` / `unfreezeTransfer`, `setFlags`, `setOwner`, `transfer`, `transferForm`
 
-### **Stasis: EURS Treasury**
-Address: [0x1bee4F735062CD00841d6997964F187f5f5F5Ac9](https://etherscan.io/address/0x1bee4f735062cd00841d6997964f187f5f5f5ac9)
+`approve`, `burnTokens` / `createTokens`, `delegatedTransfer`, `freezeTransfers` / `unfreezeTransfers`, `setFlags`, `setOwner`, `transfer`, `transferFrom`
 
 ## Governance Risk
-EURS is not controlled via decentralized governance. Instead, the token and treasury contracts are controlled by multisig for which Stasis has yet to confirm the reporting structure of the signers.
 
-### **EURS Token contract**
-**Controlled by**: [Multisig contract](https://etherscan.io/address/0x2ebbbc541e8f8f24386fa319c79ceda0579f1efb) (based on sol wallet from Gav Wood)
+EURS is centrally controlled by the issuer STSS LTD. The token and treasury contracts are controlled by a multi-sig for which Stasis has yet to confirm the reporting structure of the signers. The EURS owner was upgraded from a 2-of-3 to a [3-of-7 gnosis safe](https://app.safe.global/home?safe=eth:0x1bee4F735062CD00841d6997964F187f5f5F5Ac9) in June 2021, with 2 of the 3 original owner addresses included in the new multi-sig. 
 
-**Current threahold**: 2/3
-
-**Signers**:
-[0xEeE27C94490162b9b9789B75e0B8a40457117707](https://etherscan.io/address/0xeee27c94490162b9b9789b75e0b8a40457117707)
-[0x98CEE9817499595B45eCa740f7fC1da2F9F9280d](https://etherscan.io/address/0x98cee9817499595b45eca740f7fc1da2f9f9280d)
-[0x70250fcFEf983C9b912c8EEFB7021B4b7baE836e](https://etherscan.io/address/0x70250fcfef983c9b912c8eefb7021b4b7bae836e)
-
-### **Stasis: EURS Treasury**
-
-**Current threahold**: 3/7
-
-**Signers**:
-[0xEeE27C94490162b9b9789B75e0B8a40457117707](https://etherscan.io/address/0xeee27c94490162b9b9789b75e0b8a40457117707)
-[0x98CEE9817499595B45eCa740f7fC1da2F9F9280d](https://etherscan.io/address/0x98CEE9817499595B45eCa740f7fC1da2F9F9280d)
-[0x111b4772eFD733e7e504A0789df60AF6f2324684](https://etherscan.io/address/0x111b4772efd733e7e504a0789df60af6f2324684)
-[0xF02674b1F0D181EcF345aE83Af471b0a3B740f73](https://etherscan.io/address/0xf02674b1f0d181ecf345ae83af471b0a3b740f73)
-[0x3a136B05bb654a2E952ff76F611c1B54d30c5Ead](https://etherscan.io/address/0x3a136B05bb654a2E952ff76F611c1B54d30c5Ead)
-[0x2123AC812Bb4f08dafbb17931f6843435e319DEE](https://etherscan.io/address/0x2123ac812bb4f08dafbb17931f6843435e319dee)
-[0x558cC8752201b5F709f5d200A6F2256Dafc805CC](https://etherscan.io/address/0x558cc8752201b5f709f5d200a6f2256dafc805cc)
+The EURS token owner has the power to create and burn tokens, freeze and unfreeze token transfers, set a new owner, set fee parameters and a fee collector address, set flags for a given address (e.g. `BLACK_LIST_FLAG` prevents transfer to or from a blacklisted address), and set a delegate address that execute functions on behalf of the owner.
 
 ## Custody Risk
 
-The corporate governance structure of Stasis is highly ambiguous, leaving the custody of both token supply and underlying assets uncertain. For example, the 77m EURS token currently held by the treasury but not collateralized represents an attack vector. The uncirculated supply could be mishandled in associated Curve Pools, leaving EURS holders (and liquidity providers) unable to off-ramp their assets or exchange close to the peg value.
+The corporate governance structure of Stasis is highly ambiguous, leaving the custody of both token supply and underlying assets uncertain. Although Stasis issues regular account statements verified by third parties on their [transparency page](https://stasis.net/transparency/), the details of the company's operations are opaque. 
+
+For instance, the most recent quarterly report from March 7th reveals that Stasis' entire bond portfolio was liquidated, form a cost basis of ~48M euro. Due to adverse market conditions, the market value of the portfolio had markedly decreased since the original purchase. Although the report shows EURS to be fully collateralized, there was a transfer of 3M euro that appears to be a cash infusion. While we can only speculate on the source of funds (Stasis team neglected to comment on this point), it's possible Stasis has taken out a loan to cover a shortfall caused by their portfolio rebalancing. 
+
+Although recent bond holdings had been trading at a discount to the company's cost basis, this was not reflected in the quarterly statements. This was allowed under [IFRS 9](https://www.ifrs.org/issued-standards/list-of-standards/ifrs-9-financial-instruments/), categorized as Solely Payments of Principal and Interest (SPPI), since Stasis had planned to hold their bonds to maturity. Users should be wary of creative accounting practices and urge Stasis to improve its transparency reporting, as this sort of creative accounting can conceal the risk of insolvency from users.
 
 ## Regulatory risk
 
-Further clarity is required from Stasis about their compliance with applicable laws, as well as the number of external entities they utilize,
+Further clarity is required from Stasis about their compliance with applicable laws, as well as the number of external entities they utilize.
 
-Stasis claims they submitted a MFSA application earlier this year to prepare the company for the upcoming MiCA regulation. They expect to receive approval from MFSA in Q2 2023 and then apply for an e-money token license under MiCA regulatory regime once it comes into effect. However, these claims have not been validated.
+Stasis claims they submitted a [MFSA application](https://www.mfsa.mt/our-work/authorisations-old/our-authorisation-process/) (Malta Financial Services Authority) earlier this year to prepare the company for the upcoming [MiCA regulation](https://www.mayerbrown.com/en/perspectives-events/publications/2022/12/eu-markets-in-crypto-assets-mica-regulation-expected-to-enter-into-force-in-early-2023). They expect to receive approval from MFSA in Q2 2023 and then apply for an e-money token license under MiCA regulatory regime once it comes into effect. However, these claims have not been validated.
 
 Regarding treasury management, specifically the fluctuation of underlying bonds, it appears Stasis is not compliant with MiCA/e-money regulations.
 
@@ -250,9 +273,9 @@ Source: [E-Money: Prudential Supervision, Oversight, and User Protection ](https
 
 # Conclusion
 
-Our investigation highlights several critical risks for Stasis, the EURS stablecoins, its holders, and associated assets in Curve pools. From a regulatory perspective, it remains unclear if Stasis’s current structure is fully compliant with applicable laws, especially given a rapidly changing regulatory environment and recent enforcement. It is evident that Stasis’ setup is unsustainable as it faces a variety of risks from third parties and does not appear to have complete control over e-money liquidity or underlying assets. Moreover, EURS holders are at risk of a liquidity crunch, with minimal off-ramp pressure required to push the collateral ratio below 1:1. Control of the token smart contract via a 2-of-3 multi-sig with unknown signers also represents a substantial risk vector.
+Our investigation highlights several risks for Stasis, the EURS stablecoin, its holders, and associated assets in Curve pools. From a regulatory perspective, it remains unclear if Stasis’s current structure is fully compliant with applicable laws, especially given a rapidly changing regulatory environment and recent enforcement. It is evident that Stasis’ corporate structure with reliance on third party service providers is unsustainable, as it faces a variety of counterparty risks and does not appear to have complete control over e-money liquidity or underlying assets. Moreover, EURS holders may at some point become at risk of a liquidity crunch, given Stasis' opaque operations and misleading transparency reporting.
 
-Our recommendation is to address these issues urgently with Stasis. Due to the described risks and the fact that it is possible to operate a euro stablecoin with enough regulatory clarity (working examples include: EURe, EUROe, EUROC), we believe Stasis’ internal governance & corp setup justify a reevaluation of continued CRV gauge incentives, the alternative of using the permissionless gauge remains. Our position is that Stasis should be willing to address the transparency concerns highlighted in this report if they wish to continue receiving incentives.
+Our recommendation is to address these transparency issues urgently with Stasis. Due to the described risks and the fact that it is possible to operate a euro stablecoin with enough regulatory clarity (working examples include: EURe, EUROe, EUROC), we believe Stasis’ internal governance & corp setup justify a reevaluation of continued CRV gauge incentives. Our position is that Stasis should be willing to address the transparency concerns highlighted in this report if they wish to continue receiving incentives.
 
 # References:
 
