@@ -3,6 +3,8 @@
 
 ![](https://i.imgur.com/gdrYkVe.png)
 
+Note: During our investigation into EURS, Stasis' financial statements included 48M Euro worth of corporate and sovereign bonds. Their entire bond portfolio has recently been liquidated as of the latest [cash reserves report](https://stasis-site.s3.amazonaws.com/transparency/2023/BDO_STSS-Malta_random-verification-report_2023-03-07.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJHZ3XKRZIWZ67L2Q%2F20230307%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20230307T184739Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=e360876b710314c3276ea9fffc926725811ea8c37ea87ca4597d9d5b73af9bcf). While much of the report references Stasis' "current" bond portfolio, readers should be aware a portfolio shift to 100% cash accounts took place as of March 7, 2023.
+
 # Useful links
 
 * [Stasis website](https://stasis.net/) | [Twitter](https://twitter.com/stasisnet) | [Github](https://github.com/stasisnet) | [Medium](https://medium.com/stasis-blog) 
@@ -18,7 +20,7 @@ EURS is a euro stablecoin issued by Stasis, a digital currency company based in 
 
 This report was prepared to provide additional clarity on EURS, evaluate its status amid a rapidly changing regulatory environment, and reassess its soundness as an important euro stablecoin of the Curve ecosystem.
 
-Our investigation highlights significant risks with EURS, both for its holders and associated assets in DeFi, and critical flaws in how the suspected controlling entity is governed. The main concerns are the following:
+Our investigation highlights significant risks with EURS, in particular critical flaws in how the controlling entity is governed. The main concerns are the following:
 * an obscure corporate setup and unclear regulatory compliance with third parties in various jurisdictions across the EU,
 * underlying bonds trading at a significant discount vs. acquisition cost, resulting in a systematic asset–liability mismatch and making EURS prone to a liquidity crunch, and
 * the undisclosed ownership of the multi-sigs controlling the token and treasury contracts.
@@ -34,11 +36,11 @@ Our recommendation is to address these issues urgently with Stasis. Due to the e
 
 # Introduction
 
-Numerous stablecoin projects have been conceptualized, explored, and deployed in recent years. They can generally be classified into one of three categories: a fiat-redeemable stablecoin, a crypto-collateralized stablecoin, or an algorithmic stablecoin. The stablecoin market today is vastly different from just a couple of years ago, with notorious failures (e.g. [Terra’s UST](https://www.coindesk.com/learn/the-fall-of-terra-a-timeline-of-the-meteoric-rise-and-crash-of-ust-and-luna/)) and other projects the target of regulatory scrutiny (e.g. [Paxos BUSD](https://www.coindesk.com/business/2023/02/13/paxos-to-stop-minting-stablecoin-busd-following-regulatory-action/)) and still more simply the [victim of adverse market conditions](https://www.coindesk.com/business/2023/01/10/euro-stablecoin-eurr-issuance-ceased/)
+Numerous stablecoin projects have been conceptualized, explored, and deployed in recent years. They can generally be classified into one of three categories: fiat-redeemable, crypto-collateralized, or algorithmic. Of the three major stablecoin categories, fiat-redeemable stables issued by centralized custodials have historically enjoyed the most market dominance. This can be attributed to their high capital efficiency compared to crypto-backed stables and their greater stability assurances compared to algorithmic stables.
 
-Of the three major stablecoin categories, fiat-redeemable stables issued by centralized custodials have historically enjoyed the most market dominance. This can be attributed to their high capital efficiency compared to crypto-backed stables and their greater stability assurances compared to algorithmic stables.
+The stablecoin market today is vastly different from just a couple of years ago, with notorious failures (e.g. [Terra’s UST](https://www.coindesk.com/learn/the-fall-of-terra-a-timeline-of-the-meteoric-rise-and-crash-of-ust-and-luna/)) prompting increased regulatory scrutiny (e.g. [Paxos BUSD](https://www.coindesk.com/business/2023/02/13/paxos-to-stop-minting-stablecoin-busd-following-regulatory-action/)) and in some cases creating victims of adverse market or regulatory conditions (e.g. [eurr](https://www.coindesk.com/business/2023/01/10/euro-stablecoin-eurr-issuance-ceased/).
 
-With regards to the US dollar, the DeFi ecosystem has evolved into seeing two market leaders, Tether-issued USDT and Circle’s USDC, fighting for dominance. The competitive landscape is different for the euro currency; the most prominent players are [EURT](https://etherscan.io/token/0xC581b735A1688071A1746c968e0798D642EDE491) (Tether), [EURS](https://etherscan.io/token/0xdb25f211ab05b1c97d595516f45794528a807ad8) (Stasis), [agEUR](https://etherscan.io/token/0x1a7e4e63778b4f12a199c062f3efdd288afcbce8) (Angle), [EUROC](https://etherscan.io/token/0x1aBaEA1f7C830bD89Acc67eC4af516284b1bC33c) (Circle), [cEUR](https://explorer.celo.org/mainnet/token/0xD8763CBa276a3738E6DE85b4b3bF5FDed6D6cA73/token-transfers) (Celo) and [sEUR](https://etherscan.io/token/0xd71ecff9342a5ced620049e616c5035f1db98620) (Synthetix). This research will focus on EURS, a fiat-redeemable issued by the Malta-based company Stasis (STSS Limited).
+With regards to the US dollar, there are two clear market leaders vying for dominance: Tether-issued USDT and Circle’s USDC. The competitive landscape is less pronounced for the euro currency; the most prominent players are [EURT](https://etherscan.io/token/0xC581b735A1688071A1746c968e0798D642EDE491) (Tether), [EURS](https://etherscan.io/token/0xdb25f211ab05b1c97d595516f45794528a807ad8) (Stasis), [agEUR](https://etherscan.io/token/0x1a7e4e63778b4f12a199c062f3efdd288afcbce8) (Angle), [EUROC](https://etherscan.io/token/0x1aBaEA1f7C830bD89Acc67eC4af516284b1bC33c) (Circle), [cEUR](https://explorer.celo.org/mainnet/token/0xD8763CBa276a3738E6DE85b4b3bF5FDed6D6cA73/token-transfers) (Celo) and [sEUR](https://etherscan.io/token/0xd71ecff9342a5ced620049e616c5035f1db98620) (Synthetix). This research will focus on EURS, a fiat-redeemable euro stablecoin issued by the Malta-based company Stasis (STSS Limited).
 
 
 # Background
