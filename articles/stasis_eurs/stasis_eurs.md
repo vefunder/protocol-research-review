@@ -3,7 +3,7 @@
 
 ![](https://i.imgur.com/gdrYkVe.png)
 
-Note: During our investigation into EURS, Stasis' financial statements included 48M Euro worth of corporate and sovereign bonds. Their entire bond portfolio has recently been liquidated as of the latest [cash reserves report](https://stasis-site.s3.amazonaws.com/transparency/2023/BDO_STSS-Malta_random-verification-report_2023-03-07.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJHZ3XKRZIWZ67L2Q%2F20230307%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20230307T184739Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=e360876b710314c3276ea9fffc926725811ea8c37ea87ca4597d9d5b73af9bcf). While much of the report references Stasis' "current" bond portfolio, readers should be aware a portfolio shift to 100% cash accounts took place as of March 7, 2023.
+Note: During our investigation into EURS, Stasis' financial statements included 48M Euro worth of corporate and sovereign bonds. Their entire bond portfolio has recently been liquidated as of the latest [verification report](https://stasis-site.s3.amazonaws.com/transparency/2023/BDO_STSS-Malta_random-verification-report_2023-03-07.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJHZ3XKRZIWZ67L2Q%2F20230307%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20230307T184739Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=e360876b710314c3276ea9fffc926725811ea8c37ea87ca4597d9d5b73af9bcf). While much of the report references Stasis' "current" bond portfolio, readers should be aware a portfolio shift to 100% cash accounts took place as of March 7, 2023.
 
 # Useful links
 
@@ -14,61 +14,75 @@ Note: During our investigation into EURS, Stasis' financial statements included 
 * Third parties: [EXT LTD](https://ext.com.cy/) |  [XNT LTD](https://xnt.mt/) |  [UAB NexPay](https://paynexpay.com/) |  [SCB AG](https://scb.io/)
 * Curve pools: [EURS-USDC](https://curve.fi/#/ethereum/pools/eursusd/)  |  [3EURpool](https://curve.fi/#/ethereum/pools/factory-v2-66/)  | [EURS-sEUR](https://curve.fi/#/ethereum/pools/eurs/)
 
+
 # Abstract
 
 EURS is a euro stablecoin issued by Stasis, a digital currency company based in Malta. It is a significant token on Curve Finance, representing over 40% of all euro tokens, and is coupled with other assets such as USDC, EURT, agEUR & sEUR. As with any other centralized stablecoin, key challenges include its issuance and redemption mechanism, control of smart contracts, underlying assets, and overall regulatory compliance.
 
 This report was prepared to provide additional clarity on EURS, evaluate its status amid a rapidly changing regulatory environment, and reassess its soundness as an important euro stablecoin of the Curve ecosystem.
 
-Our investigation highlights significant risks with EURS, in particular critical flaws in how the controlling entity is governed. The main concerns are the following:
+Our investigation highlights significant risks with EURS, in particular notable flaws in how the controlling entity is governed. The main concerns are the following:
+
 * an obscure corporate setup and unclear regulatory compliance with third parties in various jurisdictions across the EU,
-* underlying bonds trading at a significant discount vs. acquisition cost, resulting in a systematic asset–liability mismatch and making EURS prone to a liquidity crunch, and
+* underlying bonds trading at a significant discount vs. acquisition cost, resulting in a systematic asset–liability mismatch and making EURS prone to a liquidity crunch (note: Stasis appears to have addressed this immediate concern by liquidating its bond portfolio as of the latest March 7th [verification report](https://stasis-site.s3.amazonaws.com/transparency/2023/BDO_STSS-Malta_random-verification-report_2023-03-07.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJHZ3XKRZIWZ67L2Q%2F20230307%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20230307T184739Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=e360876b710314c3276ea9fffc926725811ea8c37ea87ca4597d9d5b73af9bcf)), and
 * the undisclosed ownership of the multi-sigs controlling the token and treasury contracts.
 
-Our recommendation is to address these issues urgently with Stasis. Due to the elaborated risks and the fact that it is possible to operate a EUR stablecoin with enough regulatory clarity (working examples include: EURT and EUROC), we feel Stasis’ internal governance & corp setup can and should be held to a higher standard.
+Our recommendation is for the DAO to address these issues urgently with Stasis. Due to the elaborated risks and the fact that it is possible to operate a EUR stablecoin with enough regulatory clarity (working examples include: EURT and EUROC), we feel Stasis’ internal governance & corp setup can and should be held to a higher standard.
+
 
 # Key findings
-* EURS is a centralized euro stablecoin controlled by Stasis, a company registered in Malta and the Isle of Man under STSS Limited. It is the largest euro stablecoin with a supply of approx. 47m euros, and the one with the most token holders (≈ 5,000)
+
+* EURS is a centralized euro stablecoin controlled by Stasis, a company registered in Malta and the Isle of Man under STSS Limited. It is the largest euro stablecoin with a supply of approx. 47m euros, and the one with the most token holders (≈ 5,000).
 * Token supply (mint, burn, freeze, and transfer) is controlled via a 2-of-3 multi-sig whose signers are not publicly known. Authority over the signers is also undisclosed.
 * Stasis claims that EURS is backed 1:1 by cash reserves and sovereign and corporate bonds. Our verification shows that assets are held with the following entities: EXT LTD (Cyprus), XNT LDT (Malta), and UAB NexPay (Lithuania).
-* Although statements showing account holdings are provided, Stasis does not recognize unrealized P&L from daily variations of the underlying bond prices. Our analysis shows that all bonds currently held are trading at a significant discount compared to Stasis’s cost basis, resulting in a systematic asset–liability mismatch. This represents a sizable liquidity crunch risk as only 1% withdrawal pressure is required for the collateral ratio to dip below 1:1. In the case of 25% withdrawal, losses of over €1M from collateral assets would ensue.
+* Although statements showing account holdings are provided, Stasis does not recognize unrealized P&L from daily variations of the underlying bond prices. Our analysis shows that all bonds most recently held had been trading at a significant discount compared to Stasis’s cost basis, resulting in a systematic asset–liability mismatch. This represented a sizable liquidity crunch risk as only 1% withdrawal pressure would have been required for the collateral ratio to dip below 1:1. Stasis instead voluntarily rebalanced to 100% cash accounts during the course of our investigations.
 * Regulatory compliance of Stasis and its associated entities and partners remains to be determined. EURS submitted its registration application to the Malta Financial Services Authority (MFSA) to become registered as a Virtual Financial Asset Token Issuer. However, the current setup is unsustainable as Stasis does not have complete control over the e-money liquidity.
 
 # Introduction
 
 Numerous stablecoin projects have been conceptualized, explored, and deployed in recent years. They can generally be classified into one of three categories: fiat-redeemable, crypto-collateralized, or algorithmic. Of the three major stablecoin categories, fiat-redeemable stables issued by centralized custodials have historically enjoyed the most market dominance. This can be attributed to their high capital efficiency compared to crypto-backed stables and their greater stability assurances compared to algorithmic stables.
 
-The stablecoin market today is vastly different from just a couple of years ago, with notorious failures (e.g. [Terra’s UST](https://www.coindesk.com/learn/the-fall-of-terra-a-timeline-of-the-meteoric-rise-and-crash-of-ust-and-luna/)) prompting increased regulatory scrutiny (e.g. [Paxos BUSD](https://www.coindesk.com/business/2023/02/13/paxos-to-stop-minting-stablecoin-busd-following-regulatory-action/)) and in some cases creating victims of adverse market or regulatory conditions (e.g. [eurr](https://www.coindesk.com/business/2023/01/10/euro-stablecoin-eurr-issuance-ceased/).
+The stablecoin market today is vastly different from just a couple of years ago, with notorious failures (e.g. [Terra’s UST](https://www.coindesk.com/learn/the-fall-of-terra-a-timeline-of-the-meteoric-rise-and-crash-of-ust-and-luna/)) prompting increased regulatory scrutiny (e.g. [Paxos BUSD](https://www.coindesk.com/business/2023/02/13/paxos-to-stop-minting-stablecoin-busd-following-regulatory-action/)) and in some cases creating victims of adverse market or regulatory conditions (e.g. [EURR](https://www.coindesk.com/business/2023/01/10/euro-stablecoin-eurr-issuance-ceased/).
 
-With regards to the US dollar, there are two clear market leaders vying for dominance: Tether-issued USDT and Circle’s USDC. The competitive landscape is less pronounced for the euro currency; the most prominent players are [EURT](https://etherscan.io/token/0xC581b735A1688071A1746c968e0798D642EDE491) (Tether), [EURS](https://etherscan.io/token/0xdb25f211ab05b1c97d595516f45794528a807ad8) (Stasis), [agEUR](https://etherscan.io/token/0x1a7e4e63778b4f12a199c062f3efdd288afcbce8) (Angle), [EUROC](https://etherscan.io/token/0x1aBaEA1f7C830bD89Acc67eC4af516284b1bC33c) (Circle), [cEUR](https://explorer.celo.org/mainnet/token/0xD8763CBa276a3738E6DE85b4b3bF5FDed6D6cA73/token-transfers) (Celo) and [sEUR](https://etherscan.io/token/0xd71ecff9342a5ced620049e616c5035f1db98620) (Synthetix). This research will focus on EURS, a fiat-redeemable euro stablecoin issued by the Malta-based company Stasis (STSS Limited).
+With regards to the US dollar, there are two clear market leaders vying for dominance: Tether-issued USDT and Circle’s USDC. The competitive landscape is less pronounced for the euro currency; the most prominent players, making up >80% of the euro stable market, are [EURS](https://etherscan.io/token/0xdb25f211ab05b1c97d595516f45794528a807ad8) (Stasis), [agEUR](https://etherscan.io/token/0x1a7e4e63778b4f12a199c062f3efdd288afcbce8) (Angle), [EURT](https://etherscan.io/token/0xC581b735A1688071A1746c968e0798D642EDE491) (Tether), [EUROC](https://etherscan.io/token/0x1aBaEA1f7C830bD89Acc67eC4af516284b1bC33c) (Circle), and [cEUR](https://explorer.celo.org/mainnet/token/0xD8763CBa276a3738E6DE85b4b3bF5FDed6D6cA73/token-transfers) (Celo). This research will focus on EURS, a fiat-redeemable euro stablecoin issued by the Malta-based company Stasis (STSS Limited), and currently the largest euro stable by marketcap.
 
+![Screen Shot 2023-03-07 at 7 27 05 PM](https://user-images.githubusercontent.com/51072084/223612402-bffda927-5247-42c0-ad77-8be8ac6edbe1.png)
+
+Source: [DeFiLlama: Euro stables by market dominance](https://defillama.com/stablecoins?pegtype=PEGGEDEUR)
 
 # Background
 
 ## History
-Stasis launched EURS in [June 2018](https://www.globenewswire.com/news-release/2018/07/04/1533269/0/en/STASIS-launches-EURS-a-stablecoin-backed-by-the-Euro.html), as an alternative to US dollar stablecoins, which may appeal to users seeking an alternative regulatory regime or who may wish to avoid the influence of the US Federal Reserve’s inflationary monetary policies. The Company is incorporated in the Isle of Man  ([2017](https://opencorporates.com/companies/im/015541V)) and Malta ([2018](http://openleis.com/legal_entities/254900KCFJULGL20U419/STSS-Malta-Limited)), both under the name of STSS Limited.
 
-## Team
-The Company currently has approximately 20 employees, with the following directors:
+Stasis launched EURS in [June 2018](https://www.globenewswire.com/news-release/2018/07/04/1533269/0/en/STASIS-launches-EURS-a-stablecoin-backed-by-the-Euro.html), as an alternative to US dollar stablecoins, which may appeal to users seeking an alternative regulatory regime or who may wish to avoid the influence of the US Federal Reserve’s monetary policies. The Company is incorporated in the Isle of Man ([2017](https://opencorporates.com/companies/im/015541V)) and Malta ([2018](http://openleis.com/legal_entities/254900KCFJULGL20U419/STSS-Malta-Limited)), both under the name of STSS Limited.
 
-* **[Gregory Klumov](https://www.linkedin.com/in/gregoryklumov/), CEO & Founder**: Founded an Internet Service Provider at 15, then moved to Finance with experience in alternative investment management.
-* **[Vyacheslav Kim](https://www.linkedin.com/in/vvkim/), CFO**: Over 12 years of management experience in Strategic Management, Asset Restructuring, Corporate Development, and Finance. He also has a diversified background in communication with regional authorities and ministries.
-* **[Dmitry Golubev](https://www.linkedin.com/in/dmitry-golubev-9942844/), CTO**: Graduated from Nizhny Novgorod State University in 2010 and is currently based in Russia. He previously worked at Netcracker and Orion Innovation.
-
-# Competitive landscape
-
-There are five (5) notable euro stablecoins on the Ethereum mainnet. However, the circulating supply can be misleading as EURT, EURS, and EUROC include surplus treasury tokens in their respective reserves. The graph below accounts for the actual (corrected) circulating supply. CEUR (11m euro) has been excluded from this overview as it is mainly on the Celo chain.
-
-![](https://i.imgur.com/r2ekWpj.png)
-
-# EURS as an Asset
+## EURS as an Asset
 
 EURS is an ERC20 token designed by the platform to mirror the price of the euro. It is similar to the centralized stablecoins issued by Circle or Tether. As of the reporting time, EURS had approximately 47m in circulation, most of which were on the Ethereum mainnet.
 
+Users can mint and redeem EURS via [SCB AG](https://scb.io/), a third party exchange that conducts KYC and serves as an on/offramp for EURS. It involves a .1% conversion fee for amounts up to 1M euro, and .25% for amounts greater than that. 
+
+![Screen Shot 2023-03-07 at 8 18 38 PM](https://user-images.githubusercontent.com/51072084/223618759-34bd1360-6694-4c17-b73f-25eee0bfcd70.png)
+Source: [SCB purchases and sellback fees](https://scb.io/faq)
+
 ## Main liquidity and integration
+
 The majority of EURS liquidity is used in DeFi, mainly providing liquidity to Curve Finance, with a small portion being on CEX ([Bitfinex: EURS/USD](https://trading.bitfinex.com/t/EUS:USD?type=exchange), [Cex.io: EURS-EUR](https://cex.io/eurs-eur)).
 
 EURS can be borrowed or lent on [AAVE v3 Polygon](https://app.aave.com/reserve-overview/?underlyingAsset=0xe111178a87a3bff0c8d18decba5798827539ae99&marketName=proto_polygon_v3) (2.2m EURS supplied), and to a lesser extent on [Iron-bank mainnet](https://app.ib.xyz/markets/Ethereum/0xA8caeA564811af0e92b1E044f3eDd18Fa9a73E4F) (3k EUR supplied.)
+
+**Other large token holders include**:
+* [0x6F3F68525E5EdaD6F06f8b0EaE0DD7B9F695aF13](https://debank.com/profile/0x6f3f68525e5edad6f06f8b0eae0dd7b9f695af13) 8.7m EURS, unknow msig
+* [0xCFB87039A1eDa5428e2c8386d31cCF121835eCDb](https://etherscan.io/address/0xcfb87039a1eda5428e2c8386d31ccf121835ecdb) 5.4m EURS, unknown EOA
+* [0x40ec5B33f54e0E8A33A975908C5BA1c14e5BbbDf](https://etherscan.io/address/0x40ec5B33f54e0E8A33A975908C5BA1c14e5BbbDf) 2.3m EURS, Polygon bridge
+* [0x0427933133113C016C398202352307539430c900](https://etherscan.io/address/0x0427933133113c016c398202352307539430c900) 1.2m EURS, unknow msig
+* [0x529619a10129396a2F642cae32099C1eA7FA2834](https://etherscan.io/address/0x529619a10129396a2f642cae32099c1ea7fa2834) 900k EURS, unknow msig
+
+The main liquidity outside Ethereum mainnet is on Polygon (2.3m EUR) via a mainnet<>polygon bridge contract. Other chains (Arbitrum, xDAI, Algorand, XRP, and XDC Network) have negligible supply and are out of scope for this report.
+
+## EURS on Curve
+
+EURS became the [OG euro stable](https://gov.curve.fi/t/scip-18-seur-eurs-pool/1149) on Curve in a pool paired with Synthetix sEUR back in November 2020. In November 2021, three additional pools involving EURS received gauges including a 3EUR pool with agEUR and EURT, a EURS/USDC pool, and a EURS/2CRV pool deployed on Arbitrum. Several months later, a EURS/3CRV pool deployed to Polygon received a gauge. EURS has a long history with Curve, and has established itself as a main player in its euro markets.
 
 ### Major EURS Curve pools:
 * [EURS-USDC ($29.8m  TVL)](https://etherscan.io/address/0x98a7f18d4e56cfe84e3d081b40001b3d5bd3eb8b) with 14.2m EURS
@@ -79,17 +93,15 @@ EURS represents approximately 44% of all euro stablecoins present on Curve Finan
 
 ![](https://i.imgur.com/nzhEWMX.png)
 
-**Other large token holders include**:
-* [0x6F3F68525E5EdaD6F06f8b0EaE0DD7B9F695aF13](https://debank.com/profile/0x6f3f68525e5edad6f06f8b0eae0dd7b9f695af13) 8.7m EURS, unknow msig
-* [0xCFB87039A1eDa5428e2c8386d31cCF121835eCDb](https://etherscan.io/address/0xcfb87039a1eda5428e2c8386d31ccf121835ecdb) 5.4m EURS, unknown EOA
-* [0x40ec5B33f54e0E8A33A975908C5BA1c14e5BbbDf](https://etherscan.io/address/0x40ec5B33f54e0E8A33A975908C5BA1c14e5BbbDf) 2.3m EURS, Polygon bridge
-* [0x0427933133113C016C398202352307539430c900](https://etherscan.io/address/0x0427933133113c016c398202352307539430c900) 1.2m EURS, unknow msig
-* [0x529619a10129396a2F642cae32099C1eA7FA2834](https://etherscan.io/address/0x529619a10129396a2f642cae32099c1ea7fa2834) 900k EURS, unknow msig
 
-## EURS Cross-Chain
-The main liquidity outside Ethereum mainnet is on Polygon (2.3m EUR) via a mainnet<>polygon bridge contract. Other chains (Arbitrum, xDAI, Algorand, XRP, and XDC Network) have negligible supply and are out of scope for this report.
+# Corporate setup and third parties
 
-## Corporate setup and third parties
+## Team
+The Company currently has approximately 20 employees, with the following directors:
+
+* **[Gregory Klumov](https://www.linkedin.com/in/gregoryklumov/), CEO & Founder**: Founded an Internet Service Provider at 15, then moved to Finance with experience in alternative investment management.
+* **[Vyacheslav Kim](https://www.linkedin.com/in/vvkim/), CFO**: Over 12 years of management experience in Strategic Management, Asset Restructuring, Corporate Development, and Finance. He also has a diversified background in communication with regional authorities and ministries.
+* **[Dmitry Golubev](https://www.linkedin.com/in/dmitry-golubev-9942844/), CTO**: Graduated from Nizhny Novgorod State University in 2010 and is currently based in Russia. He previously worked at Netcracker and Orion Innovation.
 
 ![](https://i.imgur.com/PZbOose.png)
 
