@@ -8,7 +8,7 @@
 * [Stasis website](https://stasis.net/) | [Twitter](https://twitter.com/stasisnet) | [Github](https://github.com/stasisnet) | [Medium](https://medium.com/stasis-blog) 
 * [Daily statement, on-demand verifications, and annual audits](https://eurs.stasis.net/transparency/) 
 * Audits: [Coinfabrik (June 2018)](https://blog.coinfabrik.com/stasis-token-smart-contract-audit/) | [Certik (April 2021)](https://www.certik.com/projects/stasis)
-* Addresses: [EURS (Mainnet)](https://etherscan.io/address/0xdb25f211ab05b1c97d595516f45794528a807ad8) | [EURS (Polygon)](https://polygonscan.com/token/0xe111178a87a3bff0c8d18decba5798827539ae99) | [Treasury wallet (Mainnet)](https://etherscan.io/address/0x1bee4f735062cd00841d6997964f187f5f5f5ac9) | [EURS owner](https://etherscan.io/address/0x2EbBbc541E8f8F24386FA319c79CedA0579f1Efb)
+* Addresses: [EURS (Mainnet)](https://etherscan.io/address/0xdb25f211ab05b1c97d595516f45794528a807ad8) | [EURS (Polygon)](https://polygonscan.com/token/0xe111178a87a3bff0c8d18decba5798827539ae99) | [Treasury wallet (Mainnet)](https://etherscan.io/address/0x1bee4f735062cd00841d6997964f187f5f5f5ac9)
 * Third parties: [EXT LTD](https://ext.com.cy/) |  [XNT LTD](https://xnt.mt/) |  [UAB NexPay](https://paynexpay.com/) |  [SCB AG](https://scb.io/)
 * Curve pools: [EURS-USDC](https://curve.fi/#/ethereum/pools/eursusd/)  |  [3EURpool](https://curve.fi/#/ethereum/pools/factory-v2-66/)  | [EURS-sEUR](https://curve.fi/#/ethereum/pools/eurs/)
 
