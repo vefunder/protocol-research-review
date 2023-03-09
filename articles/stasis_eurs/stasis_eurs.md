@@ -45,9 +45,10 @@ The stablecoin market today is vastly different from just a couple of years ago,
 
 With regards to the US dollar, there are two clear market leaders vying for dominance: Tether-issued USDT and Circle’s USDC. The competitive landscape is less pronounced for the euro currency. The most prominent players, making up >80% of the euro stable market, are [EURS](https://etherscan.io/token/0xdb25f211ab05b1c97d595516f45794528a807ad8) (Stasis), [agEUR](https://etherscan.io/token/0x1a7e4e63778b4f12a199c062f3efdd288afcbce8) (Angle), [EURT](https://etherscan.io/token/0xC581b735A1688071A1746c968e0798D642EDE491) (Tether), [EUROC](https://etherscan.io/token/0x1aBaEA1f7C830bD89Acc67eC4af516284b1bC33c) (Circle), and [cEUR](https://explorer.celo.org/mainnet/token/0xD8763CBa276a3738E6DE85b4b3bF5FDed6D6cA73/token-transfers) (Celo). This research will focus on EURS, a fiat-redeemable euro stablecoin issued by the Malta-based company Stasis (STSS Limited), and currently the largest euro stable by marketcap.
 
-![Screen Shot 2023-03-07 at 7 27 05 PM](https://user-images.githubusercontent.com/51072084/223612402-bffda927-5247-42c0-ad77-8be8ac6edbe1.png)
+ The graph below accounts for the actual circulating supply of euro stables on Ethereum. cEUR (11m euro) has been excluded from this overview as it is mainly on the Celo chain.
 
-Source: [DeFiLlama: Euro stables by market dominance](https://defillama.com/stablecoins?pegtype=PEGGEDEUR)
+![snapshot-1677539774663](https://github.com/vefunder/protocol-research-review/blob/main/articles/stasis_eurs/images/snapshot-1677539774663.png)
+
 
 # Stasis and EURS
 
