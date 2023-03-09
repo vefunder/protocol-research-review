@@ -342,6 +342,18 @@ Yield for USDD holders is paid out in USDD, issued by the TDR and credited to th
 
 In conclusion, the TDR makes use of tools including its TRX collateral, reserves, and active monetary policy instruments to be the only body and mechanism to keep USDD’s peg. As seen in the image above, this is not working perfectly. USDD has been off-peg since June 2022 and has been struggling to get back to the one Dollar mark ever since.
 
+## Risk of Providing Liquidity on Sunswap
+
+Given that the largest share of USDD usage happens on the Tron network, risks related to DeFi protocols on Tron need to be considered as well. Currently, the lending protocol [JustLend]([url](https://app.justlend.org/?lang=en-US#/marketDetailNew?jtokenAddress=TX7kybeP6UwTBRHLNPYmswFESHfyjm9bAS)) is the largest USDD holder. And as highlighted in the Collateral section, all stablecoins in the TDR reserves are deposited into JustLend. Users should be aware of the borrowing factors. That is the amount of USDT or USDC that is borrowed on JustLend. A high utilization could prevent fast withdrawals of USDT or USDC reserves, in case they’re needed to back USDD.
+
+The 2nd and 3rd largest USDD holders are the BitTorrent cross-chain contracts for Ethereum and BSC. Risks related to BitTorrent were mentioned in the previous section.
+
+The fourth largest holder is Sunswap. The DEX applies an [AMM model](https://docs.sun.io/swap/stableswap-overview) based on the [stable swap](https://xord.com/research/curve-stableswap-a-comprehensive-mathematical-guide/) invariant formula (designed by Curve Finance). Currently, the [USDD/USDT](https://tronscan.org/#/contract/TNTfaTpkdd4AQDeqr8SGG7tgdkdjdhbP5c/code) contract is the largest USDD pool.
+
+There is a potential risk for USDD/USDT liquidity providers on Sunswap, because of a vulnerability that was discovered in the old Curve smart contracts. In September 2020, Peter Zeits [revealed](https://medium.com/@peter_4205/curve-vulnerability-report-a1d7630140ec) that an update to the [amplification factor](https://curve.readthedocs.io/exchange-pools.html#amplification-coefficient) can expose liquidity providers to a vulnerability. If exploited, this could lead to significant losses for LPs. Curve rewarded Peter for the bug discovery and resolved the issue shortly after.
+
+It is questionable whether SunSwap also took preventive measures, concerning these A-factor updates. One of the recommendations - which Curve implemented after the bug discovery - was that updates need to happen granularly. Large changes to the A-factor are problematic. Especially if the coming updates are known in advance. According to Sunswap’s [event logs](https://tronscan.org/#/contract/TXKQU4pV1nAVpdFLm31LNVVa8pCzNQDNhU/transactions), however, the A-factor has been adjusted very frequently. Sometimes up to three times in one day. Moreover, it was adjusted in large increments. This [sheet](https://docs.google.com/spreadsheets/d/1UwezmtfkWGrZsVLyc8T249CN03zR251uFbO-k6x5afU/edit#gid=0) created by the authors shows in detail, how the amplification factor was amended. Since contacting the team behind USDD or Sunswap was not successful, it is unclear whether they are aware of this potential issue. Hence, users should be cautious when providing liquidity.
+
 
 ## Misleading Marketing
 
