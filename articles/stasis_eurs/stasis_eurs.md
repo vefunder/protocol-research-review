@@ -51,8 +51,6 @@ Source: [DeFiLlama: Euro stables by market dominance](https://defillama.com/stab
 
 # Stasis and EURS
 
-## History
-
 Stasis launched EURS in [June 2018](https://www.globenewswire.com/news-release/2018/07/04/1533269/0/en/STASIS-launches-EURS-a-stablecoin-backed-by-the-Euro.html), as an alternative to US dollar stablecoins, which may appeal to users seeking an alternative regulatory regime or who may wish to avoid the influence of the US Federal Reserve’s monetary policies. The Company is incorporated in the Isle of Man ([2017](https://opencorporates.com/companies/im/015541V)) and Malta ([2018](http://openleis.com/legal_entities/254900KCFJULGL20U419/STSS-Malta-Limited)), both under the name of STSS Limited.
 
 ## EURS as an Asset
