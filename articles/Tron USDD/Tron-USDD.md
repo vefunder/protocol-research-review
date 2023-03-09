@@ -76,8 +76,6 @@ As of today, the circulating supply hasn’t changed much. According to [DeFi Ll
 
 
 ![defillama-usdd-total-circulating](https://user-images.githubusercontent.com/89845409/220379825-351836d4-00ae-42cc-b761-82e89d3a7980.png)
-
-
 (Source: [DeFi Llama](https://defillama.com/stablecoin/usdd))
 
 USDD is also listed on a handful of centralized exchanges. For instance, Poloniex, KuCoin, and of course Huobi ([Justin Sun](https://en.wikipedia.org/wiki/Justin_Sun), founder of the Tron network, is an advisor and investor at [Huobi](https://decrypt.co/112118/huobi-token-moons-the-week-justin-sun-becomes-exchange-advisor)).
@@ -93,8 +91,6 @@ At launch, the TDR pre-minted $999B of USDD. These sit in an “[issuance contra
 
 
 ![docs-usdd-issuing-process](https://user-images.githubusercontent.com/89845409/220379993-ae616d3a-2f4f-4069-bb06-51f6ec7aa761.png)
-
-
 (source: [USDD Docs](https://docs.usdd.io/usdd-issuance/usdd-issuance))
 
 **USDD issued by staking TRX (TDR members only)**:
@@ -127,8 +123,6 @@ Overall, the issuance of USDD has remained very constant. On-chain data and repo
 
 
 ![Messari-usdd-issuance-q4](https://user-images.githubusercontent.com/89845409/220380087-cb83c9e3-58fe-4c5e-896c-cc53c83703fd.png)
-
-
 (source: [Messari](https://messari.io/report/state-of-usdd-q4-2022?referrer=all-research))
 
 The USDD supply has remained unchanged at around $725M. This suggests that demand for USDD did not increase since its inception. This observation is further evidenced by a slow growth rate in user adoption, i.e. the number of wallets holding USDD stayed flat in the last quarter according to [Messari](https://messari.io/report/state-of-usdd-q4-2022?referrer=all-research).
@@ -140,8 +134,6 @@ USDD is promoting a high collateralization ratio (CR) on its website. At the tim
 
 
 ![usdd-website-total-collateral](https://user-images.githubusercontent.com/89845409/220380284-5a46510f-8095-4af3-8b06-7dfe25c679f6.png)
-
-
 (source: [Tron DAO Reserve](https://tdr.org/#/))
 
 Moreover, USDD  proclaims that its stablecoin is backed by “multiple mainstream digital assets” like TRX, BTC, or USDT. To confirm this statement, the website lists all wallets that contain their collateral and reserves.
@@ -290,7 +282,6 @@ $23,826</p>
   </tr>
 </table>
 
-
 (source: [table](https://docs.google.com/spreadsheets/d/1LnNj2Jm9Dun4DMoKDfpTyIHy0JHTo2chxqGORZS49ek/edit#gid=135516406))
 
 In total, $1.15B can be found by combining the collateral and the reserves (see table above). On its website, however, USDD highlights that $1.25B is collateralizing its stablecoin, a difference of ~$100M.
@@ -314,7 +305,6 @@ Comparing the amount of USDD on Ethereum and BNB with the amount in the BTTC bri
 The initial plan for maintaining the peg was very [similar](https://www.coindesk.com/markets/2022/05/04/revolution-promised-by-trons-justin-sun-looks-like-clone-of-terras-algorithmic-stablecoin/) to Terra’s UST. Mainly the following two stability mechanisms were planned:
 
 
-
 * **Short-term Arbitrage** - USDD was to maintain its price around a dollar, using the basic algorithm of 1 USDD = 1 dollar worth of TRX. In this scenario, TRX had a similar role to LUNA and would have been burned/minted when swapping USDD.
 * **Building up Reserves** - A $10B reserve should help to defend the peg. It was predicted that the TDR would [raise $10B](https://trondao.medium.com/an-open-letter-to-our-community-on-establishing-the-tron-dao-reserve-3eda495f07c2) worth of highly liquid assets within six to twelve months, starting from May 2022 (USDD release date). While Terra [stated](https://twitter.com/stablekwon/status/1483973126161842176) the same intentions, the $10B reserve did not become a reality.
 
@@ -322,25 +312,20 @@ However, as mentioned earlier, the USDD algo-stable model never came to fruition
 
 
 ![coingecko-usdd-offpeg](https://user-images.githubusercontent.com/89845409/220380464-55134e01-d76d-4550-8785-b46a96957c53.png)
-
-
 (source: [Coingecko](https://www.coingecko.com/en/coins/usdd))
 
 In addition to the PSM, the TDR put in place several [monetary policy instruments](https://docs.usdd.io/faq/what-monetary-policies-will-the-tdr-adopt-to-maintain-the-value-of-usdd) (MPI) to maintain USDD’s price stability. Below are the four main policy instruments applied by the TDR.
 
 
+* **MPI 1: Setting the Interest Rate -** Setting interest rates is a mechanism often used to regulate the supply and demand of currencies and loans. The TDR claims to be working with its partner protocols, to set USDD’s benchmark interest rates. The initial interest rate was targeted to be 30%. Today, the rate is very different, depending on the protocol. On certain platforms, it can be higher than 30%. In certain instances, the rate is subsidized by the TDR, to attract new users and drive up its adoption.
 
-* **MPI 1: Setting the Interest Rate -** Setting interest rates is a mechanism often used to regulate the supply and demand of currencies and loans. TDR works with its partner institutions and protocols to set USDD’s benchmark interest rates and has the power to adjust the rate at any time based on market conditions. The initial benchmark interest rate for USDD is 30% and is slightly higher on platforms that recently listed USDD, all subsidized by the TDR to acquire new users and drive up its adoption.
+* **MPI 2: Open Market Operations -** Through Open Market Operations, the TDR performs expansion and contraction of USDD's “monetary base”. The intention is to stabilize its value (supply and demand balance). To keep the USDD pegged to $1, the TDR claims to buy or sell USDD and reserve assets (TRX, BTC, USDT, and USDC). However, there is little on-chain proof of such transaction. Hence, it is assumed that these operations take place via CEXs.
 
-Yield for USDD holders is paid out in USDD, issued by the TDR and credited to their accounts.
+* **MPI 3: Window Guidance -** The TDR has partnered with DeFi protocols (e.g. JustLend) and centralized exchanges (e.g. Poloniex, Huobi) to be able to more effectively control USDD. The mentioned partners have the ability to limit or even temporarily pause the lending of USDD and TRX, in order to protect the "USDD monetary system” from short-sellers.
 
-* **MPI 2: Open Market Operations -** Through Open Market Operations TDR performs expansion and contraction of USDD's “monetary base”, to stabilize its value (supply and demand balance). To keep the USDD price stable and pegged to $1, the TDR buys or sells USDD and reserve assets (TRX, BTC, USDT, and USDC) on DEXs and CEXs.
-* 
-* **MPI 3: Window Guidance -** The TDR has partnered with DeFi protocols (e.g. JustLend) and centralized exchanges (e.g. Poloniex, Huobi) to be able to more effectively control USDD, in case of major market turbulence. The mentioned partners have the ability to limit or even temporarily pause the lending of USDD and TRX, in order to protect the "USDD monetary system” from short-sellers.
-* 
-* **MPI 4: Mint-and-Burn -** TDR actively uses a mint-and-burn mechanism between TRX and USDD to maintain USDD’s stability. Depending on the situation, the TDR also uses additional methods such as enabling or disabling the minting process, adjusting the mint-burn ratio, and imposing upper limits on daily minting and burning activities.
+* **MPI 4: Mint-and-Burn -** as mentione earlier, the TDR has a mint-and-burn mechanism in place. Depending on the situation, the TDR also uses additional methods such as enabling or disabling the minting process, adjusting the mint-burn ratio, and imposing upper limits on daily minting and burning activities. However, this method has not been used since its inception.
 
-In conclusion, the TDR makes use of tools including its TRX collateral, reserves, and active monetary policy instruments to be the only body and mechanism to keep USDD’s peg. As seen in the image above, this is not working perfectly. USDD has been off-peg since June 2022 and has been struggling to get back to the one Dollar mark ever since.
+In conclusion, the TDR proclaims a set of tools called monetary policy instruments, that are supposed to keep USDD’s peg. However, as seen in the image above, this is not working perfectly. USDD has been off-peg since June 2022 and has been struggling to get back to the one Dollar mark ever since.
 
 
 ## Misleading Marketing
@@ -355,17 +340,12 @@ While conducting this report, it became evident that Tron and USDD repeatedly us
     
 
 ![twitter-usdd-frontpage](https://user-images.githubusercontent.com/89845409/220380580-58334394-83fd-4ac1-ae82-a4cbd80fed4c.png)
-
-
-
- (source: [Twitter](https://twitter.com/usddio))
+(source: [Twitter](https://twitter.com/usddio))
     
 
 * On the [website](https://usdd.io/#/), USDD promises multiple times to be decentralized, tamper-proof, and independent from centralized entities. This shows a very unique interpretation of these terms, given that a 5-of-7 multi-sig fully controls USDD. The key holders are centralized entities and are completely responsible for maintaining stability of the system.
 
 **Debatable Promises**
-
-
 
 * Further, the promise of being “fully backed and over-collateralized by mainstream assets” is debatable. As eluded earlier, USDD is 65% backed by Tron’s native token TRX. Secondly, the actual “collateral” in the burn contract only adds up to a CR of 85%. The rest comes from reserves, which were voluntarily stacked up by TDR members.
 * In consequence, the promised CR is also a matter of perspective. The TRX deposited by the TDR is currently worth less than the outstanding USDD. The collateral is not very well diversified, and an above-market price is used to measure TRXs’ collateral value on the website.
@@ -373,10 +353,12 @@ While conducting this report, it became evident that Tron and USDD repeatedly us
 
 **Misleading Naming**
 
+* As mentioned above, the TRX deposited by the TDR to issue new USDD is not burned. Naming a simple multi-sig as a “burning contract” is misleading. This naming convention is also used at Tronscan (see image)
 
+![tronscan-total-trx-burned](https://user-images.githubusercontent.com/89845409/223773543-59f6c7b5-28f7-4f0b-9a23-dccc83fa0e23.png)
+(source: [Tronscan](https://tronscan.org/#/data/charts2/circulation/destroyCount))
 
-* As mentioned above, the TRX “staked” by the TDR to issue new USDD is not burned. Naming a simple multi-sig as a “burning contract” is misleading.
-* One could argue that the TRX is not even staked. Staking would require that the assets are at risk of being slashed and that stakers earn interest or rewards for putting their assets into a staking contract. Both do not apply to TDR members. They only deposit TRX into an account, to which they collectively have access.
+* In their [docs]([url](https://docs.usdd.io/usdd-issuance/usdd-issuance)), the term staking is used instead of burning. However, staking would require that the assets are at risk of being slashed, and that stakers earn interest or rewards for putting their assets into a staking contract. Both do not apply to TDR members. They only deposit TRX into an account, to which they collectively have access.
 
 
 # Risk Vectors
@@ -401,8 +383,6 @@ Despite USDD switching its stability mechanism from an algorithmic to an over-co
 
 
 ![tradingview-usdd-depeg](https://user-images.githubusercontent.com/89845409/220380962-69913c0b-4172-40d5-932d-ed9346591f56.png)
-
-
 (source: [TradingView](https://www.tradingview.com/symbols/USDDUSD/?exchange=CRYPTO))
 
 There are several possible contributors to USDD’s historical struggle with maintaining its peg. The most named reasons are:
