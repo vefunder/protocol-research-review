@@ -49,7 +49,7 @@ With regards to the US dollar, there are two clear market leaders vying for domi
 
 Source: [DeFiLlama: Euro stables by market dominance](https://defillama.com/stablecoins?pegtype=PEGGEDEUR)
 
-# Background
+# Stasis and EURS
 
 ## History
 
