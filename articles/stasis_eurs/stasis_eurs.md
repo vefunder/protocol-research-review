@@ -274,7 +274,7 @@ Further clarity is required from Stasis about their compliance with applicable l
 
 Stasis claims they submitted a [MFSA application](https://www.mfsa.mt/our-work/authorisations-old/our-authorisation-process/) (Malta Financial Services Authority) earlier this year to prepare the company for the upcoming [MiCA regulation](https://www.mayerbrown.com/en/perspectives-events/publications/2022/12/eu-markets-in-crypto-assets-mica-regulation-expected-to-enter-into-force-in-early-2023). They expect to receive approval from MFSA in Q2 2023 and then apply for an e-money token license under MiCA regulatory regime once it comes into effect. However, these claims have not been validated.
 
-Regarding treasury management, specifically the fluctuation of underlying bonds, it appears Stasis is not compliant with MiCA/e-money regulations.
+Stasis' inability to meet the requirements under existing e-money regulations casts doubts on whether they will be capable under the upcoming MiCa regime. Their recent allocation to long-term bonds would not be compliant with MiCA/e-money regulations, precisely due to market risks highlighted in this report.
 
 > EMIs may also be authorized to invest a portion of client funds in tradable, high-quality, and short-term securities. Treasuries and short-term, tradeable government debt could be allowed, in the presence of liquid secondary markets, as these would limit (but not eliminate) liquidity risks. In addition, this approach adds some market risk, as the value of these securities will fluctuate with market interest rates, although, given the short maturities, the fluctuation should be limited. **In light of these risks, EMIs that are allowed to invest in securities should be subject to more sophisticated risk management requirements (including a prohibition on the re-use or pledge of these securities), as well as prudential requirements that take into account market risk and/or limits.** Allowing EMIs to invest in short-term government securities could, to some extent, limit credit risks, as they generally have lower credit risk than commercial banks. Another advantage could be potentially higher returns compared to placing the EMIs in demand deposits at banks. However, these potential advantages should be carefully weighed against the additionally introduced liquidity and market risks.
 
@@ -289,18 +289,15 @@ Our recommendation is to address these transparency issues urgently with Stasis.
 # References:
 
 https://www.crunchbase.com/organization/stasis/company_overview/overview_timeline
+
 https://www.allcryptowhitepapers.com/wp-content/uploads/2018/11/STASIS-WhitePaper-.pdf
+
 https://wirexapp.com/blog/post/qanda-with-stasis-0516
+
 https://cointelegraph.com/news/demand-for-widely-used-euro-stablecoin-is-huge-says-defi-expert
+
 https://fortune.com/2022/07/08/euro-coin-euroc-circle-new-stablecoin-first-backed-by-euro/ 
+
 https://defillama.com/stablecoins?pegtype=PEGGEDEUR
+
 https://medium.com/e-money-com/eeur-stablecoin-unwind-cf945820fb3f
-
-# ==todo== 
-from March 2nd to 3rd
-
-Account AMB8184.001 (EXT LTD) went up by 4m EUR (from 276,576.63 EUR to 4,276,546.63 EUR)
-
-Cash balance of URS8156.001 (XNT LTD) went up by 40m EUR (from 103,315.07 EUR to 40,144,315.07 EUR) All bonds appears to have been sold (qty shown as 0).
-
-Overall assets of STSS (Malta) Limited appear to be 44,420,861.70 EUR against a liability of 47.348,346 EURS (collateral factor or 93.81%)
