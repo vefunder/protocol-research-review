@@ -203,13 +203,13 @@ Stasis provides a cost basis for the bonds they hold. However, our analysis show
 
 ![](https://i.imgur.com/4FK6hQo.png)
 
-Since Stasis planned to hold the bonds until their maturity date, according to [IFRS 9](https://www.ifrs.org/issued-standards/list-of-standards/ifrs-9-financial-instruments/), they are categorized as Solely Payments of Principal and Interest (SPPI). Under these terms, the Company uses amortized cost of financial assets and has no financial obligations with inherent costs. Stasis has recently liquidated its entire bond portfolio during the time we have been sharing our research with their team. Nevertheless, we believe this represents a systematic asset–liability mismatch issue that requires active monitoring.
+Since Stasis planned to hold the bonds until their maturity date, according to [IFRS 9](https://www.ifrs.org/issued-standards/list-of-standards/ifrs-9-financial-instruments/), they are categorized as Solely Payments of Principal and Interest (SPPI). Under these terms, the Company uses amortized cost of financial assets and has no financial obligations with inherent costs. Stasis has recently liquidated its entire bond portfolio during the time we have been sharing our research with their team. Nevertheless, we believe this accounting method represents a systematic asset–liability mismatch issue that requires active monitoring.
 
 Stasis also claims they have been able to liquidate close to 50% of the bond portfolio in 2022, facing no issues converting bonds into cash. These claims have yet to be validated and would warrant further research as Stasis has not confirmed if the bonds were liquidated at or below PAR, therefore realizing the mark-to-market (MTM) losses.
 
 ## Bond Liquidation Q1 2023
 
-At the time we began our research, the latest verified report was dated January 5th, 2023. On that date there were 50.9M EURS in circulation, roughly 48M backed by holdings in the MFSA bond investment account. This put the overall collateralization at just over 100%. The following image shows the breakdown as of January 5th:
+At the time we began our research, the latest verified report was dated January 5th, 2023. On that date there were 50.9M EURS in circulation, roughly 48M backed by holdings in the MFSA bond investment account. This put the overall collateralization at just over 100% (according to the accounting method that recognizes the face value of the bond holdings). The following image shows the breakdown as of January 5th:
 
 ![](https://i.imgur.com/lg5AJC5.png)
 
@@ -263,7 +263,7 @@ The EURS token owner has the power to create and burn tokens, freeze and unfreez
 
 The corporate governance structure of Stasis is highly ambiguous, leaving the custody of both token supply and underlying assets uncertain. Although Stasis issues regular account statements verified by third parties on their [transparency page](https://stasis.net/transparency/), the details of the company's operations are opaque. 
 
-For instance, the most recent quarterly report from March 7th reveals that Stasis' entire bond portfolio was liquidated, form a cost basis of ~48M euro. Due to adverse market conditions, the market value of the portfolio had markedly decreased since the original purchase. Although the report shows EURS to be fully collateralized, there was a transfer of 3M euro that appears to be a cash infusion. While we can only speculate on the source of funds (Stasis team neglected to comment on this point), it's possible Stasis has taken out a loan to cover a shortfall caused by their portfolio rebalancing. 
+For instance, the most recent quarterly report from March 7th reveals that Stasis' entire bond portfolio was liquidated, from a face value of ~48M euro. Due to adverse market conditions, the market value of the portfolio had markedly decreased since the original purchase. Although the report shows EURS to be fully collateralized, there was a transfer of 3M euro that appears to be a cash infusion. While we can only speculate on the source of funds (Stasis team neglected to comment on this point), it's possible Stasis has taken out a loan to cover a shortfall caused by their portfolio rebalancing. 
 
 Although recent bond holdings had been trading at a discount to the company's cost basis, this was not reflected in the quarterly statements. This was allowed under [IFRS 9](https://www.ifrs.org/issued-standards/list-of-standards/ifrs-9-financial-instruments/), categorized as Solely Payments of Principal and Interest (SPPI), since Stasis had planned to hold their bonds to maturity. Users should be wary of creative accounting practices and urge Stasis to improve its transparency reporting, as this sort of creative accounting can conceal the risk of insolvency from users.
 
