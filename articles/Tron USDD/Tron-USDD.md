@@ -36,32 +36,30 @@ Articles
 * [Coindesk](https://www.coindesk.com/markets/2022/05/14/justin-sun-talks-usdd-stablecoin-in-wake-of-lunaust-unravel/)
 
 
-# Abstract
+# TL;DR
 
-USDD is the stablecoin of the TRON ecosystem. Initially, USDD was launched as an algorithmic stablecoin inspired by the previous success of Terra's UST. After the collapse of UST and Terra, however, USDD pivoted to an over-collateralized stablecoin model.
-
-USDD is minted by the Tron DAO Reserve (TDR): A group of seven whitelisted institutional members that can issue USDD by depositing collateral. Currently, the only accepted collateral is Tron’s native token TRX. Besides the collateral, the TDR has also built up reserves in other currencies such as BTC, USDT, and USDC. The TDR has full control over all relevant smart contracts, including the minting of new USDD and the custody of the collateral and reserves.
-
-Since its inception, USDD has struggled to keep its peg at the one Dollar mark. It has traded several percentage points below the peg for most of its history.
+This report investigates the USDD stablecoin and the risks posed to Curve LPs in the [USDD/3CRV](https://curve.fi/#/ethereum/pools/factory-v2-116/deposit) and [USDD/FraxBP](https://curve.fi/#/ethereum/pools/factory-v2-135/deposit) pools. Both pools passed votes for a gauge in May and July 2022, respectively. Original governance proposal [here](https://gov.curve.fi/t/proposal-add-usdd-3crv-pool-to-the-gauge-controller/3891). 
 
 
 ## A quick TL;DR of our findings:
 
-* USDD is an over-collateralized stablecoin natively issued on the TRON blockchain. Initially launched as a copycat of UST, it pivoted to an over-collateralization model shortly after Terra’s crash. In comparison to other stablecoins such as DAI, however, USDD is not permissionless or decentralized.
-* The stablecoin can only enter circulation via a 5-of-7 multi-sig controlled by the seven whitelisted members of the Tron DAO Reserve (TDR). To issue new USDD, TDR members need to deposit TRX as collateral. The TDR has full control over all smart contracts, custody of collateral and reserves, and minting of new USDD.
-* Currently, the circulating supply of USDD is at $725M. This number hasn’t changed since early July 2022. The TRX that is backing the circulating USDD only accounts for 85% of its value. However, the TDR has added reserves in BTC, USDT, USDC, and TRX. The collateral and reserves together account for a collateralization ratio of over 160%. Around 65% of the total backing is in Tron’s TRX.
-* Besides over-collateralization, USDD has two additional stability mechanisms. A Peg Stability Module (PSM) and four Monetary Policy Instruments (MPI). However, USDD has been trading below the one Dollar peg for most of its existence. This has left the PSM empty (i.e no funds to trade against) and unutilized.
-* Most of the stability mechanisms and attempts to stabilize the price are of “symbolic value”. Direct measures to reinforce the USDD pegare a rare occurance. There is no sign that collateral or reserves were used to directly impact USDD’s price.
+* USDD is an over-collateralized stablecoin natively issued on the TRON blockchain. Initially launched as a copycat of UST, it pivoted to an over-collateralization model shortly after Terra’s crash.
+* Compared to other stablecoins, such as DAI, USDD is not permissionless or decentralized. The stablecoin can only enter circulation via a 5-of-7 multi-sig controlled by the seven whitelisted members of the Tron DAO Reserve (TDR). The TDR has full control over all smart contracts, custody of collateral and reserves, and minting of new USDD.
+* The circulating supply of USDD ($725M) hasn’t changed since early July 2022. The TRX that is backing the circulating USDD only accounts for 85% of its value. However, the TDR has added reserves in BTC, USDT, USDC, and TRX. The collateral and reserves together account for a collateralization ratio of over 160%. Around 65% of the total backing is in Tron’s TRX.
+* USDD has two stability mechanisms: A Peg Stability Module (PSM) and four Monetary Policy Instruments (MPI). However, the PSM has always remained empty (i.e no funds to trade against) and unutilized.
+* Direct measures to reinforce the USDD peg are a rare occurance. There is no sign that collateral or reserves were used to directly support USDD’s price. As a result, USDD has extensively traded below the $1 peg for most of its existence.
 * USDD repeatedly expresses false and misleading statements. For instance, it falsely claims to be “the first over-collateralized and decentralized stablecoin”. Another example is the designation of the so-called “BurnContract”, which in reality is just a multi-sig holding the TDR collateral.
-* In terms of technical security, USDD has undergone several audits by SlowMist. All the major components were assessed. There is also an active bug bounty program.
-* There are no known activities that would point toward decentralized governance. There is no forum or other venue to get involved, nor is there voting or on-chain governance. The team behind USDD is also unknown, although it is clear that Justin Sun plays a role in this project.
+* Technical security appears to be taken seriously. USDD has undergone several audits by SlowMist. All the major components were assessed. There is also an active bug bounty program.
+* There is no semblence of decentralized governance. There is no governance forum, nor is there snapshot voting or on-chain governance. The team behind USDD is also anonymous, with implicit ties to Justin Sun.
 
 
 # USDD - Introduction
 
-Decentralized USD (USDD) is the stablecoin of the TRON ecosystem. It was launched on [May 5, 2022](https://www.theblock.co/post/145231/trons-new-stablecoin-usdd-goes-live). USDD is issued by the TRON DAO Reserve (TDR), which acts as custodian. Initially, it was launched as an algorithmic stablecoin, with many [similarities](https://www.coindesk.com/markets/2022/05/04/revolution-promised-by-trons-justin-sun-looks-like-clone-of-terras-algorithmic-stablecoin/) to Terra UST. As with UST, the plan was to incentivize USDD with a 30% APY. And as LUNA provided the algorithmic backing for UST, Tron’s native token TRX would serve as [collateral](https://medium.com/coinmonks/new-algorithmic-stablecoin-usdd-promises-30-apy-is-this-a-terra-ust-copycat-2d2787af14b2) for USDD. Following Terra's collapse, however, USDD pivoted to an over-collateralized stablecoin model that would be resilient to a similar death spiral in case of a bank run.
+Decentralized USD (USDD) is the stablecoin of the TRON ecosystem launched on [May 5, 2022](https://www.theblock.co/post/145231/trons-new-stablecoin-usdd-goes-live). USDD was initially launched as an algorithmic stablecoin [inspired by]((https://www.coindesk.com/markets/2022/05/04/revolution-promised-by-trons-justin-sun-looks-like-clone-of-terras-algorithmic-stablecoin/)) the previous success of Terra's UST. As with UST, the plan was to incentivize USDD with a 30% APY. And as LUNA provided the algorithmic backing for UST, Tron’s native token TRX would serve as [collateral](https://medium.com/coinmonks/new-algorithmic-stablecoin-usdd-promises-30-apy-is-this-a-terra-ust-copycat-2d2787af14b2) for USDD. Following Terra's collapse, however, USDD pivoted to an over-collateralized stablecoin model that would be resilient to a similar death spiral in case of a bank run.
 
-USDD differs from other crypto-collateralized stables like DAI in that USDD’s issuance is permissioned. Only whitelisted members of the Tron DAO Reserve are able to provide collateral and mint new USDD. Current [members](https://tdr.org/#/) of the TDR include Poloniex, Multichain, and Amber Group among others. The now insolvent Alameda Research was an OG member but is no longer listed.
+USDD differs from other crypto-collateralized stables like DAI in that USDD’s issuance is permissioned. USDD is minted by the Tron DAO Reserve (TDR): A group of seven whitelisted institutional members that can issue USDD by depositing collateral. Currently, the only accepted collateral is Tron’s native token TRX. In addition to the TRX backing, the TDR has also built up reserves in other currencies such as BTC, USDT, and USDC. The TDR has full control over all relevant smart contracts, including the minting of new USDD and the custody of the collateral and reserves. Current [members](https://tdr.org/#/) of the TDR include Poloniex, Multichain, and Amber Group among others. The now insolvent Alameda Research was originally a member but has since been removed.
+
+Since its inception, USDD has struggled to keep its peg at the one Dollar mark. It has traded several percentage points below the peg for most of its history.
 
 
 # USDD as an Asset
