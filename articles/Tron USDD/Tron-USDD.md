@@ -83,58 +83,60 @@ Recently, USDD became an officially [authorized digital currency](https://crypto
 
 ## USDD Issuance
 
-There are two ways for new USDD to enter circulation. First, USDD can be issued by the seven members of the TRON DAO Reserve (TDR). These whitelisted institutions can stake TRX, and withdraw USDD in return. Secondly, anyone can permissionlessly swap USDD for other stablecoins (e.g. USDT, USDC) via the Peg Stability Module (PSM).
+There are two ways for new USDD to enter circulation.
+* USDD can be issued by the seven members of the TRON DAO Reserve (TDR). These whitelisted institutions can stake TRX, and withdraw USDD in return.
+* Anyone can permissionlessly swap USDD for other stablecoins (e.g. USDT, USDC) via the Peg Stability Module (PSM).
 
-At launch, the TDR pre-minted $999B of USDD. These sit in an “[issuance contract](https://tronscan.org/#/contract/TRFGnuUqED3NDpMYgqZY1X3gAeVHNw1SDq)”. From there, $1B was transferred to an “[authorized contract](https://tronscan.org/#/contract/TTsASxQhMk4t3S5vZMVVJ7nR2GQjDXNRnq)”. The TDR controls both contracts via a 5-of-7 multi-sig. Once in the authorized contract, TDR members and regular users can issue or swap USDD.
+At launch, the TDR pre-minted $999B of USDD. These sit in the “[MultiSigLocker contract](https://tronscan.org/#/contract/TRFGnuUqED3NDpMYgqZY1X3gAeVHNw1SDq)”. From there, $1B was transferred to a “[MultiSigAuthorizer contract](https://tronscan.org/#/contract/TTsASxQhMk4t3S5vZMVVJ7nR2GQjDXNRnq)”. The TDR controls both contracts via a 5-of-7 multi-sig. Once in the authorized contract, TDR members and regular users can issue or swap USDD.
 
 
 ![docs-usdd-issuing-process](https://user-images.githubusercontent.com/89845409/220379993-ae616d3a-2f4f-4069-bb06-51f6ec7aa761.png)
 (source: [USDD Docs](https://docs.usdd.io/usdd-issuance/usdd-issuance))
 
+
 **USDD issued by staking TRX (TDR members only)**:
 
-
-
-1. TDR members deposit $TRX into the [TRX Burning Contract](https://tronscan.org/#/contract/TNMcQVGPzqH9ZfMCSY4PNrukevtDgp24dK) (controlled by a 5-of-7 multi-sig).
-2. The TDR calculates the dollar value of TRX on the prevailing exchange rate and transfers an equivalent dollar value of USDD from the [authorized contract](https://tronscan.org/#/contract/TTsASxQhMk4t3S5vZMVVJ7nR2GQjDXNRnq) to the “circulation account” via multi-signature (5-of-7).
+1. TDR members deposit TRX into the [TRX Burning Contract](https://tronscan.org/#/contract/TNMcQVGPzqH9ZfMCSY4PNrukevtDgp24dK) (controlled by the 5-of-7 multisig of TDR members).
+2. The TDR calculates the dollar value of TRX and transfers an equivalent dollar value of USDD from the [MultiSigAuthorizer contract](https://tronscan.org/#/contract/TTsASxQhMk4t3S5vZMVVJ7nR2GQjDXNRnq) to the “circulation account” via multi-sig (5-of-7).
 3. The TDR converts the [TRC10 USDD](https://tronscan.org/#/token/1004777/transfers) in the “circulation account” into [TRC20 USDD](https://tronscan.org/#/token20/TPYmHEhy5n8TCEfYGqW2rPxsghSfzghPDn) and transfers the USDD to its member.
 
+
 **USDD issued by swapping stablecoins (PSM)**:
-
-
 
 1. The TDR releases the authorized and un-issued TRC10 USDD from the Authorized Contract to a [SafeVault Contract](https://tronscan.org/#/contract/TMgSSHn8APyUVViqXxtveqFEB7mBBeGqNP) ([minter](https://tronscan.org/#/contract/TUhQDzXJ3QsT6F2KiK5gZ3H673TV1516E9/code), [owner](https://tronscan.org/#/address/TPcnRbpuB89eKKkfH2E7iJooAqeEZPpdGb)) in the PSM.
 2. When users swap other stablecoins for USDD, the PSM Contract converts TRC10 USDD in the SafeVault into TRC20 USDD and transfers it to users.
 
-The Peg Stability Module supports USDD to arb its upside peg. In other words, if USDD trades above one US-Dollar, traders are incentivized to swap other stablecoins for USDD using the PSM. They can then sell USDD at another venue. Thus, making a profit and essentially bringing down the price of USDD back to one Dollar. However, the PSM is currently empty since [USDD](https://www.coingecko.com/en/coins/usdd) has not been trading above one Dollar in several months. As a result, there are no incentives to use the tool.
+The Peg Stability Module supports USDD to arb its upside peg. In other words, if USDD trades above one US-Dollar, traders are incentivized to swap other stablecoins for USDD using the PSM. They can then sell USDD at another venue. Thus, making a profit and bringing down the price back to $1. However, the PSM is currently empty since [USDD](https://www.coingecko.com/en/coins/usdd) has not been trading above one Dollar in several months. As a result, there are no incentives to use the tool.
 
-[Sidenote: USDD’s [documentation](https://docs.usdd.io/usdd-issuance/usdd-issuance) can be misleading, as the terms “staking” and “burn contract” are used for the same interaction. The “TRX Burning Contract”  is a deceptive designation. In reality, the TRX sent to the Burning Contract is not actually burned (i.e. removed from existence). On the contrary, the [Burning Contract](https://tronscan.org/#/contract/TNMcQVGPzqH9ZfMCSY4PNrukevtDgp24dK) just stores the TRX. The “burned” TRX can always be redeemed by the TDR multi-sig. More on that later].
+[Sidenote: USDD’s [documentation](https://docs.usdd.io/usdd-issuance/usdd-issuance) can be misleading, as the terms “staking” and “burn contract” are used for the same interaction. The “TRX Burning Contract”  is an incorrect designation. In reality, the [Burning Contract](https://tronscan.org/#/contract/TNMcQVGPzqH9ZfMCSY4PNrukevtDgp24dK) just stores the TRX. The “burned” TRX can always be redeemed by the TDR multi-sig.]
 
 
-### Replenish the Reserves
+## Replenish the Reserves
 
-Once the amount of USDD in the authorized contract falls below $500M, the TDR will automatically replenish the reserves. Therefore, the TDR simply releases more TRC10 from the Issuance Contract to the Authorized Contract via multi-signature. After the transaction receives five out of seven signatures, the USDD will be locked for a minimum of 10 days.
+Once the amount of USDD in the authorized contract falls below $500M, the TDR will replenish the reserves. The TDR simply releases more TRC10 from the Issuance Contract to the Authorized Contract via multi-sig. After the transaction receives five out of seven signatures, the USDD will be locked for a minimum of 10 days.
 
-As of today, the [Issuance Contract](https://tronscan.org/#/contract/TRFGnuUqED3NDpMYgqZY1X3gAeVHNw1SDq) still holds $997.9B USDD, meaning that $1.1B USDD has been released to the [Authorized Contract](https://tronscan.org/#/contract/TTsASxQhMk4t3S5vZMVVJ7nR2GQjDXNRnq/code).
-
-Overall, the issuance of USDD has remained very constant. On-chain data and reports by Messari show that no new USDD was issued over the past six months.
-
+The [Issuance Contract](https://tronscan.org/#/contract/TRFGnuUqED3NDpMYgqZY1X3gAeVHNw1SDq) still holds $997.9B USDD of the $999B pre-minted, meaning that a single infusion of $1.1B USDD has been released to the [Authorized Contract](https://tronscan.org/#/contract/TTsASxQhMk4t3S5vZMVVJ7nR2GQjDXNRnq/code). Overall, the issuance of USDD has remained very constant. On-chain data and reports by Messari show that no new USDD was issued over the past six months.
 
 ![Messari-usdd-issuance-q4](https://user-images.githubusercontent.com/89845409/220380087-cb83c9e3-58fe-4c5e-896c-cc53c83703fd.png)
+
 (source: [Messari](https://messari.io/report/state-of-usdd-q4-2022?referrer=all-research))
 
 The USDD supply has remained unchanged at around $725M. This suggests that demand for USDD did not increase since its inception. This observation is further evidenced by a slow growth rate in user adoption, i.e. the number of wallets holding USDD stayed flat in the last quarter according to [Messari](https://messari.io/report/state-of-usdd-q4-2022?referrer=all-research).
 
+![image](https://user-images.githubusercontent.com/51072084/224406624-87717c26-6473-4707-9372-8ad271fa90b4.png)
+
+(source: [Messari](https://messari.io/report/state-of-usdd-q4-2022?referrer=all-research))
+
 
 ## Collateral backing USDD
 
-USDD is promoting a high collateralization ratio (CR) on its website. At the time of writing, the CR hovered around 170%. The total collateral is supposedly at $1.25B, with $725M USDD in circulation.
-
+USDD advertizes a high collateralization ratio (CR) on its website. At the time of writing, the CR hovered around 170%. The total collateral is supposedly valued at $1.25B, with $725M USDD in circulation.
 
 ![usdd-website-total-collateral](https://user-images.githubusercontent.com/89845409/220380284-5a46510f-8095-4af3-8b06-7dfe25c679f6.png)
+
 (source: [Tron DAO Reserve](https://tdr.org/#/))
 
-Moreover, USDD  proclaims that its stablecoin is backed by “multiple mainstream digital assets” like TRX, BTC, or USDT. To confirm this statement, the website lists all wallets that contain their collateral and reserves.
+Moreover, USDD  proclaims that its stablecoin is backed by “multiple mainstream digital assets” like TRX, BTC, and USDT. To confirm this statement, the website lists all wallets that contain their collateral and reserves.
 
 A quick look into those wallets reveals that USDD is mostly backed by the TRX held in the burn contract. In addition, three reserve accounts hold extra TRX, BTC, jUSDC, and jUSDT (i.e. USDC and USDT deposited into JustLend). In summary, 65% of the total collateral and reserves consist of TRX. BTC makes up 27%, while USDC and USDT account for about 6%.
 
@@ -282,13 +284,13 @@ $23,826</p>
 
 (source: [table](https://docs.google.com/spreadsheets/d/1LnNj2Jm9Dun4DMoKDfpTyIHy0JHTo2chxqGORZS49ek/edit#gid=135516406))
 
-In total, $1.15B can be found by combining the collateral and the reserves (see table above). On its website, however, USDD highlights that $1.25B is collateralizing its stablecoin, a difference of ~$100M.
+In total, $1.15B can be found by combining the collateral and the reserves (see table above). On its website, however, USDD claims that $1.25B is collateralizing its stablecoin, a difference of ~$100M.
 
-This difference stems from an incorrect calculation on the [USDD website](https://usdd.io/#/), which is calculated from an above-market price for TRX. The calculation of the above table was based on the TRX price from [Coingecko](https://www.coingecko.com/en/coins/tron) ($0.0685). The USDD website, on the other hand, applies a higher price per TRX (~$0.0806), a difference of plus 17.6%.
+This difference stems from an above market price calculation for TRX on the [USDD website](https://usdd.io/#/). The calculation of the above table was based on the TRX price from [Coingecko](https://www.coingecko.com/en/coins/tron) ($0.0685). The USDD website, on the other hand, applies a higher price per TRX (~$0.0806), a difference of plus 17.6%.
 
-Subsequently, the collateralization ratio (CR) is also not correct. Instead of 172%, the actual ratio is 159%, including all the reserves. By only looking at the burn contract, the $725M outstanding USDD is backed by $616M worth of TRX. This resembles a CR of merely 85%.
+Subsequently, the CR is also not correct. Instead of 172%, the actual ratio is 159%, including all the reserves. By only looking at the burn contract, the $725M outstanding USDD is backed by $616M worth of TRX, or a CR of merely 85%.
 
-In conclusion, USDD is well backed by several top-tier tokens. There is, however, a high concentration of TRX. Some of the reserves are either staked or deployed to other Tron-based protocols (e.g. JustLend), increasing the composability risk and the dependency on the TDR to always be actively defending the peg.
+Overall, USDD is sufficiently backed by several top-tier tokens. There is, however, a high concentration of TRX. Some of the reserves are either staked or deployed to other Tron-based protocols (e.g. JustLend), increasing the composability risk. Furthermore, there is an ever-present dependence on the TDR to always be actively defending the peg, since they have unilateral control over the USDD backing.
 
 
 ## USDD Cross-Chain
