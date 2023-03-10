@@ -297,35 +297,44 @@ Overall, USDD is sufficiently backed by several top-tier tokens. There is, howev
 
 As mentioned earlier, USDD is supported on Tron, Ethereum, BSC, Avalanche, and Arbitrum. For cross-chain transactions, USDD utilizes the BitTorrent network. BitTorrent (BTTC) is a cross-chain [bridge](https://app.bt.io/bridge) protocol, which was bought by Justin Sun in 2018. It relies on a PoS (Proof of Stake) consensus mechanism and multi-node validation. Currently, the BTTC network is secured by 12 [validators](https://app.bt.io/staking). Among them are Binance and Huobi (another investment of Justin Sun).
 
-Comparing the amount of USDD on Ethereum and BNB with the amount in the BTTC bridge, the numbers curiously don't add up, raising questions that USDD is not fully backed. For instance, the BTTC bridge for Ethereum contains [$116M USDD](https://scan.bt.io/#/contract/0xb602f26bf29b83e4e1595244000e0111a9d39f62), although according to Etherscan there is over [$124M USDD](https://etherscan.io/token/0x0C10bF8FcB7Bf5412187A595ab97a3609160b5c6) on Ethereum (a difference of ~7M USDD). The same is true for the Binance Smart Chain. While the BNB contract on the BTTC bridge contains: [$89M USDD](https://bttcscan.com/address/0x74e7cef747db9c8752874321ba8b26119ef70c9e), there is actually over  [$110M USDD](https://bscscan.com/token/0xd17479997F34dd9156Deef8F95A52D81D265be9c) on BNB (an even higher difference of over $21M). It’s not fully clear where the remaining amounts are coming from, but speculation is that they were transferred from a CEX.
+The amount of USDD on Ethereum and BSC do not equal the amount in the BTTC bridge. For instance, the BTTC bridge for Ethereum contains [$116M USDD](https://scan.bt.io/#/contract/0xb602f26bf29b83e4e1595244000e0111a9d39f62), although according to Etherscan there is over [$124M USDD](https://etherscan.io/token/0x0C10bF8FcB7Bf5412187A595ab97a3609160b5c6) on Ethereum (a difference of ~7M USDD). The same is true for the Binance Smart Chain. While the BSC contract on the BTTC bridge contains: [$89M USDD](https://bttcscan.com/address/0x74e7cef747db9c8752874321ba8b26119ef70c9e), there is actually over [$110M USDD](https://bscscan.com/token/0xd17479997F34dd9156Deef8F95A52D81D265be9c) on BSC (an even higher difference of over $21M). It’s not fully clear where the remaining amounts are coming from, but it's possible that they were transferred from a CEX.
 
 
 ## Peg Stability Mechanism
 
-The initial plan for maintaining the peg was very [similar](https://www.coindesk.com/markets/2022/05/04/revolution-promised-by-trons-justin-sun-looks-like-clone-of-terras-algorithmic-stablecoin/) to Terra’s UST. Mainly the following two stability mechanisms were planned:
-
+The initial plan for maintaining the peg was [based on](https://www.coindesk.com/markets/2022/05/04/revolution-promised-by-trons-justin-sun-looks-like-clone-of-terras-algorithmic-stablecoin/) Terra’s UST, with the following two stability mechanisms:
 
 * **Short-term Arbitrage** - USDD was to maintain its price around a dollar, using the basic algorithm of 1 USDD = 1 dollar worth of TRX. In this scenario, TRX had a similar role to LUNA and would have been burned/minted when swapping USDD.
-* **Building up Reserves** - A $10B reserve should help to defend the peg. It was predicted that the TDR would [raise $10B](https://trondao.medium.com/an-open-letter-to-our-community-on-establishing-the-tron-dao-reserve-3eda495f07c2) worth of highly liquid assets within six to twelve months, starting from May 2022 (USDD release date). While Terra [stated](https://twitter.com/stablekwon/status/1483973126161842176) the same intentions, the $10B reserve did not become a reality.
+* **Building up Reserves** - A $10B reserve would be built to defend the peg. It was predicted that the TDR would [raise $10B](https://trondao.medium.com/an-open-letter-to-our-community-on-establishing-the-tron-dao-reserve-3eda495f07c2) worth of highly liquid assets within six to twelve months, beginning in May 2022 (USDD release date).
 
-However, as mentioned earlier, the USDD algo-stable model never came to fruition. A few weeks after the UST crash, the TDR [launched](https://twitter.com/usddio/status/1554823567904149505?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1554823567904149505%7Ctwgr%5E1b5ae4f96116046b953f2beb17f50a00fd9c1fa6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Ftronspark.com%2Ftrondao-psm%2F) the Peg Stability Module (PSM). A tool that enables users to swap between USDD and USDT, without slippage and fees. The PSM was supposed to serve as an additional stability mechanism, based on arbitrage activities. However, the PSM module is not currently active, as USDD has been suffering from a downside depeg for quite some time. The PSM can only protect USDD in case of an upside depeg (i.e USDD > 1 US-Dollar). In the current scenario, filling the PSM with “counter-swap” stablecoins would produce constant losses for the protocol.
+However, as mentioned earlier, the USDD algo-stable model never came to fruition. It instead pivoted to an over-collateralized model and introduced additional stability mechanisms.
+
+
+### The PSM
+
+A few weeks after UST collapsed, the TDR [launched](https://twitter.com/usddio/status/1554823567904149505?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1554823567904149505%7Ctwgr%5E1b5ae4f96116046b953f2beb17f50a00fd9c1fa6%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Ftronspark.com%2Ftrondao-psm%2F) the Peg Stability Module (PSM): a tool that enables users to swap between USDD and USDT, without slippage and fees.
+
+The PSM is intended to serve as an additional stability mechanism that protects against an upside depeg (i.e USDD > 1 US-Dollar). However, the PSM module is not currently active, as USDD has been suffering from a downside depeg for quite some time.
 
 
 ![coingecko-usdd-offpeg](https://user-images.githubusercontent.com/89845409/220380464-55134e01-d76d-4550-8785-b46a96957c53.png)
+
 (source: [Coingecko](https://www.coingecko.com/en/coins/usdd))
+
+
+### Monetary Policy Instruments (MPI)
 
 In addition to the PSM, the TDR put in place several [monetary policy instruments](https://docs.usdd.io/faq/what-monetary-policies-will-the-tdr-adopt-to-maintain-the-value-of-usdd) (MPI) to maintain USDD’s price stability. Below are the four main policy instruments applied by the TDR.
 
+* **MPI 1: Setting the Interest Rate -** The TDR claims to be working with its partner protocols to set USDD’s benchmark interest rates. The initial interest rate was targeted to be 30%. Today, the rates are variable and set by third-party protocols (e.g. SunSwap, JustLend), and it is unclear what role the TDR plays in setting interest rates.
 
-* **MPI 1: Setting the Interest Rate -** Setting interest rates is a mechanism often used to regulate the supply and demand of currencies and loans. The TDR claims to be working with its partner protocols, to set USDD’s benchmark interest rates. The initial interest rate was targeted to be 30%. Today, the rate is very different, depending on the protocol. On certain platforms, it can be higher than 30%. In certain instances, the rate is subsidized by the TDR, to attract new users and drive up its adoption.
+* **MPI 2: Open Market Operations -** Through Open Market Operations, the TDR performs expansion and contraction of USDD's “monetary base”. The intention is to stabilize supply and demand balance. To keep USDD pegged to $1, the TDR claims to buy or sell USDD and reserve assets (TRX, BTC, USDT, and USDC). However, there is little on-chain proof of such transaction. It is possible that such operations take place via CEXs.
 
-* **MPI 2: Open Market Operations -** Through Open Market Operations, the TDR performs expansion and contraction of USDD's “monetary base”. The intention is to stabilize its value (supply and demand balance). To keep the USDD pegged to $1, the TDR claims to buy or sell USDD and reserve assets (TRX, BTC, USDT, and USDC). However, there is little on-chain proof of such transaction. Hence, it is assumed that these operations take place via CEXs.
+* **MPI 3: Window Guidance -** The TDR has partnered with DeFi protocols (e.g. JustLend) and centralized exchanges (e.g. Poloniex, Huobi) to more effectively control USDD. The mentioned partners have the ability to limit or pause USDD and TRX lending to protect the "USDD monetary system” from short-sellers.
 
-* **MPI 3: Window Guidance -** The TDR has partnered with DeFi protocols (e.g. JustLend) and centralized exchanges (e.g. Poloniex, Huobi) to be able to more effectively control USDD. The mentioned partners have the ability to limit or even temporarily pause the lending of USDD and TRX, in order to protect the "USDD monetary system” from short-sellers.
+* **MPI 4: Mint-and-Burn -** As mentioned earlier, the TDR has a mint-and-burn mechanism in place. The TDR can also use additional methods such as enabling or disabling the minting process, adjusting the mint-burn ratio, and imposing upper limits on daily minting and burning activities. However, these methods have not been used since its inception.
 
-* **MPI 4: Mint-and-Burn -** as mentione earlier, the TDR has a mint-and-burn mechanism in place. Depending on the situation, the TDR also uses additional methods such as enabling or disabling the minting process, adjusting the mint-burn ratio, and imposing upper limits on daily minting and burning activities. However, this method has not been used since its inception.
-
-In conclusion, the TDR proclaims a set of tools called monetary policy instruments, that are supposed to keep USDD’s peg. However, as seen in the image above, this is not working perfectly. USDD has been off-peg since June 2022 and has been struggling to get back to the one Dollar mark ever since.
+Although the TDR outlines a toolkit of monetary policy instruments that are employed to keep USDD’s peg, there is cause for skepticism. There is little evidence of these MPI's useage to stabilize the peg. USDD has been off-peg since June 2022 and has been struggling to get back to the one Dollar mark ever since.
 
 ## Risk of Providing Liquidity on Sunswap
 
