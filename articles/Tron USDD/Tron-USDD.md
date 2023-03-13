@@ -45,7 +45,7 @@ This report investigates the USDD stablecoin and the risks posed to Curve LPs in
 
 * USDD is an over-collateralized stablecoin natively issued on the TRON blockchain. Initially launched as a copycat of UST, it pivoted to an over-collateralization model shortly after Terra’s crash.
 * Compared to other over-collateralized stablecoins, such as DAI, USDD is not permissionless or decentralized. The stablecoin can only enter circulation via a 5-of-7 multi-sig controlled by the seven whitelisted members of the Tron DAO Reserve (TDR). The TDR has full control over all smart contracts, custody of collateral and reserves, and minting of new USDD.
-* The circulating supply of USDD ($725M) hasn’t changed since early July 2022. The TRX that is backing the circulating USDD only accounts for 85% of its value. However, the TDR has added reserves in BTC, USDT, and USDC. The collateral and reserves together account for a collateralization ratio of over 160%. Around 65% of the total backing is in Tron’s TRX.
+* The circulating supply of USDD ($725M) hasn’t changed since early July 2022. The TRX that is backing the circulating USDD accounts for 83% of its value. However, the TDR has added reserves in BTC, USDT, and USDC to increase the backing. But all stablecoin reserves were recently emptied to defend the peg. Now, over two thirds of the collateral and reserves consists of Tron’s TRX, leaving the CR at around 147%.
 * USDD has two stability mechanisms: A Peg Stability Module (PSM) and four Monetary Policy Instruments (MPI). However, the PSM has always remained empty (i.e no funds to trade against) and unutilized.
 * Direct measures to reinforce the USDD peg are a rare occurance. There is no sign that collateral or reserves were used to directly support USDD’s price. Consequently, USDD has extensively traded below the $1 peg for most of its existence.
 * The USDD team repeatedly expresses false and misleading statements. For instance, it falsely claims to be “the first over-collateralized and decentralized stablecoin”. Another example is the designation of the so-called “BurnContract”, which in reality is just a multi-sig holding the TDR collateral.
@@ -283,15 +283,16 @@ $23,826</p>
 </table>
 
 
+
 (source: [table](https://docs.google.com/spreadsheets/d/e/2PACX-1vRnM93bqodGGHXoL6vhKfVQcxXDNZyNFT9xDZ3TxD52mH7JBsWFaBmgIU8qAtkpal4gHwsmGzRV9XjM/pubhtml#))
 
-In total, $1.15B can be found by combining the collateral and the reserves (see table above). On its website, however, USDD claims that $1.25B is collateralizing its stablecoin, a difference of ~$100M.
+In total, $1.07B can be found by combining the collateral and the reserves (see table above). On its website, however, USDD claims that $1.17B is collateralizing its stablecoin, a difference of ~$100M.
 
-This difference stems from an above market price calculation for TRX on the [USDD website](https://usdd.io/#/). The calculation of the above table was based on the TRX price from [Coingecko](https://www.coingecko.com/en/coins/tron) ($0.0685). The USDD website, on the other hand, applies a higher price per TRX (~$0.0806), a difference of plus 17.6%.
+This difference stems from an above market price calculation for TRX on the [USDD website](https://usdd.io/#/). The calculation of the above table was based on the TRX price from [Coingecko](https://www.coingecko.com/en/coins/tron) ($0.0674). The USDD website, on the other hand, applies a higher price per TRX (~$0.0806), a difference of plus 19.5%.
 
-Subsequently, the CR is also not correct. Instead of 172%, the actual ratio is 159%, including all the reserves. By only looking at the burn contract, the $725M outstanding USDD is backed by $616M worth of TRX, or a CR of merely 85%.
+Subsequently, the CR is also not correct. Instead of 172%, the actual ratio is 148%, including all the reserves. By only looking at the burn contract, the $725M outstanding USDD is backed by $606M worth of TRX, or a CR of merely 83%.
 
-Overall, USDD is sufficiently backed by several top-tier tokens. There is, however, a high concentration of TRX. Some of the reserves are either staked or deployed to other Tron-based protocols (e.g. JustLend), increasing the composability risk. Furthermore, there is an ever-present dependence on the TDR to always be actively defending the peg, since they have unilateral control over the USDD backing.
+Overall, USDD is still sufficiently backed, if the collateral and reserves are counted together. There is, however, a high concentration of TRX. Furthermore, there is an ever-present dependence on the TDR to always be actively defending the peg, since they have unilateral control over the USDD backing.
 
 
 ## USDD Cross-Chain
