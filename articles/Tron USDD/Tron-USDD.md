@@ -162,7 +162,7 @@ A quick look into those wallets reveals that USDD is mostly backed by the TRX he
 
    </td>
    <td><p style="text-align: right">
-$616,333,697</p>
+$606,436,367</p>
 
    </td>
   </tr>
@@ -176,7 +176,7 @@ $616,333,697</p>
 
    </td>
    <td><p style="text-align: right">
-$311,560,914</p>
+$312,866,690</p>
 
    </td>
   </tr>
@@ -190,7 +190,7 @@ $311,560,914</p>
 
    </td>
    <td><p style="text-align: right">
-$66,579,130</p>
+$65,509,976</p>
 
    </td>
   </tr>
@@ -200,11 +200,11 @@ $66,579,130</p>
    <td>TRX
    </td>
    <td><p style="text-align: right">
-960,009,231</p>
+960,009,049</p>
 
    </td>
    <td><p style="text-align: right">
-$65,760,632</p>
+$64,704,610</p>
 
    </td>
   </tr>
@@ -212,11 +212,11 @@ $65,760,632</p>
    <td>jUSDC
    </td>
    <td><p style="text-align: right">
-3,967,811,243</p>
+0</p>
 
    </td>
    <td><p style="text-align: right">
-$39,958,657</p>
+$0</p>
 
    </td>
   </tr>
@@ -224,11 +224,11 @@ $39,958,657</p>
    <td>jUSDT
    </td>
    <td><p style="text-align: right">
-2,947,042,032</p>
+0</p>
 
    </td>
    <td><p style="text-align: right">
-$29,978,884</p>
+$0</p>
 
    </td>
   </tr>
@@ -276,13 +276,14 @@ $23,826</p>
    <td>
    </td>
    <td><p style="text-align: right">
-<strong>$1,152,744,715</strong></p>
+<strong>$1,072,090,444</strong></p>
 
    </td>
   </tr>
 </table>
 
-(source: [table](https://docs.google.com/spreadsheets/d/1LnNj2Jm9Dun4DMoKDfpTyIHy0JHTo2chxqGORZS49ek/edit#gid=135516406))
+
+(source: [table](https://docs.google.com/spreadsheets/d/e/2PACX-1vRnM93bqodGGHXoL6vhKfVQcxXDNZyNFT9xDZ3TxD52mH7JBsWFaBmgIU8qAtkpal4gHwsmGzRV9XjM/pubhtml#))
 
 In total, $1.15B can be found by combining the collateral and the reserves (see table above). On its website, however, USDD claims that $1.25B is collateralizing its stablecoin, a difference of ~$100M.
 
