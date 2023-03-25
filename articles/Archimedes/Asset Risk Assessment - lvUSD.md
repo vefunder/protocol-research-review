@@ -69,11 +69,11 @@ Leverage takers can only invest funds in predefined strategies decided by Archim
 
 The borrower provides a principal which would act as collateral. This collateral would be in an asset that can be used as an input asset in the predefined strategy (for e.g. Archimedes has an OUSD strategy that uses an OUSD token as collateral).
 
-<figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/image.png)
 
 After paying for leverage, Archimedes would mint an outsized amount of lvUSD (no. of lvUSD > no. of OUSD).&#x20;
 
-<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/leverage.png)
 
 Archimedes aims to provide 9.73x leverage including collateral. So, Archimedes would mint lvUSD 8.73x the amount of collateral provided. This lvUSD is swapped to OUSD via lvUSD/3CRV and OUSD/3CRV pools.
 
@@ -97,7 +97,7 @@ The Archimedes Leverage Round auctions have a starting price and an ending price
 
 Details on a leverage round comprise the following things:
 
-<figure><img src="../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/ttributes.PNG)
 
 Note that Archimedes usually provides leverage with a position lifetime of 370 days.
 
@@ -131,7 +131,7 @@ As a liquidity provider, a user can simply deposit 3CRV in the lvUSD pool and wi
 
 Archimedes aims to provide ARCH incentives such that the overall yields are consistent. This is made sure through their dynamic emission mechanism. Here is the schematic on how dynamic emissions works:
 
-<figure><img src="https://image-forwarder.notaku.so/aHR0cHM6Ly93d3cubm90aW9uLnNvL2ltYWdlL2h0dHBzJTNBJTJGJTJGbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbSUyRlRKYjhxc3YwRHYxSWJaNVBPV0hGWW8zemZFWU1zLXZWR1UwQkNMSndWRHlIZUl2b0ZYZnBIODRwQ0VqVVRDenBidWhhV3NGMS1vVVpQdmNPNHE4eVFWTDVpdGpyMWtIei14NUFkXzZnZVBZaHNqaTlUREtuNkF1Slc4Z2syVDlQMnA5dmdJdkQzZzE5VWMwMVR3ck83TTE0OUE1cEMwVmJ3RTZBX1hSSUlXdmVsbXVnV01tck5qc1ZxaENnenc_dGFibGU9YmxvY2smaWQ9ZjIwOWZmYTUtNDYyZS00NWExLTg1MmUtYjU0YzYyMTgzYzcwJmNhY2hlPXYyJndpZHRoPTE2MDA=" alt="Image without caption"><figcaption></figcaption></figure>
+![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/dynamic%20emissions.png)
 
 Source: [Docs - ARCH Dynamic Emission](https://docs.archimedesfi.com/tokenomics-and-ecosystem/arch-dynamic-emissions)
 
@@ -143,11 +143,11 @@ Basically, they compare other stablecoin pools and adjust their yield accordingl
 * Target TVL: Now with a target APY, TVL value is also needed to make sure the APY is not diluted when liquidity comes. The target TVL is 1.1x the 7-day moving average of the lvUSD/3CRV pool. This data is fetched from&#x20;
 * Benchmark ARCH price: To compute the amount of ARCH to be released as emission, determining the ARCH price is essential. The ARCH price used for computation is a 7-day moving average of ARCH price data from coingecko (\*\* _If ARCH price isn’t available on Coingecko, the algorithm will use ARCH/ETH Uniswap pool data and Coingecko’s ETH/USD (taking the last 7 days average ETH/USD price)_).
 
-* [x] _<mark style="color:blue;">I’d like to know if there is manual approval required to update the emissions, so ultimately is trust placed in team or is trust in the price feed aggregation (using coin gecko price sounds very sus, and uniswap TWAP sounds possible to manipulate also if no manual approval required) -</mark>_
+[x] _<mark style="color:blue;">I’d like to know if there is manual approval required to update the emissions, so ultimately is trust placed in team or is trust in the price feed aggregation (using coin gecko price sounds very sus, and uniswap TWAP sounds possible to manipulate also if no manual approval required) -</mark>_
 
 Currently, the whole computation of dynamic emission is done manually by the team.
 
-<figure><img src="../.gitbook/assets/manual emission.png" alt=""><figcaption></figcaption></figure>
+![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/manual%20emission.png)
 
 Moreover, there are emission ranges (guardrails) for every quarter to ensure the adequate emission
 
@@ -155,7 +155,7 @@ Moreover, there are emission ranges (guardrails) for every quarter to ensure the
 >
 > Source: [Archimedes Docs - Dynamic Emission](https://docs.archimedesfi.com/tokenomics-and-ecosystem/arch-dynamic-emissions)
 
-<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/guardrails.png)
 
 Source: [Archimedes Docs - Dynamic Emission](https://docs.archimedesfi.com/tokenomics-and-ecosystem/arch-dynamic-emissions)
 
@@ -180,7 +180,7 @@ The ARCH token allocation is as follows:
 
 Liquidity providers only receive ARCH incentives from Archimedes besides the swap fees provided by Curve.&#x20;
 
-<figure><img src="../.gitbook/assets/discord1.PNG" alt=""><figcaption></figcaption></figure>
+![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/discord1.PNG)
 
 ARCH incentives that are distributed to the liquidity providers are vaguely linked to the fees collected by the protocol treasury from the leverage takers.
 
@@ -226,7 +226,7 @@ By using this strategy, a user can farm almost 9.73x yield with the funds that a
 
 Here is the breakdown of the whole leverage yield investment process:
 
-<figure><img src="../.gitbook/assets/ArchOUSDstrategy_2.png" alt=""><figcaption></figcaption></figure>
+![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/ArchOUSDstrategy_2.png)
 
 * 1: User deposits USDC/USDT/DAI&#x20;
 * 2,3: Swap leverage fee amount to ARCH&#x20;
@@ -274,7 +274,7 @@ OUSD deploys the stablecoins that have been deposited to the OUSD smart contract
 
 Here is the current allocation of funds for yield generation:
 
-![](<../.gitbook/assets/image (2) (1).png>)
+![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/ousd%20strategies.png)
 
 Source: [OUSD Analytics](https://analytics.ousd.com/)
 
@@ -359,7 +359,7 @@ Since all the decisions regarding the leverage rounds are at the team's discreti
 
 If an underlying asset (an asset that backs lvUSD i.e. OUSD or DAI, USDC, USDT) loses its peg Archimedes would lock the user's position till the investments make enough cash to repay the borrowed capital. It is still possible for the leverage taker to close the position but then the collateral would be used to recover the borrowed leverage.&#x20;
 
-<figure><img src="../.gitbook/assets/asset depeg 12.PNG" alt=""><figcaption></figcaption></figure>
+![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/1233.png)
 
 ### Collateral Risk / Underlying Assets Risks
 
@@ -381,7 +381,7 @@ LPs should be aware that entering and exiting the liquidity pool with single-sid
 
 Archimedes can control the pool proportion by providing adequate lvUSD leverage. They intend to keep the pool proportion near 50% for lvUSD at the time of computing leverage rounds.
 
-<figure><img src="../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
+![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/pool%20limit%20for%20leverage.png)
 
 **Inflation**
 
@@ -391,13 +391,13 @@ With dynamic emissions, Archimedes wants the TVL to grow constantly. They are pr
 
 So far, the leverage available per ARCH token is cheaper than the ARCH emitted to sustain the liquidity in the lvUSD/3CRV pool. In other words, the absorption of ARCH tokens (in the form of leverage fees) is lower than that of the emission provided. This creates inflation in the ARCH price and with more and more spread between the absorption and emission, the price of the ARCH token would drop.&#x20;
 
-<figure><img src="../.gitbook/assets/image (1) (3).png" alt=""><figcaption></figcaption></figure>
+![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/dune1.png)
 
 Source:  [Dune Query](https://dune.com/queries/2238660)
 
 There are events that can lead to a subsequent chain of events that would result in a price decline for ARCH tokens.&#x20;
 
-<figure><img src="../.gitbook/assets/image (1) (4).png" alt=""><figcaption></figcaption></figure>
+![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/spiral.png)
 
 When the availability of leverage is less, the inflation on ARCH price will rise. This is possible when the pool ratio is heavily shifted towards lvUSD. At this time protocol will rely on the borrowers to close their position in order to provide further leverage to new leverage takers.
 
@@ -411,9 +411,7 @@ Centralization Factors
 
 1.  Is it possible for a single entity to rug its users?
 
-    Yes, because the protocol controls and owns all the funds invested in the yield strategies. But there is a timelock that might save users if they are active enough.
-
-<figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+    Yes, because the protocol controls and owns all the funds invested in the yield strategies.
 
 2.  If the team vanishes, can the project continue?
 
