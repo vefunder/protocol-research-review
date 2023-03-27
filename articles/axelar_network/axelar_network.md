@@ -26,10 +26,10 @@
 
 ### Relation to Curve
 
-Axelar has put forward two proposals to implement gauges, each designated for a specific pool of axlUSDC tokens:
+Axelar has put forward two successful proposals to implement CRV rewards for gauges, each designated for a specific pool of axlUSDC tokens:
 
-1. The [first proposal](https://gov.curve.fi/t/proposal-to-add-axlusdc-usdc-to-the-gauge-controller/8694) is for the axlUSDC<>USDC pools on multiple chains, including Polygon, Avalanche, Arbitrum, and Fantom, which also serve as primary liquidity venues for axlUSDC on the Axelar network. This proposal seeks approval for a gauge to incentivize USDC and axlUSDC liquidity on Curve, leveraging the already high trading volumes and native yields of axlUSDC pools.
-2. The [second proposal](https://gov.curve.fi/t/proposal-to-add-axlusdc-fraxbp-to-the-gauge-controller/8907) is for the axlUSDC<>FRAXBP pool on Arbitrum, which serves as the primary liquidity venue for axlUSDC on the Axelar network. This proposal seeks approval for a gauge to incentivize USDC, FRAX, and axlUSDC liquidity on Curve, with the support of the FRAX team.
+1. The [first proposal](https://gov.curve.fi/t/proposal-to-add-axlusdc-usdc-to-the-gauge-controller/8694), executed February 2023, was for the axlUSDC<>USDC pools on multiple chains, including Polygon, Avalanche, and Fantom, which serve as primary liquidity venues for axlUSDC on the Axelar network. This proposal sought approval for a gauge to incentivize USDC and axlUSDC liquidity on Curve, leveraging the already high trading volumes and native yields of axlUSDC pools.
+2. The [second proposal](https://gov.curve.fi/t/proposal-to-add-axlusdc-fraxbp-to-the-gauge-controller/8907), executed March 2023, is for the axlUSDC<>FRAXBP pool on Arbitrum, which serves as the primary liquidity venue for axlUSDC on the Axelar network. This proposal seeks approval for a gauge to incentivize USDC, FRAX, and axlUSDC liquidity on Curve, with the support of the FRAX team.
 
 
 
