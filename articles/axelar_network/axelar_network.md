@@ -48,18 +48,18 @@ While the team (according to Linkedin) now has over [50 employees working on Axe
 
 ### Brief Project History 
 
-Several significant events have shaped Axelar's trajectory and contributed to its success, which will be outlined in the following paragraph:
+Several significant events have shaped Axelar's trajectory and contributed to its success:
 
 * **06/2020**: [Axelar Inc.](https://opencorporates.com/companies/ca/12136040) was incorpoated in Canada by Sergey Gorbunov and Georgios Vlachos.
-* **11/2020**: [$3.8M Raise](https://www.coindesk.com/tech/2020/11/13/algorand-linked-axelar-raises-375m-in-seed-funding-to-help-blockchains-communicate/) in a Seed Round from 11 investors, the funding round included participation from Binance X, DCVC (Data Collective), Lemniscap, Divergence Ventures, Waikit Lau, and Naval Ravikant.
-* **06/2021**: Axelar raises [$25 million in a Series A funding round](https://www.coindesk.com/markets/2021/07/15/axelar-raises-25m-in-series-a-fundraising-led-by-polychain-capital) led by Polychain Capital, with participation from Blockchain Capital, Divergence Ventures, and others.
+* **11/2020**: [$3.75M Raise](https://www.coindesk.com/tech/2020/11/13/algorand-linked-axelar-raises-375m-in-seed-funding-to-help-blockchains-communicate/) in a Seed Round from 11 investors, the funding round included participation from Binance X, DCVC (Data Collective), Lemniscap, Divergence Ventures, Waikit Lau, and Naval Ravikant.
+* **06/2021**: Axelar raised [$25 million in a Series A funding round](https://www.coindesk.com/markets/2021/07/15/axelar-raises-25m-in-series-a-fundraising-led-by-polychain-capital) led by Polychain Capital, with participation from Blockchain Capital, Divergence Ventures, and others.
 * **11/2021**: Axelar Network raised an [undisclosed amount of funding in a stratgic round](https://axelar.network/blog/axelar-announces-strategic-investment-from-crypto-com-capital) from 6 investors in a Venture Round, with Crypto.com Capital as the lead investor.
-* **02/2022**: Axelar releases its cross-chain communication protocol suite, tools, and APIs to the public. and raises [$100 million in a Series B funding](https://www.coindesk.com/business/2022/02/15/blockchain-interoperability-network-axelar-raises-25m-at-1b-valuation/) round led by Andreessen Horowitz, with participation from Sequoia Capital, Ribbit Capital, and others. The funding round values the company at $1 billion, making it a unicorn.
+* **02/2022**: Axelar released its cross-chain communication protocol suite, tools, and APIs to the public. It also raised [$35 million in a Series B funding](https://www.coindesk.com/business/2022/02/15/blockchain-interoperability-network-axelar-raises-25m-at-1b-valuation/) round led by Andreessen Horowitz, with participation from Sequoia Capital, Ribbit Capital, and others. The funding round values the company at $1 billion, making it a unicorn.
 * **03/2023**: Launch of [Axelar Virtual Machine](https://www.coindesk.com/tech/2023/02/27/axelar-introduces-virtual-machine-for-developers-building-cross-chain-crypto-apps/), which enables developers to build dApps once and run them on all chains, including EVM, Cairo VM, Cosmos, and other ecosystems.
 
 
 ### Axelar today
-To date, Axelar has facilitated a significant number of cross-chain activities, with a total of 376,547 transactions recorded, including 349,568 asset transfers and 26,979 GMP (general message passing) calls. The total transfer token volume across connected chains amounts to $1,853,069,262. Axelar has connected 34 chains and established 170 cross-chain contracts
+Since its public mainnet launch in [February 2022](https://axelar.network/blog/axelar-begins-rollout-of-public-mainnet-launch-for-february-2022-bringing-decentralized-interoperability-to-ethereum-avalanche-terra-moonbeam-and-others), Axelar has facilitated a significant number of cross-chain activities, with a total of 376,547 transactions recorded, including 349,568 asset transfers and 26,979 GMP (general message passing) calls. The total transfer token volume across connected chains amounts to $1,853,069,262. Axelar has connected 34 chains and established 170 cross-chain contracts
 
 
 |![Supported Networks](https://i.imgur.com/WGWEw9G.png)|
@@ -76,7 +76,7 @@ The total value locked in assets on the Axelar Network is currently $111.8M, wit
 
 ### Exploring Axelar Protocol in more depth: A practical exploration 
 
-To understand the [Axelar and the respective protocol components on a high level](https://axelar.network/blog/an-introduction-to-the-axelar-network), this section will go over a cross-chain general message passing requests initiated by a dApp or a user. A high-level understanding of Axelar is necessary to conceptualise the risk to Curve LPs.
+A high-level understanding of Axelar is necessary to conceptualise the risk to Curve LPs. To understand [Axelar and the respective protocol components](https://axelar.network/blog/an-introduction-to-the-axelar-network), this section will go over a cross-chain general message passing request initiated by a dApp or a user.
 
 |![image alt](https://i.imgur.com/QcMgjtP.jpg "Axelar Technology Stack")|
 |-------|
