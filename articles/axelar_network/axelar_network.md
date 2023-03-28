@@ -82,7 +82,7 @@ A high-level understanding of Axelar is necessary to conceptualise the risk to C
 |-------|
 |[Source: https://axelar.network/blog/an-introduction-to-the-axelar-network]|
 
-**Step 1 - Message request origination:** Axelar's cross-chain messaging process begins when a dApp user interacts with an Axelar Gateway on each connected chain. The Gateway on the source chain processes cross-chain messages, allowing users to call smart contracts on the destination chain and attach data information using Axelar's APIs for cross-chain functionality in their applications.
+**Step 1 - Message request origination:** Axelar's cross-chain messaging process begins when a dApp user interacts with an Axelar Gateway on any connected chain. The Gateway on the source chain processes cross-chain messages, allowing users to call smart contracts on the destination chain and attach data information using Axelar's APIs for cross-chain functionality in their applications.
 
 **Step 2 - Gateways:** The Gateway receives messages from the dApp and sends them into the Axelar network for routing to any connected chain. The Gateway is controlled by a key held jointly by all Axelar validators, and each validator holds multiple key shares based on the amount of AXL tokens staked. Gateways have two main functions: (1) enabling cross-chain message requests on the source chain, (2) executing messages on the destination chain, and completing the cross-chain protocol.
 
