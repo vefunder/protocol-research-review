@@ -125,35 +125,29 @@ Between 11.03 to 14.03.2023 [USDC depegged below $1](https://twitter.com/DefiIgn
 The depeg raised concerns over the trustworthiness of USDC and the risk of contagion from centralized finance (CeFi) on crypto. As a wrapped representation of USDC, axlUSDC is exposed to the risk of the underlying asset in addition to the risks associated with Axelar network itself. 
 
 
-## Risk Vector Censorship 
+## Axelar Ecosystem Health Metrics
 
-### Decentralisation
-Consensys [wrote a research piece](https://consensys.net/research/measuring-blockchain-decentralization/) attempting to quantify decentralisation various in layer 1 ecosystems. Its analysis for Axelar provides some useful metrics.
-
-#### Protocol 
-The protocol level refers in this context to fundamental blockchain protocol that serves as the foundation for a blockchain network. It defines the underlying rules and operations of the network, including how new blocks are created and validated, how transactions are processed, how consensus is reached, and how the network maintains security and integrity.
-
-##### Consensus Algorithm 
-The consensus algorithm is a core part of the protocol layer and refers to a process to achieve agreement among network participants on a single data value or state, even in the presence of faults or malicious behavior by some participants. The following metrics can be used to assess its functioning. 
+Consensys [wrote a research piece](https://consensys.net/research/measuring-blockchain-decentralization/) attempting to quantify decentralisation among various layer 1 ecosystems. Its analysis for Axelar provides some useful metrics.
 
 
-###### Block production
+### Block production
+
 |![Block Production](https://i.imgur.com/gt4N24J.png)|
 |-------|
 |[Source: https://app.metrika.co/axelar/dashboard/network-overview?tr=1M]
 
-The chart displays block production trends on the Axelar Network over the past 30 days. The blue bars represent the number of blocks generated per hour. The network has maintained a stable block production rate of approximately 600 blocks per hour. A decrease in this rate may indicate network congestion. The purple line shows the maximum time it took to produce a block in a given hour, which varied between 6 and 22 seconds during the observed period. The green line represents the average block production time, which remained stable at 6 seconds, in line with the protocol specifications.
+This chart displays block production trends on the Axelar Network over the past 30 days. The blue bars represent the number of blocks generated per hour. The network has maintained a stable block production rate of approximately 600 blocks per hour. A decrease in this rate may indicate network congestion. The purple line shows the maximum time it took to produce a block in a given hour, which varied between 6 and 22 seconds during the observed period. The green line represents the average block production time, which remained stable at 6 seconds, in line with the protocol specifications.
 
 Based on the stable block production rate and relatively consistent average block production time between the observed period, it appears that the consensus on the Axelar Network is stable and operating within the expected parameters.
 
 
-##### Function Call Diversity 
+### Function Call Diversity 
 
 |![](https://i.imgur.com/gVSCVVG.png)|
 |-------|
 |[Source: https://app.metrika.co/axelar/dashboard/network-overview?tr=1M]|
 
-The function call of the events occurring in cross-chain transfers on Axelar can be defined as follows:  
+The function calls of the events occurring in cross-chain transfers on Axelar can be defined as follows:  
 
 * **Link:** The process of linking an Axelar address with an Ethereum Virtual Machine (EVM) address, allowing for the transfer of assets between the two chains.
 * **SignCommands:** The act of signing a command to initiate a cross-chain transfer, verifying the authenticity of the transfer and ensuring that it is authorized.
@@ -164,25 +158,26 @@ The function call of the events occurring in cross-chain transfers on Axelar can
 * **ExecutePendingTransfers:** The execution of the pending transfer on the target chain, completing the cross-chain transfer and transferring the assets to the recipient.
 * **RegisterChainMaintainer:** The registration of a new chain maintainer, is responsible for maintaining and monitoring the cross-chain transfers on a specific chain, ensuring that they are secure and efficient.
 
-The data above shows the count of different event types occurring in cross-chain transfers on the Axelar Network for the past 30 days. The SubmitSignatureRequest event type is the most frequent, occurring close to 1 million times, indicating a high volume of cross-chain transfers. The Link event type occurred 32,185 times, while SignCommands occurred 13,260 times, suggesting that a significant number of users are linking their Axelar addresses with EVM addresses and signing commands to initiate cross-chain transfers. The ConfirmDeposit and CreatePendingTransfers event types occurred 11,772 and 8,168 times, respectively, indicating that the confirmation of deposits and the creation of pending transfers are crucial steps in the cross-chain transfer process. The ConfirmERC20Deposit and ExecutePendingTransfers event types occurred less frequently, suggesting that ERC20 token transfers and the execution of pending transfers are less common than other types of events. Finally, the RegisterChainMaintainer event type occurred only 109 times.
+The data above shows the count of different event types occurring in cross-chain transfers on the Axelar Network for the past 30 days. The SubmitSignatureRequest event type is the most frequent, occurring close to 1 million times. The Link event type occurred 32,185 times, while SignCommands occurred 13,260 times, suggesting that a significant number of users are linking their Axelar addresses with EVM addresses and signing commands to initiate cross-chain transfers. The ConfirmERC20Deposit and ExecutePendingTransfers event types occurred less frequently, suggesting that ERC20 token transfers and the execution of pending transfers are less common than other types of events. Finally, the RegisterChainMaintainer event type occurred only 109 times.
 
 
-[Function call diversity](https://consensys.net/research/measuring-blockchain-decentralization/) refers to the number of different functions that are being called within a software system or application. In the context of an arbitrary message bridge like Axelar, function call diversity is important because it can suggest insights on system robustness, maintainable, and extensible. The data suggests that there is a range of different event types occurring in cross-chain transfers on the Axelar Network. This indicates that the platform is able to support a diverse range of cross-chain transfer scenarios, including linking of addresses, signing of commands, confirmation of deposits, creation of pending transfers, and execution of transfers. Overall, the diversity of event types suggests that the platform is versatile and can accommodate a range of different use cases and applications.
+[Function call diversity](https://consensys.net/research/measuring-blockchain-decentralization/) refers to the number of different functions that are being called within a software system or application. In the context of an arbitrary message bridge like Axelar, function call diversity is important because it can suggest insights on system robustness, maintainability, and extensibility. There are a range of different event types occurring in cross-chain transfers on the Axelar Network. Overall, the diversity of event types suggests that the platform is versatile and can accommodate a range of different use cases and applications.
 
 
-##### Mining/ Stake Diversity & Growth 
+### Mining/Staking Diversity & Growth 
+
 |![Overview of Number of Proposed Blocks by Validator](https://i.imgur.com/F6qOeJd.png)|
 |------|
 |[Source: https://app.metrika.co/axelar/dashboard/network-overview?tr=1M]| 
 
-The chart above displays the number of blocks proposed by a validator on an hourly basis over a one-month period. The chart can be useful in identifying issues related to block production by an individual validator, but it may also provide insight into network-wide issues. For example, a rapid color shift from deep purple to grey would suggest that the validator is now producing significantly fewer blocks over a selected time interval. Censorship of a region or client issues should appear by affected validators significantly losing on block production. 
+The chart above displays the number of blocks proposed by validators on an hourly basis over a one-month period. The chart can be useful in identifying issues related to block production by an individual validator, but it may also provide insight into network-wide issues. For example, a rapid color shift from deep purple to grey would suggest that the validator is now producing significantly fewer blocks over a selected time interval. Censorship of a region or client issues may be apparent if many validators stop producing blocks. 
 
-Overall, the chart provides a clear and stable representation of the number of blocks proposed by the validator over the one-month period, indicating a consistent performance of the validator within the network.
+Overall, the chart shows good network stability (reasonably consistent validator performance) over the one-month period with a healthy propogation of blocks.
 
 
+### Client Diversity
 
-#### Client Diversity
-Client diversity refers to [the variety of blockchain clients](https://consensys.net/research/measuring-blockchain-decentralization/) that are supported by a particular blockchain network. It is important for ensuring decentralization and security in the network, as a diverse range of clients prevents any single client or group of clients from having too much control or influence over the network. In the case of Axelar, its support for a variety of clients including Ethereum, Binance Smart Chain, and Polkadot, among others, increases its ability to connect different blockchain platforms and promote interoperability, making it more accessible and versatile for users.
+Client diversity refers to [the variety of blockchain clients](https://consensys.net/research/measuring-blockchain-decentralization/) that are supported by a particular blockchain network. It is important for ensuring decentralization and security in the network, as a diverse range of clients prevents any single client or group of clients from having too much control or influence over the network. In the case of Axelar, it supports a variety of clients including Ethereum, Binance Smart Chain, and Polkadot, among others, increases its ability to connect different blockchain platforms and promote interoperability, making it more accessible and versatile for users.
 
 
 #### Validator Nodes 
