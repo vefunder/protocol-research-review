@@ -114,7 +114,10 @@ Users can acquire axlUSDC in three ways. First, they can swap it via [liquid pai
 
 #### A Note on USDC
 Between 11.03 to 14.03.2023 [USDC depegged below $1](https://twitter.com/DefiIgnas/status/1635980042294669312) due to the failure of Silicon Valley Bank (SVB), which held $3.3 billion in reserves backing the stablecoin's value. The bank's collapse was due to a bank run amid concerns over its financial health. Coinbase and Binance's decision to stop USDC conversions and the rapid depletion of the Curve 3pool contributed to USDC's depeg. The U.S. government took emergency action to [protect all SVB bank depositors](https://www.npr.org/2023/03/13/1163028329/biden-administration-steps-in-to-save-customers-of-silicon-valley-bank), thereby alleviating panic and ultimately bringing USDC back to its peg.
-![USDC depeg](https://i.imgur.com/LGcEvXI.png)
+
+|![USDC depeg](https://i.imgur.com/LGcEvXI.png)|
+|-------|
+|[Source: https://coinmarketcap.com/currencies/usd-coin/]|
 
 The depeg raised concerns over the trustworthiness of USDC and the risk of contagion from centralized finance (CeFi) on crypto. As a wrapped representation of USDC, axlUSDC is exposed to the risk of the underlying asset in addition to the risks associated with Axelar network itself. 
 
