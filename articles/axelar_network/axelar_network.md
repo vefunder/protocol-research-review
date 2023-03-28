@@ -76,7 +76,7 @@ The total value locked in assets on the Axelar Network is currently $111.8M, wit
 
 ### Exploring Axelar Protocol in more depth: A practical exploration 
 
-A high-level understanding of Axelar is necessary to conceptualise the risk to Curve LPs. To understand [Axelar and the respective protocol components](https://axelar.network/blog/an-introduction-to-the-axelar-network), this section will go over a cross-chain general message passing request initiated by a dApp or a user.
+A high-level understanding of Axelar is necessary to conceptualise the risk to Curve LPs. To understand [Axelar and the respective protocol components](https://axelar.network/blog/an-introduction-to-the-axelar-network), this section will go over a cross-chain general [message passing request](https://docs.axelar.dev/learn/network/flow) initiated by a dApp or a user.
 
 |![image alt](https://i.imgur.com/QcMgjtP.jpg "Axelar Technology Stack")|
 |-------|
@@ -84,7 +84,7 @@ A high-level understanding of Axelar is necessary to conceptualise the risk to C
 
 **Step 1 - Message request origination:** A dApp user initiates a request through the Axelar API on any connected chain. The API allows users to send arbitrary data, including token transfers and smart contract calls, to a specified destination chain.
 
-**Step 2 - Gateways:** Gateways are deployed on each connected chain as a smart contract. The Gateway receives messages from the dApp and sends them into the Axelar network for routing to any connected chain. The Gateway is controlled by a key held jointly by all Axelar validators, using a multiparty cryptography scheme. Each validator holds multiple key shares based on the amount of AXL tokens staked. Gateways have two main functions: (1) enabling cross-chain message requests on the source chain, (2) executing messages on the destination chain.
+**Step 2 - Gateways:** Gateways are deployed on each connected chain as either a smart contract (EVM chains) or an application with logic and ability to communicate with the Axelar network (Cosmos/non-EVM chains). The Gateway receives messages from the dApp and sends them into the Axelar network for routing to any connected chain. The Gateway is controlled by a key held jointly by all Axelar validators, using a multiparty cryptography scheme. Each validator holds multiple key shares based on the amount of AXL tokens staked. Gateways have two main functions: (1) enabling cross-chain message requests on the source chain, (2) executing messages on the destination chain.
 
 **Step 3 - Relayers:** When a Gateway receives a message, it generates an event, which is picked up by a relayer and submitted for processing. Axelar employs relayers to monitor events produced by Gateways on all connected chains. A free relayer service is operated by Axelar, but anyone can permissionlessly participate as a relayer for the network.
 
@@ -98,7 +98,7 @@ A high-level understanding of Axelar is necessary to conceptualise the risk to C
 ## Assets
 
 ### Native token: AXL
-AXL is the native token of Axelar Network. It can be classified primarily as [utility and governance token](https://medium.com/@axelar-foundation/an-overview-of-axl-token-economics-4dc701c9054d) and serves four primary functions: 
+AXL is the native token of Axelar Network. It can be classified primarily as a [utility and governance token](https://medium.com/@axelar-foundation/an-overview-of-axl-token-economics-4dc701c9054d) and serves four primary functions: 
 1. Medium for transaction fees and any other fees for network usage paid by users to the validators
 2. Governance over proposals such as a parameter change or protocol upgrade.
 3. Delegation and validator rewards to secure the network.
@@ -106,21 +106,17 @@ AXL is the native token of Axelar Network. It can be classified primarily as [ut
 
 
 ### axlUSDC
-Axelar's [axlUSDC is a stablecoin that is wrapped to represent USDC](https://axelar.network/blog/what-is-axlusdc-and-how-do-you-get-it) on multiple chains, allowing users to take advantage of the stablecoin's properties on different ecosystems. USDC is a dollar-pegged stablecoin issued by Circle, a US-based company, and is mainly used on the Ethereum blockchain. However, the axlUSDC allows it to be used on multiple blockchain networks.
+Axelar's [axlUSDC is a wrapped representation of USDC](https://axelar.network/blog/what-is-axlusdc-and-how-do-you-get-it) bridged from Ethereum to multiple chains supported by Axelar. It allows users to transact USDC across a multitude of ecosystems. USDC is a dollar-pegged stablecoin issued by Circle, a US-based company, and is mainly used on the Ethereum blockchain. However, the axlUSDC allows it to be used on multiple blockchain networks.
 
-Axelar's cross-chain bridges generate axlUSDC by accepting a deposit of USDC at an Axelar Gateway on the Ethereum network and then minting an equivalent amount of axlUSDC on the destination chain. Every unit of axlUSDC represents a unit of USDC that is locked in an Axelar Gateway on the Ethereum network. In essence, Axelar's dynamic validator set, numbering 70 at the time of writing, secures the axlUSDC.
+Axelar's cross-chain bridges generate axlUSDC by accepting a deposit of USDC at an Axelar Gateway on the Ethereum network and then minting an equivalent amount of axlUSDC on the destination chain. Every unit of axlUSDC represents a unit of USDC that is locked in an Axelar Gateway on the Ethereum network. In essence, Axelar's dynamic validator set, numbering 70 at the time of writing, secures axlUSDC.
 
-Users can acquire axlUSDC in three ways. First, they can swap it via liquid pairs on DEXs that list pairs in axlUSDC, supported by liquidity pools. Second, they can swap it via Squid, a cross-chain liquidity router built on Axelar, which provides liquid cross-chain swaps using axlUSDC as a routing asset. Finally, they can mint it via Satellite, a cross-chain bridge built by Axelar.
+Users can acquire axlUSDC in three ways. First, they can swap it via [liquid pairs on DEXs](https://axelar.network/liquidity-pools) that list pairs in axlUSDC, supported by liquidity pools. Second, they can swap it via [Squid](https://app.squidrouter.com/), a cross-chain liquidity router built on Axelar, which provides liquid cross-chain swaps using axlUSDC as a routing asset. Finally, they can mint it via [Satellite](https://satellite.money/), a cross-chain bridge built by Axelar.
 
-#### A Note of USDC
-Between 11.03 to 14.03.2023 [USDC lost its peg to $1](https://twitter.com/DefiIgnas/status/1635980042294669312) due to the failure of Silicon Valley Bank (SVB), which holds $3.3 billion in reserves backing the stablecoin's value. The bank's collapse was due to a bank run amid concerns over its financial health. Coinbase and Binance's decision to stop USDC conversions and the rapid depletion of the Curve 3pool contributed to USDC's dip with liquidity drying up. Given that Circle, the company issuing USDC, has only a fraction of its reserves stuck in SVB and managed to recover to peg.
+#### A Note on USDC
+Between 11.03 to 14.03.2023 [USDC depegged below $1](https://twitter.com/DefiIgnas/status/1635980042294669312) due to the failure of Silicon Valley Bank (SVB), which held $3.3 billion in reserves backing the stablecoin's value. The bank's collapse was due to a bank run amid concerns over its financial health. Coinbase and Binance's decision to stop USDC conversions and the rapid depletion of the Curve 3pool contributed to USDC's depeg. The U.S. government took emergency action to [protect all SVB bank depositors](https://www.npr.org/2023/03/13/1163028329/biden-administration-steps-in-to-save-customers-of-silicon-valley-bank), thereby alleviating panic and ultimately bringing USDC back to its peg.
 ![USDC depeg](https://i.imgur.com/LGcEvXI.png)
 
-Although the depeg raised concerns over the trustworthiness of USDC and the risk of contagion from centralized finance (CeFi) on crypto, it does not diminish the mechanism design of axlUSDC. The event highlights at best the need for decentralized stablecoins and better stability mechanisms.
-
-
-### FraxBP
-[FraxBP is a base pool token on Curve Finance](https://mirror.xyz/0x290101596c9f85eB7194f6090a8c94fF5AAa32ca/vtNw6EvBjfqsRWi4YgmV6YJgFyU6Qg2Xjbc2_GchF6Q) that serves as an alternative to 3CRV. While 3CRV consists of three stablecoins (DAI, USDC, and USDT), FraxBP only includes two stablecoins: FRAX and USDC. It was deployed on the mainnet in June 2022 as the second base pool token after 3CRV. Like 3CRV, FraxBP is used to provide liquidity for trading pairs involving the stablecoins in the pool on Curve. 
+The depeg raised concerns over the trustworthiness of USDC and the risk of contagion from centralized finance (CeFi) on crypto. As a wrapped representation of USDC, axlUSDC is exposed to the risk of the underlying asset in addition to the risks associated with Axelar network itself. 
 
 
 
