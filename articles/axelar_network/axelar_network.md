@@ -224,11 +224,6 @@ The data above shows the count of different event types occurring in cross-chain
 [Function call diversity](https://consensys.net/research/measuring-blockchain-decentralization/) refers to the number of different functions that are being called within a software system or application. In the context of an arbitrary message bridge like Axelar, function call diversity is important because it can suggest insights on system robustness, maintainability, and extensibility. There are a range of different event types occurring in cross-chain transfers on the Axelar Network. Overall, the diversity of event types suggests that the platform is versatile and can accommodate a range of different use cases and applications.
 
 
-### Client Diversity
-
-Client diversity refers to [the variety of blockchain clients](https://consensys.net/research/measuring-blockchain-decentralization/) that are supported by a particular blockchain network. It is important for ensuring decentralization and security in the network, as a diverse range of clients prevents any single client or group of clients from having too much control or influence over the network. In the case of Axelar, it supports a variety of clients including Ethereum, Binance Smart Chain, and Polkadot, among others, increases its ability to connect different blockchain platforms and promote interoperability, making it more accessible and versatile for users.
-
-
 ### Developer Activity
 
 Weekly [commit and weekly active developer](https://app.artemis.xyz/developers/Axelar%20Network?includeForks=false) are metrics used to measure the productivity and activity of open-source repositories. Weekly commit refers to the number of commits made by developers in a given week. A commit is the smallest unit of work and can vary in size, but is generally a good indicator of developer productivity. Meanwhile, the number of active developers in a week refers to the number of developers who have made at least one commit during that time period. This metric is useful in tracking the level of developer activity and engagement with the project. Both of these metrics are important in understanding the health and progress of open-source projects, as they provide insight into the level of developer involvement and output.
