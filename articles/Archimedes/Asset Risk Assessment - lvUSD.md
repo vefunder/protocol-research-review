@@ -6,13 +6,11 @@
 
 \[WIP]
 
+
 ### Relation to Curve
 
-* [x] _<mark style="color:blue;">Relation to Curve- Before explaining protocol, instead</mark> <mark style="color:blue;"></mark><mark style="color:blue;">**explain pool integration, governance proposal, state of gauge, etc. Specifically info about its relation to Curve**</mark> <mark style="color:blue;"></mark><mark style="color:blue;">(not protocol mechanics)</mark>_
+Archimedes has a [lvUSD/3CRV](https://curve.fi/#/ethereum/pools/factory-v2-268/deposit) pool where LPs can provide liquidity in 3CRV to earn ARCH incentives provided by Archimedes through the Curve gauge. As of publishing time, Archimedes has not approached the Curve community for CRV rewards allocation. In this report we investigate the leverage farming strategy employed by Archimedes and risks posed to holders of lvUSD and Curve LPs.
 
-Archimedes has a lvUSD/3CRV pool where LPs can provide liquidity in 3CRV to earn ARCH incentives provided by Archimedes through Curve gauge. Archimedes mints lvUSD and swaps it for 3CRV to provide leverage to borrowers to farm the predefined yield strategies. Currently, Archimedes has not approached the Curve community for CRV rewards allocation.
-
-Leverage distribution by Archimedes is only possible when they have enough 3CRV liquidity in their lvUSD/3CRV pool.
 
 ## Archimedes Overview
 
