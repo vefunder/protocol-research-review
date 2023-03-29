@@ -11,7 +11,7 @@
 * GitHub: https://github.com/axelarnetwork
 * Audits: https://github.com/axelarnetwork/audits
 * Bug Bounty: [Axelar Network Bug Bounties | Immunefi](https://immunefi.com/bounty/axelarnetwork/)
-#### Learing materials:
+#### Learning materials:
 * Introductory materials: [Article](https://medium.com/axelar/a-technical-introduction-to-the-axelar-network-3c4bf9fe4dc3) | [Video](https://www.youtube.com/watch?v=0-Q1mP2vmGE ) 
 * Whitepaper: https://axelar.network/axelar_whitepaper.pdf 
 * Comparision of AMBs: https://blog.li.fi/navigating-arbitrary-messaging-bridges-a-comparison-framework-8720f302e2aa
@@ -125,9 +125,69 @@ Between 11.03 to 14.03.2023 [USDC depegged below $1](https://twitter.com/DefiIgn
 The depeg raised concerns over the trustworthiness of USDC and the risk of contagion from centralized finance (CeFi) on crypto. As a wrapped representation of USDC, axlUSDC is exposed to the risk of the underlying asset in addition to the risks associated with Axelar network itself. 
 
 
-## Axelar Ecosystem Health Metrics
+## Axelar Ecosystem Health and Risk Metrics
 
 Consensys [wrote a research piece](https://consensys.net/research/measuring-blockchain-decentralization/) attempting to quantify decentralisation among various layer 1 ecosystems. Its analysis for Axelar provides some useful metrics.
+
+
+### Network Usage 
+
+|![Network Usage](https://i.imgur.com/M3xHZnc.png)|
+|----|
+|[Source: https://axelarscan.io/transfers]|
+
+When analyzing the daily transfer and volume statistics of the Axelar Network from January 15, 2022, to February 28, 2023, the impact of Terra Luna becomes quite apparent. The statistics show that the daily transfer and volume on Axelar are now relatively lower by multitudes, which highlights the setback caused by the [Terra UST collapse](https://www.coindesk.com/learn/the-fall-of-terra-a-timeline-of-the-meteoric-rise-and-crash-of-ust-and-luna/). Despite this setback, Axelar has demonstrated resilience and stable growth in terms of daily transfers. This growth is particularly noteworthy considering the timing of the market cycle and is a positive sign for the network's future growth and adoption. 
+
+
+Statistics on the [General Message Passing](https://axelarscan.io/gmp/stats?fromTime=1679309728011) show that after May 2022 (i.e. after the collapse of Luna Terra), the top chain pairs on the Axelar Network are mainly associated with Polygon, followed by BNB Chain, Moonbeam, Fantom, and Avalanche. While Polygon is the most popular, other chains also have a significant presence, as can be seen by the diverse range of destination contracts on the network. The most popular destinations are Polygon, BNB Chain, and Moonbeam, accounting for 21.64%, 16.37%, and 14.04% of the total messages, respectively. These statistics suggest the diversity and versatility of the Axelar Network, with users utilizing a range of chains and contracts for their cross-chain transfers. It will be interesting to track any shifts in the distribution of messages and destination contracts in the future.
+
+|![GENERAL MESSAGE PASSING](https://i.imgur.com/nZkq3nb.png)|
+|-------|
+|*[Source: https://axelarscan.io/gmp/stats]*|
+
+Another indicator suggesting the growth of the network is the Growth of Daily Active Addresses (DAA), which have steadily been growing. Daily active addresses is a common metric used to measure the number of unique addresses that were active on a blockchain network during a given day. 
+
+|![DAA](https://i.imgur.com/ymI48qF.png)|
+|---|
+|[Source: https://app.artemis.xyz/dashboard/axelar]|
+
+
+### Mining/Staking Diversity & Growth 
+
+|![Overview of Number of Proposed Blocks by Validator](https://i.imgur.com/F6qOeJd.png)|
+|------|
+|[Source: https://app.metrika.co/axelar/dashboard/network-overview?tr=1M]| 
+
+The chart above displays the number of blocks proposed by validators on an hourly basis over a one-month period. The chart can be useful in identifying issues related to block production by an individual validator, but it may also provide insight into network-wide issues. For example, a rapid color shift from deep purple to grey would suggest that the validator is now producing significantly fewer blocks over a selected time interval. Censorship of a region or client issues may be apparent if many validators stop producing blocks. 
+
+Overall, the chart shows good network stability (reasonably consistent validator performance) over the one-month period with a healthy propogation of blocks.
+
+
+### Collusion Threshold
+
+The collusion threshold is a key security feature of the Axelar Network that helps to prevent validators from colluding and compromising the integrity of the network. The threshold is determined by the number of validators required to sign off on a block and is set at two-thirds of the total number of validators weighted by stake. 
+
+As of [September 2022 with Meave Upgrade](https://axelar.network/blog/axelar-implements-quadratic-voting-with-maeve-upgrade), the Axelar Network has introduced [quadratic voting](https://vitalik.ca/general/2019/12/07/quadratic.html), which further enhances the security and decentralization of the network. Currently, the network is secured by 70 active validators and the collusion threshold is set at 2/3 of validators quadratically weighted by stake. At the time of writing a successful collusion would require 35 validators to collude to gain a supermajority. The metrics presented should be evaluated in context of this.
+
+
+### Validator Nodes 
+
+|![Geographical Node Distribution](https://i.imgur.com/ZVsOWhv.png)|
+|------|
+|[Source: https://observatory.zone/axelar/validators]|
+
+The Axelar validator set has a total of 90 nodes distributed across different regions. The Americas region has 22 nodes with a stake of 25.72%, while the Europe region has 57 nodes with a stake of 41.90%. The Asia Pacific region has 3 nodes with a stake of 2.24%, and there are 8 nodes with no specified region, accounting for a stake of 30.14%.
+
+Based on [the data provided](https://observatory.zone/axelar/countries), it appears that Europe has the highest concentration of Axelar validators in terms of both nodes and stake, with 57 nodes and a stake of 41.90%. The Americas also have a significant presence with 22 nodes and a stake of 25.72%. Meanwhile, Asia Pacific only has three nodes and a stake of 2.24%, indicating a lower level of participation in the network from that region. This potentially suggests geographical centralisation.
+
+It is important to note that this data only represents the validators that are currently connected and may not reflect the full distribution of validators over time. Additionally, this data does not necessarily provide information on the specific geographic location of the validators within each region, but rather through which country nodes access the network which can be altered by using VPN or routing through a private server.
+
+
+### Internet Service Providers (ISPs)
+
+The [top three Internet Service Providers (ISPs)](https://observatory.zone/axelar/isps) in terms of stake and number of nodes for Axelar are Hetzner Online GmbH, OVH SAS, and Amazon.com, Inc. OVH SAS has the highest stake with 28.01% and 16 nodes, followed by Hetzner Online GmbH with 18.66% and 19 nodes, and Amazon.com, Inc. with 9.69% and 11 nodes.
+
+The concentration of stake and nodes in these top three ISPs represents a centralising force and should be observed with caution. If a large percentage of the network's nodes are controlled by a small number of ISPs, there is a risk of centralisation and potential vulnerabilities. For example, if a majority of the network's nodes are hosted by one or two ISPs, those ISPs could potentially collude to manipulate the network's operations. However, it's important to note that the distribution of nodes and stake across different ISPs can change over time, and Axelar is still a relatively young project. In addition, ISP concentration is not meaningfully deviant from the industry standard.
 
 
 ### Block production
@@ -164,69 +224,12 @@ The data above shows the count of different event types occurring in cross-chain
 [Function call diversity](https://consensys.net/research/measuring-blockchain-decentralization/) refers to the number of different functions that are being called within a software system or application. In the context of an arbitrary message bridge like Axelar, function call diversity is important because it can suggest insights on system robustness, maintainability, and extensibility. There are a range of different event types occurring in cross-chain transfers on the Axelar Network. Overall, the diversity of event types suggests that the platform is versatile and can accommodate a range of different use cases and applications.
 
 
-### Mining/Staking Diversity & Growth 
-
-|![Overview of Number of Proposed Blocks by Validator](https://i.imgur.com/F6qOeJd.png)|
-|------|
-|[Source: https://app.metrika.co/axelar/dashboard/network-overview?tr=1M]| 
-
-The chart above displays the number of blocks proposed by validators on an hourly basis over a one-month period. The chart can be useful in identifying issues related to block production by an individual validator, but it may also provide insight into network-wide issues. For example, a rapid color shift from deep purple to grey would suggest that the validator is now producing significantly fewer blocks over a selected time interval. Censorship of a region or client issues may be apparent if many validators stop producing blocks. 
-
-Overall, the chart shows good network stability (reasonably consistent validator performance) over the one-month period with a healthy propogation of blocks.
-
-
 ### Client Diversity
 
 Client diversity refers to [the variety of blockchain clients](https://consensys.net/research/measuring-blockchain-decentralization/) that are supported by a particular blockchain network. It is important for ensuring decentralization and security in the network, as a diverse range of clients prevents any single client or group of clients from having too much control or influence over the network. In the case of Axelar, it supports a variety of clients including Ethereum, Binance Smart Chain, and Polkadot, among others, increases its ability to connect different blockchain platforms and promote interoperability, making it more accessible and versatile for users.
 
 
-#### Validator Nodes 
-|![Geographical Node Distribution](https://i.imgur.com/ZVsOWhv.png)|
-|------|
-|[Source: https://observatory.zone/axelar/validators]|
-
-The Axelar validator set has a total of 90 nodes distributed across different regions. The Americas region has 22 nodes with a stake of 25.72%, while the Europe region has 57 nodes with a stake of 41.90%. The Asia Pacific region has 3 nodes with a stake of 2.24%, and there are 8 nodes with no specified region, accounting for a stake of 30.14%.
-
-Based on [the data provided](https://observatory.zone/axelar/countries), it appears that Europe has the highest concentration of Axelar validators in terms of both nodes and stake, with 57 nodes and a stake of 41.90%. The Americas also have a significant presence with 22 nodes and a stake of 25.72%. Meanwhile, Asia Pacific only has three nodes and a stake of 2.24%, indicating a lower level of participation in the network from that region. This potentially suggests geographical centralisation.
-
-It is important to note that this data only represents the validators that are currently connected and may not reflect the full distribution of validators over time. Additionally, this data does not necessarily provide information on the specific geographic location of the validators within each region, but rather through which country nodes access the network which can be altered by using VPN or routing through a private server.
-
-#### Internet Service Providers (ISPs)
-The [top three Internet Service Providers (ISPs)](https://observatory.zone/axelar/isps) in terms of stake and number of nodes for Axelar are Hetzner Online GmbH, OVH SAS, and Amazon.com, Inc. Hetzner Online GmbH has the highest stake with 19.94% and 25 nodes, followed by OVH SAS with 25.90% and 16 nodes, and Amazon.com, Inc. with 10.03% and 11 nodes.
-
-The concentration of stake and nodes in these top three ISPs represents a centralising force and should be observed with caution. If a large percentage of the network's nodes are controlled by a small number of ISPs, there is a risk of centralization and potential vulnerabilities. For example, if a majority of the network's nodes are hosted by one or two ISPs, those ISPs could potentially collude to manipulate the network's operations. However, it's important to note that the distribution of nodes and stake across different ISPs can change over time, and Axelar is still a relatively young project. In addition, ISP concentration is not meaningfully deviant from the industry standard.
-
-##### A Note on Collusion 
-The collusion threshold is a key security feature of the Axelar Network that helps to prevent validators from colluding and compromising the integrity of the network. The threshold is determined by the number of validators required to sign off on a block and is set at two-thirds of the total number of validators weighted by stake. 
-
-As of [September 2022 with Meave Upgrade](https://axelar.network/blog/axelar-implements-quadratic-voting-with-maeve-upgrade), the Axelar Network has introduced [quadratic voting](https://vitalik.ca/general/2019/12/07/quadratic.html), which further enhances the security and decentralization of the network. Currently, the network is secured by 70 active validators and the collusion threshold is set at 2/3 of validators quadratically weighted by stake. At the time of writing a successful collusion would require 35 validators to collude to gain a supermajority. The metrics presented should be evaluated in context of this.
-
-#### Ecosystem
-
-An ecosystem refers to the network of interconnected actors and entities that participate in the network and help to create and maintain value within the network.
-
-##### Network Usage 
-|![Network Usage](https://i.imgur.com/M3xHZnc.png)|
-|----|
-|[Source: https://axelarscan.io/transfers]|
-
-When analyzing the daily transfer and volume statistics of the Axelar Network from January 15, 2022, to February 28, 2023, the impact of Terra Luna becomes quite apparent. The statistics show that the daily transfer and volume on Axelar are now relatively lower by multitudes, which highlights the setback caused by Terra. However, despite this setback, Axelar has demonstrated resilience and stable growth in terms of daily transfer. This growth is particularly noteworthy considering the timing of the market cycle and is a positive sign for the network's future growth and adoption. The setback caused by Terra Luna is also visible in the top path in terms of volume and transfer during this timeframe, which are still dominated by the Luna Terra pairs. 
-
-
-Statistics on the [General Message Passing](https://axelarscan.io/gmp/stats?fromTime=1679309728011) show that after May 2022 (i.e. after the collapse of Luna Terra), the top chain pairs on the Axelar Network are mainly associated with Polygon, followed by BNB Chain, Moonbeam, Fantom, and Avalanche. While Polygon is the most popular, other chains also have a significant presence, as can be seen by the diverse range of destination contracts on the network. The most popular destinations are Polygon, BNB Chain, and Moonbeam, accounting for 21.64%, 16.37%, and 14.04% of the total messages, respectively. These statistics suggest the diversity and versatility of the Axelar Network, with users utilizing a range of chains and contracts for their cross-chain transfers. It will be interesting to track any shifts in the distribution of messages and destination contracts in the future.
-
-|![GENERAL MESSAGE PASSING](https://i.imgur.com/nZkq3nb.png)|
-|-------|
-|*[Source: https://axelarscan.io/gmp/stats]*|
-
-Another indicator suggesting the growth of the network is the Growth of Daily Active Addresses (DAA), which have steadily been growing. Daily active addresses is a common metric used to measure the number of unique addresses that were active on a blockchain network during a given day. 
-
-|![DAA](https://i.imgur.com/ymI48qF.png)|
-|---|
-|[Source: https://app.artemis.xyz/dashboard/axelar]|
-
-
-##### Developer Activity
+### Developer Activity
 
 Weekly [commit and weekly active developer](https://app.artemis.xyz/developers/Axelar%20Network?includeForks=false) are metrics used to measure the productivity and activity of open-source repositories. Weekly commit refers to the number of commits made by developers in a given week. A commit is the smallest unit of work and can vary in size, but is generally a good indicator of developer productivity. Meanwhile, the number of active developers in a week refers to the number of developers who have made at least one commit during that time period. This metric is useful in tracking the level of developer activity and engagement with the project. Both of these metrics are important in understanding the health and progress of open-source projects, as they provide insight into the level of developer involvement and output.
 
@@ -236,39 +239,39 @@ Weekly [commit and weekly active developer](https://app.artemis.xyz/developers/A
 
 Axelar has a total of 56 repositories. The weekly commits have decreased by 61.7% in the last month and 59.1% in the last 3 months. The number of weekly active developers has decreased by 30.8% in the last month and 47.1% in the last 3 months. For Squid, representing the "Sub-Ecosystems" in the Figure above, there are 6 repositories and only 2 weekly commits, which represents an 86.7% decrease in the last month and a 33.3% decrease in the last 3 months. The number of weekly active developers has decreased by 75.0% in the last month and 50.0% in the last 3 months.
 
-While the decline seems extreme this is rather in line with other ecosystems which saw similar percentage changes of drawdowns due to the cyclical nature of the crypto markets.  
+While the decline seems extreme, this is rather in line with other ecosystems which saw similar percentage changes of drawdowns due to the cyclical nature of the crypto markets.  
 
 
-### Tokenbased Risks
+### Token-Related Risks
 
-Token-based risk refers to the potential for loss or negative impact on a blockchain network's native token or other tokens within its ecosystem. This type of risk is inherent in any decentralized system that relies on token economics, where tokens serve as a means of value transfer, governance, and incentivization. This section will explore some aspects of token-based risk in Axelar.
+Token-related risk refers to the potential for loss or negative impact on a blockchain network's native token or other tokens within its ecosystem. This type of risk is inherent in any decentralized system that relies on token economics, where tokens serve as a means of value transfer, governance, and incentivization. This section will explore some aspects of token-related risk in Axelar.
 
 #### Initial Token Distribution of $AXL
-The initial token distribution of a token-based project tends to have a degree of stickiness to it. This is particularly true for proof-of-stake systems, where initial token holders have no incentive to redistribute their tokens and promote decentralization since their wealth and staking power are directly correlated.
+The initial token distribution of a project tends to have a degree of stickiness to it. This is particularly true for proof-of-stake systems, where initial token holders have no incentive to redistribute their tokens and promote decentralization since their wealth and staking power are directly correlated.
 
-In the case of Axelar, we can see that approximately 59% of the initial token distribution went towards insiders of the project, such as the company operations, team, and backers, while the remaining 41% was allocated to the community through community programs and sale. This is illustrated in Figure 2, which shows the AXL token allocations at genesis.
+In the case of Axelar, we can see that approximately 59% of the initial token distribution went towards insiders of the project, such as the company operations, team, and backers, while the remaining 41% was allocated to the community through community programs and sale. This is illustrated below, which shows the AXL token allocations at genesis.
 
 
 |![image alt](https://i.imgur.com/YbLzetz.png "AXL token allocations at genesis")| 
 | -------- | 
-| <center>*[Fig 2:  AXL token allocations at genesis](https://medium.com/@axelar-foundation/an-overview-of-axl-token-economics-4dc701c9054d)*</center>| 
+| <center>*[Source: AXL token allocations at genesis](https://medium.com/@axelar-foundation/an-overview-of-axl-token-economics-4dc701c9054d)*</center>| 
 
 
-If we look at the [distribution of bonded validators at the time of the analysis](https://docs.google.com/spreadsheets/d/1VaNHKrsYGoQ0a2hU41gfr105k1UpZ0M7-SO1qsURmF8/edit?usp=sharing), we can see that the total stake ranges from 7.6 million AXEL tokens to 45.7 million AXEL tokens. The voting power of a validator ranges from 1.02% to 6.43%, while the quadratic voting power ranges from 1.32% to 3.32%. The total delegation of validators ranges from 7 to 1,492.
+If we look at the [distribution of bonded validators at the time of the analysis](https://docs.google.com/spreadsheets/d/1VaNHKrsYGoQ0a2hU41gfr105k1UpZ0M7-SO1qsURmF8/edit?usp=sharing), we can see that the total stake ranges from 64 thousand AXL tokens to 45.7 million AXL tokens. The voting power of a validator ranges from .01% to 6.43%, while the quadratic voting power ranges from .12% to 3.32%. The total delegation of validators ranges from 4 to 1,492.
 
 ![](https://i.imgur.com/RM3H6Fd.png)
 
-From the data observed, it appears that the AXEL tokens are relatively well distributed among validators, with no single validator holding an excessively large amount of tokens and therefore voting power. As decentralisation is a property for censorship resistance each LP should evaluate for themselves if they believe this is sufficient decentralization in the context of Axelar use cases. 
+From the data observed, it appears that the AXL tokens are relatively well distributed among validators, with no single validator holding an excessively large amount of tokens and therefore voting power. As decentralisation is a property for censorship resistance, each LP should evaluate for themselves if they believe this is sufficient decentralization in the context of Axelar use cases. 
 
-In addition, progressive decentralization gains believability in the context of Axelar as the Validator concentration improved since the past review by other sources such as this [comparison of Arbitrary messaging bridges by Lifi](https://blog.li.fi/navigating-arbitrary-messaging-bridges-a-comparison-framework-8720f302e2aa).
+In addition, there is evidence of progressive decentralisation, as the Validator concentration has improved since this past review: a [comparison of Arbitrary messaging bridges by Lifi](https://blog.li.fi/navigating-arbitrary-messaging-bridges-a-comparison-framework-8720f302e2aa). 
 
-However, the author of this report cannot conclusively comment on the progression of the current total distribution, as it is difficult to monitor the progression of the token distribution due to the presence on multiple chains and forms (e.g. AXL on Axelar Native Chain, wAXL on multiple external chains).
 
-### Technical Security Risk 
+## Technical Security Risk 
 
 Technical security risk is a critical concern for any blockchain network as it involves potential vulnerabilities in the system's technical infrastructure. In this section, we will examine technical security risks associated with the Axelar network and their potential impact.
 
-#### Contract Architecture Overview
+### Contract Architecture Overview
+
 Axelar provides the main smart contracts for EVM [here](https://github.com/axelarnetwork/axelar-cgp-solidity).
 
 **Interfaces:**
@@ -300,7 +303,7 @@ c. DepositHandler.sol
 d. AxelarDepositService.sol
 e. AxelarGasService.sol
 
-##### Arichtectual Overview description 
+
 - IAxelarGateway.sol, IERC20.sol, IERC20BurnFrom.sol, and IAxelarExecutable.sol are interfaces that define the required functions for the respective contracts implementing them.
 - Ownable.sol provides ownership functionality to contracts that inherit from it.
 - EternalStorage.sol serves as a storage contract for the proxy.
@@ -316,10 +319,11 @@ e. AxelarGasService.sol
 - [AxelarGasService.sol](https://etherscan.io/address/0x2d5d7d31F671F86C782533cc367F14109a082712#code) is a contract that handles cross-chain gas payments. It accepts payments for covering gas costs on the destination chain. Gas payments should occur with the same parameters right before calling callContract or callContractWithToken on the gateway. 
 
 
-#### Smart Contract Ownership 
-Smart Contract Ownership refers to the control over the smart contract code and its execution. In this section, we will discuss the risks associated with smart contract ownership and how they can be mitigated to ensure the security of the network. 
+### Access Control 
 
-##### AxelarGatewayProxyMultisig.sol
+Access control refers to the control over the smart contract code and its execution. In this section, we will discuss the risks associated with smart contract ownership and how they can be mitigated to ensure the security of the network. 
+
+#### AxelarGatewayProxyMultisig.sol
 AxelarGatewayProxyMultisig.sol is the central contract of the Axelar network and is owned by a multisignature scheme that is implemented in AdminMultisigBase.sol. This scheme allows multiple addresses to collectively own and control the contract. The contract coordinates various library contracts such as AxelarGateway.sol, AxelarGatewayProxy.sol, and AxelarAuthWeighted.sol. Additionally, it integrates with other library contracts to provide additional functionalities, such as cross-chain gas payments, token deployment, and signature authentication checks.
 
 At present (i.e. epoch 3) the [admin threshold is set to 4](https://etherscan.io/address/0x4F4495243837681061C4743b74B3eEdf548D56A5#readProxyContract#F2) out of 8 addresses. The owner addresses are listed below: 
@@ -337,18 +341,16 @@ At present (i.e. epoch 3) the [admin threshold is set to 4](https://etherscan.io
 | 0x30932Ac1f0477Fbd63E4c5Be1928f367A58A45A1 |
 
 
-In practical terms, this means that the upgrading of contracts is subject to 4 out of 8 Multisig signers. Axelar plans to take further steps in decentralizing the network by having the validator set jointly approve smart contract upgrades. This is a crucial step in achieving a higher level of decentralization and eliminating the need for a governed multisig. The result will be a more decentralized network, offering greater transparency and security to users. Ultimately, Axelar aims to create a fully autonomous network that operates without any central authority or governing body.
+**In practical terms, this means that the upgrading of contracts is subject to 4 out of 8 Multisig signers.** Axelar plans to take further steps in decentralising the network by having the validator set jointly approve smart contract upgrades. This is a crucial step in achieving a higher level of decentralisation and eliminating the need for a governed multisig. The result will be a more decentralised network, offering greater transparency and security to users. Ultimately, Axelar aims to create a fully autonomous network that operates without any central authority or governing body.
 
-##### AxelarAuthWeighted.sol
-
+#### AxelarAuthWeighted.sol
 [AxelarAuthWeighted.sol](https://etherscan.io/address/0x228b92510130ec2E09C6d5645039c8cB834aD42d#code) is a core contract used by the Axelar network's gateway for verifying messages. It is a weighted multisig authentication contract that allows for multiple signers with different weights to approve a message. The contract is owned by AxelarGatewayProxyMultisig.sol, which is set during contract deployment.
 
 |![AxelarAuthWeighted.sol](https://i.imgur.com/cucphk1.png)|
 |---|
 |[Source:https://etherscan.io/address/0x228b92510130ec2E09C6d5645039c8cB834aD42d#readContract#F4]|
 
-##### TokenDeployer.sol
-
+#### TokenDeployer.sol
 TokenDeployer.sol is a core contract of the Axelar network responsible for deploying BurnableMintableCappedERC20 tokens. The contract is owned by the Axelar Token Deployer, which is set as the initial owner in the constructor function of the Ownable contract. 
 |![TokenDeployer.sol](https://i.imgur.com/LC3di4t.png)|
 |--|
@@ -361,16 +363,17 @@ The onlyOwner modifier ensures that only the contract owner can call certain fun
 |[Source: https://etherscan.io/address/0xe88Ab68Cd69e92294FcC3BBBD894Fb183197fA39#events]|
 
 
-##### AxelarGasService.sol
+#### AxelarGasService.sol
+AxelarGasService.sol is a core contract in the Axelar network that handles cross-chain gas payments. It is [owned by an EOA](https://etherscan.io/address/0x2d5d7d31F671F86C782533cc367F14109a082712#readProxyContract#F4), which can upgrade the contract.
 
-AxelarGasService.sol is a core contract in the Axelar network that handles cross-chain gas payments. It is [owned by an EOA](https://etherscan.io/address/0x2d5d7d31F671F86C782533cc367F14109a082712#readProxyContract#F4). In addition, AxelarGasService.sol uses an [EOA as the gasCollector](https://etherscan.io/address/0x2d5d7d31F671F86C782533cc367F14109a082712#readProxyContract#F2), which is responsible for collecting cross-chain gas fees from users and distributing them to validators who provide gas on the other side of the chain. 
+In addition, AxelarGasService.sol uses an [EOA as the gasCollector](https://etherscan.io/address/0x2d5d7d31F671F86C782533cc367F14109a082712#readProxyContract#F2), which is responsible for collecting cross-chain gas fees from users and distributing them to validators who provide gas on the other side of the chain. 
 
 |<center>![AxelarGasService.sol](https://i.imgur.com/U64iCbP.png)</center>|
 |---|
 |[Source: https://etherscan.io/address/0x2d5d7d31F671F86C782533cc367F14109a082712#readProxyContract]|
 
 
-#### Smart Contract Audit Review 
+### Smart Contract Audit Review 
 
 Axelar protocol's smart contracts have been deployed [to multiple testnets for various networks](https://docs.axelar.dev/dev/reference/testnet-contract-addresses), which indicates a commitment to testing and validation. Moreover, the Axelar network has [conducted several audits on its tech stack](https://github.com/axelarnetwork/audits), including their cryptographic library, smart contracts, frontend, and backend code. The audits were conducted by various auditors, such as Cure53, Certik, Oak Security, and NCC, and covered different components of the Axelar protocol. The audits were conducted in different phases, with some being ongoing to ensure that any changes made to the code are reviewed for security. These audits provide strong evidence that the Axelar protocol is adequately audited and secure.
 
