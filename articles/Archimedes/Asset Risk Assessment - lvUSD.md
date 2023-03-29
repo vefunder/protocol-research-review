@@ -22,24 +22,23 @@ Archimedes has a [lvUSD/3CRV](https://curve.fi/#/ethereum/pools/factory-v2-268/d
 * [Github](https://github.com/thisisarchimedes/Archimedes\_Finance)
 * Important [contracts](https://docs.archimedesfi.com/technical-documentation/contract-addresses)
 * lvUSD/3CRV [Curve pool](https://curve.fi/#/ethereum/pools/factory-v2-268/deposit)
-* Here you will find all of our published Audit reports:
+* Audit Reports:
   * [Smart Contract -Security Audit](https://github.com/thisisarchimedes/Archimedes\_Finance/blob/main/audit/Archimedes\_Finance\_Smart\_Contract\_Security\_Audit\_Report\_Halborn\_Final.pdf) - Nov 2022
   * [Auctions - Security Audit](https://github.com/thisisarchimedes/Archimedes\_Finance/blob/main/audit/Archimedes\_Finance\_Auctions\_Smart\_Contract\_Security\_Audit\_Report\_Halborn\_Final.pdf) - Dec 2022
   * [Zapper - Security Audit](https://github.com/thisisarchimedes/Archimedes\_Finance/blob/main/audit/Archimedes\_Finance\_Zapper\_Smart\_Contract\_Security\_Audit\_Report\_Halborn\_Final.pdf) - Jan 2023
 
-### Product-market fit exploration
 
-* [x] _<mark style="color:blue;">what problem Archimedes identifies and more completely explain</mark>_&#x20;
+### Product-Market Fit Exploration
 
-Archimedes believes that over 95% of the yield on Curve does not come from transaction volume. Meaning 95% of the value being generated is not due to capital being utilized, yet still, liquidity providers are being rewarded handsomely for their money essentially sitting there. Archimedes wants to utilize this idle liquidity.
+Archimedes believes liquidity providers on Curve generally have a suboptimal experience because CRV emissions make up the vast majority of APY and consequently LPs tend to experience high volatility in pool returns as many pools compete for a fixed amount of emissions. 
 
 > We believe that CRV emissions are capping Curve's ability to scale. And we all want to see a stablecoin Curve pool that supports large investments without materially impacting the pool’s APY. Ideally, this pool provides relatively good yield, generated from real economic activity.
 >
 > Source: [Archimedes Docs - Motivation](https://docs.archimedesfi.com/tokenomics-and-ecosystem/motivation)
 
-Fluctuating APYs between projects and pools has forced users to switch between pools to get better yields consistently. As network fees continue to increase, the game has become dominated by whales and left the little farmer on the sidelines.
+Fluctuating APYs between pools has forced users to switch between pools to get better yields consistently. As network fees continue to increase, the game has become dominated by whales to the detriment of smaller LPs.
 
-Archimedes want to build a stablecoin pool where they provide yields that resulted from the economic utility (real yields) for the liquidity providers while also unlocking the idle liquidity in the liquidity pools for the leverage takers to farm the best yield strategies.
+Archimedes wants to build a strategy that makes use of Curve's stableswap pool, along with its own dynamic incentive mechanism, to offer consistently superior returns to its LPS. The startegy involves protocol-owned liquidity, which gives Archimedes control of the pool's behavior, allowing it to offer its customers (leverage takers, or LTs) access to attractive yield strategies.
 
 #### Solution
 
