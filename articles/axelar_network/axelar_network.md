@@ -375,7 +375,7 @@ In addition, AxelarGasService.sol uses an [EOA as the gasCollector](https://ethe
 
 ### Smart Contract Audit Review 
 
-Axelar protocol's smart contracts have been deployed [to multiple testnets for various networks](https://docs.axelar.dev/dev/reference/testnet-contract-addresses), which indicates a commitment to testing and validation. Moreover, the Axelar network has [conducted several audits on its tech stack](https://github.com/axelarnetwork/audits), including their cryptographic library, smart contracts, frontend, and backend code. The audits were conducted by various auditors, such as Cure53, Certik, Oak Security, and NCC, and covered different components of the Axelar protocol. The audits were conducted in different phases, with some being ongoing to ensure that any changes made to the code are reviewed for security. These audits provide strong evidence that the Axelar protocol is adequately audited and secure.
+Axelar protocol's smart contracts have been deployed [to multiple testnets for various networks](https://docs.axelar.dev/dev/reference/testnet-contract-addresses), which indicates a commitment to testing and validation. Moreover, the Axelar network has [conducted several audits on its tech stack](https://github.com/axelarnetwork/audits), including their cryptographic library, smart contracts, frontend, and backend code. The audits were conducted by various auditors, such as Cure53, Certik, Oak Security, and NCC, and covered different components of the Axelar protocol. The audits were conducted in different phases, with some ongoing to ensure that any changes made to the code are reviewed for security. These audits provide strong evidence that the Axelar protocol is adequately audited and secure.
 
 On a high level the findings can be summarised as: 
 
@@ -383,37 +383,34 @@ On a high level the findings can be summarised as:
 |-----|
 |[Source: https://docs.google.com/spreadsheets/d/1VaNHKrsYGoQ0a2hU41gfr105k1UpZ0M7-SO1qsURmF8/edit?usp=sharing]|
 
-The rest of this section will review issues the latest audit report for each repository. Only the issues that put user funds at risk and have not been resolved or where it is unclear if it has been resolved will be listed here.
-
+The rest of this section will review issues found in the latest audit report for each repository. Only the issues that put user funds at risk and have not been resolved (or where it is unclear if it has been resolved) will be listed here.
 
 
 #### Repository | axelar-utils-solidity
 
-###### Ackee Blockchain |2022-08| H1: The forecall and forecallWithToken can be called repeatedly with the same payload
+> ###### Ackee Blockchain |2022-08| H1: The forecall and forecallWithToken can be called repeatedly with the same payload
+> The AxelarForecallable contract has been found to have a high severity issue where the forecall function can be called repeatedly with the same payload. As a result, the check preventing double execution can be bypassed, which can be performed by anyone at any time since forecall is a publicly-accessible function. This can lead to the activation of the payload repeatedly, causing undefined consequences for the system. For instance, an attacker could call the forecall function with the forecaller address set to zeroaddress and execute a specific payload repeatedly. The recommendation is to add a zero-address check for the forecaller address in both functions (forecall and forecallWithToken) to prevent the issue. It is worth noting that the team believes that double execution should not cause any critical scenario. From the audit is unclear if this issue has been resolved. Investigation of the repository has led to this contract being completely removed from the main branch, suggesting the contract is no longer needed or has been absorbed into other contracts. 
 
-The AxelarForecallable contract has been found to have a high severity issue where the forecall function can be called repeatedly with the same payload. As a result, the check preventing double execution can be bypassed, which can be performed by anyone at any time since forecall is a publicly-accessible function. This can lead to the activation of the payload repeatedly, causing undefined consequences for the system. For instance, an attacker could call the forecall function with the forecaller address set to zeroaddress and execute a specific payload repeatedly. The recommendation is to add a zero-address check for the forecaller address in both functions (forecall and forecallWithToken) to prevent the issue. It is worth noting that the team believes that double execution should not cause any critical scenario. From the audit is unclear if this issue has been resolved. Investigation of the repository has led to this contract being completely removed from the main branch, suggesting the contract is no longer needed or has been absorbed into other contracts. 
 
 #### Repository | axelar-cgp-solidity
 
-
-###### Chaintroopers |2022-08| C1.1/C1.2: No upper bound and lower bound in one operator's weight at "AxelarAuthWeighted.sol"
-
-The AxelarAuthWeighted.sol contract has a medium severity rating due to the absence of a lower bound and higher bound for the new threshold provided for a set of operators at the "_transferOwnership" function. 
-
-The impact of the absence of an upper bound for the provided weight for an operator, which could allow a malicious operator to take over admin privileges. The impact of the absence of a lower bound for the provided new threshold for a set of operators, which could allow a malicious operator to compromise the gateway by taking over admin privileges. It is recommended by Chaintroopers to validate that the new threshold is at least greater than the maximum weight provided for one of the operators to mitigate this risk. 
+> ###### Chaintroopers |2022-08| C1.1/C1.2: No upper bound and lower bound in one operator's weight at "AxelarAuthWeighted.sol"
+> The AxelarAuthWeighted.sol contract has a medium severity rating due to the absence of a lower bound and higher bound for the new threshold provided for a set of operators at the "_transferOwnership" function. 
+>
+> The impact of the absence of an upper bound for the provided weight for an operator, which could allow a malicious operator to take over admin privileges. The impact of the absence of a lower bound for the provided new threshold for a set of operators, which could allow a malicious operator to compromise the gateway by taking over admin privileges. It is recommended by Chaintroopers to validate that the new threshold is at least greater than the maximum weight provided for one of the operators to mitigate this risk. 
 
 
 |![](https://i.imgur.com/oI7UeOp.png)|
 |--|
 |[Source: https://etherscan.io/address/0x228b92510130ec2E09C6d5645039c8cB834aD42d#code]|
 
-When verifiying the high-lighted code snipped in the audit against the [deployed smart contract](https://etherscan.io/address/0x228b92510130ec2E09C6d5645039c8cB834aD42d#code). No changes can be observed, suggesting this issue not resolved.
+When verifiying the highlighted code snippet in the audit against the [deployed smart contract](https://etherscan.io/address/0x228b92510130ec2E09C6d5645039c8cB834aD42d#code). No changes can be observed, suggesting this issue has not been resolved.
 
-###### Chaintroopers |2022-08| C2.5Insecure error handling of zero addresses at "ReceiverImplementation.sol" and at "DepositReceiver.sol"
 
-The contracts "ReceiverImplementation.sol" and "DepositReceiver.sol" contain insecure error handling for zero addresses. When the provided "refundAddress" is zero, the contracts replace it with "msg.sender". This can lead to incoming funds being transferred to a contract that may not be designed to handle them, potentially resulting in a lock-up of the incoming funds. The recommendation is to verify that the address is not the zero address and then revert the transaction if it is. The issue is marked as LOW, as the external functionalities are mainly designed to be used by the upgradable AxelarDepositService.
+> ###### Chaintroopers |2022-08| C2.5: Insecure error handling of zero addresses at "ReceiverImplementation.sol" and at "DepositReceiver.sol"
+> The contracts "ReceiverImplementation.sol" and "DepositReceiver.sol" contain insecure error handling for zero addresses. When the provided "refundAddress" is zero, the contracts replace it with "msg.sender". This can lead to incoming funds being transferred to a contract that may not be designed to handle them, potentially resulting in a lock-up of the incoming funds. The recommendation is to verify that the address is not the zero address and then revert the transaction if it is. The issue is marked as LOW, as the external functionalities are mainly designed to be used by the upgradable AxelarDepositService.
 
-An [example from the DepositReceiver.sol](https://github.com/axelarnetwork/axelar-cgp-solidity/blob/main/contracts/deposit-service/DepositReceiver.sol) suggest that the issue still exist.
+An [example from the DepositReceiver.sol](https://github.com/axelarnetwork/axelar-cgp-solidity/blob/main/contracts/deposit-service/DepositReceiver.sol) suggest that the issue still exists.
 
 
 |![](https://i.imgur.com/sczubTp.png)|
@@ -423,71 +420,66 @@ An [example from the DepositReceiver.sol](https://github.com/axelarnetwork/axela
 It should be noted [the contract presuably containing](https://etherscan.io/address/0xd883C8bA523253c93d97b6C7a5087a7B5ff23d79#code) the "DepositReceiver.sol" as libary contract is unverfied on etherscan, meaning an on-chain verification was not possible.
 
 
-
 #### Repository | axelar-cgp-solidity, axelar-xc20-wrapper
 
-###### Code4rena Contest |2022-07| M-6 : Add cancel and refund option for Transaction Recovery
-
-The AxelarGateway.sol and AxelarGasService.sol contracts lack an option to cancel and refund transactions that have failed or are stuck, which can potentially result in the loss of user funds. The recommendation is to include a cancel option and enable users to receive gas refunds. While Axelar Network acknowledged the issue, they disagreed with the severity, asserting that it is up to cross-chain app developers to implement refund and cancel methods as they are application-specific. The Code4rena Judge rated the issue as of medium severity due to its risk to end-users and the absence of a refund mechanism. Both the sponsor and judge advised end-users to form their own opinion.
+> ###### Code4rena Contest |2022-07| M-6 : Add cancel and refund option for Transaction Recovery
+> The AxelarGateway.sol and AxelarGasService.sol contracts lack an option to cancel and refund transactions that have failed or are stuck, which can potentially result in the loss of user funds. The recommendation is to include a cancel option and enable users to receive gas refunds. While Axelar Network acknowledged the issue, they disagreed with the severity, asserting that it is up to cross-chain app developers to implement refund and cancel methods as they are application-specific. The Code4rena Judge rated the issue as of medium severity due to its risk to end-users and the absence of a refund mechanism. Both the sponsor and judge advised end-users to form their own opinion.
 
 #### Repository | axelar-core, axelar-cgp-solidity, axelar-web-app
 
-###### Cure53 |2022-04| AXE-02-016 WP1: Potential Cosmos consensus stall via panic 
-This issue is a Medium severity vulnerability and involves the EndBlocker handlers of two modules, x/tss and x/reward, which can trigger panic() calls that could potentially cause the Cosmos network to slow down or even halt. Panic() calls are a mechanism in Go that halts the execution of a program when an unexpected error or state is encountered. If an attacker were to trigger these panic() calls remotely, they could exploit this vulnerability to create a Denial-of-Service scenario on the network. To mitigate this issue, it is recommended to integrate recovery logic to all Cosmos module EndBlocker handlers to prevent the chain stall.
+> ###### Cure53 |2022-04| AXE-02-016 WP1: Potential Cosmos consensus stall via panic 
+> This issue is a Medium severity vulnerability and involves the EndBlocker handlers of two modules, x/tss and x/reward, which can trigger panic() calls that could potentially cause the Cosmos network to slow down or even halt. Panic() calls are a mechanism in Go that halts the execution of a program when an unexpected error or state is encountered. If an attacker were to trigger these panic() calls remotely, they could exploit this vulnerability to create a Denial-of-Service scenario on the network. To mitigate this issue, it is recommended to integrate recovery logic to all Cosmos module EndBlocker handlers to prevent the chain stall.
 
-Based on abci.go files in [x/tss](https://github.com/axelarnetwork/axelar-core/blob/main/x/tss/abci.go) and [x/reward](https://github.com/axelarnetwork/axelar-core/blob/main/x/reward/abci.go) modules in the axelar-core repository, the issue has not been fixed yet. It should be noted that this may have been addressed else where in the archtiecture. 
+Based on abci.go files in [x/tss](https://github.com/axelarnetwork/axelar-core/blob/main/x/tss/abci.go) and [x/reward](https://github.com/axelarnetwork/axelar-core/blob/main/x/reward/abci.go) modules in the axelar-core repository, the issue has not been fixed yet. It should be noted that this may have been addressed else where in the architecture. 
 
-####  Repository | axelar-core, axelar-cgp-solidity, tofn, tofnd, axelarjs-sdk
+#### Repository | axelar-core, axelar-cgp-solidity, tofn, tofnd, axelarjs-sdk
 
-###### Cure53 |2021-12| AXE-01-006 WP1: Insufficient in-memory protection of secret values (Info) & AXE-01-007 WP1: Leakage of secrets via crypto libraries (Low)
-
-AXE-01-006 and AXE-01-007 are security vulnerabilities discovered in the tofnd-main and tofn repositories. AXE-01-006 concerns the insufficient in-memory protection of secret values, where the mechanism to safely store the password and other secret values in memory only ensures that the memory is zeroed when the affected variables persist out of scope, and thus may result in secrets persisting in memory and leaking to persistent storage. AXE-01-007 concerns the leakage of secrets via crypto libraries, where third-party libraries that do not diligently zeroize secrets handed over to them can lead to leakage, such as in the HMAC implementation in tofn-main/src/crypto_tools/rng.rs, where secret_recovery_key leaks via the Hmac type when the length of the key is less or equal to the output size of the hash function. It is recommended to ensure that all code, including library code, wipes secrets after usage and consider potential scenarios that could incur leakage from memory.
+> ###### Cure53 |2021-12| AXE-01-006 WP1: Insufficient in-memory protection of secret values (Info) & AXE-01-007 WP1: Leakage of secrets via crypto libraries (Low)
+> AXE-01-006 and AXE-01-007 are security vulnerabilities discovered in the tofnd-main and tofn repositories. AXE-01-006 concerns the insufficient in-memory protection of secret values, where the mechanism to safely store the password and other secret values in memory only ensures that the memory is zeroed when the affected variables persist out of scope, and thus may result in secrets persisting in memory and leaking to persistent storage. AXE-01-007 concerns the leakage of secrets via crypto libraries, where third-party libraries that do not diligently zeroize secrets handed over to them can lead to leakage, such as in the HMAC implementation in tofn-main/src/crypto_tools/rng.rs, where secret_recovery_key leaks via the Hmac type when the length of the key is less or equal to the output size of the hash function. It is recommended to ensure that all code, including library code, wipes secrets after usage and consider potential scenarios that could incur leakage from memory.
 
 It seems that the problems regarding AXE-01-006 and AXE-01-007 have not been addressed, considering that the [latest commit dates back to 09-2021](https://github.com/axelarnetwork/tofnd/commits/main/src/encrypted_sled/password.rs) and the audit report, which commenced in 12-2021 ([as indicated in the audit table](https://github.com/axelarnetwork/audits)) and concluded in 01-2022 ([as stated in the report footer](https://github.com/axelarnetwork/audits/blob/main/audits/2021-12%20Cure53.pdf))
 
 
-##### Cure53 |2021-12| AXE-01-009 WP2: Mnemonic compromise constitutes single point of failure (Medium)
-
-The use of a BIP39-mnemonic to generate entropy of 256 bits is a single point of failure and constitutes a medium level risk. This is because an attacker with knowledge of the secret mnemonic would be able to regenerate all previously generated keypairs, as they are all derived from the same seed. This design issue fails to achieve forward secrecy, and compromises the security of all generated keys and associated operations. However, the severity of this issue is mitigated by the requirement for consensus among multiple nodes in the Axelar network, making it difficult for an attacker to achieve tangible harm without compromising the mnemonic of enough nodes to achieve voting power. The affected file is tofnd-main/src/multisig/keygen.rs, where the same mnemonic entropy is used to generate key pairs.
+> ###### Cure53 |2021-12| AXE-01-009 WP2: Mnemonic compromise constitutes single point of failure (Medium)
+> The use of a BIP39-mnemonic to generate entropy of 256 bits is a single point of failure and constitutes a medium level risk. This is because an attacker with knowledge of the secret mnemonic would be able to regenerate all previously generated keypairs, as they are all derived from the same seed. This design issue fails to achieve forward secrecy, and compromises the security of all generated keys and associated operations. However, the severity of this issue is mitigated by the requirement for consensus among multiple nodes in the Axelar network, making it difficult for an attacker to achieve tangible harm without compromising the mnemonic of enough nodes to achieve voting power. The affected file is tofnd-main/src/multisig/keygen.rs, where the same mnemonic entropy is used to generate key pairs.
 
 Similar to AXE-01-006 and AXE-01-007, it seems that the problems regarding AXE-01-009 have not been addressed, considering that the [latest commit dates back to the end of 11-2021](https://github.com/axelarnetwork/tofnd/commits/main/src/multisig/keygen.rs) and the audit report, which commenced in 12-2021 ([as indicated in the audit table](https://github.com/axelarnetwork/audits)) and concluded in 01-2022 ([as stated in the report footer](https://github.com/axelarnetwork/audits/blob/main/audits/2021-12%20Cure53.pdf)). This issue should be read in mind with the validator and the threshold level of 35 validators. 
 
 
-#### Axelar's Bug Bounty Program
+### Axelar's Bug Bounty Program
 
 [Axelar Immunefi bounty program](https://immunefi.com/bounty/axelarnetwork/) offers rewards ranging from USD $1,000 to a maximum of USD $2,250,000 for critical vulnerabilities, with separate payouts for different threat levels and severity classifications. The program also requires proof of concept for critical blockchain and smart contract bug reports, which is standard practice for most bug bounty programs. Additionally, the program specifies the assets in scope and provides a detailed explanation of the type of vulnerabilities they are looking for, making it easier for bounty hunters to identify potential security issues. However, the program requires KYC for all bug bounty hunters submitting a report, which may be a deterrent for some researchers. Axelar Network's bug bounty program seems to offer reasonable rewards for identifying critical vulnerabilities. This adds additional confidence to the technical robustness of the Axelar Network.
 
-#### A Note on Documentation 
+### Documentation 
 
-[Axelar's smart contracts](https://github.com/axelarnetwork/axelar-cgp-solidity) are generally easy to find, but it can be challenging to locate all deployed contracts through the Gitbook Documentation. For example, to find the authentication module, I had to go through the AxelarGatewayProxyMultisig contract. It would be more transparent if all contracts were listed in the Gitbook documentation. Axelar has the [contracts deployments available on Github ](https://github.com/axelarnetwork/axelar-cgp-solidity/blob/3e7d6751a3016e4694b1ce643f11530442731e09/info/mainnet.json). Overall, the code documentation is comprehensive and includes a whitepaper, a flow chart within the whitepaper that documents the software architecture, and well-documented source code available on GitHub. Additionally, it is possible to trace the documented software to its implementation in the protocol's source code and development history (e.g. versioning, commits) available.
+[Axelar's smart contracts](https://github.com/axelarnetwork/axelar-cgp-solidity) are generally easy to find, but it can be challenging to locate all deployed contracts through the Gitbook Documentation. For example, to find the authentication module, we had to go through the AxelarGatewayProxyMultisig contract. It would be more transparent if all contracts were listed in the Gitbook documentation. Axelar has the [contract deployments available on Github ](https://github.com/axelarnetwork/axelar-cgp-solidity/blob/3e7d6751a3016e4694b1ce643f11530442731e09/info/mainnet.json). Overall, the code documentation is comprehensive and includes a whitepaper, a flow chart within the whitepaper that documents the software architecture, and well-documented source code available on GitHub. Additionally, it is possible to trace the documented software to its implementation in the protocol's source code and development history (e.g. versioning, commits).
 
-#### Broader Techical Risk of Arbitary Messaging Bridges (AMBs)
+### Broader Techical Risk of Arbitary Messaging Bridges (AMBs)
 
-Axelar may experience [liveness issues if validators opt to support only certain chains](https://blog.li.fi/navigating-arbitrary-messaging-bridges-a-comparison-framework-8720f302e2aa). For a new chain to be incorporated, it must receive support from 60% of the validators, based on their quadratic voting power, to run a node for that particular chain. Despite the fact that validators have the option to maintain a specific EVM chain, the majority vote threshold remains at 60% of the quadratic voting power of the total validator set. Therefore, if an EVM chain fails to attract enough supporting validators, it may only affect liveness, not security. Furthermore, on-chain governance can increase these thresholds.
+Axelar may experience [liveness issues if validators opt to support only certain chains](https://blog.li.fi/navigating-arbitrary-messaging-bridges-a-comparison-framework-8720f302e2aa). For a new chain to be incorporated, it must receive support from 60% of the validators, based on their quadratic voting power, to run a node for that particular chain. Despite the fact that validators have the option to maintain a specific EVM chain, the majority vote threshold remains at 60% of the quadratic voting power of the total validator set. Therefore, if an EVM chain fails to attract enough supporting validators, it may affect liveness, but not security. Furthermore, on-chain governance can increase these thresholds.
 
 #### A Note on Relayer Services
 Axelar runs relayer services which observe all connected chains, and these relayers will pick up the event and submit it to the Axelar network for processing. These relayer services are a free, operational convenience Axelar provides, and can be run by anyone who wishes to create and use their own relayer service instead.
 
-The distribution of currently existing alternatives is unclear in Axelar and may represent a point of centralisation and risk for axelar.  
-
+The distribution of currently existing alternatives is unclear in Axelar and may represent a point of centralisation risk. An outage of the Axelar relayer service could result in a network-wide outage.   
 
 
 ## LlamaRisk Gauge Criteria
-1. **Is it possible for a single entity to rug its users?** No, greatest point of centralisation threshold seem to be the multisig base contract allowing for upgradbility of smart contract. 
+1. **Is it possible for a single entity to rug its users?** No, the most significant point of centralisation seems to be the 4-of-8 multisig base contract allowing for upgradability of the smart contracts. 
 
 
-4. **If the team vanishes, can the project continue?** The code is well documented and open source. Yet, a fork will be required to maintain smart contract upgradbility. In addition funds seemed to be held with to company and no treasury was idenified.
+4. **If the team vanishes, can the project continue?** The code is well documented and open source. Yet, a fork will be required to maintain smart contract upgradability. In additio,n funds seem to be held with the company and no treasury was idenified.
  
-6. **Does the project viability depend on additional incentives?**  No, additional incentives are required for the project to function apart from the programtically encoded inflation distributed to validators.
+6. **Does the project viability depend on additional incentives?**  No additional incentives are required for the project to function apart from the programtically encoded inflation distributed to validators as part of the proof-of-stake consensus mechanism.
 
-8. **If demand falls to 0 tomorrow, can the users be made whole?** Yes, user should be able to redeem bridged assets at the source chain by bridging back.
+8. **If demand falls to 0 tomorrow, can the users be made whole?** Yes, axlUSDC is always backed 1:1 with USDC so users should be able to redeem bridged assets to the source chain in any market condition.
 
-10. **Do audits reveal any concerning signs?** The most concering sign is the upgradability of Smart Contract through AxelarGatewayProxyMultisig.sol, which is controlled by a 4 out of 8 multisig. 
+10. **Do audits reveal any concerning signs?** The most concering sign is the upgradability of smart contracts through AxelarGatewayProxyMultisig.sol, which is controlled by a 4-of-8 multisig. 
 
 
 ### LlamaRisk Recommendation
 
-Overall, it seems that a single entity cannot rug its users as the lowest point of centralization is the multisig base contract. The project's code is well-documented and open-source, allowing for a potential fork to maintain smart contract upgradability in case the team vanishes. The project's viability does not depend on additional incentives, as inflation distributed to validators is programatically encoded. Users should be able to redeem bridged assets at the source chain by bridging back even if demand falls to zero tomorrow. However, the upgradability of smart contracts through AxelarGatewayProxyMultisig.sol, controlled by a 4 out of 8 multisig, is the most concerning sign revealed by audits. Nevertheless, overall the risk team approves of adding  axlUSDC <> USDC and axlUSDC <> FraxBP Pools to the requested chains. 
+All signs point to Axelar being a protocol that takes security seriously and has taken reasonable measures to ensure safety of user funds. Moving forward, we would like to see more robust access control of the smart contracts by replacing the 4-of-8 multisig with a DAO governed by tokenholders. Overall, the risk team approves of adding CRV incentives to axlUSDC <> USDC and axlUSDC <> FraxBP Pools on the requested chains. 
 
 
 
