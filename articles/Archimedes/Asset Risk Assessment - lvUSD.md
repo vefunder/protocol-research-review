@@ -27,7 +27,8 @@ Archimedes has a [lvUSD/3CRV](https://curve.fi/#/ethereum/pools/factory-v2-268/d
   * [Auctions - Security Audit](https://github.com/thisisarchimedes/Archimedes\_Finance/blob/main/audit/Archimedes\_Finance\_Auctions\_Smart\_Contract\_Security\_Audit\_Report\_Halborn\_Final.pdf) - Dec 2022
   * [Zapper - Security Audit](https://github.com/thisisarchimedes/Archimedes\_Finance/blob/main/audit/Archimedes\_Finance\_Zapper\_Smart\_Contract\_Security\_Audit\_Report\_Halborn\_Final.pdf) - Jan 2023
 
-Archimedes is a leveraged yield-farming DeFi protocol. The core of the strategy involves the leveraged USD (lvUSD) stablecoin and the Curve lvUSD/3CRV stableswap pool. The protocol will periodically conduct a sale of newly minted lvUSD (pending relative token balance in the Curve pool), which allows borrowers to amplify yield farming returns up to 9.73x against a stablecoin collateral deposit. Currently, the underlying strategy relies on yield from OUSD (a yield-bearing stablecoin), but strategies may change or expand to other yield-bearing tokens in the future.
+Archimedes is a leveraged yield-farming DeFi protocol. The core of the strategy involves the leveraged USD (lvUSD) stablecoin and the Curve lvUSD/3CRV stableswap pool. The protocol periodically conducts sales of newly minted lvUSD called "leverage rounds" (pending favorable token balance in the Curve pool), which allows borrowers to amplify yield farming returns up to 9.73x against a stablecoin collateral deposit. Currently, the underlying strategy relies on yield from OUSD (a yield-bearing stablecoin), but strategies may change or expand to other yield-bearing tokens in the future.
+
 
 ### Product-Market Fit Exploration
 
@@ -42,132 +43,39 @@ Fluctuating APYs between pools requires users to switch pools to get consistentl
 
 #### Solution
 
-Archimedes has built a strategy that makes use of Curve's stableswap pool, in conjunction with its own dynamic incentive mechanism, to offer consistently superior returns to its LPS. The startegy involves protocol-owned liquidity, which gives Archimedes control of the pool's behavior, allowing it to offer its customers (leverage takers, or LTs) access to attractive yield strategies.
+Archimedes has built a strategy that makes use of Curve's stableswap pool, in conjunction with its own dynamic incentive mechanism, to attempt to offer consistently superior returns to its LPS. The startegy involves protocol-owned liquidity, which gives Archimedes control of the pool's behavior, allowing it to offer its customers (leverage takers, or LTs) access to attractive yield strategies.
 
-Archimedes offers yield to the liquidity providers in its native ARCH token and LTs (borrowers) must pay a fee (in ARCH tokens) when opening a leverage position. Demand to open a leveraged yield farming position thus produces a buy pressure on ARCH tokens. ARCH fees are then redistributed to LPs to incentivize deep liquidity and enable to protocol to mint greater amounts of lvUSD. ARCH thus serves as a utility token within the protocol that is required to access leverage.
+Archimedes offers yield to the liquidity providers in its native ARCH token and LTs (borrowers) must pay a fee (in ARCH tokens) when opening a leverage position. Demand to open a leveraged yield farming position thus produces a buy pressure on ARCH tokens. ARCH fees are then redistributed to LPs to incentivize deep liquidity and enable to protocol to mint greater amounts of lvUSD. 
 
-The ARCH yield provided by the protocol is [dynamically adjusted](https://docs.archimedesfi.com/tokenomics-and-ecosystem/arch-dynamic-emissions) such that pool yields remain competitive against a subset of high TVL stable coin pools on Curve finance.
+ARCH thus serves as a utility token within the protocol that is required to access leverage. The ARCH yield provided by the protocol is [dynamically adjusted](https://docs.archimedesfi.com/tokenomics-and-ecosystem/arch-dynamic-emissions) such that pool yields remain competitive against a subset of high TVL stable coin pools on Curve finance.
 
 
-### Archimedes mechanics
 
-#### Leverage Rounds
+### Leverage Rounds
 
 New [lvUSD](https://etherscan.io/address/0x94A18d9FE00bab617fAD8B49b11e9F1f64Db6b36) comes into circulation in batches minted by the protocol during leverage rounds. Archimedes periodically conducts [leverage rounds](https://docs.archimedesfi.com/taking-leverage-(borrower)/leverage-rounds) where it makes a limited supply of new lvUSD available for LTs to purchase leverage. The rounds do not have a fixed schedule, but the date and allocation of upcoming rounds are advertized on various Archimedes social channels (Twitter, Discord, Telegram etc.) prior to each round.
 
-Details on a leverage round comprise the following things:
+A leverage round is comprised of the following parameters:
 
 ![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/ttributes.PNG)
 
 (Note that Archimedes usually provides leverage with a position lifetime of 370 days.)
 
-The protocol relies heavily on the 3CRV liquidity in the lvUSD/3CRV pool. When the lvUSD pool on Curve has a healthy balance of lvUSD to 3CRV, leverage can be made available to LTs to open positions. A leverage round can only occur if the Curve pool is reasonably balanced, and the amount of lvUSD available to LTs is dependent on liquidity in the pool. To ensure this liquidity, Archimedes aims to consistently provide the best yields through their dynamic emission mechanism. This dynamic emission mechanic takes TVL and yields of other stablecoin pools, and yield dilution of the lvUSD/3CRV pool into consideration.
+The protocol relies heavily on the 3CRV liquidity in the lvUSD/3CRV pool. A leverage round can only occur if the Curve pool is reasonably balanced, and the amount of lvUSD made available to LTs is dependent on liquidity in the pool. To ensure this liquidity, Archimedes uses a dynamic emission mechanism to consistently provide competitive yields. This dynamic emission mechanic checks TVL and yields of other stablecoin pools, and takes yield dilution of the lvUSD/3CRV pool into consideration.
 
-Every time a borrower takes leverage, the lvUSD is minted and swapped for 3CRV. Thus the lvUSD quantity in the lvUSD/3CRV increases, pushing the price lower. The price of lvUSD w.r.t 3CRV affects the realized loss/gain for borrowers at the time of repayment. lvUSD price also matters to liquidity providers as it directly impacts the slippage on their trade while depositing or withdrawing their liquidity in 3CRV.
-
-During an active round, the LT can bid for the leverage using their ARCH token. The protocol uses a Dutch Auction strategy by beginning the round with a high fee and reducing it until all lvUSD has been acquired. The ARCH leverage fee is an upfront payment to the Archimedes treasury which will eventually flow to LPs. In addition to the dynamic leverage fee (paid in ARCH), there is a small origination fee paid in the collateral token and a 30% performance fee on the yield generated by the strategy.
+During an active round, LTs can bid for the available leverage using their ARCH token. The protocol uses a Dutch Auction strategy by beginning the round with a high fee and reducing it until all lvUSD has been acquired. The ARCH leverage fee is an upfront payment to the Archimedes treasury which will eventually flow to LPs. In addition to the dynamic leverage fee (paid in ARCH), there is a small origination fee paid in the collateral token and a 30% performance fee on the yield generated by the strategy.
 
 The borrower provides collateral in one of the counterparty assets of the Curve pool (USDT, USDC, or DAI). This collateral serves as an input asset in the predefined strategy (e.g. Archimedes uses an OUSD strategy that uses the OUSD token as collateral).
 
-#### High-level strategy mechanics
-
-Leverage takers can only invest funds in predefined strategies decided by Archimedes. There is currently only one active strategy that leverage farms the yield-bearing OUSD stablecoin. After paying for leverage, Archimedes mints an outsized amount of lvUSD (no. of lvUSD > no. of OUSD). (Archimedes now offers a fixed 9.73x leverage, although there may be more leverage options in the future.) The LT's collateral, as well as the newly minted lvUSD, are swapped within the strategy to the target asset (OUSD). 
-
-![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/image.png)
-
-
-Archimedes holds the leveraged OUSD position to earn yields and provides an NFT to the LT as a receipt of this position. The Archimedes Position Token NFT represents the details of their unique position, including collateral amount, borrow amount, and expiry. The LT can redeem this position anytime during normal conditions (abnormal conditions will be covered in the Risk Vectors section below). 
-
-
-#### Price stability of lvUSD
-
-Archimedes controls the amount and frequency of leverage given to the borrowers. This ensures the price of lvUSD stays near the $1 peg.
-
-* Leverage is capped: Archimedes opens a new auction only when there is enough liquidity in the pool. Each auction is for a limited amount of leverage and is designed to maintain the balance of the pool.&#x20;
-* lvUSD >> $1: If lvUSD rises above $1, Archimedes will raise the leverage cap. More lvUSD will be borrowed and enter circulation, returning the lvUSD peg.
-* lvUSD << $1: If lvUSD drops below $1, LTs have an arbitrage opportunity by unwinding their position. LTs will pay back $1 worth of debt for less than $1, pocketing the instant arbitrage profits. This process burns lvUSD and increases the amount of 3CRV in the pool.
-
-> Underlying asset losses peg: lvUSD is over collateralized by the underlying assets. In case the underlying asset loses its peg (<< $1), Archimedes automatically closes the LTs’ positions (no penalty to users - this isn’t liquidation, this is closing the position, returning the debt and making the remaining profit available to the LT) . All lvUSD debt is paid back and the borrowed 3CRV returns to the Curve pool.
->
-> Source: [Archimedes Whitepaper](https://docs.archimedesfi.com/archimedes-finance-whitepaper-\(v2\)#0d5b93c7b9844a5090c31c1cf190a4ae)
-
-<mark style="color:red;">Archimedes also talks about the case when an underlying asset (OUSD or any asset under 3CRV) loses its peg. This case is discussed later in the report.</mark>
-
-### Protocol Participant: Liquidity Provider
-
-* [x] _<mark style="color:blue;">Describe simply how to participate as an LP (deposit in lvUSD pool and earn yield) -</mark>_
-
-As a liquidity provider, a user can simply deposit 3CRV in the lvUSD pool and will receive ARCH incentives on top of swap fees generated on the pool.
-
-* [x] _<mark style="color:blue;">Describe the ARCH dynamic emissions scheme (without comment on how well it resists manipulation, just explain mechanics in place.)</mark>_&#x20;
-
-Archimedes aims to provide ARCH incentives such that the overall yields are consistent. This is made sure through their dynamic emission mechanism. Here is the schematic on how dynamic emissions works:
-
-![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/dynamic%20emissions.png)
-
-Source: [Docs - ARCH Dynamic Emission](https://docs.archimedesfi.com/tokenomics-and-ecosystem/arch-dynamic-emissions)
-
-Basically, they compare other stablecoin pools and adjust their yield accordingly to attract liquidity. This mechanism is designed to make the lvUSD pool among the top stablecoin pools with the best yields.
-
-#### **Mechanics Breakdown**
-
-* Target APY: It is decided based on the data of the top 10 stablecoin pools sorted by TVL. If the lvUSD pool is in the top 5 pools then the target APY is the average of the top 5 stablecoin pools sorted by APY. Else the target APY is 1.2x the average of the top 5 stablecoin pools sorted by APY. The APY and TVL data are fetched from Defillama (_\* “Target APY” is calculated based on the_ [_Defillama_](https://defillama.com/yields?project=convex-finance\&attribute=stablecoins) _data_).
-* Target TVL: Now with a target APY, TVL value is also needed to make sure the APY is not diluted when liquidity comes. The target TVL is 1.1x the 7-day moving average of the lvUSD/3CRV pool. This data is fetched from&#x20;
-* Benchmark ARCH price: To compute the amount of ARCH to be released as emission, determining the ARCH price is essential. The ARCH price used for computation is a 7-day moving average of ARCH price data from coingecko (\*\* _If ARCH price isn’t available on Coingecko, the algorithm will use ARCH/ETH Uniswap pool data and Coingecko’s ETH/USD (taking the last 7 days average ETH/USD price)_).
-
-[x] _<mark style="color:blue;">I’d like to know if there is manual approval required to update the emissions, so ultimately is trust placed in team or is trust in the price feed aggregation (using coin gecko price sounds very sus, and uniswap TWAP sounds possible to manipulate also if no manual approval required) -</mark>_
-
-Currently, the whole computation of dynamic emission is done manually by the team.
-
-![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/manual%20emission.png)
-
-Moreover, there are emission ranges (guardrails) for every quarter to ensure the adequate emission
-
-> For every year, the algorithm sets a minimum and maximum emissions to avoid edge cases, i.e. what we call emission guardrails. Otherwise significant drops in ARCH price or other unexpected event might drive ARCH to overinflate.
->
-> Source: [Archimedes Docs - Dynamic Emission](https://docs.archimedesfi.com/tokenomics-and-ecosystem/arch-dynamic-emissions)
-
-![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/guardrails.png)
-
-Source: [Archimedes Docs - Dynamic Emission](https://docs.archimedesfi.com/tokenomics-and-ecosystem/arch-dynamic-emissions)
-
-#### **ARCH Tokenomics**
-
-Total Fixed Supply: 100,000,000 ARCH.&#x20;
-
-> All 100,000,000 ARCH pre-minted to Archimedes treasury to support dynamic emission schedules and experimenting with the correct way to conduct leverage auctions.&#x20;
->
-> Source: [Archimedes Docs - Tokenomics](https://docs.archimedesfi.com/tokenomics-and-ecosystem/tokenomics)
-
-The ARCH token allocation is as follows:
-
-* 50% Community: Liquidity mining incentives
-* 30% Team and future team members: one-year cliff with total three linear vesting&#x20;
-* 15% Investors and future investors: one-year cliff with total three linear vesting&#x20;
-* 5% Foundation/Development program: development cost, audits, service provider, OPEX, and partnerships
-
-#### Incentives for Liquidity providers
-
-* [x] _<mark style="color:blue;">Explain LPs earn fees from trade fees and use that to move into section on Leverage Takers -(Don’t include risk to liquidity providers here, save it for risk section) https://twitter.com/ArchimedesFi/status/1627408252110774272?s=20</mark>_
-
-Liquidity providers only receive ARCH incentives from Archimedes besides the swap fees provided by Curve.&#x20;
-
-![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/discord1.PNG)
-
-ARCH incentives that are distributed to the liquidity providers are vaguely linked to the fees collected by the protocol treasury from the leverage takers.
 
 ### Protocol Participant: Leverage Takers
 
-* [x] _<mark style="color:blue;">reiterate on leverage round, that pool conditions need to be right to open access to leverage and a dutch auction takes place to open a position.</mark>_&#x20;
-* [x] _<mark style="color:blue;">how is ARCH token involved in the process -</mark>_
-
 For a borrower looking for leverage, they must participate in one of the leverage rounds conducted by Archimedes. The ARCH fee to buy leverage will be deducted from the provided collateral itself.
 
-The amount of leverage available per ARCH token is determined through a dutch auction, which starts with a low price and gradually increases until the desired amount of leverage is reached or there is no more leverage available. This auction is called the Archimedes Leverage Round.&#x20;
+The amount of leverage available per ARCH token is determined through a dutch auction, which starts with a low price and gradually increases until the desired amount of leverage is reached or there is no more leverage available. This auction is called the Archimedes Leverage Round.
 
-#### Fees w.r.t leverage farming
 
-* [x] _<mark style="color:blue;">Explain fees-leverage fee, origination fee, performance fee LP vs LT: https://twitter.com/ArchimedesFi/status/1633254608020840448?s=20</mark>_
+#### Leverage Farming Fees
 
 There are 3 types of fees associated with the Archimedes Protocol and will be transferred to the protocol treasury:
 
@@ -184,19 +92,97 @@ All fees are collected and sent to the Archimedes Treasury to later be used to i
 
 These fees can be tracked on the Archimedes [calculator page](https://calculator.archimedesfi.com/?levPrice=0\&originFee=NaN).
 
+
+#### Price stability of lvUSD
+
+Every time a borrower takes leverage, lvUSD is minted and swapped for 3CRV. Thus the lvUSD quantity in the lvUSD/3CRV increases, pushing the price lower. The price of lvUSD w.r.t 3CRV affects the realized loss/gain for borrowers at the time of repayment. lvUSD price also matters to liquidity providers as it directly impacts the slippage on their trade while depositing or withdrawing their liquidity in 3CRV.
+
+Archimedes controls the amount and frequency of leverage given to the borrowers. This ensures the price of lvUSD stays near the $1 peg.
+
+* Leverage is capped: Archimedes opens a new auction only when there is enough liquidity in the pool. Each auction is for a limited amount of leverage and is designed to maintain the balance of the pool.
+* lvUSD >> $1: If lvUSD rises above $1, Archimedes will raise the leverage cap. More lvUSD will be borrowed and enter circulation, returning the lvUSD peg.
+* lvUSD << $1: If lvUSD drops below $1, LTs have an arbitrage opportunity by unwinding their position. LTs will pay back $1 worth of debt for less than $1, pocketing the instant arbitrage profits. This process burns lvUSD and increases the amount of 3CRV in the pool.
+
+
+### **ARCH Tokenomics**
+
+Total Fixed Supply: 100,000,000 ARCH.
+
+> All 100,000,000 ARCH pre-minted to Archimedes treasury to support dynamic emission schedules and experimenting with the correct way to conduct leverage auctions.
+>
+> Source: [Archimedes Docs - Tokenomics](https://docs.archimedesfi.com/tokenomics-and-ecosystem/tokenomics)
+
+The ARCH token allocation is as follows:
+
+* 50% Community: Liquidity mining incentives
+* 30% Team and future team members: one-year cliff with total three linear vesting
+* 15% Investors and future investors: one-year cliff with total three linear vesting
+* 5% Foundation/Development program: development cost, audits, service provider, OPEX, and partnerships
+
+
+#### Dynamic ARCH Emissions
+
+* Target APY: It is decided based on the data of the top 10 stablecoin pools sorted by TVL. If the lvUSD pool is in the top 5 pools then the target APY is the average of the top 5 stablecoin pools sorted by APY. Otherwise the target APY is 1.2x the average of the top 5 stablecoin pools sorted by APY. The APY and TVL data are fetched from Defillama (_\* “Target APY” is calculated based on_ [_Defillama_](https://defillama.com/yields?project=convex-finance\&attribute=stablecoins) _data_).
+* Target TVL: TVL value is also needed to make sure the APY is not diluted when liquidity comes. The target TVL is 1.1x the 7-day moving average of the lvUSD/3CRV pool.
+* Benchmark ARCH price: To compute the amount of ARCH to release, the ARCH price is calculated. The ARCH price used for computation is a 7-day moving average of ARCH price data from coingecko (\*\* _If ARCH price isn’t available on Coingecko, the algorithm will use ARCH/ETH Uniswap pool data and Coingecko’s ETH/USD (taking the last 7 days average ETH/USD price)_).
+
+Currently, the computation of dynamic emission is done manually by the team, so the strategy should be viewed as a stated intention by the team and not as an immutable process. 
+
+![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/manual%20emission.png)
+
+Moreover, there are emission ranges (guardrails) for every quarter to ensure the adequate emission
+
+> For every year, the algorithm sets a minimum and maximum emissions to avoid edge cases, i.e. what we call emission guardrails. Otherwise significant drops in ARCH price or other unexpected event might drive ARCH to overinflate.
+>
+> Source: [Archimedes Docs - Dynamic Emission](https://docs.archimedesfi.com/tokenomics-and-ecosystem/arch-dynamic-emissions)
+
+![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/guardrails.png)
+
+Source: [Archimedes Docs - Dynamic Emission](https://docs.archimedesfi.com/tokenomics-and-ecosystem/arch-dynamic-emissions)
+
+
+### Protocol Participant: Liquidity Provider
+
+As a liquidity provider, a user can simply deposit 3CRV in the lvUSD pool and will receive ARCH incentives on top of swap fees generated on the pool.
+
+Archimedes aims to provide ARCH incentives such that the overall yields are consistent. This is ensured by their dynamic emission mechanism. Here is the schematic on how dynamic emissions works:
+
+![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/dynamic%20emissions.png)
+
+Source: [Docs - ARCH Dynamic Emission](https://docs.archimedesfi.com/tokenomics-and-ecosystem/arch-dynamic-emissions)
+
+Basically, they compare other stablecoin pools and adjust their yield accordingly to attract liquidity. This mechanism is designed to make the lvUSD pool among the top stablecoin pools with the best yields.
+
+
+#### Incentives for Liquidity providers
+
+Liquidity providers receive ARCH incentives from Archimedes and swap fees from Curve.
+
+![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/discord1.PNG)
+
+ARCH incentives are redistributed to LPs from the Archimedes treasury multisig. This address collects other fees (origination and performance fees) denominated in OUSD, which are currently not distributed. The [Archimedes docs](https://docs.archimedesfi.com/taking-leverage-(borrower)/taking-leverage-explained) erroneously claims all fees are used to incentivize LPs, and while that may be a future intention, it is the case today that only ARCH fees are redistributed.
+
+
+### Archimedes Strategy Mechanics
+
+Leverage takers can only invest funds in predefined strategies decided by Archimedes. There is currently only one active strategy that leverage farms the yield-bearing OUSD stablecoin. After paying for leverage, Archimedes mints an outsized amount of lvUSD (no. of lvUSD > no. of OUSD). (Archimedes now offers a fixed 9.73x leverage, although there may be more leverage options in the future.) The LT's collateral, as well as the newly minted lvUSD, are swapped within the strategy to the target asset (OUSD). 
+
+![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/image.png)
+
+
+Archimedes holds the leveraged OUSD position to earn yields and provides an NFT to the LT as a receipt of this position. The Archimedes Position Token NFT represents the details of their unique position, including collateral amount, borrow amount, and expiry. The LT can redeem this position anytime during normal conditions (abnormal conditions will be covered in the Risk Vectors section below). 
+
+
 #### Yield Strategy (OUSD)
 
-* [x] _<mark style="color:blue;">-What tokens does it accept as collateral,</mark>_&#x20;
-* [x] _<mark style="color:blue;">How does the underlying strategy earn returns for leverage takers (yield bearing stabelcoin strategy concept)</mark>_
-* [x] <mark style="color:blue;">ADD SECTION OUSD strategy- Explain in detail how the strategy works under the hood. I’ll try to make a flow chart like in previous reports to show contracts and flow of funds</mark>
+Sample tx: https://etherscan.io/tx/0xd401458a98715a7b4ed490154c4f80bfea59cb4ae06bedbbf050b159fd2ad5df
 
-Archimedes offers leveraged strategies to its users, allowing them to choose from pre-decided options. There is only one strategy right now which is holding the OUSD token.&#x20;
+Contracts Involved:
+* [Archimedes Zapper](https://etherscan.io/address/0x624f570c24d61ba5bf8fbff17aa39bfc0a7b05d8) - The contract users interact with to open a position
+* [Archimedes Coordinator](https://etherscan.io/address/0x58c968fada478adb995b59ba9e46e3db4d6b579d) - In charge of overall flow of creating positions and unwinding positions. lvUSD minted within the system is managed here.
 
-Archimedes offers an opportunity to leverage farm the OUSD yields. Under this OUSD strategy, a borrower must provide collateral in DAI, USDC, or USDT. OUSD is a meta vault token that earns yields through rebasing i.e. the supply of OUSD would increase as the yield is generated from the investment position, thus keeping the price of OUSD near $1.&#x20;
+To demonstrate the mechanics of the OUSD strategy, we break down an LT opening a new leverage position.
 
-By using this strategy, a user can farm almost 9.73x yield with the funds that are only supposed to yield 1x.
-
-Here is the breakdown of the whole leverage yield investment process:
 
 ![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/ArchOUSDstrategy_2.png)
 
@@ -407,3 +393,12 @@ Security Factors
 ## Appendix
 
 <mark style="color:blue;">leverage APY and profit calc: https://docs.google.com/spreadsheets/d/132CKzt68FhRl2UF43SxYtdyf08xr7Rj7do\_6Mi8DbWU/edit#gid=1117646091</mark>
+
+
+save for later:
+--------------
+> Underlying asset losses peg: lvUSD is over collateralized by the underlying assets. In case the underlying asset loses its peg (<< $1), Archimedes automatically closes the LTs’ positions (no penalty to users - this isn’t liquidation, this is closing the position, returning the debt and making the remaining profit available to the LT). All lvUSD debt is paid back and the borrowed 3CRV returns to the Curve pool.
+>
+> Source: [Archimedes Whitepaper](https://docs.archimedesfi.com/archimedes-finance-whitepaper-\(v2\)#0d5b93c7b9844a5090c31c1cf190a4ae)
+
+<mark style="color:red;">Archimedes also talks about the case when an underlying asset (OUSD or any asset under 3CRV) loses its peg. This case is discussed later in the report.</mark>
