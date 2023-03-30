@@ -175,7 +175,7 @@ Archimedes holds the leveraged OUSD position to earn yields and provides an NFT 
 
 #### Yield Strategy (OUSD)
 
-Sample tx: https://etherscan.io/tx/0xd401458a98715a7b4ed490154c4f80bfea59cb4ae06bedbbf050b159fd2ad5df
+Strategy logic sample tx: https://etherscan.io/tx/0xd401458a98715a7b4ed490154c4f80bfea59cb4ae06bedbbf050b159fd2ad5df
 
 Archimedes Contracts Involved:
 * [Zapper](https://etherscan.io/address/0x624f570c24d61ba5bf8fbff17aa39bfc0a7b05d8) - The contract users interact with to open a position.
@@ -183,6 +183,7 @@ Archimedes Contracts Involved:
 * [OUSD Vault](https://etherscan.io/address/0x4c12c57c37ff008450a2597e810b51b2bba0383a) - Holds OUSD managed by Archimedes and mints vault shares to Coordinator.
 * [Exchanger](https://etherscan.io/address/0x823cf8a11c1eb28b0c00011515e1d2a28b362f09) - Interacts with Curve pools.
 * [Parameter Store](https://etherscan.io/address/0xcc6Ea29928A1F6bc4796464F41b29b6d2E0ee42C) - This contract contains all system parameters, including fee rates.
+* [CDPosition](https://etherscan.io/address/0x229a9733063eAD8A1f769fd920eb60133fCCa3Ef) - The ledger contract for all NFT positions and regular positions. CDP creates and destroy NFT and address positions. It keep tracks of how many tokens a user has borrowed. It keeps track of how much interest each position has accrued.
 * [Treasury Multisig (Protocol Fees)](https://etherscan.io/address/0x29520fd76494fd155c04fa7c5532d2b2695d68c6) - The 2-of-3 multisig managed by Archimedes team collects protocol fees and periodically redistributes to LPs.
 
 To demonstrate the mechanics of the OUSD strategy, we break down this [sample tx](https://etherscan.io/tx/0xd401458a98715a7b4ed490154c4f80bfea59cb4ae06bedbbf050b159fd2ad5df) of an LT opening a new leverage position:
@@ -206,6 +207,26 @@ To demonstrate the mechanics of the OUSD strategy, we break down this [sample tx
 * 19: OUSD vault shares are minted to the Coordinator.
 * 20: Unspent ARCH sent back to the user (The fee estimate is not always exact so ARCH dust is returned to the user).
 * the 21: Protocol mints an [Archimedes Position Token NFT](https://etherscan.io/nft/0x14c6a3c8dba317b87ab71e90e264d0ea7877139d/33) to user that represents their position (amount of collateral, amount borrowed, expiry).
+
+### Access Control
+
+Archimedes uses a proxy pattern for all of its contracts and divides access control between the following roles:
+* Admin - Can upgrade contracts, add or remove addresses from all other roles, and set dependencies (change which contracts are called)
+* Governor - Can change system parameters in the parameter store contract
+* Executive - Should always be a contract, used for internal contract calls within the system
+* Guardian - Can pause and unpause the system
+* Auctioneer - Can open and close auctions from the Coordinator
+* Minter - Can mint lvUSD
+
+The [Access Control docs](https://docs.archimedesfi.com/technical-documentation/access-control-and-timelocks) describe the privileged roles given to each contract and the team's standards for operation of the protocol. However, there are many false statments made in the docs. They claim all admin actions (including upgrade of the contracts) are protected behind a 72 hour timelock, but there is currently no timelock on this action or almost any other change to the protocol (with the exception that a timelock contract was [recently granted the admin role](https://etherscan.io/tx/0xe5be2e9c3c5cb4b844b054f092a77ad47e6868055f95a1bf9cdd6686e1d7dfd9#eventlog) of the lvUSD token). Furthermore, the docs claim the Guardian role, Admin role and Governor role must always be a multisig, and the Executive is always a contract. In reality, the Governor is an EOA, the Zapper contract Admin is an EOA, several contracts have an EOA with the Executive role. 
+
+<img width="704" alt="Screen Shot 2023-03-30 at 1 02 28 PM" src="https://user-images.githubusercontent.com/51072084/228952994-21b3cc4e-2003-42d1-bd30-b808c0720f1d.png">
+
+Source: [Archimedes Access Control Docs](https://docs.archimedesfi.com/technical-documentation/access-control-and-timelocks)
+
+While the team's intention may be to incrementally move toward the security measures outlined in their docs, their description of the protocol mechanics as they currently stand is rife with false and misleading statements. Users should take care to verify access controls on the system before participating as an LP or LT. [This Google spreadsheet](https://docs.google.com/spreadsheets/d/1GMlIJwBW6ns9eWuBmWTqZEt2NrjWzL9guzCz_8oM3uI/edit?usp=sharing) lays out the core Archimedes contracts, and the roles of the current implementations as of this report's publishing.
+
+Importantly, the Admin role across most of the Archimedes system is this [2-of-3 multisig](https://app.safe.global/home?safe=eth:0x84869Ccd623BF5Fb1d18E61A21B20d50cC786744) composed of team members. It is responsible for minting lvUSD, and has the power to upgrade almost all contracts in the system without a timelock (with exception of the lvUSD contract). This is therefore a critical component of the system access control, and users should take into consideration the security of the multisig parameters and their trust in the Archimedes team before participating as an LP or LT.
 
 
 ## Origin Dollar OUSD Overview
