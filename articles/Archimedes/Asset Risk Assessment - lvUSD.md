@@ -53,50 +53,31 @@ The ARCH yield provided by the protocol is [dynamically adjusted](https://docs.a
 
 #### Leverage Rounds
 
-New lvUSD comes into circulation in batches minted by the protocol during leverage rounds. Archimedes periodically conducts [leverage rounds](https://docs.archimedesfi.com/taking-leverage-(borrower)/leverage-rounds) where it makes new lvUSD available for LTs to purchase leverage from a limited supply. The rounds do not have a fixed schedule, but the date and allocation of upcoming rounds are advertized on various Archimedes social channels (Twitter, Discord, Telegram etc.) prior to each round.
-
-The protocol relies heavily on the 3CRV liquidity in the lvUSD/3CRV pool. A leverage round can only occur if the Curve pool is reasonably balanced, and the amount of lvUSD available to LTs is dependent on liquidity in the pool. To ensure this liquidity, Archimedes aims to consistently provide the best yields through their dynamic emission mechanism. This dynamic emission mechanic takes TVL and yields of other stablecoin pools, and yield dilution of the lvUSD/3CRV pool into consideration.
-
-During an active round, the LT can bid for the leverage using their ARCH token. The protocol uses a Dutch Auction strategy by beginning the round with a high fee and reducing it until all lvUSD has been acquired. The ARCH leverage fee is an upfront payment to the Archimedes treasury which will eventually flow to LPs.
-
-The borrower provides collateral in one of the counterparty assets of the Curve pool (USDT, USDC, or DAI). This collateral serves as an input asset in the predefined strategy (e.g. Archimedes uses an OUSD strategy that uses the OUSD token as collateral).
-
-#### High-level strategy mechanics
-
-Leverage takers can only invest funds in predefined strategies decided by Archimedes. There is currently only one active strategy that leverage farms the yield-bearing OUSD stablecoin. After paying for leverage, Archimedes mints an outsized amount of lvUSD (no. of lvUSD > no. of OUSD). (Archimedes offers a fixed 9.73x leverage, although there may be more leverage options in the future.) The LT's collateral, as well as the newly minted lvUSD, are swapped within the strategy to the target asset (OUSD). The LT receives an Archimedes Position Token NFT that represents the details of their position, including collateral amount, borrow amount, and expiry. 
-
-![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/image.png)
-
-
-Archimedes holds this position of OUSD to earn yields and provides an NFT to the leverage takers as a receipt of this position. The leverage taker can redeem this position anytime.
-
-### lvUSD
-
-* [x] _<mark style="color:blue;">ADD SECTION lvUSD as an Asset - Explain how lvUSD comes into circulation (leverage rounds).</mark>_&#x20;
-
-lvUSD: 0x94A18d9FE00bab617fAD8B49b11e9F1f64Db6b36
-
-[lvUSD ](https://etherscan.io/address/0x94a18d9fe00bab617fad8b49b11e9f1f64db6b36)is meant to follow the $1 peg and is paired to 3CRV in [lvUSD/CRV](https://curve.fi/#/ethereum/pools/factory-v2-268/deposit) pool.&#x20;
-
-The only utility of lvUSD is the ability to be swapped to 3CRV in lvUSD/3CRV. This utility is only beneficial to Archimedes as they can mint lvUSD to swap for 3CRV to invest in yield strategies on behalf of leverage takers.
-
-#### Leverage Rounds
-
-Archimedes provides a fixed quantity of leverage in rounds and they call these events a leverage round. When the lvUSD pool on Curve has a healthy balance of lvUSD to 3CRV, leverage can be made available to Borrowers (Leverage Takers / LTs) to Open Positions.
-
-The Archimedes Leverage Round auctions have a starting price and an ending price of the leverage provided per ARCH token. This is done through dutch auctions where the amount of leverage per ARCH token starts low and is gradually increased until the end price hits or the available leverage is exhausted.
+New [lvUSD](https://etherscan.io/address/0x94A18d9FE00bab617fAD8B49b11e9F1f64Db6b36) comes into circulation in batches minted by the protocol during leverage rounds. Archimedes periodically conducts [leverage rounds](https://docs.archimedesfi.com/taking-leverage-(borrower)/leverage-rounds) where it makes a limited supply of new lvUSD available for LTs to purchase leverage. The rounds do not have a fixed schedule, but the date and allocation of upcoming rounds are advertized on various Archimedes social channels (Twitter, Discord, Telegram etc.) prior to each round.
 
 Details on a leverage round comprise the following things:
 
 ![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/ttributes.PNG)
 
-Note that Archimedes usually provides leverage with a position lifetime of 370 days.
+(Note that Archimedes usually provides leverage with a position lifetime of 370 days.)
 
-* [x] _<mark style="color:blue;">Explain the ARCH token utility within the system for accessing leverage https://twitter.com/ArchimedesFi/status/1636468115184943104?s=20</mark>_
+The protocol relies heavily on the 3CRV liquidity in the lvUSD/3CRV pool. When the lvUSD pool on Curve has a healthy balance of lvUSD to 3CRV, leverage can be made available to LTs to open positions. A leverage round can only occur if the Curve pool is reasonably balanced, and the amount of lvUSD available to LTs is dependent on liquidity in the pool. To ensure this liquidity, Archimedes aims to consistently provide the best yields through their dynamic emission mechanism. This dynamic emission mechanic takes TVL and yields of other stablecoin pools, and yield dilution of the lvUSD/3CRV pool into consideration.
 
-Leverage taker needs ARCH for buying leveraged and they can use the [ARCH/USDC](https://v2.info.uniswap.org/pair/0x128dd66e4c9f1477ba29523b379aec6ace76d584) pool on Uniswap to buy leverage.
+Every time a borrower takes leverage, the lvUSD is minted and swapped for 3CRV. Thus the lvUSD quantity in the lvUSD/3CRV increases, pushing the price lower. The price of lvUSD w.r.t 3CRV affects the realized loss/gain for borrowers at the time of repayment. lvUSD price also matters to liquidity providers as it directly impacts the slippage on their trade while depositing or withdrawing their liquidity in 3CRV.
 
-Every time a borrower takes leverage, the lvUSD is minted and swapped for 3CRV. Thus the lvUSD quantity in the lvUSD/3CRV increases, pushing the price lower. The price of lvUSD w.r.t 3CRV matters to the borrowers at the time of repayment of borrowed assets. lvUSD price also matters to liquidity providers as it directly impacts the slippage on their trade while depositing or withdrawing their liquidity in 3CRV.&#x20;
+During an active round, the LT can bid for the leverage using their ARCH token. The protocol uses a Dutch Auction strategy by beginning the round with a high fee and reducing it until all lvUSD has been acquired. The ARCH leverage fee is an upfront payment to the Archimedes treasury which will eventually flow to LPs. In addition to the dynamic leverage fee (paid in ARCH), there is a small origination fee paid in the collateral token and a 30% performance fee on the yield generated by the strategy.
+
+The borrower provides collateral in one of the counterparty assets of the Curve pool (USDT, USDC, or DAI). This collateral serves as an input asset in the predefined strategy (e.g. Archimedes uses an OUSD strategy that uses the OUSD token as collateral).
+
+#### High-level strategy mechanics
+
+Leverage takers can only invest funds in predefined strategies decided by Archimedes. There is currently only one active strategy that leverage farms the yield-bearing OUSD stablecoin. After paying for leverage, Archimedes mints an outsized amount of lvUSD (no. of lvUSD > no. of OUSD). (Archimedes now offers a fixed 9.73x leverage, although there may be more leverage options in the future.) The LT's collateral, as well as the newly minted lvUSD, are swapped within the strategy to the target asset (OUSD). 
+
+![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/image.png)
+
+
+Archimedes holds the leveraged OUSD position to earn yields and provides an NFT to the LT as a receipt of this position. The Archimedes Position Token NFT represents the details of their unique position, including collateral amount, borrow amount, and expiry. The LT can redeem this position anytime during normal conditions (abnormal conditions will be covered in the Risk Vectors section below). 
+
 
 #### Price stability of lvUSD
 
