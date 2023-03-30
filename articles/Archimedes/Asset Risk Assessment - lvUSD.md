@@ -177,31 +177,36 @@ Archimedes holds the leveraged OUSD position to earn yields and provides an NFT 
 
 Sample tx: https://etherscan.io/tx/0xd401458a98715a7b4ed490154c4f80bfea59cb4ae06bedbbf050b159fd2ad5df
 
-Contracts Involved:
-* [Archimedes Zapper](https://etherscan.io/address/0x624f570c24d61ba5bf8fbff17aa39bfc0a7b05d8) - The contract users interact with to open a position
-* [Archimedes Coordinator](https://etherscan.io/address/0x58c968fada478adb995b59ba9e46e3db4d6b579d) - In charge of overall flow of creating positions and unwinding positions. lvUSD minted within the system is managed here.
+Archimedes Contracts Involved:
+* [Zapper](https://etherscan.io/address/0x624f570c24d61ba5bf8fbff17aa39bfc0a7b05d8) - The contract users interact with to open a position.
+* [Coordinator](https://etherscan.io/address/0x58c968fada478adb995b59ba9e46e3db4d6b579d) - In charge of overall flow of creating positions and unwinding positions. lvUSD minted within the system is managed here.
+* [OUSD Vault](https://etherscan.io/address/0x4c12c57c37ff008450a2597e810b51b2bba0383a) - Holds OUSD managed by Archimedes and mints vault shares to Coordinator.
+* [Exchanger](https://etherscan.io/address/0x823cf8a11c1eb28b0c00011515e1d2a28b362f09) - Interacts with Curve pools.
+* [Parameter Store](https://etherscan.io/address/0xcc6Ea29928A1F6bc4796464F41b29b6d2E0ee42C) - This contract contains all system parameters, including fee rates.
+* [Treasury Multisig (Protocol Fees)](https://etherscan.io/address/0x29520fd76494fd155c04fa7c5532d2b2695d68c6) - The 2-of-3 multisig managed by Archimedes team collects protocol fees and periodically redistributes to LPs.
 
-To demonstrate the mechanics of the OUSD strategy, we break down an LT opening a new leverage position.
+To demonstrate the mechanics of the OUSD strategy, we break down this [sample tx](https://etherscan.io/tx/0xd401458a98715a7b4ed490154c4f80bfea59cb4ae06bedbbf050b159fd2ad5df) of an LT opening a new leverage position:
 
 
 ![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/ArchOUSDstrategy_2.png)
 
-* 1: User deposits USDC/USDT/DAI&#x20;
-* 2,3: Swap leverage fee amount to ARCH&#x20;
-* 4,5: Swap deposit token to OUSD&#x20;
-* 6: Pay leverage fee
+* 1: User deposits USDC/USDT/DAI
+* 2,3: Swap leverage fee amount to ARCH.
+* 4,5: Swap deposit token to OUSD.
+* 6: Pay leverage fee.
 * 7: OUSD is sent to the Coordinator, which is in charge of the overall flow of creating positions and unwinding positions. It keeps track of funds in the vault, updating CDP as needed and transferring lvUSD inside the system. It is controlled (and called) by the leverage engine.
-* 8: OUSD is sent to OUSD Vault, which holds OUSD managed by Archimedes under all positions. It mints shares for deposited OUSD.&#x20;
-* 9: Performance fee is taken from the OUSD vault based on all unhandled OUSD rebases in the vault since the last contract interaction. The fee is 30% of interest earned and can be collected once a position has been closed or expires.&#x20;
-* 10: Mint OUSD vault share to Coordinator&#x20;
-* 11: 8.73x the amount of OUSD collateral in lvUSD is sent from Coordinator to Exchanger&#x20;
-* 12,13,14,15: Exchanger swaps lvUSD to OUSD via two respective Curve pools&#x20;
-* 16: OUSD received is sent to Coordinator&#x20;
-* 17: .1% origination fee is paid.&#x20;
-* 18: Amount of OUSD minus fee is sent to the OUSD vault&#x20;
-* 19: OUSD vault shares are minted to the Coordinator&#x20;
-* 20: Unspent ARCH sent back to the user (The fee estimate is not always exact so ARCH dust is returned to the user)&#x20;
-* the 21: Protocol mints NFT to user that represents their position (amount of collateral, amount borrowed, expiry)
+* 8: OUSD is sent to OUSD Vault, which holds OUSD managed by Archimedes under all positions. It mints shares for deposited OUSD.
+* 9: Performance fee is taken from the OUSD vault based on all unhandled OUSD rebases in the vault since the last contract interaction. The fee is 30% of interest earned and can be collected once a position has been closed or expires.
+* 10: Mint OUSD vault share to Coordinator.
+* 11: 8.73x the amount of OUSD collateral in lvUSD is sent from Coordinator to Exchanger.
+* 12,13,14,15: Exchanger swaps lvUSD to OUSD via two respective Curve pools.
+* 16: OUSD received is sent to Coordinator.
+* 17: .1% origination fee is paid.
+* 18: Amount of OUSD minus fee is sent to the OUSD vault.
+* 19: OUSD vault shares are minted to the Coordinator.
+* 20: Unspent ARCH sent back to the user (The fee estimate is not always exact so ARCH dust is returned to the user).
+* the 21: Protocol mints an [Archimedes Position Token NFT](https://etherscan.io/nft/0x14c6a3c8dba317b87ab71e90e264d0ea7877139d/33) to user that represents their position (amount of collateral, amount borrowed, expiry).
+
 
 ## Origin Dollar OUSD Overview
 
@@ -214,11 +219,6 @@ To demonstrate the mechanics of the OUSD strategy, we break down an LT opening a
 * [Audits](https://docs.ousd.com/security-and-risks/audits)
 * [OUSD Analytics](https://analytics.ousd.com/)
 * [Yield Analytics](https://analytics.ousd.com/apy)
-
-<!---->
-
-* [x] _<mark style="color:blue;">OUSD Overview- This section can be simplified. Main point I think is OUSD uses several strategies under the hood to generate yield (determined by governance so they change periodically?) and yield is distributed to OUSD holders by accruing directly through rebasing</mark>_
-* [ ] _<mark style="color:red;">Risk of OUSD strategy- I’d compare to agEUR which uses underlying stategies and suffered from Euler exploit (protocol paused and agEUR depegged)</mark>_
 
 Origin Dollar (OUSD) was launched in September 2020 on the Ethereum network. Its design is superior to existing stablecoins because OUSD captures competitive yields while being passively held in wallets.
 
