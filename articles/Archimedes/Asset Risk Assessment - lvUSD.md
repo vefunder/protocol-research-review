@@ -266,26 +266,24 @@ The distribution of assets among the supported strategies is determined by veOGV
 
 On November 7th, 2020, OUSD was [exploited for 7M USD](https://medium.com/@matthewliu/urgent-ousd-has-hacked-and-there-has-been-a-loss-of-funds-7b8c4a7d534c) due to a previously undetected reentrancy bug. Origin Dollar was relaunched in December after completing multiple audits and security upgrades. You can learn more about the steps taken to secure the protocol in their [relaunch announcement](https://medium.com/@joshfraser/origin-dollar-ousd-relaunches-to-offer-hassle-free-defi-returns-b8ee0c601dad).
 
-The design of OUSD bears resemblance to another stablecoin recently affected by an exploit in its underlying strategy: Angle Protocol's agEUR. It similarly deployed collateral backing its stable into various DeFi protocols, and had funds in Euler when the protocol was [exploited for $197M](https://rekt.news/euler-rekt/). This [forced Angle to pause the protocol and agEUR experienced a prolonged depeg](https://twitter.com/LlamaRisk/status/1636460843381723136). Fortunately, the attacker has returned most funds, so users will likely be made whole. It does serve as a reminder of the dangers involved with aggressive yield-farming strategies, so users should always be aware of their risk exposure in the underlying strategies. 
-
 
 ## Risk Vectors - OUSD Strategy
 
-* [x] _<mark style="color:blue;">OUSD third party platform risk- this is included in OUSD strategy risk, or group risks related to OUSD and the strategy together</mark>_
 
 ### **Smart contract risk**
 
-OUSD is [audited ](https://docs.ousd.com/security-and-risks/audits)and also offers a bug bounty of up to $250,000 OUSD. Origin has retained [Certora](https://www.certora.com/) to formally verify the various security properties of our contracts. They helped Origin to establish automated verifications that will run anytime we update our contract code. Origin has automated checking for common errors with [Slither](https://github.com/crytic/slither) and [Echidna](https://github.com/crytic/echidna) tests.&#x20;
+OUSD is [audited ](https://docs.ousd.com/security-and-risks/audits)and also offers a bug bounty of up to $250,000 OUSD. Origin has retained [Certora](https://www.certora.com/) to formally verify the various security properties of their contracts. Certora helped Origin to establish automated verifications that will run anytime they update their contract code. Origin has automated checking for common errors with [Slither](https://github.com/crytic/slither) and [Echidna](https://github.com/crytic/echidna) tests.
 
-However, it is important to note that even with formal audits, it is still possible for there to be logic errors that could lead to the loss of funds for OUSD holders.&#x20;
+However, even with formal audits, it is still possible for there to be logic errors that could lead to the loss of funds for OUSD holders.
+
 
 ### Custody Risk
 
-There is a primary admin contract, a 5 of 8 multisig which is required to make any code changes to the protocol. OUSD can only be upgraded from this 5 of 8 multi-sig wallet. The keys to this multi-sig are held by individuals with close ties to the company, and not even the Origin founders acting together have enough control to execute owner functions on their own. In addition, the OUSD contracts are owned by a timelock which places a 48-hour time delay before any changes to the protocol can be made.&#x20;
+There is a primary admin contract, a [5-of-8 multisig](https://etherscan.io/address/0xbe2AB3d3d8F6a32b96414ebbd865dBD276d3d899) which is required to make any code changes to the protocol. OUSD can only be upgraded from this 5 of 8 multi-sig wallet. The keys to this multi-sig are held by individuals with close ties to the company, and not even the Origin founders acting together have enough control to execute owner functions on their own. In addition, the OUSD contracts are owned by a [timelock](https://etherscan.io/address/0x72426BA137DEC62657306b12B1E869d43FeC6eC7) which places a 48-hour time delay before any changes to the protocol can be made.&#x20;
 
 Time-delayed admin actions give users a chance to exit OUSD if its admins become malicious, are compromised, or make a change that the users do not like.
 
-Some functionality, such as rebalancing funds between strategies or pausing deposits, can be triggered without the timelock and with far fewer signers. This allows the Origin team to react more quickly to market conditions or security threats. These signers, known as Strategists,  have the ability to execute a limited number of functions __ with only 2 of 9 signers. The strategist multisig can do the following actions on the vault:
+Some functionality, such as rebalancing funds between strategies or pausing deposits, can be triggered without the timelock and with far fewer signers. This allows the Origin team to react more quickly to market conditions or security threats. These signers, known as Strategists,  have the ability to execute a limited number of functions with only [2-of-9 signers](https://etherscan.io/address/0xF14BBdf064E3F67f51cd9BD646aE3716aD938FDC). The strategist multisig can do the following actions on the vault:
 
 * reallocate - move funds between strategies
 * setVaultBuffer - adjust the amount of funds held outside strategies for cheaper redeems.
@@ -296,17 +294,19 @@ Some functionality, such as rebalancing funds between strategies or pausing depo
 * pauseCapital - pause all mints and redeems
 * unpauseCapital - allow all mints and redeems
 
-### The risk associated with Asset depeg
 
-Any reduction in the value of the underlying stablecoins will have a corresponding impact on the value of OUSD. It is worth noting that although OUSD aims to maintain a 1:1 relationship between its supply and the number of supporting stablecoins, there is no guarantee regarding which stablecoins will form this backing, nor their value. Additionally, each supported stablecoin introduces a level of counter-party risk that should not be underestimated.
+### Depeg Risk
+
+Any reduction in the value of the underlying stablecoins will have a corresponding impact on the value of OUSD. Although OUSD aims to maintain a 1:1 relationship between its supply and the quantity of underlying stablecoins, there is no guarantee regarding which stablecoins will form this backing, nor their value. Additionally, each supported stablecoin introduces a level of counter-party risk that should not be underestimated.
 
 > OUSD rebasing will only increase supply since the amount of OUSD minted is tied to the realized gains earned by the underlying strategies. Your principal is protected as long as nothing goes wrong with the underlying lending/AMM and stablecoin protocols. Your OUSD balance will never decrease, but the value could drop if there's a failure in the underlying systems.
 >
 > Source: [OUSD Docs](https://docs.ousd.com/core-concepts/elastic-supply)
 
-**OUSD Third-party platform risk**
-
 OUSD is built on top of other DeFi platforms like Aave, Compound, and Curve which add additional smart contract risk. There are no guarantees that the underlying third-party platforms will continue to work as intended, and any failure in an underlying strategy would potentially lead to a loss of funds for OUSD holders.
+
+The design of OUSD bears resemblance to another stablecoin recently affected by an exploit in its underlying strategy: Angle Protocol's agEUR. It similarly deployed agEUR collateral backing into various DeFi protocols, and had funds in Euler when the protocol was [exploited for $197M](https://rekt.news/euler-rekt/). This [forced Angle to pause the protocol and agEUR experienced a prolonged depeg](https://twitter.com/LlamaRisk/status/1636460843381723136). Fortunately, the attacker has returned most funds, so users will likely be made whole. It does serve as a reminder of the dangers involved with aggressive yield-farming strategies, so users should always be aware of their risk exposure in the underlying strategies. 
+
 
 ## Risk Vectors - Archimedes
 
@@ -319,36 +319,36 @@ For Liquidity Providers (lenders), the relevant smart contracts are:
 * OUSD smart contracts
 * Archimedes’ smart contracts
 
-The protocol smart contracts are audited by [Halborn Security](https://halborn.com/) to guarantee the quality and security of every change the team makes to its smart contracts. You can view the [Audits here.](https://docs.archimedesfi.com/audit-and-code-bounty/audits)&#x20;
+The Archimedes protocol smart contracts are audited by [Halborn Security](https://halborn.com/) to guarantee the quality and security of every change the team makes to its smart contracts. You can view the [Audits here.](https://docs.archimedesfi.com/audit-and-code-bounty/audits)
+
+Three audits were done on the general system, the auctions, and the Zapper contract between November 2022 and January 2023. Notable findings were one critical issue in the Auction system that would allow a user to acquire leverage at the minimum auction price on a subsequent leverage round (SOLVED). Several medium and low issues were not resolved, including risk of frontrunning the auction by checking bids in the mempool, and insufficient parameter precision and inconsistent parameter formatting in the ParameterStore contract.
+
 
 ### Depeg Risk
 
-* [x] _<mark style="color:blue;">Depeg Risk- the section on peg stabilization mechanism should be in lvUSD as an asset section.</mark>_&#x20;
-* [x] _<mark style="color:blue;">As for risk of depeg, I’d like more info on how and when protocol may force LPs to close borrow position</mark>_
-
-There is no utility of lvUSD for the users and it is only meant to be utilized by Archimedes to facilitate leveraged position for the borrowers. lvUSD can break the peg to the 3CRV in the following situations:
+The only utility of lvUSD for users is to be utilized by Archimedes to facilitate leveraged position for the borrowers. lvUSD can break its peg to 3CRV in the following situations:
 
 1. Uncapped leverage distribution.
 2. Unintended withdrawals of 3CRV by LPs
 3. If assets under 3CRV lose their dollar peg.
 
-Since all the decisions regarding the leverage rounds are at the team's discretion, lvUSD depeg due to uncapped leverage distribution relies on how actively the leverage distribution is managed. Yields can ensure there are no unintended withdrawals of 3CRV.&#x20;
+Since all the decisions regarding the leverage rounds are at the team's discretion, lvUSD depeg due to uncapped leverage distribution relies on how actively the leverage distribution is managed. A significant component of peg management is trust in the team to responsibly conduct leverage rounds such that the Curve pool reamins reasonably balanced.
 
-If an underlying asset (an asset that backs lvUSD i.e. OUSD or DAI, USDC, USDT) loses its peg Archimedes would lock the user's position till the investments make enough cash to repay the borrowed capital. It is still possible for the leverage taker to close the position but then the collateral would be used to recover the borrowed leverage.&#x20;
+Yields can incentivize against unintended withdrawals of 3CRV, but there is also no guarantee that the team's dynamic emissions strategy will consistently produce the desired outcome. A decrease in the price of ARCH or alternative yield opportunities may affect the desirability of supplying 3CRV liquidity.
 
-![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/1233.png)
+It is also possible that lvUSD depegs as a result of a depeg in the underlying strategy (OUSD). This would be caused by liquidity providers pulling their capital out of the pool on the news of OUSD depeg.
+
 
 ### Collateral Risk / Underlying Assets Risks
 
-* [x] _<mark style="color:blue;">Underlying assets risk- I want more info on how a OUSD depeg would play out for users</mark>_
+If an underlying asset (an asset that backs lvUSD i.e. OUSD or DAI, USDC, USDT) loses its peg, causing the position to be insolvent, Archimedes does not currently have a liquidation process (although the team has plans for one in the future). Instead, it would lock the user's position until the value is sufficient to repay the borrowed capital _(either by OUSD regaining its peg or by the position earning more yield over time)._ 
 
-If the OUSD peg drops below $1, the value of lvUSD would also go down because currently, OUSD is the only strategy used by Archimedes. In the case of OUSD depeg, leverage takers would be able to withdraw funds without worrying about Archimedes locking their position. This is possible as all the lvUSD is backed by the OUSD strategy and if OUSD and lvUSD depegs to a similar price or lower, the loan repayment would not require any extra funds. The effect of asset depeg will be seen while swapping from OUSD to 3CRV and while swapping from lvUSD to 3CRV. Here both, the liquidity prover, as well as leverage taker, would suffer a loss but as the liquidity provider's funds were used to provide leverage, they will be impacted the most.
+![photo_2023-03-31 11 13 37](https://user-images.githubusercontent.com/51072084/229198181-e8cc5f48-42d5-4716-9d4d-963c3f334012.jpeg)
 
-It is even possible that lvUSD depegs more than OUSD in the event of OUSD depeg. This is because of the liquidity providers pulling their capital out of the pool on the news of OUSD depeg.&#x20;
+If the underlying asset experiences a depeg that does not recover, insolvent positions may become permanently locked in Archimedes. It is still possible for the leverage taker to sell their Position Token NFT on the open market through OpenSea, although in such a situation the position is likely worth near 0.
 
-&#x20;to a value where Borrowers do not have enough OUSD to pay their leveraged debt, this would typically cause a liquidation of the users’ collateral.&#x20;
+If the OUSD peg drops below $1, the value of lvUSD would also go down, since currently, OUSD is the only strategy used by Archimedes. In the case of OUSD depeg, leverage takers would be able to withdraw funds without worrying about Archimedes locking their position. This is possible as all the lvUSD is backed by the OUSD strategy and if OUSD and lvUSD depegs to a similar price or lower, the loan repayment would not require any extra funds. The effect of asset depeg will be seen while swapping from OUSD to 3CRV and while swapping from lvUSD to 3CRV. Here both, the liquidity prover, as well as leverage taker, would suffer a loss but as the liquidity provider's funds were used to provide leverage, they will be impacted the most.
 
-In this scenario, Archimedes will instead lock the user's position until there is enough OUSD to pay the debt _(either by OUSD regaining its peg or by the position earning more yield over time)._ The user can still exit by selling their position NFT in an NFT marketplace, such as OpenSea.
 
 ### Risk exposure due to economic activities
 
