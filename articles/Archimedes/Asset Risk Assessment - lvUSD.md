@@ -184,6 +184,9 @@ Archimedes Contracts Involved:
 * [Exchanger](https://etherscan.io/address/0x823cf8a11c1eb28b0c00011515e1d2a28b362f09) - Interacts with Curve pools.
 * [Parameter Store](https://etherscan.io/address/0xcc6Ea29928A1F6bc4796464F41b29b6d2E0ee42C) - This contract contains all system parameters, including fee rates.
 * [CDPosition](https://etherscan.io/address/0x229a9733063eAD8A1f769fd920eb60133fCCa3Ef) - The ledger contract for all NFT positions and regular positions. CDP creates and destroy NFT and address positions. It keep tracks of how many tokens a user has borrowed. It keeps track of how much interest each position has accrued.
+* [LeverageEngine](https://etherscan.io/address/0x03dc7Fa99B986B7E6bFA195f39085425d8172E29) - Runs leverage cycles and underwrites debt to a Position Token NFT.
+* [Position Token NFT](https://etherscan.io/token/0x14c6a3c8dba317b87ab71e90e264d0ea7877139d) - The NFT containing unique attributes of an open position (collateral, debt, expiry etc.)
+* [lvUSD](https://etherscan.io/address/0x94A18d9FE00bab617fAD8B49b11e9F1f64Db6b36) - The synthetic stablecoin used to attain leverage.
 * [Treasury Multisig (Protocol Fees)](https://etherscan.io/address/0x29520fd76494fd155c04fa7c5532d2b2695d68c6) - The 2-of-3 multisig managed by Archimedes team collects protocol fees and periodically redistributes to LPs.
 
 To demonstrate the mechanics of the OUSD strategy, we break down this [sample tx](https://etherscan.io/tx/0xd401458a98715a7b4ed490154c4f80bfea59cb4ae06bedbbf050b159fd2ad5df) of an LT opening a new leverage position:
