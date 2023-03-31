@@ -350,40 +350,38 @@ If an underlying asset (an asset that backs lvUSD i.e. OUSD or DAI, USDC, USDT) 
 
 If the underlying asset experiences a depeg that does not recover, insolvent positions may become permanently locked in Archimedes. It is still possible for the leverage taker to sell their Position Token NFT on the open market through OpenSea, although in such a situation the position is likely worth near 0.
 
-If the OUSD peg drops below $1, the value of lvUSD would also go down, since currently, OUSD is the only strategy used by Archimedes. In the case of OUSD depeg, leverage takers would be able to withdraw funds without worrying about Archimedes locking their position. This is possible as all the lvUSD is backed by the OUSD strategy and if OUSD and lvUSD depegs to a similar price or lower, the loan repayment would not require any extra funds. The effect of asset depeg will be seen while swapping from OUSD to 3CRV and while swapping from lvUSD to 3CRV. Here both, the liquidity prover, as well as leverage taker, would suffer a loss but as the liquidity provider's funds were used to provide leverage, they will be impacted the most.
+If the OUSD peg drops below $1, lvUSD would likely also depeg, since currently, OUSD is the only strategy used by Archimedes. Assuming both stables depeg simultaneously, leverage takers may remain solvent and not have their position locked (loss from OUSD->3CRV swap is offset by gain from 3CRV->lvUSD swap). Both the liquidity provider and the leverage taker may experience a loss, but as the liquidity provider's funds were used to provide leverage, they will be impacted the most.
 
 
-### Risk exposure due to economic activities
+### Slippage and Fees (Economic Risk)
 
-#### Slippage
+LPs should be aware that entering and exiting the liquidity pool with single-sided liquidity can incur a loss from slippage and fees. Moreover, the pool proportion at the time of entry and exit would impact the resulting slippage. 
 
-LPs should be aware that entering and exiting the liquidity pool with single-sided liquidity would incur slippage. Moreover, the pool proportion at the time of entry and exit would impact the resulting slippage.
+This [calculator](https://calculator.archimedesfi.com/) can help users determine the expected APY from their position. Bear in mind the leverage fee and origination fee when opening a position, as well as swap fees in the underlying strategy, will require the position to remain open for some length of time before becoming profitable. Users should consider the opportunity cost of opening a position vs. supplying liquidity.
 
 Archimedes can control the pool proportion by providing adequate lvUSD leverage. They intend to keep the pool proportion near 50% for lvUSD at the time of computing leverage rounds.
 
 ![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/pool%20limit%20for%20leverage.png)
 
+
 **Inflation**
 
-* [ ] _<mark style="color:blue;">Inflation- The dynamic emissions scheme is kind of fishy, should also look into that more</mark>_
+With dynamic emissions, Archimedes wants their Curve pool TVL to grow continuously. They are providing emission rewards to the LPs in ARCH tokens for this intended outcome.
 
-With dynamic emissions, Archimedes wants the TVL to grow constantly. They are providing emission rewards to the LPs in ARCH tokens for this intended outcome.&#x20;
-
-So far, the leverage available per ARCH token is cheaper than the ARCH emitted to sustain the liquidity in the lvUSD/3CRV pool. In other words, the absorption of ARCH tokens (in the form of leverage fees) is lower than that of the emission provided. This creates inflation in the ARCH price and with more and more spread between the absorption and emission, the price of the ARCH token would drop.&#x20;
+So far, the leverage available per ARCH token is cheaper than the ARCH emitted to sustain the liquidity in the lvUSD/3CRV pool. In other words, the absorption of ARCH tokens (in the form of leverage fees) is lower than that of the emission provided. This creates inflation in the ARCH supply and with greater spread between the absorption and emission, the price of the ARCH token may drop.
 
 ![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/dune1.png)
 
 Source:  [Dune Query](https://dune.com/queries/2238660)
 
-There are events that can lead to a subsequent chain of events that would result in a price decline for ARCH tokens.&#x20;
+There is the potential for a chain of events that would result in a price decline for ARCH tokens.
 
 ![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/spiral.png)
 
-When the availability of leverage is less, the inflation on ARCH price will rise. This is possible when the pool ratio is heavily shifted towards lvUSD. At this time protocol will rely on the borrowers to close their position in order to provide further leverage to new leverage takers.
+When there is less leverage available, the inflation of ARCH supply will increase. This is possible when the pool ratio is heavily shifted towards lvUSD, making leverage rounds unviable. At this time, the protocol relies on existing leverage takers to close their position in order to provide further leverage to new leverage takers.
 
-This again poses a risk to the LP because the gains made by the leverage taker when they close their position to repay the debt at a discount will be suffered by the LP in terms of slippage.
+This again poses a risk to the LP because the gains made by the leverage taker when they close their position to repay the debt at a discount may be at the expense of the LP in terms of slippage.
 
-As discussed earlier, inflation is already a catalyst in the chain of these subsequent events.
 
 ## LlamaRisk Gauge Criteria
 
@@ -391,26 +389,32 @@ Centralization Factors
 
 1.  Is it possible for a single entity to rug its users?
 
-    Yes, because the protocol controls and owns all the funds invested in the yield strategies.
+Yes, the team controls access to lvUSD through period leverage rounds, as well as all system functions. There are critical roles controlled by a team-controlled 2-of-3 multisig with no timelock (e.g. upgrade contracts) and by team-controlled EOA accounts without timelock (e.g. Guardian role can globally pause the system, Governor role can change system parameters). 
 
 2.  If the team vanishes, can the project continue?
 
-    No, because there are many mechanisms that are not active yet and the team makes the decision off-chain for many moving parts of the protocol.
+No, the system depends on manual action taken by the team (opening new leverage rounds) and the team makes the decision off-chain for many moving parts of the protocol.
 
 Economic Factors
 
 1.  Does the project's viability depend on additional incentives?
 
-    The protocol refrains from using CRV rewards based on their communication in the protocol docs as of writing the report.
+The protocol refrains from using CRV rewards based on their communication in the protocol docs as of writing the report. Incentives in the form of their native ARCH token is a fundamental component of the system design to incentivize LPs.
+    
 2.  If demand falls to 0 tomorrow, can all users be made whole?
 
-    Depends. If the underlying assets (3CRV) are stable and pegged, subsequently if the assets associated with the yield-earning strategies are performing as intended, users can be made whole.
+Depends. If the underlying assets (3CRV) are stable and pegged, and the underlying yield-earning strategies are performing as intended (OUSD has not lost peg), users can be made whole. In ordinary circumstances, reduced demand for lvUSD incentivizes borrowers to repay their debt at a discount.
 
 Security Factors
 
 1. Do audits reveal any concerning signs?
 
-\#Risk Team Recommendation (Don't worry about this section in the first draft, we will discuss together and with the protocol team to determine our final recommendation)
+Several [audits](https://docs.archimedesfi.com/audit-and-code-bounty/audits) have been performed between November 2022 and January 2023 by [Halborn Security](https://www.halborn.com/). There was one critical vulnerability found in the Auction system, which has been resolved. Several medium to low issues were identified that have not been resolved, but overall audits appear thorough and do not reveal any concerning signs. 
+
+
+## Risk Team Recommendation
+
+Archimedes has not made any proposal to receive CRV emissions. Before any consideration is made to submit a gauge proposal, the Archimedes team should transfer all access controls to their multi-sig (including Zapper Admin, Guardian, and Governor) and implement a timelock on all critical functions- most importantly to put contract upgrades behind a timelock. Archimedes should strive to reduce dependence on team actions by automating leverage rounds and fee/emissions distribution, and introducing token governance. The team has informed us that a v2 is planned that will introduce a liquidation mechanism. We look forward to such features which serve to improve the resilience of the protocol and offer greater assurances to its users. 
 
 ## Appendix
 
