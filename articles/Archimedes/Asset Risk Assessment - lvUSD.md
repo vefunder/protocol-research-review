@@ -1,10 +1,21 @@
 # Asset Risk Assessment - lvUSD (Archimedes)
 
-#### (One sentence summary of the report)
+#### A look into the Archimedes leverage farming protocol, the OUSD strategy, and the lvUSD stablecoin.
 
 ### Index
 
-\[WIP]
+- Relation to Curve
+- Archimedes Overview
+     - Product-Market Fit Exploration
+     - Leverage Rounds
+     - ARCH tokenomics
+     - Archimedes Strategy Mechanics
+     - Access Control
+- Origin Dollar OUSD Overview
+- Risk Vectors - OUSD
+- Risk Vectors - Archimedes
+- LlamaRisk Gauge Criteria
+- Risk Team Recommendations
 
 
 ### Relation to Curve
@@ -333,7 +344,7 @@ It is also possible that lvUSD depegs as a result of a depeg in the underlying s
 
 ### Collateral Risk / Underlying Assets Risks
 
-If an underlying asset (an asset that backs lvUSD i.e. OUSD or DAI, USDC, USDT) loses its peg, causing the position to be insolvent, Archimedes does not currently have a liquidation process (although the team has plans for one in the future). Instead, it would lock the user's position until the value is sufficient to repay the borrowed capital _(either by OUSD regaining its peg or by the position earning more yield over time)._ 
+If an underlying asset (i.e. OUSD/DAI/USDC/USDT) loses its peg and causes the position to be insolvent, Archimedes does not currently have a liquidation process (although the team has plans for one in the future). Instead, it will lock the user's position until the value is sufficient to repay the borrowed capital _(either by OUSD regaining its peg or by the position earning more yield over time)._ 
 
 ![photo_2023-03-31 11 13 37](https://user-images.githubusercontent.com/51072084/229198181-e8cc5f48-42d5-4716-9d4d-963c3f334012.jpeg)
 
@@ -345,16 +356,16 @@ Use this [Google Sheet](https://docs.google.com/spreadsheets/d/1TT8WuC2V5VG_iJzH
 
 ### Slippage and Fees (Economic Risk)
 
-LPs should be aware that entering and exiting the liquidity pool with single-sided liquidity can incur a loss from slippage and fees. Moreover, the pool proportion at the time of entry and exit would impact the resulting slippage. 
+LPs should be aware that entering and exiting the liquidity pool with single-sided liquidity can incur a loss from slippage and fees. Moreover, the pool proportion at the time of entry and exit would impact the realized slippage. 
 
 This [calculator](https://calculator.archimedesfi.com/) can help users determine the expected APY from their position. Bear in mind the leverage fee and origination fee when opening a position, as well as swap fees in the underlying strategy, will require the position to remain open for some length of time before becoming profitable. Users should consider the opportunity cost of opening a position vs. supplying liquidity.
 
-Archimedes can control the pool proportion by providing adequate lvUSD leverage. They intend to keep the pool proportion near 50% for lvUSD at the time of computing leverage rounds.
+Archimedes can control the pool proportion by providing adequate lvUSD leverage. They intend to keep the pool proportion near 50% lvUSD when computing leverage rounds.
 
 ![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/pool%20limit%20for%20leverage.png)
 
 
-**Inflation**
+#### Inflation
 
 With dynamic emissions, Archimedes wants their Curve pool TVL to grow continuously. They are providing emission rewards to the LPs in ARCH tokens for this intended outcome.
 
@@ -379,7 +390,7 @@ Centralization Factors
 
 1.  Is it possible for a single entity to rug its users?
 
-Yes, the team controls access to lvUSD through periodic leverage rounds and control many critical system functions. There are critical roles controlled by a team-controlled 2-of-3 multisig with no timelock (e.g. upgrade contracts) and by team-controlled EOA accounts without timelock (e.g. Guardian role can globally pause the system, Governor role can change system parameters). 
+Yes, the team controls access to lvUSD through periodic leverage rounds and control many system functions. There are critical roles controlled by the team's 2-of-3 multisig with no timelock (e.g. upgrade contracts) and by team-controlled EOA accounts without timelock (e.g. Guardian role can globally pause the system, Governor role can change system parameters). 
 
 2.  If the team vanishes, can the project continue?
 
@@ -389,11 +400,11 @@ Economic Factors
 
 1.  Does the project's viability depend on additional incentives?
 
-The protocol refrains from using CRV rewards based on their communication in the protocol docs as of writing the report. Incentives in the form of their native ARCH token is a fundamental component of the system design to incentivize LPs.
+The protocol refrains from using CRV rewards as of the publishing of this report. Incentives in the form of their native ARCH token is a fundamental component of the system design to incentivize LPs.
     
 2.  If demand falls to 0 tomorrow, can all users be made whole?
 
-Depends. If the underlying assets (3CRV) are stable and pegged, and the underlying yield-earning strategies are performing as intended (OUSD has not lost peg), users can be made whole. In ordinary circumstances, reduced demand for lvUSD incentivizes borrowers to repay their debt at a discount.
+Depends. If the underlying assets (3CRV) are stable and pegged, and the underlying strategies are performing as intended (OUSD has not lost peg), users can be made whole. In ordinary circumstances, reduced demand for lvUSD incentivizes borrowers to repay their debt at a discount.
 
 Security Factors
 
@@ -404,17 +415,5 @@ Several [audits](https://docs.archimedesfi.com/audit-and-code-bounty/audits) hav
 
 ## Risk Team Recommendation
 
-Archimedes has not made any proposal to receive CRV emissions. Before any consideration is made to submit a gauge proposal, the Archimedes team should transfer all access controls to their multi-sig (including Zapper Admin, Guardian, and Governor) and implement a timelock on all critical functions- most importantly to put contract upgrades behind a timelock. Archimedes should strive to reduce dependence on team actions by automating leverage rounds and fee/emissions distribution, and introducing token governance. The team has informed us that a v2 is planned that will introduce a liquidation mechanism. We look forward to such features which serve to improve the resilience of the protocol and offer greater assurances to its users. 
+Archimedes has not made any proposal to receive CRV emissions. Before any consideration is made to submit a gauge proposal, the Archimedes team should transfer all access controls to their multi-sig (including Zapper Admin, Guardian, and Governor) and implement a timelock on all critical functions- most importantly to put contract upgrades (Admin role) behind a timelock. Archimedes should strive to reduce dependence on team actions by automating leverage rounds and fee/emissions distribution, and introducing token governance. The team has informed us that a v2 is planned that will introduce a liquidation mechanism. We look forward to such features which serve to improve the resilience of the protocol and offer greater assurances to its users. 
 
-## Appendix
-
-<mark style="color:blue;">leverage APY and profit calc: https://docs.google.com/spreadsheets/d/132CKzt68FhRl2UF43SxYtdyf08xr7Rj7do\_6Mi8DbWU/edit#gid=1117646091</mark>
-
-
-save for later:
---------------
-> Underlying asset losses peg: lvUSD is over collateralized by the underlying assets. In case the underlying asset loses its peg (<< $1), Archimedes automatically closes the LTs’ positions (no penalty to users - this isn’t liquidation, this is closing the position, returning the debt and making the remaining profit available to the LT). All lvUSD debt is paid back and the borrowed 3CRV returns to the Curve pool.
->
-> Source: [Archimedes Whitepaper](https://docs.archimedesfi.com/archimedes-finance-whitepaper-\(v2\)#0d5b93c7b9844a5090c31c1cf190a4ae)
-
-<mark style="color:red;">Archimedes also talks about the case when an underlying asset (OUSD or any asset under 3CRV) loses its peg. This case is discussed later in the report.</mark>
