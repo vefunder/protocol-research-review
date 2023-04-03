@@ -32,6 +32,8 @@ Archimedes is a DeFi protocol that enables leveraged farming of yield-bearing as
 
 ### Product-Market Fit Exploration
 
+#### Problem
+
 Archimedes argues that LPs on Curve have a suboptimal experience since CRV emissions make up the vast majority of APY, and consequently, LPs tend to experience high volatility in pool returns as protocols compete for a fixed amount of emissions. 
 
 > We believe that CRV emissions are capping Curve's ability to scale. And we all want to see a stablecoin Curve pool that supports large investments without materially impacting the pool’s APY. Ideally, this pool provides relatively good yield, generated from real economic activity.
@@ -43,9 +45,9 @@ As APYs fluctuate between pools, users must switch pools to optimize their yield
 
 #### Solution
 
-Archimedes has built a strategy that makes use of Curve's stableswap pool, incentivized by its own dynamic emissions mechanism, that attempts to offer consistently superior returns to its LPS. The strategy involves protocol-owned liquidity, which gives Archimedes control of the pool's behavior, allowing it to offer its customers (leverage takers, or LTs) access to profitable yield strategies.
+Archimedes has built a strategy that makes use of Curve's stableswap pool, incentivized by its own dynamic emissions mechanism, that attempts to offer consistently superior returns to its LPs. The strategy involves protocol-owned liquidity, which gives Archimedes control of the pool's behavior, allowing it to offer its users access to profitable yield strategies.
 
-Archimedes pays liquidity providers in its native ARCH token and LTs (borrowers) must pay a fee (in ARCH tokens) when opening a leverage position. Demand to open a leveraged position thus produces a buy pressure on ARCH tokens. ARCH fees are then redistributed to LPs to incentivize deep liquidity and enable to protocol to mint greater amounts of lvUSD. 
+Archimedes pays LPs in its native ARCH token. Liquidity Takers (LTs) must pay a fee (in ARCH tokens) when opening a leverage position. Demand to open a leveraged position thus produces a buy pressure on ARCH tokens. ARCH fees are then redistributed to LPs to incentivize deep liquidity and enable to protocol to mint greater amounts of lvUSD. 
 
 ARCH thus serves as a utility token within the protocol that is required to access leverage. The ARCH yield provided by the protocol is [dynamically adjusted](https://docs.archimedesfi.com/tokenomics-and-ecosystem/arch-dynamic-emissions) such that pool yields remain competitive against a subset of high TVL stable coin pools on Curve finance.
 
@@ -54,21 +56,9 @@ ARCH thus serves as a utility token within the protocol that is required to acce
 
 New [lvUSD](https://etherscan.io/address/0x94A18d9FE00bab617fAD8B49b11e9F1f64Db6b36) comes into circulation in batches minted by the protocol during leverage rounds. Archimedes periodically conducts [leverage rounds](https://docs.archimedesfi.com/taking-leverage-(borrower)/leverage-rounds) where it makes a limited supply of new lvUSD available for LTs to purchase leverage. The rounds do not have a fixed schedule, but the date and allocation of upcoming rounds are advertized on various Archimedes social channels (Twitter, Discord, Telegram etc.) prior to each round.
 
-A leverage round is comprised of the following parameters:
+A leverage round is comprised of the following parameters (Note that all system parameters are subject to change):
 
 ![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/ttributes.PNG)
-
-(Note that Archimedes usually provides leverage with a position lifetime of 370 days and that all system parameters are subject to change.)
-
-#### Price stability of lvUSD
-
-Every time a borrower takes leverage, lvUSD is minted and swapped for 3CRV. Thus the lvUSD quantity in the lvUSD/3CRV increases, pushing the price lower. The price of lvUSD w.r.t 3CRV affects the realized loss/gain for borrowers at the time of repayment. lvUSD price also matters to liquidity providers as it directly impacts the slippage on their trade while depositing or withdrawing their liquidity in 3CRV.
-
-The Archimedes team controls the amount and frequency of leverage given to the borrowers. This ensures the price of lvUSD stays near the $1 peg.
-
-* Leverage is capped: Archimedes opens a new auction only when there is enough liquidity in the pool. Each auction is for a limited amount of leverage and is designed to maintain the balance of the pool.
-* lvUSD >> $1: If lvUSD rises above $1, Archimedes will raise the leverage cap. More lvUSD will be borrowed and enter circulation, returning the lvUSD peg.
-* lvUSD << $1: If lvUSD drops below $1, LTs have an arbitrage opportunity by unwinding their position. LTs will pay back $1 worth of debt for less than $1, pocketing the instant arbitrage profits. This process burns lvUSD and increases the amount of 3CRV in the pool.
 
 #### Protocol Participant: Liquidity Provider
 
@@ -76,30 +66,40 @@ The protocol relies heavily on the 3CRV liquidity in the lvUSD/3CRV pool. A leve
 
 Liquidity providers receive ARCH incentives from Archimedes and swap fees from Curve.
 
-![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/discord1.PNG)
-
 As a liquidity provider, a user can simply deposit 3CRV in the lvUSD pool and will receive ARCH incentives on top of swap fees generated on the pool. 3CRV LPs are the lenders of the system. 
 
 #### Protocol Participant: Leverage Takers
 
 Borrowers looking for leverage must participate in one of the leverage rounds conducted by Archimedes. 
 
-During a leverage round, LTs can bid on available leverage. The amount of leverage available per ARCH token is determined through a dutch auction, which starts with a low price and gradually increases until the desired amount of leverage is reached or there is no more leverage available. The ARCH leverage fee is an upfront payment to the Archimedes treasury which will eventually flow to LPs. The ARCH fee to buy leverage will be deducted from the collateral itself, so the user does not need to own any ARCH. In addition to the dynamic leverage fee (paid in ARCH), there is a small origination fee paid in the collateral token (OUSD).
+During a leverage round, LTs can bid on available leverage. The amount of leverage available per ARCH token is determined through a Dutch auction, which starts with a low price and gradually increases until the desired amount of leverage is reached or there is no more leverage available. The ARCH leverage fee is an upfront payment to the Archimedes treasury which will eventually flow to LPs. The fee is deducted from the collateral itself and automatically swapped upon deposit, so the user does not need to own any ARCH. In addition to the dynamic leverage fee (paid in ARCH), there is a small origination fee paid in the collateral token (OUSD).
 
 The LT provides collateral in one of the counterparty assets of the Curve pool (USDT, USDC, or DAI). This collateral serves as an input asset in the predefined strategy (e.g. Archimedes uses an OUSD strategy that converts deposits to OUSD).
+
+#### Price stability of lvUSD
+
+Every time a borrower takes leverage, lvUSD is minted and swapped for 3CRV. Thus the lvUSD quantity in the lvUSD/3CRV pool increases, pushing the price lower. The price of lvUSD w.r.t 3CRV affects the realized loss/gain for borrowers at the time of repayment. lvUSD price also matters to liquidity providers as it directly impacts the slippage on their trade while depositing or withdrawing their liquidity in 3CRV.
+
+The Archimedes team controls the amount and frequency of leverage given to the borrowers. This ensures the price of lvUSD stays near the $1 peg.
+
+* Leverage is capped: Archimedes opens a new auction only when there is enough liquidity in the pool. Each auction is for a limited amount of leverage and is designed to maintain the balance of the pool.
+* lvUSD >> $1: If lvUSD rises above $1, Archimedes will raise the leverage cap. More lvUSD will be borrowed and enter circulation, returning the lvUSD peg.
+* lvUSD << $1: If lvUSD drops below $1, LTs have an arbitrage opportunity by unwinding their position. LTs will pay back $1 worth of debt for less than $1, pocketing the instant arbitrage profits. This process burns lvUSD and increases the amount of 3CRV in the pool.
 
 #### Leverage Farming Fees
 
 There are 3 types of fees associated with the Archimedes Protocol, which are transferred to the protocol treasury multi-sig:
 
-* Leverage Fee (ARCH Token) - When a user Opens a Position they pay some ARCH tokens as an upfront fee to access the leverage (lvUSD). It is not required for a user to hold ARCH tokens as Archimedes will take the fee from the funds provided as principal.
-* Origination Fee (Collateral Asset) - When a user Opens a Position there is a one-time origination fee applied. This amount is applied to the leverage amount (borrowed amount) and is collected from the collateral asset (OUSD). The origination fee is 0.1% at the time of writing the report (down from an initial 0.5% fee).
-* Performance Fee (Collateral Asset) - The Performance Fee is 30% and it applies only to the interest earned over the lifetime of the loan (interest earned from Collateral and Leverage). This fee is taken only when the position is closed or when it expires.
-* Open & Close Exchange Fees - 1% of the collateral is charged as Open & Close Exchange Fee
+* Leverage Fee (ARCH Token) - When a user opens a position, they pay some ARCH tokens as an upfront fee to access leverage (lvUSD). It is not required for a user to hold ARCH tokens as Archimedes will take the fee from the collateral deposit.
+* Origination Fee (OUSD) - When a user opens a position there is a one-time origination fee applied. This amount is applied to the borrowed amount and is collected from the underlying strategy asset (OUSD). The origination fee is 0.1% at the time of writing the report (down from an initial 0.5% fee).
+* Performance Fee (OUSD) - The Performance Fee is 30% and it applies only to the interest earned over the lifetime of the loan (interest earned from Collateral and Leverage). This fee is taken only when the position is closed or when it expires.
 
-These fees can be tracked on the Archimedes [calculator page](https://calculator.archimedesfi.com/?levPrice=0\&originFee=NaN).
+These fees are readable in the [ParameterStore](https://etherscan.io/address/0xcc6Ea29928A1F6bc4796464F41b29b6d2E0ee42C#readProxyContract) contract. Leverage fee = getArchToLevRatio / Origination fee = getOriginationFeeRate / Performance fee = getRebaseFeeRate. 
+The effect of fees on a position profitability can be tracked on the Archimedes [calculator page](https://calculator.archimedesfi.com/?levPrice=0\&originFee=NaN).
 
-ARCH fees are redistributed to LPs from the Archimedes treasury multi-sig. This address collects all other fees (origination and performance fees) denominated in OUSD, which are currently not distributed. The [Archimedes docs](https://docs.archimedesfi.com/taking-leverage-(borrower)/taking-leverage-explained) erroneously claims all fees are used to incentivize LPs, and while that may be a future intention, it is the case today that only ARCH fees are redistributed.
+ARCH fees are redistributed to LPs from the Archimedes treasury multi-sig. This address collects all other fees (origination and performance fees) denominated in OUSD, although these are currently not distributed. The [Archimedes docs](https://docs.archimedesfi.com/taking-leverage-(borrower)/taking-leverage-explained) erroneously claims all fees are used to incentivize LPs, and while that may be a future intention, it is the case today that only ARCH fees are redistributed.
+
+![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/discord1.PNG)
 
 
 ### **ARCH Tokenomics**
@@ -121,21 +121,21 @@ The ARCH token allocation is as follows:
 
 Archimedes aims to provide ARCH incentives such that the overall yields are consistent. This is ensured by their dynamic emission mechanism. Here is the schematic on how dynamic emissions works:
 
-![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/dynamic%20emissions.png)
+<img width="834" alt="Screen Shot 2023-04-03 at 11 00 59 AM" src="https://user-images.githubusercontent.com/51072084/229590281-f4002f48-8eca-49bf-b869-f2890570b782.png">
 
 Source: [Docs - ARCH Dynamic Emission](https://docs.archimedesfi.com/tokenomics-and-ecosystem/arch-dynamic-emissions)
 
 Basically, they compare other stablecoin pools and adjust their yield accordingly to attract liquidity. This mechanism is designed to make the lvUSD pool among the top stablecoin pools with the best yields.
 
-* Target APY: It is decided based on the data of the top 10 stablecoin pools sorted by TVL. If the lvUSD pool is in the top 5 pools then the target APY is the average of the top 5 stablecoin pools sorted by APY. Otherwise the target APY is 1.2x the average of the top 5 stablecoin pools sorted by APY. The APY and TVL data are fetched from Defillama (_\* “Target APY” is calculated based on_ [_Defillama_](https://defillama.com/yields?project=convex-finance\&attribute=stablecoins) _data_).
+* Target APY: It is decided based on the data of the top 10 stablecoin pools sorted by TVL. If the lvUSD pool is in the top 5 pools then the target APY is the average of the top 5 stablecoin pools sorted by APY. Otherwise the target APY is 1.2x the average of the top 5 stablecoin pools sorted by APY. The APY and TVL data are calculated from [Defillama](https://defillama.com/yields?project=convex-finance\&attribute=stablecoins) data.
 * Target TVL: TVL value is also needed to make sure the APY is not diluted when liquidity comes. The target TVL is 1.1x the 7-day moving average of the lvUSD/3CRV pool.
-* Benchmark ARCH price: To compute the amount of ARCH to release, the ARCH price is calculated. The ARCH price used for computation is a 7-day moving average of ARCH price data from coingecko (\*\* _If ARCH price isn’t available on Coingecko, the algorithm will use ARCH/ETH Uniswap pool data and Coingecko’s ETH/USD (taking the last 7 days average ETH/USD price)_).
+* Benchmark ARCH price: To compute the amount of ARCH to release, the ARCH price is calculated. The ARCH price used for computation is a 7-day moving average of ARCH price data from coingecko (If ARCH price isn’t available on Coingecko, the algorithm will use ARCH/ETH Uniswap pool data and a 7-day average of Coingecko’s ETH/USD).
 
 Currently, the computation of dynamic emission is done manually by the team, so the strategy should be viewed as a stated intention by the team and not as an immutable process. 
 
 ![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/manual%20emission.png)
 
-Moreover, there are emission ranges (guardrails) for every quarter to ensure the adequate emission
+Moreover, there are emission ranges (guardrails) for every quarter to ensure sensible emission rates:
 
 > For every year, the algorithm sets a minimum and maximum emissions to avoid edge cases, i.e. what we call emission guardrails. Otherwise significant drops in ARCH price or other unexpected event might drive ARCH to overinflate.
 >
@@ -148,12 +148,12 @@ Source: [Archimedes Docs - Dynamic Emission](https://docs.archimedesfi.com/token
 
 ### Archimedes Strategy Mechanics
 
-Leverage takers can only invest funds in predefined strategies decided by Archimedes. There is currently only one active strategy that leverage farms the yield-bearing OUSD stablecoin. After paying for leverage, Archimedes mints an outsized amount of lvUSD (no. of lvUSD > no. of OUSD). (Archimedes now offers a fixed 9.73x leverage, although there may be more leverage options in the future.) The LT's collateral, as well as the newly minted lvUSD, are swapped within the strategy to the target asset (OUSD). 
+Leverage takers can only invest funds in predefined strategies determined by the Archimedes team. There is currently only one active strategy that leverage farms the yield-bearing OUSD stablecoin. After paying for leverage, Archimedes mints an outsized amount of lvUSD against the LTs collateral deposit (8.73 lvUSD : 1 OUSD collateral). Archimedes currently offers a fixed 9.73x leverage, although there may be more leverage options in the future. The LT's collateral, as well as the newly minted lvUSD, are swapped within the strategy to the target asset (OUSD). 
 
 ![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/image.png)
 
 
-Archimedes holds the leveraged OUSD position to earn yields and provides an NFT to the LT as a receipt of this position. The Archimedes Position Token NFT represents the details of their unique position, including collateral amount, borrow amount, and expiry. The LT can redeem this position anytime during normal conditions (abnormal conditions will be covered in the Risk Vectors section below). 
+Archimedes holds the leveraged OUSD position to earn yields and mints an Archimedes Position Token NFT to the LT as a receipt of this position. The NFT represents the details of their unique position, including collateral amount, borrow amount, and expiry. The LT can redeem this position anytime during normal conditions (abnormal conditions will be covered in the Risk Vectors section below). 
 
 #### Yield Strategy (OUSD)
 
@@ -191,7 +191,9 @@ To demonstrate the mechanics of the OUSD strategy, we break down this [sample tx
 * 18: Amount of OUSD minus fee is sent to the OUSD vault.
 * 19: OUSD vault shares are minted to the Coordinator.
 * 20: Unspent ARCH sent back to the user (The fee estimate is not always exact so ARCH dust is returned to the user).
-* the 21: Protocol mints an [Archimedes Position Token NFT](https://etherscan.io/nft/0x14c6a3c8dba317b87ab71e90e264d0ea7877139d/33) to user that represents their position (amount of collateral, amount borrowed, expiry).
+* 21: Protocol mints an [Archimedes Position Token NFT](https://etherscan.io/nft/0x14c6a3c8dba317b87ab71e90e264d0ea7877139d/33) to user that represents their position (amount of collateral, amount borrowed, expiry).
+
+The position has a fixed expiry, but the position holder is able to close their position before expiration. To close a position, the strategy sells enough OUSD to repay the lvUSD debt, and returns the remaining OUSD to the user. The user may receive less than their original deposit due to fees and slippage. They may even have their position locked in extreme cases, such as an OUSD depeg, where their leveraged position is unable to pay off the debt. We created this [Google Sheet](https://docs.google.com/spreadsheets/d/1TT8WuC2V5VG_iJzHvY3hbX1IQWfm4NDOPbS7lKR2R_I/edit?usp=sharing) to help calculate conditions when a position would become locked.
 
 
 ### Access Control
@@ -204,19 +206,23 @@ Archimedes uses a proxy pattern for all of its contracts and divides access cont
 * Auctioneer - Can open and close auctions from the Coordinator
 * Minter - Can mint lvUSD
 
-The [Access Control docs](https://docs.archimedesfi.com/technical-documentation/access-control-and-timelocks) describe the privileged roles given to each contract along with the team's standards for operation of the protocol. This is certainly the early stage of the project, and the team appears to be making frequent updates to access controls as they become confident the system will perform with more restrictive controls.
+The [Access Control docs](https://docs.archimedesfi.com/technical-documentation/access-control-and-timelocks) describe the privileged roles that control each contract, along with the team's standards for operation of the protocol. The team appears to be making frequent updates to access controls, as contracts have been live on mainnet for some time and the team becomes confident in implementing more restrictive controls.
 
-This disconnect has resulted in many false statments made in the docs. They claim all admin actions (including upgrade of the contracts) are protected behind a 72 hour timelock, but there is currently no timelock on this action or almost any other change to the protocol (with the exception that a timelock contract was [recently granted the admin role](https://etherscan.io/tx/0xe5be2e9c3c5cb4b844b054f092a77ad47e6868055f95a1bf9cdd6686e1d7dfd9#eventlog) of the lvUSD token). Furthermore, the docs claim the Guardian role, Admin role and Governor role must always be a multisig. In reality, the Governor is an EOA, the Zapper contract Admin is an EOA, and the Guardian is an EOA. 
+This disconnect between statements made in the docs and the actual access controls of deployed contracts may cause confusion. The docs claim that all admin actions (including upgrade of the contracts) are protected behind a 72-hour timelock. However, there is currently no timelock on this action or almost any other change to the protocol (with the exception that a timelock contract was [recently granted the admin role](https://etherscan.io/tx/0xe5be2e9c3c5cb4b844b054f092a77ad47e6868055f95a1bf9cdd6686e1d7dfd9#eventlog) of the lvUSD token). Furthermore, the docs claim the Guardian role, Admin role and Governor role must always be a multi-sig. In reality, the Governor is an EOA, the Zapper contract Admin is an EOA, and the Guardian is an EOA. 
 
 <img width="704" alt="Screen Shot 2023-03-30 at 1 02 28 PM" src="https://user-images.githubusercontent.com/51072084/228952994-21b3cc4e-2003-42d1-bd30-b808c0720f1d.png">
 
 Source: [Archimedes Access Control Docs](https://docs.archimedesfi.com/technical-documentation/access-control-and-timelocks)
 
-While the team's intention may be to incrementally move toward the security measures outlined in their docs, their description of the protocol mechanics as they currently stand is rife with false and misleading statements. Users should take care to verify access controls within the system before participating as an LP or LT. [This Google spreadsheet](https://docs.google.com/spreadsheets/d/1GMlIJwBW6ns9eWuBmWTqZEt2NrjWzL9guzCz_8oM3uI/edit?usp=sharing) lays out the core Archimedes contracts, and access control within of the current implementations as of this report's publishing.
+While the team's intention may be to incrementally move toward the security measures outlined in their docs, their description of the protocol mechanics as they currently stand is rife with false and misleading statements. Users should take care to verify access controls within the system before participating as an LP or LT. [This Google spreadsheet](https://docs.google.com/spreadsheets/d/1GMlIJwBW6ns9eWuBmWTqZEt2NrjWzL9guzCz_8oM3uI/edit?usp=sharing) lays out the core Archimedes contracts and access control within the current implementations, as of this report's publishing.
+
+#### Notable Access Control Findings
 
 Importantly, the Admin role across most of the Archimedes system is this [2-of-3 multisig](https://app.safe.global/home?safe=eth:0x84869Ccd623BF5Fb1d18E61A21B20d50cC786744) composed of team members. It is responsible for minting lvUSD, and has the power to upgrade almost all contracts in the system without a timelock (with exception of the lvUSD contract). This is therefore a critical component of the system access control, and users should take into consideration the security of the multisig parameters and their trust in the Archimedes team before participating as an LP or LT.
 
-The [Timelock contract](https://etherscan.io/address/0x01D3Aa4C9a61f5fB4b3EF5aD90C0e02ccF861842) recently granted the Admin role of the lvUSD token now requires the multisig to delay before changing Admin, changing Minter (also the multisig), or changing the mint destination. Note that there is no timelock currently for minting lvUSD to the current authorized destination (Coordinator contract). The Timelock currently has a minDelay of [1.2 hours](https://etherscan.io/address/0x01D3Aa4C9a61f5fB4b3EF5aD90C0e02ccF861842#readContract#F6), so users should monitor this value that it should be increased to 72 hours as specified in the Archimedes docs.
+The [Timelock contract](https://etherscan.io/address/0x01D3Aa4C9a61f5fB4b3EF5aD90C0e02ccF861842) recently granted the Admin role of the lvUSD token now requires the multi-sig to delay before changing Admin, changing Minter (also the multi-sig), or changing the mint destination. Note that there is no timelock currently for minting lvUSD to the current mint destination (Coordinator contract). The Timelock currently has a minDelay of [1.2 hours](https://etherscan.io/address/0x01D3Aa4C9a61f5fB4b3EF5aD90C0e02ccF861842#readContract#F6), so users should monitor this value that it should be increased to 72 hours as specified in the Archimedes docs.
+
+The [Zapper](https://etherscan.io/address/0x624f570c24d61ba5bf8fbff17aa39bfc0a7b05d8#readProxyContract) contract currently has an [EOA](https://etherscan.io/address/0x68AFb79D25C9740e036b264A92d26eF95B4B9Ae7) with the Admin role, meaning someone with access to a that account can upgrade the Zapper contract without any timelock. This contract is where LTs deposit collateral into the system, so an EOA in this role puts new depositers at risk. Since Archimedes operates in leverage rounds, a malicious actor with access to the Admin private key could target these events. We recommend to change Admin to the team multi-sig for consistency within the system and to improve security assurances to new users.
 
 
 ## Origin Dollar OUSD Overview
@@ -245,7 +251,7 @@ Here is the current allocation of funds for yield generation:
 
 Source: [OUSD Analytics](https://analytics.ousd.com/)
 
-The distribution of assets among the supported strategies is determined by veOGV holders through weekly snapshot voting. After the weekly poll, the results are implemented on-chain by the Strategist multi-sig group (known as "Strategists") at their discretion and subject to their review. If over 50% of the weighted votes are in favor of the current allocation, Strategists may opt not to take any action. However, if the Strategists consider any of the allocations to be unsafe for the funds behind OUSD, they have the authority to withhold their execution. Note that Strategists do not have the authority to introduce new strategies or withdraw funds without undergoing the timelock process.
+The distribution of assets among the supported strategies is determined by veOGV holders through weekly snapshot voting. After the weekly poll, the results are implemented on-chain by the [Strategist multi-sig](https://etherscan.io/address/0xF14BBdf064E3F67f51cd9BD646aE3716aD938FDC) group (known as "Strategists") at their discretion and subject to their review. If over 50% of the weighted votes are in favor of the current allocation, Strategists may opt not to take any action. However, if the Strategists consider any of the allocations to be unsafe for the funds behind OUSD, they have the authority to withhold their execution. Note that Strategists do not have the authority to introduce new strategies or withdraw funds without undergoing the timelock process.
 
 
 ### Past Exploits
@@ -253,10 +259,10 @@ The distribution of assets among the supported strategies is determined by veOGV
 On November 7th, 2020, OUSD was [exploited for 7M USD](https://medium.com/@matthewliu/urgent-ousd-has-hacked-and-there-has-been-a-loss-of-funds-7b8c4a7d534c) due to a previously undetected reentrancy bug. Origin Dollar was relaunched in December after completing multiple audits and security upgrades. You can learn more about the steps taken to secure the protocol in their [relaunch announcement](https://medium.com/@joshfraser/origin-dollar-ousd-relaunches-to-offer-hassle-free-defi-returns-b8ee0c601dad).
 
 
-## Risk Vectors - OUSD Strategy
+## Risk Vectors - OUSD 
 
 
-### **Smart contract risk**
+### Smart contract risk
 
 OUSD is [audited ](https://docs.ousd.com/security-and-risks/audits)and also offers a bug bounty of up to $250,000 OUSD. Origin has retained [Certora](https://www.certora.com/) to formally verify the various security properties of their contracts. Certora helped Origin to establish automated verifications that will run anytime they update their contract code. Origin has automated checking for common errors with [Slither](https://github.com/crytic/slither) and [Echidna](https://github.com/crytic/echidna) tests.
 
@@ -265,11 +271,11 @@ However, even with formal audits, it is still possible for there to be logic err
 
 ### Custody Risk
 
-There is a primary admin contract, a [5-of-8 multisig](https://etherscan.io/address/0xbe2AB3d3d8F6a32b96414ebbd865dBD276d3d899) which is required to make any code changes to the protocol. OUSD can only be upgraded from this 5 of 8 multi-sig wallet. The keys to this multi-sig are held by individuals with close ties to the company, and not even the Origin founders acting together have enough control to execute owner functions on their own. In addition, the OUSD contracts are owned by a [timelock](https://etherscan.io/address/0x72426BA137DEC62657306b12B1E869d43FeC6eC7) which places a 48-hour time delay before any changes to the protocol can be made.&#x20;
+There is a primary admin contract, a [5-of-8 multi-sig](https://etherscan.io/address/0xbe2AB3d3d8F6a32b96414ebbd865dBD276d3d899) which is required to make any code changes to the protocol. OUSD can only be upgraded from this 5-of-8 multi-sig wallet. The keys to this multi-sig are held by individuals with close ties to the company, and not even the Origin founders acting together have enough control to execute owner functions on their own. In addition, the OUSD contracts are owned by a [timelock](https://etherscan.io/address/0x72426BA137DEC62657306b12B1E869d43FeC6eC7) which places a 48-hour time delay before any changes to the protocol can be made.
 
 Time-delayed admin actions give users a chance to exit OUSD if its admins become malicious, are compromised, or make a change that the users do not like.
 
-Some functionality, such as rebalancing funds between strategies or pausing deposits, can be triggered without the timelock and with far fewer signers. This allows the Origin team to react more quickly to market conditions or security threats. These signers, known as Strategists,  have the ability to execute a limited number of functions with only [2-of-9 signers](https://etherscan.io/address/0xF14BBdf064E3F67f51cd9BD646aE3716aD938FDC). The strategist multisig can do the following actions on the vault:
+Some functionality, such as rebalancing funds between strategies or pausing deposits, can be triggered without the timelock and with far fewer signers. This allows the Origin team to react more quickly to market conditions or security threats. These signers, known as Strategists, have the ability to execute a limited number of functions with only [2-of-9 signers](https://etherscan.io/address/0xF14BBdf064E3F67f51cd9BD646aE3716aD938FDC). The strategist multisig can do the following actions on the vault:
 
 * reallocate - move funds between strategies
 * setVaultBuffer - adjust the amount of funds held outside strategies for cheaper redeems.
@@ -291,7 +297,7 @@ Any reduction in the value of the underlying stablecoins will have a correspondi
 
 OUSD is built on top of other DeFi platforms like Aave, Compound, and Curve which add additional smart contract risk. There are no guarantees that the underlying third-party platforms will continue to work as intended, and any failure in an underlying strategy would potentially lead to a loss of funds for OUSD holders.
 
-The design of OUSD bears resemblance to another stablecoin recently affected by an exploit in its underlying strategy: Angle Protocol's agEUR. It similarly deployed agEUR collateral backing into various DeFi protocols, and had funds in Euler when the protocol was [exploited for $197M](https://rekt.news/euler-rekt/). This [forced Angle to pause the protocol and agEUR experienced a prolonged depeg](https://twitter.com/LlamaRisk/status/1636460843381723136). Fortunately, the attacker has returned most funds, so users will likely be made whole. It does serve as a reminder of the dangers involved with aggressive yield-farming strategies, so users should always be aware of their risk exposure in the underlying strategies. 
+The design of OUSD bears resemblance to another stablecoin recently affected by an exploit in its underlying strategy: Angle Protocol's agEUR. It similarly deployed agEUR collateral backing into various DeFi protocols, and had funds in Euler when the protocol was [exploited for $197M](https://rekt.news/euler-rekt/). This [forced Angle to pause the protocol and agEUR experienced a prolonged depeg](https://twitter.com/LlamaRisk/status/1636460843381723136). Fortunately, the attacker has returned most funds, so users will likely be made whole. It does serve as a reminder of the dangers involved with composable yield-farming strategies, so users should always be aware of their risk exposure in the underlying strategies. 
 
 
 ## Risk Vectors - Archimedes
@@ -307,22 +313,22 @@ For Liquidity Providers (lenders), the relevant smart contracts are:
 
 The Archimedes protocol smart contracts are audited by [Halborn Security](https://halborn.com/) to guarantee the quality and security of every change the team makes to its smart contracts. You can view the [Audits here.](https://docs.archimedesfi.com/audit-and-code-bounty/audits)
 
-Three audits were done on the general system, the auctions, and the Zapper contract between November 2022 and January 2023. Notable findings were one critical issue in the Auction system that would allow a user to acquire leverage at the minimum auction price on a subsequent leverage round (SOLVED). Several medium and low issues were not resolved, including risk of frontrunning the auction by checking bids in the mempool, and insufficient parameter precision and inconsistent parameter formatting in the ParameterStore contract.
+Three audits were conducted: (1) the general system, (2) the auctions, and (3) the Zapper contract, between November 2022 and January 2023. Notable findings were one critical issue in the Auction system that would allow a user to acquire leverage at the minimum auction price on a subsequent leverage round (SOLVED). Several medium and low issues were not resolved, including risk of frontrunning the auction by checking bids in the mempool, and insufficient parameter precision and inconsistent parameter formatting in the ParameterStore contract.
 
 
 ### Depeg Risk
 
-The only utility of lvUSD for users is to be utilized by Archimedes to facilitate leveraged position for the borrowers. lvUSD can break its peg to 3CRV in the following situations:
+The only utility of lvUSD for borrowers is to be utilized by Archimedes to facilitate leveraged position for the borrowers. The only utility for lenders is to access ARCH incentives. lvUSD can break its peg to 3CRV in the following situations:
 
 1. Uncapped leverage distribution.
 2. Unintended withdrawals of 3CRV by LPs
-3. If assets under 3CRV lose their dollar peg.
+3. Assets in the underlying strategy (OUSD) lose their dollar peg.
 
 Since all the decisions regarding the leverage rounds are at the team's discretion, lvUSD depeg due to uncapped leverage distribution relies on how actively the leverage distribution is managed. A significant component of peg management is trust in the team to responsibly conduct leverage rounds such that the Curve pool reamins reasonably balanced.
 
 Yields can incentivize against unintended withdrawals of 3CRV, but there is also no guarantee that the team's dynamic emissions strategy will consistently produce the desired outcome. A decrease in the price of ARCH or alternative yield opportunities may affect the desirability of supplying 3CRV liquidity.
 
-It is also possible that lvUSD depegs as a result of a depeg in the underlying strategy (OUSD). This would be caused by liquidity providers pulling their capital out of the pool on the news of OUSD depeg.
+It is also possible that lvUSD depegs as a result of a depeg in the underlying strategy (OUSD), as liquidity providers would likely pull their capital out of the pool on the news of OUSD depeg.
 
 
 ### Collateral Risk / Underlying Assets Risks
@@ -335,6 +341,7 @@ If the underlying asset experiences a depeg that does not recover, insolvent pos
 
 If the OUSD peg drops below $1, lvUSD would likely also depeg, since currently, OUSD is the only strategy used by Archimedes. Assuming both stables depeg simultaneously, leverage takers may remain solvent and not have their position locked (loss from OUSD->3CRV swap is offset by gain from 3CRV->lvUSD swap). Both the liquidity provider and the leverage taker may experience a loss, but as the liquidity provider's funds were used to provide leverage, they will be impacted the most.
 
+Use this [Google Sheet](https://docs.google.com/spreadsheets/d/1TT8WuC2V5VG_iJzHvY3hbX1IQWfm4NDOPbS7lKR2R_I/edit?usp=sharing) to help determine situations where an LT would have their position locked as a result of a depeg in the underlying strategy.
 
 ### Slippage and Fees (Economic Risk)
 
@@ -372,7 +379,7 @@ Centralization Factors
 
 1.  Is it possible for a single entity to rug its users?
 
-Yes, the team controls access to lvUSD through period leverage rounds, as well as all system functions. There are critical roles controlled by a team-controlled 2-of-3 multisig with no timelock (e.g. upgrade contracts) and by team-controlled EOA accounts without timelock (e.g. Guardian role can globally pause the system, Governor role can change system parameters). 
+Yes, the team controls access to lvUSD through periodic leverage rounds and control many critical system functions. There are critical roles controlled by a team-controlled 2-of-3 multisig with no timelock (e.g. upgrade contracts) and by team-controlled EOA accounts without timelock (e.g. Guardian role can globally pause the system, Governor role can change system parameters). 
 
 2.  If the team vanishes, can the project continue?
 
