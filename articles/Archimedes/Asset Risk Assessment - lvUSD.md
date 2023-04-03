@@ -180,7 +180,7 @@ Archimedes Contracts Involved:
 * [LeverageEngine](https://etherscan.io/address/0x03dc7Fa99B986B7E6bFA195f39085425d8172E29) - Runs leverage cycles and underwrites debt to a Position Token NFT.
 * [Position Token NFT](https://etherscan.io/token/0x14c6a3c8dba317b87ab71e90e264d0ea7877139d) - The NFT containing unique attributes of an open position (collateral, debt, expiry etc.)
 * [lvUSD](https://etherscan.io/address/0x94A18d9FE00bab617fAD8B49b11e9F1f64Db6b36) - The synthetic stablecoin used to attain leverage.
-* [Treasury Multisig (Protocol Fees)](https://etherscan.io/address/0x29520fd76494fd155c04fa7c5532d2b2695d68c6) - The 2-of-3 multisig managed by Archimedes team collects protocol fees and periodically redistributes to LPs.
+* [Treasury Multi-sig (Protocol Fees)](https://etherscan.io/address/0x29520fd76494fd155c04fa7c5532d2b2695d68c6) - The 2-of-3 multi-sig managed by Archimedes team collects protocol fees and periodically redistributes to LPs.
 
 To demonstrate the mechanics of the OUSD strategy, we break down this [sample tx](https://etherscan.io/tx/0xd401458a98715a7b4ed490154c4f80bfea59cb4ae06bedbbf050b159fd2ad5df) of an LT opening a new leverage position:
 
@@ -229,7 +229,7 @@ While the team's intention may be to incrementally move toward the security meas
 
 #### Notable Access Control Findings
 
-Importantly, the Admin role across most of the Archimedes system is this [2-of-3 multisig](https://app.safe.global/home?safe=eth:0x84869Ccd623BF5Fb1d18E61A21B20d50cC786744) composed of team members. It is responsible for minting lvUSD, and has the power to upgrade almost all contracts in the system without a timelock (with exception of the lvUSD contract). This is therefore a critical component of the system access control, and users should take into consideration the security of the multisig parameters and their trust in the Archimedes team before participating as an LP or LT.
+Importantly, the Admin role across most of the Archimedes system is this [2-of-3 multi-sig](https://app.safe.global/home?safe=eth:0x84869Ccd623BF5Fb1d18E61A21B20d50cC786744) composed of team members. It is responsible for minting lvUSD, and has the power to upgrade almost all contracts in the system without a timelock (with exception of the lvUSD contract). This is therefore a critical component of the system access control, and users should take into consideration the security of the multi-sig parameters and their trust in the Archimedes team before participating as an LP or LT.
 
 The [Timelock contract](https://etherscan.io/address/0x01D3Aa4C9a61f5fB4b3EF5aD90C0e02ccF861842) recently granted the Admin role of the lvUSD token now requires the multi-sig to delay before changing Admin, changing Minter (also the multi-sig), or changing the mint destination. Note that there is no timelock currently for minting lvUSD to the current mint destination (Coordinator contract). The Timelock currently has a minDelay of [1.2 hours](https://etherscan.io/address/0x01D3Aa4C9a61f5fB4b3EF5aD90C0e02ccF861842#readContract#F6), so users should monitor this value that it should be increased to 72 hours as specified in the Archimedes docs.
 
@@ -286,7 +286,7 @@ There is a primary admin contract, a [5-of-8 multi-sig](https://etherscan.io/add
 
 Time-delayed admin actions give users a chance to exit OUSD if its admins become malicious, are compromised, or make a change that the users do not like.
 
-Some functionality, such as rebalancing funds between strategies or pausing deposits, can be triggered without the timelock and with far fewer signers. This allows the Origin team to react more quickly to market conditions or security threats. These signers, known as Strategists, have the ability to execute a limited number of functions with only [2-of-9 signers](https://etherscan.io/address/0xF14BBdf064E3F67f51cd9BD646aE3716aD938FDC). The strategist multisig can do the following actions on the vault:
+Some functionality, such as rebalancing funds between strategies or pausing deposits, can be triggered without the timelock and with far fewer signers. This allows the Origin team to react more quickly to market conditions or security threats. These signers, known as Strategists, have the ability to execute a limited number of functions with only [2-of-9 signers](https://etherscan.io/address/0xF14BBdf064E3F67f51cd9BD646aE3716aD938FDC). The strategist multi-sig can do the following actions on the vault:
 
 * reallocate - move funds between strategies
 * setVaultBuffer - adjust the amount of funds held outside strategies for cheaper redeems.
@@ -390,7 +390,7 @@ Centralization Factors
 
 1.  Is it possible for a single entity to rug its users?
 
-Yes, the team controls access to lvUSD through periodic leverage rounds and control many system functions. There are critical roles controlled by the team's 2-of-3 multisig with no timelock (e.g. upgrade contracts) and by team-controlled EOA accounts without timelock (e.g. Guardian role can globally pause the system, Governor role can change system parameters). 
+Yes, the team controls access to lvUSD through periodic leverage rounds and control many system functions. There are critical roles controlled by the team's 2-of-3 multi-sig with no timelock (e.g. upgrade contracts) and by team-controlled EOA accounts without timelock (e.g. Guardian role can globally pause the system, Governor role can change system parameters). 
 
 2.  If the team vanishes, can the project continue?
 
