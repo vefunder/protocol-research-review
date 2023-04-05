@@ -433,5 +433,10 @@ Several [audits](https://docs.archimedesfi.com/audit-and-code-bounty/audits) hav
 
 ## Risk Team Recommendation
 
-Archimedes has not made any proposal to receive CRV emissions. Before any consideration is made to submit a gauge proposal, the Archimedes team should transfer all access controls to their multi-sig (including Zapper Admin, Guardian, and Governor) and implement a timelock on all critical functions- most importantly to put contract upgrades (Admin role) behind a timelock. Archimedes should strive to reduce dependence on team actions by automating leverage rounds and fee/emissions distribution, and introducing token governance. The team has informed us that a v2 is planned that will introduce a liquidation mechanism. We look forward to such features which serve to improve the resilience of the protocol and offer greater assurances to its users. 
+Archimedes is a young protocol that is in the process of incrementally refining its system security. At this time, it should be regarded as a project in beta and used with caution. Their team has not made any proposal to receive CRV emissions, but there should be some improvements made before any consideration is made to submit a proposal:
+* The Archimedes team should transfer all access controls to their multi-sig (including Zapper Admin, Guardian, and Governor) and implement a timelock on all critical functions- most importantly to put contract upgrades (Admin role) behind a timelock. 
+* Archimedes should strive to reduce dependence on team actions by automating leverage rounds and fee/emissions distribution, and introducing token governance.
+* The Archimedes docs should be improved to accurately and transparently reflect the functionality of the protocol (access controls, disclosure of all protocol fees, explanation of the leverage farming strategy).
+
+Their team has informed us that a v2 is planned that will introduce a liquidation mechanism. We look forward to such features which serve to improve the resilience of the protocol and offer greater assurances to its users. 
 
