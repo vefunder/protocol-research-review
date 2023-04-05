@@ -206,8 +206,23 @@ To demonstrate the mechanics of the OUSD strategy, we break down this [sample tx
 * 20: Unspent ARCH sent back to the user (The fee estimate is not always exact so ARCH dust is returned to the user).
 * 21: Protocol mints an [Archimedes Position Token NFT](https://etherscan.io/nft/0x14c6a3c8dba317b87ab71e90e264d0ea7877139d/33) to user that represents their position (amount of collateral, amount borrowed, expiry).
 
-The position has a fixed expiry, but the position holder is able to close their position before expiration. To close a position, the strategy sells enough OUSD to repay the lvUSD debt, and returns the remaining OUSD to the user. The user may receive less than their original deposit due to fees and slippage. They may even have their position locked in extreme cases, such as an OUSD depeg, where their leveraged position is unable to pay off the debt. We created this [Google Sheet](https://docs.google.com/spreadsheets/d/1AcDaQN4lNAXZKvilN1li10aU2XbegT9TfCQsiUki88E/edit?usp=sharing) to help calculate conditions when a position would become locked.
+#### Closing a Position
 
+The position has a fixed expiry, but the position holder is able to close their position before expiration. To close a position, the user calls unwindLeveragedPosition() on the LeverageEngine contract, providing the ID of their position NFT and minimum OUSD required from the operation. the strategy sells enough OUSD to repay the lvUSD debt, and returns the remaining OUSD to the user. The user may receive less than their original deposit due to fees and slippage. They may even have their position locked in extreme cases, such as an OUSD depeg, where their leveraged position is unable to pay off the debt. We created this [Google Sheet](https://docs.google.com/spreadsheets/d/1AcDaQN4lNAXZKvilN1li10aU2XbegT9TfCQsiUki88E/edit?usp=sharing) to help calculate conditions when a position would become locked.
+
+The swapOUSDforLvUSD() function, shown below, calculates how much OUSD is needed to output enough lvUSD for debt repayment.
+
+<img width="1172" alt="Screen Shot 2023-04-05 at 2 26 25 PM" src="https://user-images.githubusercontent.com/51072084/230215581-4ef259e8-69b9-4fa6-b0f6-2e3b8c1cf17c.png">
+
+Source: [Archimedes Exchanger (Etherscan)](https://etherscan.io/address/0xeade82804c67365eae67095730e70b131efb2b4e#code)
+
+This results in a hidden fee to the user when they close a position. Because the amount needed from the swap is an estimate, and all funds swapped to lvUSD are returned to/burned by the protocol, users actually repay more lvUSD than they initially borrow. 
+
+Take [this position](https://etherscan.io/nft/0x14c6a3c8dba317b87ab71e90e264d0ea7877139d/36) as an example. The user initially borrowed 485,892 and paid back 487,965 because the swap outputted .427% more lvUSD than estimated. While the position realized a yield of 9.64%, it would have earned 13.36% without this hidden fee- a 28% reduction in profitability. See the relevant details of the position here:
+
+<img width="510" alt="Screen Shot 2023-04-05 at 2 51 09 PM" src="https://user-images.githubusercontent.com/51072084/230220770-ebfe8494-df73-44c1-85cd-48d48d66414a.png">
+
+Archimedes should communicate this contract behavior to their users, and ideally, should return any lvUSD in excess of the original position debt to the user.
 
 ### Access Control
 
