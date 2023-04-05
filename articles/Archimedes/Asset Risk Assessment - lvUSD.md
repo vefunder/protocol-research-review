@@ -33,6 +33,8 @@ Archimedes has a [lvUSD/3CRV](https://curve.fi/#/ethereum/pools/factory-v2-268/d
 * [Github](https://github.com/thisisarchimedes/Archimedes\_Finance)
 * Important [contracts](https://docs.archimedesfi.com/technical-documentation/contract-addresses)
 * lvUSD/3CRV [Curve pool](https://curve.fi/#/ethereum/pools/factory-v2-268/deposit)
+* [Position locked Calculator by LlamaRisk](https://docs.google.com/spreadsheets/d/1AcDaQN4lNAXZKvilN1li10aU2XbegT9TfCQsiUki88E/edit?usp=sharing)
+* [Access Control Spreadsheet by LlamaRisk](https://docs.google.com/spreadsheets/d/1GMlIJwBW6ns9eWuBmWTqZEt2NrjWzL9guzCz_8oM3uI/edit?usp=sharing)
 * Audit Reports:
   * [Smart Contract -Security Audit](https://github.com/thisisarchimedes/Archimedes\_Finance/blob/main/audit/Archimedes\_Finance\_Smart\_Contract\_Security\_Audit\_Report\_Halborn\_Final.pdf) - Nov 2022
   * [Auctions - Security Audit](https://github.com/thisisarchimedes/Archimedes\_Finance/blob/main/audit/Archimedes\_Finance\_Auctions\_Smart\_Contract\_Security\_Audit\_Report\_Halborn\_Final.pdf) - Dec 2022
@@ -204,7 +206,7 @@ To demonstrate the mechanics of the OUSD strategy, we break down this [sample tx
 * 20: Unspent ARCH sent back to the user (The fee estimate is not always exact so ARCH dust is returned to the user).
 * 21: Protocol mints an [Archimedes Position Token NFT](https://etherscan.io/nft/0x14c6a3c8dba317b87ab71e90e264d0ea7877139d/33) to user that represents their position (amount of collateral, amount borrowed, expiry).
 
-The position has a fixed expiry, but the position holder is able to close their position before expiration. To close a position, the strategy sells enough OUSD to repay the lvUSD debt, and returns the remaining OUSD to the user. The user may receive less than their original deposit due to fees and slippage. They may even have their position locked in extreme cases, such as an OUSD depeg, where their leveraged position is unable to pay off the debt. We created this [Google Sheet](https://docs.google.com/spreadsheets/d/1TT8WuC2V5VG_iJzHvY3hbX1IQWfm4NDOPbS7lKR2R_I/edit?usp=sharing) to help calculate conditions when a position would become locked.
+The position has a fixed expiry, but the position holder is able to close their position before expiration. To close a position, the strategy sells enough OUSD to repay the lvUSD debt, and returns the remaining OUSD to the user. The user may receive less than their original deposit due to fees and slippage. They may even have their position locked in extreme cases, such as an OUSD depeg, where their leveraged position is unable to pay off the debt. We created this [Google Sheet](https://docs.google.com/spreadsheets/d/1AcDaQN4lNAXZKvilN1li10aU2XbegT9TfCQsiUki88E/edit?usp=sharing) to help calculate conditions when a position would become locked.
 
 
 ### Access Control
@@ -352,7 +354,7 @@ If the underlying asset experiences a depeg that does not recover, insolvent pos
 
 If the OUSD peg drops below $1, lvUSD would likely also depeg, since currently, OUSD is the only strategy used by Archimedes. Assuming both stables depeg simultaneously, leverage takers may remain solvent and not have their position locked (loss from OUSD->3CRV swap is offset by gain from 3CRV->lvUSD swap). Both the liquidity provider and the leverage taker may experience a loss, but as the liquidity provider's funds were used to provide leverage, they will be impacted the most.
 
-Use this [Google Sheet](https://docs.google.com/spreadsheets/d/1TT8WuC2V5VG_iJzHvY3hbX1IQWfm4NDOPbS7lKR2R_I/edit?usp=sharing) to help determine situations where an LT would have their position locked as a result of a depeg in the underlying strategy.
+Use this [Google Sheet](https://docs.google.com/spreadsheets/d/1AcDaQN4lNAXZKvilN1li10aU2XbegT9TfCQsiUki88E/edit?usp=sharing) to help determine situations where an LT would have their position locked as a result of a depeg in the underlying strategy.
 
 ### Slippage and Fees (Economic Risk)
 
