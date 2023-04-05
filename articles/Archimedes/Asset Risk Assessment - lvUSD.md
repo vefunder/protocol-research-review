@@ -75,11 +75,9 @@ A leverage round is comprised of the following parameters (Note that all system 
 
 #### Protocol Participant: Liquidity Provider
 
-The protocol relies heavily on the 3CRV liquidity in the lvUSD/3CRV pool. A leverage round can only occur if the Curve pool is reasonably balanced, and the quantity of lvUSD minted is dependent on liquidity in the pool. To ensure 3CRV liquidity, Archimedes uses a dynamic emission mechanism to consistently provide competitive yields.
+As a liquidity provider, a user simply deposits 3CRV into the lvUSD pool and receives ARCH incentives on top of swap fees generated on the pool. 3CRV LPs are the lenders of the Archimedes leverage system. Their liquidity is borrowed and deployed to a yield-generating strategy (in this case swapped into the OUSD stablecoin). LPs are making a leveraged bet that the underlying strategy will not incur a loss, and Archimedes rewards them for taking on that risk.
 
-Liquidity providers receive ARCH incentives from Archimedes and swap fees from Curve.
-
-As a liquidity provider, a user can simply deposit 3CRV in the lvUSD pool and will receive ARCH incentives on top of swap fees generated on the pool. 3CRV LPs are the lenders of the system. 
+The protocol relies heavily on the 3CRV liquidity in the lvUSD/3CRV pool. A leverage round can only occur if the Curve pool is reasonably balanced, with the quantity of lvUSD minted dependent on liquidity depth. To ensure 3CRV liquidity, Archimedes uses a dynamic emission mechanism to consistently provide competitive yields.
 
 #### Protocol Participant: Leverage Takers
 
@@ -91,9 +89,11 @@ The LT provides collateral in one of the counterparty assets of the Curve pool (
 
 #### Price stability of lvUSD
 
-Every time a borrower takes leverage, lvUSD is minted and swapped for 3CRV. Thus the lvUSD quantity in the lvUSD/3CRV pool increases, pushing the price lower. The price of lvUSD w.r.t 3CRV affects the realized loss/gain for borrowers at the time of repayment. lvUSD price also matters to liquidity providers as it directly impacts the slippage on their trade while depositing or withdrawing their liquidity in 3CRV.
+Every time a borrower takes leverage, lvUSD is minted and swapped for 3CRV. The increased quantity of lvUSD in the lvUSD/3CRV pool puts downward pressure on the price, which affects the realized loss/gain for borrowers at the time of repayment. lvUSD price also impacts liquidity providers, who can be affected by slippage and impermanent loss while depositing or withdrawing their 3CRV liquidity. 
 
-The Archimedes team controls the amount and frequency of leverage given to the borrowers. This ensures the price of lvUSD stays near the $1 peg.
+The Archimedes team controls the amount and frequency of leverage given to the borrowers. This ensures the price of lvUSD stays near the $1 peg. The lvUSD Curve pool also has a notably high "A" value (800), which means the pool must become significantly imbalanced before inducing noticeable deviations from the peg. There is therefore a heightened responsibility placed on the team to manage the pool's balance.
+
+The lvUSD peg is managed with the following mechanics:
 
 * Leverage is capped: Archimedes opens a new auction only when there is enough liquidity in the pool. Each auction is for a limited amount of leverage and is designed to maintain the balance of the pool.
 * lvUSD >> $1: If lvUSD rises above $1, Archimedes will raise the leverage cap. More lvUSD will be borrowed and enter circulation, returning the lvUSD peg.
@@ -367,9 +367,10 @@ If an underlying asset (i.e. OUSD/DAI/USDC/USDT) loses its peg and causes the po
 
 If the underlying asset experiences a depeg that does not recover, insolvent positions may become permanently locked in Archimedes. It is still possible for the leverage taker to sell their Position Token NFT on the open market through OpenSea, although in such a situation the position is likely worth near 0.
 
-If the OUSD peg drops below $1, lvUSD would likely also depeg, since currently, OUSD is the only strategy used by Archimedes. Assuming both stables depeg simultaneously, leverage takers may remain solvent and not have their position locked (loss from OUSD->3CRV swap is offset by gain from 3CRV->lvUSD swap). Both the liquidity provider and the leverage taker may experience a loss, but as the liquidity provider's funds were used to provide leverage, they will be impacted the most.
+If the OUSD peg drops below $1, lvUSD would likely also depeg since OUSD is the only strategy used by Archimedes. Assuming both stables depeg simultaneously, leverage takers may remain solvent and not have their position locked (loss from OUSD->3CRV swap is offset by gain from 3CRV->lvUSD swap). Use this [Google Sheet](https://docs.google.com/spreadsheets/d/1AcDaQN4lNAXZKvilN1li10aU2XbegT9TfCQsiUki88E/edit?usp=sharing) to help determine situations where an LT would have their position locked as a result of a depeg in the underlying strategy. 
 
-Use this [Google Sheet](https://docs.google.com/spreadsheets/d/1AcDaQN4lNAXZKvilN1li10aU2XbegT9TfCQsiUki88E/edit?usp=sharing) to help determine situations where an LT would have their position locked as a result of a depeg in the underlying strategy.
+Both the liquidity provider and the leverage taker may experience a loss, but as the liquidity provider's funds were used to provide leverage, they will be impacted the most. For example, say an LP supplys 1m 3CRV to the lvUSD pool. An LT borrows the 3CRV, converting funds to OUSD. OUSD and lvUSD both depeg to $.50, so the LT is still able to close their position. The LT's loss is offset by the depeg in both OUSD and lvUSD, but only 500k 3CRV is returned to the lvUSD pool. It is the 3CRV liquidity provider, in this case, who bears the loss.
+
 
 ### Slippage and Fees (Economic Risk)
 
