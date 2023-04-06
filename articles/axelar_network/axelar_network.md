@@ -223,6 +223,9 @@ The data above shows the count of different event types occurring in cross-chain
 
 [Function call diversity](https://consensys.net/research/measuring-blockchain-decentralization/) refers to the number of different functions that are being called within a software system or application. In the context of an arbitrary message bridge like Axelar, function call diversity is important because it can suggest insights on system robustness, maintainability, and extensibility. There are a range of different event types occurring in cross-chain transfers on the Axelar Network. Overall, the diversity of event types suggests that the platform is versatile and can accommodate a range of different use cases and applications.
 
+### A note on Client Diversity
+[Client diversity](https://clientdiversity.org/) refers to the presence of multiple software implementations of a blockchain network protocol, which is important in general-purpose blockchains like Ethereum to enhance network security, reliability, and decentralization. However, in application-specific blockchains like Axelar, client diversity may be less important due to the network's specialization and focus, and the ability to leverage the underlying security of the Cosmos Hub which has multiple client implementations. 
+
 
 ### Developer Activity
 
