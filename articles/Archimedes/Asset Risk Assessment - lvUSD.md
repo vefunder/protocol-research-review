@@ -106,12 +106,12 @@ There are 3 types of fees associated with the Archimedes Protocol, which are tra
 * Leverage Fee (ARCH Token) - When a user opens a position, they pay some ARCH tokens as an upfront fee to access leverage (lvUSD). It is not required for a user to hold ARCH tokens as Archimedes will take the fee from the collateral deposit.
 * Origination Fee (OUSD) - When a user opens a position there is a one-time origination fee applied. This amount is applied to the borrowed amount and is collected from the underlying strategy asset (OUSD). The origination fee is 0.1% at the time of writing the report (down from an initial 0.5% fee).
 * Performance Fee (OUSD) - The Performance Fee is 30% and it applies only to the interest earned over the lifetime of the loan (interest earned from Collateral and Leverage). This fee is taken only when the position is closed or when it expires.
-* Open & Close exchange fee - 0.5% is charged on the funds deposited as collateral for leverage farming.
+* Open & Close exchange fee - Users will experience additional fees from Curve swap fee (.04% per swap), slippage, and Ethereum gas fee upon position open and close. Users will also experience a variable exchange fee to Archimedes (~.01-.4%) when closing their position. Archimedes estimates position exchange fees to be ~0.5% of their collateral deposit.
 
 These fees are readable in the [ParameterStore](https://etherscan.io/address/0xcc6Ea29928A1F6bc4796464F41b29b6d2E0ee42C#readProxyContract) contract. Leverage fee = getArchToLevRatio / Origination fee = getOriginationFeeRate / Performance fee = getRebaseFeeRate. 
 The effect of fees on a position profitability can be tracked on the Archimedes [calculator page](https://calculator.archimedesfi.com/?levPrice=0\&originFee=NaN).
 
-At present, Archimedes is emitting more ARCH tokens than the leverage fee they are receiving, with the objective of preserving and attracting liquidity to their liquidity pool. However, it is important to note that the [Archimedes docs](https://docs.archimedesfi.com/taking-leverage-(borrower)/taking-leverage-explained) states that all fees denominated in OUSD are being used to incentivize LPs. As of the time of writing this report, this is not the case.
+At present, Archimedes is emitting more ARCH tokens than the leverage fee they are receiving, with the objective of preserving and attracting liquidity to their liquidity pool. However, the [Archimedes docs](https://docs.archimedesfi.com/taking-leverage-(borrower)/taking-leverage-explained) state that all fees denominated in OUSD are being used to incentivize LPs. As of the time of writing this report, this is not the case.
 
 ![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/discord1.PNG)
 
@@ -211,7 +211,7 @@ To demonstrate the mechanics of the OUSD strategy, we break down this [sample tx
 
 The position has a fixed expiry, but the position holder is able to close their position before expiration. To close a position, the user calls unwindLeveragedPosition() on the LeverageEngine contract, providing the ID of their position NFT and minimum OUSD required from the operation. the strategy sells enough OUSD to repay the lvUSD debt, and returns the remaining OUSD to the user. The user may receive less than their original deposit due to fees and slippage. 
 
-+When a user is unable to repay the loan, Archimedes has the ability to lock a user's position, which allows for the position to accrue interest and be used to repay debts in the future. This can happen when the asset proportions in OUSD/3CRV & lvUSD/3CRV pool changes out of your favor. We created this [Google Sheet](https://docs.google.com/spreadsheets/d/1AcDaQN4lNAXZKvilN1li10aU2XbegT9TfCQsiUki88E/edit?usp=sharing) to help you gauge if you position is repayable or not and if it will get locked. Moreover, in certain rare situations where the slippage for swapping OUSD for lvUSD is greater than 0.2%, Archimedes may prevent the user from exiting the position.
+When a user is unable to repay the loan, Archimedes will lock a user's position. The position will still accrue interest that can potentially repay debts in the future. Position locking can happen when imbalance in the OUSD/3CRV & lvUSD/3CRV pools causes the position to become insolvent. We created this [Google Sheet](https://docs.google.com/spreadsheets/d/1AcDaQN4lNAXZKvilN1li10aU2XbegT9TfCQsiUki88E/edit?usp=sharing) to help you calculate if your position is repayable or not and if it will get locked. Moreover, in certain rare situations where the slippage for swapping OUSD for lvUSD is greater than 1%, Archimedes may prevent the user from exiting the position (Note: max allowable slippage is a parameter in the ParameterStore contract that can be adjusted by the Governor to a value between 0 and 5%).
 
 The swapOUSDforLvUSD() function, shown below, calculates how much OUSD is needed to output enough lvUSD for debt repayment.
 
@@ -221,7 +221,7 @@ Source: [Archimedes Exchanger (Etherscan)](https://etherscan.io/address/0xeade82
 
 This results in a hidden fee to the user when they close a position. Because the amount needed from the swap is an estimate, and all funds swapped to lvUSD are returned to/burned by the protocol, users actually repay more lvUSD than they initially borrow. 
 
-To illustrate this scenario, consider the following [example](https://etherscan.io/nft/0x14c6a3c8dba317b87ab71e90e264d0ea7877139d/36): The user initially borrowed 485,892 and paid back 487,965, 0.427% more lvUSD than it should be because of the estimation done by the contracts. While the position realized a yield of 9.64%, it would have earned 13.36% had this hidden fee not been incurred, resulting in a 28% reduction in profitability. You can view the relevant details of the position here for more information.
+To illustrate this scenario, consider the following [example](https://etherscan.io/nft/0x14c6a3c8dba317b87ab71e90e264d0ea7877139d/36): The user initially borrowed 485,892 and paid back 487,965, 0.427% more lvUSD than it should be because of the estimation done by the contracts. While the position realized a yield of 9.64%, it would have earned 13.36% had this hidden fee not been incurred, reducing overall profitability by 28%. You can view the relevant details of the position here for more information:
 
 <img width="510" alt="Screen Shot 2023-04-05 at 2 51 09 PM" src="https://user-images.githubusercontent.com/51072084/230220770-ebfe8494-df73-44c1-85cd-48d48d66414a.png">
 
