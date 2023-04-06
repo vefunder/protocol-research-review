@@ -318,8 +318,8 @@ e. AxelarGasService.sol
 
 Access control refers to the control over the smart contract code and its execution. In this section, we will discuss the risks associated with smart contract ownership and how they can be mitigated to ensure the security of the network. 
 
-#### AxelarGatewayProxyMultisig.sol
-AxelarGatewayProxyMultisig.sol is the central contract of the Axelar network and is owned by a multisignature scheme that is implemented in AdminMultisigBase.sol. This scheme allows multiple addresses to collectively own and control the contract. The contract coordinates various library contracts such as AxelarGateway.sol, AxelarGatewayProxy.sol, and AxelarAuthWeighted.sol. Additionally, it integrates with other library contracts to provide additional functionalities, such as cross-chain gas payments, token deployment, and signature authentication checks.
+#### AxelarGatewayProxy.sol
+AxelarGatewayProxy.sol, formerly known as AxelarGatewayProxyMultisig.sol, is the central contract of the Axelar network and is owned by a multisignature scheme that is implemented in AdminMultisigBase.sol. This scheme allows multiple addresses to collectively own and control the contract. The contract coordinates various library contracts such as AxelarGateway.sol, AxelarGatewayProxy.sol, and AxelarAuthWeighted.sol. Additionally, it integrates with other library contracts to provide additional functionalities, such as cross-chain gas payments, token deployment, and signature authentication checks.
 
 At present (i.e. epoch 3) the [admin threshold is set to 4](https://etherscan.io/address/0x4F4495243837681061C4743b74B3eEdf548D56A5#readProxyContract#F2) out of 8 addresses. The owner addresses are listed below: 
 
@@ -346,17 +346,7 @@ At present (i.e. epoch 3) the [admin threshold is set to 4](https://etherscan.io
 |[Source:https://etherscan.io/address/0x228b92510130ec2E09C6d5645039c8cB834aD42d#readContract#F4]|
 
 #### TokenDeployer.sol
-TokenDeployer.sol is a core contract of the Axelar network responsible for deploying BurnableMintableCappedERC20 tokens. The contract is owned by the Axelar Token Deployer, which is set as the initial owner in the constructor function of the Ownable contract. 
-|![TokenDeployer.sol](https://i.imgur.com/LC3di4t.png)|
-|--|
-|[Source: https://etherscan.io/address/0xe88Ab68Cd69e92294FcC3BBBD894Fb183197fA39#code]
-
-The onlyOwner modifier ensures that only the contract owner can call certain functions, and the transferOwnership function allows the owner to transfer ownership to another address. Based on the events, it appears that ownership of the contract has not been transferred and still resides with the [Axelar Deployer](https://etherscan.io/address/0xA57ADCE1d2fE72949E4308867D894CD7E7DE0ef2).
-
-|![Events](https://i.imgur.com/5mR1rzZ.png)|
-|--|
-|[Source: https://etherscan.io/address/0xe88Ab68Cd69e92294FcC3BBBD894Fb183197fA39#events]|
-
+[TokenDeployer.sol](https://etherscan.io/address/0xe88Ab68Cd69e92294FcC3BBBD894Fb183197fA39#code) is a core contract of the Axelar network responsible for deploying BurnableMintableCappedERC20 tokens. It is a deployment library that contains the bytecode of the token. The Axelar Gateway is using Solidity delegatecall to utilize the library, and it is actually the gateway contract (AxelarGatewayProxy.sol) that is responsible for the deployment. This means that anyone can hypothetically use TokenDeployer to deploy their own instances of Axelar's token implementation without affecting the gateway contract.
 
 #### AxelarGasService.sol
 AxelarGasService.sol is a core contract in the Axelar network that handles cross-chain gas payments. It is [owned by an EOA](https://etherscan.io/address/0x2d5d7d31F671F86C782533cc367F14109a082712#readProxyContract#F4), which can upgrade the contract.
