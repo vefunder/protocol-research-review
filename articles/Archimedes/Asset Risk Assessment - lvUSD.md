@@ -60,9 +60,9 @@ As APYs fluctuate between pools, users must switch pools to optimize their yield
 
 Archimedes has built a strategy that makes use of Curve's stableswap pool, incentivized by its own dynamic emissions mechanism, that attempts to offer consistently superior returns to its LPs. The strategy involves protocol-owned liquidity, which gives Archimedes control of the pool's behavior, allowing it to offer its users access to profitable yield strategies.
 
-Archimedes pays LPs in its native ARCH token. Liquidity Takers (LTs) must pay a fee (in ARCH tokens) when opening a leverage position. Demand to open a leveraged position thus produces a buy pressure on ARCH tokens. ARCH fees are then redistributed to LPs to incentivize deep liquidity and enable to protocol to mint greater amounts of lvUSD. 
+Archimedes pays LPs in its native ARCH token. Liquidity Takers (LTs) must pay a fee (in ARCH tokens) when opening a leverage position. Demand to open a leveraged position thus produces a buy pressure on ARCH tokens. ARCH fees are then redistributed to LPs to incentivize deep liquidity and enable the protocol to mint greater amounts of lvUSD. 
 
-ARCH thus serves as a utility token within the protocol that is required to access leverage. The ARCH yield provided by the protocol is [dynamically adjusted](https://docs.archimedesfi.com/tokenomics-and-ecosystem/arch-dynamic-emissions) such that pool yields remain competitive against a subset of high TVL stable coin pools on Curve finance.
+ARCH thus serves as a utility token within the protocol that is required to access leverage. The ARCH yield provided by the protocol is [dynamically adjusted](https://docs.archimedesfi.com/tokenomics-and-ecosystem/arch-dynamic-emissions) such that pool yields remain competitive against a subset of high TVL stablecoin pools on Curve.
 
 
 ### Leverage Rounds
@@ -73,19 +73,19 @@ A leverage round is comprised of the following parameters (Note that all system 
 
 ![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/ttributes.PNG)
 
+#### Protocol Participant: Leverage Takers
+
+Borrowers looking for leverage must participate in one of the leverage rounds conducted by Archimedes. 
+
+During a leverage round, LTs can bid on available leverage. The amount of leverage available per ARCH token is determined through a Dutch auction, which starts with a low price (ie. cost of leverage) and gradually increases until the desired amount of leverage is reached or there is no more leverage available. The ARCH leverage fee is an upfront payment to the Archimedes treasury which will eventually flow to LPs. The fee is deducted from the collateral itself and automatically swapped upon deposit, so the user does not need to own any ARCH. In addition to the dynamic leverage fee (paid in ARCH), there is a small origination fee paid in the collateral token (OUSD).
+
+The LT provides collateral in one of the counterparty assets of the Curve pool (USDT, USDC, or DAI). This collateral serves as an input asset in the predefined strategy (e.g. Archimedes uses an OUSD strategy that converts deposits to OUSD).
+
 #### Protocol Participant: Liquidity Provider
 
 As a liquidity provider, a user simply deposits 3CRV into the lvUSD pool and receives ARCH incentives on top of swap fees generated on the pool. 3CRV LPs are the lenders of the Archimedes leverage system. Their liquidity is borrowed and deployed to a yield-generating strategy (in this case swapped into the OUSD stablecoin). LPs are making a leveraged bet that the underlying strategy will not incur a loss, and Archimedes rewards them for taking on that risk.
 
 The protocol relies heavily on the 3CRV liquidity in the lvUSD/3CRV pool. A leverage round can only occur if the Curve pool is reasonably balanced, with the quantity of lvUSD minted dependent on liquidity depth. To ensure 3CRV liquidity, Archimedes uses a dynamic emission mechanism to consistently provide competitive yields.
-
-#### Protocol Participant: Leverage Takers
-
-Borrowers looking for leverage must participate in one of the leverage rounds conducted by Archimedes. 
-
-During a leverage round, LTs can bid on available leverage. The amount of leverage available per ARCH token is determined through a Dutch auction, which starts with a low price and gradually increases until the desired amount of leverage is reached or there is no more leverage available. The ARCH leverage fee is an upfront payment to the Archimedes treasury which will eventually flow to LPs. The fee is deducted from the collateral itself and automatically swapped upon deposit, so the user does not need to own any ARCH. In addition to the dynamic leverage fee (paid in ARCH), there is a small origination fee paid in the collateral token (OUSD).
-
-The LT provides collateral in one of the counterparty assets of the Curve pool (USDT, USDC, or DAI). This collateral serves as an input asset in the predefined strategy (e.g. Archimedes uses an OUSD strategy that converts deposits to OUSD).
 
 #### Price stability of lvUSD
 
@@ -111,7 +111,7 @@ There are 3 types of fees associated with the Archimedes Protocol, which are tra
 These fees are readable in the [ParameterStore](https://etherscan.io/address/0xcc6Ea29928A1F6bc4796464F41b29b6d2E0ee42C#readProxyContract) contract. Leverage fee = getArchToLevRatio / Origination fee = getOriginationFeeRate / Performance fee = getRebaseFeeRate. 
 The effect of fees on a position profitability can be tracked on the Archimedes [calculator page](https://calculator.archimedesfi.com/?levPrice=0\&originFee=NaN).
 
-At present, Archimedes is emitting more ARCH tokens than the leverage fee they are receiving, with the objective of preserving and attracting liquidity to their liquidity pool. However, the [Archimedes docs](https://docs.archimedesfi.com/taking-leverage-(borrower)/taking-leverage-explained) state that all fees denominated in OUSD are being used to incentivize LPs. As of the time of writing this report, this is not the case.
+The [Archimedes docs](https://docs.archimedesfi.com/taking-leverage-(borrower)/taking-leverage-explained) state that all protocol fees are redirected as incentives to LPs in their Curve pool. At present, Archimedes is emitting more ARCH tokens than the leverage fee they are receiving, with the objective of preserving and attracting liquidity to their liquidity pool. Notably, fees denominated in OUSD are not currently being used to incentivize LPs, contrary to statements made in the docs.
 
 ![](https://github.com/DiligentDeer/Assets/blob/main/lvUSD/discord1.PNG)
 
@@ -411,7 +411,7 @@ Centralization Factors
 
 1.  Is it possible for a single entity to rug its users?
 
-Yes, the team controls access to lvUSD through periodic leverage rounds and control many system functions. There are critical roles controlled by the team's 2-of-3 multi-sig with no timelock (e.g. upgrade contracts) and by team-controlled EOA accounts without timelock (e.g. Guardian role can globally pause the system, Governor role can change system parameters). 
+Yes, the team controls access to lvUSD through periodic leverage rounds and control many system functions. There are critical roles controlled by the team's 2-of-3 multi-sig with no timelock (e.g. upgrade contracts) and by team-controlled EOA accounts without timelock (e.g. Guardian role can globally pause the system, Governor role can change system parameters, Zapper contract is upgradeable via EOA). 
 
 2.  If the team vanishes, can the project continue?
 
