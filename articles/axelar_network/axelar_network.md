@@ -26,24 +26,22 @@
 
 ### Relation to Curve
 
-Axelar has put forward two successful proposals to implement CRV rewards for gauges, each designated for a specific pool of axlUSDC tokens:
+Axelar has put forward two successful proposals to implement CRV gauge rewards for 4 axlUSDC pools on Fantom, Polygon, Avalanche, and Arbitrum:
 
-1. The [first proposal](https://gov.curve.fi/t/proposal-to-add-axlusdc-usdc-to-the-gauge-controller/8694), executed February 2023, was for the axlUSDC<>USDC pools on multiple chains, including Polygon, Avalanche, and Fantom, which serve as primary liquidity venues for axlUSDC on the Axelar network. This proposal sought approval for a gauge to incentivize USDC and axlUSDC liquidity on Curve, leveraging the already high trading volumes and native yields of axlUSDC pools.
-2. The [second proposal](https://gov.curve.fi/t/proposal-to-add-axlusdc-fraxbp-to-the-gauge-controller/8907), executed March 2023, is for the axlUSDC<>FRAXBP pool on Arbitrum, which serves as the primary liquidity venue for axlUSDC on the Axelar network. This proposal seeks approval for a gauge to incentivize USDC, FRAX, and axlUSDC liquidity on Curve, with the support of the FRAX team.
-
+1. The [first proposal](https://gov.curve.fi/t/proposal-to-add-axlusdc-usdc-to-the-gauge-controller/8694), executed February 2023, was for the axlUSDC/USDC pools on multiple chains, including [Polygon](https://curve.fi/#/polygon/pools/factory-v2-221/deposit), [Avalanche](https://curve.fi/#/avalanche/pools/factory-v2-82/deposit), and [Fantom](https://curve.fi/#/fantom/pools/factory-v2-85/deposit), which serve as primary liquidity venues for axlUSDC on the Axelar network. This proposal sought approval for a gauge to incentivize USDC and axlUSDC liquidity on Curve, leveraging the already high trading volumes and native yields of axlUSDC pools.
+2. The [second proposal](https://gov.curve.fi/t/proposal-to-add-axlusdc-fraxbp-to-the-gauge-controller/8907), executed March 2023, is for the axlUSDC/FRAXBP pool on [Arbitrum](https://curve.fi/#/arbitrum/pools/factory-v2-83/deposit), which serves as the primary liquidity venue for axlUSDC on the Axelar network. This proposal sought approval for a gauge to incentivize USDC, FRAX, and axlUSDC liquidity on Curve, with the support of the FRAX team.
 
 
 ## Introduction to Axelar
-Axelar is a decentralized blockchain network built with Cosmos SDK that uses proof-of-stake. Its infrastructure provides secure cross-chain communication, allowing users to interact with any asset or application on any blockchain. Axelar's architecture offers uniform translation, routing, and governance structure, providing developers with the ability to build on the best platform for their use case while accessing users, assets, and applications in every other ecosystem. Unlike traditional pairwise cross-chain bridges, Axelar securely processes cross-chain messages using a permissionless set of validators which constantly produce blocks by voting on the legitimacy of all messages. Additionally, the Axelar SDKs offer a comprehensive suite of tools and APIs for developing Web3 applications, abstracting away networking and ecosystem-specific deployment considerations.
+Axelar is a cross-chain bridge protocol centered on its native proof-of-stake blockchain built with Cosmos SDK. Its infrastructure provides secure cross-chain communication, allowing users to interact with any asset or application on any supported blockchain. Axelar's architecture offers uniform translation and routing of both tokens and arbitrary messages, allowing developers to connect users, assets, and applications in multiple ecosystems. Axelar securely processes cross-chain messages through a permissionless set of validators that constantly produce blocks by voting on the legitimacy of all messages. Additionally, the Axelar SDKs offer a comprehensive suite of tools and APIs for developing Web3 applications, abstracting away networking and ecosystem-specific deployment considerations.
+
 
 ### Founding Team
-The team (according to Linkedin) now has over [50 employees working on Axelar](https://www.linkedin.com/company/axelarnetwork/) and is considered the brain child of Sergey Gorbunov and Georgios Vlachos. 
+The team (according to Linkedin) now has over [50 employees working on Axelar](https://www.linkedin.com/company/axelarnetwork/) and is the brain child of Sergey Gorbunov and Georgios Vlachos. 
 
+[Sergey Gorbunov](https://www.linkedin.com/in/sergegorbunov/details/experience/) is a co-founder of Axelar Network and an assistant professor at the University of Waterloo, where he conducts research on cryptography and blockchain technology. Prior to founding Axelar, Sergey was part of the founding team at Algorand, leading the cryptography group. He has also spent time at IBM T.J. Watson Research Centre. Sergey has a strong academic background in computer science and extensive experience in the blockchain and cryptography industries.
 
-[Sergey Gorbunov](https://www.linkedin.com/in/sergegorbunov/details/experience/) is a co-founder of Axelar Network and an assistant professor at the University of Waterloo, where he conducts research on cryptography and blockchain technology. Prior to founding Axelar, Sergey served as the Chief Cryptographer at Algorand and founded stealthmine, a blockchain-based data storage and sharing platform. He has also worked as a research assistant at MIT, a course instructor at the University of Toronto, and a crypto researcher at IBM. Sergey has a strong academic background in computer science and extensive experience in the blockchain and cryptography industries.
-
-[Georgios Vlachos](https://www.linkedin.com/in/georgiosvlachos/) is a co-founder of Axelar Network. Prior to founding Axelar, he served as the Head of Mathematics at Algorand, a leading blockchain platform. Georgios holds a Master's degree in Computer Science from MIT where he conducted research on machine learning and data mining. Georgios has a strong background in mathematics and computer science, with a particular focus on algorithms and cryptography. 
-
+[Georgios Vlachos](https://www.linkedin.com/in/georgiosvlachos/) is a co-founder of Axelar Network. Prior to founding Axelar, he served as the Head of Mathematics at Algorand. Georgios holds a Master's degree in Computer Science from MIT where he conducted research on machine learning and data mining. Georgios has a strong background in mathematics and computer science, with a particular focus on algorithms and cryptography. 
 
 
 ### Brief Project History 
@@ -54,12 +52,12 @@ Several significant events have shaped Axelar's trajectory and contributed to it
 * **11/2020**: [$3.75M Raise](https://www.coindesk.com/tech/2020/11/13/algorand-linked-axelar-raises-375m-in-seed-funding-to-help-blockchains-communicate/) in a Seed Round from 11 investors, the funding round included participation from Binance X, DCVC (Data Collective), Lemniscap, Divergence Ventures, Waikit Lau, and Naval Ravikant.
 * **06/2021**: Axelar raised [$25 million in a Series A funding round](https://www.coindesk.com/markets/2021/07/15/axelar-raises-25m-in-series-a-fundraising-led-by-polychain-capital) led by Polychain Capital, with participation from Blockchain Capital, Divergence Ventures, and others.
 * **11/2021**: Axelar Network raised an [undisclosed amount of funding in a stratgic round](https://axelar.network/blog/axelar-announces-strategic-investment-from-crypto-com-capital) from 6 investors in a Venture Round, with Crypto.com Capital as the lead investor.
-* **02/2022**: Axelar released its cross-chain communication protocol suite, tools, and APIs to the public. It also raised [$35 million in a Series B funding](https://www.coindesk.com/business/2022/02/15/blockchain-interoperability-network-axelar-raises-25m-at-1b-valuation/) round led by Andreessen Horowitz, with participation from Sequoia Capital, Ribbit Capital, and others. The funding round values the company at $1 billion, making it a unicorn.
+* **02/2022**: Axelar released its cross-chain communication protocol suite, tools, and APIs to the public. It also raised [$35 million in a Series B funding](https://www.coindesk.com/business/2022/02/15/blockchain-interoperability-network-axelar-raises-25m-at-1b-valuation/) round led by Polychain and Dragonfly Capital. Additional investors include Binance, Coinbase Ventures, DCVC, Divergence Ventures, Galaxy, Lemniscap and North Island Ventures. The funding round values the company at $1 billion, making it a unicorn.
 * **03/2023**: Launch of [Axelar Virtual Machine](https://www.coindesk.com/tech/2023/02/27/axelar-introduces-virtual-machine-for-developers-building-cross-chain-crypto-apps/), which enables developers to build dApps once and run them on all chains, including EVM, Cairo VM, Cosmos, and other ecosystems.
 
 
 ### Axelar today
-Since its public mainnet launch in [February 2022](https://axelar.network/blog/axelar-begins-rollout-of-public-mainnet-launch-for-february-2022-bringing-decentralized-interoperability-to-ethereum-avalanche-terra-moonbeam-and-others), Axelar has facilitated a significant number of cross-chain activities, with a total of 376,547 transactions recorded, including 349,568 asset transfers and 26,979 GMP (general message passing) calls. The total transfer token volume across connected chains amounts to $1,853,069,262. Axelar has connected 34 chains and established 170 cross-chain contracts
+Since its public mainnet launch in [February 2022](https://axelar.network/blog/axelar-begins-rollout-of-public-mainnet-launch-for-february-2022-bringing-decentralized-interoperability-to-ethereum-avalanche-terra-moonbeam-and-others), Axelar has facilitated a significant number of cross-chain activities. See the source below for updated figures on transaction volumes and connected chains.
 
 
 |![Supported Networks](https://i.imgur.com/WGWEw9G.png)|
@@ -68,7 +66,7 @@ Since its public mainnet launch in [February 2022](https://axelar.network/blog/a
 
 
 
-The total value locked in assets on the Axelar Network is currently $111.8M, with $31.3M locked in EVM and $81.2M locked in Cosmos.
+Axelar provides analytics of the total value locked (TVL) across all supported chains, including assets locked on each source chain and where assets are bridged.
 |![TVL](https://i.imgur.com/ttl95tH.png)|
 |-------|
 |<center>[Source: https://axelarscan.io/tvl]</center>|
@@ -76,7 +74,7 @@ The total value locked in assets on the Axelar Network is currently $111.8M, wit
 
 ### Exploring Axelar Protocol in more depth: A practical exploration 
 
-A high-level understanding of Axelar is necessary to conceptualise the risk to Curve LPs. To understand [Axelar and the respective protocol components](https://axelar.network/blog/an-introduction-to-the-axelar-network), this section will go over a cross-chain general [message passing request](https://docs.axelar.dev/learn/network/flow) initiated by a dApp or a user.
+A high-level understanding of Axelar is necessary to conceptualise the risk to Curve LPs. To understand [Axelar and the respective protocol components](https://axelar.network/blog/an-introduction-to-the-axelar-network), this section will go over the [flow of a cross-chain request](https://docs.axelar.dev/learn/network/flow) initiated by a dApp or a user, whether sending a token or any other arbitrary data.
 
 |![image alt](https://i.imgur.com/QcMgjtP.jpg "Axelar Technology Stack")|
 |-------|
@@ -90,9 +88,9 @@ A high-level understanding of Axelar is necessary to conceptualise the risk to C
 
 **Step 4 - Validators:** Validators are the Axelar block producers that participate in proof-of-stake consensus and verify the truthfulness of cross-chain events being submitted. Each validator runs a node for the source chain where the event originated and verifies the event by querying their RPC endpoint. Validators are incentivized to run nodes for as many chains as possible, with rewards based on the number of chains they support. The event is validated by the Axelar network, processed by the consensus protocol, and recorded in a block. The cross-chain message is then routed into a queue for the destination chain and ready to be sent to the destination Gateway. 
 
-**Step 5 - Submitting a message to the destination chain:** Axelar reaches consensus on a transaction when a set threshold of Validator key shares have signed. Once authorized, anyone can submit the signed message to the destination chain for processing. Another set of relayer services monitor outgoing transaction queues for approved and signed cross-chain messages, and periodically submits them to external chains. The Gateway on the destination chain receives the approved message and stores the contract call approval with a hash of the payload, which can now be executed at any time. (Again, Axelar provides these relayer services for free, but users can create and use their own relayer services instead.)
+**Step 5 - Submitting a message to the destination chain:** Axelar reaches consensus on a transaction when a set threshold of Validator key shares have signed. Once authorized, anyone can submit the signed message to the destination chain for processing. Another set of relayer services monitor outgoing transaction queues for approved and signed cross-chain messages, and periodically submit them to external chains. The Gateway on the destination chain receives the approved message and stores the contract call approval with a hash of the payload, which can now be executed at any time. (Again, Axelar provides these relayer services for free, but users can create and use their own relayer services instead.)
 
-**A Note on Gas and executor services:** Axelar offers Gas and Executor services to make executing cross-chain messages easier. The Gas Receiver smart contract allows users to pay for all transaction fees in a one-time payment on the source chain in the native token. The Gas Receiver estimates the total gas cost and converts tokens into AXL, destination-chain tokens, and other required currencies.
+**A Note on Gas and Executor services:** Axelar offers Gas and Executor services to make executing cross-chain messages easier. The Gas Receiver smart contract allows users to pay for all transaction fees in a one-time payment on the source chain in the native token. The Gas Receiver estimates the total gas cost and converts tokens into AXL, destination-chain tokens, and other required currencies.
 
 
 ## Assets
@@ -106,14 +104,17 @@ AXL is the native token of Axelar Network. It can be classified primarily as a [
 
 
 ### axlUSDC
-Axelar's [axlUSDC is a wrapped representation of USDC](https://axelar.network/blog/what-is-axlusdc-and-how-do-you-get-it) bridged from Ethereum to multiple chains supported by Axelar. It allows users to transact USDC across a multitude of ecosystems. USDC is a dollar-pegged stablecoin issued by Circle, a US-based company, and is mainly used on the Ethereum blockchain. However, the axlUSDC allows it to be used on multiple blockchain networks.
+Axelar's [axlUSDC is a wrapped representation of USDC](https://axelar.network/blog/what-is-axlusdc-and-how-do-you-get-it) bridged from Ethereum to multiple chains supported by Axelar. It allows users to transact USDC across a multitude of ecosystems. USDC is a dollar-pegged stablecoin issued by Circle, a US-based company, and is mainly used on the Ethereum blockchain. However, axlUSDC allows USDC to be used across multiple blockchain networks.
 
 Axelar's cross-chain bridges generate axlUSDC by accepting a deposit of USDC at an Axelar Gateway on the Ethereum network and then minting an equivalent amount of axlUSDC on the destination chain. Every unit of axlUSDC represents a unit of USDC that is locked in an Axelar Gateway on the Ethereum network. In essence, Axelar's dynamic validator set, numbering 70 at the time of writing, secures axlUSDC.
 
-Users can acquire axlUSDC in three ways. First, they can swap it via [liquid pairs on DEXs](https://axelar.network/liquidity-pools) that list pairs in axlUSDC, supported by liquidity pools. Second, they can swap it via [Squid](https://app.squidrouter.com/), a cross-chain liquidity router built on Axelar, which provides liquid cross-chain swaps using axlUSDC as a routing asset. Finally, they can mint it via [Satellite](https://satellite.money/), a cross-chain bridge built by Axelar.
+Users can acquire axlUSDC in three ways. First, they can swap it via [axlUSDC pairs](https://axelar.network/liquidity-pools) on various DEX liquidity pools. Second, they can swap it via [Squid](https://app.squidrouter.com/), a cross-chain liquidity router built on Axelar, which provides liquid cross-chain swaps using axlUSDC as a routing asset. Finally, they can mint it via [Satellite](https://satellite.money/), a cross-chain bridge built by Axelar.
+
 
 ### Composable USDC
 Circle recently announced a [Cross-Chain Transfer Protocol](https://www.circle.com/en/pressroom/circle-enables-usdc-interoperability-for-developers-with-the-launch-of-cross-chain-transfer-protocol) (CCTP), slated for release Q1 2023 on Ethereum and Avalanche, and later available on Solana and other chains. Axelar will be a partner protocol, enabling [composable USDC](https://www.circle.com/blog/composable-usdc-seamless-multichain-ux-by-axelar) with its General Message Passing (GMP) capability. This allows arbitrary data to accompany a token transfer to enable usecases such as seamless cross-chain swaps, one-click deposits/withdrawals into application-specific blockchains, and cross-chain NFTs. 
+
+The Axelar team is working closely with Circle to enable seamless functionality of native USDC using Axelar's GMP. They believe it is likely most dApp developers will prefer to support a native version of USDC, where available. However, there are many chains Axelar supports that are not on Circle’s CCTP road map. On these chains, axlUSDC will continue to be a secure, interchain stablecoin for dApps to make use of.
 
 #### A Note on USDC
 Between 11.03 to 14.03.2023 [USDC depegged below $1](https://twitter.com/DefiIgnas/status/1635980042294669312) due to the failure of Silicon Valley Bank (SVB), which held $3.3 billion in reserves backing the stablecoin's value. The bank's collapse was due to a bank run amid concerns over its financial health. Coinbase and Binance's decision to stop USDC conversions and the rapid depletion of the Curve 3pool contributed to USDC's depeg. The U.S. government took emergency action to [protect all SVB bank depositors](https://www.npr.org/2023/03/13/1163028329/biden-administration-steps-in-to-save-customers-of-silicon-valley-bank), thereby alleviating panic and ultimately bringing USDC back to its peg.
