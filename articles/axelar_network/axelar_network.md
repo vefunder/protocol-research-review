@@ -1,4 +1,6 @@
-# Risk Assessment: Axelar 
+# Asset Risk Assessment: axlUSDC (Axelar) 
+
+### A look into the Axelar cross-chain bridge protocol and its multi-chain axlUSDC stablecoin
 
 ### Useful Links
 
