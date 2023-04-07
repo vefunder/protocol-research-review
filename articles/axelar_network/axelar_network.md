@@ -108,10 +108,15 @@ AXL is the native token of Axelar Network. It can be classified primarily as a [
 ### axlUSDC
 Axelar's [axlUSDC is a wrapped representation of USDC](https://axelar.network/blog/what-is-axlusdc-and-how-do-you-get-it) bridged from Ethereum to multiple chains supported by Axelar. It allows users to transact USDC across a multitude of ecosystems. USDC is a dollar-pegged stablecoin issued by Circle, a US-based company, and is mainly used on the Ethereum blockchain. However, axlUSDC allows USDC to be used across multiple blockchain networks.
 
-Axelar's cross-chain bridges generate axlUSDC by accepting a deposit of USDC at an Axelar Gateway on the Ethereum network and then minting an equivalent amount of axlUSDC on the destination chain. Every unit of axlUSDC represents a unit of USDC that is locked in an Axelar Gateway on the Ethereum network. In essence, Axelar's dynamic validator set, numbering 70 at the time of writing, secures axlUSDC.
+Axelar's cross-chain bridges generate axlUSDC by accepting a deposit of USDC at an [Axelar Gateway](https://etherscan.io/address/0x4f4495243837681061c4743b74b3eedf548d56a5) on the Ethereum network and then minting an equivalent amount of axlUSDC on the destination chain. Every unit of axlUSDC represents a unit of USDC that is locked in an Axelar Gateway on the Ethereum network. In essence, Axelar's dynamic validator set, numbering 70 at the time of writing, secures axlUSDC.
 
-Users can acquire axlUSDC in three ways. First, they can swap it via [axlUSDC pairs](https://axelar.network/liquidity-pools) on various DEX liquidity pools. Second, they can swap it via [Squid](https://app.squidrouter.com/), a cross-chain liquidity router built on Axelar, which provides liquid cross-chain swaps using axlUSDC as a routing asset. Finally, they can mint it via [Satellite](https://satellite.money/), a cross-chain bridge built by Axelar.
+Users can acquire axlUSDC in three ways. 
 
+- (1) They can swap it via [axlUSDC pairs](https://axelar.network/liquidity-pools) on various DEX liquidity pools. 
+- (2) They can swap it via [Squid](https://app.squidrouter.com/), a cross-chain liquidity router built on Axelar, which provides liquid cross-chain swaps using axlUSDC as a routing asset. 
+- (3) They can mint it via [Satellite](https://satellite.money/), a cross-chain bridge built by Axelar.
+
+Contract addresses for axlUSDC on all supported chains can be found [here](https://docs.axelar.dev/resources/mainnet#assets).
 
 ### Composable USDC
 Circle recently announced a [Cross-Chain Transfer Protocol](https://www.circle.com/en/pressroom/circle-enables-usdc-interoperability-for-developers-with-the-launch-of-cross-chain-transfer-protocol) (CCTP), slated for release Q1 2023 on Ethereum and Avalanche, and later available on Solana and other chains. Axelar will be a partner protocol, enabling [composable USDC](https://www.circle.com/blog/composable-usdc-seamless-multichain-ux-by-axelar) with its General Message Passing (GMP) capability. This allows arbitrary data to accompany a token transfer to enable usecases such as seamless cross-chain swaps, one-click deposits/withdrawals into application-specific blockchains, and cross-chain NFTs. 
@@ -128,6 +133,44 @@ Between 11.03 to 14.03.2023 [USDC depegged below $1](https://twitter.com/DefiIgn
 The depeg raised concerns over the trustworthiness of USDC and the risk of contagion from centralized finance (CeFi) on crypto. As a wrapped representation of USDC, axlUSDC is exposed to the risk of the underlying asset in addition to the risks associated with Axelar network itself. 
 
 
+### Contract Architecture Overview
+
+Axelar provides the main smart contracts for EVM [here](https://github.com/axelarnetwork/axelar-cgp-solidity).
+
+**Interfaces:**
+
+_Define the required functions for the respective contracts implementing them._
+- a. IAxelarGateway.sol
+- b. IERC20.sol
+- c. IERC20BurnFrom.sol
+- d. IAxelarExecutable.sol
+
+**Base Contracts:**
+- a. Ownable.sol - provides ownership functionality to contracts that inherit from it.
+- b. EternalStorage.sol - storage contract for the proxy.
+- c. AdminMultisigBase.sol - multisig governance contract used for upgrading implementations through voting.
+- d. ERC20.sol - the base ERC20 contract that other ERC20 extension contracts inherit from.
+
+**ERC20 Extensions:**
+
+_Extensions of the base ERC20 contract, providing additional functionalities like spending permits, minting with a capped total supply, and burn capabilities._
+- a. ERC20Permit.sol
+- b. MintableCappedERC20.sol
+- c. BurnableMintableCappedERC20.sol
+
+**Axelar Core Contracts:**
+- a. [AxelarGatewayProxy.sol](https://etherscan.io/address/0x4F4495243837681061C4743b74B3eEdf548D56A5#code) - Core contract of the Axelar network (proxy) that accepts signed commands from Axelar validators.
+- b. [AxelarGateway.sol (Implementation Contract)](https://etherscan.io/address/0xEd9938294aCF9EE52D097133CA2cAafF0C804F16#code) - Core contract of the Axelar network (current implementation) that accepts signed commands from Axelar validators.
+- c. [AxelarAuthWeighted.sol](https://etherscan.io/address/0x228b92510130ec2E09C6d5645039c8cB834aD42d#code) - Weighted multisig authentication contract used by the gateway for verifying messages.
+
+**Utility Contracts:**
+- a. ECDSA.sol - Utility contract for signature authentication checks.
+- b. TokenDeployer.sol - Responsible for deploying BurnableMintableCappedERC20 tokens by a delegate call from the gateway contract when it receives a signed command from the Axelar network.
+- c. DepositHandler.sol - Deployed at deposit addresses, enabling the burning/locking of tokens sent by users. It prevents re-entrancy and works in conjunction with the gateway contract.
+- d. AxelarDepositService.sol - Service used to generate deposit addresses for ERC20 tokens, native currency transfers, or unwrapping native currency from wrapped ERC20 tokens.
+- e. [AxelarGasService.sol](https://etherscan.io/address/0x2d5d7d31F671F86C782533cc367F14109a082712#code) - Handles cross-chain gas payments. It accepts payments for covering gas costs on the destination chain. Gas payments should occur with the same parameters right before calling callContract or callContractWithToken on the gateway. 
+
+
 ## Axelar Ecosystem Health and Risk Metrics
 
 Consensys [wrote a research piece](https://consensys.net/research/measuring-blockchain-decentralization/) attempting to quantify decentralisation among various layer 1 ecosystems. Its analysis for Axelar provides some useful metrics.
@@ -139,58 +182,31 @@ Consensys [wrote a research piece](https://consensys.net/research/measuring-bloc
 |----|
 |[Source: https://axelarscan.io/transfers]|
 
-When analyzing the daily transfer and volume statistics of the Axelar Network from January 15, 2022, to February 28, 2023, the impact of Terra Luna becomes quite apparent. The statistics show that the daily transfer and volume on Axelar are now relatively lower by multitudes, which highlights the setback caused by the [Terra UST collapse](https://www.coindesk.com/learn/the-fall-of-terra-a-timeline-of-the-meteoric-rise-and-crash-of-ust-and-luna/). Despite this setback, Axelar has demonstrated resilience and stable growth in terms of daily transfers. This growth is particularly noteworthy considering the timing of the market cycle and is a positive sign for the network's future growth and adoption. 
+When analyzing the daily transfer and volume statistics of the Axelar Network from January 15, 2022, to February 28, 2023, the impact of Terra Luna becomes quite apparent. The statistics show that the daily transfer and volume on Axelar experienced a sharp spike caused by the [Terra UST collapse](https://www.coindesk.com/learn/the-fall-of-terra-a-timeline-of-the-meteoric-rise-and-crash-of-ust-and-luna/), showing significant cross-chain activity during the crisis. Desite the setback this event posed to the overall crypto market, Axelar has demonstrated resilience and stable growth in terms of daily transfers. This growth is particularly noteworthy considering the timing of the market cycle and is a positive sign for the network's future growth and adoption. 
 
 
-Statistics on the [General Message Passing](https://axelarscan.io/gmp/stats?fromTime=1679309728011) show that after May 2022 (i.e. after the collapse of Luna Terra), the top chain pairs on the Axelar Network are mainly associated with Polygon, followed by BNB Chain, Moonbeam, Fantom, and Avalanche. While Polygon is the most popular, other chains also have a significant presence, as can be seen by the diverse range of destination contracts on the network. The most popular destinations are Polygon, BNB Chain, and Moonbeam, accounting for 21.64%, 16.37%, and 14.04% of the total messages, respectively. These statistics suggest the diversity and versatility of the Axelar Network, with users utilizing a range of chains and contracts for their cross-chain transfers. It will be interesting to track any shifts in the distribution of messages and destination contracts in the future.
+Statistics on [General Message Passing](https://axelarscan.io/gmp/stats?fromTime=1679309728011) show that after May 2022 (i.e. after the collapse of Luna Terra), the top chain pairs on the Axelar Network are mainly between Polygon, Moonbeam, and Ethereum. While Polygon is the most popular, there is a diverse range of destination contracts on the network. The most popular destinations are Polygon, BNB Chain, and Moonbeam, accounting for 21.64%, 16.37%, and 14.04% of the total messages, respectively. These statistics suggest the diversity and versatility of the Axelar Network, with users utilizing a range of chains and contracts for their cross-chain transfers. It will be interesting to track any shifts in the distribution of messages and destination contracts in the future.
 
 |![GENERAL MESSAGE PASSING](https://i.imgur.com/nZkq3nb.png)|
 |-------|
 |*[Source: https://axelarscan.io/gmp/stats]*|
 
-Another indicator suggesting the growth of the network is the Growth of Daily Active Addresses (DAA), which have steadily been growing. Daily active addresses is a common metric used to measure the number of unique addresses that were active on a blockchain network during a given day. 
+Another indicator suggesting the growth of the network is the Growth of Daily Active Addresses (DAA), which have steadily been growing. DAA is a common metric used to measure the number of unique addresses that were active on a blockchain network during a given day. The chart below considers an active address as a unique address sending an on-chain transaction to the network over a rolling 24-hour period. 
 
 |![DAA](https://i.imgur.com/ymI48qF.png)|
 |---|
 |[Source: https://app.artemis.xyz/dashboard/axelar]|
 
 
-### Mining/Staking Diversity & Growth 
+### Validator Performance
+
+The chart below displays the number of blocks proposed by validators on an hourly basis over a one-month period. The chart can be useful in identifying issues related to block production by an individual validator, but it may also provide insight into network-wide issues. For example, a rapid color shift from deep purple to grey would suggest that the validator is now producing significantly fewer blocks over a selected time interval. Censorship of a region or client issues may be apparent if many validators stop producing blocks. 
 
 |![Overview of Number of Proposed Blocks by Validator](https://i.imgur.com/F6qOeJd.png)|
 |------|
 |[Source: https://app.metrika.co/axelar/dashboard/network-overview?tr=1M]| 
 
-The chart above displays the number of blocks proposed by validators on an hourly basis over a one-month period. The chart can be useful in identifying issues related to block production by an individual validator, but it may also provide insight into network-wide issues. For example, a rapid color shift from deep purple to grey would suggest that the validator is now producing significantly fewer blocks over a selected time interval. Censorship of a region or client issues may be apparent if many validators stop producing blocks. 
-
 Overall, the chart shows good network stability (reasonably consistent validator performance) over the one-month period with a healthy propogation of blocks.
-
-
-### Collusion Threshold
-
-The collusion threshold is a key security feature of the Axelar Network that helps to prevent validators from colluding and compromising the integrity of the network. The threshold is determined by the number of validators required to sign off on a block and is set at two-thirds of the total number of validators weighted by stake. 
-
-As of [September 2022 with Meave Upgrade](https://axelar.network/blog/axelar-implements-quadratic-voting-with-maeve-upgrade), the Axelar Network has introduced [quadratic voting](https://vitalik.ca/general/2019/12/07/quadratic.html), which further enhances the security and decentralization of the network. Currently, the network is secured by 70 active validators and the collusion threshold is set at 2/3 of validators quadratically weighted by stake. At the time of writing a successful collusion would require 35 validators to collude to gain a supermajority. The metrics presented should be evaluated in context of this.
-
-
-### Validator Nodes 
-
-|![Geographical Node Distribution](https://i.imgur.com/ZVsOWhv.png)|
-|------|
-|[Source: https://observatory.zone/axelar/validators]|
-
-The Axelar validator set has a total of 90 nodes distributed across different regions. The Americas region has 22 nodes with a stake of 25.72%, while the Europe region has 57 nodes with a stake of 41.90%. The Asia Pacific region has 3 nodes with a stake of 2.24%, and there are 8 nodes with no specified region, accounting for a stake of 30.14%.
-
-Based on [the data provided](https://observatory.zone/axelar/countries), it appears that Europe has the highest concentration of Axelar validators in terms of both nodes and stake, with 57 nodes and a stake of 41.90%. The Americas also have a significant presence with 22 nodes and a stake of 25.72%. Meanwhile, Asia Pacific only has three nodes and a stake of 2.24%, indicating a lower level of participation in the network from that region. This potentially suggests geographical centralisation.
-
-It is important to note that this data only represents the validators that are currently connected and may not reflect the full distribution of validators over time. Additionally, this data does not necessarily provide information on the specific geographic location of the validators within each region, but rather through which country nodes access the network which can be altered by using VPN or routing through a private server.
-
-
-### Internet Service Providers (ISPs)
-
-The [top three Internet Service Providers (ISPs)](https://observatory.zone/axelar/isps) in terms of stake and number of nodes for Axelar are Hetzner Online GmbH, OVH SAS, and Amazon.com, Inc. OVH SAS has the highest stake with 28.01% and 16 nodes, followed by Hetzner Online GmbH with 18.66% and 19 nodes, and Amazon.com, Inc. with 9.69% and 11 nodes.
-
-The concentration of stake and nodes in these top three ISPs represents a centralising force and should be observed with caution. If a large percentage of the network's nodes are controlled by a small number of ISPs, there is a risk of centralisation and potential vulnerabilities. For example, if a majority of the network's nodes are hosted by one or two ISPs, those ISPs could potentially collude to manipulate the network's operations. However, it's important to note that the distribution of nodes and stake across different ISPs can change over time, and Axelar is still a relatively young project. In addition, ISP concentration is not meaningfully deviant from the industry standard.
 
 
 ### Block production
@@ -204,13 +220,40 @@ This chart displays block production trends on the Axelar Network over the past 
 Based on the stable block production rate and relatively consistent average block production time between the observed period, it appears that the consensus on the Axelar Network is stable and operating within the expected parameters.
 
 
+### Collusion Threshold
+
+The collusion threshold is a key security feature of the Axelar Network that helps to prevent validators from colluding and compromising the integrity of the network. The threshold is determined by the number of validators required to sign off on a block and is set at two-thirds of the total number of validators weighted by stake. 
+
+As of [September 2022 with Meave Upgrade](https://axelar.network/blog/axelar-implements-quadratic-voting-with-maeve-upgrade), the Axelar Network has introduced [quadratic voting](https://vitalik.ca/general/2019/12/07/quadratic.html), which further enhances the security and decentralization of the network. Currently, the network is secured by 70 active validators and the collusion threshold is set at 2/3 of validators quadratically weighted by stake. At the time of writing, a successful collusion would require 35 validators to collude to gain a supermajority (see [cumulative share % - quadratic](https://axelarscan.io/validators) here for current threshold). The metrics presented should be evaluated in context of this.
+
+
+### Validator Nodes 
+
+|![Geographical Node Distribution](https://i.imgur.com/ZVsOWhv.png)|
+|------|
+|[Source: https://observatory.zone/axelar/validators]|
+
+The Axelar validator set has a total of 90 nodes distributed across different regions. The Americas region has 22 nodes with a stake of 25.72%, while the Europe region has 57 nodes with a stake of 41.90%. The Asia Pacific region has 3 nodes with a stake of 2.24%, and there are 8 nodes with no specified region, accounting for a stake of 30.14%. Based on [the data provided](https://observatory.zone/axelar/countries), it appears that Europe has the highest concentration of Axelar validators in terms of both nodes and stake. This suggests some risk due to geographical centralisation.
+
+It is important to note that this data only represents the validators that are currently connected and may not reflect the full distribution of validators over time. Additionally, this data does not necessarily provide information on the specific geographic location of the validators within each region, but rather through which country nodes access the network. This data can be altered by using VPN or routing through a private server.
+
+
+### Internet Service Providers (ISPs)
+
+The [top three Internet Service Providers (ISPs)](https://observatory.zone/axelar/isps) in terms of stake and number of nodes for Axelar are Hetzner Online GmbH, OVH SAS, and Amazon.com, Inc. OVH SAS has the highest stake with 28.01% and 16 nodes, followed by Hetzner Online GmbH with 18.66% and 19 nodes, and Amazon.com, Inc. with 9.69% and 11 nodes.
+
+The concentration of stake and nodes in these top three ISPs represents a centralising force and should be observed with caution. If a large percentage of the network's nodes are controlled by a small number of ISPs, there is a risk of centralisation and potential vulnerabilities. For example, if a majority of the network's nodes are hosted by one or two ISPs, those ISPs could potentially collude to manipulate the network's operations. However, it's important to note that the distribution of nodes and stake across different ISPs can change over time, and Axelar is still a relatively young project. In addition, ISP concentration is not a meaningful deviation from the industry standard.
+
+
 ### Function Call Diversity 
+
+The data below shows the count of different event types occurring in cross-chain transfers on the Axelar Network for the past 30 days. 
 
 |![](https://i.imgur.com/gVSCVVG.png)|
 |-------|
 |[Source: https://app.metrika.co/axelar/dashboard/network-overview?tr=1M]|
 
-The function calls of the events occurring in cross-chain transfers on Axelar can be defined as follows:  
+The function calls on Axelar can be defined as follows:  
 
 * **Link:** The process of linking an Axelar address with an Ethereum Virtual Machine (EVM) address, allowing for the transfer of assets between the two chains.
 * **SignCommands:** The act of signing a command to initiate a cross-chain transfer, verifying the authenticity of the transfer and ensuring that it is authorized.
@@ -221,18 +264,21 @@ The function calls of the events occurring in cross-chain transfers on Axelar ca
 * **ExecutePendingTransfers:** The execution of the pending transfer on the target chain, completing the cross-chain transfer and transferring the assets to the recipient.
 * **RegisterChainMaintainer:** The registration of a new chain maintainer, is responsible for maintaining and monitoring the cross-chain transfers on a specific chain, ensuring that they are secure and efficient.
 
-The data above shows the count of different event types occurring in cross-chain transfers on the Axelar Network for the past 30 days. The SubmitSignatureRequest event type is the most frequent, occurring close to 1 million times. The Link event type occurred 32,185 times, while SignCommands occurred 13,260 times, suggesting that a significant number of users are linking their Axelar addresses with EVM addresses and signing commands to initiate cross-chain transfers. The ConfirmERC20Deposit and ExecutePendingTransfers event types occurred less frequently, suggesting that ERC20 token transfers and the execution of pending transfers are less common than other types of events. Finally, the RegisterChainMaintainer event type occurred only 109 times.
-
+The SubmitSignatureRequest event type is the most frequent, occurring close to 1 million times. The Link event type occurred 32,185 times, while SignCommands occurred 13,260 times, suggesting that a significant number of users are linking their Axelar addresses with EVM addresses and signing commands to initiate cross-chain transfers. The ConfirmERC20Deposit and ExecutePendingTransfers event types occurred less frequently. Finally, the RegisterChainMaintainer event type occurred only 109 times.
 
 [Function call diversity](https://consensys.net/research/measuring-blockchain-decentralization/) refers to the number of different functions that are being called within a software system or application. In the context of an arbitrary message bridge like Axelar, function call diversity is important because it can suggest insights on system robustness, maintainability, and extensibility. There are a range of different event types occurring in cross-chain transfers on the Axelar Network. Overall, the diversity of event types suggests that the platform is versatile and can accommodate a range of different use cases and applications.
 
-### A note on Client Diversity
-[Client diversity](https://clientdiversity.org/) refers to the presence of multiple software implementations of a blockchain network protocol, which is important in general-purpose blockchains like Ethereum to enhance network security, reliability, and decentralization. However, in application-specific blockchains like Axelar, client diversity may be less important due to the network's specialization and focus, and the ability to leverage the underlying security of the Cosmos Hub which has multiple client implementations. 
+
+### Client Diversity
+
+[Client diversity](https://clientdiversity.org/) refers to the presence of multiple software implementations of a blockchain network protocol. This is important in general-purpose blockchains like Ethereum to enhance network security, reliability, and decentralization, as failures associated with the client can potentially disrupt the entire network.
+
+The Axelar-core clinet can be found [here](https://github.com/axelarnetwork/axelar-core). Due to the app-specific nature (as opposed to a general purpose blockchain like Ethereum), the Axelar team claims that a multi-client model doesn’t add much benefit, similar to other Cosmos-based chains. Client diversity may be less important due to the network's specialization and focus, and the ability to leverage the underlying security of the Cosmos Hub which has multiple client implementations. 
 
 
 ### Developer Activity
 
-Weekly [commit and weekly active developer](https://app.artemis.xyz/developers/Axelar%20Network?includeForks=false) are metrics used to measure the productivity and activity of open-source repositories. Weekly commit refers to the number of commits made by developers in a given week. A commit is the smallest unit of work and can vary in size, but is generally a good indicator of developer productivity. Meanwhile, the number of active developers in a week refers to the number of developers who have made at least one commit during that time period. This metric is useful in tracking the level of developer activity and engagement with the project. Both of these metrics are important in understanding the health and progress of open-source projects, as they provide insight into the level of developer involvement and output.
+Weekly [commit and weekly active developers](https://app.artemis.xyz/developers/Axelar%20Network?includeForks=false) are metrics used to measure the productivity and activity of open-source repositories. Weekly commit refers to the number of commits made by developers in a given week. A commit is the smallest unit of work and can vary in size, but is generally a good indicator of developer productivity. Meanwhile, the number of active developers in a week refers to the number of developers who have made at least one commit during that time period. This metric is useful in tracking the level of developer activity and engagement with the project. Both of these metrics are important in understanding the health and progress of open-source projects, as they provide insight into the level of developer involvement and output.
 
 |![Developer Activity](https://i.imgur.com/4Zw6Z1k.png)|
 |--------|
@@ -258,7 +304,7 @@ In the case of Axelar, we can see that approximately 59% of the initial token di
 | <center>*[Source: AXL token allocations at genesis](https://medium.com/@axelar-foundation/an-overview-of-axl-token-economics-4dc701c9054d)*</center>| 
 
 
-If we look at the [distribution of bonded validators at the time of the analysis](https://docs.google.com/spreadsheets/d/1VaNHKrsYGoQ0a2hU41gfr105k1UpZ0M7-SO1qsURmF8/edit?usp=sharing), we can see that the total stake ranges from 64 thousand AXL tokens to 45.7 million AXL tokens. The voting power of a validator ranges from .01% to 6.43%, while the quadratic voting power ranges from .12% to 3.32%. The total delegation of validators ranges from 4 to 1,492.
+If we look at the [distribution of bonded validators at the time of the analysis](https://docs.google.com/spreadsheets/d/1VaNHKrsYGoQ0a2hU41gfr105k1UpZ0M7-SO1qsURmF8/edit?usp=sharing), we can see that the total stake ranges from 64,000 AXL tokens to 45.7 million AXL tokens. The voting power of a validator ranges from .01% to 6.43%, while the quadratic voting power ranges from .12% to 3.32%. The total delegation of validators ranges from 4 to 1,492.
 
 ![](https://i.imgur.com/RM3H6Fd.png)
 
@@ -269,55 +315,16 @@ In addition, there is evidence of progressive decentralisation, as the Validator
 
 ## Technical Security Risk 
 
-Technical security risk is a critical concern for any blockchain network as it involves potential vulnerabilities in the system's technical infrastructure. In this section, we will examine technical security risks associated with the Axelar network and their potential impact.
+Technical security risk is a critical concern for any blockchain network as it involves potential vulnerabilities in the system's technical infrastructure. In this section, we will examine technical security risks associated with the Axelar network, including potential liveness issues, trust assumptions involving access controls, and smart contract security practices.
 
-### Contract Architecture Overview
+### Possible Liveness Issues
 
-Axelar provides the main smart contracts for EVM [here](https://github.com/axelarnetwork/axelar-cgp-solidity).
+Axelar may experience [liveness issues if validators opt to support only certain chains](https://blog.li.fi/navigating-arbitrary-messaging-bridges-a-comparison-framework-8720f302e2aa). For a new chain to be incorporated, it must receive support from 60% of the validators, based on their quadratic voting power, to run a node for that particular chain. Despite the fact that validators have the option to maintain a specific EVM chain, the majority vote threshold remains at 60% of the quadratic voting power of the total validator set. Therefore, if an EVM chain fails to attract enough supporting validators, it may affect liveness (although not security). Furthermore, on-chain governance can increase these thresholds.
 
-**Interfaces:**
-a. IAxelarGateway.sol
-b. IERC20.sol
-c. IERC20BurnFrom.sol
-d. IAxelarExecutable.sol
+#### A Note on Relayer Services
+Axelar runs relayer services which observe all connected chains, and these relayers will pick up the event and submit it to the Axelar network for processing. These relayer services are a free, operational convenience Axelar provides, and can be run by anyone who wishes to create and use their own relayer service instead.
 
-**Base Contracts:**
-a. Ownable.sol
-b. EternalStorage.sol
-c. AdminMultisigBase.sol
-d. ERC20.sol
-
-**ERC20 Extensions:**
-a. ERC20Permit.sol
-b. MintableCappedERC20.sol
-c. BurnableMintableCappedERC20.sol
-
-**Axelar Core Contracts:**
-a. AxelarGatewayProxy.sol
-b. AxelarGateway.sol
-c. AxelarAuthWeighted.sol
-
-**Utility Contracts:**
-a. ECDSA.sol
-b. TokenDeployer.sol
-c. DepositHandler.sol
-d. AxelarDepositService.sol
-e. AxelarGasService.sol
-
-
-- IAxelarGateway.sol, IERC20.sol, IERC20BurnFrom.sol, and IAxelarExecutable.sol are interfaces that define the required functions for the respective contracts implementing them.
-- Ownable.sol provides ownership functionality to contracts that inherit from it.
-- EternalStorage.sol serves as a storage contract for the proxy.
-- AdminMultisigBase.sol is a multisig governance contract used for upgrading implementations through voting.
-- ERC20.sol is the base ERC20 contract that other ERC20 extension contracts inherit from.
-- ERC20Permit.sol, MintableCappedERC20.sol, and BurnableMintableCappedERC20.sol are extensions of the base ERC20 contract, providing additional functionalities like spending permits, minting with a capped total supply, and burn capabilities.
-- [AxelarGatewayProxy.sol](https://etherscan.io/address/0x4F4495243837681061C4743b74B3eEdf548D56A5#code) and [AxelarGateway.sol (Implementation Contract)](https://etherscan.io/address/0xEd9938294aCF9EE52D097133CA2cAafF0C804F16#code) are the core contracts of the Axelar network, with the former implementing the proxy pattern and the latter being the implementation contract that accepts signed commands from Axelar validators.
-- [AxelarAuthWeighted.sol](https://etherscan.io/address/0x228b92510130ec2E09C6d5645039c8cB834aD42d#code) is a weighted multisig authentication contract used by the gateway for verifying messages.
-- ECDSA.sol is a utility contract for signature authentication checks.
-- [TokenDeployer.sol](https://etherscan.io/address/0xe88Ab68Cd69e92294FcC3BBBD894Fb183197fA39#code) is responsible for deploying BurnableMintableCappedERC20 tokens upon receiving a signed command from the Axelar network.
-- DepositHandler.sol is a contract deployed at deposit addresses, enabling the burning/locking of tokens sent by users. It prevents re-entrancy and works in conjunction with the gateway contract.
-- AxelarDepositService.sol is a service used to generate deposit addresses for ERC20 tokens, native currency transfers, or unwrapping native currency from wrapped ERC20 tokens.
-- [AxelarGasService.sol](https://etherscan.io/address/0x2d5d7d31F671F86C782533cc367F14109a082712#code) is a contract that handles cross-chain gas payments. It accepts payments for covering gas costs on the destination chain. Gas payments should occur with the same parameters right before calling callContract or callContractWithToken on the gateway. 
+The distribution of currently existing alternatives is unclear in Axelar and may represent a centralisation risk. An outage of the Axelar relayer service could result in a network-wide outage. 
 
 
 ### Access Control 
@@ -325,12 +332,12 @@ e. AxelarGasService.sol
 Access control refers to the control over the smart contract code and its execution. In this section, we will discuss the risks associated with smart contract ownership and how they can be mitigated to ensure the security of the network. 
 
 #### AxelarGatewayProxy.sol
-AxelarGatewayProxy.sol, formerly known as AxelarGatewayProxyMultisig.sol, is the central contract of the Axelar network and is owned by a multisignature scheme that is implemented in AdminMultisigBase.sol. This scheme allows multiple addresses to collectively own and control the contract. The contract coordinates various library contracts such as AxelarGateway.sol, AxelarGatewayProxy.sol, and AxelarAuthWeighted.sol. Additionally, it integrates with other library contracts to provide additional functionalities, such as cross-chain gas payments, token deployment, and signature authentication checks.
+AxelarGatewayProxy.sol, formerly known as AxelarGatewayProxyMultisig.sol, is the central contract of the Axelar network. It is using library contracts such as AxelarGateway.sol, AxelarAuthWeighted.sol, and  TokenDeployer.sol. Additionally, it is supported by other service contracts to provide other functionalities, such as cross-chain gas payments, and permission-less deposit addresses for cross-chain token transfers.
 
-At present (i.e. epoch 3) the [admin threshold is set to 4](https://etherscan.io/address/0x4F4495243837681061C4743b74B3eEdf548D56A5#readProxyContract#F2) out of 8 addresses. The owner addresses are listed below: 
+This contract is owned by a multisignature scheme that is implemented in AdminMultisigBase.sol. This scheme allows multiple addresses to collectively own and control the contract. At present (i.e. epoch 3) the admin threshold is set to [4 out of 8 addresses](https://etherscan.io/address/0x4F4495243837681061C4743b74B3eEdf548D56A5#readProxyContract#F2). The owner addresses are listed below: 
 
     
-| AxelarGatewayProxyMultisig.sol Owners |
+| AxelarGatewayProxy.sol Owners |
 |:--------------------------------------:|
 | 0x3f5876a2b06E54949aB106651Ab6694d0289b2b4 |
 | 0x9256Fd872118ed3a97754B0fB42c15015d17E0CC |
@@ -342,22 +349,26 @@ At present (i.e. epoch 3) the [admin threshold is set to 4](https://etherscan.io
 | 0x30932Ac1f0477Fbd63E4c5Be1928f367A58A45A1 |
 
 
-**In practical terms, this means that the upgrading of contracts is subject to 4 out of 8 Multisig signers.** Axelar plans to take further steps in decentralising the network by having the validator set jointly approve smart contract upgrades. This is a crucial step in achieving a higher level of decentralisation and eliminating the need for a governed multisig. The result will be a more decentralised network, offering greater transparency and security to users. Ultimately, Axelar aims to create a fully autonomous network that operates without any central authority or governing body.
+**In practical terms, this means that the upgrading of contracts is subject to 4 out of 8 multi-sig signers.** Axelar plans to take further steps in decentralising the network by having the validator set jointly approve smart contract upgrades. This is a crucial step in achieving a higher level of decentralisation and eliminating the need for a governed multi-sig. The result will be a more decentralised network, offering greater transparency and security to users. Ultimately, Axelar aims to create a fully autonomous network that operates without any central authority or governing body.
+
+![Screen Shot 2023-04-07 at 1 38 37 PM](https://user-images.githubusercontent.com/51072084/230675911-4c73268c-7ce4-4fa3-aaee-a4e9eaf46dc6.png)
+
+Source: AxelarGatewayProxy upgrade function [Etherscan](https://etherscan.io/address/0xed9938294acf9ee52d097133ca2caaff0c804f16#code)
 
 #### AxelarAuthWeighted.sol
-[AxelarAuthWeighted.sol](https://etherscan.io/address/0x228b92510130ec2E09C6d5645039c8cB834aD42d#code) is a core contract used by the Axelar network's gateway for verifying messages. It is a weighted multisig authentication contract that allows for multiple signers with different weights to approve a message. The contract is owned by AxelarGatewayProxyMultisig.sol, which is set during contract deployment.
+[AxelarAuthWeighted.sol](https://etherscan.io/address/0x228b92510130ec2E09C6d5645039c8cB834aD42d#code) is a core contract used by the Axelar network's gateway for verifying messages. It is a weighted multi-sig authentication contract that allows for multiple signers with different weights to approve a message. The contract is owned by AxelarGatewayProxy.sol, which is set during contract deployment.
 
 |![AxelarAuthWeighted.sol](https://i.imgur.com/cucphk1.png)|
 |---|
 |[Source:https://etherscan.io/address/0x228b92510130ec2E09C6d5645039c8cB834aD42d#readContract#F4]|
 
 #### TokenDeployer.sol
-[TokenDeployer.sol](https://etherscan.io/address/0xe88Ab68Cd69e92294FcC3BBBD894Fb183197fA39#code) is a core contract of the Axelar network responsible for deploying BurnableMintableCappedERC20 tokens. It is a deployment library that contains the bytecode of the token. The Axelar Gateway is using Solidity delegatecall to utilize the library, and it is actually the gateway contract (AxelarGatewayProxy.sol) that is responsible for the deployment. This means that anyone can hypothetically use TokenDeployer to deploy their own instances of Axelar's token implementation without affecting the gateway contract.
+[TokenDeployer.sol](https://etherscan.io/address/0xe88Ab68Cd69e92294FcC3BBBD894Fb183197fA39#code) is a deployment library that contains the bytecode of the token. The Axelar Gateway is using Solidity delegatecall to utilize the library, and it is actually the gateway contract (AxelarGatewayProxy.sol) that is responsible for the deployment. This means that anyone can hypothetically use TokenDeployer to deploy their own instances of Axelar's token implementation without affecting the gateway contract.
 
 #### AxelarGasService.sol
-AxelarGasService.sol is a core contract in the Axelar network that handles cross-chain gas payments. It is [owned by an EOA](https://etherscan.io/address/0x2d5d7d31F671F86C782533cc367F14109a082712#readProxyContract#F4), which can upgrade the contract.
+AxelarGasService.sol handles cross-chain gas payments. It is [owned by an EOA](https://etherscan.io/address/0x2d5d7d31F671F86C782533cc367F14109a082712#readProxyContract#F4), which can upgrade the contract.
 
-In addition, AxelarGasService.sol uses an [EOA as the gasCollector](https://etherscan.io/address/0x2d5d7d31F671F86C782533cc367F14109a082712#readProxyContract#F2), which is responsible for collecting cross-chain gas fees from users and distributing them to validators who provide gas on the other side of the chain. 
+In addition, AxelarGasService.sol uses an [EOA as the gasCollector](https://etherscan.io/address/0x2d5d7d31F671F86C782533cc367F14109a082712#readProxyContract#F2), which is responsible for collecting cross-chain gas fees from users and distributing them to validators who provide gas on the recipient chain. 
 
 |<center>![AxelarGasService.sol](https://i.imgur.com/U64iCbP.png)</center>|
 |---|
@@ -377,13 +388,13 @@ On a high level the findings can be summarised as:
 The rest of this section will review issues found in the latest audit report for each repository. Only the issues that put user funds at risk and have not been resolved (or where it is unclear if it has been resolved) will be listed here.
 
 
-#### Repository | axelar-utils-solidity
+#### Repository | axelar-utils-solidity | [Ackee Blockchain](https://raw.githubusercontent.com/axelarnetwork/audits/main/audits/2022-08%20Ackee%20blockchain.pdf)
 
 > ###### Ackee Blockchain |2022-08| H1: The forecall and forecallWithToken can be called repeatedly with the same payload
 > The AxelarForecallable contract has been found to have a high severity issue where the forecall function can be called repeatedly with the same payload. As a result, the check preventing double execution can be bypassed, which can be performed by anyone at any time since forecall is a publicly-accessible function. This can lead to the activation of the payload repeatedly, causing undefined consequences for the system. For instance, an attacker could call the forecall function with the forecaller address set to zeroaddress and execute a specific payload repeatedly. The recommendation is to add a zero-address check for the forecaller address in both functions (forecall and forecallWithToken) to prevent the issue. It is worth noting that the team believes that double execution should not cause any critical scenario. From the audit is unclear if this issue has been resolved. Investigation of the repository has led to this contract being completely removed from the main branch, suggesting the contract is no longer needed or has been absorbed into other contracts. 
 
 
-#### Repository | axelar-cgp-solidity
+#### Repository | axelar-cgp-solidity | [Chaintroopers](https://github.com/axelarnetwork/audits/blob/main/audits/2022-08%20Chaintroopers.pdf)
 
 > ###### Chaintroopers |2022-08| C1.1/C1.2: No upper bound and lower bound in one operator's weight at "AxelarAuthWeighted.sol"
 > The AxelarAuthWeighted.sol contract has a medium severity rating due to the absence of a lower bound and higher bound for the new threshold provided for a set of operators at the "_transferOwnership" function. 
@@ -408,15 +419,15 @@ An [example from the DepositReceiver.sol](https://github.com/axelarnetwork/axela
 |--|
 |[Source: https://github.com/axelarnetwork/axelar-cgp-solidity/blob/main/contracts/deposit-service/DepositReceiver.sol]|
 
-It should be noted [the contract presuably containing](https://etherscan.io/address/0xd883C8bA523253c93d97b6C7a5087a7B5ff23d79#code) the "DepositReceiver.sol" as libary contract is unverfied on etherscan, meaning an on-chain verification was not possible.
+It should be noted [the contract presuably containing](https://etherscan.io/address/0xd883C8bA523253c93d97b6C7a5087a7B5ff23d79#code) "DepositReceiver.sol" as a library contract is unverfied on etherscan, meaning an on-chain verification was not possible.
 
 
-#### Repository | axelar-cgp-solidity, axelar-xc20-wrapper
+#### Repository | axelar-cgp-solidity, axelar-xc20-wrapper | [Code4rena](https://code4rena.com/contests/2022-07-axelar-network-v2-contest)
 
 > ###### Code4rena Contest |2022-07| M-6 : Add cancel and refund option for Transaction Recovery
 > The AxelarGateway.sol and AxelarGasService.sol contracts lack an option to cancel and refund transactions that have failed or are stuck, which can potentially result in the loss of user funds. The recommendation is to include a cancel option and enable users to receive gas refunds. While Axelar Network acknowledged the issue, they disagreed with the severity, asserting that it is up to cross-chain app developers to implement refund and cancel methods as they are application-specific. The Code4rena Judge rated the issue as of medium severity due to its risk to end-users and the absence of a refund mechanism. Both the sponsor and judge advised end-users to form their own opinion.
 
-#### Repository | axelar-core, axelar-cgp-solidity, axelar-web-app
+#### Repository | axelar-core, axelar-cgp-solidity, axelar-web-app [Cure53](https://github.com/axelarnetwork/audits/blob/main/audits/2022-04%20Cure53.pdf)
 
 > ###### Cure53 |2022-04| AXE-02-016 WP1: Potential Cosmos consensus stall via panic 
 > This issue is a Medium severity vulnerability and involves the EndBlocker handlers of two modules, x/tss and x/reward, which can trigger panic() calls that could potentially cause the Cosmos network to slow down or even halt. Panic() calls are a mechanism in Go that halts the execution of a program when an unexpected error or state is encountered. If an attacker were to trigger these panic() calls remotely, they could exploit this vulnerability to create a Denial-of-Service scenario on the network. To mitigate this issue, it is recommended to integrate recovery logic to all Cosmos module EndBlocker handlers to prevent the chain stall.
@@ -434,7 +445,7 @@ It seems that the problems regarding AXE-01-006 and AXE-01-007 have not been add
 > ###### Cure53 |2021-12| AXE-01-009 WP2: Mnemonic compromise constitutes single point of failure (Medium)
 > The use of a BIP39-mnemonic to generate entropy of 256 bits is a single point of failure and constitutes a medium level risk. This is because an attacker with knowledge of the secret mnemonic would be able to regenerate all previously generated keypairs, as they are all derived from the same seed. This design issue fails to achieve forward secrecy, and compromises the security of all generated keys and associated operations. However, the severity of this issue is mitigated by the requirement for consensus among multiple nodes in the Axelar network, making it difficult for an attacker to achieve tangible harm without compromising the mnemonic of enough nodes to achieve voting power. The affected file is tofnd-main/src/multisig/keygen.rs, where the same mnemonic entropy is used to generate key pairs.
 
-Similar to AXE-01-006 and AXE-01-007, it seems that the problems regarding AXE-01-009 have not been addressed, considering that the [latest commit dates back to the end of 11-2021](https://github.com/axelarnetwork/tofnd/commits/main/src/multisig/keygen.rs) and the audit report, which commenced in 12-2021 ([as indicated in the audit table](https://github.com/axelarnetwork/audits)) and concluded in 01-2022 ([as stated in the report footer](https://github.com/axelarnetwork/audits/blob/main/audits/2021-12%20Cure53.pdf)). This issue should be read in mind with the validator and the threshold level of 35 validators. 
+Similar to AXE-01-006 and AXE-01-007, it seems that the problems regarding AXE-01-009 have not been addressed, considering that the latest commit dates back to the [end of 11-2021](https://github.com/axelarnetwork/tofnd/commits/main/src/multisig/keygen.rs) and the audit report, which commenced in 12-2021 ([as indicated in the audit table](https://github.com/axelarnetwork/audits)), concluded in 01-2022 ([as stated in the report footer](https://github.com/axelarnetwork/audits/blob/main/audits/2021-12%20Cure53.pdf)). This issue should be read bearing in mind a sizable threshold level of 35 validators. 
 
 
 ### Axelar's Bug Bounty Program
@@ -443,34 +454,36 @@ Similar to AXE-01-006 and AXE-01-007, it seems that the problems regarding AXE-0
 
 ### Documentation 
 
-[Axelar's smart contracts](https://github.com/axelarnetwork/axelar-cgp-solidity) are generally easy to find, but it can be challenging to locate all deployed contracts through the Gitbook Documentation. For example, to find the authentication module, we had to go through the AxelarGatewayProxyMultisig contract. It would be more transparent if all contracts were listed in the Gitbook documentation. Axelar has the [contract deployments available on Github ](https://github.com/axelarnetwork/axelar-cgp-solidity/blob/3e7d6751a3016e4694b1ce643f11530442731e09/info/mainnet.json). Overall, the code documentation is comprehensive and includes a whitepaper, a flow chart within the whitepaper that documents the software architecture, and well-documented source code available on GitHub. Additionally, it is possible to trace the documented software to its implementation in the protocol's source code and development history (e.g. versioning, commits).
-
-### Broader Techical Risk of Arbitary Messaging Bridges (AMBs)
-
-Axelar may experience [liveness issues if validators opt to support only certain chains](https://blog.li.fi/navigating-arbitrary-messaging-bridges-a-comparison-framework-8720f302e2aa). For a new chain to be incorporated, it must receive support from 60% of the validators, based on their quadratic voting power, to run a node for that particular chain. Despite the fact that validators have the option to maintain a specific EVM chain, the majority vote threshold remains at 60% of the quadratic voting power of the total validator set. Therefore, if an EVM chain fails to attract enough supporting validators, it may affect liveness, but not security. Furthermore, on-chain governance can increase these thresholds.
-
-#### A Note on Relayer Services
-Axelar runs relayer services which observe all connected chains, and these relayers will pick up the event and submit it to the Axelar network for processing. These relayer services are a free, operational convenience Axelar provides, and can be run by anyone who wishes to create and use their own relayer service instead.
-
-The distribution of currently existing alternatives is unclear in Axelar and may represent a point of centralisation risk. An outage of the Axelar relayer service could result in a network-wide outage.   
+[Axelar's smart contracts](https://github.com/axelarnetwork/axelar-cgp-solidity) are generally easy to find, but it can be challenging to locate all deployed contracts through the Gitbook Documentation. For example, to find the authentication module, we had to go through the AxelarGatewayProxy contract. It would be more transparent if all contracts were listed in the Gitbook documentation. Axelar has the [contract deployments available on Github](https://github.com/axelarnetwork/axelar-cgp-solidity/blob/3e7d6751a3016e4694b1ce643f11530442731e09/info/mainnet.json). Overall, the code documentation is comprehensive and includes a whitepaper, a flow chart within the whitepaper that documents the software architecture, and well-documented source code available on GitHub. Additionally, it is possible to trace the documented software to its implementation in the protocol's source code and development history (e.g. versioning, commits).
 
 
 ## LlamaRisk Gauge Criteria
-1. **Is it possible for a single entity to rug its users?** No, the most significant point of centralisation seems to be the 4-of-8 multisig base contract allowing for upgradability of the smart contracts. 
 
+1. **Is it possible for a single entity to rug its users?** 
 
-4. **If the team vanishes, can the project continue?** The code is well documented and open source. Yet, a fork will be required to maintain smart contract upgradability. In additio,n funds seem to be held with the company and no treasury was idenified.
- 
-6. **Does the project viability depend on additional incentives?**  No additional incentives are required for the project to function apart from the programtically encoded inflation distributed to validators as part of the proof-of-stake consensus mechanism.
+No. Although there is a significant point of centralisation from the 4-of-8 multi-sig allowing for upgradability of the smart contracts. 
 
-8. **If demand falls to 0 tomorrow, can the users be made whole?** Yes, axlUSDC is always backed 1:1 with USDC so users should be able to redeem bridged assets to the source chain in any market condition.
+2. **If the team vanishes, can the project continue?** 
 
-10. **Do audits reveal any concerning signs?** The most concering sign is the upgradability of smart contracts through AxelarGatewayProxyMultisig.sol, which is controlled by a 4-of-8 multisig. 
+Somewhat. The code is well documented and open source. Validators on the network can autonomously achieve consensus without team involvement. Relayers are a permissionless service. However, a fork will be required to maintain smart contract upgradability. In addition, funds seem to be held with the company and no community-owned treasury was identified.
 
+3. **Does the project viability depend on additional incentives?**  
+
+No. Additional incentives are not required for the project to function apart from the programtically encoded inflation distributed to validators as part of the proof-of-stake consensus mechanism.
+
+4. **If demand falls to 0 tomorrow, can the users be made whole?** 
+
+Yes. axlUSDC is always backed 1:1 with USDC so users should be able to redeem bridged assets to the source chain in any market condition.
+
+5. **Do audits reveal any concerning signs?** 
+
+The most concering sign is the upgradability of smart contracts through AxelarGatewayProxy.sol, which is controlled by a 4-of-8 multisig. 
 
 ### LlamaRisk Recommendation
 
-All signs point to Axelar being a protocol that takes security seriously and has taken reasonable measures to ensure safety of user funds. Moving forward, we would like to see more robust access control of the smart contracts by replacing the 4-of-8 multisig with a DAO governed by tokenholders. Overall, the risk team approves of adding CRV incentives to axlUSDC <> USDC and axlUSDC <> FraxBP Pools on the requested chains. 
+All signs point to Axelar being a protocol that takes security seriously and has taken reasonable measures to ensure safety of user funds. Nevertheless, users should remain aware that bridge protocols have historically been very lucrative targets for hackers, and bridge hacks make up [4 of the 5 top exploits](https://rekt.news/leaderboard/) in the RektHQ leaderboard.
+
+Moving forward, we would like to see more robust access control of the smart contracts by replacing the 4-of-8 multisig with a DAO governed by tokenholders. Overall, LlamaRisk supports the continuation of CRV incentives to axlUSDC/USDC and axlUSDC/FraxBP pools on the requested chains. 
 
 
 
