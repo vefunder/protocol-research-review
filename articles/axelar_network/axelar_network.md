@@ -2,6 +2,13 @@
 
 ### A look into the Axelar cross-chain bridge protocol and its multi-chain axlUSDC stablecoin
 
+### TL;DR
+Axelar is a cross-chain bridge protocol built on the Cosmos SDK, providing secure cross-chain communication and allowing users to interact with any supported blockchain assets and applications. It offers a variety of tools and APIs for developing Web3 applications, abstracting away from networking and deployment specifics. Since its mainnet launch in February 2022, Axelar has facilitated a significant number of cross-chain activities and supported multiple chains, including Fantom, Polygon, Avalanche, and Arbitrum.
+
+Axelar's axlUSDC is a wrapped representation of USDC, enabling users to transact the stablecoin across various blockchain networks. Users can access axlUSDC through DEX liquidity pools, cross-chain liquidity routers such as Squid, or via Satellite, a cross-chain bridge built by Axelar. The platform aims to enable composable USDC using its General Message Passing (GMP) capability in collaboration with Circle's Cross-Chain Transfer Protocol (CCTP).
+
+Axelar's technical security risk appears to be well-managed, with comprehensive measures to ensure user funds' safety. However, users should remain aware of the potential risks associated with bridge protocols. It is worth noting that the upgradability of smart contracts through AxelarGatewayProxy.sol is controlled by a 4-of-8 multisig, with a recommendation to replace it with a DAO governed by tokenholders in the future. Overall, LlamaRisk supports the continuation of CRV incentives to axlUSDC/USDC and axlUSDC/FraxBP pools on the requested chains.
+
 ### Useful Links
 Another indicator suggesting the growth of the network is the growth of Daily Active Addresses (DAA), which have steadily been growing. DAA is a common metric used to measure the number of unique addresses that were active on a blockchain network during a given day. The chart below considers an active address as a unique address sending an on-chain transaction to the network over a rolling 24-hour period. 
 #### Basic information:
