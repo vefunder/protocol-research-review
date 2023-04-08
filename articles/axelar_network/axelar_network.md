@@ -354,14 +354,14 @@ This contract is owned by a multisignature scheme that is implemented in AdminMu
 | [0x30932Ac1f0477Fbd63E4c5Be1928f367A58A45A1](https://etherscan.io/address/0x30932Ac1f0477Fbd63E4c5Be1928f367A58A45A1) |
 
 
-**In practical terms, this means that the upgrading of contracts is subject to 4 out of 8 multi-sig signers.** Axelar plans to take further steps in decentralising the network by having the validator set jointly approve smart contract upgrades. This is a crucial step in achieving a higher level of decentralisation and eliminating the need for a governed multi-sig. The result will be a more decentralised network, offering greater transparency and security to users. Ultimately, Axelar aims to create a fully autonomous network that operates without any central authority or governing body.
+**In practical terms, this means that the upgrading of contracts is subject to 4 out of 8 multisig signers.** Axelar plans to take further steps in decentralising the network by having the validator set jointly approve smart contract upgrades. This is a crucial step in achieving a higher level of decentralisation and eliminating the need for a governed multisig. The result will be a more decentralised network, offering greater transparency and security to users. Ultimately, Axelar aims to create a fully autonomous network that operates without any central authority or governing body.
 
 ![Screen Shot 2023-04-07 at 1 38 37 PM](https://user-images.githubusercontent.com/51072084/230675911-4c73268c-7ce4-4fa3-aaee-a4e9eaf46dc6.png)
 
 Source: [AxelarGatewayProxy upgrade function](https://etherscan.io/address/0xed9938294acf9ee52d097133ca2caaff0c804f16#code)
 
 #### AxelarAuthWeighted.sol
-[AxelarAuthWeighted.sol](https://etherscan.io/address/0x228b92510130ec2E09C6d5645039c8cB834aD42d#code) is a core contract used by the Axelar network's gateway for verifying messages. It is a weighted multi-sig authentication contract that allows for multiple signers with different weights to approve a message. The contract is owned by AxelarGatewayProxy.sol, which is set during contract deployment.
+[AxelarAuthWeighted.sol](https://etherscan.io/address/0x228b92510130ec2E09C6d5645039c8cB834aD42d#code) is a core contract used by the Axelar network's gateway for verifying messages. It is a weighted multisig authentication contract that allows for multiple signers with different weights to approve a message. The contract is owned by AxelarGatewayProxy.sol, which is set during contract deployment.
 
 |![AxelarAuthWeighted.sol](https://i.imgur.com/cucphk1.png)|
 |---|
@@ -466,7 +466,7 @@ Similar to AXE-01-006 and AXE-01-007, it seems that the problems regarding AXE-0
 
 1. **Is it possible for a single entity to rug its users?** 
 
-No. Although there is a significant point of centralisation from the 4-of-8 multi-sig allowing for upgradability of the smart contracts. 
+No. Although there is a significant point of centralisation from the 4-of-8 multisig allowing for upgradability of the smart contracts. 
 
 2. **If the team vanishes, can the project continue?** 
 
