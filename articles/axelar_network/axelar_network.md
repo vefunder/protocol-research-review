@@ -5,25 +5,25 @@
 ### Useful Links
 Another indicator suggesting the growth of the network is the growth of Daily Active Addresses (DAA), which have steadily been growing. DAA is a common metric used to measure the number of unique addresses that were active on a blockchain network during a given day. The chart below considers an active address as a unique address sending an on-chain transaction to the network over a rolling 24-hour period. 
 #### Basic information:
-* Website: https://axelar.network/
-* Twitter: https://twitter.com/axelarcore
-* Discord: https://discord.com/invite/aRZ3Ra6f7D
-* Block Explorer: http://axelarscan.io
-* Dev Docs: http://docs.axelar.dev
-* GitHub: https://github.com/axelarnetwork
-* Audits: https://github.com/axelarnetwork/audits
-* Bug Bounty: [Axelar Network Bug Bounties | Immunefi](https://immunefi.com/bounty/axelarnetwork/)
+* [Website](https://axelar.network/) 
+* [Twitter](https://twitter.com/axelarcore)
+* [Discord](https://discord.com/invite/aRZ3Ra6f7D)
+* [Block Explorer](http://axelarscan.io)
+* [Dev Docs](http://docs.axelar.dev)
+* [GitHub](https://github.com/axelarnetwork)
+* [Audits](https://github.com/axelarnetwork/audits)
+* [Axelar Network Bug Bounties | Immunefi](https://immunefi.com/bounty/axelarnetwork/)
 #### Learning materials:
 * Introductory materials: [Article](https://medium.com/axelar/a-technical-introduction-to-the-axelar-network-3c4bf9fe4dc3) | [Video](https://www.youtube.com/watch?v=0-Q1mP2vmGE ) 
-* Whitepaper: https://axelar.network/axelar_whitepaper.pdf 
-* Comparision of AMBs: https://blog.li.fi/navigating-arbitrary-messaging-bridges-a-comparison-framework-8720f302e2aa
+* [Whitepaper](https://axelar.network/axelar_whitepaper.pdf)
+* [Comparision of AMBs](https://blog.li.fi/navigating-arbitrary-messaging-bridges-a-comparison-framework-8720f302e2aa)
 #### Project specific:
 * axlUSDC Contracts: [Assets | Axelarscan](https://axelarscan.io/assets)
-* Satellite (Token Bridge): https://satellite.money/
+* [Satellite (Token Bridge)](https://satellite.money/)
 #### Metrics & Data 
-* Validator Security overview: https://observatory.zone/axelar/validators
+* [Validator Security overview](https://observatory.zone/axelar/validators)
 * Metrics: [Metrica](https://https://app.metrika.co/axelar/dashboard/network-overview?tr=1d) | [Dune](https://dune.com/axelarnetwork/axelar)
-* Research Notes: https://docs.google.com/spreadsheets/d/1VaNHKrsYGoQ0a2hU41gfr105k1UpZ0M7-SO1qsURmF8/edit?usp=sharing
+* [Research Notes](https://docs.google.com/spreadsheets/d/1VaNHKrsYGoQ0a2hU41gfr105k1UpZ0M7-SO1qsURmF8/edit?usp=sharing)
 
 
 ### Relation to Curve
@@ -80,7 +80,7 @@ A high-level understanding of Axelar is necessary to conceptualise the risk to C
 
 |![image alt](https://i.imgur.com/QcMgjtP.jpg "Axelar Technology Stack")|
 |-------|
-|[Source: https://axelar.network/blog/an-introduction-to-the-axelar-network]|
+|[Source: [Axelar](https://axelar.network/blog/an-introduction-to-the-axelar-network)]|
 
 **Step 1 - Message request origination:** A dApp user initiates a request through the Axelar API on any connected chain. The API allows users to send arbitrary data, including token transfers and smart contract calls, to a specified destination chain.
 
@@ -180,7 +180,7 @@ Consensys [wrote a research piece](https://consensys.net/research/measuring-bloc
 
 |![Network Usage](https://i.imgur.com/M3xHZnc.png)|
 |----|
-|[Source: https://axelarscan.io/transfers]|
+|[Source: [Axelarscan](https://axelarscan.io/transfers)]|
 
 When analyzing the daily transfer and volume statistics of the Axelar Network from January 15, 2022, to February 28, 2023, the impact of Terra Luna becomes quite apparent. The statistics show that the daily transfer and volume on Axelar experienced a sharp spike caused by the [Terra UST collapse](https://www.coindesk.com/learn/the-fall-of-terra-a-timeline-of-the-meteoric-rise-and-crash-of-ust-and-luna/), showing significant cross-chain activity during the crisis. Despite the setback this event posed to the overall crypto market, Axelar has demonstrated resilience and stable growth in terms of daily transfers. This growth is particularly noteworthy considering the timing of the market cycle and is a positive sign for the network's future growth and adoption. 
 
@@ -189,13 +189,13 @@ Statistics on [General Message Passing](https://axelarscan.io/gmp/stats?fromTime
 
 |![GENERAL MESSAGE PASSING](https://i.imgur.com/nZkq3nb.png)|
 |-------|
-|*[Source: https://axelarscan.io/gmp/stats]*|
+|[Source: [Axelarscan](https://axelarscan.io/gmp/stats)]|
 
 An additional signal that implies the expansion of the network is the consistent increase in Daily Active Addresses (DAA). DAA is a common metric used to measure the number of unique addresses that were active on a blockchain network during a given day. The chart below considers an active address as a unique address sending an on-chain transaction to the network over a rolling 24-hour period. 
 
 |![DAA](https://i.imgur.com/ymI48qF.png)|
 |---|
-|[Source: https://app.artemis.xyz/dashboard/axelar]|
+|[Source: [Artermis Axelar Dashboard](https://app.artemis.xyz/dashboard/axelar)]|
 
 
 ### Validator Performance
@@ -204,7 +204,7 @@ The chart below displays the number of blocks proposed by validators on an hourl
 
 |![Overview of Number of Proposed Blocks by Validator](https://i.imgur.com/F6qOeJd.png)|
 |------|
-|[Source: https://app.metrika.co/axelar/dashboard/network-overview?tr=1M]| 
+|[Source: [Metrika Axelar Dashboard](https://app.metrika.co/axelar/dashboard/network-overview?tr=1M)]| 
 
 Overall, the chart shows good network stability (reasonably consistent validator performance) over the one-month period with a healthy propogation of blocks.
 
@@ -213,7 +213,7 @@ Overall, the chart shows good network stability (reasonably consistent validator
 
 |![Block Production](https://i.imgur.com/gt4N24J.png)|
 |-------|
-|[Source: https://app.metrika.co/axelar/dashboard/network-overview?tr=1M]
+|[Source: [Metrika Axelar Dashboard](https://app.metrika.co/axelar/dashboard/network-overview?tr=1M)]
 
 This chart displays block production trends on the Axelar Network over the past 30 days. The blue bars represent the number of blocks generated per hour. The network has maintained a stable block production rate of approximately 600 blocks per hour. A decrease in this rate may indicate network congestion. The purple line shows the maximum time it took to produce a block in a given hour, which varied between 6 and 22 seconds during the observed period. The green line represents the average block production time, which remained stable at 6 seconds, in line with the protocol specifications.
 
@@ -229,7 +229,7 @@ As of [September 2022 with Meave Upgrade](https://axelar.network/blog/axelar-imp
 
 ### Validator Nodes 
 
-|![Geographical Node Distribution](https://i.imgur.com/ZVsOWhv.png)|
+|![Geographical Node Distribution](https://i.imgur.com/ddVom6l.png)|
 |------|
 |[Source: https://observatory.zone/axelar/validators]|
 
@@ -250,7 +250,7 @@ The data below shows the count of different event types occurring in cross-chain
 
 |![](https://i.imgur.com/gVSCVVG.png)|
 |-------|
-|[Source: https://app.metrika.co/axelar/dashboard/network-overview?tr=1M]|
+|[Source: [Metrika Axelar Dashboard](https://app.metrika.co/axelar/dashboard/network-overview?tr=1M)]|
 
 The function calls on Axelar can be defined as follows:  
 
@@ -281,7 +281,7 @@ Weekly [commit and weekly active developers](https://app.artemis.xyz/developers/
 
 |![Developer Activity](https://i.imgur.com/4Zw6Z1k.png)|
 |--------|
-|[Source: https://app.artemis.xyz/developers/Axelar%20Network?includeForks=false]|
+|[Source: [Artemis Axelar Dashboard](https://app.artemis.xyz/developers/Axelar%20Network?includeForks=false)]|
 
 Axelar has a total of 56 repositories. The weekly commits have decreased by 61.7% in the last month and 59.1% in the last 3 months. The number of weekly active developers has decreased by 30.8% in the last month and 47.1% in the last 3 months. For Squid, representing the "Sub-Ecosystems" in the Figure above, there are 6 repositories and only 2 weekly commits, which represents an 86.7% decrease in the last month and a 33.3% decrease in the last 3 months. The number of weekly active developers has decreased by 75.0% in the last month and 50.0% in the last 3 months.
 
@@ -299,7 +299,7 @@ For Axelar, it is observed that around 59% of the initial token distribution was
 
 |![image alt](https://i.imgur.com/YbLzetz.png "AXL token allocations at genesis")| 
 | -------- | 
-| <center>*[Source: AXL token allocations at genesis](https://medium.com/@axelar-foundation/an-overview-of-axl-token-economics-4dc701c9054d)*</center>| 
+|[Source: [AXL token allocations at genesis](https://medium.com/@axelar-foundation/an-overview-of-axl-token-economics-4dc701c9054d)]| 
 
 
 If we look at the [distribution of bonded validators at the time of the analysis](https://docs.google.com/spreadsheets/d/1VaNHKrsYGoQ0a2hU41gfr105k1UpZ0M7-SO1qsURmF8/edit?usp=sharing), we can see that the total stake ranges from 64,000 AXL tokens to 45.7 million AXL tokens. The voting power of a validator ranges from .01% to 6.43%, while the quadratic voting power ranges from .12% to 3.32%. The total delegation of validators ranges from 4 to 1,492.
@@ -337,28 +337,28 @@ This contract is owned by a multisignature scheme that is implemented in AdminMu
     
 | AxelarGatewayProxy.sol Owners |
 |:--------------------------------------:|
-| 0x3f5876a2b06E54949aB106651Ab6694d0289b2b4 |
-| 0x9256Fd872118ed3a97754B0fB42c15015d17E0CC |
-| 0x5C8EF9ca7b43c93Ac4a146BeF77FAFbc7D3e69B7 |
-| 0x1486157d505C7F7E546aD00E3E2Eee25BF665C9b |
-| 0x2eC991B5c0B742AbD9d2ea31fe6c14a85e91C821 |
-| 0xf505462A29E36E26f25Ef0175Ca1eCBa09CC118f |
-| 0x027c1882B975E2cd771AE068b0389FA38B9dda73 |
-| 0x30932Ac1f0477Fbd63E4c5Be1928f367A58A45A1 |
+| [0x3f5876a2b06E54949aB106651Ab6694d0289b2b4](https://etherscan.io/address/0x3f5876a2b06E54949aB106651Ab6694d0289b2b4) |
+| [0x9256Fd872118ed3a97754B0fB42c15015d17E0CC](https://etherscan.io/address/0x9256Fd872118ed3a97754B0fB42c15015d17E0CC) |
+| [0x5C8EF9ca7b43c93Ac4a146BeF77FAFbc7D3e69B7](https://etherscan.io/address/0x5C8EF9ca7b43c93Ac4a146BeF77FAFbc7D3e69B7) |
+| [0x1486157d505C7F7E546aD00E3E2Eee25BF665C9b](https://etherscan.io/address/0x1486157d505C7F7E546aD00E3E2Eee25BF665C9b) |
+| [0x2eC991B5c0B742AbD9d2ea31fe6c14a85e91C821](https://etherscan.io/address/0x2eC991B5c0B742AbD9d2ea31fe6c14a85e91C821) |
+| [0xf505462A29E36E26f25Ef0175Ca1eCBa09CC118f](https://etherscan.io/address/0xf505462A29E36E26f25Ef0175Ca1eCBa09CC118f) |
+| [0x027c1882B975E2cd771AE068b0389FA38B9dda73](https://etherscan.io/address/0x027c1882B975E2cd771AE068b0389FA38B9dda73) |
+| [0x30932Ac1f0477Fbd63E4c5Be1928f367A58A45A1](https://etherscan.io/address/0x30932Ac1f0477Fbd63E4c5Be1928f367A58A45A1) |
 
 
 **In practical terms, this means that the upgrading of contracts is subject to 4 out of 8 multi-sig signers.** Axelar plans to take further steps in decentralising the network by having the validator set jointly approve smart contract upgrades. This is a crucial step in achieving a higher level of decentralisation and eliminating the need for a governed multi-sig. The result will be a more decentralised network, offering greater transparency and security to users. Ultimately, Axelar aims to create a fully autonomous network that operates without any central authority or governing body.
 
 ![Screen Shot 2023-04-07 at 1 38 37 PM](https://user-images.githubusercontent.com/51072084/230675911-4c73268c-7ce4-4fa3-aaee-a4e9eaf46dc6.png)
 
-Source: AxelarGatewayProxy upgrade function [Etherscan](https://etherscan.io/address/0xed9938294acf9ee52d097133ca2caaff0c804f16#code)
+Source: [AxelarGatewayProxy upgrade function](https://etherscan.io/address/0xed9938294acf9ee52d097133ca2caaff0c804f16#code)
 
 #### AxelarAuthWeighted.sol
 [AxelarAuthWeighted.sol](https://etherscan.io/address/0x228b92510130ec2E09C6d5645039c8cB834aD42d#code) is a core contract used by the Axelar network's gateway for verifying messages. It is a weighted multi-sig authentication contract that allows for multiple signers with different weights to approve a message. The contract is owned by AxelarGatewayProxy.sol, which is set during contract deployment.
 
 |![AxelarAuthWeighted.sol](https://i.imgur.com/cucphk1.png)|
 |---|
-|[Source:https://etherscan.io/address/0x228b92510130ec2E09C6d5645039c8cB834aD42d#readContract#F4]|
+|[Source: [AxelarAuthWeighted.sol](https://etherscan.io/address/0x228b92510130ec2E09C6d5645039c8cB834aD42d#readContract#F4)]|
 
 #### TokenDeployer.sol
 [TokenDeployer.sol](https://etherscan.io/address/0xe88Ab68Cd69e92294FcC3BBBD894Fb183197fA39#code) is a deployment library that contains the bytecode of the token. The Axelar Gateway is using Solidity delegatecall to utilize the library, and it is actually the gateway contract (AxelarGatewayProxy.sol) that is responsible for the deployment. This means that anyone can hypothetically use TokenDeployer to deploy their own instances of Axelar's token implementation without affecting the gateway contract.
@@ -370,7 +370,7 @@ In addition, AxelarGasService.sol uses an [EOA as the gasCollector](https://ethe
 
 |<center>![AxelarGasService.sol](https://i.imgur.com/U64iCbP.png)</center>|
 |---|
-|[Source: https://etherscan.io/address/0x2d5d7d31F671F86C782533cc367F14109a082712#readProxyContract]|
+|[Source: [AxelarGasService.sol](https://etherscan.io/address/0x2d5d7d31F671F86C782533cc367F14109a082712#readProxyContract)]|
 
 
 ### Smart Contract Audit Review 
@@ -381,7 +381,7 @@ On a high level the findings can be summarised as:
 
 |<center>![Severity Findings by Auditor across Audit Reports](https://i.imgur.com/YcD88Fh.png)</center>|
 |-----|
-|[Source: https://docs.google.com/spreadsheets/d/1VaNHKrsYGoQ0a2hU41gfr105k1UpZ0M7-SO1qsURmF8/edit?usp=sharing]|
+|[Source: [Google docs sheet](https://docs.google.com/spreadsheets/d/1VaNHKrsYGoQ0a2hU41gfr105k1UpZ0M7-SO1qsURmF8/edit#gid=2025182090)|
 
 The rest of this section will review issues found in the latest audit report for each repository. Only the issues that put user funds at risk and have not been resolved (or where it is unclear if it has been resolved) will be listed here.
 
@@ -402,7 +402,7 @@ The rest of this section will review issues found in the latest audit report for
 
 |![](https://i.imgur.com/oI7UeOp.png)|
 |--|
-|[Source: https://etherscan.io/address/0x228b92510130ec2E09C6d5645039c8cB834aD42d#code]|
+|[Source: [AxelarAuthWeighted.sol](https://etherscan.io/address/0x228b92510130ec2E09C6d5645039c8cB834aD42d#code)]|
 
 When verifiying the highlighted code snippet in the audit against the [deployed smart contract](https://etherscan.io/address/0x228b92510130ec2E09C6d5645039c8cB834aD42d#code). No changes can be observed, suggesting this issue has not been resolved.
 
@@ -415,7 +415,7 @@ An [example from the DepositReceiver.sol](https://github.com/axelarnetwork/axela
 
 |![](https://i.imgur.com/sczubTp.png)|
 |--|
-|[Source: https://github.com/axelarnetwork/axelar-cgp-solidity/blob/main/contracts/deposit-service/DepositReceiver.sol]|
+|[Source: [DepositReceiver.sol](https://github.com/axelarnetwork/axelar-cgp-solidity/blob/main/contracts/deposit-service/DepositReceiver.sol)]|
 
 It should be noted [the contract presuably containing](https://etherscan.io/address/0xd883C8bA523253c93d97b6C7a5087a7B5ff23d79#code) "DepositReceiver.sol" as a library contract is unverfied on etherscan, meaning an on-chain verification was not possible.
 
