@@ -30,7 +30,7 @@ Another indicator suggesting the growth of the network is the growth of Daily Ac
 
 Axelar has put forward two successful proposals to implement CRV gauge rewards for 4 axlUSDC pools on Fantom, Polygon, Avalanche, and Arbitrum:
 
-1. The [first proposal](https://gov.curve.fi/t/proposal-to-add-axlusdc-usdc-to-the-gauge-controller/8694), executed February 2023, was for the axlUSDC/USDC pools on multiple chains, including [Polygon](https://curve.fi/#/polygon/pools/factory-v2-221/deposit), [Avalanche](https://curve.fi/#/avalanche/pools/factory-v2-82/deposit), and [Fantom](https://curve.fi/#/fantom/pools/factory-v2-85/deposit), which serve as primary liquidity venues for axlUSDC on the Axelar network. This proposal sought approval for a gauge to incentivize USDC and axlUSDC liquidity on Curve, leveraging the already high trading volumes and native yields of axlUSDC pools.
+1. The [first proposal](https://gov.curve.fi/t/proposal-to-add-axlusdc-usdc-to-the-gauge-controller/8694), executed in February 2023, was for the axlUSDC/USDC pools on multiple chains, including [Polygon](https://curve.fi/#/polygon/pools/factory-v2-221/deposit), [Avalanche](https://curve.fi/#/avalanche/pools/factory-v2-82/deposit), and [Fantom](https://curve.fi/#/fantom/pools/factory-v2-85/deposit), which serve as primary liquidity venues for axlUSDC on the Axelar network. This proposal sought approval for a gauge to incentivize USDC and axlUSDC liquidity on Curve, leveraging the already high trading volumes and native yields of axlUSDC pools.
 2. The [second proposal](https://gov.curve.fi/t/proposal-to-add-axlusdc-fraxbp-to-the-gauge-controller/8907), executed March 2023, is for the axlUSDC/FRAXBP pool on [Arbitrum](https://curve.fi/#/arbitrum/pools/factory-v2-83/deposit), which serves as the primary liquidity venue for axlUSDC on the Axelar network. This proposal sought approval for a gauge to incentivize USDC, FRAX, and axlUSDC liquidity on Curve, with the support of the FRAX team.
 
 
@@ -39,22 +39,22 @@ Axelar is a cross-chain bridge protocol centered on its native proof-of-stake bl
 
 
 ### Founding Team
-The team (according to Linkedin) now has over [50 employees working on Axelar](https://www.linkedin.com/company/axelarnetwork/) and is the brain child of Sergey Gorbunov and Georgios Vlachos. 
+The team (according to Linkedin) now has over [50 employees working on Axelar](https://www.linkedin.com/company/axelarnetwork/) and is the brainchild of Sergey Gorbunov and Georgios Vlachos. 
 
-[Sergey Gorbunov](https://www.linkedin.com/in/sergegorbunov/details/experience/) is a co-founder of Axelar Network and an assistant professor at the University of Waterloo, where he conducts research on cryptography and blockchain technology. Prior to founding Axelar, Sergey was part of the founding team at Algorand, leading the cryptography group. He has also spent time at IBM T.J. Watson Research Centre. Sergey has a strong academic background in computer science and extensive experience in the blockchain and cryptography industries.
+[Sergey Gorbunov](https://www.linkedin.com/in/sergegorbunov/details/experience/) is a co-founder of Axelar Network and an assistant professor at the University of Waterloo, where he researches cryptography and blockchain technology. Prior to founding Axelar, Sergey was part of the founding team at Algorand, leading the cryptography group. He has also spent time at IBM T.J. Watson Research Centre. Sergey has a strong academic background in computer science and extensive experience in the blockchain and cryptography industries.
 
-[Georgios Vlachos](https://www.linkedin.com/in/georgiosvlachos/) is a co-founder of Axelar Network. Prior to founding Axelar, he served as the Head of Mathematics at Algorand. Georgios holds a Master's degree in Computer Science from MIT where he conducted research on machine learning and data mining. Georgios has a strong background in mathematics and computer science, with a particular focus on algorithms and cryptography. 
+[Georgios Vlachos](https://www.linkedin.com/in/georgiosvlachos/) is a co-founder of Axelar Network. Prior to founding Axelar, he served as the Head of Mathematics at Algorand. Georgios holds a Master's degree in Computer Science from MIT where he researched machine learning and data mining. Georgios has a strong background in mathematics and computer science, with a particular focus on algorithms and cryptography. 
 
 
 ### Brief Project History 
 
 Several significant events have shaped Axelar's trajectory and contributed to its success:
 
-* **06/2020**: [Axelar Inc.](https://opencorporates.com/companies/ca/12136040) was incorpoated in Canada by Sergey Gorbunov and Georgios Vlachos.
+* **06/2020**: [Axelar Inc.](https://opencorporates.com/companies/ca/12136040) was incorporated in Canada by Sergey Gorbunov and Georgios Vlachos.
 * **11/2020**: [$3.75M Raise](https://www.coindesk.com/tech/2020/11/13/algorand-linked-axelar-raises-375m-in-seed-funding-to-help-blockchains-communicate/) in a Seed Round from 11 investors, the funding round included participation from Binance X, DCVC (Data Collective), Lemniscap, Divergence Ventures, Waikit Lau, and Naval Ravikant.
 * **06/2021**: Axelar raised [$25 million in a Series A funding round](https://www.coindesk.com/markets/2021/07/15/axelar-raises-25m-in-series-a-fundraising-led-by-polychain-capital) led by Polychain Capital, with participation from Blockchain Capital, Divergence Ventures, and others.
-* **11/2021**: Axelar Network raised an [undisclosed amount of funding in a stratgic round](https://axelar.network/blog/axelar-announces-strategic-investment-from-crypto-com-capital) from 6 investors in a Venture Round, with Crypto.com Capital as the lead investor.
-* **02/2022**: Axelar released its cross-chain communication protocol suite, tools, and APIs to the public. It also raised [$35 million in a Series B funding](https://www.coindesk.com/business/2022/02/15/blockchain-interoperability-network-axelar-raises-25m-at-1b-valuation/) round led by Polychain and Dragonfly Capital. Additional investors include Binance, Coinbase Ventures, DCVC, Divergence Ventures, Galaxy, Lemniscap and North Island Ventures. The funding round values the company at $1 billion, making it a unicorn.
+* **11/2021**: Axelar Network raised an [undisclosed amount of funding in a strategic round](https://axelar.network/blog/axelar-announces-strategic-investment-from-crypto-com-capital) from 6 investors in a Venture Round, with Crypto.com Capital as the lead investor.
+* **02/2022**: Axelar released its cross-chain communication protocol suite, tools, and APIs to the public. It also raised [$35 million in Series B funding](https://www.coindesk.com/business/2022/02/15/blockchain-interoperability-network-axelar-raises-25m-at-1b-valuation/) round led by Polychain and Dragonfly Capital. Additional investors include Binance, Coinbase Ventures, DCVC, Divergence Ventures, Galaxy, Lemniscap, and North Island Ventures. The funding round values the company at $1 billion, making it a unicorn.
 * **03/2023**: Launch of [Axelar Virtual Machine](https://www.coindesk.com/tech/2023/02/27/axelar-introduces-virtual-machine-for-developers-building-cross-chain-crypto-apps/), which enables developers to build dApps once and run them on all chains, including EVM, Cairo VM, Cosmos, and other ecosystems.
 
 
@@ -119,9 +119,9 @@ Users can acquire axlUSDC in three ways.
 Contract addresses for axlUSDC on all supported chains can be found [here](https://docs.axelar.dev/resources/mainnet#assets).
 
 ### Composable USDC
-Circle recently announced a [Cross-Chain Transfer Protocol](https://www.circle.com/en/pressroom/circle-enables-usdc-interoperability-for-developers-with-the-launch-of-cross-chain-transfer-protocol) (CCTP), slated for release Q1 2023 on Ethereum and Avalanche, and later available on Solana and other chains. Axelar will be a partner protocol, enabling [composable USDC](https://www.circle.com/blog/composable-usdc-seamless-multichain-ux-by-axelar) with its General Message Passing (GMP) capability. This allows arbitrary data to accompany a token transfer to enable usecases such as seamless cross-chain swaps, one-click deposits/withdrawals into application-specific blockchains, and cross-chain NFTs. 
+Circle recently announced a [Cross-Chain Transfer Protocol](https://www.circle.com/en/pressroom/circle-enables-usdc-interoperability-for-developers-with-the-launch-of-cross-chain-transfer-protocol) (CCTP), slated for release Q1 2023 on Ethereum and Avalanche, and later available on Solana and other chains. Axelar will be a partner protocol, enabling [composable USDC](https://www.circle.com/blog/composable-usdc-seamless-multichain-ux-by-axelar) with its General Message Passing (GMP) capability. This allows arbitrary data to accompany a token transfer to enable use-cases such as seamless cross-chain swaps, one-click deposits/withdrawals into application-specific blockchains, and cross-chain NFTs. 
 
-The Axelar team is working closely with Circle to enable seamless functionality of native USDC using Axelar's GMP. They believe it is likely most dApp developers will prefer to support a native version of USDC, where available. However, there are many chains Axelar supports that are not on Circle’s CCTP road map. On these chains, axlUSDC will continue to be a secure, interchain stablecoin for dApps to make use of.
+The Axelar team is working closely with Circle to enable seamless functionality of native USDC using Axelar's GMP. They believe it is likely most dApp developers will prefer to support a native version of USDC, where available. Nevertheless, numerous chains supported by Axelar are not included in Circle's CCTP roadmap. On these chains, axlUSDC will persist as a secure, interchain stablecoin for dApps to utilize.
 
 #### A Note on USDC
 Between 11.03 to 14.03.2023 [USDC depegged below $1](https://twitter.com/DefiIgnas/status/1635980042294669312) due to the failure of Silicon Valley Bank (SVB), which held $3.3 billion in reserves backing the stablecoin's value. The bank's collapse was due to a bank run amid concerns over its financial health. Coinbase and Binance's decision to stop USDC conversions and the rapid depletion of the Curve 3pool contributed to USDC's depeg. The U.S. government took emergency action to [protect all SVB bank depositors](https://www.npr.org/2023/03/13/1163028329/biden-administration-steps-in-to-save-customers-of-silicon-valley-bank), thereby alleviating panic and ultimately bringing USDC back to its peg.
@@ -206,7 +206,7 @@ The chart below displays the number of blocks proposed by validators on an hourl
 |------|
 |[Source: [Metrika Axelar Dashboard](https://app.metrika.co/axelar/dashboard/network-overview?tr=1M)]| 
 
-Overall, the chart shows good network stability (reasonably consistent validator performance) over the one-month period with a healthy propogation of blocks.
+Overall, the chart shows good network stability (reasonably consistent validator performance) over the one-month period with a healthy propagation of blocks.
 
 
 ### Block production
@@ -217,14 +217,14 @@ Overall, the chart shows good network stability (reasonably consistent validator
 
 This chart displays block production trends on the Axelar Network over the past 30 days. The blue bars represent the number of blocks generated per hour. The network has maintained a stable block production rate of approximately 600 blocks per hour. A decrease in this rate may indicate network congestion. The purple line shows the maximum time it took to produce a block in a given hour, which varied between 6 and 22 seconds during the observed period. The green line represents the average block production time, which remained stable at 6 seconds, in line with the protocol specifications.
 
-Based on the stable block production rate and relatively consistent average block production time between the observed period, it appears that the consensus on the Axelar Network is stable and operating within the expected parameters.
+Based on the stable block production rate and relatively consistent average block production time during the observed period, it appears that the consensus on the Axelar Network is stable and operating within the expected parameters.
 
 
 ### Collusion Threshold
 
-The collusion threshold is a key security feature of the Axelar Network that helps to prevent validators from colluding and compromising the integrity of the network. The threshold is determined by the number of validators required to sign off on a block and is set at two-thirds of the total number of validators weighted by stake. 
+The collusion threshold is a key security feature of the Axelar Network that helps to prevent validators from colluding and compromising the integrity of the network. The threshold is determined by the number of validators required to sign off on a block and is set at two-thirds of the total number of validators weighted by the stake. 
 
-As of [September 2022 with Meave Upgrade](https://axelar.network/blog/axelar-implements-quadratic-voting-with-maeve-upgrade), the Axelar Network has introduced [quadratic voting](https://vitalik.ca/general/2019/12/07/quadratic.html), which further enhances the security and decentralization of the network. Currently, the network is secured by 70 active validators and the collusion threshold is set at 2/3 of validators quadratically weighted by stake. At the time of writing, a successful collusion would require 35 validators to collude to gain a supermajority (see [cumulative share % - quadratic](https://axelarscan.io/validators) here for current threshold). The metrics presented should be evaluated in context of this.
+As of [September 2022 with Meave Upgrade](https://axelar.network/blog/axelar-implements-quadratic-voting-with-maeve-upgrade), the Axelar Network has introduced [quadratic voting](https://vitalik.ca/general/2019/12/07/quadratic.html), which further enhances the security and decentralization of the network. Currently, the network is secured by 70 active validators and the collusion threshold is set at 2/3 of validators quadratically weighted by the stake. At the time of writing, a successful collusion would require 35 validators to collude to gain a supermajority (see [cumulative share % - quadratic](https://axelarscan.io/validators) here for the current threshold). Given this context, it is crucial to evaluate the presented metrics with these factors in mind.
 
 
 ### Validator Nodes 
@@ -233,16 +233,16 @@ As of [September 2022 with Meave Upgrade](https://axelar.network/blog/axelar-imp
 |------|
 |[Source: https://observatory.zone/axelar/validators]|
 
-At the time of writing, the Axelar validator set has a total of 92 nodes distributed across different regions. The Americas region has 21 nodes with a stake of 22.82%, while the Europe region has 58 nodes with a stake of 63.04%. The Asia Pacific region has 2 nodes with a stake of 2.17%, and there are 13 nodes with no specified region, accounting for a stake of 14.13%. Based on [the data provided](https://observatory.zone/axelar/countries), it appears that Europe has the highest concentration of Axelar validators in terms of both nodes and stake. This suggests some risk due to geographical centralisation.
+At the time of writing, the Axelar validator set has a total of 92 nodes distributed across different regions. The Americas region has 21 nodes with a stake of 22.82%, while the Europe region has 58 nodes with a stake of 63.04%. The Asia Pacific region has 2 nodes with a stake of 2.17%, and there are 13 nodes with no specified region, accounting for a stake of 14.13%. Based on [the data provided](https://observatory.zone/axelar/countries), it appears that Europe has the highest concentration of Axelar validators in terms of both nodes and the stake. This suggests some risk due to geographical centralisation.
 
 It is important to note that this data only represents the validators that are currently connected and may not reflect the full distribution of validators over time. Additionally, this data does not necessarily provide information on the specific geographic location of the validators within each region, but rather through which country nodes access the network. This data can be altered by using VPN or routing through a private server.
 
 
 ### Internet Service Providers (ISPs)
 
-The [top three Internet Service Providers (ISPs)](https://observatory.zone/axelar/isps) in terms of stake and number of nodes for Axelar are Hetzner Online GmbH, OVH SAS, and Amazon.com, Inc. OVH SAS has the highest stake with 27.81% and 16 nodes, followed by Hetzner Online GmbH with 19.80% and 22 nodes, and Amazon.com, Inc. with 9.98% and 12 nodes.
+The [top three Internet Service Providers (ISPs)](https://observatory.zone/axelar/isps) in terms of stakes and number of nodes for Axelar are Hetzner Online GmbH, OVH SAS, and Amazon.com, Inc. OVH SAS has the highest stake with 27.81% and 16 nodes, followed by Hetzner Online GmbH with 19.80% and 22 nodes, and Amazon.com, Inc. with 9.98% and 12 nodes.
 
-The aggregation of stake and nodes within the leading three ISPs embodies a centralizing tendency that necessitates vigilant monitoring. The main issues associated with centralization stem from regulatory risks, including the banning of node services and the termination of contracts. Moreover, should a data center cease operations, the network could temporarily experience a substantial loss of nodes, leading to heightened centralization. It is essential to bear in mind that the dispersion of nodes and stake among different ISPs can vary over time, and Axelar is still an emerging project. Additionally, the concentration of ISPs does not substantially diverge from established industry norms.
+The aggregation of stake and nodes within the leading three ISPs embodies a centralizing tendency that necessitates vigilant monitoring. The main issues associated with centralization stem from regulatory risks, including the banning of node services and the termination of contracts. Moreover, should a data center cease operations, the network could temporarily experience a substantial loss of nodes, leading to heightened centralization. It is essential to bear in mind that the dispersion of nodes and stakes among different ISPs can vary over time, and Axelar is still an emerging project. Additionally, the concentration of ISPs does not substantially diverge from established industry norms.
 
 ### Function Call Diversity 
 
@@ -272,7 +272,7 @@ The SubmitSignatureRequest event type is the most frequent, occurring close to 1
 
 [Client diversity](https://clientdiversity.org/) refers to the presence of multiple software implementations of a blockchain network protocol. This is important in general-purpose blockchains like Ethereum to enhance network security, reliability, and decentralization, as failures associated with the client can potentially disrupt the entire network.
 
-The Axelar-core clinet can be found [here](https://github.com/axelarnetwork/axelar-core). Due to the app-specific nature (as opposed to a general purpose blockchain like Ethereum), the Axelar team claims that a multi-client model doesn’t add much benefit, similar to other Cosmos-based chains. Client diversity may be less important due to the network's specialization and focus, and the ability to leverage the underlying security of the Cosmos Hub which has multiple client implementations. 
+The Axelar-core client can be found [here](https://github.com/axelarnetwork/axelar-core). Due to the app-specific nature (as opposed to a general-purpose blockchain like Ethereum), the Axelar team claims that a multi-client model doesn’t add many benefits, similar to other Cosmos-based chains. Client diversity may be less important due to the network's specialization and focus, and the ability to leverage the underlying security of the Cosmos Hub which has multiple client implementations. 
 
 
 ### Developer Activity
@@ -410,27 +410,27 @@ When verifiying the highlighted code snippet in the audit against the [deployed 
 > ###### Chaintroopers |2022-08| C2.5: Insecure error handling of zero addresses at "ReceiverImplementation.sol" and at "DepositReceiver.sol"
 > The contracts "ReceiverImplementation.sol" and "DepositReceiver.sol" contain insecure error handling for zero addresses. When the provided "refundAddress" is zero, the contracts replace it with "msg.sender". This can lead to incoming funds being transferred to a contract that may not be designed to handle them, potentially resulting in a lock-up of the incoming funds. The recommendation is to verify that the address is not the zero address and then revert the transaction if it is. The issue is marked as LOW, as the external functionalities are mainly designed to be used by the upgradable AxelarDepositService.
 
-An [example from the DepositReceiver.sol](https://github.com/axelarnetwork/axelar-cgp-solidity/blob/main/contracts/deposit-service/DepositReceiver.sol) suggest that the issue still exists.
+An [example from the DepositReceiver.sol](https://github.com/axelarnetwork/axelar-cgp-solidity/blob/main/contracts/deposit-service/DepositReceiver.sol) suggests that the issue still exists.
 
 
 |![](https://i.imgur.com/sczubTp.png)|
 |--|
 |[Source: [DepositReceiver.sol](https://github.com/axelarnetwork/axelar-cgp-solidity/blob/main/contracts/deposit-service/DepositReceiver.sol)]|
 
-It should be noted [the contract presuably containing](https://etherscan.io/address/0xd883C8bA523253c93d97b6C7a5087a7B5ff23d79#code) "DepositReceiver.sol" as a library contract is unverfied on etherscan, meaning an on-chain verification was not possible.
+It should be noted [the contract presumably containing](https://etherscan.io/address/0xd883C8bA523253c93d97b6C7a5087a7B5ff23d79#code) "DepositReceiver.sol" as a library contract is unverified on etherscan, meaning an on-chain verification was not possible.
 
 
 #### Repository | axelar-cgp-solidity, axelar-xc20-wrapper | [Code4rena](https://code4rena.com/contests/2022-07-axelar-network-v2-contest)
 
 > ###### Code4rena Contest |2022-07| M-6 : Add cancel and refund option for Transaction Recovery
-> The AxelarGateway.sol and AxelarGasService.sol contracts lack an option to cancel and refund transactions that have failed or are stuck, which can potentially result in the loss of user funds. The recommendation is to include a cancel option and enable users to receive gas refunds. While Axelar Network acknowledged the issue, they disagreed with the severity, asserting that it is up to cross-chain app developers to implement refund and cancel methods as they are application-specific. The Code4rena Judge rated the issue as of medium severity due to its risk to end-users and the absence of a refund mechanism. Both the sponsor and judge advised end-users to form their own opinion.
+> The AxelarGateway.sol and AxelarGasService.sol contracts lack the option to cancel and refund transactions that have failed or are stuck, which can potentially result in the loss of user funds. The recommendation is to include a cancel option and enable users to receive gas refunds. While Axelar Network acknowledged the issue, they disagreed with the severity, asserting that it is up to cross-chain app developers to implement refund and cancel methods as they are application-specific. The Code4rena Judge rated the issue as of medium severity due to its risk to end-users and the absence of a refund mechanism. Both the sponsor and judge advised end-users to form their own opinion.
 
 #### Repository | axelar-core, axelar-cgp-solidity, axelar-web-app [Cure53](https://github.com/axelarnetwork/audits/blob/main/audits/2022-04%20Cure53.pdf)
 
 > ###### Cure53 |2022-04| AXE-02-016 WP1: Potential Cosmos consensus stall via panic 
 > This issue is a Medium severity vulnerability and involves the EndBlocker handlers of two modules, x/tss and x/reward, which can trigger panic() calls that could potentially cause the Cosmos network to slow down or even halt. Panic() calls are a mechanism in Go that halts the execution of a program when an unexpected error or state is encountered. If an attacker were to trigger these panic() calls remotely, they could exploit this vulnerability to create a Denial-of-Service scenario on the network. To mitigate this issue, it is recommended to integrate recovery logic to all Cosmos module EndBlocker handlers to prevent the chain stall.
 
-Based on abci.go files in [x/tss](https://github.com/axelarnetwork/axelar-core/blob/main/x/tss/abci.go) and [x/reward](https://github.com/axelarnetwork/axelar-core/blob/main/x/reward/abci.go) modules in the axelar-core repository, the issue has not been fixed yet. It should be noted that this may have been addressed else where in the architecture. 
+Based on abci.go files in [x/tss](https://github.com/axelarnetwork/axelar-core/blob/main/x/tss/abci.go) and [x/reward](https://github.com/axelarnetwork/axelar-core/blob/main/x/reward/abci.go) modules in the axelar-core repository, the issue has not been fixed yet. It should be noted that this may have been addressed elsewhere in the architecture. 
 
 #### Repository | axelar-core, axelar-cgp-solidity, tofn, tofnd, axelarjs-sdk
 
