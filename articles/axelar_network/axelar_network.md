@@ -3,7 +3,7 @@
 ### A look into the Axelar cross-chain bridge protocol and its multi-chain axlUSDC stablecoin
 
 ### Useful Links
-
+Another indicator suggesting the growth of the network is the growth of Daily Active Addresses (DAA), which have steadily been growing. DAA is a common metric used to measure the number of unique addresses that were active on a blockchain network during a given day. The chart below considers an active address as a unique address sending an on-chain transaction to the network over a rolling 24-hour period. 
 #### Basic information:
 * Website: https://axelar.network/
 * Twitter: https://twitter.com/axelarcore
@@ -182,7 +182,7 @@ Consensys [wrote a research piece](https://consensys.net/research/measuring-bloc
 |----|
 |[Source: https://axelarscan.io/transfers]|
 
-When analyzing the daily transfer and volume statistics of the Axelar Network from January 15, 2022, to February 28, 2023, the impact of Terra Luna becomes quite apparent. The statistics show that the daily transfer and volume on Axelar experienced a sharp spike caused by the [Terra UST collapse](https://www.coindesk.com/learn/the-fall-of-terra-a-timeline-of-the-meteoric-rise-and-crash-of-ust-and-luna/), showing significant cross-chain activity during the crisis. Desite the setback this event posed to the overall crypto market, Axelar has demonstrated resilience and stable growth in terms of daily transfers. This growth is particularly noteworthy considering the timing of the market cycle and is a positive sign for the network's future growth and adoption. 
+When analyzing the daily transfer and volume statistics of the Axelar Network from January 15, 2022, to February 28, 2023, the impact of Terra Luna becomes quite apparent. The statistics show that the daily transfer and volume on Axelar experienced a sharp spike caused by the [Terra UST collapse](https://www.coindesk.com/learn/the-fall-of-terra-a-timeline-of-the-meteoric-rise-and-crash-of-ust-and-luna/), showing significant cross-chain activity during the crisis. Despite the setback this event posed to the overall crypto market, Axelar has demonstrated resilience and stable growth in terms of daily transfers. This growth is particularly noteworthy considering the timing of the market cycle and is a positive sign for the network's future growth and adoption. 
 
 
 Statistics on [General Message Passing](https://axelarscan.io/gmp/stats?fromTime=1679309728011) show that after May 2022 (i.e. after the collapse of Luna Terra), the top chain pairs on the Axelar Network are mainly between Polygon, Moonbeam, and Ethereum. While Polygon is the most popular, there is a diverse range of destination contracts on the network. The most popular destinations are Polygon, BNB Chain, and Moonbeam, accounting for 21.64%, 16.37%, and 14.04% of the total messages, respectively. These statistics suggest the diversity and versatility of the Axelar Network, with users utilizing a range of chains and contracts for their cross-chain transfers. It will be interesting to track any shifts in the distribution of messages and destination contracts in the future.
@@ -191,7 +191,7 @@ Statistics on [General Message Passing](https://axelarscan.io/gmp/stats?fromTime
 |-------|
 |*[Source: https://axelarscan.io/gmp/stats]*|
 
-Another indicator suggesting the growth of the network is the Growth of Daily Active Addresses (DAA), which have steadily been growing. DAA is a common metric used to measure the number of unique addresses that were active on a blockchain network during a given day. The chart below considers an active address as a unique address sending an on-chain transaction to the network over a rolling 24-hour period. 
+An additional signal that implies the expansion of the network is the consistent increase in Daily Active Addresses (DAA). DAA is a common metric used to measure the number of unique addresses that were active on a blockchain network during a given day. The chart below considers an active address as a unique address sending an on-chain transaction to the network over a rolling 24-hour period. 
 
 |![DAA](https://i.imgur.com/ymI48qF.png)|
 |---|
@@ -233,17 +233,16 @@ As of [September 2022 with Meave Upgrade](https://axelar.network/blog/axelar-imp
 |------|
 |[Source: https://observatory.zone/axelar/validators]|
 
-The Axelar validator set has a total of 90 nodes distributed across different regions. The Americas region has 22 nodes with a stake of 25.72%, while the Europe region has 57 nodes with a stake of 41.90%. The Asia Pacific region has 3 nodes with a stake of 2.24%, and there are 8 nodes with no specified region, accounting for a stake of 30.14%. Based on [the data provided](https://observatory.zone/axelar/countries), it appears that Europe has the highest concentration of Axelar validators in terms of both nodes and stake. This suggests some risk due to geographical centralisation.
+At the time of writing, the Axelar validator set has a total of 92 nodes distributed across different regions. The Americas region has 21 nodes with a stake of 22.82%, while the Europe region has 58 nodes with a stake of 63.04%. The Asia Pacific region has 2 nodes with a stake of 2.17%, and there are 13 nodes with no specified region, accounting for a stake of 14.13%. Based on [the data provided](https://observatory.zone/axelar/countries), it appears that Europe has the highest concentration of Axelar validators in terms of both nodes and stake. This suggests some risk due to geographical centralisation.
 
 It is important to note that this data only represents the validators that are currently connected and may not reflect the full distribution of validators over time. Additionally, this data does not necessarily provide information on the specific geographic location of the validators within each region, but rather through which country nodes access the network. This data can be altered by using VPN or routing through a private server.
 
 
 ### Internet Service Providers (ISPs)
 
-The [top three Internet Service Providers (ISPs)](https://observatory.zone/axelar/isps) in terms of stake and number of nodes for Axelar are Hetzner Online GmbH, OVH SAS, and Amazon.com, Inc. OVH SAS has the highest stake with 28.01% and 16 nodes, followed by Hetzner Online GmbH with 18.66% and 19 nodes, and Amazon.com, Inc. with 9.69% and 11 nodes.
+The [top three Internet Service Providers (ISPs)](https://observatory.zone/axelar/isps) in terms of stake and number of nodes for Axelar are Hetzner Online GmbH, OVH SAS, and Amazon.com, Inc. OVH SAS has the highest stake with 27.81% and 16 nodes, followed by Hetzner Online GmbH with 19.80% and 22 nodes, and Amazon.com, Inc. with 9.98% and 12 nodes.
 
-The concentration of stake and nodes in these top three ISPs represents a centralising force and should be observed with caution. If a large percentage of the network's nodes are controlled by a small number of ISPs, there is a risk of centralisation and potential vulnerabilities. For example, if a majority of the network's nodes are hosted by one or two ISPs, those ISPs could potentially collude to manipulate the network's operations. However, it's important to note that the distribution of nodes and stake across different ISPs can change over time, and Axelar is still a relatively young project. In addition, ISP concentration is not a meaningful deviation from the industry standard.
-
+The aggregation of stake and nodes within the leading three ISPs embodies a centralizing tendency that necessitates vigilant monitoring. The main issues associated with centralization stem from regulatory risks, including the banning of node services and the termination of contracts. Moreover, should a data center cease operations, the network could temporarily experience a substantial loss of nodes, leading to heightened centralization. It is essential to bear in mind that the dispersion of nodes and stake among different ISPs can vary over time, and Axelar is still an emerging project. Additionally, the concentration of ISPs does not substantially diverge from established industry norms.
 
 ### Function Call Diversity 
 
@@ -296,8 +295,7 @@ Token-related risk refers to the potential for loss or negative impact on a bloc
 #### Initial Token Distribution of $AXL
 The initial token distribution of a project tends to have a degree of stickiness to it. This is particularly true for proof-of-stake systems, where initial token holders have no incentive to redistribute their tokens and promote decentralization since their wealth and staking power are directly correlated.
 
-In the case of Axelar, we can see that approximately 59% of the initial token distribution went towards insiders of the project, such as the company operations, team, and backers, while the remaining 41% was allocated to the community through community programs and sale. This is illustrated below, which shows the AXL token allocations at genesis.
-
+For Axelar, it is observed that around 59% of the initial token distribution was allocated to individuals closely associated with the project, including company operations, team members, and supporters. The remaining 41% was distributed to the community via community programs and sales. The following illustration demonstrates the AXL token allocations at the genesis stage, with a different terminology for insiders.
 
 |![image alt](https://i.imgur.com/YbLzetz.png "AXL token allocations at genesis")| 
 | -------- | 
@@ -483,7 +481,7 @@ The most concering sign is the upgradability of smart contracts through AxelarGa
 
 All signs point to Axelar being a protocol that takes security seriously and has taken reasonable measures to ensure safety of user funds. Nevertheless, users should remain aware that bridge protocols have historically been very lucrative targets for hackers, and bridge hacks make up [4 of the 5 top exploits](https://rekt.news/leaderboard/) in the RektHQ leaderboard.
 
-Moving forward, we would like to see more robust access control of the smart contracts by replacing the 4-of-8 multisig with a DAO governed by tokenholders. Overall, LlamaRisk supports the continuation of CRV incentives to axlUSDC/USDC and axlUSDC/FraxBP pools on the requested chains. 
+Moving forward, we would like to see more robust access control of the smart contracts by replacing the 4-of-8 multisig with a DAO governed by tokenholders. Overall, LlamaRisk supports the continuation of CRV incentives to axlUSDC/USDC and axlUSDC/FraxBP pools on the requested chains.
 
 
 
