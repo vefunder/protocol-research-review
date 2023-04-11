@@ -130,15 +130,6 @@ Circle recently announced a [Cross-Chain Transfer Protocol](https://www.circle.c
 
 The Axelar team is working closely with Circle to enable seamless functionality of native USDC using Axelar's GMP. They believe it is likely most dApp developers will prefer to support a native version of USDC, where available. Nevertheless, numerous chains supported by Axelar are not included in Circle's CCTP roadmap. On these chains, axlUSDC will persist as a secure, interchain stablecoin for dApps to utilize.
 
-#### A Note on USDC
-Between 11.03 to 14.03.2023 [USDC depegged below $1](https://twitter.com/DefiIgnas/status/1635980042294669312) due to the failure of Silicon Valley Bank (SVB), which held $3.3 billion in reserves backing the stablecoin's value. The bank's collapse was due to a bank run amid concerns over its financial health. Coinbase and Binance's decision to stop USDC conversions and the rapid depletion of the Curve 3pool contributed to USDC's depeg. The U.S. government took emergency action to [protect all SVB bank depositors](https://www.npr.org/2023/03/13/1163028329/biden-administration-steps-in-to-save-customers-of-silicon-valley-bank), thereby alleviating panic and ultimately bringing USDC back to its peg.
-
-|![USDC depeg](https://i.imgur.com/LGcEvXI.png)|
-|-------|
-|[Source: https://coinmarketcap.com/currencies/usd-coin/]|
-
-The depeg raised concerns over the trustworthiness of USDC and the risk of contagion from centralized finance (CeFi) on crypto. As a wrapped representation of USDC, axlUSDC is exposed to the risk of the underlying asset in addition to the risks associated with Axelar network itself. 
-
 
 ### Contract Architecture Overview
 
@@ -251,6 +242,7 @@ The [top three Internet Service Providers (ISPs)](https://observatory.zone/axela
 
 The aggregation of stake and nodes within the leading three ISPs embodies a centralizing tendency that necessitates vigilant monitoring. The main issues associated with centralization stem from regulatory risks, including the banning of node services and the termination of contracts. Moreover, should a data center cease operations, the network could temporarily experience a substantial loss of nodes, leading to heightened centralization. It is essential to bear in mind that the dispersion of nodes and stakes among different ISPs can vary over time, and Axelar is still an emerging project. Additionally, the concentration of ISPs does not substantially diverge from established industry norms.
 
+
 ### Function Call Diversity 
 
 The data below shows the count of different event types occurring in cross-chain transfers on the Axelar Network for the past 30 days. 
@@ -299,7 +291,9 @@ While the decline seems extreme, this is rather in line with other ecosystems wh
 
 Token-related risk refers to the potential for loss or negative impact on a blockchain network's native token or other tokens within its ecosystem. This type of risk is inherent in any decentralized system that relies on token economics, where tokens serve as a means of value transfer, governance, and incentivization. This section will explore some aspects of token-related risk in Axelar.
 
+
 #### Initial Token Distribution of $AXL
+
 The initial token distribution of a project tends to have a degree of stickiness to it. This is particularly true for proof-of-stake systems, where initial token holders have no incentive to redistribute their tokens and promote decentralization since their wealth and staking power are directly correlated.
 
 For Axelar, it is observed that around 59% of the initial token distribution was allocated to individuals closely associated with the project, including company operations, team members, and supporters. The remaining 41% was distributed to the community via community programs and sales. The following illustration demonstrates the AXL token allocations at the genesis stage, with a different terminology for insiders.
@@ -318,13 +312,26 @@ From the data observed, it appears that the AXL tokens are relatively well distr
 In addition, there is evidence of progressive decentralisation, as the Validator concentration has improved since this past review: a [comparison of Arbitrary messaging bridges by Lifi](https://blog.li.fi/navigating-arbitrary-messaging-bridges-a-comparison-framework-8720f302e2aa). 
 
 
+#### USDC Depeg
+
+Between 11.03 to 14.03.2023 [USDC depegged below $1](https://twitter.com/DefiIgnas/status/1635980042294669312) due to the failure of Silicon Valley Bank (SVB), which held $3.3 billion in reserves backing the stablecoin's value. The bank's collapse was due to a bank run amid concerns over its financial health. Coinbase and Binance's decision to stop USDC conversions and the rapid depletion of the Curve 3pool contributed to USDC's depeg. The U.S. government took emergency action to [protect all SVB bank depositors](https://www.npr.org/2023/03/13/1163028329/biden-administration-steps-in-to-save-customers-of-silicon-valley-bank), thereby alleviating panic and ultimately bringing USDC back to its peg.
+
+|![USDC depeg](https://i.imgur.com/LGcEvXI.png)|
+|-------|
+|[Source: https://coinmarketcap.com/currencies/usd-coin/]|
+
+The depeg raised concerns over the trustworthiness of USDC and the risk of contagion from centralized finance (CeFi) on crypto. As a wrapped representation of USDC, axlUSDC is exposed to the risk of the underlying asset in addition to the risks associated with Axelar network itself. 
+
+
 ## Technical Security Risk 
 
 Technical security risk is a critical concern for any blockchain network as it involves potential vulnerabilities in the system's technical infrastructure. In this section, we will examine technical security risks associated with the Axelar network, including potential liveness issues, trust assumptions involving access controls, and smart contract security practices.
 
+
 ### Possible Liveness Issues
 
 Axelar may experience [liveness issues if validators opt to support only certain chains](https://blog.li.fi/navigating-arbitrary-messaging-bridges-a-comparison-framework-8720f302e2aa). For a new chain to be incorporated, it must receive support from 60% of the validators, based on their quadratic voting power, to run a node for that particular chain. Despite the fact that validators have the option to maintain a specific EVM chain, the majority vote threshold remains at 60% of the quadratic voting power of the total validator set. Therefore, if an EVM chain fails to attract enough supporting validators, it may affect liveness (although not security). Furthermore, on-chain governance can increase these thresholds.
+
 
 #### A Note on Relayer Services
 Axelar runs relayer services which observe all connected chains, and these relayers will pick up the event and submit it to the Axelar network for processing. These relayer services are a free, operational convenience Axelar provides, and can be run by anyone who wishes to create and use their own relayer service instead.
