@@ -390,7 +390,50 @@ On a high level the findings can be summarised as:
 |-----|
 |[Source: [Google docs sheet](https://docs.google.com/spreadsheets/d/1VaNHKrsYGoQ0a2hU41gfr105k1UpZ0M7-SO1qsURmF8/edit#gid=2025182090)|
 
-The rest of this section will review issues found in the latest audit report for each repository. Only the issues that put user funds at risk and have not been resolved (or where it is unclear if it has been resolved) will be listed here.
+The Axelar team does not have a system for tracking resolved issues, making the review process an arduous task. Efforts should be made to imrove transparency in this regard. An overview of notable findings can be found in the Appendix, which includes issues that put user funds at risk and have not been resolved (or where it is unclear if it has been resolved).
+
+
+### Axelar's Bug Bounty Program
+
+[Axelar Immunefi bounty program](https://immunefi.com/bounty/axelarnetwork/) offers rewards ranging from USD $1,000 to a maximum of USD $2,250,000 for critical vulnerabilities, with separate payouts for different threat levels and severity classifications. The program also requires proof of concept for critical blockchain and smart contract bug reports, which is standard practice for most bug bounty programs. Additionally, the program specifies the assets in scope and provides a detailed explanation of the type of vulnerabilities they are looking for, making it easier for bounty hunters to identify potential security issues. However, the program requires KYC for all bug bounty hunters submitting a report, which may be a deterrent for some researchers. Axelar Network's bug bounty program seems to offer reasonable rewards for identifying critical vulnerabilities. This adds additional confidence to the technical robustness of the Axelar Network.
+
+### Documentation 
+
+[Axelar's smart contracts](https://github.com/axelarnetwork/axelar-cgp-solidity) are generally easy to find, but it can be challenging to locate all deployed contracts through the Gitbook Documentation. For example, to find the authentication module, we had to go through the AxelarGatewayProxy contract. It would be more transparent if all contracts were listed in the Gitbook documentation. Axelar has the [contract deployments available on Github](https://github.com/axelarnetwork/axelar-cgp-solidity/blob/3e7d6751a3016e4694b1ce643f11530442731e09/info/mainnet.json). Overall, the code documentation is comprehensive and includes a whitepaper, a flow chart within the whitepaper that documents the software architecture, and well-documented source code available on GitHub. Additionally, it is possible to trace the documented software to its implementation in the protocol's source code and development history (e.g. versioning, commits).
+
+
+## LlamaRisk Gauge Criteria
+
+1. **Is it possible for a single entity to rug its users?** 
+
+No. Although there is a significant point of centralisation from the 4-of-8 multisig allowing for upgradability of the smart contracts. 
+
+2. **If the team vanishes, can the project continue?** 
+
+Somewhat. The code is well documented and open source. Validators on the network can autonomously achieve consensus without team involvement. Relayers are a permissionless service. However, a fork will be required to maintain smart contract upgradability. In addition, funds seem to be held with the company and no community-owned treasury was identified.
+
+3. **Does the project viability depend on additional incentives?**  
+
+No. Additional incentives are not required for the project to function apart from the programtically encoded inflation distributed to validators as part of the proof-of-stake consensus mechanism.
+
+4. **If demand falls to 0 tomorrow, can the users be made whole?** 
+
+Yes. axlUSDC is always backed 1:1 with USDC so users should be able to redeem bridged assets to the source chain in any market condition.
+
+5. **Do audits reveal any concerning signs?** 
+
+The most concering sign is the upgradability of smart contracts through AxelarGatewayProxy.sol, which is controlled by a 4-of-8 multisig. 
+
+### LlamaRisk Recommendation
+
+All signs point to Axelar being a protocol that takes security seriously and has taken reasonable measures to ensure safety of user funds. Nevertheless, users should remain aware that bridge protocols have historically been very lucrative targets for hackers, and bridge hacks make up [4 of the 5 top exploits](https://rekt.news/leaderboard/) in the RektHQ leaderboard.
+
+Moving forward, we would like to see more robust access control of the smart contracts by replacing the 4-of-8 multisig with a DAO governed by tokenholders. Overall, LlamaRisk supports the continuation of CRV incentives to axlUSDC/USDC and axlUSDC/FraxBP pools on the requested chains.
+
+
+## Appendix: Notable Audit Findings
+
+This section will review issues found in the latest audit report for each repository. Only the issues that put user funds at risk and have not been resolved (or where it is unclear if it has been resolved) will be listed here.
 
 
 #### Repository | axelar-utils-solidity | [Ackee Blockchain](https://raw.githubusercontent.com/axelarnetwork/audits/main/audits/2022-08%20Ackee%20blockchain.pdf)
@@ -451,44 +494,4 @@ It seems that the problems regarding AXE-01-006 and AXE-01-007 have not been add
 > The use of a BIP39-mnemonic to generate entropy of 256 bits is a single point of failure and constitutes a medium level risk. This is because an attacker with knowledge of the secret mnemonic would be able to regenerate all previously generated keypairs, as they are all derived from the same seed. This design issue fails to achieve forward secrecy, and compromises the security of all generated keys and associated operations. However, the severity of this issue is mitigated by the requirement for consensus among multiple nodes in the Axelar network, making it difficult for an attacker to achieve tangible harm without compromising the mnemonic of enough nodes to achieve voting power. The affected file is tofnd-main/src/multisig/keygen.rs, where the same mnemonic entropy is used to generate key pairs.
 
 Similar to AXE-01-006 and AXE-01-007, it seems that the problems regarding AXE-01-009 have not been addressed, considering that the latest commit dates back to the [end of 11-2021](https://github.com/axelarnetwork/tofnd/commits/main/src/multisig/keygen.rs) and the audit report, which commenced in 12-2021 ([as indicated in the audit table](https://github.com/axelarnetwork/audits)), concluded in 01-2022 ([as stated in the report footer](https://github.com/axelarnetwork/audits/blob/main/audits/2021-12%20Cure53.pdf)). This issue should be read bearing in mind a sizable threshold level of 35 validators. 
-
-
-### Axelar's Bug Bounty Program
-
-[Axelar Immunefi bounty program](https://immunefi.com/bounty/axelarnetwork/) offers rewards ranging from USD $1,000 to a maximum of USD $2,250,000 for critical vulnerabilities, with separate payouts for different threat levels and severity classifications. The program also requires proof of concept for critical blockchain and smart contract bug reports, which is standard practice for most bug bounty programs. Additionally, the program specifies the assets in scope and provides a detailed explanation of the type of vulnerabilities they are looking for, making it easier for bounty hunters to identify potential security issues. However, the program requires KYC for all bug bounty hunters submitting a report, which may be a deterrent for some researchers. Axelar Network's bug bounty program seems to offer reasonable rewards for identifying critical vulnerabilities. This adds additional confidence to the technical robustness of the Axelar Network.
-
-### Documentation 
-
-[Axelar's smart contracts](https://github.com/axelarnetwork/axelar-cgp-solidity) are generally easy to find, but it can be challenging to locate all deployed contracts through the Gitbook Documentation. For example, to find the authentication module, we had to go through the AxelarGatewayProxy contract. It would be more transparent if all contracts were listed in the Gitbook documentation. Axelar has the [contract deployments available on Github](https://github.com/axelarnetwork/axelar-cgp-solidity/blob/3e7d6751a3016e4694b1ce643f11530442731e09/info/mainnet.json). Overall, the code documentation is comprehensive and includes a whitepaper, a flow chart within the whitepaper that documents the software architecture, and well-documented source code available on GitHub. Additionally, it is possible to trace the documented software to its implementation in the protocol's source code and development history (e.g. versioning, commits).
-
-
-## LlamaRisk Gauge Criteria
-
-1. **Is it possible for a single entity to rug its users?** 
-
-No. Although there is a significant point of centralisation from the 4-of-8 multisig allowing for upgradability of the smart contracts. 
-
-2. **If the team vanishes, can the project continue?** 
-
-Somewhat. The code is well documented and open source. Validators on the network can autonomously achieve consensus without team involvement. Relayers are a permissionless service. However, a fork will be required to maintain smart contract upgradability. In addition, funds seem to be held with the company and no community-owned treasury was identified.
-
-3. **Does the project viability depend on additional incentives?**  
-
-No. Additional incentives are not required for the project to function apart from the programtically encoded inflation distributed to validators as part of the proof-of-stake consensus mechanism.
-
-4. **If demand falls to 0 tomorrow, can the users be made whole?** 
-
-Yes. axlUSDC is always backed 1:1 with USDC so users should be able to redeem bridged assets to the source chain in any market condition.
-
-5. **Do audits reveal any concerning signs?** 
-
-The most concering sign is the upgradability of smart contracts through AxelarGatewayProxy.sol, which is controlled by a 4-of-8 multisig. 
-
-### LlamaRisk Recommendation
-
-All signs point to Axelar being a protocol that takes security seriously and has taken reasonable measures to ensure safety of user funds. Nevertheless, users should remain aware that bridge protocols have historically been very lucrative targets for hackers, and bridge hacks make up [4 of the 5 top exploits](https://rekt.news/leaderboard/) in the RektHQ leaderboard.
-
-Moving forward, we would like to see more robust access control of the smart contracts by replacing the 4-of-8 multisig with a DAO governed by tokenholders. Overall, LlamaRisk supports the continuation of CRV incentives to axlUSDC/USDC and axlUSDC/FraxBP pools on the requested chains.
-
-
 
