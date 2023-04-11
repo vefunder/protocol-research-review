@@ -344,9 +344,9 @@ The distribution of currently existing alternatives is unclear in Axelar and may
 Access control refers to the control over the smart contract code and its execution. In this section, we will discuss the risks associated with smart contract ownership and how they can be mitigated to ensure the security of the network. 
 
 #### AxelarGatewayProxy.sol
-AxelarGatewayProxy.sol, formerly known as AxelarGatewayProxyMultisig.sol, is the central contract of the Axelar network. It is using library contracts such as AxelarGateway.sol, AxelarAuthWeighted.sol, and  TokenDeployer.sol. Additionally, it is supported by other service contracts to provide other functionalities, such as cross-chain gas payments, and permission-less deposit addresses for cross-chain token transfers.
+AxelarGatewayProxy.sol, formerly known as AxelarGatewayProxyMultisig.sol, is the central contract of the Axelar network. All funds transfered cross-chain over the Axelar network are locked in this contract. It owns the AxelarAuthWeighted.sol contract and axlTokens deployed through the TokenDeployer.sol library. Additionally, it is supported by other service contracts to provide other functionalities, such as cross-chain gas payments, and permission-less deposit addresses for cross-chain token transfers.
 
-This contract is owned by a multisignature scheme that is implemented in AdminMultisigBase.sol. This scheme allows multiple addresses to collectively own and control the contract. At present (i.e. epoch 3) the admin threshold is set to [4 out of 8 addresses](https://etherscan.io/address/0x4F4495243837681061C4743b74B3eEdf548D56A5#readProxyContract#F2). The owner addresses are listed below: 
+This contract is owned by a multisignature scheme that is implemented in AdminMultisigBase.sol. This scheme allows multiple addresses to collectively own and control the contract. At present (i.e. epoch 3) the admin threshold is set to [4-of-8 addresses](https://etherscan.io/address/0x4F4495243837681061C4743b74B3eEdf548D56A5#readProxyContract#F2). The owner addresses are listed below: 
 
     
 | AxelarGatewayProxy.sol Owners |
@@ -361,21 +361,23 @@ This contract is owned by a multisignature scheme that is implemented in AdminMu
 | [0x30932Ac1f0477Fbd63E4c5Be1928f367A58A45A1](https://etherscan.io/address/0x30932Ac1f0477Fbd63E4c5Be1928f367A58A45A1) |
 
 
-**In practical terms, this means that the upgrading of contracts is subject to 4 out of 8 multisig signers.** Axelar plans to take further steps in decentralising the network by having the validator set jointly approve smart contract upgrades. This is a crucial step in achieving a higher level of decentralisation and eliminating the need for a governed multisig. The result will be a more decentralised network, offering greater transparency and security to users. Ultimately, Axelar aims to create a fully autonomous network that operates without any central authority or governing body.
+**The 4-of-8 multi-sig controls contract upgrades, which effectively gives it custody of funds locked in Axelar.** Additionally, it has the power to impose transfer rate limits. Axelar plans to take further steps to decentralise the network by having the validator set jointly approve smart contract upgrades. This is a crucial step in achieving a higher level of decentralisation and eliminating the need for a governed multi-sig. The result will be a more decentralised network, offering greater transparency and security to users. Ultimately, Axelar aims to create a fully autonomous network that operates without any central authority or governing body.
 
 ![Screen Shot 2023-04-07 at 1 38 37 PM](https://user-images.githubusercontent.com/51072084/230675911-4c73268c-7ce4-4fa3-aaee-a4e9eaf46dc6.png)
 
 Source: [AxelarGatewayProxy upgrade function](https://etherscan.io/address/0xed9938294acf9ee52d097133ca2caaff0c804f16#code)
 
+The Axelar docs make no mention of the multi-sig, and the team declined to comment on the member composition due to security concerns. Likely all members are Axelar employees who, Axelar points out, are geographically dispersed with no central office or storage facility. However, a recently released blog post provides an outline of governance-controlled parameters, and specifically identifies the power of the "governed multisig", as well as parameters controlled by on-chain governance. 
+
 #### AxelarAuthWeighted.sol
-[AxelarAuthWeighted.sol](https://etherscan.io/address/0x228b92510130ec2E09C6d5645039c8cB834aD42d#code) is a core contract used by the Axelar network's gateway for verifying messages. It is a weighted multisig authentication contract that allows for multiple signers with different weights to approve a message. The contract is owned by AxelarGatewayProxy.sol, which is set during contract deployment.
+[AxelarAuthWeighted.sol](https://etherscan.io/address/0x228b92510130ec2E09C6d5645039c8cB834aD42d#code) is a core contract used by the Axelar network's gateway for verifying messages. It is a weighted multi-sig authentication contract that allows for multiple signers with different weights to approve a message. The contract is owned by AxelarGatewayProxy.sol, which is set during contract deployment.
 
 |![AxelarAuthWeighted.sol](https://i.imgur.com/cucphk1.png)|
 |---|
 |[Source: [AxelarAuthWeighted.sol](https://etherscan.io/address/0x228b92510130ec2E09C6d5645039c8cB834aD42d#readContract#F4)]|
 
-#### TokenDeployer.sol
-[TokenDeployer.sol](https://etherscan.io/address/0xe88Ab68Cd69e92294FcC3BBBD894Fb183197fA39#code) is a deployment library that contains the bytecode of the token. The Axelar Gateway is using Solidity delegatecall to utilize the library, and it is actually the gateway contract (AxelarGatewayProxy.sol) that is responsible for the deployment. This means that anyone can hypothetically use TokenDeployer to deploy their own instances of Axelar's token implementation without affecting the gateway contract.
+The owner can call [transferOperatorship](https://etherscan.io/address/0x228b92510130ec2E09C6d5645039c8cB834aD42d#writeContract#F1), which allows it to change the composition of signer addresses, their relative weighting, and the overall threshold required.  
+
 
 #### AxelarGasService.sol
 AxelarGasService.sol handles cross-chain gas payments. It is [owned by an EOA](https://etherscan.io/address/0x2d5d7d31F671F86C782533cc367F14109a082712#readProxyContract#F4), which can upgrade the contract.
