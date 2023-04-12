@@ -55,6 +55,6 @@ Security Factors
 1. Do audits reveal any concerning signs?
 
 
-#Risk Team Recommendation
+# Risk Team Recommendation
 (Don't worry about this section in the first draft, we will discuss together and with the protocol team to determine our final recommendation)
 
