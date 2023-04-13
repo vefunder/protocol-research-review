@@ -1,25 +1,22 @@
-# **Asset Risk Assessment: DeFi Franc (DCHF)**
+# Asset Risk Assessment: DeFi Franc (DCHF)
 
 
-### **(One sentence summary of the report)**
+#### A look into MonetaDAO and its Swiss franc stablecoin DCHF
 
 
-## **Useful Links**
+### Useful Links
 
 * [Protocol Website](https://www.defifranc.com/)
 * [App](https://app.defifranc.com/)
 * [Docs](https://docs.defifranc.com/)
-* Github ([broken link](https://github.com/defifranc/))
-* [Important contracts](https://docs.defifranc.com/contracts)
-* Governance (Multisig address, gov contract, gov reference)
+* [GitHub](https://github.com/monetadao)
+* [Deployed Smart Contracts](https://docs.defifranc.com/contracts)
 * Market Data (Curve pool, analytics)
+* Governance
+  * [DAO Website](https://monetadao.com/) 
+  * [Multisig address](https://etherscan.io/address/0x83737EAe72ba7597b36494D723fbF58cAfee8A69)
+  * [gov forum](https://commonwealth.im/moneta-dao/discussions)
 
-Moneta DAO
-
-* [DAO Website](https://monetadao.com/)
-* [Important contracts](https://github.com/monetadao/dchf)
-* Governance ([Multisig address](https://etherscan.io/address/0x83737EAe72ba7597b36494D723fbF58cAfee8A69), gov contract, [gov forum](https://commonwealth.im/moneta-dao/discussions), [gov members](https://commonwealth.im/moneta-dao/members))
-* Market Data (Curve pool, analytics)
 
 
 ## **TLDR**
