@@ -27,9 +27,9 @@ This report delves into the DeFi Franc (DCHF) stablecoin (pegged to the Swiss Fr
 * **MON Token distribution**: There is a need for updated messaging and documentation as the team has conflicting statements about the role of MON token holders. There are also governance risks regarding the distribution of MON tokens. Although the distribution is public and transparent, there may be questions about allocation decisions made before the formation of the DAO.
 
 
-# **DCHF - Introduction**
+## DCHF - Introduction
 
-**History & Context**
+### History & Context
 
 DeFi Franc (DCHF) is an overcollateralized stablecoin pegged to the Swiss franc, created on September 25, 2022 by [Moneta DAO Deployer](https://etherscan.io/address/0x7d7711efd844e5e204df29dc3e109d1af95a801c) ([source](https://etherscan.io/tx/0x7d6ba3055e572fffda740ee48482517061c98b7b04ec79ea08478280010070f1)). On January 25, 2023, a proposal to add the DCHF+3CRV pool to the Gauge Controller was made by Andrés Soltermann, founder of [Grizzly.Fi](https://blog.grizzly.fi/team-of-grizzly/) and current DCHF core team member ([source](https://www.linkedin.com/in/andr%C3%A9s-soltermann-379aa3174/?originalSubdomain=ch)). Grizzly.Fi is a liquidity mining aggregator with presence on Binance Smart Chain ([source](https://defillama.com/yields?project=grizzlyfi)) and on Ethereum ([source](https://app.grizzly.fi/)).
 
@@ -37,24 +37,35 @@ DCHF initially launched with governance controlled solely by the Moneta team. Th
 
 A Curve DAO vote took place from March 20, 2023 to March 27, 2023 to add the DCHF gauge, but it did not pass quorum ([source](https://dao.curve.fi/vote/ownership/300)). The team has stated an intention to attempt another vote to add a gauge to the DCHF-3CRV pool, citing the transition to DAO governance and improved multi-sig parameters as reasonable steps taken to alleviate concerns of custody risk.
 
-**Peg mechanism**
+### Comparison to Liquity
 
-The DeFi Franc (DCHF) protocol is a fork of Liquity and is claimed to be a more developed version of it. While DCHF has the same basic peg mechanics as Liquity, there are some significant differences. For instance, 
+The DeFi Franc (DCHF) protocol is a fork of [Vesta Finance](https://vestafinance.xyz/), which is itself a fork of [Liquity](https://www.liquity.org/). The foundational architecture of the protocol family involves an over-collateralized, crypto-backed stablecoin, and a philosophical preference for decentralized collateral and governance-minimization. The protocols have many common features, including stability pools that facilitate liquidations, universal redemption (anyone owning the protocol stablecoin can redeem for system collateral), and a recovery mode that programmatically protects against system insolvency in case the Total Collateral Ratio (TCR) falls below 150%.
 
-* DCHF is pegged to the value of one Swiss Franc (CHF) instead of one US Dollar.
-* DCHF allows two collateral tokens: ETH and wBTC, instead of just ETH.
-* DCHF is governed by the Moneta DAO, while Liquity is governance-free.
-* MON is the governance token over DCHF with its own distribution, whereas LQTY captures fee revenue and incentivizes Frontend Operators without any governance role. ([source](https://docs.defifranc.com/in-depth/liquity), [source](https://docs.liquity.org/faq/lqty-distribution-and-rewards))
+While DCHF has the same basic peg mechanics as Liquity, there are some significant differences. For instance: 
 
-The DeFi Franc (DCHF) protocol requires a minimum debt of 2,000 DCHF and sends 200 DCHF to the Liquidation Reserve to cover gas cost when a user opens a borrow position. The user can add collateral, repay debt, or close out the position at any time. The protocol maintains its peg to the Swiss Franc through collateral ratios, redemption and borrow fees, and a stability pool. 
+* DCHF is pegged to the value of one Swiss franc (CHF) instead of one US Dollar.
+* DCHF allows two collateral tokens: ETH and wBTC, with capability to add new collateral types, instead of just ETH.
+* DCHF is governed by the Moneta DAO through its native MON token, while Liquity is governance-free.
+* DCHF currently has system access control granted to a 4-of-6 multi-sig, while Liquity has no such access control.
 
-Users can lock ETH and/or wBTC into the protocol to borrow against, with a minimum collateral ratio of 110%, which creates a price floor and ceiling through arbitrage opportunities. DCHF can be redeemed for ETH or wBTC at face value (1 DCHF for 1 Swiss Franc’s worth of ETH / wBTC) whether DCHF is below or above peg. 
+### Protocol Mechanics
 
-Borrow and redemption fees adjust borrowing and redemption velocity. The borrow fee is proportional to the amount of liquidity that they borrow and is determined by the current baseRate, which can range from 0.5% to 5%.
+When opening a position, users can lock ETH and/or wBTC into the protocol to borrow against, with a minimum collateral ratio of 110%, which creates a price floor and ceiling through arbitrage opportunities. DCHF can be redeemed for ETH or wBTC at face value (1 DCHF for 1 Swiss Franc’s worth of ETH / wBTC) whether DCHF is below or above peg. The user can add collateral, repay debt, or close out the position at any time.
 
-Borrow Fee = baseRate * amount of liquidity drawn by borrower
+There are several parameters, adjustable through the [dfrancParameters](https://etherscan.io/address/0x6F9990B242873d7396511f2630412A3fcEcacc42#code) contract, that a user experiences upon opening a position. The DeFi Franc (DCHF) protocol currently requires a minimum debt of 2,000 DCHF, and will charge a algorithmically-determined borrowing fee. It also sends 200 DCHF to the (GasPool)[https://etherscan.io/address/0xc9a113c35f961af3526e6f016f6df9da0a4c7bfa#code] contract as a "Liquidation Reserve". This reserve counts toward the overall debt and is used to pay liquidator gas fees in case the position becomes eligible for liquidation, but is otherwise refunded upon position close.  
 
-Higher redemption volumes imply DCHF is below peg, therefore borrow and redemption fees are increased to discourage borrowing and redemption of DCHF for ETH/wBTC. Both forces combine to push the peg towards 1 DCHF = 1 CHF ([source](https://docs.defifranc.com/in-depth/price-stability-and-redemptions)).
+
+#### Dynamic baseRate
+
+The protocol maintains its peg to the Swiss franc through redemption and borrow fees, and a stability pool. Borrow and redemption fees adjust algorithmically to regulate borrowing and redemption velocity, in what is calculated as the "baseRate". The baseRate increases when DCHF is redeemed, and decays over time according to a predefined `DECAY_FACTOR`, with an upper an lower bound of 0.5% to 5%.
+
+Higher redemption volumes imply DCHF is below peg. Therefore, borrow and redemption fees are increased to discourage borrowing and redemption of DCHF for ETH/wBTC. Both forces combine to push the peg towards 1 DCHF = 1 CHF ([source](https://docs.defifranc.com/in-depth/price-stability-and-redemptions)).
+
+The baseRate is calculated as follows (from the Liquity whitepaper):
+
+![Screen Shot 2023-04-13 at 3 58 02 PM](https://user-images.githubusercontent.com/51072084/231900851-0b8db7de-010b-4696-9df7-1c7616e34117.png)
+
+Source: [Liquity Whitepaper](https://docsend.com/view/bwiczmy#)
 
 Here’s an example of where 1 DCHF is trading at 0.95 CHF (below peg). Assuming 1,000 DCHF supply and 1,500 ETH collateral at a 150% collateral ratio and a 1% baseRate:
 
@@ -63,10 +74,10 @@ Here’s an example of where 1 DCHF is trading at 0.95 CHF (below peg). Assuming
 * Higher baseRate increases borrowing costs, limiting DCHF supply in the market and expected to push its value towards peg
 * Redemption fees, calculated as (baseRate + 0.5%) * ETH drawn, incentivize holding DCHF instead of redeeming, reducing excessive redemption
 * Increased demand for DCHF due to these mechanisms may increase its price towards the 1 CHF peg.
-* [Source](https://docs.defifranc.com/in-depth/price-stability-and-redemptions)
+[Source](https://docs.defifranc.com/in-depth/price-stability-and-redemptions)
 
 
-**Stability Pool**
+#### Stability Pool
 
 The Stability Pool is crucial for maintaining DeFi Franc protocol's solvency. When a debt position is liquidated, the remaining debt is burned from the Stability Pool while the collateral for the debt position is transferred to the pool. This ensures a healthy collateral ratio is maintained to back the supply of DCHF. Stability Providers fund the Stability Pool by depositing DCHF into it. They gain a proportionate share of liquidated collateral while losing a proportionate share of their DCHF deposits over time. As positions are liquidated below 110% collateral ratio (CR), Stability Providers experience a net gain because of the minimum CR. 
 
