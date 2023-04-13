@@ -79,11 +79,14 @@ Here’s an example of where 1 DCHF is trading at 0.95 CHF (below peg). Assuming
 
 #### Stability Pool
 
-The Stability Pool is crucial for maintaining DeFi Franc protocol's solvency. When a debt position is liquidated, the remaining debt is burned from the Stability Pool while the collateral for the debt position is transferred to the pool. This ensures a healthy collateral ratio is maintained to back the supply of DCHF. Stability Providers fund the Stability Pool by depositing DCHF into it. They gain a proportionate share of liquidated collateral while losing a proportionate share of their DCHF deposits over time. As positions are liquidated below 110% collateral ratio (CR), Stability Providers experience a net gain because of the minimum CR. 
+The Stability Pool is crucial for maintaining protocol solvency. There is a unique pool for each collateral asset and each one accepts DCHF deposits. The DCHF supplies liquidity for liquidation events and allows depositors to deposit from their contribution. When a debt position is liquidated, the remaining debt is burned from the Stability Pool while the collateral for the debt position is transferred to the pool. Depositors gain a proportionate share of liquidated collateral in exchange for a proportionate share of their DCHF deposits over time. This ensures a healthy collateral ratio is maintained to back the supply of DCHF. 
 
-Gain Collateral - Lose DCHF = Net Positive
+Positions are liquidated below 110% collateral ratio (CR), and due to the 10% liquidation fee, Stability Providers typically will experience a net gain. It may be possible that Stability Pool depositors lose money, in cases where liquidation occurs below a 100% CR. Even in normal conditions, the pool provider may wish to actively reduce exposure to volatile collateral, if they believe prices will continue to decline.
 
-Anyone can initiate a liquidation, and they will receive 200 DCHF as compensation for gas costs.
+Anyone can initiate a liquidation, and they will receive 200 DCHF as compensation for gas costs + .5% of the position collateral.
+
+
+#### Recovery Mode
 
 When the Total Collateral Ratio (TCR) of the DeFi Franc protocol falls below 150%, Recovery Mode is activated, allowing for the liquidation of all positions with a collateral ratio (CR) below 150%. This is intended to encourage borrowers to increase the TCR above 150% and for DCHF holders to replenish the Stability Pool. Details on the liquidation mechanics during Recovery Mode are available in the [documentation](https://docs.defifranc.com/in-depth/recovery-mode). 
 
