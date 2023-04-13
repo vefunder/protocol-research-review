@@ -37,6 +37,7 @@ DCHF initially launched with governance controlled solely by the Moneta team. Th
 
 A Curve DAO vote took place from March 20, 2023 to March 27, 2023 to add the DCHF gauge, but it did not pass quorum ([source](https://dao.curve.fi/vote/ownership/300)). The team has stated an intention to attempt another vote to add a gauge to the DCHF-3CRV pool, citing the transition to DAO governance and improved multi-sig parameters as reasonable steps taken to alleviate concerns of custody risk.
 
+
 ### Comparison to Liquity
 
 The DeFi Franc (DCHF) protocol is a fork of [Vesta Finance](https://vestafinance.xyz/), which is itself a fork of [Liquity](https://www.liquity.org/). The foundational architecture of the protocol family involves an over-collateralized, crypto-backed stablecoin, and a philosophical preference for decentralized collateral and governance-minimization. The protocols have many common features, including stability pools that facilitate liquidations, universal redemption (anyone owning the protocol stablecoin can redeem for system collateral), and a recovery mode that programmatically protects against system insolvency in case the Total Collateral Ratio (TCR) falls below 150%.
@@ -47,6 +48,7 @@ While DCHF has the same basic peg mechanics as Liquity, there are some significa
 * DCHF allows two collateral tokens: ETH and wBTC, with capability to add new collateral types, instead of just ETH.
 * DCHF is governed by the Moneta DAO through its native MON token, while Liquity is governance-free.
 * DCHF currently has system access control granted to a 4-of-6 multi-sig, while Liquity has no such access control.
+
 
 ### Protocol Mechanics
 
@@ -97,7 +99,7 @@ The chart below shows the daily TCR from October 2022 to the present, indicating
 [Source: query](https://dune.com/queries/2316272/3794165)
 
 
-**Broader Market** 
+### Broader Market
 
 Currently, the DCHF token is traded on two major DEXes including Uniswap and Curve ([source](https://dune.com/queries/2297121), [source](https://www.coingecko.com/en/coins/defi-franc#markets)). DCHF does not appear to be traded on any CEXes.
 
@@ -108,7 +110,7 @@ On Uniswap, the trading pairs include:
 
 On Curve, the trading pairs include:
 
-* DCHF - 3PoolCurve (3CRV)
+* DCHF - 3CRV
 
 For DEX volume, Curve has historically led, with Uniswap gaining ground in recent months. These two charts show daily sell and buy volume, respectively:
 
@@ -131,14 +133,21 @@ TVL and outstanding DCHF declined after initial release in September of 2022 and
 [Source query](https://dune.com/queries/2297708/3764348)
 
 
-**Governance asset**
+### Governance Token: MON
 
-DeFi Franc draws inspiration from Liquity, but sets itself apart being governed by a DAO and having the ability to update the system with new features. While the protocol's documentation allows for additional collateral types and native leverage on crypto-assets and LP Tokens, the core team currently has no plans to add new collateral types. If additional collateral were to be considered in the future, it may involve staked ETH. Nevertheless, it's important to note that Moneta DAO has discretion over supporting new collateral types for DCHF. 
+DeFi Franc draws inspiration from Liquity, but sets itself apart by initializing DAO governance and having the ability to update the system with new features. Governable aspects of the system include:
+
+* Add new collateral types, including an associated Stability Pool and oracle
+* Adjust system parameters, including set oracle pricefeed, set minimum collateral ratio before triggering liquidation (101%-1000%), set critical collateral ratio before triggering Recovery Mode (101%-1000%), set min/max borrow fee (0%-10%), set Liquidation Reserve fee (1-200), set minimum borrow amount (0-10,000), and set min redemption fee (.1%-10%)
+* Introduce a whitelist for DCHF redemptions (note: this is seperate from repaying debt, and governance cannot prevent depositors from withdrawing their collateral)
+* Upgrade to a new AdminContract, TroveManager, and BorrowingOperations contract
+
+While the protocol allows for additional collateral types and native leverage on crypto-assets and LP Tokens, the core team currently has no immediate plans to add new collateral types. The team believes based on informal discussion, if additional collateral were to be considered in the future, it may involve staked ETH. Nevertheless, Moneta DAO has discretion over supporting new collateral types for DCHF, and the 4-of-6 multi-sig has the power to enact it. 
 
 The protocol's backing for DCHF can be found at 
 
 * Trove Manager Address: 0x99838142189adE67c1951f9c57c3333281334F7F for native ETH and wBTC deposits, and 
-* MON Staking: 0x8Bc3702c35D33E5DF7cb0F06cb72a0c34Ae0C56F for DCHF deposits. 
+* MON Staking: 0x8Bc3702c35D33E5DF7cb0F06cb72a0c34Ae0C56F for MON deposits. 
 
 Governance assets are governed by Moneta DAO, the entity in charge of the DCHF ecosystem.
 
