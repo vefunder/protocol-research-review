@@ -99,18 +99,15 @@ The chart below shows the daily TCR from October 2022 to the present, indicating
 [Source: query](https://dune.com/queries/2316272/3794165)
 
 
-### Broader Market
+### Market and Utility
 
-Currently, the DCHF token is traded on two major DEXes including Uniswap and Curve ([source](https://dune.com/queries/2297121), [source](https://www.coingecko.com/en/coins/defi-franc#markets)). DCHF does not appear to be traded on any CEXes.
+Over 90% of circulating DCHF is held in the WBTC/ETH Stability Pools and the Curve DCHF/3CRV pool. The UniV3 DCHF/USDC pool also ranks among the top addresses, although only making up ~2% of the supply. Top address as of April 2023 are as follows:
 
-On Uniswap, the trading pairs include:
+![Screen Shot 2023-04-13 at 5 41 09 PM](https://user-images.githubusercontent.com/51072084/231912967-29ad3f62-7c4c-4fb2-a2cd-763f4a740d15.png)
 
-* DCHF - USDC
-* DCHF - LUSD
+Source: [Etherscan](https://etherscan.io/token/0x045da4bFe02B320f4403674B3b7d121737727A36#balances)
 
-On Curve, the trading pairs include:
-
-* DCHF - 3CRV
+Currently, the DCHF token is traded on two major DEXes including Uniswap and Curve ([source](https://dune.com/queries/2297121), [source](https://www.coingecko.com/en/coins/defi-franc#markets)) and does not appear to be traded on any CEXes. The vast majority of liquidity resides in the Curve pool.
 
 For DEX volume, Curve has historically led, with Uniswap gaining ground in recent months. These two charts show daily sell and buy volume, respectively:
 
@@ -133,32 +130,30 @@ TVL and outstanding DCHF declined after initial release in September of 2022 and
 [Source query](https://dune.com/queries/2297708/3764348)
 
 
-### Governance Token: MON
+### Governance
 
-DeFi Franc draws inspiration from Liquity, but sets itself apart by initializing DAO governance and having the ability to update the system with new features. Governable aspects of the system include:
+DeFi Franc draws inspiration from Liquity, but sets itself apart by introducing DAO governance and having the ability to update the system with new features. Governable aspects of the system include:
 
 * Add new collateral types, including an associated Stability Pool and oracle
 * Adjust system parameters, including set oracle pricefeed, set minimum collateral ratio before triggering liquidation (101%-1000%), set critical collateral ratio before triggering Recovery Mode (101%-1000%), set min/max borrow fee (0%-10%), set Liquidation Reserve fee (1-200), set minimum borrow amount (0-10,000), and set min redemption fee (.1%-10%)
 * Introduce a whitelist for DCHF redemptions (note: this is seperate from repaying debt, and governance cannot prevent depositors from withdrawing their collateral)
 * Upgrade to a new AdminContract, TroveManager, and BorrowingOperations contract
 
-While the protocol allows for additional collateral types and native leverage on crypto-assets and LP Tokens, the core team currently has no immediate plans to add new collateral types. The team believes based on informal discussion, if additional collateral were to be considered in the future, it may involve staked ETH. Nevertheless, Moneta DAO has discretion over supporting new collateral types for DCHF, and the 4-of-6 multi-sig has the power to enact it. 
-
-The protocol's backing for DCHF can be found at 
-
-* Trove Manager Address: 0x99838142189adE67c1951f9c57c3333281334F7F for native ETH and wBTC deposits, and 
-* MON Staking: 0x8Bc3702c35D33E5DF7cb0F06cb72a0c34Ae0C56F for MON deposits. 
-
-Governance assets are governed by Moneta DAO, the entity in charge of the DCHF ecosystem.
+While the protocol allows for additional collateral types and native leverage on crypto-assets and LP Tokens, the core team currently has no immediate plans to add new collateral types. The team believes, based on informal discussion, if additional collateral were to be considered in the future it may involve staked ETH. Nevertheless, Moneta DAO has discretion over supporting new collateral types for DCHF, and the 4-of-6 multi-sig has the power to enact it. 
 
 
-# **Moneta DAO**
+#### Moneta DAO
 
-The MON token, issued by Moneta DAO, is intended to govern the DCHF protocol and is described as a revenue-sharing token that can only be obtained by staking MON tokens in the DeFi Franc staking contract. By doing so, users can earn a proportionate share of borrowing and redemption fees in DCHF, ETH, and wBTC ([source](https://docs.defifranc.com/tokenomics/moneta-tokenomics), [source](https://docs.defifranc.com/tokenomics/moneta-staking)). 
+The [MON token](https://etherscan.io/address/0x1ea48b9965bb5086f3b468e50ed93888a661fc17), issued by Moneta DAO, is intended to govern the DCHF protocol and is described as a revenue-sharing token that can only be obtained by staking MON tokens in the [MONStaking](https://etherscan.io/address/0x8Bc3702c35D33E5DF7cb0F06cb72a0c34Ae0C56F#code) contract. By doing so, users can earn a proportionate share of borrowing and redemption fees in DCHF, ETH, and wBTC ([source](https://docs.defifranc.com/tokenomics/moneta-tokenomics), [source](https://docs.defifranc.com/tokenomics/moneta-staking)). 
 
-The MON token contract address is 0x1ea48b9965bb5086f3b468e50ed93888a661fc17
+According to the Moneta DAO [Tokenomics page](https://docs.defifranc.com/tokenomics/moneta-tokenomics), MON was launched with a max supply of 100m tokens that have been allocated toward four main purposes:
 
-According to the Moneta DAO Tokenomics page, MON tokens have been allocated to facilitate the launch, protocol treasury, and airdrops ([source](https://docs.defifranc.com/tokenomics/moneta-tokenomics)). Token allocation can be confirmed in the following table, with the Protocol Owner contract (0x83737E...Afee8A69) being seeded with 100,000,000 tokens on September 23, 2022 ([source](https://etherscan.io/tx/0xa57dd3c6e8f44be7e3f17904b3d5719da1857b205ce3a0af4ddcecd8a4cbb4fc)) and distributing them since then. We attempt to corroborate token distribution as stated in the documentation:
+* 72.5% - Treasury reserve for future distribution (decided by the DAO)
+* 15% - Airdrop to tokenholders of Grizzly (GHNY), Liquity (LQTY), and Freezer
+* 10% - Team and advisors
+* 2.5% - Liquidity bootstrapping (Supply liquidity and incentives to a MON/ETH pool)
+
+Token allocation can be confirmed in the following table, with the Protocol Owner contract (0x83737E...Afee8A69) being seeded with 100,000,000 tokens on September 23, 2022 ([source](https://etherscan.io/tx/0xa57dd3c6e8f44be7e3f17904b3d5719da1857b205ce3a0af4ddcecd8a4cbb4fc)) and distributing them since then. We attempt to corroborate token distribution as stated in the documentation:
 
 
 <table>
