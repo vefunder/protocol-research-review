@@ -340,6 +340,10 @@ DefiFranc_mon: LockedMONteam
   </tr>
 </table>
 
+MON initial distribution directed tokens to the following addresses:
+
+![photo_2023-04-14 13 01 57](https://user-images.githubusercontent.com/51072084/232144288-c9c550b0-1323-4ce4-ae2e-ec57bc43a808.jpeg)
+
 
 The [Treasury multi-sig](https://etherscan.io/address/0x5592cb82f5b11a4e42b1275a973e6b712194e239) currently holds around 50% of all tokens. Of circulating supply, the majority is in the [MONStaking contract](https://etherscan.io/token/0x1EA48B9965bb5086F3b468E50ED93888a661fc17?a=0x8bc3702c35d33e5df7cb0f06cb72a0c34ae0c56f) (17m) and the [Uniswap pool](https://etherscan.io/token/0x1EA48B9965bb5086F3b468E50ED93888a661fc17?a=0x21f396dd37a26d7754c513fd916d07f66aa6b81e) (3m). Since all allocations were made before the DAO was formed and without community input, there may be questions regarding the airdrops. The Grizzly.Fi community received the most tokens (11.17m), and it is worth noting that members of the core team are also co-founders of Grizzly.Fi. This overlap in roles may be a cause for concern, as the majority of MON circulating supply is from airdrops and the team's realized MON allocation is obscured by a significant airdrop to their previous project.
 
