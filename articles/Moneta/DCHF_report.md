@@ -99,37 +99,6 @@ The chart below shows the daily TCR from October 2022 to the present, indicating
 [Source: query](https://dune.com/queries/2316272/3794165)
 
 
-### Market and Utility
-
-Over 90% of circulating DCHF is held in the WBTC/ETH Stability Pools and the Curve DCHF/3CRV pool. The UniV3 DCHF/USDC pool also ranks among the top addresses, although only making up ~2% of the supply. Top address as of April 2023 are as follows:
-
-![Screen Shot 2023-04-13 at 5 41 09 PM](https://user-images.githubusercontent.com/51072084/231912967-29ad3f62-7c4c-4fb2-a2cd-763f4a740d15.png)
-
-Source: [Etherscan](https://etherscan.io/token/0x045da4bFe02B320f4403674B3b7d121737727A36#balances)
-
-Currently, the DCHF token is traded on two major DEXes including Uniswap and Curve ([source](https://dune.com/queries/2297121), [source](https://www.coingecko.com/en/coins/defi-franc#markets)) and does not appear to be traded on any CEXes. The vast majority of liquidity resides in the Curve pool.
-
-For DEX volume, Curve has historically led, with Uniswap gaining ground in recent months. These two charts show daily sell and buy volume, respectively:
-
-![DCHF_DEX_vol](https://user-images.githubusercontent.com/51072084/231853767-f7908825-e4c3-4fc5-8a17-a9bf42ded16a.png)
-
-[Source query](https://dune.com/queries/2318214/3794424)
-
-![DCHF_DEX_vol_buy](https://user-images.githubusercontent.com/51072084/231853847-13dfc290-b241-40c1-8cad-6a66baf4b3b5.png)
-
-[Source query](https://dune.com/queries/2320640/3798115)
-
-TVL and outstanding DCHF declined after initial release in September of 2022 and adoption appears to be relatively flat since November 2022.
-
-![DCHF_TVL](https://user-images.githubusercontent.com/51072084/231854056-f81d3ae5-ca2b-454a-9517-9553325e1a65.png)
-
-[Credit: DeFiLlama](https://defillama.com/protocol/defi-franc?denomination=USD)
-
-![DCHF_TVL2](https://user-images.githubusercontent.com/51072084/231854095-c8d9a024-94e2-4d1a-a948-f98f0cca1c06.png)
-
-[Source query](https://dune.com/queries/2297708/3764348)
-
-
 ### Governance
 
 DeFi Franc draws inspiration from Liquity, but sets itself apart by introducing DAO governance and having the ability to update the system with new features. Governable aspects of the system include:
@@ -371,6 +340,37 @@ The six multisig signers are ([source](https://etherscan.io/address/0x83737EAe72
 Moneta DAO hosts community discussions on the Commonwealth forum where they made their inception announcement on February 26th, 2023 ([source](https://commonwealth.im/moneta-dao/discussions)). To date, the DAO has held four governance votes, including a test vote, launching Moneta DAO, adopting a liquidity strategy, and expanding multisig signers ([source](https://snapshot.org/#/monetadao.eth)). You can find additional governance details in this forum post and the Moneta Tokenomics page ([source](https://commonwealth.im/moneta-dao/discussion/10191-launching-monetadao), [source](https://docs.defifranc.com/tokenomics/moneta-tokenomics#allocation)). On April 7th, 2023, a proposal was made to create a Community Grants Committee with a 5-of-9 multisig threshold ([GnosisSafeProxy address available here](https://etherscan.io/address/0xba4ee2C6f2DC76f69d14F36ac4255bd4899BF5f0)). However, the Moneta DAO Token House (MON token holders) has the power to dissolve the Community Grants Committee, which has granted the Treasury Multisig full allowance over its MON holdings ([source](https://commonwealth.im/moneta-dao/discussion/11047-community-grants-program)). 
 
 All of these contracts are GnosisSafeProxies created from Factory v1.3.0. Both the Treasury Multisig and Protocol Owner address are a 4-of-6 multisig of the same individuals (see above). Once the allowance transaction is executed, the Treasury multisig will have full allowance over the Community Grants Committee multisig. The Community Grants Committee consists of representatives from Moneta DAO and the team, including Dr. LM, Andrea, Markus, Nilic, Daniel, ViTo, Tom, Leon, and Andrés ([source](https://commonwealth.im/moneta-dao/discussion/11047-community-grants-program)).
+
+
+### Market and Utility
+
+Over 90% of circulating DCHF is held in the WBTC/ETH Stability Pools and the Curve DCHF/3CRV pool. The UniV3 DCHF/USDC pool also ranks among the top addresses, although only making up ~2% of the supply. Top address as of April 2023 are as follows:
+
+![Screen Shot 2023-04-13 at 5 41 09 PM](https://user-images.githubusercontent.com/51072084/231912967-29ad3f62-7c4c-4fb2-a2cd-763f4a740d15.png)
+
+Source: [Etherscan](https://etherscan.io/token/0x045da4bFe02B320f4403674B3b7d121737727A36#balances)
+
+Currently, the DCHF token is traded on two major DEXes including Uniswap and Curve ([source](https://dune.com/queries/2297121), [source](https://www.coingecko.com/en/coins/defi-franc#markets)) and does not appear to be traded on any CEXes. The vast majority of liquidity resides in the Curve pool.
+
+For DEX volume, Curve has historically led, with Uniswap gaining ground in recent months. These two charts show daily sell and buy volume, respectively:
+
+![DCHF_DEX_vol](https://user-images.githubusercontent.com/51072084/231853767-f7908825-e4c3-4fc5-8a17-a9bf42ded16a.png)
+
+[Source query](https://dune.com/queries/2318214/3794424)
+
+![DCHF_DEX_vol_buy](https://user-images.githubusercontent.com/51072084/231853847-13dfc290-b241-40c1-8cad-6a66baf4b3b5.png)
+
+[Source query](https://dune.com/queries/2320640/3798115)
+
+TVL and outstanding DCHF declined after initial release in September of 2022 and adoption appears to be relatively flat since November 2022.
+
+![DCHF_TVL](https://user-images.githubusercontent.com/51072084/231854056-f81d3ae5-ca2b-454a-9517-9553325e1a65.png)
+
+[Credit: DeFiLlama](https://defillama.com/protocol/defi-franc?denomination=USD)
+
+![DCHF_TVL2](https://user-images.githubusercontent.com/51072084/231854095-c8d9a024-94e2-4d1a-a948-f98f0cca1c06.png)
+
+[Source query](https://dune.com/queries/2297708/3764348)
 
 
 # **Risk Vectors**
