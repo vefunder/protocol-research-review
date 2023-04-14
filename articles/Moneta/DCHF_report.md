@@ -26,6 +26,8 @@ This report delves into the DeFi Franc (DCHF) stablecoin (pegged to the Swiss Fr
 * **Governance Risk**: The team has recently launched the Moneta DAO. DCHF, while a fork of the governance-free Liquity Protocol, is itself governed by the Moneta DAO. Nevertheless, there is limited bottom-up community engagement, with the core team coordinating recent activities (i.e., formation of community grants committee), raising the question of how much decentralization is actually achieved. 
 * **MON Token distribution**: There is a need for updated messaging and documentation as the team has conflicting statements about the role of MON token holders. There are also governance risks regarding the distribution of MON tokens. Although the distribution is public and transparent, there may be questions about allocation decisions made before the formation of the DAO.
 
+Overall, Llama Risk believes the protocol risks are on par with other early-stage DeFi protocols. The Moneta team has made a good faith effort by improving security in the Owner multi-sig and moving toward decentralized governance. It's our opinion that the protocol meets requirements to receive a Curve gauge.
+
 
 ## DCHF - Introduction
 
