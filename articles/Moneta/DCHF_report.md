@@ -92,13 +92,13 @@ Anyone can initiate a liquidation, and they will receive 200 DCHF as compensatio
 
 #### Recovery Mode
 
-When the Total Collateral Ratio (TCR) of the DeFi Franc protocol falls below 150%, Recovery Mode is activated, allowing for the liquidation of all positions with a collateral ratio (CR) below 150%. This is intended to encourage borrowers to increase the TCR above 150% and for DCHF holders to replenish the Stability Pool. Details on the liquidation mechanics during Recovery Mode are available in the [documentation](https://docs.defifranc.com/in-depth/recovery-mode). 
+When the Total Collateral Ratio (TCR) of the DeFi Franc protocol falls below 150%, Recovery Mode is activated, allowing for the liquidation of all positions with a collateral ratio (CR) below 150%. There are also additional parameters on borrowing: borrowing can only occur if the position CR would be >150% and the borrow fee is set to 0%. This is intended to encourage borrowers to increase the TCR above 150% and for DCHF holders to replenish the Stability Pool. Details on the liquidation mechanics during Recovery Mode are available in the [documentation](https://docs.defifranc.com/in-depth/recovery-mode). 
 
-The chart below shows the daily TCR from October 2022 to the present, indicating that while most days exceed the minimum collateral ratio (110%, red line), on some days the ratio falls below 150% (green line), suggesting that Recovery Mode may have been triggered.
+The chart below shows the daily TCR from October 2022 to the present, indicating that the system has remained sufficiently collateralized since inception. As such, DCHF has never experienced Recovery Mode in production.
 
-![DCHF_CR](https://user-images.githubusercontent.com/51072084/231853447-c6973a9e-a28b-4c0b-bdb4-4d3303171800.png)
+![Screen Shot 2023-04-14 at 12 45 30 PM](https://user-images.githubusercontent.com/51072084/232141280-c4574129-6338-490b-98f9-4126386b5c30.png)
 
-[Source: query](https://dune.com/queries/2316272/3794165)
+Source: [DCHF Dashboard](https://app.defifranc.com/)
 
 
 ### Governance
