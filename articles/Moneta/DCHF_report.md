@@ -397,10 +397,6 @@ There were four middle level issues identified including ([source](https://hackm
 3. It is possible to block tokens on the balance of the contract: This issue has been taken into account. 
 4. Wrong token price: This issue has been taken into account. 
 
-![DCHF_audit](https://user-images.githubusercontent.com/51072084/231854879-d3a1ed32-90be-4246-8a48-d006fb860d0b.png)
-
-[Source](https://hackmd.io/Jsn0wBW7SOWFm-L34V4cMw) 
-
 The CertiK audit has reported 0 unresolved and 0 critical issues from this project. With no critical issues, here’s a sample of major/medium issues that may be related to additional risk vectors outside of smart contracts: 
 
 **GLOBAL-01 | Centralization Related Risk**: In the [AdminContract](https://etherscan.io/address/0x2748C55219DCa1D9D3c3a57505e99BB04e42F254#code), the `_owner` role has extensive authority over several functions that could affect borrow/redemption fees, addition or removal of collateral assets from stability pool, transferring funds out of Stability Pool, changing vesting periods or, worse yet, changing the AdminContract itself including, among others:
