@@ -524,7 +524,7 @@ The protocol can continue operating normally in the absence of the team, but the
 
 **1. Does the project's viability depend on additional incentives?**
 
-While the project may depend on incentives for liquidity (voting for Curve Factory v2 pool to add a gauge), the primary peg stability mechanism is achieved through borrow/redemption fees and 110% minimum collateral ratio to define a soft peg. 
+The protocol depends on its own incentives to drive liquidity to its Stability Pools and DEXs like Curve. It does not depend on additional incentives except as a bootstrapping tool.
 
 **2. If demand falls to 0 tomorrow, can all users be made whole?**
 
@@ -534,12 +534,14 @@ Yes, there’s roughly $17m in ETH and wBTC collateral supporting $7.6m in DCHF 
 
 **1. Do audits reveal any concerning signs?**
 
-The audits did not identify any critical issues, but flagged a few major concerns that have been partially or fully addressed. The primary concern was the overreaching powers of the AdminContract, which has been transferred to multisig signers. It should also be noted that DCHF is a fork of Vespa Finance and Liquity. Although, the DCHF protocol has switched to non-upgradeable contracts, it does have a path to update the system through the AdminContract ([source](https://etherscan.io/address/0x2748C55219DCa1D9D3c3a57505e99BB04e42F254#code)) or make parameter updates through the DFrancParameters contract ([source](https://etherscan.io/address/0x6F9990B242873d7396511f2630412A3fcEcacc42#code)). Nevertheless, it may be challenging for the protocol to implement upgrades in a modular fashion like Vespa Finance and Liquidity ([source](https://github.com/vesta-finance/vesta-protocol-v1/releases/tag/v1.0)).
+The audits did not identify any critical issues, but flagged a few major concerns that have been partially or fully addressed. The primary concern was the overreaching powers of the AdminContract, which has been transferred to multi-sig signers. It should also be noted that DCHF is a fork of Vespa Finance and Liquity. Although, the DCHF protocol has switched to non-upgradeable contracts, it does have a path to update the system through the AdminContract ([source](https://etherscan.io/address/0x2748C55219DCa1D9D3c3a57505e99BB04e42F254#code)) or make parameter updates through the DFrancParameters contract ([source](https://etherscan.io/address/0x6F9990B242873d7396511f2630412A3fcEcacc42#code)). 
 
 # Risk Team Recommendation (Don't worry about this section in the first draft, we will discuss together and with the protocol team to determine our final recommendation)
 
-Here are three recommendations that would be beneficial to the DCHF ecosystem and community: \
+We have three recommendations that would be beneficial to the DCHF ecosystem and community:
 
 1. Update documentation to be explicit about MON token holders strategic role in governing DCHF protocol 
-2. Be explicit about allowance/powers the Treasury / Protocol proxy multisig continues to have through contracts like AdminContract and DFrancParameter
-3. Put in a process for DAO delegates to apply and be nominated from the community.
+2. Be explicit about allowance/powers the Treasury / Protocol  multi-sig continues to have through all revelant system contracts, and provide a clear roadmap toward decentralization.
+3. Create a policy for acceptable forms of collateral and process for adding collateral types that Moneta DAO is willing to stand by.
+
+Overall, we see the challenges Moneta DAO faces to decentralize as typical for a DeFi protocol in its early stage of deployment. While there certainly exist risks and uncertainties, we see there has been a good faith effort by their team to reasonably alleviate concerns. Our hope is that they continue to exercise good judgement by remaining conservative when adding any new collateral types. We support the team's proposal for a Curve gauge to the DCHF/3CRV pool.
