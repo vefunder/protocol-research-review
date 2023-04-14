@@ -109,6 +109,8 @@ DeFi Franc draws inspiration from Liquity, but sets itself apart by introducing 
 * Adjust system parameters, including set oracle pricefeed, set minimum collateral ratio before triggering liquidation (101%-1000%), set critical collateral ratio before triggering Recovery Mode (101%-1000%), set min/max borrow fee (0%-10%), set Liquidation Reserve fee (1-200), set minimum borrow amount (0-10,000), and set min redemption fee (.1%-10%)
 * Introduce a whitelist for DCHF redemptions (note: this is seperate from repaying debt, and governance cannot prevent depositors from withdrawing their collateral)
 * Upgrade to a new AdminContract, TroveManager, and BorrowingOperations contract
+* Handling of MON funds between the CommunityIssuance and StabilityPool contracts
+* Emergency pause of MON staking deposits and pause of DCHF minting
 
 While the protocol allows for additional collateral types and native leverage on crypto-assets and LP Tokens, the core team currently has no immediate plans to add new collateral types. The team believes, based on informal discussion, if additional collateral were to be considered in the future it may involve staked ETH. Nevertheless, Moneta DAO has discretion over supporting new collateral types for DCHF, and the 4-of-6 multi-sig has the power to enact it. 
 
@@ -374,9 +376,14 @@ TVL and outstanding DCHF declined after initial release in September of 2022 and
 [Source query](https://dune.com/queries/2297708/3764348)
 
 
-# **Risk Vectors**
+## Risk Vectors
 
-## **Smart Contract Risk**
+### Smart Contract Risk
+
+DCHF is a fork of Vesta Finance, which itself is a fork of the Liquity decentralized borrowing protocol. Although Liquity is a well-audited protocol, engineers from Vesta have cautioned against forking these projects due to messy and unoptimized code that may not be up-to-date with new features ([source](https://github.com/vesta-finance/vesta-protocol-v1/releases/tag/v1.0)). Despite this warning, DCHF remains a fork of Vesta with no visible effort to keep up with changes in the original code base, possibly due to their use of non-upgradeable contracts ([source](https://github.com/monetadao/dchf/tree/main/contracts)).
+
+
+**Audits**
 
 DeFi Franc Version 1.0 has undergone [two audits from CertiK and General IT](https://docs.defifranc.com/extras/audits). The latter is an audit by a foreign company. An in-browser translation was required to decipher the contents of the audit (see screencap below). Two critical issues were found including: 
 
@@ -398,8 +405,6 @@ The CertiK audit has reported 0 unresolved and 0 critical issues from this proje
 
 **GLOBAL-01 | Centralization Related Risk**: In the [AdminContract](https://etherscan.io/address/0x2748C55219DCa1D9D3c3a57505e99BB04e42F254#code), the `_owner` role has extensive authority over several functions that could affect borrow/redemption fees, addition or removal of collateral assets from stability pool, transferring funds out of Stability Pool, changing vesting periods or, worse yet, changing the AdminContract itself including, among others:
 
-
-
         * setAddresses 
         * addNewCollateral
         * emergencyStopMinting
@@ -415,7 +420,7 @@ The CertiK audit has reported 0 unresolved and 0 critical issues from this proje
         * addUserToWhitelistRedemption 
         * removeUserFromWhitelistRedemption 
 
-Moreover, the AdminContract has the power to upgrade several contracts <span style="text-decoration:underline;">without</span> community consensus including: SortedTroves, StabiltiyPool, StabiltiyPoolManager, and TroveManager, among others. This opens the door for an attacker to change the contract implementation and drain tokens. 
+Moreover, the AdminContract has the power to upgrade several contracts without community consensus including: SortedTroves, StabiltiyPool, StabiltiyPoolManager, and TroveManager, among others. This opens the door for an attacker to change the contract implementation and drain tokens. 
 
 **MOT-01 | Initial Token Distribution (mitigated)**: Another major issue within the centralization / privilege risk category involves how MON tokens were sent to a `_treasurySig` address when deploying the contract. This implies that MON tokens can be distributed without community consensus. To mitigate this risk, the team has documented their tokenomics and how MON tokens are distributed ([source](https://docs.defifranc.com/tokenomics/moneta-tokenomics)). 
 
@@ -424,11 +429,34 @@ Moreover, the AdminContract has the power to upgrade several contracts <span sty
 
 **Audit Recommendations**
 
-The team followed Certik's recommendations by assigning privileged roles to multisig wallets and transitioning to a DAO governance/voting module. The Treasury multisig and Protocol owner multisig (which controls the AdminContract) addresses can be found [here](https://etherscan.io/address/0x5592cB82f5B11A4E42B1275A973E6B712194e239) and [here](https://etherscan.io/address/0x83737EAe72ba7597b36494D723fbF58cAfee8A69), respectively.
+The team followed Certik's recommendations by assigning privileged roles to multi-sig wallets and transitioning to a DAO governance/voting module. The Treasury multi-sig and Protocol owner multi-sig (which controls the AdminContract) addresses can be found [here](https://etherscan.io/address/0x5592cB82f5B11A4E42B1275A973E6B712194e239) and [here](https://etherscan.io/address/0x83737EAe72ba7597b36494D723fbF58cAfee8A69), respectively.
 
-Certik also advised implementing a time-lock contract with a 48-hour latency for privileged operations. The team has considered this but opted not to give ownership to a time-lock contract to remain agile. A permanent solution would be to renounce ownership or remove the _owner role's ability to affect collateral assets from the stability pool, transfer funds, change vesting periods, or alter the AdminContract. 
+Certik also advised implementing a time-lock contract with a 48-hour latency for privileged operations. The team has considered this but opted not to give ownership to a time-lock contract at this time to remain agile. A permanent solution could be to renounce ownership or remove the owner role's ability to affect collateral assets from the stability pool, transfer funds, change vesting periods, or alter the AdminContract. This would put DCHF's trust assumptions in line with Liquity, but would sacrifice flexibility, as new collateral types and oracles could no longer be altered.
 
-The transition to a DAO is still in its early stages with limited community activity outside of the team. Questions could be raised about the fairness of the MON token distribution, given the overlap between core Treasury multisig signers and Grizzly.Fi airdrop recipients. To address this, the team has set up a [multisig proxy address](https://etherscan.io/address/0x83737eae72ba7597b36494d723fbf58cafee8a69) and transferred ownership of the AdminContract to this address, providing transparency to users about the token distribution ([proof of transfer](https://etherscan.io/tx/0xea7d8303eb36885d2446bd3ea73ca64027f5e851c5ba0119fddd0370b3604468)). This provides a reference to help users check whether MON tokens have been distributed as advertised, the Moneta DAO has released documentation for their token distribution (see above section). For more information, check the Moneta DAO's token distribution documentation ([source](https://docs.defifranc.com/tokenomics/moneta-tokenomics)).
+Another solution could be to introduce fully on-chain governance controlled by a DAO of tokenholders. The transition to a DAO is still in its early stages with limited community activity outside of the team. Questions could be raised about the fairness of the MON token distribution, given the overlap between core Treasury multi-sig signers and Grizzly.Fi airdrop recipients. To address this, the team has set up a [multi-sig proxy address](https://etherscan.io/address/0x83737eae72ba7597b36494d723fbf58cafee8a69) and transferred ownership of the AdminContract to this address, providing transparency to users about the token distribution ([proof of transfer](https://etherscan.io/tx/0xea7d8303eb36885d2446bd3ea73ca64027f5e851c5ba0119fddd0370b3604468)). This provides a reference to help users check whether MON tokens have been distributed as advertised. For more information, check the Moneta DAO's token distribution documentation ([source](https://docs.defifranc.com/tokenomics/moneta-tokenomics)).
+
+
+### Centralization & Custody Risk
+
+The [4-of-6 multi-sig](https://etherscan.io/address/0x83737EAe72ba7597b36494D723fbF58cAfee8A69) ownership of the AdminContract (as well as ownership of all relevant system contracs) grants it extensive authority over critical protocol functions, raising custody risk concerns. The team has opted for non-upgradeable contracts, which means the Owner multi-sig must add new collateral through the [AdminContract](https://etherscan.io/address/0x2748C55219DCa1D9D3c3a57505e99BB04e42F254#code) or update existing collateral parameters through the [DFrancParameters](https://etherscan.io/address/0x6F9990B242873d7396511f2630412A3fcEcacc42#code) contract. This multi-sig has the power to:
+
+* Add new collateral types, including an associated Stability Pool and oracle
+* Adjust system parameters, including set oracle pricefeed, set minimum collateral ratio before triggering liquidation (101%-1000%), set critical collateral ratio before triggering Recovery Mode (101%-1000%), set min/max borrow fee (0%-10%), set Liquidation Reserve fee (1-200), set minimum borrow amount (0-10,000), and set min redemption fee (.1%-10%)
+* Introduce a whitelist for DCHF redemptions (note: this is seperate from repaying debt, and governance cannot prevent depositors from withdrawing their collateral)
+* Upgrade to a new AdminContract, TroveManager, and BorrowingOperations contract
+* * Handling of MON funds between the CommunityIssuance and StabilityPool contracts
+* Emergency pause of MON staking deposits and pause of DCHF minting
+
+Although centralization risks found in the audit have been mitigated to an extent, extensive privileges remain available to the core team to exercise.
+
+The team has [expanded the multi-sig threshold](https://etherscan.io/address/0x83737EAe72ba7597b36494D723fbF58cAfee8A69#readProxyContract) from 3-of-6 to 4-of-6 and added a Curve team member ([Mimaklas](https://twitter.com/cryptomits)). They have additionally transitioned to a DAO, which is still in its early stage of development. It remains to be seen how well Moneta can garner community involvement in decision-making and on-chain governance. At this time, the core team is necessary for the DAO to operate effectively.
+
+The recommended next step to reduce custody risk is to pass ownership to a timelock contract for all functions that are not time-sensitive. The multi-sig without timelock should ideally be reserved for emergency actions (pause MONStaking/pause DCHF minting). The long-term goal should be to transition either to fully on-chain governance or to opt for governance minimization by renouncing ownership of the relevant contracts. 
+
+A list of access controls for the system contracts has been compiled on this [Google Sheet](https://docs.google.com/spreadsheets/d/1B3Y2HIc9BNz5iVQPA-cw_GORxubk8MwLNCjYwIatVes/edit?usp=sharing).
+
+
+## Governance Risk
 
 Here’s an overview of major MON token holders:
 
@@ -440,45 +468,21 @@ Here’s an overview of major MON token holders:
 
 [Source query](https://dune.com/queries/2320797/3800099)
 
-DCHF is a fork of Vesta Finance, which itself is a fork of the Liquity decentralized borrowing protocol. Although Liquity is a well-audited protocol, engineers from Vesta have cautioned against forking these projects due to messy and unoptimized code that may not be up-to-date with new features ([source](https://github.com/vesta-finance/vesta-protocol-v1/releases/tag/v1.0)). Despite this warning, DCHF remains a fork of Vesta with no visible effort to keep up with changes in the original code base, possibly due to their use of non-upgradeable contracts ([source](https://github.com/monetadao/dchf/tree/main/contracts)).
+Grizzly.Fi incubated both the DeFi Franc and Moneta DAO. The team and advisors have been allocated 10% of tokens (10m MON) ([source](https://docs.defifranc.com/tokenomics/moneta-tokenomics)), and the DAO was allocated a treasury seed of 1M USD worth of assets (9,174,312 MON) ([source](https://commonwealth.im/moneta-dao/discussion/10191-launching-monetadao)).
 
+There are two entities to Moneta DAO governance: Token House and Delegate House ([source](https://monetadao.com/)). As discussed above Moneta DAO token holders will have say over strategic protocol decisions including allocation of DAO treasury funds, critical risk parameters and protocol upgrades ([source](https://commonwealth.im/moneta-dao/discussion/10191-launching-monetadao)). However, in the early stage of development, there continues to be an absence of a clear process for prominent community members to serve as delegates and permissioned roles within the DAO. 
 
-## **Centralization & Custody Risk**
-
-Transferring ownership of the AdminContract to a multisig wallet partially mitigates centralization risk, but does not fully address it. The transfer of the AdminContract to a multisig has granted it extensive authority over critical protocol functions, raising custody risk. The team has extended the multisig threshold and transitioned to a DAO, which remains to be seen how well it can garner community involvement in decision-making and on-chain governance. 
-
-Additional expansion of the current 4-of-6 multisig threshold ([source](https://etherscan.io/address/0x83737EAe72ba7597b36494D723fbF58cAfee8A69#readProxyContract)) and a plan to further reduce privileges associated with the `_owner` role, which the multisig has full control of, should be developed and communicated. 
-
-However, the team has opted for non-upgradeable contracts, which means the owner (multisig) must add new collateral through the [AdminContract](https://etherscan.io/address/0x2748C55219DCa1D9D3c3a57505e99BB04e42F254#code) or update existing collateral parameters through the [DFrancParameters](https://etherscan.io/address/0x6F9990B242873d7396511f2630412A3fcEcacc42#code) contract. Although centralization risks found in the audit have been mitigated to an extent, extensive privileges remain available to the core team to exercise.
-
-Presently, the Treasury multisig controls 
-
-* Adding new collateral types
-* Full allowance of Community Grants Committee
-* Collateral supply and Risk Parameters
-* Protocol Updates
-* Moving funds in and out of Stability Pool
-* Redemption list
-* Treasury address
-* And more.
-
-The Treasury multisig currently controls many aspects of the protocol, and the Moneta DAO lacks a clear delegation process. As a result, the core team is necessary for the DAO to operate effectively.
-
-
-## **Governance Risk**
-
-Grizzly.Fi incubated both the DeFi Franc and Moneta DAO, with the latter receiving a treasury seed of 1M USD worth of assets for 9,174,312 MON ([source](https://commonwealth.im/moneta-dao/discussion/10191-launching-monetadao)), and the team and advisors being allocated 10% or 10m MON ([source](https://docs.defifranc.com/tokenomics/moneta-tokenomics)). 
-
-There are two entities to Moneta DAO governance: Token House and Delegate House ([source](https://monetadao.com/)). As discussed above Moneta DAO token holders will have say over strategic protocol decisions including allocation of DAO treasury funds, critical risk parameters and protocol upgrades ([source](https://commonwealth.im/moneta-dao/discussion/10191-launching-monetadao)). However, the absence of a clear process for prominent community members to serve as delegates and permissioned roles within the DAO compounds this issue. 
-
-Additionally, the distribution of MON tokens was made before the formation of the DAO, without community input. Moreover, given that there is no clear process for delegation, we can assume that the current multisig signers of the Treasury and Protocol Owner proxy are the de facto delegates. While delegates execute the wishes of tokenholders, this relationship is non-binding and trust-based. 
+Additionally, the distribution of MON tokens was made before the formation of the DAO, without community input. Moreover, given that there is no clear process for delegation, we can assume that the current multi-sig signers of the Treasury and Protocol Owner proxy are the de facto delegates. While delegates execute the wishes of tokenholders, this relationship is non-binding and trust-based. 
 
 While the token holders will have a say in strategic protocol decisions, the extent of governance remains uncertain. Clear communication of a governance process and plans for delegation will be helpful.
 
 
 ## **Oracle Risk**
 
-DCHF relies on a Chainlink oracle, with the AdminContract able to call the addOracle function, creating a risk if the AdminContract is compromised. Unfortunately, DCHF lacks a backup oracle, relying on the fetchPrice function which interacts with two Chainlink oracles and allows a maximum deviation of 50% ([source, line 148](https://github.com/monetadao/dchf/blob/main/contracts/PriceFeed.sol)). As a result, if one CHF is inaccurately priced, it could lead to negative effects on liquidations and the redemption mechanism, ultimately resulting in potential loss of funds ([source](https://docs.defifranc.com/extras/audits)).
+DCHF relies on a Chainlink oracle, with the AdminContract able to call the addOracle function, creating a risk if the owner multi-sig is compromised. 
+Chainlink is a well-regarded oracle provider, although DCHF lacks a backup oracle, relying on the fetchPrice function which interacts with two Chainlink oracles and allows a maximum deviation of 50% ([source, line 148](https://github.com/monetadao/dchf/blob/main/contracts/PriceFeed.sol)) between updates. As a result, if one CHF is inaccurately priced, it could lead to negative effects on liquidations and the redemption mechanism, ultimately resulting in potential loss of funds ([source](https://docs.defifranc.com/extras/audits)).
+
+Liquity, by comparison, uses Chainlink as a primary oracle and Tellor as a backup. It will algorithmically reject the primary oracle if it fails to update or produces a value outside of the specified guardrail. The strategy was designed to ensure the pricefeed can autonomously react to black swan events without requiring manual intervention. The DCHF strategy, on the other hand, may require more active monitoring and manual updates in case of oracle failure.
 
 
 ## **Depeg Risk**
@@ -499,26 +503,24 @@ The DeFi Franc protocol currently has 6,694,401 DCHF tokens minted, valued at $1
 
 However, a minor contract risk exists due to the setDCHFGasCompensation() function potentially resulting in insufficient DCHF tokens to burn from the gas pool, which could prevent redemptions ([source](https://skynet.certik.com/projects/defi-franc)). This has been partially resolved, but still could result in MCR (minimum collateral ratio) > CCR (collateral coverage ratio).
 
-To control the supply of DCHF, the protocol utilizes borrow and redemption fees. A 110% collateral ratio provides a price floor and ceiling, and arbitrageurs are incentivized to maintain price stability. However, a depeg risk exists if demand for DCHF is insufficient and it trades above 1 CHF for a prolonged period.
+To control the supply of DCHF, the protocol utilizes borrow and redemption fees. A 110% collateral ratio provides a price floor and ceiling, and arbitrageurs are incentivized to maintain price stability. However, a depeg risk exists if demand for DCHF is insufficient and it trades above 1 CHF for a prolonged period. The protocol does not rely on an external AMM for supply expansion or contraction, and burning/withdrawal amounts are approved through on-chain peg mechanisms. 
 
-The protocol does not rely on an external AMM for supply expansion or contraction, and burning/withdrawal amounts are approved through on-chain peg mechanisms. Although the risk of depeg is currently low, it still exists.
+As a fork of Liquity- a resilient and battle tested stablecoin, the risk of depeg is currently low. The collateral selection (ETH/WBTC) is also reasonably conservative. It is our opinion that the greatest risk of future depeg is the possibility of governance mismangement. If low quality collateral types are ever added to the protocol (e.g. the protocol's native governance token MON, or complex derivative assets), failure or manipulation of underlying collateral can lead to system insolvency and therefore a depeg. 
 
 
-# **LlamaRisk Gauge Criteria**
+## LlamaRisk Gauge Criteria
 
-(An analysis of all the above findings are used to answer the following questions, which we ultimately use to determine whether we recommend a gauge or not)
-
-**Centralization Factors**
+### Centralization Factors
 
 **1. Is it possible for a single entity to rug its users?**
 
-The risk of a single entity rug-pulling users has been reduced by transferring the AdminContract's extensive privileges to a multisig, which currently has a 4-of-6 signer setup. However, despite this arrangement, there is still a considerable amount of centralization. 
+The risk of a single entity rug-pulling users has been reduced by transferring ownership privileges to a multi-sig, which currently has a 4-of-6 signer setup and includes a member from the Curve team. It is still possible for this multi-sig to take action that can impact user funds. 
 
 **2. If the team vanishes, can the project continue?**
 
-Currently, activities seem to be well-coordinated with the core team able to coordinate critical protocol functions. With the DAO being recently launched, there is no clear process for selecting delegates, and the forum is only active with a few participants. The project will be unable to continue without the core team. 
+The protocol can continue operating normally in the absence of the team, but there would be no way to update the system or respond to an emergency. With the DAO being recently launched, there is still no direct way for tokenholder to directly assert control over the protocol. 
 
-**Economic Factors**
+### Economic Factors
 
 **1. Does the project's viability depend on additional incentives?**
 
@@ -528,7 +530,7 @@ While the project may depend on incentives for liquidity (voting for Curve Facto
 
 Yes, there’s roughly $17m in ETH and wBTC collateral supporting $7.6m in DCHF value. Users can redeem their deposits tomorrow. 
 
-**Security Factors**
+### Security Factors
 
 **1. Do audits reveal any concerning signs?**
 
