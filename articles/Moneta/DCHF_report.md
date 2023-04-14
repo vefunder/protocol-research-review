@@ -1,7 +1,7 @@
 # Asset Risk Assessment: DeFi Franc (DCHF)
 
 
-#### A look into MonetaDAO and its Swiss franc stablecoin DCHF
+#### A look into Moneta DAO and its Swiss franc stablecoin DCHF
 
 
 ### Useful Links
@@ -536,7 +536,7 @@ Yes, there’s roughly $17m in ETH and wBTC collateral supporting $7.6m in DCHF 
 
 The audits did not identify any critical issues, but flagged a few major concerns that have been partially or fully addressed. The primary concern was the overreaching powers of the AdminContract, which has been transferred to multi-sig signers. It should also be noted that DCHF is a fork of Vespa Finance and Liquity. Although, the DCHF protocol has switched to non-upgradeable contracts, it does have a path to update the system through the AdminContract ([source](https://etherscan.io/address/0x2748C55219DCa1D9D3c3a57505e99BB04e42F254#code)) or make parameter updates through the DFrancParameters contract ([source](https://etherscan.io/address/0x6F9990B242873d7396511f2630412A3fcEcacc42#code)). 
 
-# Risk Team Recommendation (Don't worry about this section in the first draft, we will discuss together and with the protocol team to determine our final recommendation)
+# Risk Team Recommendation
 
 We have three recommendations that would be beneficial to the DCHF ecosystem and community:
 
