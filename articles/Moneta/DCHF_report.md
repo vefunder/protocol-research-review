@@ -150,7 +150,9 @@ Once the allowance transaction is executed, the Treasury multi-sig will have ful
 
 #### MON Governance Token
 
-The [MON token](https://etherscan.io/address/0x1ea48b9965bb5086f3b468e50ed93888a661fc17), issued by Moneta DAO, is intended to govern the DCHF protocol and is described as a revenue-sharing token that can only be obtained by staking DCHF in one of the stability pools, or by supplying liquidity to the Curve pool. Users can stake their MON to earn a proportionate share of borrowing and redemption fees in DCHF, ETH, and wBTC ([source](https://docs.defifranc.com/tokenomics/moneta-tokenomics), [source](https://docs.defifranc.com/tokenomics/moneta-staking)). 
+The [MON token](https://etherscan.io/address/0x1ea48b9965bb5086f3b468e50ed93888a661fc17), issued by Moneta DAO, is intended to govern the DCHF protocol and is described as a revenue-sharing token that can only be obtained by staking DCHF in one of the stability pools, or by supplying liquidity to the Curve pool. Users can stake their MON to earn a proportionate share of borrowing and redemption fees in DCHF, ETH, and wBTC ([source](https://docs.defifranc.com/tokenomics/moneta-tokenomics), [source](https://docs.defifranc.com/tokenomics/moneta-staking)).
+
+There are inconsistencies between the Moneta DAO documentation and governance forum announcements regarding the governance role of MON token holders. On one hand, the documentation states: “staked MON tokens are not used for governance as there is no DeFi Franc governance” ([source](https://docs.defifranc.com/tokenomics/moneta-staking)), but the announcement post for launching Moneta DAO suggest MON token holders and stakers “govern over strategic DAO decisions” including: allocation of DAO treasury funds, critical risk parameters and protocol upgrades ([source](https://commonwealth.im/moneta-dao/discussion/10191-launching-monetadao)). This is likely due to the recent introduction of the DAO (March 2023) and the docs should be updated for clarity.
 
 According to the Moneta DAO [Tokenomics page](https://docs.defifranc.com/tokenomics/moneta-tokenomics), MON was launched with a max supply of 100m tokens that have been allocated toward four main purposes:
 
@@ -159,7 +161,7 @@ According to the Moneta DAO [Tokenomics page](https://docs.defifranc.com/tokenom
 * 10% - Team and advisors
 * 2.5% - Liquidity bootstrapping (Supply liquidity and incentives to a MON/ETH pool)
 
-The [Protocol Owner multi-sig](https://etherscan.io/address/0x83737EAe72ba7597b36494D723fbF58cAfee8A69) was initially seeded with 100,000,000 tokens on September 23, 2022 ([source](https://etherscan.io/tx/0xa57dd3c6e8f44be7e3f17904b3d5719da1857b205ce3a0af4ddcecd8a4cbb4fc)). The [docs](https://docs.defifranc.com/contracts) list contracts used in the initial distribution, but many have been deprecated with the launch of Moneta DAO. Moneta documentation should be updated to reflect new decisions around treasury management and allocation. The following chart shows funds that have been returned to the owner multi-sig since the original distribution.
+The [Protocol Owner multi-sig](https://etherscan.io/address/0x83737EAe72ba7597b36494D723fbF58cAfee8A69) was initially seeded with 100,000,000 tokens on September 23, 2022 ([source](https://etherscan.io/tx/0xa57dd3c6e8f44be7e3f17904b3d5719da1857b205ce3a0af4ddcecd8a4cbb4fc)). The [docs](https://docs.defifranc.com/contracts) list the contracts used in the initial distribution, but many have been deprecated with the launch of Moneta DAO. Moneta documentation should be updated to reflect new decisions around treasury management and allocation. The following chart shows funds that have been returned to the owner multi-sig since the original distribution.
 
 ![mon_distribution](https://user-images.githubusercontent.com/4058461/232518729-ade22691-2c4c-46b4-b8c4-92d351e953ee.png)
 
@@ -182,183 +184,9 @@ Contract addresses:
 * [CommunityIssuance](https://etherscan.io/address/0x0fa46e8cBCEff8468DB2Ec2fD77731D8a11d3D86) (Stability Pool incentives)
 * [MON airdrop](https://etherscan.io/address/0xff42ec1c83e0f4939c45ab4f6a027b44e5a3fc8f)
 
-The [Treasury multi-sig](https://etherscan.io/address/0x5592cb82f5b11a4e42b1275a973e6b712194e239) currently holds around 50% of all tokens. Of circulating supply, the majority is in the [MONStaking contract](https://etherscan.io/token/0x1EA48B9965bb5086F3b468E50ED93888a661fc17?a=0x8bc3702c35d33e5df7cb0f06cb72a0c34ae0c56f) (17m) and the [Uniswap pool](https://etherscan.io/token/0x1EA48B9965bb5086F3b468E50ED93888a661fc17?a=0x21f396dd37a26d7754c513fd916d07f66aa6b81e) (3m). Since all allocations were made before the DAO was formed and without community input, there may be questions regarding the airdrops. The Grizzly.Fi community received the most tokens (11.17m), and it is worth noting that members of the core team are also co-founders of Grizzly.Fi. This overlap in roles may be a cause for concern, as the majority of MON circulating supply is from airdrops and the team's realized MON allocation is obscured by a significant airdrop to their previous project.
+The [Treasury multi-sig](https://etherscan.io/address/0x5592cb82f5b11a4e42b1275a973e6b712194e239) currently holds around 50% of all tokens. Of circulating supply, the majority is in the [MONStaking contract](https://etherscan.io/token/0x1EA48B9965bb5086F3b468E50ED93888a661fc17?a=0x8bc3702c35d33e5df7cb0f06cb72a0c34ae0c56f) (17m) and the [Uniswap pool](https://etherscan.io/token/0x1EA48B9965bb5086F3b468E50ED93888a661fc17?a=0x21f396dd37a26d7754c513fd916d07f66aa6b81e) (3m). Since all allocations were made before the DAO was formed and without community input, there may be questions regarding the airdrops. The Grizzly.Fi community received the most tokens (11.17m), and it is worth noting that members of the core team are also co-founders of Grizzly.Fi. This overlap may be a cause for concern, as the majority of MON circulating supply is from airdrops and the team's overall MON allocation is obscured by the airdrop strategy.
 
-There are inconsistencies between the Moneta DAO documentation and governance forum announcements regarding the governance role of MON token holders. On one hand, the documentation states: “staked MON tokens are not used for governance as there is no DeFi Franc governance” ([source](https://docs.defifranc.com/tokenomics/moneta-staking)), but the announcement post for launching Moneta DAO suggest MON token holders and stakers “govern over strategic DAO decisions” including: allocation of DAO treasury funds, critical risk parameters and protocol upgrades ([source](https://commonwealth.im/moneta-dao/discussion/10191-launching-monetadao)). This is likely due to the recent introduction of the DAO (March 2023) and the docs should be updated for clarity.
 
-<table>
-  <tr>
-   <td>Group
-   </td>
-   <td>Detail
-   </td>
-   <td>MON Supply (Documentation)
-   </td>
-   <td>MON Supply
-<p>
-(Confirmation)
-   </td>
-  </tr>
-  <tr>
-   <td>Launch (2.5%
-   </td>
-   <td>
-   </td>
-   <td>
-   </td>
-   <td>
-   </td>
-  </tr>
-  <tr>
-   <td>
-   </td>
-   <td>Liquidity Pool
-   </td>
-   <td>1,000,000
-   </td>
-   <td><strong>Uni V3 Liquidity Pool</strong> (971,695) (<a href="https://etherscan.io/tx/0x8b6a6522a2f3422eb444c9577fdb07a4f107527e30de1f9e75e0b6c8a397a71e">etherscan</a>)
-   </td>
-  </tr>
-  <tr>
-   <td>
-   </td>
-   <td>Bootstrapping Rewards
-   </td>
-   <td>1,500,000
-   </td>
-   <td><strong>Vester</strong> contract with totalVestingAmount (1,500,000) (<a href="https://etherscan.io/address/0xc0747a27c6fa20effba2937419647e976f111611#readContract">etherscan</a>)
-   </td>
-  </tr>
-  <tr>
-   <td>Treasury (82.5%)
-   </td>
-   <td>
-   </td>
-   <td>
-   </td>
-   <td>
-   </td>
-  </tr>
-  <tr>
-   <td>
-   </td>
-   <td>Reward & Reserves  \
- \
-(Marketing & Growth)
-   </td>
-   <td>72,000,000
-   </td>
-   <td><strong>Protocol Owner</strong> (start at 100,000,000 MON) (<a href="https://etherscan.io/tokentxns?a=0x83737eae72ba7597b36494d723fbf58cafee8a69&p=81">etherscan</a>)
-   </td>
-  </tr>
-  <tr>
-   <td>
-   </td>
-   <td>
-   </td>
-   <td>
-   </td>
-   <td><strong>Marketing</strong> (vesting)
-<p>
-Defifranc_mon: LockedMONmarketing (12,750,000) (<a href="https://etherscan.io/address/0x2e92c456278d77558723ca263c713b5d30520a39#tokentxns">etherscan</a>)
-   </td>
-  </tr>
-  <tr>
-   <td>
-   </td>
-   <td>
-   </td>
-   <td>
-   </td>
-   <td><strong>Marketing</strong> (wallets) (4,250,000) (<a href="https://etherscan.io/address/0x844a255666f63f1F663Ac93dD876F8Aa584830Ff#tokentxns">etherscan</a>)
-   </td>
-  </tr>
-  <tr>
-   <td>
-   </td>
-   <td>
-   </td>
-   <td>
-   </td>
-   <td><strong>Reserves</strong> (wallets)
-<p>
-(7,750,000) (<a href="https://etherscan.io/address/0x7F2D099410B26219475fA54405736425411f5a06#tokentxns">etherscan</a>)
-   </td>
-  </tr>
-  <tr>
-   <td>
-   </td>
-   <td>
-   </td>
-   <td>
-   </td>
-   <td><strong>Reserves</strong> (vesting) (7,750,000) (<a href="https://etherscan.io/address/0x0F45883CDBE2B4D9cF79c823509112028DA0C857#tokentxns">etherscan</a>)
-   </td>
-  </tr>
-  <tr>
-   <td>
-   </td>
-   <td>
-   </td>
-   <td>
-   </td>
-   <td><strong>Treasury Multisig </strong>(50,508,223) (<a href="https://etherscan.io/address/0x5592cb82f5b11a4e42b1275a973e6b712194e239">etherscan</a>)
-   </td>
-  </tr>
-  <tr>
-   <td>
-   </td>
-   <td>Team & Advisors
-   </td>
-   <td>10,000,000
-   </td>
-   <td><strong>Team</strong> (vesting) \
-DefiFranc_mon: LockedMONteam 
-<p>
-(<a href="https://etherscan.io/address/0x8eba1ad289f5e6c50d2f924e17cc8dd607b3c083#tokentxns">etherscan</a>)
-   </td>
-  </tr>
-  <tr>
-   <td>Airdrops (15%)
-   </td>
-   <td>
-   </td>
-   <td>
-   </td>
-   <td><strong>Airdrop</strong> (15,000,000) (<a href="https://etherscan.io/address/0x1bd03ad578e8c9f457961856842e920881ab2d8c#tokentxns">etherscan</a>)
-   </td>
-  </tr>
-  <tr>
-   <td>
-   </td>
-   <td>Airdrop 1 (GHNY Snapshot)
-   </td>
-   <td>5,882,676
-   </td>
-   <td>
-   </td>
-  </tr>
-  <tr>
-   <td>
-   </td>
-   <td>Airdrop 2 (Freezer)
-   </td>
-   <td>5,291,841
-   </td>
-   <td>
-   </td>
-  </tr>
-  <tr>
-   <td>
-   </td>
-   <td>Airdrop 3 (LQTY)
-   </td>
-   <td>3,825,483
-   </td>
-   <td>
-   </td>
-  </tr>
-</table>
 
 
 ### Market and Utility
