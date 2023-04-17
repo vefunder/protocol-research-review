@@ -262,7 +262,7 @@ Defifranc_mon: LockedMONmarketing (12,750,000) (<a href="https://etherscan.io/ad
    </td>
    <td><strong>Reserves</strong> (wallets)
 <p>
-(7,750,000) (<a href="https://etherscan.io/tokentxns?a=0x83737eae72ba7597b36494d723fbf58cafee8a69&p=81">etherscan</a>)
+(7,750,000) (<a href="https://etherscan.io/address/0x7F2D099410B26219475fA54405736425411f5a06#tokentxns">etherscan</a>)
    </td>
   </tr>
   <tr>
@@ -272,7 +272,7 @@ Defifranc_mon: LockedMONmarketing (12,750,000) (<a href="https://etherscan.io/ad
    </td>
    <td>
    </td>
-   <td><strong>Reserves</strong> (vesting) (7,750,000) (<a href="https://etherscan.io/tokentxns?a=0x83737eae72ba7597b36494d723fbf58cafee8a69&p=81">etherscan</a>)
+   <td><strong>Reserves</strong> (vesting) (7,750,000) (<a href="https://etherscan.io/address/0x0F45883CDBE2B4D9cF79c823509112028DA0C857#tokentxns">etherscan</a>)
    </td>
   </tr>
   <tr>
