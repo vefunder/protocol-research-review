@@ -12,7 +12,7 @@
 * [GitHub](https://github.com/monetadao)
 * [Deployed Smart Contracts](https://docs.defifranc.com/contracts)
 * [Access Control Google Sheet](https://docs.google.com/spreadsheets/d/1B3Y2HIc9BNz5iVQPA-cw_GORxubk8MwLNCjYwIatVes/edit?usp=sharing)
-* Market Data (Curve pool, analytics)
+* [Dune Dashboard by Llama Risk](https://dune.com/paulapivat/llama-risk-assessment-defi-franc)
 * Governance
   * [DAO Website](https://monetadao.com/) 
   * [Multisig address](https://etherscan.io/address/0x83737EAe72ba7597b36494D723fbF58cAfee8A69)
@@ -34,7 +34,7 @@ Overall, Llama Risk believes the protocol risks are on par with other early-stag
 
 ### History & Context
 
-DeFi Franc (DCHF) is an overcollateralized stablecoin pegged to the Swiss franc, created on September 25, 2022 by [Moneta DAO Deployer](https://etherscan.io/address/0x7d7711efd844e5e204df29dc3e109d1af95a801c) ([source](https://etherscan.io/tx/0x7d6ba3055e572fffda740ee48482517061c98b7b04ec79ea08478280010070f1)). On January 25, 2023, a proposal to add the DCHF+3CRV pool to the Gauge Controller was made by Andrés Soltermann, founder of [Grizzly.Fi](https://blog.grizzly.fi/team-of-grizzly/) and current DCHF core team member ([source](https://www.linkedin.com/in/andr%C3%A9s-soltermann-379aa3174/?originalSubdomain=ch)). Grizzly.Fi is a liquidity mining aggregator with presence on [Binance Smart Chain](https://defillama.com/yields?project=grizzlyfi) and on [Ethereum](https://app.grizzly.fi/).
+DeFi Franc (DCHF) is an overcollateralized stablecoin pegged to the Swiss franc, created on September 25, 2022 by [Moneta DAO Deployer](https://etherscan.io/tx/0x7d6ba3055e572fffda740ee48482517061c98b7b04ec79ea08478280010070f1). On January 25, 2023, a proposal to add the DCHF+3CRV pool to the Gauge Controller was made by Andrés Soltermann, founder of [Grizzly.Fi](https://blog.grizzly.fi/team-of-grizzly/) and current DCHF [core team member](https://www.linkedin.com/in/andr%C3%A9s-soltermann-379aa3174/?originalSubdomain=ch). Grizzly.Fi is a liquidity mining aggregator with presence on [Binance Smart Chain](https://defillama.com/yields?project=grizzlyfi) and on [Ethereum](https://app.grizzly.fi/).
 
 DCHF initially launched with governance controlled solely by the Moneta team. The native MON token was used only for distributing protocol fees to stakers, and for a liquidity mining scheme. DCHF transitioned into a DAO governance model with the [launch of Moneta DAO](https://commonwealth.im/moneta/discussion/9887-hello-world) on February 5, 2023. MON token holders govern the DeFi franc protocol through a dual-governance structure and have proposed initiatives such as a liquidity strategy, expanded signers on the Moneta DAO multi-sig, and a community grants program. 
 
@@ -102,30 +102,30 @@ Source: [DCHF Dashboard](https://app.defifranc.com/)
 
 ### Governance
 
-DeFi Franc draws inspiration from Liquity, but sets itself apart by introducing DAO governance and having the ability to update the system with new features. Governable aspects of the system include:
+DeFi franc draws inspiration from Liquity, but sets itself apart by introducing DAO governance and having the ability to update the system with new features. Governable aspects of the system include:
 
 * Add new collateral types, including an associated Stability Pool and oracle
 * Adjust system parameters, including set oracle pricefeed, set minimum collateral ratio before triggering liquidation (101%-1000%), set critical collateral ratio before triggering Recovery Mode (101%-1000%), set min/max borrow fee (0%-10%), set Liquidation Reserve fee (1-200), set minimum borrow amount (0-10,000), and set min redemption fee (.1%-10%)
 * Introduce a whitelist for DCHF redemptions (note: this is seperate from repaying debt, and governance cannot prevent depositors from withdrawing their collateral)
 * Upgrade to a new AdminContract, TroveManager, and BorrowingOperations contract
-* Handling of MON funds between the CommunityIssuance and StabilityPool contracts
+* Handling of protocol fees between the CommunityIssuance and StabilityPool contracts
 * Emergency pause of MON staking deposits and pause of DCHF minting
 
-While the protocol allows for additional collateral types and native leverage on crypto-assets and LP Tokens, the core team currently has no immediate plans to add new collateral types. The team believes, based on informal discussion, if additional collateral were to be considered in the future it may involve staked ETH. Nevertheless, Moneta DAO has discretion over supporting new collateral types for DCHF, and the 4-of-6 multi-sig has the power to enact it. 
+While the protocol allows for adding additional collateral types, the core team currently has no immediate plans to add any. Based on informal discussion, the team believes a logical next collateral may involve staked ETH. In any case, Moneta DAO has discretion over supporting new collateral types for DCHF, and the 4-of-6 owner multi-sig has the power to enact it. 
 
 
 #### Moneta DAO
 
-The most significant addresses to Moneta governance are the [4-of-6 Owner multi-sig](https://etherscan.io/address/0x83737eae72ba7597b36494d723fbf58cafee8a69) and the [4-of-6 Treasury multi-sig](https://etherscan.io/address/0x5592cb82f5b11a4e42b1275a973e6b712194e239). The Treasury and Protocol Owner addresses are composed of the same individuals.
+The most significant addresses for Moneta governance are the [4-of-6 Owner multi-sig](https://etherscan.io/address/0x83737eae72ba7597b36494d723fbf58cafee8a69) and the [4-of-6 Treasury multi-sig](https://etherscan.io/address/0x5592cb82f5b11a4e42b1275a973e6b712194e239). The Treasury and Owner addresses are composed of the same individuals.
 
-The Moneta DAO has two governance bodies:
+The [Moneta DAO](https://monetadao.com/) has two governance bodies:
 
 * Token House is hosted by MON token holders who govern strategic decisions, including who should be in the Delegate House. It governs allocation of treasury funds and protocol upgrades. 
-* Delegate House comprises of elected members who oversee day-to-day governance decisions ([source](https://monetadao.com/))
+* Delegate House comprises of elected members who oversee day-to-day governance decisions.
 
-To put it plainly, Moneta is structuring itself similar to many early-stage DeFi projects: tokenholders can signal vote through Snapshot and a multi-sig of trusted individuals has the power to enact (or not) the wishes of tokenholders. The Moneta DAO has recently raised the multi-sig threshold from 3-of-5 to 4-of-6 to address concerns of potential collusion among multi-sig signers ([source](https://commonwealth.im/moneta-dao/discussion/10509-expand-signers-on-the-monetadao-multisig)). 
+To put it plainly, Moneta is structuring itself similar to many early-stage DeFi projects: tokenholders can signal vote through Snapshot and a multi-sig of trusted individuals has the power to enact (or not) the wishes of tokenholders. The Moneta DAO has recently [raised the multi-sig threshold](https://commonwealth.im/moneta-dao/discussion/10509-expand-signers-on-the-monetadao-multisig) from 3-of-5 to 4-of-6 to address concerns of potential collusion among multi-sig signers. 
 
-The six multisig signers are ([source](https://etherscan.io/address/0x83737EAe72ba7597b36494D723fbF58cAfee8A69#readProxyContract)):
+The six multi-sig signers are:
 
 1. Andrés Soltermann (Moneta Co-Founder)
 
@@ -139,18 +139,16 @@ The six multisig signers are ([source](https://etherscan.io/address/0x83737EAe72
 
 6. Mimaklas (Curve)
 
-Moneta DAO hosts community discussions on the Commonwealth forum where they made their inception announcement on February 26th, 2023 ([source](https://commonwealth.im/moneta-dao/discussions)). There are 55 members in the governance forum ([source](https://commonwealth.im/moneta-dao/members)), with 138 voting members on Snapshot ([source](https://snapshot.org/#/monetadao.eth)). To date, the DAO has held four governance votes, including a test vote, launching Moneta DAO, adopting a liquidity strategy, and expanding multisig signers ([source](https://snapshot.org/#/monetadao.eth)). You can find additional governance details in this forum post and the Moneta Tokenomics page ([source](https://commonwealth.im/moneta-dao/discussion/10191-launching-monetadao), [source](https://docs.defifranc.com/tokenomics/moneta-tokenomics#allocation)). 
+Moneta DAO hosts community discussions on the [Commonwealth forum](https://commonwealth.im/moneta-dao/discussions) where they made their inception announcement on February 26th, 2023. There are [55 members](https://commonwealth.im/moneta-dao/members) in the governance forum, with 138 voting members on [Snapshot](https://snapshot.org/#/monetadao.eth). To date, the DAO has held four governance votes, including a test vote, launching Moneta DAO, adopting a liquidity strategy, and expanding multisig signers. You can find additional governance details in this [forum post](https://commonwealth.im/moneta-dao/discussion/10191-launching-monetadao) and the Moneta [Tokenomics page](https://docs.defifranc.com/tokenomics/moneta-tokenomics#allocation). 
 
-On April 7th, 2023, a proposal was made to create a Community Grants Committee with a 5-of-9 multi-sig ([GnosisSafeProxy address available here](https://etherscan.io/address/0xba4ee2C6f2DC76f69d14F36ac4255bd4899BF5f0)). However, the Moneta DAO Token House (MON token holders) can choose to dissolve the Community Grants Committee, which has granted the Treasury Multi-sig full allowance over its MON holdings ([source](https://commonwealth.im/moneta-dao/discussion/11047-community-grants-program)). 
-
-Once the allowance transaction is executed, the Treasury multi-sig will have full allowance over the Community Grants Committee multi-sig. The Community Grants Committee consists of representatives from Moneta DAO and the team, including Dr. LM, Andrea, Markus, Nilic, Daniel, ViTo, Tom, Leon, and Andrés ([source](https://commonwealth.im/moneta-dao/discussion/11047-community-grants-program)).
+On April 7th, 2023, a proposal was made to create a Community Grants Committee with a [5-of-9 multi-sig](https://etherscan.io/address/0xba4ee2C6f2DC76f69d14F36ac4255bd4899BF5f0). The Community Grants Committee consists of representatives from Moneta DAO and the team, including Dr. LM, Andrea, Markus, Nilic, Daniel, ViTo, Tom, Leon, and Andrés. The Moneta DAO Token House (MON token holders) reserves the right to dissolve the Community Grants Committee, to which it has granted the Treasury Multi-sig [full allowance](https://commonwealth.im/moneta-dao/discussion/11047-community-grants-program) over its MON treasury. 
 
 
 #### MON Governance Token
 
-The [MON token](https://etherscan.io/address/0x1ea48b9965bb5086f3b468e50ed93888a661fc17), issued by Moneta DAO, is intended to govern the DCHF protocol and is described as a revenue-sharing token that can only be obtained by staking DCHF in one of the stability pools, or by supplying liquidity to the Curve pool. Users can stake their MON to earn a proportionate share of borrowing and redemption fees in DCHF, ETH, and wBTC ([source](https://docs.defifranc.com/tokenomics/moneta-tokenomics), [source](https://docs.defifranc.com/tokenomics/moneta-staking)).
+The [MON token](https://etherscan.io/address/0x1ea48b9965bb5086f3b468e50ed93888a661fc17), issued by Moneta DAO, is intended to govern the DCHF protocol and is described as a [revenue-sharing token](https://docs.defifranc.com/tokenomics/moneta-tokenomics) that can only be obtained by staking DCHF in one of the stability pools, or by supplying liquidity to the Curve pool. Users can [stake their MON](https://docs.defifranc.com/tokenomics/moneta-staking) to earn a proportionate share of borrowing and redemption fees in DCHF, ETH, and wBTC.
 
-There are inconsistencies between the Moneta DAO documentation and governance forum announcements regarding the governance role of MON token holders. On one hand, the documentation states: “staked MON tokens are not used for governance as there is no DeFi Franc governance” ([source](https://docs.defifranc.com/tokenomics/moneta-staking)), but the announcement post for launching Moneta DAO suggest MON token holders and stakers “govern over strategic DAO decisions” including: allocation of DAO treasury funds, critical risk parameters and protocol upgrades ([source](https://commonwealth.im/moneta-dao/discussion/10191-launching-monetadao)). This is likely due to the recent introduction of the DAO (March 2023) and the docs should be updated for clarity.
+There are inconsistencies between the Moneta DAO documentation and governance forum announcements regarding the governance role of MON token holders. On one hand, the [documentation](https://docs.defifranc.com/tokenomics/moneta-staking) states: “staked MON tokens are not used for governance as there is no DeFi Franc governance”, but the [announcement post](https://commonwealth.im/moneta-dao/discussion/10191-launching-monetadao) for launching Moneta DAO suggests MON token holders and stakers “govern over strategic DAO decisions” including: allocation of DAO treasury funds, critical risk parameters and protocol upgrades. This discrepency is likely due to the recent introduction of the DAO (March 2023) and the docs should be updated for clarity.
 
 According to the Moneta DAO [Tokenomics page](https://docs.defifranc.com/tokenomics/moneta-tokenomics), MON was launched with a max supply of 100m tokens that have been allocated toward four main purposes:
 
@@ -159,13 +157,13 @@ According to the Moneta DAO [Tokenomics page](https://docs.defifranc.com/tokenom
 * 10% - Team and advisors
 * 2.5% - Liquidity bootstrapping (Supply liquidity and incentives to a MON/ETH pool)
 
-The [Protocol Owner multi-sig](https://etherscan.io/address/0x83737EAe72ba7597b36494D723fbF58cAfee8A69) was initially seeded with 100,000,000 tokens on September 23, 2022 ([source](https://etherscan.io/tx/0xa57dd3c6e8f44be7e3f17904b3d5719da1857b205ce3a0af4ddcecd8a4cbb4fc)). The [docs](https://docs.defifranc.com/contracts) list the contracts used in the initial distribution, but many have been deprecated with the launch of Moneta DAO. Moneta documentation should be updated to reflect new decisions around treasury management and allocation. The following chart shows funds that have been returned to the owner multi-sig since the original distribution.
+The [Protocol Owner multi-sig](https://etherscan.io/address/0x83737EAe72ba7597b36494D723fbF58cAfee8A69) was initially [seeded with 100,000,000 tokens](https://etherscan.io/tx/0xa57dd3c6e8f44be7e3f17904b3d5719da1857b205ce3a0af4ddcecd8a4cbb4fc) on September 23, 2022. The [docs](https://docs.defifranc.com/contracts) list the contracts used in the initial distribution, but many have been deprecated with the Moneta DAO launch. Moneta documentation should be updated to reflect new decisions around treasury management and allocation. The following chart shows funds that have been returned to the owner multi-sig since the original distribution.
 
 ![mon_distribution](https://user-images.githubusercontent.com/4058461/232518729-ade22691-2c4c-46b4-b8c4-92d351e953ee.png)
 
-Here is a [dashboard](https://dune.com/paulapivat/llama-risk-assessment-defi-franc) to show onchain transactions to and from the [Protocol Owner multi-sig](https://etherscan.io/address/0x83737EAe72ba7597b36494D723fbF58cAfee8A69); see "MON Received and In Circulation".
+We have additionally built a Moneta Dune [dashboard](https://dune.com/paulapivat/llama-risk-assessment-defi-franc) that show onchain transactions to and from the [Protocol Owner multi-sig](https://etherscan.io/address/0x83737EAe72ba7597b36494D723fbF58cAfee8A69); see "MON Received and In Circulation".
 
-The following chart shows the actual distribution of MON as of April 17, 2023. The majority of funds have been transferred to a new Treasury multi-sig and to the Grizzli.fi multi-sig, which provided Moneta DAO with $1m of seed funding denominated in USDC, CRV, and LIT. The owner multi-sig continues to be a regular funding source for Curve gauge rewards, Stability Pool incentives (CommunityIssuance), and airdrop claims.
+The following chart shows the actual distribution of MON as of April 17, 2023. The majority of funds have been transferred to a new Treasury multi-sig and to a Grizzli.fi multi-sig. The latter had provided Moneta DAO with $1m of seed funding denominated in USDC, CRV, and LIT. The owner multi-sig continues to be a regular funding source for Curve gauge rewards, Stability Pool incentives (CommunityIssuance), and airdrop claims.
 
 ![MON dist flow drawio](https://user-images.githubusercontent.com/51072084/232602695-d5099d2b-8671-48d7-806a-d6a344851419.png)
 
@@ -182,9 +180,7 @@ Contract addresses:
 * [CommunityIssuance](https://etherscan.io/address/0x0fa46e8cBCEff8468DB2Ec2fD77731D8a11d3D86) (Stability Pool incentives)
 * [MON airdrop](https://etherscan.io/address/0xff42ec1c83e0f4939c45ab4f6a027b44e5a3fc8f)
 
-The [Treasury multi-sig](https://etherscan.io/address/0x5592cb82f5b11a4e42b1275a973e6b712194e239) currently holds around 50% of all tokens. Of circulating supply, the majority is in the [MONStaking contract](https://etherscan.io/token/0x1EA48B9965bb5086F3b468E50ED93888a661fc17?a=0x8bc3702c35d33e5df7cb0f06cb72a0c34ae0c56f) (17m) and the [Uniswap pool](https://etherscan.io/token/0x1EA48B9965bb5086F3b468E50ED93888a661fc17?a=0x21f396dd37a26d7754c513fd916d07f66aa6b81e) (3m). Since all allocations were made before the DAO was formed and without community input, there may be questions regarding the airdrops. The Grizzly.Fi community received the most tokens (11.17m), and it is worth noting that members of the core team are also co-founders of Grizzly.Fi. This overlap may be a cause for concern, as the majority of MON circulating supply is from airdrops and the team's overall MON allocation is obscured by the airdrop strategy.
-
-
+The [Treasury multi-sig](https://etherscan.io/address/0x5592cb82f5b11a4e42b1275a973e6b712194e239) currently holds around 50% of all tokens. Of circulating supply, the majority is in the [MONStaking contract](https://etherscan.io/token/0x1EA48B9965bb5086F3b468E50ED93888a661fc17?a=0x8bc3702c35d33e5df7cb0f06cb72a0c34ae0c56f) (17m) and the [Uniswap pool](https://etherscan.io/token/0x1EA48B9965bb5086F3b468E50ED93888a661fc17?a=0x21f396dd37a26d7754c513fd916d07f66aa6b81e) (3m). Since all allocations were made before the DAO was formed and without community input, there may be questions regarding the airdrops. The Grizzly.Fi community received the most tokens (11.17m), and it is worth noting that members of the core team are also co-founders of Grizzly.Fi. This overlap may be a cause for concern, as the majority of MON circulating supply is from airdrops and the team's overall MON allocation is obscured by this airdrop strategy.
 
 
 ### Market and Utility
