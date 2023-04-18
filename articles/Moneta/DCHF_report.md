@@ -169,16 +169,16 @@ The following chart shows the actual distribution of MON as of April 17, 2023. T
 
 Contract addresses:
 
-* [Uniswap MON pool](https://etherscan.io/address/0x21f396dd37a26d7754c513fd916d07f66aa6b81e) ([tx](https://etherscan.io/tx/0x8b6a6522a2f3422eb444c9577fdb07a4f107527e30de1f9e75e0b6c8a397a71e))
-* [UniV3 rewards vest](https://etherscan.io/address/0xc0747a27c6fa20effba2937419647e976f111611)
-* [Team vest](https://etherscan.io/address/0x8eba1ad289f5e6c50d2f924e17cc8dd607b3c083)
-* [lockedMON](https://etherscan.io/address/0x020b7d785d343c92f3be7d802545d031e943366f)
-* [Treasury multi-sig](https://etherscan.io/address/0x5592cb82f5b11a4e42b1275a973e6b712194e239)
-* [Grizzli.fi multi-sig](https://etherscan.io/address/0xcE88F73FAA2C8de5fdE0951A6b80583af4C14265)
-* [Moneta DAO: Deployer](https://etherscan.io/address/0x7d7711efd844e5e204df29dc3e109d1af95a801c)
-* [Curve Gauge Rewards](https://etherscan.io/address/0xe55393dd3002ac8e9b82a804774616c35cc8fd64)
-* [CommunityIssuance](https://etherscan.io/address/0x0fa46e8cBCEff8468DB2Ec2fD77731D8a11d3D86) (Stability Pool incentives)
-* [MON airdrop](https://etherscan.io/address/0xff42ec1c83e0f4939c45ab4f6a027b44e5a3fc8f)
+* [Uniswap MON pool](https://etherscan.io/address/0x21f396dd37a26d7754c513fd916d07f66aa6b81e) ([tx](https://etherscan.io/tx/0x8b6a6522a2f3422eb444c9577fdb07a4f107527e30de1f9e75e0b6c8a397a71e)) - MON/WETH UniV3 pool
+* [UniV3 rewards vest](https://etherscan.io/address/0xc0747a27c6fa20effba2937419647e976f111611) - Rewards for MON/WETH pool LPs
+* [Team vest](https://etherscan.io/address/0x8eba1ad289f5e6c50d2f924e17cc8dd607b3c083) - Original team allocation
+* [lockedMON](https://etherscan.io/address/0x020b7d785d343c92f3be7d802545d031e943366f) - Vest for new team member @elnilz
+* [Treasury multi-sig](https://etherscan.io/address/0x5592cb82f5b11a4e42b1275a973e6b712194e239) - Treasury created with formation of Moneta DAO
+* [Grizzli.fi multi-sig](https://etherscan.io/address/0xcE88F73FAA2C8de5fdE0951A6b80583af4C14265) - Seed fund raise of $1m at formation of Moneta DAO
+* [Moneta DAO: Deployer](https://etherscan.io/address/0x7d7711efd844e5e204df29dc3e109d1af95a801c) - Giveaway campaign hosted by Moneta team
+* [Curve Gauge Rewards](https://etherscan.io/address/0xe55393dd3002ac8e9b82a804774616c35cc8fd64) - DCHF pool rewards distributed weekly
+* [CommunityIssuance](https://etherscan.io/address/0x0fa46e8cBCEff8468DB2Ec2fD77731D8a11d3D86) - Stability Pool incentives distributed monthly
+* [MON airdrop](https://etherscan.io/address/0xff42ec1c83e0f4939c45ab4f6a027b44e5a3fc8f) - GHNY, LQTY, and Grizzly Freezer airdrop. Claims are through the airdrop contract and distribute funds from the owner multi-sig
 
 The [Treasury multi-sig](https://etherscan.io/address/0x5592cb82f5b11a4e42b1275a973e6b712194e239) currently holds around 50% of all tokens. Of circulating supply, the majority is in the [MONStaking contract](https://etherscan.io/token/0x1EA48B9965bb5086F3b468E50ED93888a661fc17?a=0x8bc3702c35d33e5df7cb0f06cb72a0c34ae0c56f) (17m) and the [Uniswap pool](https://etherscan.io/token/0x1EA48B9965bb5086F3b468E50ED93888a661fc17?a=0x21f396dd37a26d7754c513fd916d07f66aa6b81e) (3m). Since all allocations were made before the DAO was formed and without community input, there may be questions regarding the airdrops. The Grizzly.Fi community received the most tokens (11.17m), and it is worth noting that members of the core team are also co-founders of Grizzly.Fi. This overlap may be a cause for concern, as the majority of MON circulating supply is from airdrops and the team's overall MON allocation is obscured by this airdrop strategy.
 
@@ -213,6 +213,7 @@ TVL and outstanding DCHF declined after the initial release in September of 2022
 
 [Source query](https://dune.com/queries/2297708/3764348)
 
+DCHF has traded above its CHF peg for most of its history and currently has a substantial premium of ~1.04:1. This is not entirely surprising, as there are no readily accessible CHF tokens to arb against, and the Liquity mechanics allow for a fairly wide deviation above the peg. Due to the 110% MCR, an upward depeg >1.1 would create an instant arb opportunity for a user to borrow the max amount and sell for a profit. Liquity describes this as the [price ceiling](https://www.liquity.org/blog/on-price-stability-of-liquity). Historically, LUSD has also traded above peg because of its conservative collateral choice (even when trading above peg, arbs may choose not to step in) and the system's accomodative soft peg range. An upward depeg is less worrisome for users, but may raise questions about a stablecoin's utility. 
 
 ## Risk Vectors
 
