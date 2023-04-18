@@ -90,12 +90,7 @@ While officially capped at 33M, more TNGBL could theoretically be minted. An eva
 * **Mint Function** - The contract may contain additional issuance functions, which can generate more tokens.
 * **Hidden Owner** - The token has a hidden owner address. Meaning that developers can potentially still manipulate the contract even if ownership has been abandoned.
 
-
-
-<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image2.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image2.png "image_tooltip")
+![Polyscan-Erc20-sol-file](https://github.com/Lavi54/protocol-research-review/blob/1df338393309656066ae5438633ead36570d1477/articles/TangibleDAO/images/polyscan-tangibleerc20-sol-file-highlighted.png)
 
 
 (Source: [TangibleERC20.sol](https://polygonscan.com/token/0x05d71db24f436e40d4bcb54724dc458eb641c2f1#code))
@@ -156,13 +151,7 @@ In conclusion, the redemption of USDR is limited to the amount of DAI in its tre
 
 As mentioned above, USDR is backed by different types of collateral. There are currently five categories, each with a flexible share. According to their [docs](https://docs.tangible.store/real-usd/backing), the collateral structure is targeted to look as shown in the image.
 
-
-
-<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image3.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image3.png "image_tooltip")
-
+![usdr-collatera-structure](https://github.com/Lavi54/protocol-research-review/blob/1df338393309656066ae5438633ead36570d1477/articles/TangibleDAO/images/tangible-docs-collateral-backing.png)
 
 (source: [TangibleDAO documentation](https://docs.tangible.store/real-usd/backing))
 
@@ -170,12 +159,7 @@ The planned collateral allocation generally falls within the projected share ran
 
 The image below displays the current collateral structure. The share of real estate is only 38.6%. This section requires more growth to achieve 50-80%. The TNGBL’s share on the other hand is over 18%. A difference of plus 8% from the promised allocation. This is due to TNGBL's recent price appreciation, according to the team.
 
-
-
-<p id="gdcalert4" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image4.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert5">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image4.png "image_tooltip")
+![tangible-website-collateral-ratio](https://github.com/Lavi54/protocol-research-review/blob/1df338393309656066ae5438633ead36570d1477/articles/TangibleDAO/images/tangible-website-collateral-ratio.png)
 
 
 (source: [Tangible Website - USDR](https://www.tangible.store/realusd))
@@ -212,12 +196,7 @@ In summary, Tangible has to work with value estimates for its collateral. And th
 Tangible provides a list of all 14 [properties](https://www.tangible.store/realusd/properties) backing USDR. Let’s look at the example of the apartment in [Gillingham](https://www.google.com/maps/place/X1+Chatham+Waters/@51.3995588,0.5448852,948m/data=!3m1!1e3!4m10!1m2!2m1!1slocation+Location+S1-08+Chatham+Waters,+South+House,+Gillingham+Gate+Rd,+Gillingham+ME4+4RS,+UK!3m6!1s0x47d8cd46e69990fd:0xaea3b218eca0d54c!8m2!3d51.3982314!4d0.5502304!15sCl9sb2NhdGlvbiBMb2NhdGlvbiBTMS0wOCBDaGF0aGFtIFdhdGVycywgU291dGggSG91c2UsIEdpbGxpbmdoYW0gR2F0ZSBSZCwgR2lsbGluZ2hhbSBNRTQgNFJTLCBVS1pdIltsb2NhdGlvbiBsb2NhdGlvbiBzMSAwOCBjaGF0aGFtIHdhdGVycyBzb3V0aCBob3VzZSBnaWxsaW5naGFtIGdhdGUgcmQgZ2lsbGluZ2hhbSBtZTQgNHJzIHVrkgESYXBhcnRtZW50X2J1aWxkaW5nmgEjQ2haRFNVaE5NRzluUzBWSlEwRm5TVU10TlRsaFprVm5FQUXgAQA!16s%2Fg%2F11g0gfrrn5?authuser=0) (see the image below). This is one of the properties backing USDR. All relevant documents can be accessed via a [Dropbox](https://www.dropbox.com/sh/cgzx9g4xk2av72s/AAD4IxvMie6z0n5bVP-tgEVWa?dl=0) file share.
 
 
-
-<p id="gdcalert5" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image5.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert6">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image5.png "image_tooltip")
-
+![tangible-website-appartment](https://github.com/Lavi54/protocol-research-review/blob/1df338393309656066ae5438633ead36570d1477/articles/TangibleDAO/images/tangible-website-re-appartment.png)
 
 (Source: [Tangible Website](https://www.tangible.store/product/0x29613FbD3e695a669C647597CEFd60bA255cc1F8?tokenId=340282366920938463463374607431768211474))
 
@@ -254,16 +233,10 @@ The audit did not find any major bugs or high-severity issues. In total 19 issue
 1. **Administrator** **Configurations** - Many contracts depend on configurations from an administrator. For example, when it comes to funding allocation (e.g. bond program, affiliate, and incentive features) and direct state manipulation. In other words, the protocol depends on human interaction with its contracts, and there is no smart contract with an implemented business logic.
 2. **Decimal Architecture** - The contracts do not have a single point of decimals normalization mechanism. One example from the audit is highlighted below:
 
-    
+![cyberscope-audit-report](https://github.com/Lavi54/protocol-research-review/blob/1df338393309656066ae5438633ead36570d1477/articles/TangibleDAO/images/cyberscope-audit-report-p13.png)
 
-<p id="gdcalert6" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image6.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert7">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+(source: [CyberScope audit](https://github.com/cyberscope-io/audits/blob/main/tngbl/audit.pdf))
 
-
-![alt_text](images/image6.png "image_tooltip")
-
-
-
-    (source: [CyberScope audit](https://github.com/cyberscope-io/audits/blob/main/tngbl/audit.pdf))
 
 3. **Random Architecture of Contracts Roles -** Every contract contains its own access layer. Several roles were used, for example, BURNER, MINTER, CONTROLLER, TRACKER, ROUTER_POLICY, etc.
 
@@ -339,12 +312,7 @@ Since its inception, USDR has been relatively stable. The only mentionable depeg
 
 However, with regard to USDR’s stability, the price has been mostly around the one Dollar mark. It also recovered quickly from the depeg in mid of March (see image below).
 
-
-
-<p id="gdcalert7" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image7.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert8">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image7.png "image_tooltip")
+![coingecko-usdr-price](https://github.com/Lavi54/protocol-research-review/blob/1df338393309656066ae5438633ead36570d1477/articles/TangibleDAO/images/coingecko-usdr-price-chart.png)
 
 
 (Source: [Coingecko](https://www.coingecko.com/en/coins/real-usd))
@@ -370,23 +338,14 @@ In order to be compatible with Multichain’s router as a “bridge asset”, wU
 Moreover, there is a big difference between wUSDR and USDR. The wrapped version of the token does not rebase. Instead, it increases in price when the rental distribution occurs. Hence, there is a difference between the price of wUSDR and USDR (see the image below).
 
 
-
-<p id="gdcalert8" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image8.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert9">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image8.png "image_tooltip")
+![wrapped-usdr](https://github.com/Lavi54/protocol-research-review/blob/1df338393309656066ae5438633ead36570d1477/articles/TangibleDAO/images/tangible-website-wrap-usdr.png)
 
 
 (Source: Tangible [website](https://www.tangible.store/realusd?action=Wrap))
 
 With a constantly increasing price, these liquidity pools are not “pure stable pools". They can not be considered to meaningfully contribute to USDRs pegging mechanism. On the contrary, adding more complexity to a project that is already a handful. It’s also worth pointing out that there is a high concentration in terms of wUSDR token holders. On all chains outside of Polygon, almost all wUSDR tokens are deposited into the above-mentioned DEXs (see image below).
 
-
-
-<p id="gdcalert9" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image9.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert10">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image9.png "image_tooltip")
+![wusdr-cross-chain-implementation](https://github.com/Lavi54/protocol-research-review/blob/1df338393309656066ae5438633ead36570d1477/articles/TangibleDAO/images/usdr-crosschain-implementation.png)
 
 
 In conclusion, Tangible has built several mechanisms that support the peg of USDR. And they conceptualized a promising method (pDAI), to assure that USDR holders can always redeem USDR for something of equal value. However, most measures are still new, and not battle-tested, and some are fully centralized (e.g. real estate liquidations). Especially in the case of a bank run, it's questionable whether USDR can hold its peg. Moreover, the project introduced multiple dimensions of additional complexity and potential weaknesses through its wUSDR token and Multichain integration. These factors do not contribute to the safety of USDR’s peg stability. Nonetheless, USDR has so far proven to be quite stable and survived its first depeg well.
