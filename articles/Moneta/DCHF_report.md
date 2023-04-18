@@ -260,6 +260,7 @@ Moreover, the AdminContract has the power to upgrade several contracts without c
 
 **GLOBAL-02 | Lack of Storage Gap (resolved)**: Several contracts were upgradable including `AdminContract`, `StabilityPoolManager`, `TroveManager` etc. This means there needs to be a storage gap to allow the addition of new state without compromising existing deployments. In response, the Certik report indicates the team has modified the design and opted for non-upgradeable contracts. While non-upgradeable contracts prevent future changes that could compromise the protocol, there are still options for the system to make updates. The Protocol Owner multisig could still addNewCollateral through the AdminContract ([source](https://etherscan.io/address/0x2748C55219DCa1D9D3c3a57505e99BB04e42F254#code)) or they could make updates to parameters through the DFrancParameters contract ([source](https://etherscan.io/address/0x6F9990B242873d7396511f2630412A3fcEcacc42#code)). 
 
+**DPK-01 | Lack of Input Validation (partially resolved)**: A minor contract risk exists in the `dfrancParameters` contract setMCR() and setCCR() functions that can potentially be set such that a user's MCR is greater than the CCR, which would essentially prevent recovery mode from activating ([source](https://skynet.certik.com/projects/defi-franc)). This has not been changed in the deployed code.
 
 **Audit Recommendations**
 
@@ -334,11 +335,11 @@ The DeFi franc protocol currently has 6,694,401 DCHF tokens minted, valued at $1
 
 [Source query](https://dune.com/queries/2322141)
 
-However, a minor contract risk exists due to the setDCHFGasCompensation() function potentially resulting in insufficient DCHF tokens to burn from the gas pool, which could prevent redemptions ([source](https://skynet.certik.com/projects/defi-franc)). This has been partially resolved, but still could result in MCR (minimum collateral ratio) > CCR (collateral coverage ratio).
+To control the supply of DCHF, the protocol utilizes borrow and redemption fees. A 110% collateral ratio provides a price floor and ceiling, and arbitrageurs are incentivized to maintain price stability. The protocol does not rely on an external AMM for supply expansion or contraction, and burning/withdrawal amounts are executed through onchain peg mechanisms. 
 
-To control the supply of DCHF, the protocol utilizes borrow and redemption fees. A 110% collateral ratio provides a price floor and ceiling, and arbitrageurs are incentivized to maintain price stability. However, a depeg risk exists if demand for DCHF is insufficient and it trades above 1 CHF for a prolonged period. The protocol does not rely on an external AMM for supply expansion or contraction, and burning/withdrawal amounts are approved through on-chain peg mechanisms. 
+As a fork of Liquity- a resilient and battle tested stablecoin, the risk of insolvency is currently low. Liquity does, however, have a history of prolonged depeg >$1. By maximizing decentralization, it sacrifices scalability and tends to have a substantially variant soft peg compared to centralized stablecoins. 
 
-As a fork of Liquity- a resilient and battle tested stablecoin, the risk of depeg is currently low. The collateral selection (ETH/WBTC) is also reasonably conservative. It is our opinion that the greatest risk of future depeg is the possibility of governance mismangement. If low quality collateral types are ever added to the protocol (e.g. the protocol's native governance token MON, or complex derivative assets), failure or manipulation of underlying collateral can lead to system insolvency and therefore a depeg. 
+The collateral selection (ETH/WBTC) Moneta has opted for is likewise reasonably conservative. It is our opinion that the greatest risk of future depeg is the possibility of governance mismangement. If low quality collateral types are ever added to the protocol (e.g. the protocol's native governance token MON, or complex derivative assets), failure or manipulation of underlying collateral can lead to system insolvency and therefore a depeg. 
 
 
 ## LlamaRisk Gauge Criteria
@@ -351,7 +352,7 @@ The risk of a single entity rug-pulling users has been reduced by transferring o
 
 **2. If the team vanishes, can the project continue?**
 
-The protocol can continue operating normally in the absence of the team, but there would be no way to update the system or respond to an emergency. With the DAO being recently launched, there is still no direct way for tokenholder to directly assert control over the protocol. 
+The protocol can continue operating normally in the absence of the team, but there would be no way to update the system or respond to an emergency. Although the DAO has been recently launched, there is still no direct way for tokenholders to directly assert control over the protocol. 
 
 ### Economic Factors
 
@@ -367,7 +368,7 @@ Yes, there’s roughly $17m in ETH and wBTC collateral supporting $7.6m in DCHF 
 
 **1. Do audits reveal any concerning signs?**
 
-The audits did not identify any critical issues, but flagged a few major concerns that have been partially or fully addressed. The primary concern was the overreaching powers of the AdminContract, which has been transferred to multi-sig signers. It should also be noted that DCHF is a fork of Vespa Finance and Liquity. Although, the DCHF protocol has switched to non-upgradeable contracts, it does have a path to update the system through the AdminContract ([source](https://etherscan.io/address/0x2748C55219DCa1D9D3c3a57505e99BB04e42F254#code)) or make parameter updates through the DFrancParameters contract ([source](https://etherscan.io/address/0x6F9990B242873d7396511f2630412A3fcEcacc42#code)). 
+The audits did not identify any critical issues, but flagged a few major concerns that have been partially or fully addressed. The primary concern was the overreaching powers of the AdminContract, which has been transferred to multi-sig signers. Although, the DCHF protocol uses non-upgradeable contracts, it does have a path to update the system through the AdminContract ([source](https://etherscan.io/address/0x2748C55219DCa1D9D3c3a57505e99BB04e42F254#code)) or make parameter updates through the DFrancParameters contract ([source](https://etherscan.io/address/0x6F9990B242873d7396511f2630412A3fcEcacc42#code)). 
 
 # Risk Team Recommendation
 
