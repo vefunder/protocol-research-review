@@ -43,8 +43,7 @@ In case of redemption, Tangible collaborates with logistic firms to ensure the s
 In summary, Tangible allows the conversion of real-world assets into TNFTs, which can be redeemed for the real physical product. Their [docs](https://docs.tangible.store/) provide an overview of the process to explain how it works (see image below).
 
 
-
-
+![marketplace-process](https://github.com/Lavi54/protocol-research-review/blob/bcd1e3e47bc3345a8418e237dd48ace67a7f768e/articles/TangibleDAO/images/tangible-docs-marketplace-process.png)
 
 
 (Source: [Tangible Docs](https://docs.tangible.store/))
