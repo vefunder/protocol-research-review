@@ -6,4 +6,6 @@
 * Tx Explorer: https://dashboard.tenderly.co/explorer?utm_source=homepage
 * Smart Contract Reader: https://www.contractreader.io/
 * Preliminary Token Security Checker: https://gopluslabs.io/token-security/
-
+* MEV data: https://eigenphi.io/
+* Tx Decoder: https://ethtx.info/
+* Curve pool data: https://llama.airforce/#/curve/pools
