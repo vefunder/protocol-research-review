@@ -101,21 +101,17 @@ At the time of writing, there are only 21 TNGBL token holders on [Polygon](https
 
 ## Real USD (USDR)
 
-USDR is a natively **rebasing**, **yield-bearing**, **over-collateralized stablecoin**, **pegged to the US dollar**. [USDR](https://polygonscan.com/token/0xb5dfabd7ff7f83bab83995e72a52b97abb7bcf63?a=0xa138341185a9d0429b0021a11fb717b225e13e1f#readContract) is issued on Polygon where it currently counts 142 holders. The stablecoin is backed by ERC-20s, LP tokens, and tokenized real estate. USDR is issued by Tangible, and partially backed by tokenized real estate (RE) TNFTs. Using real estate TNFTs as collateral enables two novel features:
-
-
+USDR is a natively **rebasing**, **yield-bearing**, **over-collateralized stablecoin**, **pegged to the US dollar**. [USDR](https://polygonscan.com/token/0xb5dfabd7ff7f83bab83995e72a52b97abb7bcf63?a=0xa138341185a9d0429b0021a11fb717b225e13e1f#readContract) is issued on Polygon where it currently counts 179 holders. The stablecoin, issued by Tangible, is backed by a combination of ERC-20s, LP tokens, and tokenized real estate TNFTs. Using real estate TNFTs as collateral enables two novel features:
 
 1. **Intrinsic Yield** - According to Tangible, their properties yield 8-10% annual interest from rentals. This yield is paid out to USDR holders in the form of daily rebases (i.e. the amount of USDR in a wallet automatically increases). To boost yield for early adopters, Tangible is currently subsidizing USDR via a daily airdrop of TNGBL to USDR holders, thus increasing the yield by ~10%.
-2. **Exposure to a novel asset class** - Stablecoins are usually backed by either highly volatile crypto assets or other stablecoins. Real estate on the other hand has a long [track record](https://tradingeconomics.com/united-kingdom/average-house-prices#:~:text=Average%20House%20Prices%20in%20the%20United%20Kingdom%20averaged%20128122.75%20GBP,United%20Kingdom%20Average%20House%20Prices.) of relatively low volatility and continuous appreciation in value. In other words, the value of the collateral backing USDR should steadily increase.
+2. **Exposure to a novel asset class** - Stablecoins are usually backed by either highly volatile crypto assets or other stablecoins. Real estate, on the other hand, has a long [track record](https://tradingeconomics.com/united-kingdom/average-house-prices#:~:text=Average%20House%20Prices%20in%20the%20United%20Kingdom%20averaged%20128122.75%20GBP,United%20Kingdom%20Average%20House%20Prices.) of relatively low volatility and continuous appreciation in value. In other words, the value of the collateral backing USDR should steadily increase.
 
-The drawback of these TNFTs is the general illiquidity that comes with the real estate market. Unlike currencies or securities, properties cannot be sold within minutes. Especially when tokenized on-chain. But real estate can still depreciate in value. Therefore, a good liquidation mechanism and measures to keep USDR over-collateralized are needed. Tangible has a few methods for keeping the collateralization ratio (CR) over 100%. These are:
-
-
+The drawback of these TNFTs is the relative illiquidity that comes with the real estate market. Unlike currencies or securities, properties cannot be sold within minutes. Additionally, real estate can still depreciate in value. Therefore, a good liquidation mechanism is required, along with precautions to keep USDR over-collateralized. Tangible has a few methods for keeping the collateralization ratio (CR) over 100%:
 
 * In case the CR of USDR falls below 100%, half of the rental yield payments are retained by the USDR collateral treasury. The daily rebase is consequently reduced by 50%. In other words, USDR holders earn less interest, until the CR is back to 100%.
-* The treasury that is backing USDR always holds other more liquid assets for fast liquidations (e.g. DAI, protocol-owned liquidity, and TNGBL tokens).
-* In case all DAI and other reserves are emptied, real estate TNFTs are liquidated. In such a scenario, users will receive[ pDAI](https://polygonscan.com/token/0x263fa8f30351472A1363902318098bEfAD3B440e) instead of real DAI. pDAI serves as an IOU token that represents a claim to real DAI, once the liquidation is executed.
-* A benefit of real-estate-based yield is that it’s not highly correlated with the asset’s price volatility. Rents don’t change in the short to mid-term. Even if the properties’ value decreases (and thus the CR), the monthly income remains.
+* The treasury that is backing USDR always holds a diversified portfolio of liquid assets for fast liquidations (e.g. DAI, protocol-owned liquidity, and TNGBL tokens).
+* In case all DAI and other reserves are emptied, real estate TNFTs are liquidated. In such a scenario, users will receive [pDAI](https://polygonscan.com/token/0x263fa8f30351472A1363902318098bEfAD3B440e) instead of real DAI. pDAI serves as an IOU token that represents a claim to real DAI, once the liquidation is executed.
+* A benefit of RE-based yield is that it’s not highly correlated with the asset’s price volatility. Rents don’t change in the short to mid-term, even if the properties’ value decreases.
 
 
 ## **Minting Real USD**
