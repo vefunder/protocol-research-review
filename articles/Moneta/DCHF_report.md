@@ -64,7 +64,7 @@ There are several parameters, adjustable through the [dfrancParameters](https://
 
 The protocol maintains its peg to the Swiss franc through redemption and borrow fees, and a stability pool. Borrow and redemption fees adjust algorithmically to regulate borrowing and redemption velocity, in what is calculated as the "baseRate". The baseRate increases when DCHF is redeemed, and decays over time according to a predefined `DECAY_FACTOR`, with a lower and upper bound of 0.5% to 5%.
 
-Higher redemption volumes imply DCHF is below peg. Therefore, borrow and redemption fees are increased to discourage borrowing and redemption of DCHF for ETH/wBTC. Both forces combine to push the peg towards 1 DCHF = 1 CHF ([source](https://docs.defifranc.com/in-depth/price-stability-and-redemptions)).
+Higher redemption volumes imply DCHF is below peg. Therefore, [borrow and redemption fees](https://docs.defifranc.com/in-depth/price-stability-and-redemptions) are increased to discourage borrowing and redemption of DCHF for ETH/wBTC. Both forces combine to push the peg towards 1 DCHF = 1 CHF.
 
 The baseRate is calculated as follows (from the Liquity whitepaper):
 
@@ -79,7 +79,6 @@ Here’s an example where 1 DCHF is trading at 0.95 CHF (below peg). Assuming 1,
 * Higher baseRate increases borrowing costs, limiting DCHF supply in the market and expected to push its value towards peg
 * Redemption fees, calculated as (baseRate + 0.5%) * ETH drawn, incentivize holding DCHF instead of redeeming, reducing excessive redemption
 * Increased demand for DCHF due to these mechanisms may increase its price towards the 1 CHF peg.
-[Source](https://docs.defifranc.com/in-depth/price-stability-and-redemptions)
 
 
 #### Stability Pool
@@ -191,7 +190,7 @@ Over 90% of circulating DCHF is held in the WBTC/ETH Stability Pools and the Cur
 
 Source: [Etherscan](https://etherscan.io/token/0x045da4bFe02B320f4403674B3b7d121737727A36#balances)
 
-Currently, the DCHF token is traded on two major DEXes including Uniswap and Curve ([source](https://dune.com/queries/2297121), [source](https://www.coingecko.com/en/coins/defi-franc#markets)) and does not appear to be traded on any CEXes. The vast majority of liquidity resides in the Curve pool.
+Currently, the DCHF token is traded on two major DEXes including Uniswap and Curve and does not appear to be traded on any CEXes. The vast majority of liquidity resides in the Curve pool.
 
 Curve has historically led in DEX volume, although Uniswap has gained ground in recent months. These two charts show daily sell and buy volume, respectively:
 
@@ -259,7 +258,7 @@ Moreover, the AdminContract has the power to upgrade several contracts without c
 
 **MOT-01 | Initial Token Distribution (mitigated)**: Another major issue within the centralization / privilege risk category involves how MON tokens were sent to a `_treasurySig` address when deploying the contract. This implies that MON tokens can be distributed without community consensus. To mitigate this risk, the team has documented their [tokenomics](https://docs.defifranc.com/tokenomics/moneta-tokenomics) and how MON tokens are distributed. 
 
-**GLOBAL-02 | Lack of Storage Gap (resolved)**: Several contracts were upgradable including `AdminContract`, `StabilityPoolManager`, `TroveManager` etc. This means there needs to be a storage gap to allow the addition of new state without compromising existing deployments. In response, the Certik report indicates the team has modified the design and opted for non-upgradeable contracts. While non-upgradeable contracts prevent future changes that could compromise the protocol, there are still options for the system to make updates. The Protocol Owner multisig could still addNewCollateral through the AdminContract ([source](https://etherscan.io/address/0x2748C55219DCa1D9D3c3a57505e99BB04e42F254#code)) or they could make updates to parameters through the DFrancParameters contract ([source](https://etherscan.io/address/0x6F9990B242873d7396511f2630412A3fcEcacc42#code)). 
+**GLOBAL-02 | Lack of Storage Gap (resolved)**: Several contracts were upgradable including `AdminContract`, `StabilityPoolManager`, `TroveManager` etc. This means there needs to be a storage gap to allow the addition of new state without compromising existing deployments. In response, the Certik report indicates the team has modified the design and opted for non-upgradeable contracts. While non-upgradeable contracts prevent future changes that could compromise the protocol, there are still options for the system to make updates. The Protocol Owner multisig could still addNewCollateral through the [AdminContract](https://etherscan.io/address/0x2748C55219DCa1D9D3c3a57505e99BB04e42F254#code)) or they could make updates to parameters through the [DFrancParameters](https://etherscan.io/address/0x6F9990B242873d7396511f2630412A3fcEcacc42#code) contract. 
 
 **DPK-01 | Lack of Input Validation (partially resolved)**: A minor contract risk exists in the `dfrancParameters` contract setMCR() and setCCR() functions that can potentially be set such that a user's MCR is greater than the CCR, which would essentially prevent recovery mode from activating ([source](https://skynet.certik.com/projects/defi-franc)). This has not been changed in the deployed code.
 
@@ -372,7 +371,7 @@ Yes, there’s roughly $17m in ETH and wBTC collateral supporting $7.6m in DCHF 
 
 **1. Do audits reveal any concerning signs?**
 
-The audits did not identify any critical issues, but flagged a few major concerns that have been partially or fully addressed. The primary concern was the overreaching powers of the AdminContract, which has been transferred to multi-sig signers. Although, the DCHF protocol uses non-upgradeable contracts, it does have a path to update the system through the AdminContract ([source](https://etherscan.io/address/0x2748C55219DCa1D9D3c3a57505e99BB04e42F254#code)) or make parameter updates through the DFrancParameters contract ([source](https://etherscan.io/address/0x6F9990B242873d7396511f2630412A3fcEcacc42#code)). 
+The audits did not identify any critical issues, but flagged a few major concerns that have been partially or fully addressed. The primary concern was the overreaching powers of the AdminContract, which has been transferred to multi-sig signers. Although, the DCHF protocol uses non-upgradeable contracts, it does have a path to update the system through the [AdminContract](https://etherscan.io/address/0x2748C55219DCa1D9D3c3a57505e99BB04e42F254#code)) or make parameter updates through the [DFrancParameters](https://etherscan.io/address/0x6F9990B242873d7396511f2630412A3fcEcacc42#code) contract. 
 
 # Risk Team Recommendation
 
