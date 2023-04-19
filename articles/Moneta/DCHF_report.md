@@ -338,6 +338,10 @@ The DeFi franc protocol currently has 6,694,401 DCHF tokens minted, valued at $1
 
 To control the supply of DCHF, the protocol utilizes borrow and redemption fees. A 110% collateral ratio provides a price floor and ceiling, and arbitrageurs are incentivized to maintain price stability. The protocol does not rely on an external AMM for supply expansion or contraction, and burning/withdrawal amounts are executed through onchain peg mechanisms. 
 
+However, users should keep in mind external factors to DeFi, such as currency exchange rate risk. If the Swiss Franc (CHF) loses value against the USD, the value of DCHF would decrease in USD terms given it’s soft peg to the CHF.
+
+For example, if the exchange rate went from 1 CHF : 1.12 USD to 1 CHF : 1.00 USD, the value of DCHF would decrease by approximately 10% in USD terms. This might encourage users to redeem their DCHF. To maintain the peg, the protocol would have to increase the redemption fee on DCHF. This would encourage investors to keep their DCHF instead of redeeming it.
+
 As a fork of Liquity- a resilient and battle tested stablecoin, the risk of insolvency is currently low. Liquity does, however, have a history of prolonged depeg >$1. By maximizing decentralization, it sacrifices scalability and tends to have a substantially variant soft peg compared to centralized stablecoins. 
 
 The collateral selection (ETH/WBTC) Moneta has opted for is likewise reasonably conservative. It is our opinion that the greatest risk of future depeg is the possibility of governance mismangement. If low quality collateral types are ever added to the protocol (e.g. the protocol's native governance token MON, or complex derivative assets), failure or manipulation of underlying collateral can lead to system insolvency and therefore a depeg. 
