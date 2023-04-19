@@ -335,7 +335,9 @@ The DeFi franc protocol currently has 6,694,401 DCHF tokens minted, valued at $1
 
 [Source query](https://dune.com/queries/2322141)
 
-To control the supply of DCHF, the protocol utilizes borrow and redemption fees. A 110% collateral ratio provides a price floor and ceiling, and arbitrageurs are incentivized to maintain price stability. The protocol does not rely on an external AMM for supply expansion or contraction, and burning/withdrawal amounts are executed through onchain peg mechanisms. 
+To control the supply of DCHF, the protocol utilizes borrow and redemption fees. A 110% collateral ratio provides a price floor and ceiling, and arbitrageurs are incentivized to maintain price stability. The protocol does not rely on an external AMM for supply expansion or contraction, and burning/withdrawal amounts are executed through onchain peg mechanisms.
+
+Users (borrowers) should keep in mind external factors, such as currency exchange rate risk in TradFi markets. Considering that CHF looses value against USD, there is a lag between DeFi reflecting this price change. In a scenario where DCHF depegs vs CHF, the assumptions of a repeg are undermined by borrowers having an opportunity to pay back their loans for a cheaper rate, given that borrowers swapped to USD after borrowing. In the other scenario where DCHF depegs above 1 CHF (but under <1.10 CHF), it looks different. Since in that case there is no way to directly arbitrage DCHF and CHF to balance the peg, the only dynamic that could lead to DCHF depegging back to 1 is demand for supplying DCHF to DeFi.
 
 As a fork of Liquity- a resilient and battle tested stablecoin, the risk of insolvency is currently low. Liquity does, however, have a history of prolonged depeg >$1. By maximizing decentralization, it sacrifices scalability and tends to have a substantially variant soft peg compared to centralized stablecoins. 
 
