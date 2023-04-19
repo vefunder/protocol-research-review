@@ -1,13 +1,13 @@
 
-# Risk Assessment: USDR by Tangible DAO
+# Risk Assessment: Tangible (USDR)
 
-A deep dive into a pioneering real-estate-backed stablecoin.
-
-
-# Useful Links
+A deep dive into a pioneering real-estate-backed stablecoin on Polygon.
 
 
-* Linktr.ee [TangibleDAO](https://linktr.ee/tangible.store) | [Website](https://www.tangible.store/) | [Documentation](https://docs.tangible.store/) | [Twitter](https://twitter.com/tangibleDAO)
+### Useful Links
+
+
+* [Linktr.ee](https://linktr.ee/tangible.store) | [Website](https://www.tangible.store/) | [Documentation](https://docs.tangible.store/) | [Twitter](https://twitter.com/tangibleDAO)
 * USDR V2 [Whitepaper](https://2424721250-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2Fs3Wb3QaMBqltgcDPRi6m%2Fuploads%2FeFpJR8VXWFhGtYO7AJ1w%2FReal%20USD%20Whitepaper%20(USDR%20v2).pdf?alt=media&token=34b884b6-b44c-4bec-87a9-9f550318da76)
 * Tangible [Docs](https://docs.tangible.store/)
 * Coingecko [TNGBL](https://www.coingecko.com/en/coins/tangible) / [USDR](https://www.coingecko.com/en/coins/real-usd)
@@ -17,9 +17,9 @@ A deep dive into a pioneering real-estate-backed stablecoin.
 * Cyberscope [Audit](https://github.com/cyberscope-io/audits/blob/main/tngbl/audit.pdf) + [Blog post](https://www.cyberscope.io/blog/cyberscope-and-tangible-store-audit-case-study)
 
 
-# A TL;DR of our Findings
+## A TL;DR of our Findings
 
-This report will investigate risks associated with the USDR stablecoin issued by Tangible DAO. The team submitted a [proposal](https://gov.curve.fi/t/proposal-to-add-usdr-am3crv-to-the-curve-gauge-controller-polygon/8981) in March 2023 to add CRV incentives to the [USDR/3CRV](https://curve.fi/#/polygon/pools/factory-v2-339/deposit) pool on Polygon. The proposal successfully passed a [DAO vote](https://dao.curve.fi/vote/ownership/305) on March 30, 2023.
+This report will investigate risks associated with the USDR stablecoin issued by Tangible. The team submitted a [proposal](https://gov.curve.fi/t/proposal-to-add-usdr-am3crv-to-the-curve-gauge-controller-polygon/8981) in March 2023 to add CRV incentives to the [USDR/3CRV](https://curve.fi/#/polygon/pools/factory-v2-339/deposit) pool on Polygon. The proposal successfully passed a [DAO vote](https://dao.curve.fi/vote/ownership/305) on March 30, 2023.
 
 * Tangible is building an on-ramp and trading platform for real-world assets (RWAs). Physical items such as gold bars, watches, or real estate (RE) are tokenized (i.e. minted) as tangible non-fungible tokens (TNFTs).
 * The protocol provides a marketplace to issue and trade TNFTs. The legal entity behind the project (Tangible Labs) facilitates the real-world purchase and custody of these goods. It collaborates with several service providers (vendors, custody) across different jurisdictions. However, most of its business is centered around the UK.
@@ -33,15 +33,15 @@ This report will investigate risks associated with the USDR stablecoin issued by
 The project is very ambitious and multi-faceted. It combines elements of DeFi and RWA tokenization to create a novel solution. However, it appears to be quite complex on a technical level, introducing many centralized components and potential single points of failure. In conclusion, the project would not count as “battle-tested” and it is fully dependent on the founding team. Governance is not live yet. Decision-making, custody, and development are still centralized and thus rather risky.
 
 
-# Introduction - TangibleDAO
+## Introduction - Tangible
 
 Tangible is a [marketplace](https://www.tangible.store/) for tokenized assets, a stablecoin issuer, and an on/off-ramp service for real-world assets (RWAs). Tangible’s marketplace enables the primary purchase and secondary trading of tokenized physical goods, such as wine, real estate, watches, or gold bars. When purchasing a good through Tangible, the buyer receives the product in the form of a TNFT - a tangible non-fungible token - which is minted upon purchase. These TNFTs represent ownership of the physical item.
 
-The real item is acquired through one of Tangible's partner vendors, and stored in one of their storage facilities. Each product type requires individual storage facilities. A storage fee is charged to the owner of the TNFT. For example, the fee for storing gold bars is 1% per year.
+The physical item is acquired through one of Tangible's partner vendors, and stored in one of their storage facilities. Each product type requires individual storage facilities. A storage fee is charged to the owner of the TNFT. For example, the fee for storing gold bars is 1% per year.
 
 In case of redemption, Tangible collaborates with logistic firms to ensure the safe shipping of physical goods. Shipping fees must be paid by the person redeeming the TNFT and are calculated on an individual basis.
 
-In summary, Tangible allows the conversion of real-world assets into TNFTs, which can be redeemed for the real physical product. Their [docs](https://docs.tangible.store/) provide an overview of the process to explain how it works (see image below).
+In summary, Tangible allows the conversion of real-world assets into TNFTs, which can be redeemed for the physical product. Their [docs](https://docs.tangible.store/) provide an overview of the process to explain how it works (see image below).
 
 
 ![marketplace-process](https://github.com/Lavi54/protocol-research-review/blob/bcd1e3e47bc3345a8418e237dd48ace67a7f768e/articles/TangibleDAO/images/tangible-docs-marketplace-process.png)
@@ -50,42 +50,39 @@ In summary, Tangible allows the conversion of real-world assets into TNFTs, whic
 (Source: [Tangible Docs](https://docs.tangible.store/))
 
 
-
 1. A user buys an item on Tangible’s marketplace. Smart contracts process the item price and storage fee where relevant.
 2. The TNFT is minted and sent to the user’s wallet.
 3. Concurrently, Tangible completes the purchase of the physical item through its partner supplier.
 4. The purchased item is shipped to a Tangible Vault for storage.
 
-In addition, besides minting new TNFTs through the primary store, Tangible also built a marketplace for secondary trading. Thus facilitating the buying and selling of existing TNFTs. In this scenario, the buyer sends USDR and in return, the TNFT is transferred to their wallet. Tangible applies a 2.5% marketplace fee per trade. 33.3% of the fee is used to buy and burn TNGBL tokens, and the remaining 66.6% is distributed to TNGBL stakers (3,3+ NFT holders).
+In addition to minting new TNFTs through the primary store, Tangible also built a secondary marketplace that facilitates the trading of existing TNFTs. In this scenario, the buyer sends USDR and in return, the TNFT is transferred to their wallet. Tangible applies a 2.5% marketplace fee per trade. 33.3% of the fee is used to buy and burn TNGBL tokens, and the remaining 66.6% is distributed to TNGBL stakers (3,3+ NFT holders).
 
 However, secondary market sales can be an issue for sellers who need liquidity immediately. The current system requires users to wait until a buyer is willing to pay for the goods. The team is working on a solution that should enable faster liquidations (not live yet).
 
 
-## Product Categories
+### Product Categories
 
-Four tokenized product [categories](https://docs.tangible.store/product-categories) are live on the platform. These are Gold, Wine, Watches, and Real Estate. For each category, Tangible is working with international suppliers.
+Four tokenized product [categories](https://docs.tangible.store/product-categories) are live on the platform. These are Gold, Wine, Watches, and Real Estate. For each category, Tangible is working with the following international suppliers:
 
 For the trading and storing of gold bars, Tangible uses the service of [PX Precinox](https://pxgroup.com/en/companies/px-precinox/) in Switzerland. For wines, they collaborate with London-based [Bordeaux Index](https://bordeauxindex.com/), and for watches, they work with UK-based [BQ Watches](https://www.bqwatches.com/).
 
-In the case of real estate, Tangible creates local Special Purpose Vehicles (SPV). These are legal entities established for every property. For instance, each UK-based property has its own [UK-SPV](https://find-and-update.company-information.service.gov.uk/advanced-search/get-results?companyNameIncludes=TNFT&companyNameExcludes=&registeredOfficeAddress=&incorporationFromDay=&incorporationFromMonth=&incorporationFromYear=&incorporationToDay=&incorporationToMonth=&incorporationToYear=&sicCodes=&dissolvedFromDay=&dissolvedFromMonth=&dissolvedFromYear=&dissolvedToDay=&dissolvedToMonth=&dissolvedToYear=). This is done because real estate cannot be directly tokenized. However, legal entities can. Real estate TNFT holders get beneficial ownership over the SPV, which holds beneficial ownership over the property. Legal ownership of both, however, remains with Tangible’s legal entity (i.e. [BTS TNFT Limited](https://find-and-update.company-information.service.gov.uk/company/13591056), incorporated in the UK, Tangible also has an entity registered in the British Virgin Islands with the same name).
+In the case of real estate, Tangible creates local Special Purpose Vehicles (SPV). These are legal entities established for every property. SPVs manage the property by sourcing tenants, collecting rent, or managing repairs. All properties are leased out and rental yield is paid to the TNFT holder(s) in USDC. 
 
-In addition, SPVs also manage the property. For example, sourcing tenants, collecting rent, or managing repairs. All properties are leased out and rental yield is paid to the TNFT holder(s) in USDC.
-
-
-## Fractional TNFTs
-
-Tangible Fractions are smaller fractions of a whole TNFT. This allows large ticket items (e.g. real estate) to be split into more affordable pieces. This way multiple owners can share the risks and rewards of an investment. To create fractionalized TNFTs, the complete TNFT is locked into a [smart contract vault](https://polygonscan.com/address/0x44100ed95c83ee1a669742dca58f9461fd8f9a78#code), that splits it into several Fractional TNFTs. The original TNFT can only be redeemed by collecting all the individual fractions.
+Each UK-based property has its own [UK-SPV](https://find-and-update.company-information.service.gov.uk/advanced-search/get-results?companyNameIncludes=TNFT&companyNameExcludes=&registeredOfficeAddress=&incorporationFromDay=&incorporationFromMonth=&incorporationFromYear=&incorporationToDay=&incorporationToMonth=&incorporationToYear=&sicCodes=&dissolvedFromDay=&dissolvedFromMonth=&dissolvedFromYear=&dissolvedToDay=&dissolvedToMonth=&dissolvedToYear=). This is done because real estate cannot be directly tokenized. However, legal entities can. Real estate TNFT holders get beneficial ownership over the SPV, which grants them beneficial ownership over the property. Legal ownership of both, however, remains with Tangible’s legal entity (i.e. [BTS TNFT Limited](https://find-and-update.company-information.service.gov.uk/company/13591056), incorporated in the UK. Tangible also has an entity registered in the British Virgin Islands with the same name).
 
 
-## TNGBL Token
+### Fractional TNFTs
+
+Tangible Fractions are smaller fractions of a whole TNFT. This allows large ticket items (e.g. real estate) to be split into more affordable pieces. This way multiple owners can share the risks and rewards of an investment. To create fractionalized TNFTs, the complete TNFT is locked into a [smart contract vault](https://polygonscan.com/address/0x44100ed95c83ee1a669742dca58f9461fd8f9a78#code) that splits it into several Fractional TNFTs. The original TNFT can only be redeemed by collecting all the individual fractions.
+
+
+### TNGBL Token
 
 Tangible’s token [$TNGBL](https://www.coingecko.com/en/coins/tangible) has three main functions. It serves as a reward token (to incentivize usage of the marketplace and subsidize USDR yield), it has a revenue-sharing mechanism (to incentivize lock-ups of TNGBL), and lastly, it functions as a backing for USDR (i.e. it can be used to mint USDR). It does not have any governing rights so far.
 
-The max supply of [TNGBL](https://polygonscan.com/address/0x49e6a20f1bbdfeec2a8222e052000bbb14ee6007) is capped at 33M. The initial [distribution](https://docs.tangible.store/tangible-token-tngbl) foresees a majority allocation to the DAO and the community (70.8%). The rest is mostly reserved for the team, investors, advisors, and Tangible Labs. Another 1.25% were sold in an [IDO](https://www.youtube.com/watch?v=yS4C7440fjw) in April 2022 via [PeakDeFi](https://launchpad.peakdefi.com/). However, there is no distribution schedule or any information provided on how the “DAO share” will enter circulation.
+The max supply of [TNGBL](https://polygonscan.com/address/0x49e6a20f1bbdfeec2a8222e052000bbb14ee6007) is capped at 33M. The initial [distribution](https://docs.tangible.store/tangible-token-tngbl) plan promises a majority allocation to the DAO and the community (70.8%). The rest is mostly reserved for the team, investors, advisors, and Tangible Labs. Another 1.25% were sold in an [IDO](https://www.youtube.com/watch?v=yS4C7440fjw) in April 2022 via [PeakDeFi](https://launchpad.peakdefi.com/). However, there is no distribution schedule or any information provided on how the “DAO share” will enter circulation.
 
 While officially capped at 33M, more TNGBL could theoretically be minted. An evaluation of the token contract via [GoPlusLabs](https://gopluslabs.io/token-security/137/0x49e6A20f1BBdfEeC2a8222E052000BbB14EE6007) reveals that:
-
-
 
 * **Change Balance** - The contract owner has the authority to modify the balance of tokens at other addresses, which may result in a loss of assets.
 * **Mint Function** - The contract may contain additional issuance functions, which can generate more tokens.
@@ -93,23 +90,18 @@ While officially capped at 33M, more TNGBL could theoretically be minted. An eva
 
 ![Polyscan-Erc20-sol-file](https://github.com/Lavi54/protocol-research-review/blob/1df338393309656066ae5438633ead36570d1477/articles/TangibleDAO/images/polyscan-tangibleerc20-sol-file-highlighted.png)
 
-
 (Source: [TangibleERC20.sol](https://polygonscan.com/token/0x05d71db24f436e40d4bcb54724dc458eb641c2f1#code))
 
-As mentioned, TNGBL holders can earn a share of the platform's revenue by locking up their tokens. The longer the lock-up period, the higher the reward multiplier. The multiplier rewards stakers with additional TNGBL tokens. When locking TNGBL, users receive a so-called 3,3+ NFT in return, which represents the locked position. The maximum lock-up period is four years. In comparison to other established ve-tokenomics designs, however, Tangible’s 3,3+ NFTs do not grant lockers any governance rights or influence over a reward gauge. In the absence of long-term governance alignment, the use of locking tokens is questionable.
+As mentioned, TNGBL holders can earn a share of the platform's revenue by locking up their tokens. The longer the lock-up period, the higher the reward multiplier. The multiplier rewards stakers with additional TNGBL tokens. When locking TNGBL, users receive a so-called 3,3+ NFT in return, which represents the locked position. The maximum lock-up period is four years. In comparison to other established ve-tokenomics designs, however, Tangible’s 3,3+ NFTs do not grant lockers any governance rights or influence over a reward gauge.
 
-Tangible also built a [marketplace](https://www.tangible.store/explore?category=3%2C3%2B+NFTs&page=1&sorting=%7B%7D&filters=%7B%7D) for 3,3+ NFTs, to allow users an early exit without having to unlock TNGBL, which would result in a reduced reward. However, given that the max lockup amount for TNGBL tokens is already reached, locking TNGBL does not come with a multiplier anymore.
+Tangible also built a [marketplace](https://www.tangible.store/explore?category=3%2C3%2B+NFTs&page=1&sorting=%7B%7D&filters=%7B%7D) for 3,3+ NFTs that allows users an early exit without having to unlock TNGBL. 33.3% of the marketplace fees are used to buy back and burn TNGBL. The remaining 66.6% can be claimed by 3,3+ NFT holders. The reward is issued in USDR and depends on the amount of locked TNGBL and the multiplier. 3,3+ NFTs were also handed out as a reward to early users of the platform. For instance, by purchasing a gold bar and minting a gold TNFT, users were rewarded with a 3,3+ NFT. This incentivization is no longer active.
 
-While 33.3% of the marketplace fees are used to buy back and burn TNGBL. The remaining 66.6% can be claimed by 3,3+ NFT holders. The reward is issued in USDR and depends on the amount of locked TNGBL and the multiplier.
-
-3,3+ NFTs were also handed out as a reward to early users of the platform. For instance, by purchasing a gold bar and minting a gold TNFT, users were rewarded with a 3,3+ NFT. This incentivization is no longer active though. And finally, the token also serves as collateral for USDR (more on that later).
-
-At the time of writing, there are only 21 TNGBL token holders on [Polygon](https://polygonscan.com/token/0x05d71db24f436e40d4bcb54724dc458eb641c2f1#balances). The largest holder, however, is the [PassiveIncomeNFT](https://polygonscan.com/address/0xdc7ee66c43f35ac8c1d12df90e61f05fbc2cd2c1#code) contract. It holds 98.75% of all TNGBL tokens. This means that almost the entire circulating supply is locked in 3,3+ NFTs. There are currently 1347 [addresses](https://polygonscan.com/token/0xd71b43474da7f77a567925f107f5fa611a22cb40#balances) holding these 3,3+ Passive Income (PI) NFTs. The largest one is the [Tangible:Deployer](https://polygonscan.com/token/0xd71b43474da7f77a567925f107f5fa611a22cb40?a=0x3d41487a3c5662ede90d0ee8854f3cc59e8d66ad) contract with 78%, which is an EOA.
+At the time of writing, there are only 21 TNGBL token holders on [Polygon](https://polygonscan.com/token/0x05d71db24f436e40d4bcb54724dc458eb641c2f1#balances). The largest holder is the [PassiveIncomeNFT](https://polygonscan.com/address/0xdc7ee66c43f35ac8c1d12df90e61f05fbc2cd2c1#code) contract. It holds 98.75% of all TNGBL tokens. This means that almost the entire circulating supply is locked in 3,3+ NFTs. There are currently 1347 [addresses](https://polygonscan.com/token/0xd71b43474da7f77a567925f107f5fa611a22cb40#balances) holding these 3,3+ Passive Income (PI) NFTs. The largest one is the [Tangible:Deployer](https://polygonscan.com/token/0xd71b43474da7f77a567925f107f5fa611a22cb40?a=0x3d41487a3c5662ede90d0ee8854f3cc59e8d66ad) EOA with 78%.
 
 
-# Real USD - Introduction
+## Real USD (USDR)
 
-Real USD (USDR) is a natively **rebasing**, **yield-bearing**, **over-collateralized stablecoin**, **pegged to the US dollar**. [USDR](https://polygonscan.com/token/0xb5dfabd7ff7f83bab83995e72a52b97abb7bcf63?a=0xa138341185a9d0429b0021a11fb717b225e13e1f#readContract) is issued on Polygon where it currently counts 142 holders. The stablecoin is backed by ERC-20s, LP tokens, and tokenized real estate. USDR is issued by Tangible, and partially backed by tokenized real estate (RE) TNFTs. Using real estate TNFTs as collateral enables two novel features:
+USDR is a natively **rebasing**, **yield-bearing**, **over-collateralized stablecoin**, **pegged to the US dollar**. [USDR](https://polygonscan.com/token/0xb5dfabd7ff7f83bab83995e72a52b97abb7bcf63?a=0xa138341185a9d0429b0021a11fb717b225e13e1f#readContract) is issued on Polygon where it currently counts 142 holders. The stablecoin is backed by ERC-20s, LP tokens, and tokenized real estate. USDR is issued by Tangible, and partially backed by tokenized real estate (RE) TNFTs. Using real estate TNFTs as collateral enables two novel features:
 
 
 
