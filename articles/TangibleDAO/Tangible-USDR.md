@@ -127,9 +127,11 @@ The team also expresses the intention to fully [automate](https://docs.tangible.
 
 ### Redeeming Real USD
 
-Real USD is redeemable 1:1 for DAI at any time (note that TNGBL can not be redeemed against USDR). Using the redemption function will incur a 0.25% fee. According to [Tangible](https://docs.tangible.store/real-usd/redeeming-real-usd), this fee is configurable and will sit just above the fee of Curve, thus encouraging swaps over redemptions.
+Real USD is redeemable 1:1 for DAI at any time. Using the redemption function will incur a 0.25% fee. According to [Tangible](https://docs.tangible.store/real-usd/redeeming-real-usd), this fee is configurable and will sit just above the fee of Curve, thus encouraging swaps over redemptions.
 
-In the event that all DAI from the treasury is redeemed, users who wish to redeem USDR will receive [pDAI](https://polygonscan.com/address/0x263fa8f30351472A1363902318098bEfAD3B440e#code) (promissory DAI) - a synthetic IOU token that represents a claim to real DAI. The treasury will then start the liquidation process of its TNFTs. Users will be able to exchange pDAI 1:1 for DAI, once real estate TNFTs were sold for more DAI.
+In the event that all DAI from the treasury is redeemed, users who wish to redeem USDR will receive [pDAI](https://polygonscan.com/address/0x263fa8f30351472A1363902318098bEfAD3B440e#code) (promissory DAI) - a synthetic IOU token that represents a claim to real DAI. The treasury will then start the liquidation process of its TNFTs. Users will be able to exchange pDAI 1:1 for DAI, once real estate TNFTs were sold for more DAI. 
+
+After all RE has been liquidated, users are finally able to redeem TNGBL. As a precaution in case of 100% redemption demand, there is an [insurance fund](https://docs.tangible.store/real-usd/backing/insurance-fund) made of a diversified treasury that ensures 1 USDR can always be redeemed for $1 worth of DAI. 
 
 Tangible also has plans to leverage protocol-owned liquidity (POL). They already own most of the Curve [metapool](https://curve.fi/#/polygon/pools/factory-v2-339/deposit) (USDR-am3CRV). It thus makes sense to have a redemption fee that is higher than the Curve swap fee, as users are incentivized to swap USDR using the Curve metapool instead of emptying the treasury.
 
