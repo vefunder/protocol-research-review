@@ -10,3 +10,4 @@
 * Tx Decoder: https://ethtx.info/
 * Curve pool data: https://llama.airforce/#/curve/pools
 * DeFi Project Data: https://defillama.com/
+* Phalcon Blockchain Transaction Explorer: https://explorer.phalcon.xyz/ 
