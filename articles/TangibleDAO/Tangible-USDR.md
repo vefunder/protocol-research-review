@@ -166,16 +166,16 @@ The system backing can be verified at the following addresses:
 * [Insurance Fund-Optimism](https://debank.com/profile/0x7f922242d919fef0da0e40e3cb4b7f7d3c97a63e) - Insurance fund on Optimism
 * [Insurance Fund-Ethereum](https://debank.com/profile/0x5d35a37e5842f6b3072893a3f7bf0e1d1ff80179) - Insurance fund on Ethereum
 
+The majority of insurance fund reserves are on Polygon. Assets include USDC20/TNGBL80 balancer LP, locked USDC/TETU LP, locked CVX, USDC, locked VELO and OP. Although the insurance fund is intended to protect users against a TGBL death spiral (ie. to ensure users are made whole in case of 100% redemption demand), nearly half of the insurance fund value is from TGBL.
+
 It’s also worth noting the sizable share of protocol-owned liquidity (POL). Having POL backing USDR benefits the protocol by increasing liquidity, creating a revenue stream for the treasury, and providing another venue to swap USDR (besides redemption). However, it is recommended to differentiate POL from user minted collateral (e.g. DAI or TNFTs). USDR minted through automated POL strategies are more akin to available reserves than circulating supply. Reserves depend on LPs in the Curve pool to supply the counterparty asset, and overreliance on POL strategies is indicative of low organic demand for the core product. Tangible currently owns [~42%](https://polygonscan.com/address/0x804cb5e7b50146cdd267fc6e4fc51463a34e2a9f#code) of the Curve pool, indicating that there is relatively low organic demand to provide liquidity (although the new Curve gauge is likely to attract more external LPs).
 
 
-### Tokenized Real Estate as Collateral
+#### Tokenized Real Estate as Collateral
 
 Real Estate (RE) represents the main collateral type of USDR. As mentioned earlier, using RE has several advantages. It is natively yield-bearing, it comes with low price volatility, the yield is independent of the price, and it has a history of strong value appreciation.
 
 Tangible plans to make real estate the main collateral. Up to 80% of USDR is going to be backed by RE. This leads to some key questions:
-
-
 
 * How is the real value (market price) of RE defined?
 * What method is used to value RE’s appraisal?
@@ -184,11 +184,11 @@ Tangible plans to make real estate the main collateral. Up to 80% of USDR is goi
 * How trustless is the RE on-ramp and liquidation process?
 * How is the regulatory situation impacting tokenized RE?
 
-It’s beyond the scope of this article to answer all these questions. However, it is clear that there are certain drawbacks to using RE as collateral. First of all, it complicates the calculation of the collateral’s value. It doesn’t come without effort to agree on the real value of these properties. Some websites offer the service of estimating the market price. For instance, [zoopla.co.uk](https://www.zoopla.co.uk/) is one option. Tangible recommends using [hometrack.com](https://www.hometrack.com/) to find housing prices. However, these are all just estimations, the real price is only determined once the property is sold. 
+It’s beyond the scope of this article to answer all these questions. However, it is clear that there are certain drawbacks to using RE as collateral. First of all, it complicates the calculation of the collateral’s value. It doesn’t come without effort to determine the real value of these properties. Some websites offer the service of estimating the market price. For instance, [zoopla.co.uk](https://www.zoopla.co.uk/) is one option. Tangible recommends using [hometrack.com](https://www.hometrack.com/) to find housing prices. However, these are all just estimations, as the real price is only determined once the property is sold. 
 
-The second obstacle is the confirmation that the TNFT represents the promised SPV and that the SPV owns the property. It would be easy to just mint TNFTs without actually buying a house. Tangible therefore provides access to all the official documents for each property.
+The second obstacle is the verification that the TNFT represents the promised SPV and that the SPV owns the property. It would be trivial to mint TNFTs without actually buying a house. Tangible therefore provides access to all the official documents for each property ([example property](https://www.dropbox.com/sh/cgzx9g4xk2av72s/AAD4IxvMie6z0n5bVP-tgEVWa?dl=0)). The team claims to be working with Chainlink and a third party auditor to integrate proof of reserves (independent verification of property ownership and proper documentation backing the NFT) and a price feed from hometrack.com (later expanding to an aggregate of pricing data providers). The team believes this integration will be complete by mid-May. 
 
-In summary, Tangible has to work with value estimates for its collateral. And the whole process is susceptible to centralized and trusted intermediaries that Tangible has to circumvent by increasing transparency.
+Currently, Tangible is trusted to make value estimates for its collateral. While Tangible have stated intentions to incorporate independant third-parties and decrease a central reliance on the team, this remains to be seen.
 
 
 ### Proof of Ownership & Purchase - An Example
