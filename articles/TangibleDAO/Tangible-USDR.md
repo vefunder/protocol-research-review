@@ -140,7 +140,9 @@ In conclusion, the redemption of USDR is limited to the amount of DAI in its tre
 
 ### USDR Collateral Structure
 
-As mentioned above, USDR is backed by different types of collateral. There are currently five categories, each with a flexible share. According to their [docs](https://docs.tangible.store/real-usd/backing), the collateral structure is targeted to look as shown in the image.
+As mentioned above, USDR is backed by different types of collateral. There are currently five categories, each with a flexible share. 
+
+According to their [docs](https://docs.tangible.store/real-usd/backing), the collateral structure is targeted to look as shown in the image.
 
 ![usdr-collatera-structure](https://github.com/Lavi54/protocol-research-review/blob/1df338393309656066ae5438633ead36570d1477/articles/TangibleDAO/images/tangible-docs-collateral-backing.png)
 
@@ -148,15 +150,23 @@ As mentioned above, USDR is backed by different types of collateral. There are c
 
 The actual collateral structure currently is quite different from the above targets.
 
-The image below displays the current collateral structure. The share of real estate is only 38.6%. This section requires more growth to achieve 50-80%. The TNGBL’s share on the other hand is over 18%. A difference of plus 8% from the promised allocation. This is due to TNGBL's recent price appreciation, according to the team.
+The image below displays the current collateral structure. The share of real estate is only 43.24%. This section requires more growth to achieve 50-80%. The TNGBL’s share on the other hand is over 15%. A difference of plus 5% from the intended allocation. This is due to TNGBL's recent price appreciation, according to the team.
 
-![tangible-website-collateral-ratio](https://github.com/Lavi54/protocol-research-review/blob/1df338393309656066ae5438633ead36570d1477/articles/TangibleDAO/images/tangible-website-collateral-ratio.png)
+![tangible-website-collateral-ratio](https://user-images.githubusercontent.com/51072084/233482360-4949ffd0-13f1-48d0-a7d7-ed57bfb1d0f2.png)
 
 (source: [Tangible Website - USDR](https://www.tangible.store/realusd))
 
-[Side note: The reported shares in the image correspond to the outstanding USDR ($11.3M). When compared to the overall collateral ($13.3M), real estate only accounts for 32.7%].
+[Side note: The reported shares in the image correspond to the outstanding USDR ($21.1M). When compared to the overall collateral ($24.1M), real estate only accounts for 37.8%].
 
-It’s also worth noting sizable share of protocol-owned liquidity (POL). Having POL backing USDR is reasonable. It increases liquidity, creates a revenue stream for the treasury, and provides another venue to swap USDR (besides redemption). However, it is recommended to differentiate POL from user minted collateral (e.g. DAI or TNFTs). USDR minted through automated POL strategies are more akin to available reserves rather than circulating supply. Reserves depend on LPs in the Curve pool to supply the counterparty asset, and overreliance on POL strategies is indicative of low organic demand for the core product. Tangible currently owns [~42%](https://polygonscan.com/address/0x804cb5e7b50146cdd267fc6e4fc51463a34e2a9f#code) of the Curve pool, indicating that there is relatively low organic demand to provide liquidity (although the new Curve gauge is likely to attract more external LPs).
+The system backing can be verified at the following addresses:
+
+* [USDRTreasury](https://polygonscan.com/address/0x6ef682f0223687c625e6c4a115f544a80c37da33#code) - Contains DAI, TNGBL, RE NFTs, and USDR. The USDR is minted against gains and temporarily stored until a new property is listed on the marketplace. It is then converted to real estate.
+* [LiquidityManager](https://polygonscan.com/address/0x804cb5e7b50146cdd267fc6e4fc51463a34e2a9f) - Contains cvxUSDR3CRV-f, the Convex shares of USDR/am3CRV Curve LPs.
+* [Insurance Fund-Polygon](https://debank.com/profile/0xd1758fbabae91c805be76d56548a584ef68b81f0) - Insurance fund on Polygon
+* [Insurance Fund-Optimism](https://debank.com/profile/0x7f922242d919fef0da0e40e3cb4b7f7d3c97a63e) - Insurance fund on Optimism
+* [Insurance Fund-Ethereum](https://debank.com/profile/0x5d35a37e5842f6b3072893a3f7bf0e1d1ff80179) - Insurance fund on Ethereum
+
+It’s also worth noting the sizable share of protocol-owned liquidity (POL). Having POL backing USDR benefits the protocol by increasing liquidity, creating a revenue stream for the treasury, and providing another venue to swap USDR (besides redemption). However, it is recommended to differentiate POL from user minted collateral (e.g. DAI or TNFTs). USDR minted through automated POL strategies are more akin to available reserves than circulating supply. Reserves depend on LPs in the Curve pool to supply the counterparty asset, and overreliance on POL strategies is indicative of low organic demand for the core product. Tangible currently owns [~42%](https://polygonscan.com/address/0x804cb5e7b50146cdd267fc6e4fc51463a34e2a9f#code) of the Curve pool, indicating that there is relatively low organic demand to provide liquidity (although the new Curve gauge is likely to attract more external LPs).
 
 
 ### Tokenized Real Estate as Collateral
