@@ -19,7 +19,7 @@ A deep dive into a pioneering real-estate-backed stablecoin on Polygon.
 
 ## A TL;DR of our Findings
 
-This report will investigate risks associated with the USDR stablecoin issued by Tangible. The team submitted a [proposal](https://gov.curve.fi/t/proposal-to-add-usdr-am3crv-to-the-curve-gauge-controller-polygon/8981) in March 2023 to add CRV incentives to the [USDR/3CRV](https://curve.fi/#/polygon/pools/factory-v2-339/deposit) pool on Polygon. The proposal successfully passed a [DAO vote](https://dao.curve.fi/vote/ownership/305) on March 30, 2023.
+This report will investigate risks associated with the USDR stablecoin issued by Tangible. The team submitted a [proposal](https://gov.curve.fi/t/proposal-to-add-usdr-am3crv-to-the-curve-gauge-controller-polygon/8981) in March 2023 to add CRV incentives to the [USDR/am3CRV](https://curve.fi/#/polygon/pools/factory-v2-339/deposit) pool on Polygon. The proposal successfully passed a [DAO vote](https://dao.curve.fi/vote/ownership/305) on March 30, 2023.
 
 * Tangible is building an on-ramp and trading platform for real-world assets (RWAs). Physical items such as gold bars, watches, or real estate (RE) are tokenized (i.e. minted) as tangible non-fungible tokens (TNFTs).
 * The protocol provides a marketplace to issue and trade TNFTs. The legal entity behind the project (Tangible Labs) facilitates the real-world purchase and custody of these goods. It collaborates with several service providers (vendors, custody) across different jurisdictions. However, most of its business is centered around the UK.
@@ -114,7 +114,7 @@ The drawback of these TNFTs is the relative illiquidity that comes with the real
 * A benefit of RE-based yield is that it’s not highly correlated with the asset’s price volatility. Rents don’t change in the short to mid-term, even if the properties’ value decreases.
 
 
-## **Minting Real USD**
+### Minting Real USD
 
 USDR can be minted using TNGBL or DAI at a 1:1 ratio. To access the minting function, users can visit Tangible's [website](https://www.tangible.store/realusd). The USDR contracts are deployed on Polygon and are based on Open Zeppelin smart contracts.
 
@@ -125,15 +125,15 @@ Tangible aims to also mint USDR from [system gains](https://docs.tangible.store/
 The team also expresses the intention to fully [automate](https://docs.tangible.store/real-usd/backing/real-estate#tangibles-true-property-valuation-tpv) this process in the future. While the process indicates a willingness to maximize capital efficiency, the team has left a collateral buffer to reduce risk (more on that later).
 
 
-## **Redeeming Real USD**
+### Redeeming Real USD
 
-Real USD is redeemable 1:1 for DAI at any time. Using the redemption function will incur a 0.25% fee. According to [Tangible](https://docs.tangible.store/real-usd/redeeming-real-usd), this fee is configurable and will sit just above the fee of Curve, thus encouraging swaps over redemptions.
+Real USD is redeemable 1:1 for DAI at any time (note that TNGBL can not be redeemed against USDR). Using the redemption function will incur a 0.25% fee. According to [Tangible](https://docs.tangible.store/real-usd/redeeming-real-usd), this fee is configurable and will sit just above the fee of Curve, thus encouraging swaps over redemptions.
 
 In the event that all DAI from the treasury is redeemed, users who wish to redeem USDR will receive [pDAI](https://polygonscan.com/address/0x263fa8f30351472A1363902318098bEfAD3B440e#code) (promissory DAI) - a synthetic IOU token that represents a claim to real DAI. The treasury will then start the liquidation process of its TNFTs. Users will be able to exchange pDAI 1:1 for DAI, once real estate TNFTs were sold for more DAI.
 
-Tangible also has plans to leverage protocol-owned liquidity (POL). They already own most of the Curve [metapool](https://curve.fi/#/polygon/pools/factory-v2-339/deposit) (USDR-am3CRV). It thus makes sense to have a redemption fee that is higher than the Curve swap fee. So users are incentivized to swap USDR using the Curve metapool, instead of emptying the treasury.
+Tangible also has plans to leverage protocol-owned liquidity (POL). They already own most of the Curve [metapool](https://curve.fi/#/polygon/pools/factory-v2-339/deposit) (USDR-am3CRV). It thus makes sense to have a redemption fee that is higher than the Curve swap fee, as users are incentivized to swap USDR using the Curve metapool instead of emptying the treasury.
 
-In conclusion, the redemption of USDR is limited to the amount of DAI in its treasury. And by extension to the number of other stables in the Curve pool. However, this only counts for immediate redemptions. Users who are willing to wait, can rely on the TNFT liquidation mechanism, and receive pDAI instead of DAI.
+In conclusion, the redemption of USDR is limited to the amount of DAI in its treasury (and, by extension, to the number of other stables in the Curve pool). However, this only counts for immediate redemptions. Users who are willing to wait, can rely on the TNFT liquidation mechanism, and receive pDAI instead of DAI.
 
 
 ## **USDR Collateral Structure**
