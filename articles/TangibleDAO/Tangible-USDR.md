@@ -191,7 +191,7 @@ The second obstacle is the verification that the TNFT represents the promised SP
 Currently, Tangible is trusted to make value estimates for its collateral. While Tangible have stated intentions to incorporate independant third-parties and decrease a central reliance on the team, this remains to be seen.
 
 
-### Proof of Ownership & Purchase - An Example
+#### Proof of Ownership & Purchase - An Example
 
 Tangible provides a list of all 14 [properties](https://www.tangible.store/realusd/properties) backing USDR. Let’s look at the example of the apartment in [Gillingham](https://www.google.com/maps/place/X1+Chatham+Waters/@51.3995588,0.5448852,948m/data=!3m1!1e3!4m10!1m2!2m1!1slocation+Location+S1-08+Chatham+Waters,+South+House,+Gillingham+Gate+Rd,+Gillingham+ME4+4RS,+UK!3m6!1s0x47d8cd46e69990fd:0xaea3b218eca0d54c!8m2!3d51.3982314!4d0.5502304!15sCl9sb2NhdGlvbiBMb2NhdGlvbiBTMS0wOCBDaGF0aGFtIFdhdGVycywgU291dGggSG91c2UsIEdpbGxpbmdoYW0gR2F0ZSBSZCwgR2lsbGluZ2hhbSBNRTQgNFJTLCBVS1pdIltsb2NhdGlvbiBsb2NhdGlvbiBzMSAwOCBjaGF0aGFtIHdhdGVycyBzb3V0aCBob3VzZSBnaWxsaW5naGFtIGdhdGUgcmQgZ2lsbGluZ2hhbSBtZTQgNHJzIHVrkgESYXBhcnRtZW50X2J1aWxkaW5nmgEjQ2haRFNVaE5NRzluUzBWSlEwRm5TVU10TlRsaFprVm5FQUXgAQA!16s%2Fg%2F11g0gfrrn5?authuser=0) (see the image below). This is one of the properties backing USDR. All relevant documents can be accessed via a [Dropbox](https://www.dropbox.com/sh/cgzx9g4xk2av72s/AAD4IxvMie6z0n5bVP-tgEVWa?dl=0) file share.
 
@@ -200,7 +200,7 @@ Tangible provides a list of all 14 [properties](https://www.tangible.store/realu
 
 (Source: [Tangible Website](https://www.tangible.store/product/0x29613FbD3e695a669C647597CEFd60bA255cc1F8?tokenId=340282366920938463463374607431768211474))
 
-According to the [list](https://www.tangible.store/realusd/properties) on the website, as well as on-chain records show that the corresponding TNFT is owned by the [USDR treasury](https://polygonscan.com/address/0x6Ef682F0223687c625E6c4a115F544a80c37dA33#tokentxnsErc721). The item is listed on [Polygon](https://polygonscan.com/token/0x29613fbd3e695a669c647597cefd60ba255cc1f8?a=340282366920938463463374607431768211474#inventory). It can be recognized by its ID number (340282366920938463463374607431768211474).
+According to the [list](https://www.tangible.store/realusd/properties) on the website and on-chain records, the corresponding TNFT is owned by the [USDR treasury](https://polygonscan.com/address/0x6Ef682F0223687c625E6c4a115F544a80c37dA33#tokentxnsErc721). The item is listed on [Polygon](https://polygonscan.com/token/0x29613fbd3e695a669c647597cefd60ba255cc1f8?a=340282366920938463463374607431768211474#inventory). It can be recognized by its ID number (340282366920938463463374607431768211474).
 
 This, however, only completes the on-chain proof that the USDR treasury owns the corresponding TNFT. Tangible attached eight documents to the respective Dropbox share for proof of purchase. Among them is a [valuation report](https://www.dropbox.com/sh/cgzx9g4xk2av72s/AAD4IxvMie6z0n5bVP-tgEVWa?dl=0&preview=Chatham+Waters+-Valuation+Report+-+Apt+99+3-bed.pdf), which attests the apartment's market price of £470k (~580k in USD). Further, there is a [sales agreement](https://www.dropbox.com/sh/cgzx9g4xk2av72s/AAD4IxvMie6z0n5bVP-tgEVWa?dl=0&preview=Sales+Agreement+.pdf) providing the agreed-upon sales price, as well as a [completion statement](https://www.dropbox.com/sh/cgzx9g4xk2av72s/AAD4IxvMie6z0n5bVP-tgEVWa?dl=0&preview=Completion+Statement+.pdf) confirming that the property was bought for £413k (incl. stamp tax and other fees). There is also a property management agreement ([PMA](https://www.dropbox.com/sh/cgzx9g4xk2av72s/AAD4IxvMie6z0n5bVP-tgEVWa?dl=0&preview=PMA+Agreement+S1-08.pdf)) and an [insurance policy](https://www.dropbox.com/sh/cgzx9g4xk2av72s/AAD4IxvMie6z0n5bVP-tgEVWa?dl=0&preview=Insurance+Policy.pdf).
 
@@ -211,14 +211,12 @@ Assuming that all documents are correct, this completes the proof of ownership. 
 In conclusion, the process of verifying the price and ownership of real estate is rather cumbersome and not scalable. Users of Tangible or USDR have to either trust the project or go through a verification process for each and every TNFT that is backing USDR. This process needs to be improved and better methods to increase transparency need to be found. Tangible mentions a collaboration with Chainlink, to directly feed market prices of its properties from an independent source. This, however, is not live yet and raised other questions (more on that in the next section).
 
 
-# Risk Vectors
+## Risk Vectors
 
 
-## Smart Contract Risk
+### Smart Contract Risk
 
 The protocol already has over 60 unique smart contracts deployed ([list 1](https://docs.tangible.store/contracts-and-addresses) and [list 2](https://docs.tangible.store/real-usd/real-usd-contracts-and-addresses)). It has cross-chain implementations and many off-chain components that play an important role. The smart contracts related to USDR were audited by [CyberScope](https://github.com/cyberscope-io/audits/blob/main/tngbl/audit.pdf) over three phases:
-
-
 
 1. Initial audit (Nov. 24, 2022)
 2. Correction phase 1 (Dec. 15, 2022)
@@ -228,8 +226,6 @@ The protocol already has over 60 unique smart contracts deployed ([list 1](https
 
 The audit did not find any major bugs or high-severity issues. In total 19 issues were found (2 medium, 17 minor, and 0 critical). But it did surface several recommendations to improve the code or the architecture. Some examples are listed below:
 
-
-
 1. **Administrator** **Configurations** - Many contracts depend on configurations from an administrator. For example, when it comes to funding allocation (e.g. bond program, affiliate, and incentive features) and direct state manipulation. In other words, the protocol depends on human interaction with its contracts, and there is no smart contract with an implemented business logic.
 2. **Decimal Architecture** - The contracts do not have a single point of decimals normalization mechanism. One example from the audit is highlighted below:
 
@@ -237,24 +233,20 @@ The audit did not find any major bugs or high-severity issues. In total 19 issue
 
 (source: [CyberScope audit](https://github.com/cyberscope-io/audits/blob/main/tngbl/audit.pdf))
 
-
 3. **Random Architecture of Contracts Roles -** Every contract contains its own access layer. Several roles were used, for example, BURNER, MINTER, CONTROLLER, TRACKER, ROUTER_POLICY, etc.
 
     The auditors pointed out a possible conflict between administrator roles and general architecture (addresses, contracts). They recommended using multi-signature wallets as an additional layer of security.
-
 
 Adding to the last point, there is a general concern around access rights. Our research found that almost every contract has some sort of admin access. Hence, none of the contracts are immutable. Despite the use of multi-sigs for most contracts, it opens a potential attack vector, given the high number of contracts and the use of a 2-of-3 multi-sig. Essentially, only two signers need to be compromised to endanger the whole project.
 
 In conclusion, the audit did not find any severe issues. However, despite the audit's findings, the current setup urges caution. First of all, the recent Euler [exploit](https://rekt.news/euler-rekt/) shows that even six audits still do not prevent a hack. But more importantly, none of Tangible’s 60+ contracts are immutable, and many are relying on manual interaction (administrator role). These roles appear to be managed somewhat orderless. The sheer amount of contracts and the current setup create additional complexity. And essentially, this opens unnecessary risk vectors and is prone to human errors. Moreover, the contracts are susceptible to compromised access rights. Adding to these points are the facts that the project has no decentralized components (e.g. a governance module) and a bug bounty program is also missing.
 
 
-## On-Chain Custody Risk
+### On-Chain Custody Risk
 
 As mentioned above, the Tangible platform and the USDR smart contracts are based on admin role privileges and a few multi-signature wallets. The custody risk thus lies in the hands of these signers. They basically control the entire project, making it a fully centralized project.
 
 Looking at the signers from the most relevant wallets leads to the conclusion that the same two to three EOAs control all wallets. A summary of all signers is listed below:
-
-
 
 * [Tangible Labs](https://polygonscan.com/address/0xaf8a1548fd69a59ce6a2a5f308bcc4698e1db2e5) Multi-sig (2-of-3). This wallet has control over the USDR collateral treasury and minting of all TNFTs, including real estate:
     * [Signer 1](https://debank.com/profile/0x9f70ecf8cae680f0bde6c0b7bdaec348ef9be554) (460 days - high activity; ENS tag -> tangiblelabs.eth)
@@ -276,7 +268,7 @@ Another example is the [marketplace fee distributor](https://polygonscan.com/add
 In other words, there is a high trust factor for all assets in Tangible’s smart contract custody. One person controls the fee distribution, which should ideally be automated or be callable by a public function. The collateral in the USDR treasury is also accessible by the Tangible Labs multi-sig. So are almost all smart contracts. Leading to the conclusion that the current custody setup is highly risky, not trustless, and prone to errors.
 
 
-## Off-Chain (RWA) Custody Risk
+### Off-Chain (RWA) Custody Risk
 
 As indicated earlier, having real estate as collateral for a stablecoin comes with some benefits, but also with several risks. The main risks are summarised below:
 
@@ -292,7 +284,7 @@ Risks associated with the last two points become apparent when looking at an exa
 Tangible is working on a solution to this problem. A collaboration with Chainlink should allow an independent oracle price feed for all Tangibles real estate TNFTs (more in the following section).
 
 
-## Oracle Risk
+### Oracle Risk
 
 Tangible implemented a fingerprint oracle solution for pricing its RWAs TNFTs. A fingerprint oracle uses a unique ID assigned to each product (product_id = a string representing a unique item). This way, Tangible can map each item to its market price, provided by their suppliers. Fingerprints are assigned to products before the TNFT is minted, and token IDs are mapped to the fingerprint after minting. This solution is also chosen because it fits within the limited block size of the Polygon sidechain.
 
@@ -301,12 +293,12 @@ In summary, Tangible uses a custom oracle solution. This allows them to inform t
 A collaboration with Chainlink sounds promising. This would take the price definition out of Tangible’s influence. This removes the “conflict of interest” mentioned above. However, using only hometrack as the only price source moves the question of reliability to another single entity. While it’s definitely an improvement, it can’t guarantee that the oracle sources the actual liquidation price.
 
 
-## Governance Risk
+### Governance Risk
 
 As of writing this report, Tangible has not introduced any elements of decentralized governance. The project is centrally steered and developed by the founding team. There are no structures for the community to get involved or facilitate decentralized decision-making (i.e. no dedicated Discord channel, no forum, no governance constitution, or voting tools). The risks related to centralized governance, custody, and management were mentioned in the sections above.
 
 
-## Depeg Risk
+### Depeg Risk
 
 Since its inception, USDR has been relatively stable. The only mentionable depeg happened during the weekend of March 11/12, 2023. The same weekend that USDC lost its peg. USDR is partially backed by DAI (~25%), which itself is mostly backed by USDC ([~63%](https://dune.com/SebVentures/maker---accounting_1)).
 
@@ -319,8 +311,6 @@ However, with regard to USDR’s stability, the price has been mostly around the
 
 The following stability mechanisms are installed to keep USDR at peg:
 
-
-
 * As a first measure to prevent depegs, USDR is redeemable for the DAI that is backing it. Currently, around 25% of its collateral is denominated in DAI.
 * As a second measure, USDR is backed by protocol-owned liquidity, consisting of the USDR Curve [pool](https://curve.fi/#/polygon/pools/factory-v2-339/deposit). In combination, the two measures guarantee a certain amount of liquidity for trading or redeeming USDR.
 * As a third step, Tangible established an insurance fund. At the time of writing, the insurance fund stands at ~$1.1M (9.2%) of USDRs collateral. However, the Polygon-based [multi-sig](https://debank.com/profile/0xd1758fbabae91c805be76d56548a584ef68b81f0) mainly contains 20/80 USDC/TNGBL LP tokens. In other words, the insurance fund mostly consists of more TNGBL.
@@ -329,7 +319,7 @@ The following stability mechanisms are installed to keep USDR at peg:
 Given that pDAI has not been implemented yet, the stability of USDR relies on the first three mechanisms. Furthermore, USDR is available cross-chain, which needs to be considered as well when looking at the peg stability. To use its stablecoin outside of Polygon, Tangible created wrapped USDR (wUSDR).
 
 
-### wUSDR
+#### wUSDR
 
 Real USD can be wrapped into wUSDR through Tangible’s [website](https://www.tangible.store/realusd?action=Wrap). Wrapping is done on [Polygon](https://polygonscan.com/token/0xaf0d9d65fc54de245cda37af3d18cbec860a4d4b). From there, it can be transferred to [BSC](https://bscscan.com/token/0x2952beb1326accbb5243725bd4da2fc937bca087), [Optimism](https://optimistic.etherscan.io/token/0x340fe1d898eccaad394e2ba0fc1f93d27c7b717a), [Ethereum](https://etherscan.io/token/0xd5a14081a34d256711b02bbef17e567da48e80b5), and [Arbitrum](https://arbiscan.io/token/0xddc0385169797937066bbd8ef409b5b3c0dfeb52) using Multichain’s router. wUSDR holders can then provide liquidity and farm on different DEX and yield aggregators across these ecosystems. For instance, [Beefy](https://app.beefy.com/vault/velodrome-wusdr-usdc) and [Velodrome](https://optimistic.etherscan.io/address/0x48dce63bacf1c7c839cfa7d4f871ad17c0d30d38) (Optimism), [Thena](https://info.thena.fi/token/0x2952beb1326accbb5243725bd4da2fc937bca087) (BSC), or [Balancer](https://app.balancer.fi/#/ethereum/pool/0x831261f44931b7da8ba0dcc547223c60bb75b47f000200000000000000000460) and [Aura](https://etherscan.io/address/0x831261f44931b7da8ba0dcc547223c60bb75b47f) (Ethereum). Farming on Arbitrum isn't enabled yet.
 
@@ -337,9 +327,7 @@ In order to be compatible with Multichain’s router as a “bridge asset”, wU
 
 Moreover, there is a big difference between wUSDR and USDR. The wrapped version of the token does not rebase. Instead, it increases in price when the rental distribution occurs. Hence, there is a difference between the price of wUSDR and USDR (see the image below).
 
-
 ![wrapped-usdr](https://github.com/Lavi54/protocol-research-review/blob/1df338393309656066ae5438633ead36570d1477/articles/TangibleDAO/images/tangible-website-wrap-usdr.png)
-
 
 (Source: Tangible [website](https://www.tangible.store/realusd?action=Wrap))
 
@@ -347,12 +335,10 @@ With a constantly increasing price, these liquidity pools are not “pure stable
 
 ![wusdr-cross-chain-implementation](https://github.com/Lavi54/protocol-research-review/blob/1df338393309656066ae5438633ead36570d1477/articles/TangibleDAO/images/usdr-crosschain-implementation.png)
 
-
 In conclusion, Tangible has built several mechanisms that support the peg of USDR. And they conceptualized a promising method (pDAI), to assure that USDR holders can always redeem USDR for something of equal value. However, most measures are still new, and not battle-tested, and some are fully centralized (e.g. real estate liquidations). Especially in the case of a bank run, it's questionable whether USDR can hold its peg. Moreover, the project introduced multiple dimensions of additional complexity and potential weaknesses through its wUSDR token and Multichain integration. These factors do not contribute to the safety of USDR’s peg stability. Nonetheless, USDR has so far proven to be quite stable and survived its first depeg well.
 
 
-# Discussion
-
+## Llama Risk Gauge Criteria
 
 
 1. **Is it possible for one single entity to rug its users?**
@@ -362,13 +348,11 @@ Yes, Tangible can neglect to liquidate assets or not honor redemptions. In addit
 These are clearly some red flags. The fact that the [team](https://docs.tangible.store/legal#who-is-on-the-tangible-labs-team) is public and is experienced in building Web3 start-ups, adds some credibility. However, only two signers need to be compromised to endanger the whole project and user funds.
 
 
-
 2. **If the team vanishes, can the project continue?**
 
 No, the team controls all contracts, assets, and custody of all RWAs. If the team vanishes, the DAO could not exercise the liquidation of its RWAs. Moreover, nobody could update the contracts, distribute fees, or access any other assets held in the treasury. Hence, it’s unlikely that the real estate properties or any other RWAs in Tangible’s custody can be accessed by anyone outside the team.
 
 The team mentioned the objective to partner with other RE issuers, to reduce dependency on their own LLC. This, however, is not the case yet.
-
 
 
 3. **Does the protocol rely on CRV or other incentives to keep its peg?**
@@ -378,7 +362,6 @@ Not at this point. USDR has grown to a market cap of [$11.5M](https://www.coinge
 Given that they have not profited from CRV rewards so far, this leads to the conclusion that these rewards are not needed to keep USDR at the peg.
 
 
-
 4. **Do audits reveal any concerning signs?**
 
 No, the first audit did not find any severe issues. However, there has only been one audit so far. A second audit is underway while this report is being written. It is worth noting that there is no active bounty program, and generally Tangible and USDR is still a young project.
@@ -386,7 +369,7 @@ No, the first audit did not find any severe issues. However, there has only been
 As mentioned above, there seem to be some architectural inconsistencies and a missing smart contract business logic, that is relying on a role-based system. Currently, Tangible is more a company than a protocol, leaving room for human errors that can be implemented undetected.
 
 
-# Conclusion
+## Conclusion
 
 Tangible is a very ambitious and fast-moving project. It introduces novel RWA use cases and an innovative stablecoin with intrinsic yield and a rebase mechanism. The concepts with regard to RWA trading, and real estate as collateral are sound and often well thought through. One conceptual flaw, however, is that the protocol represents the issuer and collateral taker of RE TNFTs. Additionally, the actual implementation of the project's vision often leaves room for improvement. Tangible is prioritizing growth and fast releases of new features over the improvement and decentralization of the existing infrastructure.
 
@@ -395,9 +378,7 @@ The entire setup related to smart contract custody, RWA custody, governance, and
 In summary, the project is a pioneer in the RE/RWA-backed stablecoin market. But it is somewhat opaque and the visible elements come with several risks. The project is not of decentralized nature.
 
 
-# Resources
-
-
+## Resources
 
 * Linktr.ee [TangibleDAO](https://linktr.ee/tangible.store) | [Website](https://www.tangible.store/) | [Documentation](https://docs.tangible.store/) | [Twitter](https://twitter.com/tangibleDAO)
 * USDR V2 [Whitepaper](https://2424721250-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2Fs3Wb3QaMBqltgcDPRi6m%2Fuploads%2FeFpJR8VXWFhGtYO7AJ1w%2FReal%20USD%20Whitepaper%20(USDR%20v2).pdf?alt=media&token=34b884b6-b44c-4bec-87a9-9f550318da76)
