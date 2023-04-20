@@ -136,7 +136,7 @@ Tangible also has plans to leverage protocol-owned liquidity (POL). They already
 In conclusion, the redemption of USDR is limited to the amount of DAI in its treasury (and, by extension, to the number of other stables in the Curve pool). However, this only counts for immediate redemptions. Users who are willing to wait, can rely on the TNFT liquidation mechanism, and receive pDAI instead of DAI.
 
 
-## **USDR Collateral Structure**
+### USDR Collateral Structure
 
 As mentioned above, USDR is backed by different types of collateral. There are currently five categories, each with a flexible share. According to their [docs](https://docs.tangible.store/real-usd/backing), the collateral structure is targeted to look as shown in the image.
 
@@ -144,18 +144,17 @@ As mentioned above, USDR is backed by different types of collateral. There are c
 
 (source: [TangibleDAO documentation](https://docs.tangible.store/real-usd/backing))
 
-The planned collateral allocation generally falls within the projected share ranges. Notable differences are the share of real estate and TNGBL tokens.
+The actual collateral structure currently is quite different from the above targets.
 
 The image below displays the current collateral structure. The share of real estate is only 38.6%. This section requires more growth to achieve 50-80%. The TNGBL’s share on the other hand is over 18%. A difference of plus 8% from the promised allocation. This is due to TNGBL's recent price appreciation, according to the team.
 
 ![tangible-website-collateral-ratio](https://github.com/Lavi54/protocol-research-review/blob/1df338393309656066ae5438633ead36570d1477/articles/TangibleDAO/images/tangible-website-collateral-ratio.png)
 
-
 (source: [Tangible Website - USDR](https://www.tangible.store/realusd))
 
-[Side note: The reported shares in the image correspond to the outstanding USDR ($11.3M). When compared to the overall collateral ($13.3M), however, real estate only accounts for 32.7%].
+[Side note: The reported shares in the image correspond to the outstanding USDR ($11.3M). When compared to the overall collateral ($13.3M), real estate only accounts for 32.7%].
 
-It’s also worth noting that the protocol-owned liquidity (POL) share of 24.9% contains over 54% of USDR. Having POL backing USDR is reasonable. It increases liquidity, creates a revenue stream for the treasury, and provides another venue to swap USDR (besides redemption). However, it is recommended to differentiate POL from the rest of the “intrinsic collateral” (e.g. DAI or TNFTs). As with AMOs, POL provides a separate issuance and redemption option for USDR. It should thus be labeled differently, for instance as “extrinsic collateral”. It’s also important for (retail) liquidity providers to understand that they participate in a Curve [pool](https://curve.fi/#/polygon/pools/factory-v2-339/deposit), which is used as a backstop mechanism for USDR redemption. On the other hand, Tangible currently owns [99.9%](https://polygonscan.com/token/0xa138341185a9d0429b0021a11fb717b225e13e1f#balances) of the Curve pool. Indicating that there is little organic demand to provide liquidity.
+It’s also worth noting sizable share of protocol-owned liquidity (POL). Having POL backing USDR is reasonable. It increases liquidity, creates a revenue stream for the treasury, and provides another venue to swap USDR (besides redemption). However, it is recommended to differentiate POL from user minted collateral (e.g. DAI or TNFTs). USDR minted through automated POL strategies are more akin to available reserves rather than circulating supply. Reserves depend on LPs in the Curve pool to supply the counterparty asset, and overreliance on POL strategies is indicative of low organic demand for the core product. Tangible currently owns [~42%](https://polygonscan.com/address/0x804cb5e7b50146cdd267fc6e4fc51463a34e2a9f#code) of the Curve pool, indicating that there is relatively low organic demand to provide liquidity (although the new Curve gauge is likely to attract more external LPs).
 
 
 ### Tokenized Real Estate as Collateral
