@@ -252,20 +252,20 @@ Looking at the signers from the most relevant wallets leads to the conclusion th
     * [Signer 1](https://debank.com/profile/0x9f70ecf8cae680f0bde6c0b7bdaec348ef9be554) (460 days - high activity; ENS tag -> tangiblelabs.eth)
     * [Signer 2](https://debank.com/profile/0xff7afa1153c4d56756000b29ff534f309129ac26) (558 days - medium activity)
     * [Signer 3](https://debank.com/profile/0x6bd40c6f7849160fe217d07a73e15f4ef8222283) (428 days - low activity)
-* [Tangible DAO](https://polygonscan.com/address/0x100fcc635acf0c22dcdcef49dd93ca94e55f0c71) Multi-sig (4-of-5):
+* [Tangible DAO](https://polygonscan.com/address/0x100fcc635acf0c22dcdcef49dd93ca94e55f0c71) Multi-sig (4-of-5) This waller has admin privileges across the majority of system contracts:
     * [Signer 1](https://debank.com/profile/0x9f70ecf8cae680f0bde6c0b7bdaec348ef9be554) (460 days - high activity; ENS tag -> tangiblelabs.eth)
     * [Signer 2](https://debank.com/profile/0xff7afa1153c4d56756000b29ff534f309129ac26) (558 days - medium activity)
     * [Signer 3](https://debank.com/profile/0x6bd40c6f7849160fe217d07a73e15f4ef8222283) (428 days - low activity)
     * [Signer 4](https://debank.com/profile/0xfbce8758dbf56d574a80fa3a6ab27275a8f1ef6a) (306 days - no activity)
     * [Signer 5](https://debank.com/profile/0xd5c77e6a29a09324b0b0d1bc813beaeabc3b0b6c) (306 days - no activity)
-* [USDR Treasury Manager](https://polygonscan.com/address/0x5F5b6597a5AC0d87FEff2e6757668885239ff3d2#code) Multi-sig (3-of-5)
+* [USDR Treasury Manager](https://polygonscan.com/address/0x5F5b6597a5AC0d87FEff2e6757668885239ff3d2#code) Multi-sig (3-of-5). This wallet manages assets in the USDRTreasury:
     * The same five signers as for the wallet above (Tangible DAO Msg)
 
 In summary, the first three signers are the same for all three wallets. The other two that complete the 4-of-5 and 3-of-5 multi-sigs have no activity. This suggests that all multi-sigs may be controlled via three addresses. 
 
-Another example is the [marketplace fee distributor](https://polygonscan.com/address/0x49c7371DAecB7f06fC7303A14ab80174453dF4cF#code). This contract is used to distribute 66.6% of the fees and swap the remaining 33.3% on Uniswap to buy and burn TNGBL. This contract is controlled by one single [EOA](https://polygonscan.com/address/0x9e9d5307451d11b2a9f84d9cfd853327f2b7e0f7). The same is true for the 3,3+ NFTs: [Tangible: Deployer](https://polygonscan.com/token/0xd71b43474da7f77a567925f107f5fa611a22cb40?a=0x3d41487a3c5662ede90d0ee8854f3cc59e8d66ad) controls 78% of these.
+Another example is the [marketplace fee distributor](https://polygonscan.com/address/0x49c7371DAecB7f06fC7303A14ab80174453dF4cF#code). This contract is used to distribute 66.6% of the fees and swap the remaining 33.3% on Uniswap to buy and burn TNGBL. This contract is controlled by one single [EOA](https://polygonscan.com/address/0x9e9d5307451d11b2a9f84d9cfd853327f2b7e0f7). The same is true for the 3,3+ NFTs: [Tangible: Deployer](https://polygonscan.com/token/0xd71b43474da7f77a567925f107f5fa611a22cb40?a=0x3d41487a3c5662ede90d0ee8854f3cc59e8d66ad) controls 78% of these. Additionally, the [bribe manager](https://polygonscan.com/address/0x81a7525cd96603eb335a9e6e8473246f232fd71d) is the same EOA across all chains.
 
-In other words, there is a high trust factor for all assets in Tangible’s smart contract custody. One person controls the fee distribution, which should ideally be automated or be callable by a public function. The collateral in the USDR treasury is also accessible by the Tangible Labs multi-sig. So are almost all smart contracts. Our conclusion is that the current custody setup is highly risky, not trustless, and prone to errors.
+In other words, there is a high trust factor for all assets in Tangible’s smart contract custody. One person controls considerable fund flows within the system, which should ideally be automated/callable by a public function. The collateral in the USDR treasury is also accessible by the Tangible Labs multi-sig, as are almost all smart contracts. Our conclusion is that the current custody setup is highly risky, highly trusted, and prone to errors.
 
 
 ### Off-Chain (RWA) Custody Risk
@@ -277,25 +277,23 @@ As indicated earlier, having real estate as collateral for a stablecoin comes wi
 * **Conflict of Interest** - Having the same company that is issuing USDR also controlling the on- and off-ramp of the RWA’s backing the stablecoin can lead to conflicts of interest. It also adds a single point of failure and it raises the question of scalability.
 * **Evaluation of Real Estate** - Evaluating the collateral value of RE is a complicated process. The support offered by websites such as [hometrack](https://www.hometrack.com/) or [zoopla](https://www.zoopla.co.uk/) is a decent start, but these are just [estimates](https://www.hometrack.com/wp-content/uploads/2022/05/Your-Hometrack-Property-Valuation-Report-for-SE1-2LH.pdf). They can’t predict the liquidation value. Besides, hometrack is not usable for free, thus limiting accessibility (it costs £20 per [valuation](https://www.hometrack.com/products/opportunity-insight/property-valuation-report/)). Zoopla on the other hand is free to use.
 
-Risks associated with the last two points become apparent when looking at an example. Using the same property as in the previous section, Zoopla comes estimates a [price](https://www.zoopla.co.uk/for-sale/property/chatham/gillingham-gate-road/?q=S1-08%20Chatham%20Waters%2C%20South%20House%2C%20Gillingham%20Gate%20Rd%2C%20Gillingham%20ME4%204RS%2C%20UK&search_source=home) between £370k–390k ($457k–482k). This is for a property similar to the apartment in [Gillingham](https://www.tangible.store/product/0x29613FbD3e695a669C647597CEFd60bA255cc1F8?tokenId=340282366920938463463374607431768211474) mentioned above. In comparison, Tangible values the Gillingham property at $529k USDR. A difference of plus 9–15%. Thus allowing for a higher issuance of USDR, which might reveal to be not fully backed in a stress test. According to the team, their valuation also includes other funds held in the RE reserve (e.g. 5% maintenance fee, 2% vacancy fee, 2% management fee, etc). Nonetheless, this example emphasizes the conflict of interest that occurs when the same protocol issues the stablecoin and the collateral backing it. Naturally, Tangible is incentivized to apply a high evaluation.
 
-Tangible is working on a solution to this problem. A collaboration with Chainlink and an independant auditor should allow an objective oracle price feed for all Tangibles real estate TNFTs (more in the following section).
+#### Oracle Risk
 
-
-### Regulatory Risk
-
-Real Estate NFTs may be classified as securities tokens, which may require registration with the UK Financial Conduct Authority (FCA). In the absence of clear regulatory guidance, an official Legal Opinion (LO) on the proposed business model would serve as justification for the compliance of the tokenization. We requested access to the LO statement from the team, and they have shared it with us. The document was examined by Llama Risk legal counsel, then following its provisions and confirmation by Tangible we were assured that their operations are exempt from registration with the FCA.
-
-As regulatory clarity continues to be a challenge for projects offering RWAs such as real estate NFTs, securing quality legal guidance is essential. The Tangible team currently solicits legal advice on a weekly basis and say they will have an in-house legal and compliance team starting in June.
-
-
-### Oracle Risk
+Risks associated with the last two points become apparent when looking at an example. Using the same property as in the previous section, Zoopla estimates a [price](https://www.zoopla.co.uk/for-sale/property/chatham/gillingham-gate-road/?q=S1-08%20Chatham%20Waters%2C%20South%20House%2C%20Gillingham%20Gate%20Rd%2C%20Gillingham%20ME4%204RS%2C%20UK&search_source=home) between £370k–390k ($457k–482k). This is for a property similar to the apartment in [Gillingham](https://www.tangible.store/product/0x29613FbD3e695a669C647597CEFd60bA255cc1F8?tokenId=340282366920938463463374607431768211474) mentioned above. In comparison, Tangible values the Gillingham property at $529k USDR. A difference of plus 9–15%. Thus allowing for a higher issuance of USDR, which might reveal to be not fully backed in a stress test. According to the team, their valuation also includes other funds held in the RE reserve (e.g. 5% maintenance fee, 2% vacancy fee, 2% management fee, etc). Nonetheless, this example emphasizes the conflict of interest that occurs when the same protocol issues the stablecoin and the collateral backing it. Naturally, Tangible is incentivized to apply a high evaluation.
 
 Tangible implemented a fingerprint oracle solution for pricing its RWAs TNFTs. A fingerprint oracle uses a unique ID assigned to each product (product_id = a string representing a unique item). This way, Tangible can map each item to its market price, provided by their suppliers. Fingerprints are assigned to products before the TNFT is minted, and token IDs are mapped to the fingerprint after minting. This solution is also chosen because it fits within the limited block size of the Polygon sidechain.
 
 In summary, Tangible uses a custom oracle solution. This allows them to inform the prices of their traded goods. Some details were also provided in the [Curve Gauge Proposal](https://gov.curve.fi/t/proposal-to-add-usdr-am3crv-to-the-curve-gauge-controller-polygon/8981): “_We have our own oracles for properties at the moment but are working with Chainlink to integrate, then true property valuations via 3rd party [Hometrack.com](http://hometrack.com/) can be reflected on a chain in Real Time so the treasury values and the collateralization ratio are up to date, this also allows for “minting on gains” to work more effectively in real-time._”
 
-A collaboration with Chainlink sounds promising. This would remove concern surrounding Tangible’s conflict of interest. However, using  Hometrack as the sole price authority moves the question of reliability to another single entity. While it’s definitely an improvement, it can’t guarantee that the oracle sources the actual liquidation price.
+A collaboration with Chainlink and an independant auditor would be a substantial improvement. This would remove concerns surrounding Tangible’s conflict of interest. However, using Hometrack as the sole price authority moves the question of reliability to another single entity. While it’s definitely an improvement, it can’t guarantee that the oracle quotes a reliable liquidation price.
+
+
+#### Regulatory Risk
+
+Real Estate NFTs may be classified as securities tokens, which may require registration with the UK Financial Conduct Authority (FCA). In the absence of clear regulatory guidance, an official Legal Opinion (LO) on the proposed business model would serve as justification for the compliance of the tokenization. We requested access to the LO statement from the team, and they have shared it with us. The document was examined by Llama Risk legal counsel, then following its provisions and confirmation by Tangible we were assured that their operations are exempt from registration with the FCA.
+
+As regulatory clarity continues to be a challenge for projects offering RWAs such as real estate NFTs, securing quality legal guidance is essential. The Tangible team currently solicits legal advice on a weekly basis and say they will have an in-house legal and compliance team starting in June.
 
 
 ### Depeg Risk
