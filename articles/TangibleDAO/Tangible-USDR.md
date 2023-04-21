@@ -244,7 +244,7 @@ In conclusion, the audit did not find any severe issues. However, despite the au
 
 ### On-Chain Custody Risk
 
-As mentioned above, the Tangible platform and the USDR smart contracts are based on admin role privileges and a few multi-signature wallets. The custody risk thus lies in the hands of these signers. They basically control the entire project, making it a fully centralized project.
+As mentioned above, the Tangible platform and the USDR smart contracts involve a role-based access control system owned by a few multi-signature wallets (which are granted by a single EOA). The custody risk thus lies in the hands of the Tangible: Deployer and in these signers. They basically control the entire project, making it a fully centralized project.
 
 Looking at the signers from the most relevant wallets leads to the conclusion that the same two to three EOAs control all wallets. A summary of all signers is listed below:
 
@@ -252,7 +252,7 @@ Looking at the signers from the most relevant wallets leads to the conclusion th
     * [Signer 1](https://debank.com/profile/0x9f70ecf8cae680f0bde6c0b7bdaec348ef9be554) (460 days - high activity; ENS tag -> tangiblelabs.eth)
     * [Signer 2](https://debank.com/profile/0xff7afa1153c4d56756000b29ff534f309129ac26) (558 days - medium activity)
     * [Signer 3](https://debank.com/profile/0x6bd40c6f7849160fe217d07a73e15f4ef8222283) (428 days - low activity)
-* [Tangible DAO](https://polygonscan.com/address/0x100fcc635acf0c22dcdcef49dd93ca94e55f0c71)** **Multi-sig** (**4-of-5):
+* [Tangible DAO](https://polygonscan.com/address/0x100fcc635acf0c22dcdcef49dd93ca94e55f0c71) Multi-sig (4-of-5):
     * [Signer 1](https://debank.com/profile/0x9f70ecf8cae680f0bde6c0b7bdaec348ef9be554) (460 days - high activity; ENS tag -> tangiblelabs.eth)
     * [Signer 2](https://debank.com/profile/0xff7afa1153c4d56756000b29ff534f309129ac26) (558 days - medium activity)
     * [Signer 3](https://debank.com/profile/0x6bd40c6f7849160fe217d07a73e15f4ef8222283) (428 days - low activity)
@@ -261,11 +261,11 @@ Looking at the signers from the most relevant wallets leads to the conclusion th
 * [USDR Treasury Manager](https://polygonscan.com/address/0x5F5b6597a5AC0d87FEff2e6757668885239ff3d2#code) Multi-sig (3-of-5)
     * The same five signers as for the wallet above (Tangible DAO Msg)
 
-In summary, the first three signers are the same for all three wallets. The other two that complete the 4-of-5 and 3-of-5 multi-sigs have no activity. This leads to the conclusion that all multi-sigs, and thus the entire protocol is controlled via three EOAs, whereby tangiblelabs.eth (signer 1) is the one setting the tone.
+In summary, the first three signers are the same for all three wallets. The other two that complete the 4-of-5 and 3-of-5 multi-sigs have no activity. This suggests that all multi-sigs may be controlled via three addresses. 
 
-Another example is the [marketplace fee distributor](https://polygonscan.com/address/0x49c7371DAecB7f06fC7303A14ab80174453dF4cF#code). This contract is used to distribute 66.6% of the fees and swap the remaining 33.3% on Uniswap, to buy and burn TNGBL. This contract is controlled by one single [EOA](https://polygonscan.com/address/0x9e9d5307451d11b2a9f84d9cfd853327f2b7e0f7). The same is true for the [Tangible:Deployer](https://polygonscan.com/token/0xd71b43474da7f77a567925f107f5fa611a22cb40?a=0x3d41487a3c5662ede90d0ee8854f3cc59e8d66ad) contract, which controls 78% of all 3,3+ NFTs.
+Another example is the [marketplace fee distributor](https://polygonscan.com/address/0x49c7371DAecB7f06fC7303A14ab80174453dF4cF#code). This contract is used to distribute 66.6% of the fees and swap the remaining 33.3% on Uniswap to buy and burn TNGBL. This contract is controlled by one single [EOA](https://polygonscan.com/address/0x9e9d5307451d11b2a9f84d9cfd853327f2b7e0f7). The same is true for the 3,3+ NFTs: [Tangible: Deployer](https://polygonscan.com/token/0xd71b43474da7f77a567925f107f5fa611a22cb40?a=0x3d41487a3c5662ede90d0ee8854f3cc59e8d66ad) controls 78% of these.
 
-In other words, there is a high trust factor for all assets in Tangible’s smart contract custody. One person controls the fee distribution, which should ideally be automated or be callable by a public function. The collateral in the USDR treasury is also accessible by the Tangible Labs multi-sig. So are almost all smart contracts. Leading to the conclusion that the current custody setup is highly risky, not trustless, and prone to errors.
+In other words, there is a high trust factor for all assets in Tangible’s smart contract custody. One person controls the fee distribution, which should ideally be automated or be callable by a public function. The collateral in the USDR treasury is also accessible by the Tangible Labs multi-sig. So are almost all smart contracts. Our conclusion is that the current custody setup is highly risky, not trustless, and prone to errors.
 
 
 ### Off-Chain (RWA) Custody Risk
