@@ -237,14 +237,14 @@ The audit did not find any major bugs or high-severity issues. In total 19 issue
 
     The auditors pointed out a possible conflict between administrator roles and general architecture (addresses, contracts). They recommended using multi-signature wallets as an additional layer of security.
 
-Adding to the last point, there is a general concern around access rights. Our research found that almost every contract has some sort of admin access. Hence, none of the contracts are immutable. Despite the use of multi-sigs for most contracts, it opens a potential attack vector, given the high number of contracts. The [Tangible: Deployer](https://polygonscan.com/address/0x3d41487a3c5662ede90d0ee8854f3cc59e8d66ad) EOA, in particular, has enormous power within the system. It can set roles for an arbitrary address.
+Adding to the last point, there is a general concern around access rights. Our research found that almost every contract has some sort of admin access. Hence, none of the contracts are immutable. Despite the use of multi-sigs for most contracts, it opens a potential attack vector, given the high number of contracts. The [Tangible: Deployer](https://polygonscan.com/address/0x3d41487a3c5662ede90d0ee8854f3cc59e8d66ad) EOA, in particular, has enormous power within the system. It is the DEFAULT_ADMIN_ROLE that can set roles for an arbitrary address. Although the team regularly passes admin control to the [4-of-5 multi-sig](https://polygonscan.com/address/0x100fCC635acf0c22dCdceF49DD93cA94E55F0c71), care must be taken that the new admin revoke the admin role from the Deployer for every deployed contract. This manual process increases the risk of human error that can potentially affect user funds.
 
 In conclusion, the audit did not find any severe issues. However, despite the audit's findings, the current setup warrants caution. None of Tangible’s 60+ contracts are immutable, and many are relying on manual interaction (administrator role). These roles can be difficult to track and are not implemented in a uniform manner. The sheer amount of contracts and the current setup create additional complexity. Essentially, this opens unnecessary risk vectors and is prone to human errors. Moreover, the contracts are susceptible to compromised access rights. Adding to these points are the facts that the project has no decentralized components (e.g. a governance module) and lacks a bug bounty program.
 
 
 ### On-Chain Custody Risk
 
-As mentioned above, the Tangible platform and the USDR smart contracts involve a role-based access control system owned by a few multi-signature wallets (which are granted by a single EOA). The custody risk thus lies in the hands of the Tangible: Deployer and in these signers. They basically control the entire project, making it a fully centralized project.
+As mentioned above, the Tangible platform and the USDR smart contracts involve a role-based access control system owned by a few multi-signature wallets (which are granted by the Deployer EOA EOA). The custody risk thus lies in the hands of the Tangible: Deployer and in these signers. They basically control the entire project, making it a fully centralized project.
 
 Looking at the signers from the most relevant wallets leads to the conclusion that the same two to three EOAs control all wallets. A summary of all signers is listed below:
 
@@ -315,6 +315,17 @@ The following stability mechanisms are installed to keep USDR at peg:
 * As mentioned earlier, Tangible also aims to implement [pDAI](https://docs.tangible.store/real-usd/redeeming-real-usd) (i.e. promissory DAI). pDAI would be required in the case of a bank run, meaning that Tangible has to sell its RE TNFTs, to make USDR holders whole. In such a scenario, pDAI would be redeemable instead of DAI. And once enough real estate is liquidated, pDAI holders can swap it for real DAI.
 
 
+#### TNGBL as Collateral
+
+Tangible targets 5-10% of the collateral backing to be composed of its own TNGBL token, which can be minted as $1 worth of TNGBL for 1 USDR. This makes USDR a partial algo-stable and raises concerns about its reliability in adverse market situations. Although Tangible limits the amount of USDR that can be minted from TNGBL, it now accounts for ~14% of the total backing.
+
+There are concerning and potentially unsustainable strategies that can be used by having a partially endogenous collateral type. For instance, the [bribe manager](https://polygonscan.com/address/0x81a7525cd96603eb335a9e6e8473246f232fd71d) regularly deposits TNGBL to mint USDR for its incentive scheme. This gives Tangible a similar power to mint unbacked stablecoins that prompted an [emergency action against Mochi's USDM](https://gov.curve.fi/t/the-curve-emergency-dao-has-killed-the-usdm-gauge/2307). Tangible could potentially mint USDR against TNGBL and redeem for DAI or sell into its Curve pool for USDC/USDT/DAI. The team recently began bribing aggressively for its USDR/am3CRV pool with a [$225k deposit](https://etherscan.io/tx/0x7a15b1345dbe03c1d472dbad6e292207747f729a8960a9eae3011432c055df31) to Warden Quest. The majority of funding came from Binance wallets, and some were [bridged from Polygon](https://polygonscan.com/tx/0x5670ba8edf0e141036ebed37b158cdc0bbc03a037cf85fd3dc295cdfc539c6a9) with funds flowing from TNGBL -> USDR -> DAI (Curve pool) ([tx](https://polygonscan.com/tx/0xf5f29bf13ee69d653d6fba7498ab3b83e37c0ee3effacf107f64615bae9f3a5f)).
+
+![Screen Shot 2023-04-21 at 1 17 34 PM](https://user-images.githubusercontent.com/51072084/233727100-9331d6f1-5c03-4783-a349-02ab0a9cae8d.png)
+
+Source: [Warden Quest](https://app.warden.vote/quest/details/?quest=37)
+
+
 #### wUSDR
 
 USDR is available cross-chain, which needs to be considered as well when looking at the peg stability. To use its stablecoin outside of Polygon, Tangible created wrapped USDR (wUSDR).
@@ -341,9 +352,9 @@ In conclusion, Tangible has built several mechanisms that support the peg of USD
 
 1. **Is it possible for one single entity to rug its users?**
 
-Yes, Tangible can neglect to liquidate assets or not honor redemptions. It also acts as its own oracle for pricing RWA's. Most of the protocol’s funds, including its treasury, insurance funds, and collateral assets in smart contract custody, can be accessed through a single EOA (Tangible: Deployer) or privileged multi-sig. Moreover, there are no timelocks.
+Yes, Tangible can neglect to liquidate assets or not honor redemptions. It also acts as its own oracle for pricing RWA's. Most of the protocol’s funds, including its treasury, insurance funds, and collateral assets in smart contract custody, can be accessed through a team-controlled multi-sig. Moreover, there are no timelocks.
 
-These are clearly some red flags. The fact that the [team](https://docs.tangible.store/legal#who-is-on-the-tangible-labs-team) is doxxed and is experienced in building Web3 start-ups adds some credibility. However, the high level of system complexity along with centralized access control give cause for concern.
+The fact that the [team](https://docs.tangible.store/legal#who-is-on-the-tangible-labs-team) is doxxed and is experienced in building Web3 start-ups adds some credibility. However, the high level of system complexity along with centralized access control give cause for concern.
 
 
 2. **If the team vanishes, can the project continue?**
@@ -357,23 +368,23 @@ The team mentioned the objective to partner with other RE issuers to reduce depe
 
 Somewhat. USDR has grown to a market cap of [$11.5M](https://www.coingecko.com/en/coins/real-usd) before receiving a Curve gauge. USDR has also been relatively stable. The only depeg occurred during the depeg of USDC, whereby most stablecoins experience some issues over the course of one weekend. USDR has quickly recovered and remained stable since.
 
-However, USDR depends on POL in the Curve pool to offer adequate liquidity and minimize redemptions thorugh the protocol directly. This can create a dependence on incentives to the Curve pool to avoid a liquidity crunch, and could become a crutch in case the system faces insolvency. 
+However, USDR depends on POL in the Curve pool to offer adequate liquidity and minimize redemptions thorugh the protocol directly. This can create a dependence on incentives to the Curve pool to avoid a liquidity crunch, which could become a crutch in case the system faces risk of insolvency. 
 
 
 4. **Do audits reveal any concerning signs?**
 
 No, the first audit did not find any severe issues. However, there has only been one audit so far. A second audit is underway while this report is being written. It is worth noting that there is no active bounty program, and generally Tangible and USDR is still a young project.
 
-As mentioned above, there seem to be some architectural inconsistencies and a missing smart contract business logic, that is relying on a role-based system. Currently, Tangible is more a company than a protocol, leaving room for human errors. Given the complexity of the system, a single audit seems inadequate.
+As mentioned above, there seem to be some architectural inconsistencies and an excess of manual, privileged functionality. Currently, Tangible is more a company than a protocol, leaving possibility for human errors or poor system management. Given the complexity of the system, a single audit and lack of bug bounty program is inadequate.
 
 
 ## Conclusion
 
-Tangible is a very ambitious and fast-moving project. It introduces novel RWA use cases and an innovative stablecoin with intrinsic yield and a rebase mechanism. The concepts with regard to RWA trading, and real estate as collateral are sound and well thought through. One conceptual flaw, however, is that the protocol represents the issuer and custodian of RE TNFTs. Additionally, the actual implementation of the project's vision often leaves room for improvement. Tangible is prioritizing growth and fast releases of new features over the improvement and decentralization of the existing infrastructure.
+Tangible is a very ambitious and fast-moving project. It introduces novel RWA use cases and an innovative stablecoin with intrinsic yield and a rebase mechanism. The concepts with regard to RWA trading, and real estate as collateral are sound and well thought through. One conceptual flaw, however, is that the protocol represents the issuer and custodian of RE TNFTs. Additionally, the actual implementation of the project's vision often leaves room for improvement. Tangible is prioritizing growth and fast releases of new features over the decentralization and sustainability of the existing infrastructure.
 
-The entire setup related to smart contract access control, RWA custody, governance, and oracle is insufficient and urges caution. The protocol is susceptible to human errors and requires complete trust in the entities behind the platform. Moreover, it’s quite complex on a technical and conceptual level, and much is needed to improve the project’s transparency (e.g. ownership and custody of RWAs, pricing of RWAs, cross-chain wUSDR implementation, roadmap, access rights, admin roles, and hidden owners, just to name a few).
+The entire setup related to smart contract access control, RWA custody, governance, and collateral management is insufficient and merits caution. The protocol is susceptible to human errors and requires complete trust in the entities behind the platform. Moreover, it’s quite complex on a technical and conceptual level, and much is needed to improve the project’s transparency (e.g. ownership and custody of RWAs, pricing of RWAs, cross-chain wUSDR implementation, roadmap, access rights, admin roles, and hidden owners, just to name a few).
 
-Although we commend the project's ambition, our opinion is that there is simply too much dependence on the core team. Users are wholly reliant on honest and responsible management by the team. In order to meet requirements for a Curve gauge, Tangible should implement their plan to transfer price oracles and proof of reserve for their RWAs to an independant auditor and oracle provider, and remove access control from EOAs on all system contracts. Until these changes take place, we believe Curve should not be incentivizing the USDR/am3CRV pool.
+Although we commend the project's ambition, our opinion is that there is simply too much dependence on the core team. Users are wholly reliant on honest and responsible management by the team. In order to meet requirements for a Curve gauge, Tangible should implement their plan to transfer price oracles and proof of reserve for their RWAs to an independant auditor and oracle provider, and remove TNGBL as a collateral asset. Until these changes take place, we believe Curve should not be incentivizing the USDR/am3CRV pool.
 
 
 ## Resources
