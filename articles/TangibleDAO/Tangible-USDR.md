@@ -282,6 +282,13 @@ Risks associated with the last two points become apparent when looking at an exa
 Tangible is working on a solution to this problem. A collaboration with Chainlink and an independant auditor should allow an objective oracle price feed for all Tangibles real estate TNFTs (more in the following section).
 
 
+### Regulatory Risk
+
+Real Estate NFTs may be classified as securities tokens, which may require registration with the UK Financial Conduct Authority (FCA). In the absence of clear regulatory guidance, an official Legal Opinion (LO) on the proposed business model would serve as justification for the compliance of the tokenization. We requested access to the LO statement from the team, and they have shared it with us. The document was examined by Llama Risk legal counsel, then following its provisions and confirmation by Tangible we were assured that their operations are exempt from registration with the FCA.
+
+As regulatory clarity continues to be a challenge for projects offering RWAs such as real estate NFTs, securing quality legal guidance is essential. The Tangible team currently solicits legal advice on a weekly basis and say they will have an in-house legal and compliance team starting in June.
+
+
 ### Oracle Risk
 
 Tangible implemented a fingerprint oracle solution for pricing its RWAs TNFTs. A fingerprint oracle uses a unique ID assigned to each product (product_id = a string representing a unique item). This way, Tangible can map each item to its market price, provided by their suppliers. Fingerprints are assigned to products before the TNFT is minted, and token IDs are mapped to the fingerprint after minting. This solution is also chosen because it fits within the limited block size of the Polygon sidechain.
@@ -289,11 +296,6 @@ Tangible implemented a fingerprint oracle solution for pricing its RWAs TNFTs. A
 In summary, Tangible uses a custom oracle solution. This allows them to inform the prices of their traded goods. Some details were also provided in the [Curve Gauge Proposal](https://gov.curve.fi/t/proposal-to-add-usdr-am3crv-to-the-curve-gauge-controller-polygon/8981): “_We have our own oracles for properties at the moment but are working with Chainlink to integrate, then true property valuations via 3rd party [Hometrack.com](http://hometrack.com/) can be reflected on a chain in Real Time so the treasury values and the collateralization ratio are up to date, this also allows for “minting on gains” to work more effectively in real-time._”
 
 A collaboration with Chainlink sounds promising. This would remove concern surrounding Tangible’s conflict of interest. However, using  Hometrack as the sole price authority moves the question of reliability to another single entity. While it’s definitely an improvement, it can’t guarantee that the oracle sources the actual liquidation price.
-
-
-### Governance Risk
-
-As of writing this report, Tangible has not introduced any elements of decentralized governance. The project is centrally controlled and developed by the founding team. There are no structures for the community to get involved or facilitate decentralized decision-making (i.e. no dedicated Discord channel, no forum, no governance constitution, or voting tools). The risks related to centralized governance, custody, and management were mentioned in the sections above.
 
 
 ### Depeg Risk
@@ -361,7 +363,7 @@ The fact that the [team](https://docs.tangible.store/legal#who-is-on-the-tangibl
 
 No, the team controls all contracts, assets, and custody of all RWAs. If the team vanishes, the DAO could not exercise the liquidation of its RWAs. Moreover, nobody could update the contracts, distribute fees, or access any other assets held in the treasury. Hence, it’s unlikely that the real estate properties or any other RWAs in Tangible’s custody can be accessed by anyone outside the team.
 
-The team mentioned the objective to partner with other RE issuers to reduce dependency on their own LLC. This, however, is not the case yet.
+The team mentioned a plan to partner with other RE issuers to reduce dependency on their own LLC. This remains to be seen.
 
 
 3. **Does the protocol rely on CRV or other incentives to keep its peg?**
@@ -375,14 +377,14 @@ However, USDR depends on POL in the Curve pool to offer adequate liquidity and m
 
 No, the first audit did not find any severe issues. However, there has only been one audit so far. A second audit is underway while this report is being written. It is worth noting that there is no active bounty program, and generally Tangible and USDR is still a young project.
 
-As mentioned above, there seem to be some architectural inconsistencies and an excess of manual, privileged functionality. Currently, Tangible is more a company than a protocol, leaving possibility for human errors or poor system management. Given the complexity of the system, a single audit and lack of bug bounty program is inadequate.
+There seem to be some architectural inconsistencies and an excess of manual, privileged functionality. Currently, Tangible is more a company than a protocol, leaving the possibility for human errors or poor system management. Given the complexity of the system, a single audit and absence of a bug bounty program are inadequate to make strong security assurances.
 
 
 ## Conclusion
 
-Tangible is a very ambitious and fast-moving project. It introduces novel RWA use cases and an innovative stablecoin with intrinsic yield and a rebase mechanism. The concepts with regard to RWA trading and real estate as collateral are novel and well thought through. The degree of centralized control by the team does, however, present a conflict of interest, as the team is both the issuer of RE TNFTs and custodian of the underlying assets. Additionally, the actual implementation of the project's vision often leaves room for improvement. Tangible is prioritizing growth and fast releases of new features over the decentralization and sustainability of the existing infrastructure.
+Tangible is a very ambitious and fast-moving project. It introduces novel RWA use cases and an innovative stablecoin with intrinsic yield and a rebase mechanism. The concepts with regard to RWA trading and real estate as collateral are novel and well thought through. The degree of centralized control by the team does, however, present a conflict of interest, as the team is both the issuer of RE TNFTs and custodian of the underlying assets. Additionally, the actual implementation of the project's vision leaves much room for improvement. Tangible is prioritizing growth and fast releases of new features over the decentralization and sustainability of the existing infrastructure.
 
-The entire setup related to smart contract access control, RWA custody, governance, and collateral management is insufficient and merits caution. The protocol is susceptible to human errors and requires complete trust in the entities behind the platform. Moreover, it’s quite complex on a technical and conceptual level, and much is needed to improve the project’s transparency (e.g. ownership and custody of RWAs, pricing of RWAs, cross-chain wUSDR implementation, roadmap, access rights, admin roles, and hidden owners, just to name a few).
+The entire setup related to smart contract access control, RWA custody, governance, and collateral structure is insufficient and merits caution. The protocol is susceptible to human errors and requires complete trust in the entities behind the platform. Moreover, it’s quite complex on a technical and conceptual level, and much is needed to improve the project’s transparency (e.g. ownership and custody of RWAs, pricing of RWAs, cross-chain wUSDR implementation, roadmap, access rights, admin roles, and hidden owners, just to name a few).
 
 Although we commend the project's ambition, our opinion is that there is simply too much dependence on the core team. Users are wholly reliant on honest and responsible management by the team. In order to meet requirements for a Curve gauge, Tangible should implement their plan to transfer price oracles and proof of reserve for their RWAs to an independant auditor and oracle provider. TNGBL should also be removed as a collateral asset, as it magnifies the riskiness of USDR. Until these changes take place, we believe Curve should not be incentivizing the USDR/am3CRV pool.
 
