@@ -244,7 +244,7 @@ In conclusion, the audit did not find any severe issues. However, despite the au
 
 ### On-Chain Custody Risk
 
-As mentioned above, the Tangible platform and the USDR smart contracts involve a role-based access control system owned by a few multi-signature wallets (which are granted by the Deployer EOA EOA). The custody risk thus lies in the hands of the Tangible: Deployer and in these signers. They basically control the entire project, making it a fully centralized project.
+As mentioned above, the Tangible platform and the USDR smart contracts involve a role-based access control system owned by a few multi-signature wallets (which are granted by the Deployer EOA). The custody risk thus lies in the hands of the Tangible: Deployer and in these signers. They basically control the entire project, making it a fully centralized project.
 
 Looking at the signers from the most relevant wallets leads to the conclusion that the same two to three EOAs control all wallets. A summary of all signers is listed below:
 
