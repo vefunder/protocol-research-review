@@ -403,7 +403,7 @@ Although we commend the project's ambition, our opinion is that there is simply 
 * Smart Contracts [from Tangible Docs](https://docs.google.com/spreadsheets/d/18d5rl5vZkfw-3kn82Su8m8YetUMCvkAx5KHiTAVUydk/edit?usp=sharing) (65)
 * Curve USDR/3Curve [Metapool](https://curve.fi/#/polygon/pools/factory-v2-339/deposit) (Polygon)
 * Multi-sig (2-of-3) [Tangible Labs](https://polygonscan.com/address/0xaf8a1548fd69a59ce6a2a5f308bcc4698e1db2e5)
-* Multi-sig** (**4-of-5) [Tangible DAO](https://polygonscan.com/address/0x100fcc635acf0c22dcdcef49dd93ca94e55f0c71)
+* Multi-sig (4-of-5) [Tangible DAO](https://polygonscan.com/address/0x100fcc635acf0c22dcdcef49dd93ca94e55f0c71)
 * Multi-sig (3-of-5) [USDR Treasury Manager](https://polygonscan.com/address/0x5F5b6597a5AC0d87FEff2e6757668885239ff3d2#code)
 * [EOA](https://polygonscan.com/address/0x9e9d5307451d11b2a9f84d9cfd853327f2b7e0f7) controlling [marketplace fee distributor](https://polygonscan.com/address/0x49c7371DAecB7f06fC7303A14ab80174453dF4cF#code) & [Tangible:Deployer](https://polygonscan.com/token/0xd71b43474da7f77a567925f107f5fa611a22cb40?a=0x3d41487a3c5662ede90d0ee8854f3cc59e8d66ad)
 * wUSDR on [Polygon](https://polygonscan.com/token/0xaf0d9d65fc54de245cda37af3d18cbec860a4d4b) | [BSC](https://bscscan.com/token/0x2952beb1326accbb5243725bd4da2fc937bca087) | [Optimism](https://optimistic.etherscan.io/token/0x340fe1d898eccaad394e2ba0fc1f93d27c7b717a) | [Ethereum](https://etherscan.io/token/0xd5a14081a34d256711b02bbef17e567da48e80b5) | [Arbitrum](https://arbiscan.io/token/0xddc0385169797937066bbd8ef409b5b3c0dfeb52)
