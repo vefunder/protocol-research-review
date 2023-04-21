@@ -17,7 +17,7 @@ A deep dive into a pioneering real-estate-backed stablecoin on Polygon.
 * Cyberscope [Audit](https://github.com/cyberscope-io/audits/blob/main/tngbl/audit.pdf) + [Blog post](https://www.cyberscope.io/blog/cyberscope-and-tangible-store-audit-case-study)
 
 
-## A TL;DR of our Findings
+## A TLDR of our Findings
 
 This report will investigate risks associated with the USDR stablecoin issued by Tangible. The team submitted a [proposal](https://gov.curve.fi/t/proposal-to-add-usdr-am3crv-to-the-curve-gauge-controller-polygon/8981) in March 2023 to add CRV incentives to the [USDR/am3CRV](https://curve.fi/#/polygon/pools/factory-v2-339/deposit) pool on Polygon. The proposal successfully passed a [DAO vote](https://dao.curve.fi/vote/ownership/305) on March 30, 2023.
 
@@ -222,24 +222,24 @@ The protocol already has over 60 unique smart contracts deployed ([list 1](https
 2. Correction phase 1 (Dec. 15, 2022)
 3. Correction phase 2 (Jan. 17, 2023)
 
-[Side note: CyberScope’s audit report falsely mentions the release date as January 2022, instead of 2023. The team was notified and acknowledged the error]
+[Side note: CyberScope’s audit report mistakenly mentions the release date as January 2022, instead of 2023. The team was notified and acknowledged the error]
 
 The audit did not find any major bugs or high-severity issues. In total 19 issues were found (2 medium, 17 minor, and 0 critical). But it did surface several recommendations to improve the code or the architecture. Some examples are listed below:
 
-1. **Administrator** **Configurations** - Many contracts depend on configurations from an administrator. For example, when it comes to funding allocation (e.g. bond program, affiliate, and incentive features) and direct state manipulation. In other words, the protocol depends on human interaction with its contracts, and there is no smart contract with an implemented business logic.
-2. **Decimal Architecture** - The contracts do not have a single point of decimals normalization mechanism. One example from the audit is highlighted below:
+1. **Administrator Configurations** - Many contracts depend on configurations from an administrator, for example, for funding allocations (e.g. bond program, affiliate, and incentive features) and direct state manipulation. In other words, the protocol depends on human interaction with its contracts. The [Tangible: Deployer](https://polygonscan.com/address/0x3d41487a3c5662ede90d0ee8854f3cc59e8d66ad) EOA can set privileged roles within the system that have the power to affect user funds.
+2. **Decimal Architecture** - The contracts do not have a decimals normalization mechanism. This results in excessive decimals normalization within the contracts, creates unnecessary dependancies between contracts, and hardcodes values that may change. One example from the audit is highlighted below:
 
 ![cyberscope-audit-report](https://github.com/Lavi54/protocol-research-review/blob/1df338393309656066ae5438633ead36570d1477/articles/TangibleDAO/images/cyberscope-audit-report-p13.png)
 
 (source: [CyberScope audit](https://github.com/cyberscope-io/audits/blob/main/tngbl/audit.pdf))
 
-3. **Random Architecture of Contracts Roles -** Every contract contains its own access layer. Several roles were used, for example, BURNER, MINTER, CONTROLLER, TRACKER, ROUTER_POLICY, etc.
+3. **Architecture of Contracts Roles** - Every contract contains its own access layer. Several roles were used, for example, BURNER, MINTER, CONTROLLER, TRACKER, ROUTER_POLICY, etc. The DEFAULT_ADMIN_ROLE, which controls some of the most critical functionalities, has been granted to the [Tangible DAO 4-of-5 multi-sig](https://polygonscan.com/address/0x100fcc635acf0c22dcdcef49dd93ca94e55f0c71).
 
     The auditors pointed out a possible conflict between administrator roles and general architecture (addresses, contracts). They recommended using multi-signature wallets as an additional layer of security.
 
-Adding to the last point, there is a general concern around access rights. Our research found that almost every contract has some sort of admin access. Hence, none of the contracts are immutable. Despite the use of multi-sigs for most contracts, it opens a potential attack vector, given the high number of contracts and the use of a 2-of-3 multi-sig. Essentially, only two signers need to be compromised to endanger the whole project.
+Adding to the last point, there is a general concern around access rights. Our research found that almost every contract has some sort of admin access. Hence, none of the contracts are immutable. Despite the use of multi-sigs for most contracts, it opens a potential attack vector, given the high number of contracts. The [Tangible: Deployer](https://polygonscan.com/address/0x3d41487a3c5662ede90d0ee8854f3cc59e8d66ad) EOA, in particular, has enormous power within the system. It can set roles for an arbitrary address.
 
-In conclusion, the audit did not find any severe issues. However, despite the audit's findings, the current setup urges caution. First of all, the recent Euler [exploit](https://rekt.news/euler-rekt/) shows that even six audits still do not prevent a hack. But more importantly, none of Tangible’s 60+ contracts are immutable, and many are relying on manual interaction (administrator role). These roles appear to be managed somewhat orderless. The sheer amount of contracts and the current setup create additional complexity. And essentially, this opens unnecessary risk vectors and is prone to human errors. Moreover, the contracts are susceptible to compromised access rights. Adding to these points are the facts that the project has no decentralized components (e.g. a governance module) and a bug bounty program is also missing.
+In conclusion, the audit did not find any severe issues. However, despite the audit's findings, the current setup warrants caution. None of Tangible’s 60+ contracts are immutable, and many are relying on manual interaction (administrator role). These roles can be difficult to track and are not implemented in a uniform manner. The sheer amount of contracts and the current setup create additional complexity. Essentially, this opens unnecessary risk vectors and is prone to human errors. Moreover, the contracts are susceptible to compromised access rights. Adding to these points are the facts that the project has no decentralized components (e.g. a governance module) and lacks a bug bounty program.
 
 
 ### On-Chain Custody Risk
