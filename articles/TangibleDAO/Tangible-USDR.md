@@ -17,7 +17,7 @@ A deep dive into a pioneering real-estate-backed stablecoin on Polygon.
 * Cyberscope [Audit](https://github.com/cyberscope-io/audits/blob/main/tngbl/audit.pdf) + [Blog post](https://www.cyberscope.io/blog/cyberscope-and-tangible-store-audit-case-study)
 
 
-## A TLDR of our Findings
+## A TLDR of our Findings 
 
 This report will investigate risks associated with the USDR stablecoin issued by Tangible. The team submitted a [proposal](https://gov.curve.fi/t/proposal-to-add-usdr-am3crv-to-the-curve-gauge-controller-polygon/8981) in March 2023 to add CRV incentives to the [USDR/am3CRV](https://curve.fi/#/polygon/pools/factory-v2-339/deposit) pool on Polygon. The proposal successfully passed a [DAO vote](https://dao.curve.fi/vote/ownership/305) on March 30, 2023.
 
