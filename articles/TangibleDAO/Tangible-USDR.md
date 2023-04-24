@@ -297,6 +297,13 @@ Real Estate NFTs may be classified as securities tokens, which may require regis
 
 As regulatory clarity continues to be a challenge for projects offering RWAs such as real estate NFTs, securing quality legal guidance is essential. The Tangible team currently solicits legal advice on a weekly basis and say they will have an in-house legal and compliance team starting in June.
 
+Users should be aware, that as per the Tangible [Terms of Service](https://www.tangible.store/tos.pdf), TNFT Ltd. excludes the company's liability for damages and limits liability in contract, tort, misrepresentation or restitution to 1,000 GBP. 
+
+![photo_2023-04-24 12 32 54](https://user-images.githubusercontent.com/51072084/234097459-ba218dbd-af3c-4746-a382-1fc4675d3202.jpeg)
+
+Source: [Tangible.store TOS](https://www.tangible.store/tos.pdf)
+
+It is the opinion of Llama Risk legal counsel that since Tangible acts as a bridge between RWA and on-chain transactions/relationship, when tokenizing property and selling to retail investors, a merchant acting in good faith ought to ensure sufficient level of customer protection. The TOS here offers minimal protection.
 
 ### Depeg Risk
 
