@@ -325,7 +325,7 @@ There are concerning and potentially unsustainable strategies that can be used b
 
 Source: [Warden Quest](https://app.warden.vote/quest/details/?quest=37)
 
-The [USDRExchanger](https://polygonscan.com/address/0x195f7b233947d51f4c3b756ad41a5ddb34cebce0#code) contract enforces the USD value of TNGBL that can be deposited by querying the [TNGBLPriceOracle](https://polygonscan.com/address/0x884C16195114F3Fc71Bd8612981687EB6be90d4b#code), using the [TNGBL/DAI pool](https://info.uniswap.org/#/polygon/pools/0xdc8a5c5975726235402cfac9b28268eeccd42813) on UniV3 as a pricefeed. This pool currently has $250k TVL. There is a market manipulation risk that an attacker might inflate the value of TNGBL to mint an outsize amount of USDR.
+The [USDRExchanger](https://polygonscan.com/address/0x195f7b233947d51f4c3b756ad41a5ddb34cebce0#code) contract enforces the USD value of TNGBL that can be deposited by querying the [TNGBLPriceOracle](https://polygonscan.com/address/0x884C16195114F3Fc71Bd8612981687EB6be90d4b#code). The TNGBL price oracle is updated by multi-sig tx, using the [TNGBL/DAI pool](https://info.uniswap.org/#/polygon/pools/0xdc8a5c5975726235402cfac9b28268eeccd42813) on UniV3 as a secondary pricefeed that is only accepted if lower than the team's primary value. This protects against market manipulation by setting an upper bound on an settled TNGBL price, but further highlights system dependence on the active management by the Tangible team. 
 
 
 #### wUSDR
