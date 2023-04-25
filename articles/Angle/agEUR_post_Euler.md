@@ -14,7 +14,7 @@
 
 ## Introduction
 
-In a [previous article](https://cryptorisks.substack.com/p/ageur-angle-protocol), we explored the Angle Protocol, an innovative stablecoin framework designed for price stability, over-collateralization, and optimal capital efficiency. The protocol's stablecoin, agEUR, aims to be pegged to the Euro and has demonstrated impressive price stability compared to other Euro-based stablecoins. This report delves into the Euler Finance exploit that occurred on March 13th, 2023, examining its impact on the peg and liquidity on Curve. It also investigates the strategies Angle Core Module's reserves employed, the crisis management measures Angle took, actions taken following Euler's recovery, and the lessons learned from the incident. Finally, the report provides an updated risk assessment for agEUR and its related Curve pools.
+In a [previous report](https://cryptorisks.substack.com/p/ageur-angle-protocol), we explored the Angle Protocol, an innovative stablecoin framework designed for price stability, over-collateralization, and optimal capital efficiency. The protocol's stablecoin, agEUR, aims to be pegged to the Euro and has demonstrated impressive price stability compared to other Euro-based stablecoins. This report delves into the Euler Finance exploit that occurred on March 13th, 2023, examining its impact on the peg and liquidity on Curve. It also investigates the strategies employed by the Angle Core Module, the crisis management response by the Angle team, actions taken following Euler's recovery, and the lessons learned from the incident. Finally, the report provides an updated risk assessment for agEUR and its related Curve pools.
 
 ### Key Findings:
 
