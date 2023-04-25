@@ -7,7 +7,7 @@
 * [Angle Governance Forum](https://gov.angle.money/) | [Snapshot page](https://snapshot.org/#/anglegovernance.eth)
 * [AgEUR - LlamaRisk Assessment (Jan 2022)](https://cryptorisks.substack.com/p/ageur-angle-protocol)
 * [AIP-43: Improve Angle Yield Strategies for USDC and DAI](https://snapshot.org/#/anglegovernance.eth/proposal/0xb1b4d98c080ec587b2563a6aaa6f854e0a42ce6881f61bced62cf9fa8ae42898)
-* [Euler exploit analysys](https://medium.com/@numencyberlabs/a-detailed-analysis-of-Euler-finances-196-million-flash-loan-attack-81cdef370024)
+* [Euler exploit analysis](https://medium.com/@numencyberlabs/a-detailed-analysis-of-Euler-finances-196-million-flash-loan-attack-81cdef370024)
 * [AgEUR/EUROC Factory Pool](https://curve.fi/#/ethereum/pools/factory-v2-164/deposit) | [3EURpool Factory Pool](https://curve.fi/#/ethereum/pools/factory-v2-66/deposit)
 * [Angle Protocol - Q&A Regarding Euler Exploit](https://anglemoney.notion.site/Angle-Protocol-Q-A-Regarding-Euler-Exploit-03af18cbe5e84430b3341b145554492e)
 * [Angle Protocol - Ideas for re-launching the protocol](https://gov.angle.money/t/ideas-for-re-launching-the-protocol/674)
@@ -60,7 +60,7 @@ HAs play a critical role in managing risks associated with collateral fluctuatio
 
 At times, HAs may not be completely insuring the protocol collateral, so SLPs are attracted to provide a system buffer. SLPs provide liquidity that enables the protocols to earn additional interest and ensure system solvency. In return, they receive a portion of fees generated from agEUR minting/burning and a portion of fees from protocol lending activities. They have additional yield potential, as they also earn interest on capital provided by both stablecoin minters and HAs. 
 
-SLPs are instrumental in maintaining agEUR's liquidity and contribute to the overall stability of the stablecoin. In the case of the protocol becoming under-collateralized from insufficient HA positions, the liquidity provided by an SLP ensures 1:1 redeemability. Should an SLP choose to remove their liquidity in such circumstances, they would incur a slippage. The protocol's C-ratio governs the slippage parameter:
+SLPs are instrumental in maintaining agEUR's system solvency and contribute to the overall stability of the stablecoin. In the case of the protocol becoming under-collateralized from insufficient HA positions, the liquidity provided by an SLP ensures 1:1 redeemability. Should an SLP choose to remove their liquidity in such circumstances, they would incur a slippage. This incentivizes a target system C-ratio. The protocol's C-ratio governs the slippage parameter:
 
 * Above 120% C-ratio, the slippage is zero.
 * Slippage increases with decreasing C-ratio.
