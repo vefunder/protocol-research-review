@@ -18,10 +18,10 @@ In a [previous report](https://cryptorisks.substack.com/p/ageur-angle-protocol),
 
 ### Key Findings:
 
-- In Q1 2023, Angle modified its Core Module's reserve investment approach, allowing anyone to change the investment strategy allocation via a permissionless function. However, Angle did not consider additional risk mitigation by diversifying yield sources. During the exploit, Angle had 74% of its USDC reserves invested in Euler.
+- In Q1 2023, Angle modified its reserve investment approach for the Core Module, allowing anyone to change the investment strategy allocation via a permissionless function. However, Angle did not consider additional risk mitigation by diversifying yield sources. During the exploit, Angle had 74% of its USDC reserves invested in Euler.
 - Before the hack, Angle had $36.1m (Core Module), $11.8m (SLP), and a surplus (treasury) of $5.6m. The exploit led to Angle Protocol losing approximately 17.6m USDC, leaving agEUR undercollateralized.
-- Angle's governance multisigs (Guardian and Governor, despite the relatively high signature threshold) were quick to pause the protocol's critical functions, minimizing further negative impact.
-- Although present in the documents, the seniority principle prioritizes agEUR holders over the Stablecoin Liquidity Providers (SLPs) and Hedging Agents (HAs) was not clearly stated and had to be voted on shortly after the exploit.
+- Angle's governance multisigs (Guardian and Governor), despite the relatively high signature threshold, were quick to pause the protocol's critical functions and minimized further negative impact.
+- Although present in the documents, the seniority principle which prioritizes agEUR holders over the Stablecoin Liquidity Providers (SLPs) and Hedging Agents (HAs) was not clearly stated and had to be voted on shortly after the exploit.
 - The Euler incident caused considerable disruptions in agEUR associated Curve pools, resulting from a significant net outflow of euro-denominated stablecoins (>€8m).
 - Euler's successful recovery of the stolen funds led to Angle protocol restoring over-collateralization. Angle may not have survived had the exploited funds been lost, leading to significant losses for SLP and HAs and a dire collateral ratio for agEUR.
 - This de-peg event serves as a reminder of the various trade-offs associated with different stablecoin designs. While fiat-redeemable stablecoins may present challenges regarding transparency and regulatory compliance (EURS, EURT, EUROC), crypto-collateralized stablecoins like Angle grapple with capital efficiency concerns and potentially expose users to other protocol risks.
