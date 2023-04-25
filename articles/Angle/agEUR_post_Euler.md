@@ -1,5 +1,6 @@
 # Consequences of the Euler Exploit for Angle's agEUR and Euro-Denominated Curve Pools
 
+
 ## Useful links
 
 * [Angle Website](https://www.angle.money/#/) | [General Docs](https://docs.angle.money/overview/readme) | [Developer Docs](https://developers.angle.money/)
@@ -12,9 +13,11 @@
 * [Angle Protocol - Ideas for re-launching the protocol](https://gov.angle.money/t/ideas-for-re-launching-the-protocol/674)
 * [Euler Hack Reflection: Learning, Adapting, and Strengthening Angle Protocol](https://www.angle.money/#/blog/announcements/euler-hack-reflection-learning-adapting-and-strengthening-angle-protocol)
 
+
 ## Introduction
 
 In a [previous report](https://cryptorisks.substack.com/p/ageur-angle-protocol), we explored the Angle Protocol, an innovative stablecoin framework designed for price stability, over-collateralization, and optimal capital efficiency. The protocol's stablecoin, agEUR, aims to be pegged to the Euro and has demonstrated impressive price stability compared to other Euro-based stablecoins. This report delves into the Euler Finance exploit that occurred on March 13th, 2023, examining its impact on the peg and liquidity on Curve. It also investigates the strategies employed by the Angle Core Module, the crisis management response by the Angle team, actions taken following Euler's recovery, and the lessons learned from the incident. Finally, the report provides an updated risk assessment for agEUR and its related Curve pools.
+
 
 ### Key Findings:
 
@@ -26,27 +29,47 @@ In a [previous report](https://cryptorisks.substack.com/p/ageur-angle-protocol),
 - Euler's successful recovery of the stolen funds led to Angle protocol restoring over-collateralization. Angle may not have survived had the exploited funds been lost, leading to significant losses for SLP and HAs and a dire collateral ratio for agEUR.
 - This de-peg event serves as a reminder of the various trade-offs associated with different stablecoin designs. While fiat-redeemable stablecoins may present challenges regarding transparency and regulatory compliance (EURS, EURT, EUROC), crypto-collateralized stablecoins like Angle grapple with capital efficiency concerns and potentially expose users to other protocol risks.
 
+
 ## Revisiting agEUR and Prior Report Findings: Balancing Overcollateralization and Capital Efficiency
 
-The Angle Protocol presents a novel approach to decentralized finance by offering stablecoins backed by diversified collateral. Its primary product, the agEUR stablecoin, has gained recognition due to its unique method of balancing over-collateralization with capital efficiency. This balance is achieved by distributing risks among various market participants, namely: the **Core Module** (CM), **Stablecoin Liquidity Providers** (SLP), and **Hedging Agents** (HAs). The agEUR stablecoin aims to maintain its peg to the Euro by leveraging a diverse collateral pool. Overcollateralization is a fundamental aspect of this design, ensuring that agEUR remains stable even during market fluctuations.
+The Angle Protocol presents a novel approach to crypto-collateralized stablecoin design that has gained recognition due to its unique method of balancing over-collateralization with capital efficiency. This balance is achieved by distributing risks among various market participants, namely: **Stable Seekers/Holders**, **Stablecoin Liquidity Providers** (SLP), and **Hedging Agents** (HAs).
 
-### Market Participants: Roles and Contributions
+Its primary product is the agEUR stablecoin. The agEUR stablecoin aims to maintain its peg to the Euro by leveraging a diverse collateral pool. Overcollateralization is a fundamental aspect of this design, ensuring that agEUR remains stable even during market fluctuations.
+
+
+### Core Module and its Market Participants
+
+The Core Module oversees collateral pools and mints stablecoins. It comprises agEUR minters, Stablecoin Liquidity Providers (SLPs), and Hedging Agents (HAs). At the same time, the Core Module sustains a debt-to-collateral ratio to ensure the stablecoin's over-collateralization. An in-depth look at the inner workings of the core module and its participants can be found in our [previous article](https://cryptorisks.substack.com/p/ageur-angle-protocol).
+
 ![](https://i.imgur.com/gUR3jGm.png)
 
-#### Core Module (CM)
-The Core Module oversees collateral pools and mints stablecoins. It comprises Stablecoin Liquidity Providers (SLPs), Hedging Agents (HAs), and agEUR minters. Users can deposit collateral (DAI, USDC, FRAX, WETH, and FAI) and obtain agEUR in return. At the same time, the Core Module sustains a debt-to-collateral ratio to ensure the stablecoin's over-collateralization. An in-depth look at the inner workings of the core module and its participants can be found in our [previous article](https://cryptorisks.substack.com/p/ageur-angle-protocol).
+Source: [Angle Docs: Core Module](https://docs.angle.money/angle-core-module/overview)
 
-##### Stablecoin Liquidity Providers (SLPs)
-SLPs are providing liquidity that enables the exchange of agEUR with other stablecoins. In return, they receive fees generated from the trades they facilitate. SLPs are instrumental in maintaining agEUR's liquidity and contribute to the overall stability of the stablecoin. In the case of the protocol reaching under-collateralization, the liquidity provided by an SLP ensures 1:1 redeemability. Should an SLP choose to remove their liquidity in such circumstances, they would incur a slippage. The protocol's C-ratio governs the slippage parameter:
+
+#### agEUR Minters
+
+Users can deposit whitelisted collateral (DAI, USDC, FRAX, WETH, and FEI) and obtain agEUR in return. The operation is done as a 1:1 swap (minus fees). Deposits are then owned by the Core Module, which it subsequently lends out to other platforms. agEUR can always be minted or burned for the underlying collateral at the oracle value during normal operation. 
+
+
+#### Hedging Agents (HAs)
+
+HAs play a critical role in managing risks associated with collateral fluctuations. The Core Module hedges its volatility by allowing profit-seeking HAs to open perpetual futures positions. The HA opens a position with X amount of their own collateral and Y position size (how much of the Core Module collateral they will insure). Positive fluctuations in the protocol collateral are realized as profit to the HA, and negative fluctuations realized as losses. The protocol can safely guarantee capital-efficient stablecoin minting/burning when its holdings are adequately hedged.  
+
+
+#### Stablecoin Liquidity Providers (SLPs)
+
+At times, HAs may not be completely insuring the protocol collateral, so SLPs are attracted to provide a system buffer. SLPs provide liquidity that enables the protocols to earn additional interest and ensure system solvency. In return, they receive a portion of fees generated from agEUR minting/burning and a portion of fees from protocol lending activities. They have additional yield potential, as they also earn interest on capital provided by both stablecoin minters and HAs. 
+
+SLPs are instrumental in maintaining agEUR's liquidity and contribute to the overall stability of the stablecoin. In the case of the protocol becoming under-collateralized from insufficient HA positions, the liquidity provided by an SLP ensures 1:1 redeemability. Should an SLP choose to remove their liquidity in such circumstances, they would incur a slippage. The protocol's C-ratio governs the slippage parameter:
 
 * Above 120% C-ratio, the slippage is zero.
 * Slippage increases with decreasing C-ratio.
 
-##### Hedging Agents (HAs)
-HAs play a critical role in managing risks associated with collateral fluctuations. By purchasing and selling collateral to preserve an appropriate debt-to-collateral ratio, they help maintain agEUR's stability while promoting capital efficiency.
 
 ## Angle's Core Module Reserve Allocation and Implemented Changes
+
 The Core module earns interest on these reserves by lending to other platforms. These strategies contribute to the Core module's appeal for Standard Liquidity Providers (SLPs), enabling interest generation, reserve accumulation, and veANGLE holder incentivization. It is critical to how Angle Protocol optimizes its collateral's efficiency; by mobilizing the liquidity into blue-chip DeFi protocols, Angle improves the capital efficiency of the collateral, allowing the cake-having (cap. efficiency) and cake-eating (adoption: attracting more SLPs, thereby buffering the system, which makes agEUR more stable and hence more attractive). It is done at the cost of additional smart contract risk, exposing the Core Module to contracts developed, controlled, and maintained by other protocols.
+
 
 ### AIP-43 and the Shift in Reserve Strategy
 
