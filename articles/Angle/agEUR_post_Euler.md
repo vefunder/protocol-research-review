@@ -66,9 +66,9 @@ SLPs are instrumental in maintaining agEUR's system solvency and contribute to t
 * Slippage increases with decreasing C-ratio.
 
 
-## Angle's Core Module Reserve Allocation and Implemented Changes
+## Angle's Core Module Reserve Allocation and Recent Changes
 
-The Core module earns interest on these reserves by lending to other platforms. These strategies contribute to the Core module's appeal for Standard Liquidity Providers (SLPs), enabling interest generation, reserve accumulation, and veANGLE holder incentivization. It is critical to how Angle Protocol optimizes its collateral's efficiency; by mobilizing the liquidity into blue-chip DeFi protocols, Angle improves the capital efficiency of the collateral, allowing the cake-having (cap. efficiency) and cake-eating (adoption: attracting more SLPs, thereby buffering the system, which makes agEUR more stable and hence more attractive). It is done at the cost of additional smart contract risk, exposing the Core Module to contracts developed, controlled, and maintained by other protocols.
+The Core module earns interest on these reserves by lending to other platforms. These strategies enable interest generation, reserve accumulation, veANGLE holder incentivization, and contribute to the Core module's appeal for Standard Liquidity Providers (SLPs). By mobilizing liquidity into blue-chip DeFi protocols, Angle can offer the financial motive that enables the cake-having (over-collateralization) and cake-eating (capital efficiency). It is done at the cost of composability risk from exposing the Core Module to third-party protocols (and therefore all risks associated with those protocols).
 
 
 ### AIP-43 and the Shift in Reserve Strategy
@@ -77,7 +77,7 @@ In January 2023, a proposal was [submitted to the Angle governance forum](https:
 
 The proposed system allows any individual to harvest the strategy and suggest a new allocation of funds to the underlying venues. The contract then verifies on-chain whether the proposed allocation results in a greater APR. If the proposal is superior, the contract transitions to the new allocation; otherwise, it retains the existing state and deploys idle funds into the highest-yielding lending venue. This approach supersedes the previous system, where funds were fully allocated to the platform offering the highest APR, which may not be the most efficient allocation.
 
-Angle stated that the main benefit of this change was that the protocol's lending revenues could increase by up to 50% by employing efficient bots to execute optimizations. This would further boost the revenues for SLPs and veANGLE holders. Additionally, implementing the change necessitated only minimal modifications to the strategy engine and related contracts.
+Angle stated that the main benefit of this change was that, by employing efficient bots to execute optimizations, the protocol's lending revenues could increase by up to 50%. This would further boost the revenues for SLPs and veANGLE holders. Additionally, implementing the change necessitated only minimal modifications to the strategy engine and related contracts.
 
 ![](https://i.imgur.com/B59O32i.png)
 
