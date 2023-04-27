@@ -19,3 +19,5 @@
 * Onchain analytics: breadcrumbs.app https://www.breadcrumbs.app/
 * AML onchain analytics: misttrack.io https://misttrack.io/
 
+* Full on-chain investigations tools list https://github.com/OffcierCia/On-Chain-Investigations-Tools-List
+
