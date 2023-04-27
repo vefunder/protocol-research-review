@@ -133,19 +133,23 @@ Following the exploit, Angle's liabilities far exceeded assets. In the event tha
 
 Source: [Tokens Claimable from CM before Hack](https://docs.google.com/spreadsheets/d/1SYkNR0BYBh4dHKSomJAXHXHZ9RkvYenn0DAvUAdTlJo/edit#gid=38781252)
 
-## Effect on Curve pools and agEUR peg
+### Effect on Curve Pools and agEUR Peg
 
 The peg on various Curve pools containing agEUR began to drop rapidly as the news of the exploit began to propagate.
 
 ![](https://i.imgur.com/uO98jir.png)
 
-Balances of the two main Curve pools containing agEU, 3EUR & agEUR/EUROC changed considerably as users offloaded agEUR.
+Balances of the two main Curve pools containing agEUR, 3EUR & agEUR/EUROC changed considerably as users offloaded agEUR.
 
 ![](https://i.imgur.com/JpNz3ug.png)
 
 ![](https://i.imgur.com/UeaLY2C.png)
 
 Overall, the Euler exploit contributed to a net outflow of Euro-denominated stablecoins exceeding €8m.
+
+![agEUR EUROC outflow](https://user-images.githubusercontent.com/51072084/234969580-13400110-5ac8-4111-a8a5-4530d2706b57.png)
+
+Source: [Outflow from agEUR/EUROC pool- Llama.airforce](https://llama.airforce/#/curve/pools) 
 
 Other pools that experienced minor effects included: [agEUR/ibEUR](https://curve.fi/#/ethereum/pools/factory-v2-78/deposit), [Euro Pool](https://curve.fi/#/ethereum/pools/factory-v2-145/deposit), [agEUR/EURe](https://curve.fi/#/ethereum/pools/factory-v2-231/deposit) and [agEUR/FRAXBP](https://curve.fi/#/ethereum/pools/factory-crypto-93/deposit). No significant impact has been observed on other euro Curve pools.
 
