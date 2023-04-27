@@ -21,3 +21,5 @@
 * Human readable block explorer: https://www.onceupon.gg/
 * Chain analytics/comparisons: https://www.artemis.xyz/
 
+* Full on-chain investigations tools list https://github.com/OffcierCia/On-Chain-Investigations-Tools-List
+
