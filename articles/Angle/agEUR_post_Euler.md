@@ -153,42 +153,52 @@ Source: [Outflow from agEUR/EUROC pool- Llama.airforce](https://llama.airforce/#
 
 Other pools that experienced minor effects included: [agEUR/ibEUR](https://curve.fi/#/ethereum/pools/factory-v2-78/deposit), [Euro Pool](https://curve.fi/#/ethereum/pools/factory-v2-145/deposit), [agEUR/EURe](https://curve.fi/#/ethereum/pools/factory-v2-231/deposit) and [agEUR/FRAXBP](https://curve.fi/#/ethereum/pools/factory-crypto-93/deposit). No significant impact has been observed on other euro Curve pools.
 
-We also looked into a [large liquidity removal](https://etherscan.io/tx/0x376a748c4eb1a174adf1de4c6a58ff4a3665196dfe652603c47f4e19b87d43bd) (approximately €1m equivalent) from agEUR/EUROC pool that occurred a few days before the exploit. This appears unrelated to these events and could be a market participant derisking his positions during the USDC depeg event.
+We also looked into a [large withdrawal](https://etherscan.io/tx/0x376a748c4eb1a174adf1de4c6a58ff4a3665196dfe652603c47f4e19b87d43bd) (approximately €1m equivalent) from the agEUR/EUROC pool that occurred a few days before the exploit. This appears unrelated to these events and could be a market participant derisking his positions during the USDC depeg event.
 
-## Recovery plan
 
-### Vote on agEUR holders' seniority
+## Funds Recovery and Proposal to Restart the Protocol
 
-The Euler hack prompted a governance discussion on the need to define the order of "seniority" among different token holders of the Angle Protocol, not only for the Euler situation but also for any future occurrences of losses not automatically handled by the Core module's smart contracts and voted parameters. This seniority concept was not explicitly stated before the exploit, only being obliquely alluded to in the document ([collateral settlement section](https://docs.angle.money/angle-core-module/other-aspects/collateral-settlement#use-cases)) and voted on by governance after the exploit.
-
-Angle governance argued that by prioritizing agEUR holders over Standard Liquidity Providers (SLPs) and Hedging Agents (HAs), the protocol could ensure its pegged value is defended using the available collateral reserves. 
-
-After deliberations, the proposed seniority of agEUR holders was submitted for a [snapshot vote](https://snapshot.org/#/anglegovernance.eth/proposal/0xd5404ecbd1e76a01c9991bcac74b631d562e0445a1998ea407678391ad95474a), resulting in veANGLE holders supporting the seniority of agEUR holders.
-
-## Funds recovery and Angle proposal to Restart the Protocol
-
-On March 25th, the hacker began to return the stolen funds to the Euler DAO. By April 4th, the entire amount was recovered. The Euler hack affected multiple assets. However, the restored funds were in ETH and DAI only, constituting approximately 97% of the stolen amount (converted to native assets at the time of transfer). This situation prompted several discussions on the best approach for Euler to return the funds to users.
+On March 25th, the hacker began to return the stolen funds to the Euler DAO. By April 3rd, Euler had confirmed that [the entire amount was recovered](https://twitter.com/eulerfinance/status/1643027386802270210). The Euler hack affected [ETH/stETH, WBTC, USDC and DAI](https://etherscan.io/address/0x036cec1a199234fc02f72d29e596a09440825f1c#tokentxns), which the hackers had consolidated into ETH and DAI, constituting approximately 97% of the stolen amount. This situation prompted several discussions on the best approach for Euler to return the funds to users.
 
 * **Initial exploit balances**: 66.3k wstETH, 34.4m USDC, 849.14 WBTC, 8,099.3 WETH, 8.88m DAI & 3,897.5 stETH.
 * **Returned funds**: 95.5k WETH and 43.1m DAI
 
-### Plan v1 and initial feedback
-On April 4th, Euler presented its [initial recovery plan](https://gov.angle.money/t/ideas-for-re-launching-the-protocol/674) on the governance forum for discussion. The proposed plan entailed simulating the repayment of all liabilities at the block when the protocol was disabled, calculating the net asset value (NAV) for each account, and allowing users to claim the recovered ETH, DAI, and USDC based on their proportion of the total NAV. A smart contract would be created to facilitate the claims. 
 
-### Plan v2 and redemption contract
-[Proposal v2](https://gov.angle.money/t/ideas-for-re-launching-the-protocol/674/6) was published on April 11th. The updated redemption plan addressed feedback on the initial proposal and outlined a mechanism to distribute the recovered assets to affected users following the attack. Critical updates include a more detailed calculation of net asset values (NAVs) for each sub-account and an alternate NAV calculation, including potential foregone profits due to the protocol's pause. The redemption contract was activated on the same day at 2:00 UTC.
+### Plan v1: Initial Feedback
 
-### Angle receiving its share of the reclaimed funds
-In the updated redemption plan, smart contract accounts cannot directly claim their recovered funds through the proposed smart contract mechanism because of potential issues with their internal accounting and inability to execute the `claim` method on the Merkle distributor contract. In addition, ending recovered funds directly to smart contracts may cause problems with their internal accounting, leading to incorrect or inconsistent record-keeping. 
+On April 4th, Euler presented its [Redemption of Euler Funds plan](https://forum.euler.finance/t/plan-for-redemption-of-euler-funds/906) on the governance forum for discussion. The proposed plan entailed simulating the repayment of all liabilities at the block when the protocol was disabled, calculating the net asset value (NAV) for each account, and allowing users to claim the recovered ETH, DAI, and USDC based on their proportion of the total NAV. A smart contract would be created to facilitate the claims. 
+
+
+### Plan v2: Redemption Contract
+
+[Redemption Proposal v2](https://forum.euler.finance/t/plan-for-redemption-of-euler-funds-v2/947) was published on April 11th. The updated redemption plan addressed feedback on the initial proposal and outlined a mechanism to distribute the recovered assets to affected users following the attack. Critical updates include a more detailed calculation of net asset values (NAVs) for each sub-account and an alternate NAV calculation, including potential foregone profits due to the protocol's pause. It also addressed returning funds to smart contracts on a case-by-case basis:
+
+> ### Smart Contract Accounts
+>
+> There are 141 affected smart contract accounts. Smart contracts can not necessarily execute the claim method on the merkle distributor contract. Furthermore, claims can not necessarily be sent directly to smart contracts without causing problems with their internal accounting.
+>
+> For these reasons, smart contracts will have to be handled on a case-by-case basis. Representatives of the Euler Foundation will communicate with Affected protocols and smart contract wallet holders can contact this email address for guidance given their particular situations: contact@euler.foundation
+>
+> Source: [Redemption Proposal v2](https://forum.euler.finance/t/plan-for-redemption-of-euler-funds-v2/947#smart-contract-accounts-8)
+
+The redemption contract was activated on the same day at 2:00 UTC.
+
+
+### Angle Funds Reclamation
+
+In the updated redemption plan, smart contract accounts cannot directly claim their recovered funds through the proposed smart contract mechanism because of potential issues with their internal accounting and inability to execute the `claim` method on the Merkle distributor contract. In addition, sending recovered funds directly to smart contracts may cause problems with their internal accounting, leading to incorrect or inconsistent record-keeping. 
 
 Angle communicated with Euler and ultimately received the recovered funds on April 12th through these two transactions:
+
 * [0xc8509333e66415834d8d44e392132730a2b20f2f4efa8a66b7728326b4668276](https://etherscan.io/tx/0xc8509333e66415834d8d44e392132730a2b20f2f4efa8a66b7728326b4668276)
 * [0x8ab2c73bd55fb255124c720f8bc64b73d0932b653005b2ab8a6b355e94c29022](https://etherscan.io/tx/0x8ab2c73bd55fb255124c720f8bc64b73d0932b653005b2ab8a6b355e94c29022)
 
-The breakdown of the returned funds is as follows: 
+The breakdown of the returned funds is as follows:
+
 * 7,408.8 ETH
 * 3,416,991 DAI
 * 263,379 USDC
+
 
 ### Vote to re-launch the protocol
 
@@ -196,21 +206,29 @@ On April 13th, a snapshot vote [was initiated](https://snapshot.org/#/anglegover
 
 ![](https://i.imgur.com/jU1Uq8I.png)
 
+Source: [Twitter](https://twitter.com/AngleProtocol/status/1646485888103518208?s=20)
+
 This proposal outlined the necessary steps to secure the Angle and agEUR positions after Angle successfully recovered funds from the Euler hack. The primary objective of the vote was to establish a way to maintain agEUR's peg and provide a method for Staking Liquidity Providers (SLPs) to retrieve their funds and repay Hedge Accounts (HAs). 
 
-Two options were proposed for swapping the recovered assets. Both options suggest upgrading the PoolManager contracts, unpausing SLP contracts, and settling HAs. The vote had a 25-hour timespan to allow for a quick swap, as the protocol held long ETH and bears significant exchange risk. This vote is intended as a first step towards getting the protocol back on track, with the ultimate goal of building a better, more scalable, and robust system that can make agEUR a backbone in DeFi.
+Two options were proposed for swapping the recovered assets. Both options suggested upgrading the PoolManager contracts, unpausing SLP contracts, and settling HAs. The vote had a 25-hour timespan to allow for a quick swap, as the protocol held long ETH and bore significant exchange risk. This vote was intended as a first step towards getting the protocol back on track, with the ultimate goal of building a better, more scalable, and robust system that can make agEUR a backbone in DeFi.
 
 #### Option 1 - Swap all recovered funds and additional DAI into EUROC
 
-Option 1 suggests swapping the 7,408.8 ETH and 3,416,991 DAI received from Euler's redemption into EUROC and removing 2,700,000 DAI from the Core module's DAI PoolManager contract to be swapped into EUROC. This aims to cancel the protocol's exposure to ETH and USD, backing all agEUR issued through the Core module with EUROC. This option allows the Governor or Guardian multisig to manage the agEUR-EUROC pool liquidity. This option will pause mints and redemptions through the Core module.
+Option 1 suggested swapping the 7,408.8 ETH and 3,416,991 DAI received from Euler's redemption into EUROC and removing 2,700,000 DAI from the Core module's DAI PoolManager contract to be swapped into EUROC. This aimed to cancel the protocol's exposure to ETH and USD, backing all agEUR issued through the Core module with EUROC. This option would allow the Governor or Guardian multisig to manage the agEUR-EUROC pool liquidity. This option would pause mints and redemptions through the Core module.
 
 #### Option 2 - Swap 50% of recovered ETH into USDC and the other 50% into EUROC.
 
-Option 2 proposes swapping 50% of the 7,408 ETH obtained from Euler into EUROC and the other half into USDC. This option aims to eliminate the protocol's exposure to ETH and partially remove its exposure to USDC. While the Core module could technically be restarted for agEUR holder redemptions after the swap, the protocol may need more USDC to handle all agEUR to be redeemed. The implications of this situation would be decided in a future vote.
+Option 2 proposed swapping 50% of the 7,408 ETH obtained from Euler into EUROC and the other half into USDC. This option aimed to eliminate the protocol's exposure to ETH and partially remove its exposure to USDC. While the Core module could technically be restarted for agEUR holder redemptions after the swap, the protocol may need more USDC to handle all agEUR to be redeemed. The implications of this situation would be decided in a future vote.
+
 
 ### Results
+
 The voting concluded on April 14th, 2023, witnessing substantial participation from the community. Option 2 emerged successful, albeit by a narrow margin.
+
 ![](https://i.imgur.com/Pr2kUSP.png)
+
+Source: [Snapshot](https://snapshot.org/#/anglegovernance.eth/proposal/0x3214d2a1f5ce14ebc976d9e3a171dc185c1fa466aaf401bd34e5d84f37095921)
+
 
 ### OTC trade
 
@@ -227,6 +245,16 @@ On April 21st, Angle opened the redemption for hedging agents (HA) to settle all
 At the time of writing this article, a [snapshot vote](https://snapshot.org/#/anglegovernance.eth/proposal/0x7c1aad3b8293a5cb15af1d8f80ccead11c84f6e61fe6b1dc7e719f1f22e831bc) was underway to determine the distribution of excess profit generated by the ETH to USDC swaps to the Stablecoin Liquidity Providers (SLP). The staking module withdrawal function is expected to be reinstated shortly after that.
 
 ## Lessons learned and a path forward for V2
+
+### Vote on agEUR Holders' Seniority
+
+The Euler hack prompted a [governance discussion](https://gov.angle.money/t/moving-forward-with-angle-post-euler-hack/647) on the need to define the order of "seniority" among different token holders of the Angle Protocol, not only for the Euler situation but also for any future occurrences of losses not automatically handled by the Core module's smart contracts. This seniority concept was not explicitly stated before the exploit, only being obliquely alluded to in the document ([collateral settlement section](https://docs.angle.money/angle-core-module/other-aspects/collateral-settlement#use-cases)) and voted on by governance after the exploit.
+
+Angle governance considered various seniority options and ultimately decided that by prioritizing agEUR holders over Standard Liquidity Providers (SLPs) and Hedging Agents (HAs), the protocol could ensure its pegged value is defended using the available collateral reserves. 
+
+After deliberations, the proposed seniority of agEUR holders was submitted for a [snapshot vote](https://snapshot.org/#/anglegovernance.eth/proposal/0xd5404ecbd1e76a01c9991bcac74b631d562e0445a1998ea407678391ad95474a), resulting in veANGLE holders supporting the seniority of agEUR holders.
+
+____
 
 On April 5th, 2023, Angle published [Euler Hack Reflection: Learning, Adapting, and Strengthening Angle Protocol](https://www.angle.money/#/blog/announcements/euler-hack-reflection-learning-adapting-and-strengthening-angle-protocol) which give a glimpse of a possible way forward for the Angle Protocol. 
 
