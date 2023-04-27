@@ -41,7 +41,7 @@ Its primary product is the agEUR stablecoin. The agEUR stablecoin aims to mainta
 
 The Core Module oversees collateral pools and mints stablecoins. It comprises agEUR minters, Stablecoin Liquidity Providers (SLPs), and Hedging Agents (HAs). At the same time, the Core Module sustains a debt-to-collateral ratio to ensure the stablecoin's over-collateralization. An in-depth look at the inner workings of the core module and its participants can be found in our [previous article](https://cryptorisks.substack.com/p/ageur-angle-protocol).
 
-![](https://i.imgur.com/gUR3jGm.png)
+![Core Module](https://i.imgur.com/gUR3jGm.png)
 
 Source: [Angle Docs: Core Module](https://docs.angle.money/angle-core-module/overview)
 
@@ -68,7 +68,7 @@ SLPs are instrumental in maintaining agEUR's system solvency and contribute to t
 
 ## Angle's Core Module Reserve Allocation and Recent Changes
 
-The Core module earns interest on these reserves by lending to other platforms. These strategies enable interest generation, reserve accumulation, veANGLE holder incentivization, and contribute to the Core module's appeal for Standard Liquidity Providers (SLPs). By mobilizing liquidity into blue-chip DeFi protocols, Angle can offer the financial motive that enables the cake-having (over-collateralization) and cake-eating (capital efficiency). It is done at the cost of composability risk from exposing the Core Module to third-party protocols (and therefore all risks associated with those protocols).
+The Core module earns interest on these reserves by lending to other platforms. These strategies thereby enable protocol reserve accumulation, veANGLE holder incentivization, and contribute to the Core module's appeal for Standard Liquidity Providers (SLPs). By mobilizing liquidity into blue-chip DeFi protocols, Angle can offer the financial motive for both the cake-having (over-collateralization) and cake-eating (capital efficiency). It is done at the cost of composability risk from exposing the Core Module to third-party protocols (and therefore all risks associated with those protocols).
 
 
 ### AIP-43 and the Shift in Reserve Strategy
@@ -79,16 +79,18 @@ The proposed system allows any individual to harvest the strategy and suggest a 
 
 Angle stated that the main benefit of this change was that, by employing efficient bots to execute optimizations, the protocol's lending revenues could increase by up to 50%. This would further boost the revenues for SLPs and veANGLE holders. Additionally, implementing the change necessitated only minimal modifications to the strategy engine and related contracts.
 
-![](https://i.imgur.com/B59O32i.png)
+![Lending Strategies](https://user-images.githubusercontent.com/51072084/234950319-d21a93ac-c113-46ec-9738-12d2247654fa.png)
+
+Source: [Angle Docs: Lending Strategies](https://docs.angle.money/angle-core-module/lending)
 
 In February 2023, [AIP-43: Improve Angle Yield Strategies for USDC and DAI](https://snapshot.org/#/anglegovernance.eth/proposal/0xb1b4d98c080ec587b2563a6aaa6f854e0a42ce6881f61bced62cf9fa8ae42898) was successfully implemented following a favorable snapshot vote. It is also worth noting that this marked the introduction of the GenericEuler strategy, as advertised [in the official announcement](https://www.angle.money/#/blog/announcements/increasing-angle-yield-and-revenue-with-permissionless-off-chain-optimization).
 
 [`OptimizerAPRStrategyV2`](https://github.com/AngleProtocol/angle-strategies/blob/main/contracts/strategies/OptimizerAPR/OptimizerAPRStrategy.sol) (based on Yearn's GenLender contract) was deployed, with the [following whitelisted strategies](https://github.com/AngleProtocol/angle-strategies/tree/main/contracts):
-* Generic Aave
-* Generic Compound
-* Generic Euler
+* [Generic Aave](https://etherscan.io/address/0xe4377620697Be18E6d6aa911CA488571EeB3f081)
+* [Generic Compound](https://etherscan.io/address/0xE2773fB045e53De5344f245E03eA614AF1064Ce3#readProxyContract)
+* [Generic Euler](https://etherscan.io/address/0xf5aD02F3DbBF4b42DEE1f1255607f929CA2a7c5a#readProxyContract)
 
-These strategies are regular lenders, meaning they supply the capital to these Lending & Borrowing protocols. Over the next few months, the system performed as intended, with debt allocation being changed periodically but primarily assigned to Generic Euler due to the added EUL incentives.
+These strategies are regular lenders, meaning they supply the capital to these Lending & Borrowing protocols and havest interest earnings. Over the next few months, the system performed as intended, with debt allocation being changed periodically but primarily assigned to Generic Euler due to the added EUL incentives.
 
 ## Unraveling the Euler Exploit: Timeline, Reserve Implications, and Consequences for Curve Pools
 
