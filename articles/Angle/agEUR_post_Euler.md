@@ -96,7 +96,7 @@ These strategies are regular lenders, meaning they supply the capital to these L
 
 On March 13th, 2023, Euler Finance suffered an exploit resulting in a loss of around $200 million. The vulnerability stemmed from Euler Finance permitting donations without an account health check, specifically in the `donateToReserves` function of the EToken implementation. This issue was introduced through [eIP 14: Contract Upgrades](https://forum.euler.finance/t/eip-14-contract-upgrades/305) and remained on-chain for eight months before being exploited.
 
-Following the attack, Euler's native token, EUL, fell by 50%. The team halted the attack by disabling the EToken module and the vulnerable donation function. Numerous protocols were affected, including Angle, Balancer, Idle, Inverse, SwissBorg, Swivel, Temple DAO, Yield, etc.
+Following the attack, Euler's native token, EUL, fell by 50%. The team responded by disabling the EToken module and the vulnerable donation function. Numerous protocols were affected, including Angle, Balancer, Idle, Inverse, SwissBorg, Swivel, Temple DAO, Yield, etc.
 
 ### Timeline (UTC)
 Below is the timeline of March 13th events and actions taken by Angle:
@@ -108,16 +108,16 @@ Below is the timeline of March 13th events and actions taken by Angle:
 - 11:09 UTC: [burns the remaining agEUR](https://etherscan.io/tx/0x46540733e163ba1d5cce04d77bd6395c52c50126fd97c1c78d75f676d099115c) on the Euler contract
 - 11:52 UTC: Debt ceiling [updated to 0](https://etherscan.io/tx/0x515b4679db46356bb9a598247095cbafab7dcf1ac5eb7f6ecafad3ea14961140) for the Borrowing module. The core module is fully paused.
 - 13:42 UTC: Angle [removes liquidity](https://etherscan.io/tx/0xcf7f9c25034faaa5dcd3c5acd8fde5f06dc586e8ed7272e2368ae0a80af313f5) from `Curve agEUR/EUROC Factory`
-- 14:56 UTC: Angle [posted a Q&A](https://anglemoney.notion.site/Angle-Protocol-Q-A-`Regarding-Euler-Exploit-03af18cbe5e84430b3341b145554492e) addressing the exploit
+- 14:56 UTC: Angle [posts a Q&A](https://anglemoney.notion.site/Angle-Protocol-Q-A-`Regarding-Euler-Exploit-03af18cbe5e84430b3341b145554492e) addressing the exploit
 - 15:59 UTC: Reserves funds are [removed from Compound strategy](https://etherscan.io/tx/0x61f20b2bd6ebb5fa567e36ab6a60332a4749f066e931fc22b06e0880658d5f6e) (3,942,967 DAI & 6,126,537 USDC)
 
 ### Impact on Angles Core Module's Reserves
 
-During the exploit, Angle's USDC reserves were heavily invested (74%) in the GenericEuler strategies. Fortunately, the DAI reserves suffered no losses as they were only invested in the `GenericCoumpound` strategy.
+During the exploit, Angle's USDC reserves were heavily invested (74%) in the `GenericEuler` strategy. Fortunately, the DAI reserves suffered no losses as they were only invested in the `GenericCoumpound` strategy.
 
-![](https://i.imgur.com/J2PJUhl.png)
+![Angle USDC Reserve](https://i.imgur.com/J2PJUhl.png)
 
-The Euler exploit resulted in **Angle's reserves losing 17,6m USDC** as detailed in the[ Angle Protocol - State of the Protocol spreedsheet](https://docs.google.com/spreadsheets/d/1SYkNR0BYBh4dHKSomJAXHXHZ9RkvYenn0DAvUAdTlJo/edit#gid=1182401585). At the time of the hack, the total supply was 26,418,421 agEUR (excluding the agEUR burned on the Euler contract). The Core Module held the following assets for an estimated TVL of $36.1m:
+The Euler exploit resulted in **Angle losing 17.6m USDC** as detailed in the[ Angle Protocol - State of the Protocol spreedsheet](https://docs.google.com/spreadsheets/d/1SYkNR0BYBh4dHKSomJAXHXHZ9RkvYenn0DAvUAdTlJo/edit#gid=1182401585). At the time of the attack, the Core Module held the following assets for an estimated TVL of $36.1m:
 
 * 4.11m DAI
 * 24.99m USDC
@@ -125,9 +125,13 @@ The Euler exploit resulted in **Angle's reserves losing 17,6m USDC** as detailed
 * 1.52 wETH
 * 203k FEI
 
-The protocol also had ~$11.8m in deposits from its SPLs, ~$71.0k from the HAs, and a surplus of ~$5.58m.
+The total agEUR supply was 26,418,421 agEUR (excluding the agEUR burned on the Euler contract), with 17.3m having been minted thorugh the Core Module. The protocol also had ~$11.8m in deposits from its SPLs, ~$71.0k from the HAs, and a surplus of ~$5.58m.
 
-Following the exploit, Angle's liabilities far exceeded assets. The reserves in the Core module were inferior to the value of the claims of agEUR holders, Standard Liquidity Providers, and the remaining hedging agents.
+Following the exploit, Angle's liabilities far exceeded assets. In the event that no funds were recovered, the TVL of the Core Module would stand at $18.4m. The reserves in the Core module were inferior to the value of the claims of agEUR holders, Standard Liquidity Providers, and the remaining hedging agents. There would be a shortfall of around $12m ($18.4m in assets - $30.4m in liabilities).
+
+![Screen Shot 2023-04-27 at 12 05 50 PM](https://user-images.githubusercontent.com/51072084/234966425-47502577-f2b0-4e3f-a373-06643ff06197.png)
+
+Source: [Tokens Claimable from CM before Hack](https://docs.google.com/spreadsheets/d/1SYkNR0BYBh4dHKSomJAXHXHZ9RkvYenn0DAvUAdTlJo/edit#gid=38781252)
 
 ## Effect on Curve pools and agEUR peg
 
