@@ -23,7 +23,7 @@ In a [previous report](https://cryptorisks.substack.com/p/ageur-angle-protocol),
 
 - In Q1 2023, Angle modified its reserve investment approach for the Core Module, allowing anyone to change the investment strategy allocation via a permissionless function. However, Angle did not consider additional risk mitigation by diversifying yield sources. During the exploit, Angle had 74% of its USDC reserves invested in Euler.
 - Before the hack, Angle had $36.1m (Core Module), $11.8m (SLP), and a surplus (treasury) of $5.6m. The exploit led to Angle Protocol losing approximately 17.6m USDC, leaving agEUR undercollateralized.
-- Angle's governance multisigs (Guardian and Governor), despite the relatively high signature threshold, were quick to pause the protocol's critical functions and minimized further negative impact.
+- Despite the relatively high signature threshold, Angle's governance multisigs (Guardian and Governor) quickly paused the protocol's critical functions and minimized further negative impact.
 - Although present in the documents, the seniority principle which prioritizes agEUR holders over the Stablecoin Liquidity Providers (SLPs) and Hedging Agents (HAs) was not clearly stated and had to be voted on shortly after the exploit.
 - The Euler incident caused considerable disruptions in agEUR associated Curve pools, resulting from a significant net outflow of euro-denominated stablecoins (>€8m).
 - Euler's successful recovery of the stolen funds led to Angle protocol restoring over-collateralization. Angle may not have survived had the exploited funds been lost, leading to significant losses for SLP and HAs and a dire collateral ratio for agEUR.
@@ -53,12 +53,12 @@ Users can deposit whitelisted collateral (DAI, USDC, FRAX, WETH, and FEI) and ob
 
 #### Hedging Agents (HAs)
 
-HAs play a critical role in managing risks associated with collateral fluctuations. The Core Module hedges its volatility by allowing profit-seeking HAs to open perpetual futures positions. The HA opens a position with X amount of their own collateral and Y position size (how much of the Core Module collateral they will insure). Positive fluctuations in the protocol collateral are realized as profit to the HA, and negative fluctuations realized as losses. The protocol can safely guarantee capital-efficient stablecoin minting/burning when its holdings are adequately hedged.  
+HAs play a critical role in managing risks associated with collateral fluctuations. The Core Module hedges its volatility by allowing profit-seeking HAs to open perpetual futures positions. The HA opens a position with X amount of their own collateral and Y position size (how much of the Core Module collateral they will insure). Positive fluctuations in the protocol collateral are realized as profit to the HA, and negative fluctuations are realized as losses. The protocol can safely guarantee capital-efficient stablecoin minting/burning when its holdings are adequately hedged.  
 
 
 #### Stablecoin Liquidity Providers (SLPs)
 
-At times, HAs may not be completely insuring the protocol collateral, so SLPs are attracted to provide a system buffer. SLPs provide liquidity that enables the protocols to earn additional interest and ensure system solvency. In return, they receive a portion of fees generated from agEUR minting/burning and a portion of fees from protocol lending activities. They have additional yield potential, as they also earn interest on capital provided by both stablecoin minters and HAs. 
+At times, HAs may not be completely insuring the protocol collateral, so SLPs are attracted to provide a system buffer. SLPs provide liquidity enabling the protocol to earn additional interest and ensure system solvency. In return, they receive a portion of fees generated from agEUR minting/burning and from protocol lending activities. They have additional yield potential, as they also earn interest on capital provided by both stablecoin minters and HAs. 
 
 SLPs are instrumental in maintaining agEUR's system solvency and contribute to the overall stability of the stablecoin. In the case of the protocol becoming under-collateralized from insufficient HA positions, the liquidity provided by an SLP ensures 1:1 redeemability. Should an SLP choose to remove their liquidity in such circumstances, they would incur a slippage. This incentivizes a target system C-ratio. The protocol's C-ratio governs the slippage parameter:
 
@@ -90,7 +90,7 @@ In February 2023, [AIP-43: Improve Angle Yield Strategies for USDC and DAI](http
 * [Generic Compound](https://etherscan.io/address/0xE2773fB045e53De5344f245E03eA614AF1064Ce3#readProxyContract)
 * [Generic Euler](https://etherscan.io/address/0xf5aD02F3DbBF4b42DEE1f1255607f929CA2a7c5a#readProxyContract)
 
-These strategies are regular lenders, meaning they supply the capital to these Lending & Borrowing protocols and havest interest earnings. Over the next few months, the system performed as intended, with debt allocation being changed periodically but primarily assigned to Generic Euler due to the added EUL incentives.
+These strategies are regular lenders, meaning they supply the capital to these Lending & Borrowing protocols and harvest interest earnings. Over the next few months, the system performed as intended, with debt allocation being changed periodically but primarily assigned to Generic Euler due to the added EUL incentives.
 
 ## Unraveling the Euler Exploit: Timeline, Reserve Implications, and Consequences for Curve Pools
 
@@ -113,11 +113,11 @@ Below is the timeline of March 13th events and actions taken by Angle:
 
 ### Impact on Angles Core Module's Reserves
 
-During the exploit, Angle's USDC reserves were heavily invested (74%) in the `GenericEuler` strategy. Fortunately, the DAI reserves suffered no losses as they were only invested in the `GenericCoumpound` strategy.
+During the exploit, Angle's USDC reserves were heavily invested (74%) in the `GenericEuler` strategy. Fortunately, the DAI reserves suffered no losses as they were only allocated to the `GenericCoumpound` strategy.
 
 ![Angle USDC Reserve](https://i.imgur.com/J2PJUhl.png)
 
-The Euler exploit resulted in **Angle losing 17.6m USDC** as detailed in the[ Angle Protocol - State of the Protocol spreedsheet](https://docs.google.com/spreadsheets/d/1SYkNR0BYBh4dHKSomJAXHXHZ9RkvYenn0DAvUAdTlJo/edit#gid=1182401585). At the time of the attack, the Core Module held the following assets for an estimated TVL of $36.1m:
+The Euler exploit resulted in **Angle losing 17.6m USDC** as detailed in the[ Angle Protocol - State of the Protocol spreadsheet](https://docs.google.com/spreadsheets/d/1SYkNR0BYBh4dHKSomJAXHXHZ9RkvYenn0DAvUAdTlJo/edit#gid=1182401585). At the time of the attack, the Core Module held the following assets for an estimated TVL of $36.1m:
 
 * 4.11m DAI
 * 24.99m USDC
@@ -185,8 +185,6 @@ The redemption contract was activated on the same day at 2:00 UTC.
 
 
 ### Angle Funds Reclamation
-
-In the updated redemption plan, smart contract accounts cannot directly claim their recovered funds through the proposed smart contract mechanism because of potential issues with their internal accounting and inability to execute the `claim` method on the Merkle distributor contract. In addition, sending recovered funds directly to smart contracts may cause problems with their internal accounting, leading to incorrect or inconsistent record-keeping. 
 
 Angle communicated with Euler and ultimately received the recovered funds on April 12th through these two transactions:
 
