@@ -61,31 +61,36 @@ A [gauge proposal](https://gov.curve.fi/t/proposal-to-add-wacme-frxeth-and-stacm
 
 ## Introduction to Accumulate Ecosystem
 
+### Project History
+
+Accumulate Network has a long project history that was originally the Factom Protocol founded by [Paul Snow](https://www.linkedin.com/in/paulsn/) and [David Johnston](https://www.linkedin.com/in/davidajohnston/details/experience/) in 2014. Factom was conceived as an enterprise blockchain that would enable companies and organizations to keep transparent, high integrity data records. It was a grant recipient from the US Department of Homeland Security and partnered with the Bill and Melinda Gates Foundation. The protocol [announced its intention](https://factom-council.medium.com/factom-becomes-accumulate-860ededf771f) to rebrand and upgrade to the Accumulate Network in November 2021, and officially [activated its mainnet](https://accumulatenetwork.io/2022/10/accumulate-mainnet-activation/) the following year. A timeline of significant events are as follows: 
+
+- **2014**: [Factom](https://web.archive.org/web/20210624141324/https://www.factomprotocol.org/) is founded by Paul Snow and David Johnston in Austin, Texas.
+- **April 2015**: Factom has one of the first blockchain token sales and raises 579 Bitcoin (~17,370,000 USD), worth $140,000 at the time.
+- **Summer 2021**: [Inveniam Capital Partners](https://www.inveniam.io/) acquires Factom's 40 blockchain patents and key engineers Paul Snow and Jay Smith. It also forms the [DeFi Devs](https://defidevs.io/) subsidiary as a developer community for its projects.
+- **November 2021**: Factom Authority Node Operators (ANOs) [unanimously vote](https://accumulatenetwork.io/2021/12/factom-validators-vote-unanimously-to-approve-upgrade-to-accumulate/) to rebrand and upgrade the Factom blockchain to the Accumulate blockchain.
+- **November 2022**: The Accumulate mainnet is officially activated.
+
+
+### Team 
+
+Development of Accumulate is headed by Factom lead engineers [Paul Snow](https://www.linkedin.com/in/paulsn/) and [Jay Smith](https://www.linkedin.com/in/jaysmithpmp/) through the community developement organizations. There are a number of organizations that can be considered core maintainers of the Accumulate Ecosystem, most notably: 
+
+- [DeFi Devs](https://defidevs.io/) is a community developer organization for Accumulate Protocol. They are one of the primary contributors to the project, which is developed through open participation from the developer community. 
+
+- [De Facto](https://de-facto.pro/) is a company that provides blockchain development and advisory services to startups. Their goal is to help startups navigate the complexities of blockchain technology and bring their solutions to market quickly and efficiently. De Facto can be considered core maintainers of Accumulate Network, but are also the core development team behind Accumulated Finance.
+
+Accumulate [show on their website](https://accumulatenetwork.io/about/#story) a number of additional organizations that contribute to its development. 
+
+
 ### Brief Ecosystem Overview
+
 |![](https://i.imgur.com/VtZokGd.png)|
 |----|
 |Conceptual Orientation of Accumulate Ecosystem & Interdependencies
 
-The [Accumulate network](https://accumulatenetwork.io/) is a layer 1 blockchain network and ACME is its native utility token (similar to ETH). The Accumulate Network has its token economy with users acquiring ACME on the open market/ earning it from staking. Usage burns the token and adds it to the token reserve which issues them as staking rewards to stakers. The [Accumulate Bridge](https://bridge.accumulatenetwork.io/mint) enables the bridging ACME between Ethereum and Accumulate by issuing wACME. [Accumulated Finance](https://accumulated.finance/) is a platform for liquid staking on Ethereum for wACME and allows the user to stake wACME tokens by earning underlying yield while having a liquid representation in stACME tokens.   
+The [Accumulate network](https://accumulatenetwork.io/) is a layer 1 blockchain network and ACME is its native utility token (similar to ETH). The Accumulate Network has its token economy with users acquiring ACME on the open market/ earning it from staking. Usage burns the token and adds it to the token reserve which issues them as staking rewards to stakers. The [Accumulate Bridge](https://bridge.accumulatenetwork.io/mint) enables the bridging ACME between Ethereum and Accumulate by issuing wACME. [Accumulated Finance](https://accumulated.finance/) is a platform for liquid staking on Ethereum for wACME and allows the user to stake wACME tokens by earning underlying yield while having a liquid representation in stACME tokens.
 
-### Team 
-While the project was initiated by [Paul Snow](https://www.linkedin.com/in/paulsn/) and [David Johnston](https://www.linkedin.com/in/davidajohnston/details/experience/). The companies that in the meantime can be considered core maintainers across the Accumulate Ecosystem are: 
-
-- [DeFi Devs](https://www.linkedin.com/company/defi-devs/) is a community developer of Accumulate Protocol, an open-source identity-based blockchain protocol that supports multiple chains, human-readable addresses, and key hierarchies. They are one of the primary contributors to the project, which is developed through open participation from the developer community. 
-
-- [De Facto](https://www.linkedin.com/company/defactopro/) is a company that provides blockchain development and advisory services to startups. Their goal is to help startups navigate the complexities of blockchain technology and bring their solutions to market quickly and efficiently. Similarly to DeFi Devs they can be considered core maintainers of Accumulate Network, but are also the core development team behind Accumulated Finance.
-
-Accumulate [show on their website](https://accumulatenetwork.io/about/#story) is a composition of different development companies that are behind the development which is a positive as it distributed reliance to multiple teams rather than one. 
-
-### Project History
-Accumulate Network has a [long project history](https://accumulatenetwork.io/2022/05/factom-transition-to-accumulate-guide-faq/). It spans from its founding as Factom in 2014 to its transition to Accumulate in 2021: 
-
-- **2014**: [Factom](https://web.archive.org/web/20210624141324/https://www.factomprotocol.org/) is founded by Paul Snow and David Johnston in Austin, Texas.
-- **April 2015**: Factom has one of the first blockchain token sales and raises 579 Bitcoin (~17,370,000 USD), worth $140,000 at the time.
-- **2015**: Factom partners with the Gates Foundation and becomes a grant recipient from the Department of Homeland Security.
-- **2016**: Factom releases its whitepaper
-- **2021**: Factom Authority Node Operators (ANOs) unanimously voted to rebrand and upgrade the Factom blockchain to the Accumulate blockchain.
-- **November 2021**: The hard fork to upgrade the Factom blockchain to the Accumulate blockchain is completed.
 
 ### Assets
 
@@ -99,6 +104,7 @@ The assets relevant for this report can be summarised as follows:
 | [ACFI](https://docs.accumulated.finance/accumulated-finance/acfi) | ACFI is the governance token of Accumulated Finance, a platform that allows users to participate in liquid staking and other DeFi services for the Accumulate protocol. |
 | [FraxETH](https://defillama.com/protocol/frax-ether) | Frax Ether is a liquid ETH staking derivative designed to uniquely leverage the Frax Finance ecosystem to maximize staking yield and smoothen the Ethereum staking process for a simplified, secure, and DeFi-native way to earn interest on ETH.
 | [FraxBP](https://mirror.xyz/0x290101596c9f85eB7194f6090a8c94fF5AAa32ca/vtNw6EvBjfqsRWi4YgmV6YJgFyU6Qg2Xjbc2_GchF6Q) |FraxBP is a base pool token on Curve Finance that serves as an alternative to 3CRV. It includes FRAX and USDC, and is used to provide liquidity for trading pairs involving those stablecoins on Curve. |
+
 
 ## Risk Assessment 
 While this risk assessment sets the primary focus on the proposal put forward by Accumulated Finance for the WACME/frxETH (or WACME/ETH) and stACME/WACME pools, given the complexity and interdependence of different protocols and networks a wider scope has to be set. 
