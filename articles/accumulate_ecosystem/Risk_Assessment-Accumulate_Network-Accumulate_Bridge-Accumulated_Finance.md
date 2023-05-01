@@ -10,8 +10,6 @@ To-do's (remove before publsihing)
 - [ ] Upload to Github & Request review
 - [ ] Answer gudiding questions (after review - in case more digging is needed)
 
-Item to move (from relation to Curve section):
-
 
 
 ====
@@ -102,10 +100,10 @@ The assets relevant for this report can be summarised as follows:
 
 | Asset | Description |
 | --- | --- |
-| [ACME](https://docs.accumulatenetwork.io/accumulate/getting-started/glossary) | ACME is the native token of the Accumulate Network. It is used to pay for transactions and services on the network, and it can be staked for network security and governance. |
-| [wACME](https://docs.accumulatenetwork.io/accumulate/tutorials/bridge/release-acme-in-accumulate-burn-wrapped-acme) | wACME is an ERC-20 token that is pegged 1:1 to ACME and can be minted by depositing ACME on the Accumulate Bridge, which is a bridge that allows users to transfer ACME and other Accumulate tokens between Ethereum and Accumulate. |
-| [stACME](https://docs.accumulated.finance/general/deployment) |  stACME is a derivative token of ACME that represents staked ACME tokens on the Accumulate Network. It allows users to earn staking rewards while retaining the ability to use their staked tokens as collateral for other DeFi applications. |
-| [ACFI](https://docs.accumulated.finance/accumulated-finance/acfi) | ACFI is the governance token of Accumulated Finance, a platform that allows users to participate in liquid staking and other DeFi services for the Accumulate protocol. |
+| [ACME](https://explorer.accumulatenetwork.io/acc/ACME) | ACME is the native token of the Accumulate Network. It is used to pay for transactions and services on the network, and it can be staked for network security and governance. |
+| [WACME](https://etherscan.io/token/0xDF4Ef6EE483953fE3B84ABd08C6A060445c01170) | WACME is an ERC-20 token that is pegged 1:1 to ACME and can be minted by depositing ACME on the Accumulate Bridge, which is a bridge that allows users to transfer ACME and other Accumulate tokens between Ethereum and Accumulate. |
+| [stACME](https://etherscan.io/token/0x7AC168c81F4F3820Fa3F22603ce5864D6aB3C547) |  stACME is an ERC-20 derivative token of ACME that represents staked ACME tokens on the Accumulate Network. It allows users to earn staking rewards while retaining the ability to use their staked tokens as collateral for other DeFi applications. |
+| [ACFI](https://docs.accumulated.finance/accumulated-finance/acfi) | ACFI is the (currently unreleased) governance token of Accumulated Finance, a platform that allows users to participate in liquid staking and other DeFi services for the Accumulate protocol. |
 | [FraxETH](https://defillama.com/protocol/frax-ether) | Frax Ether is a liquid ETH staking derivative designed to uniquely leverage the Frax Finance ecosystem to maximize staking yield and smoothen the Ethereum staking process for a simplified, secure, and DeFi-native way to earn interest on ETH.
 | [FraxBP](https://mirror.xyz/0x290101596c9f85eB7194f6090a8c94fF5AAa32ca/vtNw6EvBjfqsRWi4YgmV6YJgFyU6Qg2Xjbc2_GchF6Q) |FraxBP is a base pool token on Curve Finance that serves as an alternative to 3CRV. It includes FRAX and USDC, and is used to provide liquidity for trading pairs involving those stablecoins on Curve. |
 
