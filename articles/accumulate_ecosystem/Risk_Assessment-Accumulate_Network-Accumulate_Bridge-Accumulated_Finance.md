@@ -10,6 +10,8 @@ To-do's (remove before publsihing)
 - [ ] Upload to Github & Request review
 - [ ] Answer gudiding questions (after review - in case more digging is needed)
 
+Item to move (from relation to Curve section):
+Accumulated Finance is a liquid staking and DeFi platform for the WACME token, which is a wrapped version of ACME on the Ethereum mainnet. The platform issues stACME, a liquid staking derivative of WACME. ACME, the underlying token to WACME and stWACME is the native token of Accumate Network, an L1 blockchain based on the Tendermint with human-readable account, and complex multi-sig in the core layer.
 
 
 ====
@@ -52,8 +54,9 @@ To-do's (remove before publsihing)
 - wACME: https://dune.com/sigrlami/wacme-accumulate
 
 
-### Proposal and relation to Curve
-The proposal is put forward by Accumulated Finance. Accumulated Finance is a liquid staking and DeFi platform for the WACME token, which is a wrapped version of ACME on the Ethereum mainnet. The platform issues stACME, a liquid staking derivative of WACME. ACME, the underlying token to WACME and stWACME is the native token of Accumate Network, an L1 blockchain based on the Tendermint with human-readable account, and complex multi-sig in the core layer. [The proposal ask for two Curve pools, WACME/frxETH and stACME/WACME.](https://gov.curve.fi/t/proposal-to-add-wacme-frxeth-and-stacme-wacme-to-the-gauge-controller/9148). The goal is to create deep on-chain liquidity for their token, WACME, and liquid stakers, stACME. This is important for Accumulated Finance as it ensures that stACME and WACME can be easily traded without the asset diverging in price (as they should be pegged 1:1) for large trades in or out of WACME or stAGME. 
+### Relation to Curve
+
+A [gauge proposal](https://gov.curve.fi/t/proposal-to-add-wacme-frxeth-and-stacme-wacme-to-the-gauge-controller/9148) has been put forward by Accumulated Finance for the [WACME/frxETH](https://curve.fi/#/ethereum/pools/factory-crypto-238/deposit) and [stACME/WACME](https://curve.fi/#/ethereum/pools/factory-v2-294/deposit) Curve pools. The goal is to create deep on-chain liquidity for the WACME token and exit liquidity for its stACME liquid staking derivative (LSD). Accumulated Finance has been incentivizing both pools with their WACME token since April 15th and claims they will transition incentives to Votium/Votemarket after a successful gauge vote. Gauge votes for both pools have recently passed on [April 30th, 2023](https://dao.curve.fi/vote/ownership/320) and [May 1st, 2023](https://dao.curve.fi/vote/ownership/321).
 
 
 ## Introduction to Accumulate Ecosystem
