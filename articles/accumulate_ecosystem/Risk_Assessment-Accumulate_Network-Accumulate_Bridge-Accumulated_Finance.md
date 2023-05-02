@@ -114,8 +114,6 @@ The assets relevant for this report can be summarised as follows:
 
 ## Risk Assessment 
 
-While this report is primary focused on the proposal put forward by Accumulated Finance for the WACME/frxETH (or WACME/ETH) and stACME/WACME pools, given the dependency on Accumulate Netowrk, a wider scope has to be set. 
-
 For the purpose of this report, we categorise risk into three risk vectors: 
 
 | Risk Vectors | Definition | Guiding questions|
@@ -124,6 +122,7 @@ For the purpose of this report, we categorise risk into three risk vectors:
 | Token-based Risk | This refers to risks introduced through the use of tokens, either through governance or token model | (3) Does the project viability depend on additional incentives?, (4) If demand falls to 0 tomorrow, can the users be made whole?|
 |Technical Security| Risks related to the project's technical infrastructure, including risks related to the stability and security of the network. This includes risks related to software bugs, code vulnerabilities, and other technical issues that could compromise the project's functionality or security| (5) Do audits reveal any concerning signs|
 
+While this report is primary focused on the proposal put forward by Accumulated Finance for the WACME/frxETH (or WACME/ETH) and stACME/WACME pools, the dependency on Accumulate Network requires a wider scope for our investigation.  
 
 The remainder of the section will first cover risks associated with Accumulate Network, as it underlies the stACME and wACME pools put forward in the proposal. Secondly, the report will look at Accumulate Bridge, which is responsible for issuing wACME. Finally, we will take a look at Accumulated Finance, the issuer of stACME which is governed by ACFI. 
 
