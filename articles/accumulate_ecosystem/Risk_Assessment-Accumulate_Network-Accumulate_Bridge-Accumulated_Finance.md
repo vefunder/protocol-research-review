@@ -71,6 +71,7 @@ The protocol [announced its intention](https://factom-council.medium.com/factom-
 - **April 2015**: Factom has one of the first blockchain token sales and raises 579 Bitcoin (~17,370,000 USD), worth $140,000 at the time.
 - **Summer 2021**: [Inveniam Capital Partners](https://www.inveniam.io/) acquires Factom's 40 blockchain patents and key engineers Paul Snow and Jay Smith. It also forms the [DeFi Devs](https://defidevs.io/) subsidiary as a developer community for its projects.
 - **November 2021**: Factom Authority Node Operators (ANOs) [unanimously vote](https://accumulatenetwork.io/2021/12/factom-validators-vote-unanimously-to-approve-upgrade-to-accumulate/) to rebrand and upgrade the Factom blockchain to the Accumulate blockchain.
+-  **April 2022**: Accumulate [whitepaper](https://accumulatenetwork.io/2022/04/accumulate-whitepaper-release/) is released.
 - **November 2022**: The Accumulate mainnet is officially activated.
 
 
