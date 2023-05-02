@@ -443,9 +443,9 @@ The recommendation given is to consider implementing the logic in a way that a t
 The update from the Accumulate team is that each account is auditable independently, and the cryptographic proofs of false transactions are small, making the protocol harder to compromise. They believe this makes the blockchain more decentralized and validates components independently. They plan to launch with a small set of trusted operators and randomly shuffle BVN assignments and active validator assignments in PoS v2 to make it harder for a cabal to gain control of a BVN. The Accumulate team has acknowledged this issue.
 
 
-### Risk Analysis: Accumulate Bridge
+## Risk Analysis: Accumulate Bridge
 
-#### Product Introduction: Accumulate Bridge
+### Product Introduction: Accumulate Bridge
 
 |![](https://i.imgur.com/lUyFj7d.png)|
 |-----|
@@ -454,7 +454,7 @@ The update from the Accumulate team is that each account is auditable independen
 - [ ] What is the stake for a node operator 
 - [ ] Slashing parameters etc.
 
-The [Accumulate Bridge](https://docs.accumulatenetwork.io/accumulate/tutorials/bridge) is a decentralized bridge that allows users to transfer Accumulate tokens, including ACME, between Ethereum and the Accumulate blockchain. It uses a technology based on Darknodes, which act as gatekeepers between different blockchain networks, to facilitate cross-chain transfers. At present there is no slashing implemented for bridge operators, meaning it run by a trusted set of nodes (i.e. PoA). Misbehavior by any of the nodes results in automatic transaction stops in the bridge. Each bridge node operators has staked over 1.5 million ACME each, which is significant in relation to the total token supply of 200 million although less so in dollar-terms (~ 60k USD). 
+The [Accumulate Bridge](https://docs.accumulatenetwork.io/accumulate/tutorials/bridge) is a decentralized bridge that allows users to transfer Accumulate tokens, including ACME, between Ethereum and the Accumulate blockchain. It uses a technology based on renBridge [Darknodes](https://docs.renproject.io/darknodes/), which act as gatekeepers between different blockchain networks to facilitate cross-chain transfers. At present there is no slashing implemented for bridge operators, meaning it run by a trusted set of nodes (i.e. PoA). Bridge transactions can be paused if misbehavior by any of the nodes is detected. Each bridge node operator has staked over 1.5 million ACME each, which is significant in relation to the total token supply of 200 million, although less so in dollar-terms (~$60k USD). 
 
 The [bridge software](https://fairyproof.com/doc/AccumulateBridge-Audit-Report-092822.pdf) consists of the bridge node, bridge frontend, and smart contracts. The bridge node is a Golang backend application that integrates with the Accumulate blockchain and Ethereum. Bridge node operators set up multi-sig token accounts on both sides of the bridge that can only hold one type of token.
 
@@ -464,11 +464,11 @@ Once the transfer request is validated, the Accumulate Darknodes verify the tran
 
 On the Ethereum network, bridge operators parse burn transactions made by users, which releases native ACME tokens from the multi-sig token account on the Accumulate blockchain. Bridge operators mint wrapped tokens on the Ethereum network by generating and signing multi-sig mint transactions using the Gnosis Safe API.
 
-The bridge also includes a fee module, which charges a flat fee without price ACME price oracles. The fees collected are accumulated into Accumulate multi-sig token accounts.
+The bridge also includes a fee module, which charges a flat fee without ACME price oracles. The fees collected are accumulated into Accumulate multi-sig token accounts.
 
 Users can interact with the bridge via the bridge frontend, which allows them to initiate transfers of Accumulate tokens between Ethereum and Accumulate. The bridge node, bridge smart contracts, and the bridge frontend are open-source and released under the MIT license.
 
-##### Brief note on Usage
+#### Brief note on Usage
 
 The bridge received some usage since implementation but consist most likely out of existing holder base as the total unique holders of wACME assimilates the number of total stakers. 
 
@@ -477,12 +477,12 @@ The bridge received some usage since implementation but consist most likely out 
 |[WACME Holders Over Time](https://dune.com/sigrlami/wacme-accumulate)|
 
 
+### Risk Vector 1: User Assets Security
 
-#### Risk Vector 1: User Assets Security
+At present, there are [three authorized signers](https://etherscan.io/address/0x76b1E2d258CC4297e7708345E5d99e8ECa967BB1#readProxyContract#F9) for the Accumulate Bridge. [Two of the three signers](https://etherscan.io/address/0x76b1E2d258CC4297e7708345E5d99e8ECa967BB1#readProxyContract#F11) are required to initiate cross-chain transfers. While the validator set is small, they are not anonymous and are operated by companies. 
 
-At present, there are [three validators authorized as signers](https://etherscan.io/address/0x76b1E2d258CC4297e7708345E5d99e8ECa967BB1#readProxyContract#F9) for the Accumulate Bridge. [Two of the three validators](https://etherscan.io/address/0x76b1E2d258CC4297e7708345E5d99e8ECa967BB1#readProxyContract#F11) need to sign the multi-sig to initiate cross-chain transfers. While the validator set is small, the validator nodes of the bridge are not anonymous and are operated by companies. 
+The node operator addresses are listed below:
 
-The authors have listed the node operator addresses below: 
 | [Bridge Signer (Ethereum)](https://etherscan.io/address/0x76b1E2d258CC4297e7708345E5d99e8ECa967BB1#readProxyContract#F9)                                       |
 |--------------------------------------------------------------|
 | 0xCaD2fddb5009608Fa1ab042d643A61550A7dA63F                    |
@@ -496,25 +496,32 @@ The authors have listed the node operator addresses below:
 | MHz126MJiCCPe4XSiS4byx5ydc5dk3aM4JAjU4odXvhpF9pwubvBqnU         |
 | MHz1277ixNm9EZcLbCBpbw8SDYRddWfzHbXmHcEgbAShLY2mWp5N8xw         |
 
-While the companies behind the bridge signers are not publicly stated the Accumulate Team [highlighted it can inferred on-chain](https://explorer.accumulatenetwork.io/acc/8091107d12de06e1ec77c5622dd3c46e563b00c3cc06f8b50efde5e3693bf0ee@bridge.acme/1-ACME). 
+While the companies behind the bridge signers are not posted publicly, the Accumulate Team has stated that they can [inferred on-chain](https://explorer.accumulatenetwork.io/acc/8091107d12de06e1ec77c5622dd3c46e563b00c3cc06f8b50efde5e3693bf0ee@bridge.acme/1-ACME). 
 
-Based on this the Bridge Operators are [DeFacto](https://de-facto.pro/), [HighStakes](https://highstakesllc.org/) and [Kompendium](https://kompendium.co/). 
-
-
-##### Note on bridges
-A user can lose funds even after bridging their asset if the underlying token is stolen. This is because the synthetic representation, in this case, wACME, derives its value from the underlying token, which is ACME. If the underlying ACME token is stolen or compromised, the value of wACME will be affected, potentially rendering it worthless.
-
-For example, if a user bridges 100 ACME tokens to wACME tokens via the Accumulate Bridge, and then the ACME tokens are stolen, the wACME tokens will no longer be worth 100 ACME tokens. The value of wACME will be reduced or potentially become worthless, depending on the severity of the theft or compromise.
-
-#### Risk Vector 2: Token-based Risk 
-Not applicable as the bridge is not govern by a native token.
+Based on this, the Bridge Operators are [DeFacto](https://de-facto.pro/), [HighStakes](https://highstakesllc.org/) and [Kompendium](https://kompendium.co/). 
 
 
-#### Risk Vector 3: Technical Security
-The Accumlate Bridge Infrastructure (i.e. [bride frontend](https://github.com/AccumulateNetwork/bridge-frontend) and [bride contracts](https://github.com/AccumulateNetwork/bridge-contracts)) have be audited by [Fairproof](https://fairyproof.com/). [The audit](https://fairyproof.com/doc/AccumulateBridge-Audit-Report-092822.pdf) does not show any meaningful unresolved security issues. It is worth highlighting a recommendation mentioned in the report - under the current implementation, bridge validators complete a cross-chain transaction by using private keys stored locally in configuration files, which is not the best security practice. To improve security, it is recommended to use Clef for signing transactions on an EVM chain and Walletd for signing transactions on the Accumulate network. These are programs that enable the signing of transactions without exposing private keys to the Internet. Clef and Walletd should be deployed independently from the bridge nodes, and access control should be managed by different individuals. This may increase maintenance costs, but it greatly enhances overall security by reducing the risk of private key compromise.
+#### Note on Bridges
 
-### Risk Analysis: Accumulated Finance
-#### Product introduction: Accumulated Finance
+A user can lose funds even after bridging their asset if the underlying token is stolen. This is because the synthetic ERC-20 WACME token derives its value from the underlying ACME locked on the Accumulate network. If the underlying ACME token is stolen or compromised, the value of WACME will be affected, and depending on the severity of the compromise can potentially render it worthless. Therefore the wrapped ACME is entirely dependent on the integrity of its native network.
+
+
+### Risk Vector 2: Token-based Risk
+
+Not applicable as the bridge is not governed by a native token.
+
+
+### Risk Vector 3: Technical Security
+
+The Accumlate Bridge Infrastructure (i.e. [bridge frontend](https://github.com/AccumulateNetwork/bridge-frontend) and [bride contracts](https://github.com/AccumulateNetwork/bridge-contracts)) have be audited by [Fairyproof](https://fairyproof.com/). [The audit](https://fairyproof.com/doc/AccumulateBridge-Audit-Report-092822.pdf) does not show any meaningful unresolved security issues.
+
+However, it is worth highlighting a recommendation mentioned in the report: under the current implementation, bridge validators complete a cross-chain transaction by using private keys stored locally in configuration files, which is not the best security practice. To improve security, it is recommended to use [Clef](https://geth.ethereum.org/docs/tools/clef/introduction) for signing transactions on an EVM chain and [Walletd](https://github.com/walletd/walletd) for signing transactions on the Accumulate network. These are programs that enable the signing of transactions without exposing private keys to the Internet. Clef and Walletd should be deployed independently from the bridge nodes, and access control should be managed by different individuals. This may increase maintenance costs, but it greatly enhances overall security by reducing the risk of private key compromise.
+
+
+## Risk Analysis: Accumulated Finance
+
+### Product introduction: Accumulated Finance
+
 [Accumulated Finance](https://docs.accumulated.finance/general/about) is a platform that enables users to participate in liquid staking for the Accumulate protocol, similar to Lido for Ethereum. Users can easily stake any amount without worrying about the challenges and risks of managing staking infrastructure by delegating their assets to professional node operators. Stakers receive stACME assets, which are liquid, tokenized staking derivatives representing their claim on the underlying stake pool and its yield. This allows them to eliminate the opportunity cost of staking and unlock liquidity by using their assets on popular DeFi protocols to generate additional yield.
 
 Accumulated Finance plans to use deep liquid Curve pools to provide liquidity for WACME, the wrapped version of ACME on the Ethereum network, and users can stake WACME tokens on the platform to earn staking rewards. This allows users to stake their ACME tokens on the Accumulate protocol through Ethereum, without leaving the Ethereum ecosystem.
