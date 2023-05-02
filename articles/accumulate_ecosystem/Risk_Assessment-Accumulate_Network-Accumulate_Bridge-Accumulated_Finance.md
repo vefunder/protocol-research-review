@@ -169,10 +169,12 @@ More information on the tech stack is available in the [Accumulate Whitepaper](h
 
 ### Risk Vector 1: Censorship & User Assets Security
 
-The theme of this discussion revolves around the security of user asset ACME. For this, we based our analysis on [available metrics based on this consensus research piece](https://consensys.net/research/measuring-blockchain-decentralization/) the extent of decentralisation of the Accumulate Network and therefore to assess the "rug-ability" (i.e. the extend of decentralisation and therefore the extend of censorship resistance). 
+This section revolves around the security of user funds on Accumulate. For this, we based our analysis on metrics from this [Consensys research piece](https://consensys.net/research/measuring-blockchain-decentralization/) to determine the level of network decentralisation and therefore to assess the "rug-ability" (i.e. the extend of censorship resistance). 
 
-##### Consensus Algorithm 
-Accumulate Network uses a Delegated Proof of Stake System (in essence this means that the tokenholders by allocating ACME curate which validator creates new blocks and validates transactions) where each Validator runs the Tendermint Consensus Algorithm. Tendermint is a Byzantine Fault Tolerant (BFT) consensus algorithm and was designed to provide a high degree of security and consistency in a decentralized network by [Jae Kwon (2014)](https://tendermint.com/static/docs/tendermint.pdf). At a high level, the Tendermint algorithm works as follows:
+
+#### Consensus Algorithm 
+
+Accumulate Network uses a Delegated Proof of Stake System. In essence, this means that tokenholders delegate their ACME to specific validators which propose new blocks and validate transactions. Each Validator runs the [Tendermint Consensus Algorithm](https://docs.tendermint.com/v0.34/introduction/what-is-tendermint.html#consensus-overview). Tendermint is a Byzantine Fault Tolerant (BFT) consensus algorithm designed by [Jae Kwon (2014)](https://tendermint.com/static/docs/tendermint.pdf) to provide a high degree of security and consistency in a decentralized network. At a high level, the Tendermint algorithm works as follows:
 
 1. Validators are responsible for proposing new blocks and verifying transactions. A set of validators is selected through a Byzantine fault-tolerant consensus algorithm that ensures a certain level of decentralization and security.
 2. A new block is proposed by one of the validators, who must then broadcast the proposal to the rest of the validators.
@@ -180,12 +182,14 @@ Accumulate Network uses a Delegated Proof of Stake System (in essence this means
 4. If more than two-thirds of the validators approve the proposed block, it is added to the blockchain. Otherwise, the block is rejected.
 5. Once a block has been added to the blockchain, the validators move on to the next block proposal and voting process.
 
-It also supports finality, which means that once a block has been added to the blockchain, it cannot be reversed. The most popular and original use case is part of the [Cosmos SDK](https://tendermint.com/sdk/). Purely on an empirical basis, this suggests a degree of establishment and robustness in thus far it has been successfully running with a large amount of capital in the respective chain suggesting a trustworthy and efficient consensus algorithm.
+It also supports finality, which means that once a block has been added to the blockchain, it cannot be reversed. The most popular and original use case is part of the [Cosmos SDK](https://tendermint.com/sdk/). Purely on an empirical basis, this suggests a degree of establishment and robustness. Thus far, it has been successfully running with a large amount of capital on the respective chain, suggesting a trustworthy and efficient consensus algorithm.
 
-Due to the absence of more granular data provided by the Accumulate Network, the author is unable to assess stability beyond heuristical reference to Tendermint.
+Due to the absence of more granular data provided by the Accumulate Network, the author is unable to assess stability beyond a heuristical reference to Tendermint.
 
-##### Mining Rewards
-Validators are nodes that are responsible for verifying and validating transactions and adding them to the blockchain. According to the [whitepaper (p. 21)](https://accumulatenetwork.io/Accumulate-Whitepaper-4-12-22.pdf) and are compensated for it with freshly minted ACME:
+
+#### Mining Rewards
+
+Validators are nodes that are responsible for verifying and validating transactions, and adding them to the blockchain. According to the [whitepaper (p. 21)](https://accumulatenetwork.io/Accumulate-Whitepaper-4-12-22.pdf), stakers and validators are compensated with freshly minted ACME:
 
 >  "Every year, 16% of tokens in the unissued pool will be minted at intervals of approximately 1 month to compensate stakers and validators in the absence of a transaction fee"
 
@@ -195,21 +199,23 @@ Accumulate validators earn [10% of staking rewards](https://explorer.accumulaten
 Monthly Validator Reward = (16% * Total Unissued Tokens / 12) * 10% * (Validator Stake / Total Staked)
 ``` 
 
-By doing a simple analysis we can see that of the 40 listed validators only two make more than $2000 a month from pure validation of blocks and transactions.
+By doing a simple analysis, we see that of the 40 listed validators, only two make more than $2000 a month from pure validation of blocks and transactions.
 
 |![](https://i.imgur.com/vP0Z8fF.png)|
 |------|
 |[Validation Rewards](https://docs.google.com/spreadsheets/d/1gDlENkhPkzSvdi73ySq75VJgcsrvBOlSlTPtrFwS9_k/edit?usp=sharing)|
 
-Most Validators self-stake as well which makes their total reward significantly higher. Nevertheless, only six validators earn more than $2000 in USD value. 
+Most validators self-stake as well, which makes their total reward significantly higher. Nevertheless, only six validators earn more than $2000 in USD value. 
 
 |![](https://i.imgur.com/DxUW5Xy.png)|
 |------|
 |[Validation Rewards incl. Self-Staking](https://docs.google.com/spreadsheets/d/1gDlENkhPkzSvdi73ySq75VJgcsrvBOlSlTPtrFwS9_k/edit?usp=sharing)|
 
-While this may seem like a low-security budget, it may be sufficient in the context of network activity as Accumualte is with its relanch essentially a new project. In addition given that ACME is relatively illiquid an attacker will be unable to cash out a meaningful amount limiting the risk further at present, which may change with increased liqudity through Curve pools.
+While this may seem like a low-security budget, it may be sufficient in the context of network activity, as Accumulate is essentially a new project. Given that ACME is relatively illiquid, an attacker will be unable to meaningfully cash out on a consensus level attack. This limits the risk at present, although additional liquidity in the Curve pools may increase this risk.
 
-##### Stake Diversity & Growth 
+
+#### Stake Diversity & Growth
+
 There are different types of agents listed as staking and validation participants. They are defined as follows: 
 
 - CoreValidator: A validator node that is responsible for proposing new blocks and validating transactions on the Accumulate Network. CoreValidators are selected through a consensus algorithm and have a significant role in maintaining the security and integrity of the network.
@@ -223,9 +229,7 @@ There are 17 coreFollowers, 24 coreValidators, 145 delegates, and 3 stakingValid
 |------|
 |[Count of Staker by Type](https://docs.google.com/spreadsheets/d/1gDlENkhPkzSvdi73ySq75VJgcsrvBOlSlTPtrFwS9_k/edit?usp=sharing)|
 
-
-
-On the other hand, the coreFollowers hold the lowest number of tokens, at 20,496,467, while the coreValidators hold the largest amount at 73,088,162 tokens. Delegates hold 32,159,501 tokens, and stakingValidators hold 42,458,526 tokens. 
+CoreFollowers hold the lowest number of tokens, at 20,496,467, while the coreValidators hold the largest amount at 73,088,162 tokens. Delegates hold 32,159,501 tokens, and stakingValidators hold 42,458,526 tokens. 
 
 |![](https://i.imgur.com/ejAWyDP.png)|
 |------|
@@ -235,41 +239,48 @@ This shows a nearly inverse relationship which may suggest some disproportional 
 
 *Note: In the following section on Token-based Risk we will elaborate further on centralised aspects of decision-making.*
 
-##### Note on Client Diversity
-Based on the information provided, it seems that there is a lack of available information on the client diversity of the Accumulate Network. Therefore, it is difficult to draw any definitive conclusions about the extent of client diversity. However, the limited information available suggests that there may only be one client available for the network. 
 
-##### Network Usage - Txs & calls (absolute fig)
-The absolute figures are unclear. It is not uncommon to see empty blocks suggesting the operation of Accumulate at low capacity. It should be caveated, however, that the block is second block time. 
+#### Nodes
+
+Due to a lack of available data about Accumulate Network, limited insight on node distribution can be provided. The current count of active nodes (i.e. coreFollower) as indicated in the previous section amount to 17. The author encourages similar infrastructure to [Etherscan Node Tracker](https://etherscan.io/nodetracker) to be deployed by Accumulate Network. 
+
+
+#### Client Diversity
+
+Based on the information provided, it seems there is a lack of available information on the client diversity of the Accumulate Network. Therefore, it is difficult to draw any definitive conclusions about the extent of client diversity. However, the limited information available suggests that there may only be one client available for the network. 
+
+
+#### Network Usage
+
+The absolute figures are unclear. It is not uncommon to see empty blocks, although it should be noted that the network operates on a 1-second block time. 
 
 |![](https://i.imgur.com/c1zHIrG.png)|
 |------|
 |[Snapshot of latest transactions](https://explorer.accumulatenetwork.io/)|
 
-Another measure of actual usage is the transaction of the underlying ACME token, which facilitates the overall working of the ACME Network. The number of transactions of the token can be found [on the token page](https://explorer.accumulatenetwork.io/acc/ACME).
+Another measure of actual usage is the transaction volume of the native ACME token. The number of transactions of the token can be found on the [token page](https://explorer.accumulatenetwork.io/acc/ACME).
 
 |![](https://i.imgur.com/4EgkDfL.png)|
 |------|
 |[Snapshot of Total ACME Transfers](https://explorer.accumulatenetwork.io/acc/ACME)|
 
-At the time of writing the Token page of the ACME token has 23191 transactions associated with it. Given that the Accumulate Network generate its Genesis block 2022-10-31 20:11:52 [(see Block 1)](https://explorer.accumulatenetwork.io/), it has operated for approximately 6 months which averages to (23191/6) = 3865 transaction involving ACME per month or 128 transactions per day. Relative to a layer 1 blockchain this is little (compare to [this layer 1 dashboard](https://app.artemis.xyz/dashboard) for instance)and many applications generate more transactions. 
+At of this writing, the ACME token page displays 23191 transactions associated with it. Given that the Accumulate Network generated its Genesis block on 2022-10-31 20:11:52 [(see Block 1)](https://explorer.accumulatenetwork.io/), it has operated for approximately 6 months, which averages to (23191/6) = 3865 transactions involving ACME per month or 128 transactions per day. Relative to other blockchains, the activity is notably sparse (compare to this [Chain Comparison Dashboard](https://app.artemis.xyz/dashboard)). 
 
-> *Note: we excluded Function call diversity and growth as well as Internet Service Providers (ISPs) due to the absence of meaningful information available and the lack of ability *
-
-
-##### Nodes
-Due to a lack of available data about Accumulate Network limited insight on node distribution can be provided. The current count of active nodes (i.e. coreFollower) as indicated in the previous section amount to 17. The author encourages similar infrastructure to [Etherscan Node Tracker](https://etherscan.io/nodetracker) to be deployed by Accumulate Network. 
+> *Note: Our analysis excludes function call diversity and growth, as well as Internet Service Providers (ISPs), due to the absence of meaningful information available*
 
 
-##### User traction 
-While Social following is not a great metric for user traction as it can be easily be manipulated, the nevertheless will consider it due to a lack of meaningful analytics we will use this metric as a proxy to analyse the general interest of users in Accumualte. 
+#### User traction 
+
+While social metrics are not a great tool for examining real user traction (as it can be easily manipulated), we nevertheless will consider it. Due to a lack of meaningful analytics, we will use this metric as a proxy to analyse the general interest of users in Accumulate. 
 
 |![](https://i.imgur.com/cXvCzvm.png)|
 |-----|
 | [Twitter follower's @accumulatehq](https://www.coingecko.com/en/coins/wrapped-accumulate)|
 
-As illustrated in the chart [from coingecko](https://www.coingecko.com/en/coins/wrapped-accumulate) we can observe a decline of ~6% of Twitter followers from close to 175,000 to 165,000 since the listing on the 10th of September 2022 to the 6th of April 2023.
+As illustrated in the chart [from Coingecko](https://www.coingecko.com/en/coins/wrapped-accumulate), we can observe a decline of ~6% of Twitter followers (from ~175,000 to 165,000 since listing on the 10th of September, 2022 until the 6th of April, 2023).
 
-##### Developer Activity
+
+#### Developer Activity
 
 Developer activity refers to the level of contribution and engagement of developers in a software project. It can be measured by various metrics such as code commits, pull requests, bug fixes, and code reviews. Developer activity is a critical factor in the success and sustainability of software projects, as it drives faster development cycles, improved collaboration, and better quality software. In open-source projects, developer activity is particularly important, as it fosters community participation and collaboration, and helps drive the project's success. The reader should note that the main development of the Accumulate Network takes places on [GitLab](https://gitlab.com/accumulatenetwork/accumulate/) and GitHub acts as mirror.
 
@@ -277,33 +288,34 @@ Developer activity refers to the level of contribution and engagement of develop
 |------|
 |[Code frequency history of Accumulate Network Main Repository](https://github.com/AccumulateNetwork/accumulate/graphs/code-frequency)|
 
-The developer activity for the main repo on GitHub is relatively consistent suggesting sustained effort and sustainability of the project.
+The developer activity for the main repo on GitHub is relatively consistent, suggesting sustained effort and sustainability of the project.
 
 |![](https://i.imgur.com/SWJHoER.png)|
 |------|
 |[Commit Activity of Accumulate Network Main Repository](https://github.com/AccumulateNetwork/accumulate/graphs/commit-activity)|
 
-Commit for this repo range somewhere between 5 to 10 commits per week. On a relative basis, this is not on par with projects [ranked by commit 727 or less of the 1468 projects listed on Artemis](https://app.artemis.xyz/developers) and is there for the average for a crypto project.
+Commits for this repo range somewhere between 5 to 10 commits per week. On a relative basis, this puts Accumulate on par with projects ranked 727 - 1001 in terms of weekly commits on the [Artemis Developer Activity Dashboard](https://app.artemis.xyz/developers).
 
     
-##### Funding 
+#### Funding 
+
 A substantial ecosystem fund is crucial for the success of a layer 1 blockchain. It provides resources to support growth and development, incentivizes participation, and covers costs when there are low adoption rates. Without such a fund, the network may not be able to pay transaction fees or support dApps. In addition, a large ecosystem fund attracts investors and developers, signalling a commitment to long-term success. It can also incentivize early adoption and provide grants for projects that contribute to the ecosystem's growth. Thus the aspect of funding is key.
 
-Factom raised 579 Bitcoin (~17,370,000 USD) in 2015. Relative to major recent launches of layer 1 this is tiny. For instance, Sui raised [336,000,000 USD in Series A and B](https://cryptorank.io/ico/sui), Avalanche raised [248,000,000 USD across funding rounds](https://cryptorank.io/ico/avalanche) or Solana with [334,000,000 USD](https://cryptorank.io/ico/solana). While Accumulate Network in addition allocated a 60M ACME Grant block (~ 0.04*60,000,000 = 2,400,000 USD), the minimal funding is a concern as bootstrapping layer 1 is expensive.
+Factom raised 579 Bitcoin in 2015. Relative to major recent launches, this is tiny. For instance, Sui raised [336,000,000 USD in Series A and B](https://cryptorank.io/ico/sui), Avalanche raised [248,000,000 USD across funding rounds](https://cryptorank.io/ico/avalanche) and Solana raised [334,000,000 USD](https://cryptorank.io/ico/solana). While Accumulate Network allocated a 60M ACME Grant block (~0.04x60,000,000 = 2,400,000 USD), the minimal funding is a concern as bootstrapping a layer 1 protocol is expensive.
 
-The Accumulate team noted that after the Factom's tokenomics failed due to unlimited supply and inflation. [Inveniam](https://www.inveniam.io/) urchased all the patents and [invested several million dollars into Accumulate's development](https://accumulatenetwork.io/2022/05/factom-transition-to-accumulate-guide-faq/). An exact figure is not known. It's unlikely that the amount equates to funding of other layer-1.
+The Accumulate team noted that Factom's tokenomics failed due to unlimited supply and inflation. [Inveniam](https://www.inveniam.io/) purchased all the patents and [invested several million dollars into Accumulate's development](https://accumulatenetwork.io/2022/05/factom-transition-to-accumulate-guide-faq/). An exact figure is not known. It's unlikely that the amount compares to funding of other layer 1 protocols.
 
-Potential evidence of the effects of this discrepancy in funds can be seen in the lack of community engagement, marketing and communication. An excerpt for a discord shows the community's frustration and lack of engagement.  
+Potential evidence of this discrepancy in funding can be seen in the lack of community engagement, marketing, and communication. An excerpt for a discord shows the community's frustration and lack of engagement.  
 
 |![](https://i.imgur.com/NrQ6AOC.png)|
 |-----|
 |Discord Message Snapshot|
 
 
+### Risk Vector 2: Token-based Risk
 
-#### Risk Vector 2: Token-based Risk
+#### Tokenomics $ACME
 
-##### Tokenomics $ACME
 As [outlined in the whitepaper](https://accumulatenetwork.io/Accumulate-Whitepaper-4-12-22.pdf), Accumulate's ACME token is designed to follow a Burn and Mint Equilibrium (BME) model. The token is used as a means of exchanging value within the Accumulate network, with Credits being used to pay for blockchain services. The Credits are fixed to the USD, allowing enterprise users to budget their data use long-term without worrying about market conditions.
 
 The BME model is designed to be deflationary, which incentivizes network use and staking. Periodically, ACME tokens are minted and distributed to stakers and validators as a reward for securing the network. At the same time, a portion of the circulating supply of ACME tokens is burned to create Credits, which are used to pay for blockchain services. Burned ACME tokens are returned to an unissued pool to be reissued in future blocks, creating a deflationary model that further incentivizes network use and staking. Initially, the unissued pool contains 300 million ACME tokens, which is 60% of the max supply.
