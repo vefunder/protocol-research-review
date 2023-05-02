@@ -166,7 +166,7 @@ The protocol has a hierarchical key management structure where Key Books contain
 More information on the tech stack is available in the [Accumulate Whitepaper](https://accumulatenetwork.io/whitepaper/).
 
 
-#### Risk Vector 1: Censorship & User Assets Security
+### Risk Vector 1: Censorship & User Assets Security
 
 The theme of this discussion revolves around the security of user asset ACME. For this, we based our analysis on [available metrics based on this consensus research piece](https://consensys.net/research/measuring-blockchain-decentralization/) the extent of decentralisation of the Accumulate Network and therefore to assess the "rug-ability" (i.e. the extend of decentralisation and therefore the extend of censorship resistance). 
 
