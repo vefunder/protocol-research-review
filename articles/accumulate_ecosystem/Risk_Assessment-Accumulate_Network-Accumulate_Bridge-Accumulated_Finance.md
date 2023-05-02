@@ -61,7 +61,11 @@ A [gauge proposal](https://gov.curve.fi/t/proposal-to-add-wacme-frxeth-and-stacm
 
 ### Project History
 
-Accumulate Network has a long project history that was originally the Factom Protocol founded by [Paul Snow](https://www.linkedin.com/in/paulsn/) and [David Johnston](https://www.linkedin.com/in/davidajohnston/details/experience/) in 2014. Factom was conceived as an enterprise blockchain that would enable companies and organizations to keep transparent, high integrity data records. It was a grant recipient from the US Department of Homeland Security and partnered with the Bill and Melinda Gates Foundation. The protocol [announced its intention](https://factom-council.medium.com/factom-becomes-accumulate-860ededf771f) to rebrand and upgrade to the Accumulate Network in November 2021, and officially [activated its mainnet](https://accumulatenetwork.io/2022/10/accumulate-mainnet-activation/) the following year. A timeline of significant events are as follows: 
+Accumulate Network has a long project history that began as the Factom Protocol founded by [Paul Snow](https://www.linkedin.com/in/paulsn/) and [David Johnston](https://www.linkedin.com/in/davidajohnston/details/experience/) in 2014. Factom was conceived as an enterprise blockchain that would enable companies and organizations to keep transparent, high integrity data records. It was a grant recipient from the US Department of Homeland Security and partnered with the Bill and Melinda Gates Foundation. 
+
+The Factom protocol improved Bitcoin's verification process by utilizing a unique chain-of-chains architecture that linked specific data chains for faster indexing and reduced computational costs. Factom also introduced innovations for more efficient scaling, such as the separation of token transactions and computation from the data layer, which allowed for continuous and real-time securing of data demanded by enterprise customers. With its competitive speeds, Factom forged several successful partnerships in both the public and private sectors. Accumulate Protocol was born out of the desire to preserve Factom's unique aspects while improving ease of use, mass appeal, and scalability.
+
+The protocol [announced its intention](https://factom-council.medium.com/factom-becomes-accumulate-860ededf771f) to rebrand and upgrade to the Accumulate Network in November 2021, and officially [activated its mainnet](https://accumulatenetwork.io/2022/10/accumulate-mainnet-activation/) the following year. A timeline of significant events are as follows: 
 
 - **2014**: [Factom](https://web.archive.org/web/20210624141324/https://www.factomprotocol.org/) is founded by Paul Snow and David Johnston in Austin, Texas.
 - **April 2015**: Factom has one of the first blockchain token sales and raises 579 Bitcoin (~17,370,000 USD), worth $140,000 at the time.
@@ -109,25 +113,30 @@ The assets relevant for this report can be summarised as follows:
 
 
 ## Risk Assessment 
-While this risk assessment sets the primary focus on the proposal put forward by Accumulated Finance for the WACME/frxETH (or WACME/ETH) and stACME/WACME pools, given the complexity and interdependence of different protocols and networks a wider scope has to be set. 
+
+While this report is primary focused on the proposal put forward by Accumulated Finance for the WACME/frxETH (or WACME/ETH) and stACME/WACME pools, given the dependency on Accumulate Netowrk, a wider scope has to be set. 
 
 For the purpose of this report, we categorise risk into three risk vectors: 
 
 | Risk Vectors | Definition | Guiding questions|
 |-----------|------------|------------------|
-| Censorship & Asset Security | Risks related to misappropriation of assets, including theft of funds, exit scams, hacking, and other cyber attacks, as well as, the possibility that users' assets may be seized, frozen, or otherwise restricted by an external authority or regulatory body. | (1) Is it possible for a single entity to rug its users?, (2) If the team vanishes, can the project continue?|
+| Censorship & Asset Security | Risks related to misappropriation of assets, including theft of funds, exit scams, and the possibility that users' assets may be seized, frozen, or otherwise restricted by an external authority or regulatory body. | (1) Is it possible for a single entity to rug its users?, (2) If the team vanishes, can the project continue?|
 | Token-based Risk | This refers to risks introduced through the use of tokens, either through governance or token model | (3) Does the project viability depend on additional incentives?, (4) If demand falls to 0 tomorrow, can the users be made whole?|
 |Technical Security| Risks related to the project's technical infrastructure, including risks related to the stability and security of the network. This includes risks related to software bugs, code vulnerabilities, and other technical issues that could compromise the project's functionality or security| (5) Do audits reveal any concerning signs|
 
 
-The remainder of the section will cover, first risk associated with Accumulate Network as it forms the underlying for stACME and wACME pools put forward in the proposal. Secondly, the report will look at Accumulate Bridge, which is responsible for issuing wACME and finally, we will take a look at Accumulated Finance issuing stACME which is governed by ACFI. 
+The remainder of the section will first cover risks associated with Accumulate Network, as it underlies the stACME and wACME pools put forward in the proposal. Secondly, the report will look at Accumulate Bridge, which is responsible for issuing wACME. Finally, we will take a look at Accumulated Finance, the issuer of stACME which is governed by ACFI. 
 
-### Risk Analysis: Accumuate Network
 
-#### Product Introduction: Accumulate Network 
-The Accumulate Protocol is an identity-based blockchain that aims to address the trilemma of security, scalability, and decentralization through a chain-of-chains architecture. Digital identities called Accumulate Digital Identifiers (ADIs) are treated as independent blockchains, and each possesses a hierarchical set of keys with different priority levels. The protocol uses a two-token system to provide predictable costs for enterprise users, and all transactions are anchored to Layer-1 blockchains for enhanced security. The goal is to power the digital economy through interoperability with Layer-1 blockchains, integration with enterprise tech stacks, and interfacing with the World Wide Web.
+## Risk Analysis: Accumulate Network
 
-##### Tech tl;dr 
+### Product Introduction: Accumulate Network 
+
+The Accumulate Protocol is an identity-based blockchain that aims to address the trilemma of security, scalability, and decentralization through a chain-of-chains architecture. Digital identities called Accumulate Digital Identifiers (ADIs) are treated as independent blockchains, and each possesses a hierarchical set of keys with different priority levels. The protocol uses a two-token system to provide predictable costs for enterprise users, and all transactions are anchored to Layer-1 blockchains for enhanced security. The goal is to power the digital economy through interoperability with Layer-1 blockchains, integration with enterprise tech stacks, and interfacing with web APIs.
+
+
+### Block Validator Networks
+
 The Accumulate protocol is designed to optimize parallel processing, linear scaling, and state efficiency. To achieve parallel processing, the network is partitioned into multiple validator networks, called Block Validator Networks (BVNs), that process transactions for a fraction of accounts. Each account is assigned to a particular BVN, and each BVN can process transactions for thousands of accounts. Additional BVNs can be added to linearly scale the network as usage increases.
 
 |![System Overview](https://i.imgur.com/CRqXXMG.png)|
@@ -144,7 +153,7 @@ In contrast, the Accumulate protocol treats each account as an independent chain
 |[Chains-of-chains architecture of Accumulate](https://accumulatenetwork.io/Accumulate-Whitepaper-4-12-22.pdf)|
 
 
-Tendermint nodes, called BVNs, validate transactions for an account. Root hashes from each BVN are fed into a larger network of Tendermint nodes called the Directory Network (DN), which produces a final root hash that can be ‘anchored’ into another blockchain. DN root hashes will be regularly anchored into Layer-1 blockchains like Bitcoin and Ethereum.
+Tendermint nodes validate transactions for an account. Root hashes from each BVN are fed into a larger network of Tendermint nodes called the Directory Network (DN), which produces a final root hash that can be ‘anchored’ into another blockchain. DN root hashes will be regularly anchored into Layer-1 blockchains like Bitcoin and Ethereum.
 
 Inside the DN and each BVN is an interconnected network of chains responsible for collecting signatures, synchronizing Tendermint nodes within a BVN, communicating between BVNs, collecting roots, and anchoring roots to other blockchains. These chains and their functions include Signature Chain, Main Chain, Synthetic Transaction Chain, Binary Patricia Trie (BPT), Root Anchor Chain, and Intermediate Anchor Chain.
 
@@ -154,23 +163,11 @@ Accumulate accounts are designed to improve the user experience, efficiently org
 
 The protocol has a hierarchical key management structure where Key Books contain Key Pages and Key Pages contain keys that are authorized to sign transactions. Each Key Page specifies m of n where m is the number of unique, authorized signatures required to approve transactions (i.e., the signature threshold) and n is the total number of keys on the page. Accounts are linked at creation to a Main Key Book and an optional Manager Key Book. A signature is authorized only if the signing key corresponds to a key in one of the pages of either the Main Key Book or the Manager Key Book (if specified).
 
-###### Understanding Accumulate by drawing an analogy to Ethereum 
-
-In Ethereum, a transaction is processed and validated by a network of nodes that maintain a copy of the blockchain ledger. When a transaction is executed, it modifies the state of the Ethereum network by updating the balances of the relevant accounts and executing the smart contract code. This state is maintained and validated by all nodes in the network, and any updates to the state must be agreed upon by consensus.
-
-Similarly, in Accumulate, a transaction is processed and validated by a network of validator networks called Block Validator Networks (BVNs) that are responsible for processing transactions for only a fraction of accounts. Each account is assigned to a particular BVN, and each BVN can process transactions for thousands of accounts.
-
-The state of Accumulate is maintained by organizing transactions into hierarchies of summary hashes. The state of an account is stored in a Binary Patricia Trie (BPT), which records the current state and history of every account in the BVN or DN. This allows Accumulate to provide 1-second blocks for finalization and 12-hour blocks for synchronization of the historical ledger.
-
-To summarise both Ethereum and Accumulate, the state is validated by consensus among nodes in the network, but Accumulate uses a different architecture to achieve this, with each account treated as an independent chain and managed as a continuously growing Merkle tree while blocks are treated as synchronization points for all chains in the network.
-
-##### Inheritance from Factom 
-The Factom protocol (the predecessor to Accumulate Network) was created in 2014 as a Layer-2 blockchain solution for secure and reliable data storage and management. It improved Bitcoin's verification process by utilizing a unique chain-of-chains architecture that linked specific data chains for faster indexing and reduced computational costs. Factom also introduced innovations for more efficient scaling, such as the separation of token transactions and computation from the data layer, which allowed for continuous and real-time securing of data demanded by enterprise customers. With its competitive speeds, Factom forged several successful partnerships in both the public and private sectors. Accumulate Protocol was born out of the desire to preserve Factom's unique aspects while improving ease of use, mass appeal, and scalability.
-
-More information on the tech stack is available in the  [Accumulate Whitepaper](https://accumulatenetwork.io/whitepaper/).
+More information on the tech stack is available in the [Accumulate Whitepaper](https://accumulatenetwork.io/whitepaper/).
 
 
 #### Risk Vector 1: Censorship & User Assets Security
+
 The theme of this discussion revolves around the security of user asset ACME. For this, we based our analysis on [available metrics based on this consensus research piece](https://consensys.net/research/measuring-blockchain-decentralization/) the extent of decentralisation of the Accumulate Network and therefore to assess the "rug-ability" (i.e. the extend of decentralisation and therefore the extend of censorship resistance). 
 
 ##### Consensus Algorithm 
