@@ -113,7 +113,7 @@ The assets relevant for this report can be summarised as follows:
 | [FraxBP](https://mirror.xyz/0x290101596c9f85eB7194f6090a8c94fF5AAa32ca/vtNw6EvBjfqsRWi4YgmV6YJgFyU6Qg2Xjbc2_GchF6Q) |FraxBP is a base pool token on Curve Finance that serves as an alternative to 3CRV. It includes FRAX and USDC, and is used to provide liquidity for trading pairs involving those stablecoins on Curve. |
 
 
-## Risk Assessment 
+## Risk Assessment Scope and Specification
 
 For the purpose of this report, we categorise risk into three risk vectors: 
 
@@ -132,10 +132,10 @@ The remainder of the section will first cover risks associated with Accumulate N
 
 ### Product Introduction: Accumulate Network 
 
-The Accumulate Protocol is an identity-based blockchain that aims to address the trilemma of security, scalability, and decentralization through a chain-of-chains architecture. Digital identities called Accumulate Digital Identifiers (ADIs) are treated as independent blockchains, and each possesses a hierarchical set of keys with different priority levels. The protocol uses a two-token system to provide predictable costs for enterprise users, and all transactions are anchored to Layer-1 blockchains for enhanced security. The goal is to power the digital economy through interoperability with Layer-1 blockchains, integration with enterprise tech stacks, and interfacing with web APIs.
+The Accumulate Protocol is an identity-based blockchain that aims to address the trilemma of security, scalability, and decentralization through a chain-of-chains architecture. Digital identities called Accumulate Digital Identifiers (ADIs) are treated as independent blockchains, and each possesses a hierarchical set of keys with different priority levels. The protocol uses a two-token system to provide predictable costs for enterprise users, and all transactions are anchored to Layer-1 blockchains for enhanced security. The goal is to power the digital economy through interoperability with Layer-1 blockchains, integrations with enterprise tech stacks, and interfacing with web APIs.
 
 
-### Block Validator Networks
+#### Block Validator Networks and Anchoring
 
 The Accumulate protocol is designed to optimize parallel processing, linear scaling, and state efficiency. To achieve parallel processing, the network is partitioned into multiple validator networks, called Block Validator Networks (BVNs), that process transactions for a fraction of accounts. Each account is assigned to a particular BVN, and each BVN can process transactions for thousands of accounts. Additional BVNs can be added to linearly scale the network as usage increases.
 
@@ -153,13 +153,14 @@ In contrast, the Accumulate protocol treats each account as an independent chain
 |[Chains-of-chains architecture of Accumulate](https://accumulatenetwork.io/Accumulate-Whitepaper-4-12-22.pdf)|
 
 
-Tendermint nodes validate transactions for an account. Root hashes from each BVN are fed into a larger network of Tendermint nodes called the Directory Network (DN), which produces a final root hash that can be ‘anchored’ into another blockchain. DN root hashes will be regularly anchored into Layer-1 blockchains like Bitcoin and Ethereum.
+Block Validator Network Nodes (BVNNs) validate transactions for an account. Root hashes from each BVN are fed into a larger network of nodes called the Directory Network (DN), which produces a final root hash that can be ‘anchored’ into another blockchain. DN root hashes will be regularly anchored into Layer-1 blockchains like Bitcoin and Ethereum.
 
-Inside the DN and each BVN is an interconnected network of chains responsible for collecting signatures, synchronizing Tendermint nodes within a BVN, communicating between BVNs, collecting roots, and anchoring roots to other blockchains. These chains and their functions include Signature Chain, Main Chain, Synthetic Transaction Chain, Binary Patricia Trie (BPT), Root Anchor Chain, and Intermediate Anchor Chain.
+Additionally, each BVN and the DN have Synthetic Transaction Chains, Root Anchor Chains, and one or more Intermediate Anchor Chains. Every chain is anchored into the Root Anchor Chain, creating a chain-of-chains architecture where every chain within a BVN or the DN can be considered a side chain of its respective BVN/DN Root Anchor Chain.
 
-Each account is uniquely identified by a URL and is uniquely identified by its own Signature Chain and Main Chain. Additionally, each BVN and the DN have Synthetic Transaction Chains, Root Anchor Chains, and one or more Intermediate Anchor Chains. Every chain is anchored into the Root Anchor Chain, creating a chain-of-chains architecture where every chain within a BVN or the DN can be considered a side chain of its respective BVN/DN Root Anchor Chain.
 
-Accumulate accounts are designed to improve the user experience, efficiently organize data, and integrate with web apps, mobile devices, and enterprise tech stacks. Accumulate supports several types of accounts, including Lite Token Account, Lite Data Account, Accumulate Digital Identifier (ADI), Key Book, Key Page, ADI Token Account, ADI Data Account, and Scratch Account.
+#### Accounts and Key Heirarchy
+
+Each account is uniquely identified by a URL and is uniquely identified by its own Signature Chain and Main Chain. Accumulate accounts are designed to improve the user experience, efficiently organize data, and integrate with web apps, mobile devices, and enterprise tech stacks. Accumulate supports several types of accounts, including Lite Token Account, Lite Data Account, Accumulate Digital Identifier (ADI), Key Book, Key Page, ADI Token Account, ADI Data Account, and Scratch Account.
 
 The protocol has a hierarchical key management structure where Key Books contain Key Pages and Key Pages contain keys that are authorized to sign transactions. Each Key Page specifies m of n where m is the number of unique, authorized signatures required to approve transactions (i.e., the signature threshold) and n is the total number of keys on the page. Accounts are linked at creation to a Main Key Book and an optional Manager Key Book. A signature is authorized only if the signing key corresponds to a key in one of the pages of either the Main Key Book or the Manager Key Book (if specified).
 
