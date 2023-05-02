@@ -316,7 +316,7 @@ Potential evidence of this discrepancy in funding can be seen in the lack of com
 
 #### Tokenomics $ACME
 
-As [outlined in the whitepaper](https://accumulatenetwork.io/Accumulate-Whitepaper-4-12-22.pdf), Accumulate's ACME token is designed to follow a Burn and Mint Equilibrium (BME) model. The token is used as a means of exchanging value within the Accumulate network, with Credits being used to pay for blockchain services. The Credits are fixed to the USD, allowing enterprise users to budget their data use long-term without worrying about market conditions.
+As [outlined in the whitepaper](https://accumulatenetwork.io/Accumulate-Whitepaper-4-12-22.pdf), Accumulate's ACME token is designed to follow a Burn and Mint Equilibrium (BME) model. The token is used as a means of exchanging value within the Accumulate network, with Credits being used to pay for blockchain services. The Credits are fixed to the USD value, allowing enterprise users to budget their data use long-term without worrying about market conditions.
 
 The BME model is designed to be deflationary, which incentivizes network use and staking. Periodically, ACME tokens are minted and distributed to stakers and validators as a reward for securing the network. At the same time, a portion of the circulating supply of ACME tokens is burned to create Credits, which are used to pay for blockchain services. Burned ACME tokens are returned to an unissued pool to be reissued in future blocks, creating a deflationary model that further incentivizes network use and staking. Initially, the unissued pool contains 300 million ACME tokens, which is 60% of the max supply.
 
@@ -324,9 +324,9 @@ Furthermore, every month, 1-2% of the tokens in the unissued pool will be minted
 
 In the first year, 100% of minted ACME tokens will be delivered to stakers and validators as a reward for securing the network. Later on, some of the minted ACME tokens will be added to the Grant Pool to support partnerships and development.
 
-The [staking process](https://gitlab.com/accumulatenetwork/governance/governance-docs/-/blob/main/Governance.md#lockup-period) in Accumulate aims to lower token velocity to increase predictability, with a goal of 60%-80% of circulating supply being staked. There are two staking methods: undelegated staking, which has no penalties or bonding, and delegated staking, which has higher rewards but with warm-up and cool-down periods and penalties for poor performance. One can choose to delegate stake between 3 months and 24 months. The longer you stake the higher the rewards percentage will be. There will be short-term and long-term lockup implementation, and delegators and operators can be slashed if the operator is not performing or acting maliciously. To incentivize the robustness of the network in its early days, operators may operate multiple active core validators, but this is a temporary measure that may be discontinued in the future.
+The [staking process](https://gitlab.com/accumulatenetwork/governance/governance-docs/-/blob/main/Governance.md#lockup-period) in Accumulate aims to lower token velocity and increase predictability, with a goal of 60%-80% of circulating supply being staked. There are two staking methods: undelegated staking, which has no penalties or bonding, and delegated staking, which has higher rewards but with warm-up and cool-down periods and penalties for poor performance. One can choose to delegate stake between 3 months and 24 months. The longer you stake the higher the rewards percentage will be. There will be short-term and long-term lockup implementation, and delegators and operators can be slashed if the operator is not performing or acting maliciously. To incentivize the robustness of the network in its early days, operators may operate multiple active core validators, but this is a temporary measure that may be discontinued in the future.
 
-##### Initial Token Distribution of $ACME
+#### Initial Token Distribution of $ACME
 
 The initial token distribution of $ACME is outlined in [this article](https://accumulatenetwork.io/2022/05/factom-transition-to-accumulate-guide-faq/): 
 
@@ -342,6 +342,7 @@ The initial token distribution of $ACME is outlined in [this article](https://ac
 | Monthly Mint Rate | 1-2% of uncirculated pool tokens will be minted as ACME to create credits. |
 
 The [Grant Block](https://accumulatenetwork.io/2022/04/accumulate-tokenomics-model-part-2/) will be given to community members for improving the protocol.
+
 | Token Allocation | Amount |
 | --- | --- |
 | Governance | 30M |
@@ -361,16 +362,18 @@ The [Developer Block](https://accumulatenetwork.io/2022/04/accumulate-tokenomics
 
 The initial allocation can be considered fair. In this distribution, DeFi Devs and Advisor can be considered protocol insiders putting the insider allocation to approximately 41% which on a relative basis can be considered low.
 
-##### Token ownership 
+
+#### Token Ownership 
+
 In Delegated Proof of Stake (DPoS), the delegated tokens play a crucial role in curating the validator selection process. DPoS networks are designed such that token holders can vote for delegates who will validate transactions and maintain the blockchain. In DPoS, the token holders' voting power is proportional to the number of tokens they hold or control through delegation. This means that token holders with a larger token balance or more delegated tokens have a greater say in the election of validators and hence the ordering of transactions and block construction. In addition, validators are rewarded with newly minted tokens and transaction fees for their efforts.
 
-In essence, who controls more than 2/3 of the token stake effectively controls transaction validation and block construction in a Tendermint DPoS System.
+In essence, whoever controls more than 2/3 of the token stake effectively controls transaction validation and block construction in a Tendermint DPoS System.
 
 |![](https://i.imgur.com/R8fo1vn.png)|
 |------|
 |[Cumulative Percentage Share of Validator Delgation (incl. Self-Staking)](https://docs.google.com/spreadsheets/d/1gDlENkhPkzSvdi73ySq75VJgcsrvBOlSlTPtrFwS9_k/edit?usp=sharing)|
 
-From the chart, we can see that in essence, two validators & it's delegates controlled by a development team (acc://defidevs.acme) and the foundation (acc://accumulate.acmeAccumulate Foundation) effectively control the network. While they are invested individuals, nevertheless this represents a concerning sign and a greater distribution of the token is needed. 
+From the chart, we can see that in essence, two validators & their delegates controlled by a development team (acc://defidevs.acme) and the foundation (acc://accumulate.acmeAccumulate Foundation) effectively control the network. While they are invested individuals, nevertheless this represents a concerning sign and a greater distribution of the token is needed. 
 
 The authors see this, especially concerning as the staking mechanism has a positive feedback loop (assuming no slashing for technical failures of a given validator, etc.) that increases the balances of large token holders as they are disproportionally more often selected for block validation and construction and thus rewarded, meaning it is likely to observe an effect of the rich getting richer and given the small starting set of tokenholders it will make entering the ecosystem harder for the new participant which may stifle future growth.
 
