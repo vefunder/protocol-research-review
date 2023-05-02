@@ -373,27 +373,28 @@ In essence, whoever controls more than 2/3 of the token stake effectively contro
 |------|
 |[Cumulative Percentage Share of Validator Delgation (incl. Self-Staking)](https://docs.google.com/spreadsheets/d/1gDlENkhPkzSvdi73ySq75VJgcsrvBOlSlTPtrFwS9_k/edit?usp=sharing)|
 
-From the chart, we can see that in essence, two validators & their delegates controlled by a development team (acc://defidevs.acme) and the foundation (acc://accumulate.acmeAccumulate Foundation) effectively control the network. While they are invested individuals, nevertheless this represents a concerning sign and a greater distribution of the token is needed. 
+From the chart, we can see that essentially two validators & their delegates controlled by 1) the DeFi Devs team ([acc://defidevs.acme](https://explorer.accumulatenetwork.io/acc/defidevs.acme)) and 2) the Accumulate Foundation ([acc://accumulate.acme](https://explorer.accumulatenetwork.io/acc/accumulate.acme)) effectively control the network. While not unusual for an early stage protocol, this represents a concerning level of centralization and a greater distribution of the token is needed. 
 
-The authors see this, especially concerning as the staking mechanism has a positive feedback loop (assuming no slashing for technical failures of a given validator, etc.) that increases the balances of large token holders as they are disproportionally more often selected for block validation and construction and thus rewarded, meaning it is likely to observe an effect of the rich getting richer and given the small starting set of tokenholders it will make entering the ecosystem harder for the new participant which may stifle future growth.
+The staking mechanism has a positive feedback loop (assuming no slashing for technical failures of a given validator, etc.) that increases the balances of large token holders, as they are disproportionally more often selected for block validation and construction. It is likely to observe a circular effect of further entrenching the influence of early insiders, which may stifle future growth.
 
-The authors would encourage stakers that delegate their tokens to these validators to reconsider their distribution and allocate to lower balanced validators. The effect is minuscule as the majority in both cases is self-staked (56,193,658 ACME and 42,000,000 ACME respectively). However, as shown below the 2/3 threshold would be reached after three companies.
+In the interest of decentralizing the influence of validators, stakers might reconsider the current distribution and delegate to a wider pool of validators. The effect is minuscule as the majority in both cases is self-staked (56,193,658 ACME and 42,000,000 ACME respectively). However, as shown below the 2/3 threshold would be reached after three companies.
 
 |![](https://i.imgur.com/X3lAXp1.png)|
 |------|
 |[Cumulative Percentage Share of Validator Self-Stake (excl. Delegation)](https://docs.google.com/spreadsheets/d/1gDlENkhPkzSvdi73ySq75VJgcsrvBOlSlTPtrFwS9_k/edit?usp=sharing)|
 
-In addition, the authors recommend ideating about the modification of the validation mechanism. For instance, an option for balancing power more effectively for Accumulate Network might be achieved by implementing Quadratic Voting. For an example [see Axelar Network](https://axelar.network/blog/axelar-implements-quadratic-voting-with-maeve-upgrade). 
+In addition, we recommend ideating about possible modifications to the validation mechanism. For instance, an option for balancing power more effectively for Accumulate Network might be achieved by implementing Quadratic Voting. For an example [see Axelar Network](https://axelar.network/blog/axelar-implements-quadratic-voting-with-maeve-upgrade). 
 
 Furthermore, as only 45% of the total supply have been issued at present, it may be worth considering an alternative distribution mechanism to distribute to a larger token holder base. 
 
-> *Editorial Note: Decentralisation is always a means to an end and not a goal in itself (i.e. most commonly it blockchain system is used to achieve the property of censorship resistance). Given this, the LP should ask him or herself whether the degree of centralisation is sufficient for them in the context of Accumulate Network to evaluate risk.*
+> *Note: Decentralisation is always a means to an end and not a goal in itself (i.e. most commonly blockchain systems are used to achieve the property of censorship resistance). Given this, the LP should ask him or herself whether the degree of decentralisation is sufficient for them in the context of Accumulate Network.*
 
-##### Governance processes
 
-Accumulate's [governance process is centered around committees](https://gitlab.com/accumulatenetwork/governance/governance-docs/-/blob/main/Committees.md#committees) that manage critical workflows in a blockchain ecosystem. These committees are selected by stakers and validators and include Protocol Oversight and Operations, Operations and Staking, Core and Core Service Development, Ecosystem Development, Exchanges and Liquidity, and Marketing. Each workflow is assigned its budget in ACME tokens to carry out operations. The committees manage tasks such as code development, managing the protocol, managing staking services, coordinating integrations with other communities, negotiating with exchanges, providing liquidity, and organizing marketing activities such as conferences and hackathons.
+#### Governance Processes
 
-The [grant request process](https://gitlab.com/accumulatenetwork/governance/governance-docs/-/blob/main/Grants.md) is initiated by an applicant who submits a proposal to the appropriate committee. The committee evaluates the proposal and approves or rejects it. Public stakeholder voting is required for all grant proposals, and decisions by the committee cannot be appealed. The committee may appoint independent consultants to monitor the execution of awarded grants. The grant system is governed by four grant committees, and the initial Accumulate Grant Pool is allocated 60 million ACME tokens.
+Accumulate's governance process is centered around [committees](https://gitlab.com/accumulatenetwork/governance/governance-docs/-/blob/main/Committees.md#committees) that manage critical workflows in the ecosystem. Committee members are selected by stakers and validators. There are four committes called the Governance Committe, the Core Development Committee, the Ecosystem Committee, and the Business Committee. Each is assigned a budget in ACME tokens to carry out operations. The committees manage tasks such as code development, managing the protocol, managing staking services, coordinating integrations with other communities, negotiating with exchanges, providing liquidity, and organizing marketing activities such as conferences and hackathons.
+
+The [grant request process](https://gitlab.com/accumulatenetwork/governance/governance-docs/-/blob/main/Grants.md) is initiated by an applicant who submits a proposal to the appropriate committee. The committee evaluates the proposal and approves or rejects it. Stakeholder voting is required for all grant proposals, and decisions by the committee cannot be appealed. The committee may appoint independent consultants to monitor the execution of awarded grants. The initial Accumulate Grant Pool is allocated 60 million ACME tokens.
 
 In general, the standard process can be summarised below:
 
@@ -402,35 +403,44 @@ In general, the standard process can be summarised below:
 |High-level Overview: Grant proposal flow|
 
 
-While Governance is fairly centralised it is effective and well-documented and seems appropriate given the current growth stage of the Accumulate Network. Accumulate [has plans to move towards a 100% on-chain governance model](https://gitlab.com/accumulatenetwork/governance/governance-docs/-/blob/main/Governance.md#more-decentralization-over-time) over the next 2-5 years, where all decisions will be made by all staking parties. Initially, a core committee of individuals with technical expertise will make decisions about the protocol's implementation, but over time, node operators and delegators will have greater input in decision-making. The community will eventually be able to vote on Accumulate Improvement Proposals and Grants for application/solution development. The move towards full decentralization is expected to be slower than the implementation of layer 2 grant proposal voting.
+While Governance is fairly centralised, it is effective and well-documented, and seems appropriate given the current growth stage of the Accumulate Network. Initially, a core committee of individuals with technical expertise will make decisions about the protocol's implementation, but over time, node operators and delegators will have greater input in decision-making. Accumulate has plans to move towards a 100% [on-chain governance model](https://gitlab.com/accumulatenetwork/governance/governance-docs/-/blob/main/Governance.md#more-decentralization-over-time) over the next 2-5 years, with all decisions being made by all staking parties.  The community will eventually be able to vote on Accumulate Improvement Proposals and Grants for application/solution development. The move towards full decentralization is expected to be slower than the implementation of layer 2 grant proposal voting.
 
 
 - [ ] where are fund of respective committees held?
 
 
-#### Risk Vector 3: Technical Security Risk
+### Risk Vector 3: Technical Security Risk
 
-The [audit report by Fairproof](https://fairyproof.com/doc/Accumulate-Blockchain-Audit-Report-091622.pdf) has been conducted between July 7, 2022 - Sep 13, 2022. For the report, we will highlight the most important issues highlighted by Fairproof.
+A series of [9 testnet releases](https://accumulatenetwork.io/technology/#roadmap) were deployed between November 2021 (when the upgrade to Accumulate was confirmed) and November 2022 (when the Accumulate mainnet was activated).
 
-##### Consensus mechanisms are not fully implemented: [FP-1] DPoS Algorithm Not Implemented, [FP-2] No Slashing for Tendermint Validators 
+An [audit report by Fairyproof](https://fairyproof.com/doc/Accumulate-Blockchain-Audit-Report-091622.pdf) has been conducted between July 7, 2022 - Sep 13, 2022. We will highlight the most important issues raised by Fairyproof.
+
+
+#### Consensus mechanisms are not fully implemented: [FP-1] DPoS Algorithm Not Implemented, [FP-2] No Slashing for Tendermint Validators 
 
 The Accumulate Network has not implemented the DPoS algorithm. This changes the security properties of Accumlate and poses a potential risk to the network's security and integrity. At the time of the audit, the network seems to have been running on pure PoS. 
 
-Additionally, the network's lack of a mechanism to punish malicious validators who engage in misconduct poses a risk to users. If a validator engages in misconduct, there is currently no way to penalize them. However, the Accumulate team has acknowledged this issue and plans to implement a slashing mechanism to penalize such validators in future upgrades. Once implemented, evidence will be recorded on a data chain, and a layer 2 staking system will be responsible for discovering evidence and punishing misbehaving validators.  
+Additionally, the network's lack of a slashing mechanism poses a risk to users. If a validator engages in misconduct, there is currently no way to penalize them. However, the Accumulate team has acknowledged this issue and plans to implement a slashing mechanism to penalize such validators in future upgrades. Once implemented, evidence will be recorded on a data chain, and a layer 2 staking system will be responsible for discovering evidence and punishing misbehaving validators.  
 
-After inquiring with the team it was clarified that the DPoS and Slashing will go live in May 2023.
+After inquiring with the team, it was clarified that the DPoS and slashing will go live in May 2023.
 
-##### Unresolved Attack Vectors: [FP-6] Potential Malicious BVN, [FP-15] Inappropriate Validator Power
 
-The issue at hand is that the Accumulate Network has a potential security vulnerability in its consensus algorithm. When 2/3 of the validators in a single Byzantine Validator Node (BVN) are malicious, that BVN could become malicious and could potentially attack normal BVNs. This is particularly concerning when the number of validators in a BVN is small, as it could be easily manipulated and used to attack the entire system. 
+#### Unresolved Attack Vectors: [FP-6] Potential Malicious BVN, [FP-15] Inappropriate Validator Power
+
+The Accumulate Network has a potential security vulnerability in its consensus algorithm. When 2/3 of the validators in a single BVN are malicious, that BVN could become malicious and could potentially attack normal BVNs. This is particularly concerning when the number of validators in a BVN is small, as it could be easily manipulated and used to attack the entire system. 
 
 To address this issue, the recommendation is to ensure that each BVN has at least a certain number of validators and to use a well-designed algorithm to randomly allocate validators for each BVN. At launch, each BVN will have at least 10 validators, spread across different mainnet participants. The Accumulate team plans to implement a more robust solution, including randomization, in version 1.1.
 
-In addition, the power of newly added validators is always set to 1 in Accumulate Network's EndBlock function, which could pose a security risk. The recommendation is to implement a DPoS algorithm to calculate the actual power of the validator. The Accumulate team has acknowledged the issue, but no update has been provided yet. Again, with the next to DPoS the validator weight should change.
+In addition, the power of newly added validators is always set to 1 in Accumulate Network's EndBlock function, which could pose a security risk. The recommendation is to implement a DPoS algorithm to calculate the actual power of the validator. The Accumulate team has acknowledged the issue, but no update has been provided yet. With the upgrade to DPoS in May 2023, the validator weight should change.
 
-##### [FP-18] Reinforcing Token Security
 
-The potential issue identified is that Accumulate's token design may have some issues. Currently, a token issuer only keeps its token's metadata in the BVN it belongs to and not the balance of the token holder's account. This implementation leads to issues such as the balance of a sender being verified only in the sender's BVN, but the receiver BVN cannot verify the sender's balance. The recommendation given is to consider implementing the logic in a way that a token issuer's BVN keeps all token holders' account balances, and when a token transfer is initiated, the token issuer's BVN will act as a relayer and verify the transaction. The update from the Accumulate team is that each account is auditable independently, and the cryptographic proofs of false transactions are small, making the protocol harder to compromise. They believe this makes the blockchain more decentralized and validates components independently. They plan to launch with a small set of trusted operators and randomly shuffle BVN assignments and active validator assignments in PoS v2 to make it harder for a cabal to gain control of a BVN. The Accumulate team has acknowledged this issue
+#### [FP-18] Reinforcing Token Security
+
+The potential issue identified is that Accumulate's token design may have some issues. Currently, a token issuer only keeps its token's metadata in the BVN it belongs to and not the balance of the token holder's account. This implementation leads to issues such as the balance of a sender being verified only in the sender's BVN, but the receiver BVN cannot verify the sender's balance. 
+
+The recommendation given is to consider implementing the logic in a way that a token issuer's BVN keeps all token holders' account balances, and when a token transfer is initiated, the token issuer's BVN will act as a relayer and verify the transaction. 
+
+The update from the Accumulate team is that each account is auditable independently, and the cryptographic proofs of false transactions are small, making the protocol harder to compromise. They believe this makes the blockchain more decentralized and validates components independently. They plan to launch with a small set of trusted operators and randomly shuffle BVN assignments and active validator assignments in PoS v2 to make it harder for a cabal to gain control of a BVN. The Accumulate team has acknowledged this issue.
 
 
 ### Risk Analysis: Accumulate Bridge
