@@ -501,21 +501,16 @@ While the companies behind the bridge signers are not posted publicly, the Accum
 Based on this, the Bridge Operators are [DeFacto](https://de-facto.pro/), [HighStakes](https://highstakesllc.org/) and [Kompendium](https://kompendium.co/). 
 
 
-#### Note on Bridges
+### Risk Vector 2: Token-based Risk
 
 A user can lose funds even after bridging their asset if the underlying token is stolen. This is because the synthetic ERC-20 WACME token derives its value from the underlying ACME locked on the Accumulate network. If the underlying ACME token is stolen or compromised, the value of WACME will be affected, and depending on the severity of the compromise can potentially render it worthless. Therefore the wrapped ACME is entirely dependent on the integrity of its native network.
 
 
-### Risk Vector 2: Token-based Risk
-
-Not applicable as the bridge is not governed by a native token.
-
-
 ### Risk Vector 3: Technical Security
 
-The Accumlate Bridge Infrastructure (i.e. [bridge frontend](https://github.com/AccumulateNetwork/bridge-frontend) and [bride contracts](https://github.com/AccumulateNetwork/bridge-contracts)) have be audited by [Fairyproof](https://fairyproof.com/). [The audit](https://fairyproof.com/doc/AccumulateBridge-Audit-Report-092822.pdf) does not show any meaningful unresolved security issues.
+The Accumlate Bridge Infrastructure (i.e. [bridge frontend](https://github.com/AccumulateNetwork/bridge-frontend) and [bridge contracts](https://github.com/AccumulateNetwork/bridge-contracts)) have be audited by [Fairyproof](https://fairyproof.com/). [The audit](https://fairyproof.com/doc/AccumulateBridge-Audit-Report-092822.pdf) does not show any meaningful unresolved security issues.
 
-However, it is worth highlighting a recommendation mentioned in the report: under the current implementation, bridge validators complete a cross-chain transaction by using private keys stored locally in configuration files, which is not the best security practice. To improve security, it is recommended to use [Clef](https://geth.ethereum.org/docs/tools/clef/introduction) for signing transactions on an EVM chain and [Walletd](https://github.com/walletd/walletd) for signing transactions on the Accumulate network. These are programs that enable the signing of transactions without exposing private keys to the Internet. Clef and Walletd should be deployed independently from the bridge nodes, and access control should be managed by different individuals. This may increase maintenance costs, but it greatly enhances overall security by reducing the risk of private key compromise.
+However, it is worth highlighting a recommendation mentioned in the report: under the current implementation bridge validators complete a cross-chain transaction by using private keys stored locally in configuration files, which is not the best security practice. To improve security, it is recommended to use [Clef](https://geth.ethereum.org/docs/tools/clef/introduction) for signing transactions on an EVM chain and [Walletd](https://github.com/walletd/walletd) for signing transactions on the Accumulate network. These are programs that enable the signing of transactions without exposing private keys to the Internet. Clef and Walletd should be deployed independently from the bridge nodes, and access control should be managed by different individuals. This may increase maintenance costs, but it greatly enhances overall security by reducing the risk of private key compromise.
 
 
 ## Risk Analysis: Accumulated Finance
@@ -581,50 +576,66 @@ Accumulated Finance charges a 20% fee from ACME staking rewards and an 8% fee on
 - Liquid Staking
      - ACME is staked at [acc://accumulated.acme/staking](https://explorer.accumulatenetwork.io/acc/accumulated.acme/staking), it delegates its stake to [acc://defacto.acme](https://explorer.accumulatenetwork.io/acc/defacto.acme) (a validator run by the Accumulated team), and rewards are claimed by [acc://accumulated.acme/staking-rewards](https://explorer.accumulatenetwork.io/acc/accumulated.acme/staking-rewards). The fee is taken from the staking rewards and the remainder is compounded for the benefit of stACME holders. 
      - **4%** to [Accumulated Finance Treasury](https://explorer.accumulatenetwork.io/acc/accumulated.acme/treasury) on Accumulate Network
-     - **8%** to veACFI stakers (since token is not currently live, this fee is directed to the above treasury for now)
+     - **8%** to veACFI stakers (since token is not currently live, this fee is directed to the above treasury for now).
      - **8%** to [Accumulated Finance Incentives](https://explorer.accumulatenetwork.io/acc/accumulated.acme/incentives) on Accumulate Network, to be used to incentivize LPs in the stACME/WACME Curve pool.
 
 - Distribution of WACME/frxETH incentives
      - Funds for these incentives are from 2 Accumulate accounts ([acc://defidevs.acme](https://explorer.accumulatenetwork.io/acc/defidevs.acme/wacme-lp-incentives-curve) and [acc://wacme-lp-incentives.acme](https://explorer.accumulatenetwork.io/acc/wacme-lp-incentives.acme/curve)) that direct their ACME staking rewards to the [Accumulated WACME LP incentives account](https://explorer.accumulatenetwork.io/acc/accumulated.acme/wacme-lp-incentives). An [on-chain motion](https://explorer.accumulatenetwork.io/acc/c679f146d256a2413ddc0f7207ba895f5f58b1fe61ad08ec20eb28bd93ef6112@accumulate.acme/business/motions) references this resolution to transfer staking rewards from the Accumulate Business Committee.
-     - **8%** fee on the distribution of these incentives to cover associated gas fees. 
+     - **4%** fee on the distribution of these incentives to cover associated gas fees to [Accumulated Finance Treasury](https://explorer.accumulatenetwork.io/acc/accumulated.acme/treasury).
+     - **4%** to veACFI stakers (since token is not currently live, this fee is directed to the above treasury for now). 
 
 The Accumulated team processes fee distribution on the Accumulate network using this [script](https://github.com/AccumulatedFinance/liquid-staking-calc/blob/master/main.go#L66). Fee handling is a manual process so users must trust the Accumulated team to honestly and responsibly process fees and rewards.
 
 
-#### Risk Vector 2: Token-based Risk 
+### Risk Vector 2: Token-based Risk 
 
-Governance as of now, seems to be undefined for Accumulated Finance. However, the [fee page](https://docs.accumulated.finance/accumulated-finance/fees) suggests that a veModel will be utilised.   
+Governance currently seems to be undefined for Accumulated Finance. However, the [fee page](https://docs.accumulated.finance/accumulated-finance/fees) suggests that a veModel will be utilised.   
 
-Based on the information provided on that page, one can imagine, a potential veTokenomic model for Accumulated Finance could involve the use of veACFI staking to incentivize participation in the platform. Users who stake their ACFI tokens could earn a portion of the fees generated by the platform, including the 8% fee from the ACME Liquid Staking Fee Structure and the 4% fee from the WACME LP Incentives Fee Structure. The amount of the staking reward as well as the decision-making power will most likely be determined by the lock-up to which the user commits.
+Based on the information provided on that page, one can imagine a potential veTokenomic model for Accumulated Finance could involve the use of veACFI staking to incentivize participation in the platform. Users who stake their ACFI tokens could earn a portion of the fees generated by the platform, including the 8% fee from the ACME Liquid Staking Fee Structure and the 4% fee from the WACME LP Incentives Fee Structure. The amount of the staking reward, as well as the decision-making power, will most likely be determined by the lock-up to which the user commits.
 
-To encourage liquidity in the stACME/WACME Curve pool, the platform could allocate 8% of the fees generated by the ACME Liquid Staking Fee Structure towards incentivizing liquidity providers. These incentives could be in the form of additional stACME or other rewards.
-
-In addition, the Treasury Fee Structure could be used to fund ongoing development and operations of the platform. A portion of the fees generated by the platform, including the 4% fees from the Treasury Fee Structure, could be allocated to the Treasury to support the platform's growth and sustainability.
-
-Inquire with the team made it clear that they retain the right to launch a token and will only do so if it makes sense. A healthy comment shared by the team is shared below:
+Inquiry with the team made it clear that they retain the right to launch a token and will only do so if it makes sense. A comment by the team is shared below:
 
 |![](https://i.imgur.com/AwDmAAT.png)|
 |----|
 |Communication with the team in Telegram|
 
+
 #### Initial Token Distribution of $ACFI
 
-To date there is not much information available on the token apart from that (1)  ACFI token holders will be entitled to 50% of the protocol revenue (2) that 1% of the total ACFI supply will be distributed to early adopters through several rounds of distribution. Early bird liquid staking users who deposit ACME or WACME to the liquid staking before 9 March 23:59, 2023, will be able to participate. The ACFI distribution will be based on a pro-rata basis, determined by the amount and duration of the deposit. The network will distribute ACFI to early birds in a calculated manner, based on their virtual points. The early birds' stACME/WACME liquidity providers will be announced at a later stage.
-
-#### Risk Vector 3: Technical Security
-The code has not been audited. 
+To date, there is not much information available on the token apart from (1) ACFI token holders will be entitled to 50% of the protocol revenue (2) 1% of the total ACFI supply will be distributed to early adopters through several rounds of distribution. Early bird liquid staking users who deposit ACME or WACME to the liquid staking before 9 March 23:59, 2023, will be able to participate. The ACFI distribution will be based on a pro-rata basis, determined by the amount and duration of the deposit. A retroactive allocation will be given to early stACME/WACME Curve pool liquidity providers at a later stage.
 
 
-## LlamaRisk Gauge Criteria
-1. Is it possible for a single entity to rug its users?
-4. If the team vanishes, can the project continue?
-6. Does the project viability depend on additional incentives?
-8. If demand falls to 0 tomorrow, can the users be made whole?
-10. Do audits reveal any concerning signs?
+### Risk Vector 3: Technical Security
 
-### LlamaRisk Recommendation
+The code has not been audited. They plan to conduct an audit when releasing their ACFI token. The system is composed of only a few contracts that are forked from previously audited projects. 
+
+
+## Llama Risk Gauge Criteria
+
+**1. Is it possible for a single entity to rug its users?**
+
+Yes. There are a number of points of trust in the system, including Accumulated Finance Deployer, Accumulated Finance 2-of-3 multi-sig on Ethereum, Accumulated Finance 4-of-6 multi-sig on Accumulate, and Accumulate bridge 2-of-3 multi-sig. In all cases, trust is in core members of the Accumulate team whose identities are known.
+
+**2. If the team vanishes, can the project continue?**
+
+No. The team is required to stake and process rewards for users. stACME does not have any utility without active efforts by the team.
+
+**3. Does the project viability depend on additional incentives?**
+
+No. Accumulated can support the project through native staking rewards on Accumulate. Additional CRV emissions mearly provide additional bootstrapping support.
+
+**4. If demand falls to 0 tomorrow, can the users be made whole?**
+
+No. Until staking withdrawals are activated, users who wish to exit stACME must do so through the Curve pool. Users may experience slippage if the Curve pool becomes imbalanced.
+
+**5. Do audits reveal any concerning signs?**
+
+Accumulated Finance is a small project in its early stage. It has not undergone an audit, although its system is quite simple and makes use of previously audited contracts. The team plan to have an audit when releasing their ACFI token.
+
+
+## Llama Risk Recommendation
  
-
+As with many early stage DeFi projects, Accumulated Finance requires a significant amount of trust in the honest performance of its core team. It is given greater credibility by its direct ties with core developers of the Accumulate network and that the team's identities are known. Accumulate itself is an early stage layer-1 protocol and has yet to implement core features of its consensus algorithm, including a true proof of stake consensus with slashing, performance traction, and staking withdrawals. The Accumulate Bridge additionally presents a single point of failure. Although there are significant trust assumptions that warrants caution, the movement of funds is all auditable on-chain and both staking reward revenue streams and fees have been clearly defined. For that reason we are comfortable with request for gauges to the stACME/WACME and WACME/frxETH pools.
 
 
 
