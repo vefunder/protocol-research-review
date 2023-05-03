@@ -95,7 +95,7 @@ The assets relevant for this report can be summarised as follows:
 | [stACME](https://etherscan.io/token/0x7AC168c81F4F3820Fa3F22603ce5864D6aB3C547) |  stACME is an ERC-20 derivative token of ACME that represents staked ACME tokens on the Accumulate Network. It allows users to earn staking rewards while retaining the ability to use their staked tokens as collateral for other DeFi applications. |
 | [ACFI](https://docs.accumulated.finance/accumulated-finance/acfi) | ACFI is the (currently unreleased) governance token of Accumulated Finance, a platform that allows users to participate in liquid staking and other DeFi services for the Accumulate protocol. |
 | [FraxETH](https://defillama.com/protocol/frax-ether) | Frax Ether is a liquid ETH staking derivative designed to uniquely leverage the Frax Finance ecosystem to maximize staking yield and smoothen the Ethereum staking process for a simplified, secure, and DeFi-native way to earn interest on ETH.
-| [FraxBP](https://mirror.xyz/0x290101596c9f85eB7194f6090a8c94fF5AAa32ca/vtNw6EvBjfqsRWi4YgmV6YJgFyU6Qg2Xjbc2_GchF6Q) |FraxBP is a base pool token on Curve Finance that serves as an alternative to 3CRV. It includes FRAX and USDC, and is used to provide liquidity for trading pairs involving those stablecoins on Curve. |
+
 
 
 ## Risk Assessment Scope and Specification
@@ -108,9 +108,9 @@ For the purpose of this report, we categorise risk into three risk vectors:
 | Token-based Risk | This refers to risks introduced through the use of tokens, either through governance or token model | (3) Does the project viability depend on additional incentives?, (4) If demand falls to 0 tomorrow, can the users be made whole?|
 |Technical Security| Risks related to the project's technical infrastructure, including risks related to the stability and security of the network. This includes risks related to software bugs, code vulnerabilities, and other technical issues that could compromise the project's functionality or security| (5) Do audits reveal any concerning signs|
 
-While this report is primary focused on the proposal put forward by Accumulated Finance for the WACME/frxETH (or WACME/ETH) and stACME/WACME pools, the dependency on Accumulate Network requires a wider scope for our investigation.  
+While this report is primary focused on the proposal put forward by Accumulated Finance for the WACME/frxETH and stACME/WACME pools, the dependency on Accumulate Network requires a wider scope for our investigation.  
 
-The remainder of the section will first cover risks associated with Accumulate Network, as it underlies the stACME and wACME pools put forward in the proposal. Secondly, the report will look at Accumulate Bridge, which is responsible for issuing wACME. Finally, we will take a look at Accumulated Finance, the issuer of stACME which is governed by ACFI. 
+We will first cover risks associated with Accumulate Network, as it underlies the stACME and wACME pools put forward in the proposal. Secondly, the report will look at Accumulate Bridge, which is responsible for issuing wACME. Finally, we will take a look at Accumulated Finance, the issuer of stACME.
 
 
 ## Risk Analysis: Accumulate Network
@@ -154,12 +154,14 @@ More information on the tech stack is available in the [Accumulate Whitepaper](h
 
 ### Risk Vector 1: Censorship & User Assets Security
 
-This section revolves around the security of user funds on Accumulate. For this, we based our analysis on metrics from this [Consensys research piece](https://consensys.net/research/measuring-blockchain-decentralization/) to determine the level of network decentralisation and therefore to assess the "rug-ability" (i.e. the extend of censorship resistance). 
+This section revolves around the security of user funds on Accumulate. For this, we based our analysis on metrics from this [Consensys research piece](https://consensys.net/research/measuring-blockchain-decentralization/) to determine the level of network decentralisation and therefore to assess the "rug-ability" (i.e. the extent of censorship resistance). 
 
 
 #### Consensus Algorithm 
 
-Accumulate Network uses a Delegated Proof of Stake System. In essence, this means that tokenholders delegate their ACME to specific validators which propose new blocks and validate transactions. Each Validator runs the [Tendermint Consensus Algorithm](https://docs.tendermint.com/v0.34/introduction/what-is-tendermint.html#consensus-overview). Tendermint is a Byzantine Fault Tolerant (BFT) consensus algorithm designed by [Jae Kwon (2014)](https://tendermint.com/static/docs/tendermint.pdf) to provide a high degree of security and consistency in a decentralized network. At a high level, the Tendermint algorithm works as follows:
+*Note: As of this writing, Accumulate has not fully implemented its consensus algorithm as outlined in the whitepaper. The network currently operates as a hybrid proof of stake/proof of authority chain. Validators on the network are whitelisted and all 44 validators have equal weight in achieving consensus. There is an early version of staking and stake delegation, but there is not yet an automated process for slashing. Stakers can not unstake until an upgrade that is planned for end of May.*
+
+Accumulate Network is building a Delegated Proof of Stake System. In essence, this means that tokenholders delegate their ACME to specific validators which propose new blocks and validate transactions. Each Validator runs the [Tendermint Consensus Algorithm](https://docs.tendermint.com/v0.34/introduction/what-is-tendermint.html#consensus-overview). Tendermint is a Byzantine Fault Tolerant (BFT) consensus algorithm designed by [Jae Kwon (2014)](https://tendermint.com/static/docs/tendermint.pdf) to provide a high degree of security and consistency in a decentralized network. At a high level, the Tendermint algorithm works as follows:
 
 1. Validators are responsible for proposing new blocks and verifying transactions. A set of validators is selected through a Byzantine fault-tolerant consensus algorithm that ensures a certain level of decentralization and security.
 2. A new block is proposed by one of the validators, who must then broadcast the proposal to the rest of the validators.
@@ -169,7 +171,7 @@ Accumulate Network uses a Delegated Proof of Stake System. In essence, this mean
 
 It also supports finality, which means that once a block has been added to the blockchain, it cannot be reversed. The most popular and original use case is part of the [Cosmos SDK](https://tendermint.com/sdk/). Purely on an empirical basis, this suggests a degree of establishment and robustness. Thus far, it has been successfully running with a large amount of capital on the respective chain, suggesting a trustworthy and efficient consensus algorithm.
 
-Due to the absence of more granular data provided by the Accumulate Network, the author is unable to assess stability beyond a heuristical reference to Tendermint.
+Due to the absence of more granular analytics provided by the Accumulate Network, the author is unable to assess stability beyond a heuristical reference to Tendermint.
 
 
 #### Mining Rewards
