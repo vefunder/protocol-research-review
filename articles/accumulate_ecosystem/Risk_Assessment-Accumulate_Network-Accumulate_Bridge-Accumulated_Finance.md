@@ -576,7 +576,19 @@ Below is an overview of Accumulated Finance's liquid staked ACME contracts, cont
 
 **Fees:**
 
-Accumulated Finance charges a 20% fee from ACME staking rewards and an 8% fee on the distribution of WACME/frxETH incentives.
+Accumulated Finance charges a 20% fee from ACME staking rewards and an 8% fee on the distribution of WACME/frxETH incentives. The breakdown of fees and their funding source is as follows:
+
+- Liquid Staking
+     - ACME is staked at [acc://accumulated.acme/staking](https://explorer.accumulatenetwork.io/acc/accumulated.acme/staking), it delegates its stake to [acc://defacto.acme](https://explorer.accumulatenetwork.io/acc/defacto.acme) (a validator run by the Accumulated team), and rewards are claimed by [acc://accumulated.acme/staking-rewards](https://explorer.accumulatenetwork.io/acc/accumulated.acme/staking-rewards). The fee is taken from the staking rewards and the remainder is compounded for the benefit of stACME holders. 
+     - **4%** to [Accumulated Finance Treasury](https://explorer.accumulatenetwork.io/acc/accumulated.acme/treasury) on Accumulate Network
+     - **8%** to veACFI stakers (since token is not currently live, this fee is directed to the above treasury for now)
+     - **8%** to [Accumulated Finance Incentives](https://explorer.accumulatenetwork.io/acc/accumulated.acme/incentives) on Accumulate Network, to be used to incentivize LPs in the stACME/WACME Curve pool.
+
+- Distribution of WACME/frxETH incentives
+     - Funds for these incentives are from 2 Accumulate accounts ([acc://defidevs.acme](https://explorer.accumulatenetwork.io/acc/defidevs.acme/wacme-lp-incentives-curve) and [acc://wacme-lp-incentives.acme](https://explorer.accumulatenetwork.io/acc/wacme-lp-incentives.acme/curve)) that direct their ACME staking rewards to the [Accumulated WACME LP incentives account](https://explorer.accumulatenetwork.io/acc/accumulated.acme/wacme-lp-incentives). An [on-chain motion](https://explorer.accumulatenetwork.io/acc/c679f146d256a2413ddc0f7207ba895f5f58b1fe61ad08ec20eb28bd93ef6112@accumulate.acme/business/motions) references this resolution to transfer staking rewards from the Accumulate Business Committee.
+     - **8%** fee on the distribution of these incentives to cover associated gas fees. 
+
+The Accumulated team processes fee distribution on the Accumulate network using this [script](https://github.com/AccumulatedFinance/liquid-staking-calc/blob/master/main.go#L66). Fee handling is a manual process so users must trust the Accumulated team to honestly and responsibly process fees and rewards.
 
 
 #### Risk Vector 2: Token-based Risk 
