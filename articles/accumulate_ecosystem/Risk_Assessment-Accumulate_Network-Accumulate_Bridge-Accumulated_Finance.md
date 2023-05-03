@@ -51,7 +51,7 @@ The Factom protocol improved Bitcoin's verification process by utilizing a uniqu
 The protocol [announced its intention](https://factom-council.medium.com/factom-becomes-accumulate-860ededf771f) to rebrand and upgrade to the Accumulate Network in November 2021, and officially [activated its mainnet](https://accumulatenetwork.io/2022/10/accumulate-mainnet-activation/) the following year. A timeline of significant events are as follows: 
 
 - **2014**: [Factom](https://web.archive.org/web/20210624141324/https://www.factomprotocol.org/) is founded by Paul Snow and David Johnston in Austin, Texas.
-- **April 2015**: Factom has one of the first blockchain token sales and raises 579 Bitcoin (~17,370,000 USD), worth $140,000 at the time.
+- **April 2015**: Factom has one of the first blockchain token sales and raises 579 Bitcoin, worth $140,000 at the time.
 - **Summer 2021**: [Inveniam Capital Partners](https://www.inveniam.io/) acquires Factom's 40 blockchain patents and key engineers Paul Snow and Jay Smith. It also forms the [DeFi Devs](https://defidevs.io/) subsidiary as a developer community for its projects.
 - **November 2021**: Factom Authority Node Operators (ANOs) [unanimously vote](https://accumulatenetwork.io/2021/12/factom-validators-vote-unanimously-to-approve-upgrade-to-accumulate/) to rebrand and upgrade the Factom blockchain to the Accumulate blockchain.
 -  **April 2022**: Accumulate [whitepaper](https://accumulatenetwork.io/2022/04/accumulate-whitepaper-release/) is released.
