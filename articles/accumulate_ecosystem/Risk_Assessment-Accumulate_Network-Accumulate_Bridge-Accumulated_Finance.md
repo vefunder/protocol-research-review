@@ -64,22 +64,24 @@ Development of Accumulate is headed by Factom lead engineers [Paul Snow](https:/
 
 - [DeFi Devs](https://defidevs.io/) is a community developer organization for Accumulate Protocol. They are one of the primary contributors to the project, which is developed through open participation from the developer community. 
 
-- [De Facto](https://de-facto.pro/) is a company that provides blockchain development and advisory services to startups. Their goal is to help startups navigate the complexities of blockchain technology and bring their solutions to market quickly and efficiently. De Facto can be considered core maintainers of Accumulate Network, but are also the core development team behind Accumulated Finance.
+- [De Facto](https://de-facto.pro/) is a company that provides blockchain development and advisory services to startups. Their goal is to help startups navigate the complexities of blockchain technology and bring their solutions to market quickly and efficiently. De Facto can be considered core maintainers of Accumulate Network, and are also the core development team behind Accumulated Finance.
 
 Accumulate [show on their website](https://accumulatenetwork.io/about/#story) a number of additional organizations that contribute to its development. 
 
 
 ### Brief Ecosystem Overview
 
-|![](https://i.imgur.com/VtZokGd.png)|
-|----|
-|Conceptual Orientation of Accumulate Ecosystem & Interdependencies
-
 The [Accumulate network](https://accumulatenetwork.io/) is a delegated proof-of-stake blockchain network organized around digital identities called Accumulate Digital Identifiers (ADIs). Other key features include a multi-chain architecture through the use of sub-chains, human-readable addresses, and user assignable key hierarchies for customizable security settings. 
 
 ACME is its native asset (similar to ETH). Users can acquire ACME on the open market or earn it from staking. Usage burns the token and adds it to the token reserve where it can be issued again as staking rewards. The [Accumulate Bridge](https://bridge.accumulatenetwork.io/mint) enables users to bridge ACME from Accumulate to Ethereum where it is represented as the WACME ERC-20 token.
 
-[Accumulated Finance](https://accumulated.finance/) is a DeFi application on Ethereum for staking WACME which allows the user to stake for stACME and earn yield. This allows users to reap the benefits of staking ACME without leaving Ethereum. Staking is liquid, so users can redeem their stACME for WACME at any time.
+[Accumulated Finance](https://accumulated.finance/) is a DeFi application on Ethereum for staking WACME which allows the user to stake for stACME and earn yield. This allows users to reap the benefits of staking ACME without leaving Ethereum. Staking is liquid through the stACME/WACME and WACME/frxETH Curve pools, so users can enter or exit the Accumulate ecosystem at any time.
+
+The following diagram shows an overview of the relationship between the three main components: Accumulate network, Accumulate bridge, and Accumulated Finance:
+
+|![](https://i.imgur.com/VtZokGd.png)|
+|----|
+|Conceptual Orientation of Accumulate Ecosystem & Interdependencies
 
 
 ### Assets
