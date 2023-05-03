@@ -377,13 +377,13 @@ From the chart, we can see that essentially two validators & their delegates con
 
 The staking mechanism has a positive feedback loop (assuming no slashing for technical failures of a given validator, etc.) that increases the balances of large token holders, as they are disproportionally more often selected for block validation and construction. It is likely to observe a circular effect of further entrenching the influence of early insiders, which may stifle future growth.
 
-In the interest of decentralizing the influence of validators, stakers might reconsider the current distribution and delegate to a wider pool of validators. The effect is minuscule as the majority in both cases is self-staked (56,193,658 ACME and 42,000,000 ACME respectively). However, as shown below the 2/3 threshold would be reached after three companies.
+In the interest of decentralizing the influence of validators, stakers might reconsider the current distribution and delegate to a wider pool of validators. However, this may not be effective to adequately distribute vote power, as the majority of validator stake in both cases is self-staked (56,193,658 ACME and 42,000,000 ACME respectively). As shown below, when excluding delegation, the 2/3 threshold would be met by only 3 entities.
 
 |![](https://i.imgur.com/X3lAXp1.png)|
 |------|
 |[Cumulative Percentage Share of Validator Self-Stake (excl. Delegation)](https://docs.google.com/spreadsheets/d/1gDlENkhPkzSvdi73ySq75VJgcsrvBOlSlTPtrFwS9_k/edit?usp=sharing)|
 
-In addition, we recommend ideating about possible modifications to the validation mechanism. For instance, an option for balancing power more effectively for Accumulate Network might be achieved by implementing Quadratic Voting. For an example [see Axelar Network](https://axelar.network/blog/axelar-implements-quadratic-voting-with-maeve-upgrade). 
+We recommend ideating about possible modifications to the validation mechanism. For instance, an option for balancing power more effectively for Accumulate Network might be achieved by implementing Quadratic Voting. For an example [see Axelar Network](https://axelar.network/blog/axelar-implements-quadratic-voting-with-maeve-upgrade). 
 
 Furthermore, as only 45% of the total supply have been issued at present, it may be worth considering an alternative distribution mechanism to distribute to a larger token holder base. 
 
