@@ -440,7 +440,7 @@ The potential issue identified is that Accumulate's token design may have some i
 
 The recommendation given is to consider implementing the logic in a way that a token issuer's BVN keeps all token holders' account balances, and when a token transfer is initiated, the token issuer's BVN will act as a relayer and verify the transaction. 
 
-The update from the Accumulate team is that each account is auditable independently, and the cryptographic proofs of false transactions are small, making the protocol harder to compromise. They believe this makes the blockchain more decentralized and validates components independently. They plan to launch with a small set of trusted operators and randomly shuffle BVN assignments and active validator assignments in PoS v2 to make it harder for a cabal to gain control of a BVN. The Accumulate team has acknowledged this issue.
+The Accumulate team has responded that the state of the BVN can only be compromised by Tendermint authorities, which will be shuffled automatically in a subsequent update. Also, each account is auditable independently, without needing to involve the entire blockchain for audit purposes, and along with the ability to keep cryptographic fraud proofs small, this makes the protocol harder to compromise. They believe this makes the blockchain more decentralized. They plan to launch with a small set of trusted operators and randomly shuffle BVN assignments and active validator assignments in PoS v2 to make it harder for a cabal to gain control of a BVN.
 
 
 ## Risk Analysis: Accumulate Bridge
