@@ -11,7 +11,6 @@
 - Webpage: https://accumulatenetwork.io/
 - Docs: https://docs.accumulatenetwork.io/
 - Whitepaper: https://accumulatenetwork.io/Accumulate-Whitepaper-4-12-22.pdf
-- Factom: https://factom.pro/
 - Block explorer: https://explorer.accumulatenetwork.io/
 - Twitter: https://twitter.com/accumulatehq
 - Discord: https://discord.com/invite/X74hPx8VZT
