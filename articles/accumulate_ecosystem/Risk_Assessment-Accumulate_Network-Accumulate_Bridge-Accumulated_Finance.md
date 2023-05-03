@@ -468,9 +468,9 @@ The bridge also includes a fee module, which charges a flat fee without ACME pri
 
 Users can interact with the bridge via the bridge frontend, which allows them to initiate transfers of Accumulate tokens between Ethereum and Accumulate. The bridge node, bridge smart contracts, and the bridge frontend are open-source and released under the MIT license.
 
-#### Brief note on Usage
+#### Note on WACME Adoption
 
-The bridge received some usage since implementation but consist most likely out of existing holder base as the total unique holders of wACME assimilates the number of total stakers. 
+The bridge has received modest usage since launch. WACME holders apparently consists mostly of the existing ACME holder base, rather than users onboarding from Ethereum. This may change as incentives to the WACME/frxETH pool grow WACME liquidity. The number of unique WACME holders has expanded since March, but as of this writing adoption remains very low.
 
 |![](https://i.imgur.com/MzWn0oj.png)|
 |-----|
@@ -479,7 +479,7 @@ The bridge received some usage since implementation but consist most likely out 
 
 ### Risk Vector 1: User Assets Security
 
-At present, there are [three authorized signers](https://etherscan.io/address/0x76b1E2d258CC4297e7708345E5d99e8ECa967BB1#readProxyContract#F9) for the Accumulate Bridge. [Two of the three signers](https://etherscan.io/address/0x76b1E2d258CC4297e7708345E5d99e8ECa967BB1#readProxyContract#F11) are required to initiate cross-chain transfers. While the validator set is small, they are not anonymous and are operated by companies. 
+At present, a [2-of-3 multi-sig](https://etherscan.io/address/0x76b1E2d258CC4297e7708345E5d99e8ECa967BB1#readProxyContract#F9) governs the Accumulate bridge and is required to initiate cross-chain transfers. While the validator set is small, they are not anonymous and are operated by companies. 
 
 The node operator addresses are listed below:
 
