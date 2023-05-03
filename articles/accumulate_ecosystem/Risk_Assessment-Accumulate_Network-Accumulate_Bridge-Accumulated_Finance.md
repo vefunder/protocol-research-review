@@ -61,7 +61,7 @@ The protocol [announced its intention](https://factom-council.medium.com/factom-
 
 ### Team 
 
-Development of Accumulate is headed by Factom lead engineers [Paul Snow](https://www.linkedin.com/in/paulsn/) and [Jay Smith](https://www.linkedin.com/in/jaysmithpmp/) through the community developement organizations. There are a number of organizations that can be considered core maintainers of the Accumulate Ecosystem, most notably: 
+Development of Accumulate is headed by Factom lead engineers [Paul Snow](https://www.linkedin.com/in/paulsn/) and [Jay Smith](https://www.linkedin.com/in/jaysmithpmp/) through the community developement organizations. [Dennis Bunfield](https://www.linkedin.com/in/dennis-bunfield-340a5552/) and [Ethan Reesor](https://www.linkedin.com/in/ethanreesor/) are team members who have played a significant role in Accumulate Network development. There are a number of organizations that can be considered core maintainers of the Accumulate Ecosystem, most notably: 
 
 - [DeFi Devs](https://defidevs.io/) is a community developer organization for Accumulate Protocol. They are one of the primary contributors to the project, which is developed through open participation from the developer community. 
 
