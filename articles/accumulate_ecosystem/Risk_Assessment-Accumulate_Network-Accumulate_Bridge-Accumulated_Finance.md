@@ -522,24 +522,51 @@ However, it is worth highlighting a recommendation mentioned in the report: unde
 
 ### Product introduction: Accumulated Finance
 
-[Accumulated Finance](https://docs.accumulated.finance/general/about) is a platform that enables users to participate in liquid staking for the Accumulate protocol, similar to Lido for Ethereum. Users can easily stake any amount without worrying about the challenges and risks of managing staking infrastructure by delegating their assets to professional node operators. Stakers receive stACME assets, which are liquid, tokenized staking derivatives representing their claim on the underlying stake pool and its yield. This allows them to eliminate the opportunity cost of staking and unlock liquidity by using their assets on popular DeFi protocols to generate additional yield.
+[Accumulated Finance](https://docs.accumulated.finance/general/about) is a platform that enables users to participate in liquid staking for the Accumulate protocol, similar to Lido for Ethereum. Users can easily stake any amount without worrying about the challenges and risks of managing staking infrastructure. Stakers receive stACME assets, which are liquid, tokenized staking derivatives representing their claim on the underlying stake pool and its yield. This allows users to stake their ACME tokens on the Accumulate protocol without leaving the Ethereum ecosystem. 
 
-Accumulated Finance plans to use deep liquid Curve pools to provide liquidity for WACME, the wrapped version of ACME on the Ethereum network, and users can stake WACME tokens on the platform to earn staking rewards. This allows users to stake their ACME tokens on the Accumulate protocol through Ethereum, without leaving the Ethereum ecosystem.
+Accumulated Finance plans to use deeply liquid Curve pools to provide liquidity for WACME, the wrapped version of ACME on the Ethereum network. A pool paired with frxETH onboards Ethereum users to WACME and a pool paired with stACME given them access to ACME staking rewards.  
 
-Node operators are added to Accumulated Finance through the multi-sig and are responsible for actual staking, maintaining the underlying infrastructure, and ensuring the security of the staked assets.  Given there is a [token planned for Accumulated Finance (i.e. $ACFI)](https://docs.accumulated.finance/accumulated-finance/acfi), it is likely that Governance over which Node Operator should be added to will be subject to token voting, [mirroring Lido.](https://messari.io/report/liquid-staking-with-lido)  
+Node operators are added to Accumulated Finance through the multi-sig and are responsible for actual staking, maintaining the underlying infrastructure, and ensuring the security of the staked assets. Given that there is a token planned for Accumulated Finance ([$ACFI](https://docs.accumulated.finance/accumulated-finance/acfi)), it is likely that Governance over changes to the Node Operator configuration will eventually be subject to token voting, similar to [Lido](https://messari.io/report/liquid-staking-with-lido).  
 
 |![](https://i.imgur.com/al8QryW.png)|
 |-----|
 |System Overview: Accumulated Finance|
 
-When a user deposits wACME into the ACME Liquid Staking Deposits and then moved to Accumulate Bridge. From there, they are transferred to be burned. The Bridge releases the ACME on Accumulate Network and stakes it and the user is issued stACME in return. A withdrawal event mirrors the reverse as seen in the figure.
+When a user deposits WACME into the ACME Liquid Staking, deposits are then moved to Accumulate Bridge. From there, they are transferred to the burn address. The Bridge releases the ACME on Accumulate Network where it is staked by whitelisted node operators, and the user is issued stACME in return. A withdrawal event executes the process in reverse, as seen in the figure.
 
 
-#### Risk Vector 1: User Assets Security
-The user of the Liquid staking deposits has entrusted their assets to two out of three multi-sig wallets with specifically designated signers. These [signers are not anonymous](https://docs.accumulated.finance/security/multisig-admin-rights), but are rather vested individuals to the Accumulate Ecosystem. The signers include [Anton Ilzheev](https://www.linkedin.com/in/ilzheev/), who represents Accumulated Finance, [Paul Snow](https://www.linkedin.com/in/paulsn/), the Chief Blockchain Scientist of Accumulate Protocol, and [Ethan Reesor](https://www.linkedin.com/in/ethanreesor/), a Core Developer of Accumulate Protocol. These individuals are responsible for managing the multi-sig wallet and have specific admin rights, including ACME Liquid Staking contract ownership, the ability to set staking accounts for deposits, pause stACME transactions, and mint stACME. 
+### Risk Vector 1: User Assets Security
+
+The ACME liquid staking contracts are owned by a [2-of-3 multi-sig](https://etherscan.io/address/0xaBaEBBd34E7F79352F55B0Acea9516F6CDB94BB5) wallet composed of Accumulated Finance/Accumulate network team members. The signers include [Anton Ilzheev](https://www.linkedin.com/in/ilzheev/), who represents Accumulated Finance, [Paul Snow](https://www.linkedin.com/in/paulsn/), the Chief Blockchain Scientist of Accumulate Protocol, and [Ethan Reesor](https://www.linkedin.com/in/ethanreesor/), a Core Developer of Accumulate Protocol. These individuals are responsible for managing the multi-sig wallet and have specific admin rights, including ACME Liquid Staking contract ownership, the ability to set staking accounts for deposits, and mint stACME. All relevant contracts are non-upgradeable and there are no timelocks on admin functions.
+
+Below is an overview of Accumulated Finance's liquid staked ACME contracts, contract ownership, and privileged functions:
+
+**[ACMELiquidStaking Contract](https://etherscan.io/address/0xcf1A40eFf1A4d4c56DC4042A1aE93013d13C3217)** - Handles the logic of accepting WACME deposit, transferring to Accumulate Bridge, and minting stACME to users. 
+
+- Owner is Accumulated Finance multi-sig
+- `approve_bridge()` - approve bridge address for the WACME token
+- `mint_stACME()` - mint stACME to an address
+- `renounceOwnership()` - renounce ownership to ACMELiquidStaking
+- `renounce_stACME_ownership()` - renounce ownership to stACME
+- `set_stakingAccount()` - set Accumulate staking account
+- `transferOwnership()` - transfer ownership to another address
+- `transfer_stACME_ownership()` - transfer stACME ownership to another address
+
+**[stakedACME Contract](https://etherscan.io/address/0x7AC168c81F4F3820Fa3F22603ce5864D6aB3C547)** - The stACME token contract.
+
+- Owner is ACMELiquidStaking contract (which is owned by Accumulated Finance multi-sig)
+- Function calls are made through the LiquidStaking Contract
+- `pause()` - This function cannot be called, as the LiquidStaking contract doesnt support this function call. Either the LiquidStaking contract would need to be upgraded or stakedACME ownership transferred to use this function.
+
+**[StakingRewards Contract](https://etherscan.io/address/0xe194d30aFDbae89b3118b8b7bc7B331Cc3333b88)** - Users can stake their stACME and earn staking rewards.
+
+- Owner is [Accumulated Finance: Deployer](https://etherscan.io/address/0x5503e1185c486c327b999b094b151474c1b9bb1f) (EOA)
+- `setRewardsDuration()` - set duration of rewards to be paid out (in seconds)
+- `notifyRewardAmount()` - set the reward amount for the next reward period
 
 
 #### Risk Vector 2: Token-based Risk 
+
 Governance as of now, seems to be undefined for Accumulated Finance. However, the [fee page](https://docs.accumulated.finance/accumulated-finance/fees) suggests that a veModel will be utilised.   
 
 Based on the information provided on that page, one can imagine, a potential veTokenomic model for Accumulated Finance could involve the use of veACFI staking to incentivize participation in the platform. Users who stake their ACFI tokens could earn a portion of the fees generated by the platform, including the 8% fee from the ACME Liquid Staking Fee Structure and the 4% fee from the WACME LP Incentives Fee Structure. The amount of the staking reward as well as the decision-making power will most likely be determined by the lock-up to which the user commits.
