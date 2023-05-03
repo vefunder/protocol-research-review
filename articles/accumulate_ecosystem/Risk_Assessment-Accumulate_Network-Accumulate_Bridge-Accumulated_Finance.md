@@ -1,19 +1,3 @@
-To-do's (remove before publsihing)
-- [x] Read over again & refine sections 
-- [x] Resolve comments 
-- [x] Review contracts of Accumualted Finance 
-- [x] Format images
-- [x] Grammar check
-- [x] integrate wACME Dashboard
-- [x] integrate anton clarifyications  
-- [x] Check feedback wormhole gave you and see where applicable to this report 
-- [ ] Upload to Github & Request review
-- [ ] Answer gudiding questions (after review - in case more digging is needed)
-
-
-
-====
-
 # Risk Assessment: Accumulated Network, Accumulate Bridge & Accumulated Finance 
 
 **General:**
