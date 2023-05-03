@@ -537,6 +537,16 @@ When a user deposits WACME into the ACME Liquid Staking, deposits are then moved
 
 ### Risk Vector 1: User Assets Security
 
+**Unstaking ACME:**
+
+Users should be aware that, as of early May when this report is being released, it is not possible to unstake ACME (similar to ETH staking before the Shanghai upgrade). The Accumulate team has announced on Discord their plan to allow staking withdrawals by end of May. The Accumulated Finance team has also reported to us that they will allow stACME redemptions following this network upgrade. For now, the only way users can exit stACME is through the stACME/WACME Curve pool.
+
+![Screen Shot 2023-05-02 at 11 21 16 PM](https://user-images.githubusercontent.com/51072084/235987251-670794b6-6ea7-4837-a9d5-9d961fc74c6c.png)
+
+Source: [Accumulate Discord Server](https://discord.com/channels/677558240141115481/902272484945059840/1102633904910905476)
+
+**Access Control:**
+
 The ACME liquid staking contracts are owned by a [2-of-3 multi-sig](https://etherscan.io/address/0xaBaEBBd34E7F79352F55B0Acea9516F6CDB94BB5) wallet composed of Accumulated Finance/Accumulate network team members. The signers include [Anton Ilzheev](https://www.linkedin.com/in/ilzheev/), who represents Accumulated Finance, [Paul Snow](https://www.linkedin.com/in/paulsn/), the Chief Blockchain Scientist of Accumulate Protocol, and [Ethan Reesor](https://www.linkedin.com/in/ethanreesor/), a Core Developer of Accumulate Protocol. These individuals are responsible for managing the multi-sig wallet and have specific admin rights, including ACME Liquid Staking contract ownership, the ability to set staking accounts for deposits, and mint stACME. All relevant contracts are non-upgradeable and there are no timelocks on admin functions.
 
 Below is an overview of Accumulated Finance's liquid staked ACME contracts, contract ownership, and privileged functions:
@@ -563,6 +573,10 @@ Below is an overview of Accumulated Finance's liquid staked ACME contracts, cont
 - Owner is [Accumulated Finance: Deployer](https://etherscan.io/address/0x5503e1185c486c327b999b094b151474c1b9bb1f) (EOA)
 - `setRewardsDuration()` - set duration of rewards to be paid out (in seconds)
 - `notifyRewardAmount()` - set the reward amount for the next reward period
+
+**Fees:**
+
+Accumulated Finance charges a 20% fee from ACME staking rewards and an 8% fee on the distribution of WACME/frxETH incentives.
 
 
 #### Risk Vector 2: Token-based Risk 
