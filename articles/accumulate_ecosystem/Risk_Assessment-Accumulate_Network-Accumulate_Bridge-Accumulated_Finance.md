@@ -223,12 +223,9 @@ CoreFollowers hold the lowest number of tokens, at 20,496,467, while the coreVal
 
 This shows a nearly inverse relationship that likely indicates the relative token distribution between insiders and retail. Insiders are likely to be operating validators and retail users are likely to be delegates.
 
+Due to a lack of available analytics about Accumulate Network, limited insight on node distribution can be provided. The author encourages similar infrastructure to [Etherscan Node Tracker](https://etherscan.io/nodetracker) to be deployed by Accumulate Network. 
+
 *Note: In the current iteration of Accumulate consensus, all validator types (CoreValidator, StakingValidator, and CoreFollower) have equal weight in achieving consensus with a total of 44 validators. Weighting proportional to stake will be introduced in a later upgrade.*
-
-
-#### Nodes
-
-Due to a lack of available data about Accumulate Network, limited insight on node distribution can be provided. The current count of active nodes (i.e. coreFollower) as indicated in the previous section amount to 17. The author encourages similar infrastructure to [Etherscan Node Tracker](https://etherscan.io/nodetracker) to be deployed by Accumulate Network. 
 
 
 #### Client Diversity
