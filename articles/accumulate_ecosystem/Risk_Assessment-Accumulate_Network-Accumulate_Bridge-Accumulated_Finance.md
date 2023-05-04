@@ -398,14 +398,11 @@ The Accumulate team has responded that the state of the BVN can only be compromi
 
 ## Risk Analysis: Accumulate Bridge
 
-### Product Introduction: Accumulate Bridge
+### Product Introduction
 
 |![](https://i.imgur.com/lUyFj7d.png)|
 |-----|
 |System Overview: Accumulate Bridge|
-- [ ] What is the uptime requirement for Accumulate Node operators 
-- [ ] What is the stake for a node operator 
-- [ ] Slashing parameters etc.
 
 The [Accumulate Bridge](https://docs.accumulatenetwork.io/accumulate/tutorials/bridge) is a decentralized bridge that allows users to transfer Accumulate tokens, including ACME, between Ethereum and the Accumulate blockchain. It uses a technology based on renBridge [Darknodes](https://docs.renproject.io/darknodes/), which act as gatekeepers between different blockchain networks to facilitate cross-chain transfers. At present there is no slashing implemented for bridge operators, meaning it run by a trusted set of nodes (i.e. PoA). Bridge transactions can be paused if misbehavior by any of the nodes is detected. Each bridge node operator has staked over 1.5 million ACME each, which is significant in relation to the total token supply of 200 million, although less so in dollar-terms (~$60k USD). 
 
@@ -421,7 +418,32 @@ The bridge also includes a fee module, which charges a flat fee without ACME pri
 
 Users can interact with the bridge via the bridge frontend, which allows them to initiate transfers of Accumulate tokens between Ethereum and Accumulate. The bridge node, bridge smart contracts, and the bridge frontend are open-source and released under the MIT license.
 
-#### Note on WACME Adoption
+
+### Risk Vector 1: User Assets Security
+
+At present, a [2-of-3 multi-sig](https://etherscan.io/address/0x76b1E2d258CC4297e7708345E5d99e8ECa967BB1#readProxyContract#F9) governs the Accumulate bridge and is required to initiate cross-chain transfers. While the validator set is small, they are not anonymous and are operated by companies. 
+
+The node operator addresses are listed below:
+
+[Bridge Signer (Ethereum)](https://etherscan.io/address/0x76b1E2d258CC4297e7708345E5d99e8ECa967BB1#readProxyContract#F9)                                 
+
+* 0xCaD2fddb5009608Fa1ab042d643A61550A7dA63F
+* 0x9aB9c0d6741EaA6d6FDAf44c6EE80A2F9F59A8dB
+* 0x348975426678c0C0fCeD637b7Aa25C2900db986D
+
+
+[Bridge Signer (Accumulate)](https://explorer.accumulatenetwork.io/acc/bridge.acme/validators/1)
+
+* MHz125tGb22fZtxjkViSDLmV5xeDmWRDgvZf39qbWMfbnDkYnJ8LLHT
+* MHz126MJiCCPe4XSiS4byx5ydc5dk3aM4JAjU4odXvhpF9pwubvBqnU
+* MHz1277ixNm9EZcLbCBpbw8SDYRddWfzHbXmHcEgbAShLY2mWp5N8xw
+
+While the companies behind the bridge signers are not posted publicly, the Accumulate Team has stated that they can [inferred on-chain](https://explorer.accumulatenetwork.io/acc/8091107d12de06e1ec77c5622dd3c46e563b00c3cc06f8b50efde5e3693bf0ee@bridge.acme/1-ACME). Based on this, the Bridge Operators are [DeFacto](https://de-facto.pro/), [HighStakes](https://highstakesllc.org/) and [Kompendium](https://kompendium.co/). 
+
+
+### Risk Vector 2: Token-based Risk
+
+#### WACME Adoption
 
 The bridge has received modest usage since launch. WACME holders apparently consists mostly of the existing ACME holder base, rather than users onboarding from Ethereum. This may change as incentives to the WACME/frxETH pool grow WACME liquidity. The number of unique WACME holders has expanded since March, but as of this writing adoption remains very low.
 
@@ -430,31 +452,7 @@ The bridge has received modest usage since launch. WACME holders apparently cons
 |[WACME Holders Over Time](https://dune.com/sigrlami/wacme-accumulate)|
 
 
-### Risk Vector 1: User Assets Security
-
-At present, a [2-of-3 multi-sig](https://etherscan.io/address/0x76b1E2d258CC4297e7708345E5d99e8ECa967BB1#readProxyContract#F9) governs the Accumulate bridge and is required to initiate cross-chain transfers. While the validator set is small, they are not anonymous and are operated by companies. 
-
-The node operator addresses are listed below:
-
-| [Bridge Signer (Ethereum)](https://etherscan.io/address/0x76b1E2d258CC4297e7708345E5d99e8ECa967BB1#readProxyContract#F9)                                       |
-|--------------------------------------------------------------|
-| 0xCaD2fddb5009608Fa1ab042d643A61550A7dA63F                    |
-| 0x9aB9c0d6741EaA6d6FDAf44c6EE80A2F9F59A8dB                    |
-| 0x348975426678c0C0fCeD637b7Aa25C2900db986D                    |
-
-
-| [Bridge Signer (Accumulate)](https://explorer.accumulatenetwork.io/acc/bridge.acme/validators/1)|
-|---------------------------------------------------------------|
-| MHz125tGb22fZtxjkViSDLmV5xeDmWRDgvZf39qbWMfbnDkYnJ8LLHT         |
-| MHz126MJiCCPe4XSiS4byx5ydc5dk3aM4JAjU4odXvhpF9pwubvBqnU         |
-| MHz1277ixNm9EZcLbCBpbw8SDYRddWfzHbXmHcEgbAShLY2mWp5N8xw         |
-
-While the companies behind the bridge signers are not posted publicly, the Accumulate Team has stated that they can [inferred on-chain](https://explorer.accumulatenetwork.io/acc/8091107d12de06e1ec77c5622dd3c46e563b00c3cc06f8b50efde5e3693bf0ee@bridge.acme/1-ACME). 
-
-Based on this, the Bridge Operators are [DeFacto](https://de-facto.pro/), [HighStakes](https://highstakesllc.org/) and [Kompendium](https://kompendium.co/). 
-
-
-### Risk Vector 2: Token-based Risk
+#### Potential WACME Depeg
 
 A user can lose funds even after bridging their asset if the underlying token is stolen. This is because the synthetic ERC-20 WACME token derives its value from the underlying ACME locked on the Accumulate network. If the underlying ACME token is stolen or compromised, the value of WACME will be affected, and depending on the severity of the compromise can potentially render it worthless. Therefore the wrapped ACME is entirely dependent on the integrity of its native network.
 
@@ -463,7 +461,9 @@ A user can lose funds even after bridging their asset if the underlying token is
 
 The Accumlate Bridge Infrastructure (i.e. [bridge frontend](https://github.com/AccumulateNetwork/bridge-frontend) and [bridge contracts](https://github.com/AccumulateNetwork/bridge-contracts)) have be audited by [Fairyproof](https://fairyproof.com/). [The audit](https://fairyproof.com/doc/AccumulateBridge-Audit-Report-092822.pdf) does not show any meaningful unresolved security issues.
 
-However, it is worth highlighting a recommendation mentioned in the report: under the current implementation bridge validators complete a cross-chain transaction by using private keys stored locally in configuration files, which is not the best security practice. To improve security, it is recommended to use [Clef](https://geth.ethereum.org/docs/tools/clef/introduction) for signing transactions on an EVM chain and [Walletd](https://github.com/walletd/walletd) for signing transactions on the Accumulate network. These are programs that enable the signing of transactions without exposing private keys to the Internet. Clef and Walletd should be deployed independently from the bridge nodes, and access control should be managed by different individuals. This may increase maintenance costs, but it greatly enhances overall security by reducing the risk of private key compromise.
+However, it is worth highlighting a recommendation mentioned in the report: under the current implementation bridge validators complete a cross-chain transaction by using private keys stored locally in configuration files, which is not the best security practice. Compromise of the private keys could cause losses to WACME holders and LPs in the associated Curve pools. 
+
+To improve security, it is recommended to use [Clef](https://geth.ethereum.org/docs/tools/clef/introduction) for signing transactions on an EVM chain and [Walletd](https://github.com/walletd/walletd) for signing transactions on the Accumulate network. These are programs that enable the signing of transactions without exposing private keys to the Internet. Clef and Walletd should be deployed independently from the bridge nodes, and access control should be managed by different individuals. This may increase maintenance costs, but it greatly enhances overall security by reducing the risk of private key compromise.
 
 
 ## Risk Analysis: Accumulated Finance
@@ -546,14 +546,10 @@ Governance currently seems to be undefined for Accumulated Finance. However, the
 
 Based on the information provided on that page, one can imagine a potential veTokenomic model for Accumulated Finance could involve the use of veACFI staking to incentivize participation in the platform. Users who stake their ACFI tokens could earn a portion of the fees generated by the platform, including the 8% fee from the ACME Liquid Staking Fee Structure and the 4% fee from the WACME LP Incentives Fee Structure. The amount of the staking reward, as well as the decision-making power, will most likely be determined by the lock-up to which the user commits.
 
-Inquiry with the team made it clear that they retain the right to launch a token and will only do so if it makes sense. A comment by the team is shared below:
-
-|![](https://i.imgur.com/AwDmAAT.png)|
-|----|
-|Communication with the team in Telegram|
+Inquiry with the team made it clear that they are not in a rush to launch a token and will only do so if it makes sense. Their stated intention is to have sound utility for any governance token, and not simply launch a token for farming purposes.
 
 
-#### Initial Token Distribution of $ACFI
+#### Initial Token Distribution of ACFI
 
 To date, there is not much information available on the token apart from (1) ACFI token holders will be entitled to 50% of the protocol revenue (2) 1% of the total ACFI supply will be distributed to early adopters through several rounds of distribution. Early bird liquid staking users who deposit ACME or WACME to the liquid staking before 9 March 23:59, 2023, will be able to participate. The ACFI distribution will be based on a pro-rata basis, determined by the amount and duration of the deposit. A retroactive allocation will be given to early stACME/WACME Curve pool liquidity providers at a later stage.
 
@@ -588,7 +584,9 @@ Accumulated Finance is a small project in its early stage. It has not undergone 
 
 ## Llama Risk Recommendation
  
-As with many early stage DeFi projects, Accumulated Finance requires a significant amount of trust in the honest performance of its core team. It is given greater credibility by its direct ties with core developers of the Accumulate network and that the team's identities are known. Accumulate itself is an early stage layer-1 protocol and has yet to implement core features of its consensus algorithm, including a true proof of stake consensus with slashing, performance traction, and staking withdrawals. The Accumulate Bridge additionally presents a single point of failure. Although there are significant trust assumptions that warrants caution, the movement of funds is all auditable on-chain and both staking reward revenue streams and fees have been clearly defined. For that reason we are comfortable with request for gauges to the stACME/WACME and WACME/frxETH pools.
+As with many early stage DeFi projects, Accumulated Finance requires a significant amount of trust in the honest and reliable performance of its core team. It is given greater credibility by its direct ties with core developers of the Accumulate network and that the team's identities are known. Accumulate itself is an early stage layer-1 protocol and has yet to implement core features of its consensus algorithm, including a true proof of stake consensus with slashing, performance traction, and staking withdrawals. The Accumulate Bridge additionally presents a single point of failure, and its private key management strategy poses a risk of loss to WACME holders.
+
+Although there are significant trust assumptions that warrants caution, the movement of funds is all auditable on-chain and both staking reward revenue streams and fees have been clearly defined. Users always have a way to publicly verify the proper operation of the Accumulated Finance staking system. For that reason we are comfortable with request for gauges to the stACME/WACME and WACME/frxETH pools.
 
 
 
