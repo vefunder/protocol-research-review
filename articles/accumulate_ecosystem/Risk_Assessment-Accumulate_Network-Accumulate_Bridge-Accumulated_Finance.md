@@ -587,47 +587,50 @@ Although there are significant trust assumptions that warrants caution, the move
 ### Contract glossary
 
 
-* | ACFI     | Gnosis Safe Multisig Admin          | [0xaBaEBBd34E7F79352F55B0Acea9516F6CDB94BB5](https://etherscan.io/address/0xaBaEBBd34E7F79352F55B0Acea9516F6CDB94BB5)        | The Gnosis Safe Multisig Admin is a smart contract used by Accumulated Finance to manage multisig wallets for the platform. Specifically, this contract is used for the Accumulated Finance multisig wallet.                                                                  |
-* | ACFI     | ACME Liquid Staking (Deposits)      | [0xcf1a40eff1a4d4c56dc4042a1ae93013d13c3217](https://etherscan.io/address/0xcf1a40eff1a4d4c56dc4042a1ae93013d13c3217)        | The ACME Liquid Staking (Deposits) contract is used by Accumulated Finance to manage the staking of ACME tokens in a way that allows them to be used for other purposes while still earning rewards.                                                                                                                         |
-* | ACFI     | ACME Liquid Staking (Rewards)       | [0xe194d30aFDbae89b3118b8b7bc7B331Cc3333b88](https://etherscan.io/address/0xe194d30aFDbae89b3118b8b7bc7B331Cc3333b88)        | The ACME Liquid Staking (Rewards) contract is used by Accumulated Finance to distribute rewards to users who stake their ACME tokens in the liquid staking pool managed by the platform.                                                                                                                                  |
-* | Curve     | stACME/WACME            | [0x4424b4A37ba0088D8a718b8fc2aB7952C7e695F5](https://etherscan.io/address/0x4424b4A37ba0088D8a718b8fc2aB7952C7e695F5) | The stACME/WACME  contract is used by Accumulated Finance to incentivize liquidity providers in the stACME/WACME pool. Users who provide liquidity to this pool can earn rewards in the form of stACME or other tokens.                                                                                         |
-* | Curve     | WACME/frxETH                        | [0x7bbE7a17E501BB6542e975D8A163950149487fa3](https://etherscan.io/address/0x7bbE7a17E501BB6542e975D8A163950149487fa3)        | The WACME/frxETH contract is used by Accumulated Finance to manage the exchange of WACME and frxETH tokens. Users can trade between these tokens through this contract, which enables them to take advantage of different features and benefits associated with each token. |
+* Accumulated Finance     | Gnosis Safe Multisig Admin          | [0xaBaEBBd34E7F79352F55B0Acea9516F6CDB94BB5](https://etherscan.io/address/0xaBaEBBd34E7F79352F55B0Acea9516F6CDB94BB5)
+     * The Gnosis Safe Multisig Admin is a smart contract used by Accumulated Finance to manage multisig wallets for the platform. Specifically, this contract is used for the Accumulated Finance multisig wallet. 
+ 
+* Accumulated Finance   | Accumulate Deployer      | [0x5e95454F33F9C88C9a967531CD48192dEb2Fd4fd](https://etherscan.io/address/0x5e95454f33f9c88c9a967531cd48192deb2fd4fd)         
+     * Accumulate Deployer is used to deploy and manage smart contracts on the Ethereum network. In particular, it manages stACME staking rewards
 
-* | ACFI | ADI               | [accumulated.acme](https://explorer.accumulatenetwork.io/acc/accumulated.acme) | ADI is the native token of the Accumulate Network blockchain. It is used for various functions within the platform. |
+* Accumulated Finance   | stACME | [0x7AC168c81F4F3820Fa3F22603ce5864D6aB3C547](https://etherscan.io/token/0x7AC168c81F4F3820Fa3F22603ce5864D6aB3C547) 
+     * stACME is a liquid staking derivative token of WACME, representing staked ACME in a liquid form. 
 
-* | ACFI | ACME Staking Account         | [accumulated.acme/staking](https://explorer.accumulatenetwork.io/acc/accumulated.acme/staking)      | The ACME Staking Account is a smart contract used by Accumulate Network to manage staking of ACME tokens.                                                  |
+* Accumulated Finance    | ACME Liquid Staking (Deposits)      | [0xcf1a40eff1a4d4c56dc4042a1ae93013d13c3217](https://etherscan.io/address/0xcf1a40eff1a4d4c56dc4042a1ae93013d13c3217)      
+     * The ACME Liquid Staking (Deposits) contract is used by Accumulated Finance to manage the staking of ACME tokens in a way that allows them to be used for other purposes while still earning rewards. 
+                                                                                                                          
+* Accumulated Finance    | ACME Liquid Staking (Rewards)       | [0xe194d30aFDbae89b3118b8b7bc7B331Cc3333b88](https://etherscan.io/address/0xe194d30aFDbae89b3118b8b7bc7B331Cc3333b88)    
+     * The ACME Liquid Staking (Rewards) contract is used by Accumulated Finance to distribute rewards to users who stake their ACME tokens in the liquid staking pool managed by the platform.                                                                                                             
 
-* | ACFI | Staking Rewards       | [accumulated.acme/staking-rewards](https://explorer.accumulatenetwork.io/acc/accumulated.acme/staking-rewards)        | The Staking Rewards contract is used by Accumulate Network to distribute rewards to users who stake their ACME tokens on the platform.|
+* Accumulated Finance | Accumulated Account               | [accumulated.acme](https://explorer.accumulatenetwork.io/acc/accumulated.acme) 
+     * Accumulated.acme is the parent account for all Accumulated Finance addresses on Accumulate Network.
 
-* | ACFT | Incentives           | [accumulated.acme/incentives](https://explorer.accumulatenetwork.io/acc/accumulated.acme/incentives) | The Incentives contract is used by Accumulate Network to incentivize users to provide liquidity to different pools on the platform. |
+* Accumulated Finance | ACME Staking Account         | [accumulated.acme/staking](https://explorer.accumulatenetwork.io/acc/accumulated.acme/staking)   
+     * The ACME Staking Account is a smart contract used by Accumulate Network to manage staking of ACME tokens.                                         
 
-* | ACFI | Treasury            | [accumulated.acme/treasury](https://explorer.accumulatenetwork.io/acc/accumulated.acme/treasury) | The Treasury is a public address used by Accumulate Network for various functions, including receiving a portion of the protocol fees. |
+* Accumulated Finance | Staking Rewards       | [accumulated.acme/staking-rewards](https://explorer.accumulatenetwork.io/acc/accumulated.acme/staking-rewards)    
+     * The Staking Rewards contract is used by Accumulate Network to distribute rewards to users who stake their ACME tokens on the platform.
 
-* | Accumulate Bridge    | Accumulate Bridge Contract         | [0xbA050938970C8eAeDA3e970B571a6fe463Db7d0e](https://etherscan.io/address/0xbA050938970C8eAeDA3e970B571a6fe463Db7d0e#writeContract)      | The Accumulate Bridge Contract is a smart contract that enables cross-chain transfers of ACME tokens between Ethereum and Accumulate blockchains.|
+* Accumulated Finance | Incentives           | [accumulated.acme/incentives](https://explorer.accumulatenetwork.io/acc/accumulated.acme/incentives) 
+     * The Incentives contract is used by Accumulate Network to incentivize users to provide liquidity to different pools on the platform. 
 
-* | Accumulate Bridge    | Accumulate Bridge Multi-sig      | [0x76b1E2d258CC4297e7708345E5d99e8ECa967BB1](https://etherscan.io/address/0x76b1E2d258CC4297e7708345E5d99e8ECa967BB1#readProxyContract)       | The Accumulate Bridge Multi-sig is a secure way for bridge operators to manage and authorize cross-chain token transfers. |
-
-* | General    | Accumulate Deployer      | [0x5e95454F33F9C88C9a967531CD48192dEb2Fd4fd](https://etherscan.io/address/0x5e95454f33f9c88c9a967531cd48192deb2fd4fd)         | Accumulate Deployer is used to deploy and manage smart contracts on the Accumulate blockchain network.                |
-
-* | General              | Wrapped ACME (wACME) |[0xDF4Ef6EE483953fE3B84ABd08C6A060445c01170](https://etherscan.io/address/0xDF4Ef6EE483953fE3B84ABd08C6A060445c01170)| Wrapped ACME (wACME) is a token that represents ACME on the Ethereum blockchain, allowing it to be used in decentralized finance (DeFi) applications.|
-
-* | General    | stACME | [0x7AC168c81F4F3820Fa3F22603ce5864D6aB3C547](https://etherscan.io/token/0x7AC168c81F4F3820Fa3F22603ce5864D6aB3C547)| stACME is a liquid staking derivative token of wACME, representing staked ACME in a liquid form. |
-
-
-========= Ideas to add to the report (with more time) =======
-### Possible Extension of the analysis - remove before publishing
-- [ ] Enhance analytics by building dashbaord for Bridge & Accumalated Finance  (requires scraping form block explorer)
-- [ ] Simulate Centralisation of Token supply over time  (basic cadCAD simulation)
-```
-Staking Reward = (16% * Total Unissued Tokens / 12) * 90% * (Stake / Total Staked)
-``` 
-
-## Risk Mitigation Checklist
-- [ ] Simulate Token economy 
-- [ ] Reconsider token distriution mechanism 
-- [ ] Set greater focus on ecosystem growth & communication
-- [ ] Analytics tool!!! Very hard to get concret information 
+* Accumulated Finance | Treasury            | [accumulated.acme/treasury](https://explorer.accumulatenetwork.io/acc/accumulated.acme/treasury) 
+     * The Treasury is a public address used by Accumulate Network for various functions, including receiving a portion of the protocol fees. 
 
 
-Comment
-- Grant proposals process - well done! Feel highly apporipriate given the stage of accumulate and well documented
+* Accumulate Bridge    | Accumulate Bridge Multi-sig      | [0x76b1E2d258CC4297e7708345E5d99e8ECa967BB1](https://etherscan.io/address/0x76b1E2d258CC4297e7708345E5d99e8ECa967BB1#readProxyContract)       
+     * The Accumulate Bridge Multi-sig is a secure way for bridge operators to manage and authorize cross-chain token transfers.    
+
+* Accumulate Bridge              | Wrapped ACME (wACME) |[0xDF4Ef6EE483953fE3B84ABd08C6A060445c01170](https://etherscan.io/address/0xDF4Ef6EE483953fE3B84ABd08C6A060445c01170)
+     * Wrapped ACME (WACME) is a token that represents ACME on the Ethereum blockchain, allowing it to be used in decentralized finance (DeFi) applications.
+
+* Accumulate Bridge    | Accumulate Bridge Contract         | [0xbA050938970C8eAeDA3e970B571a6fe463Db7d0e](https://etherscan.io/address/0xbA050938970C8eAeDA3e970B571a6fe463Db7d0e#writeContract) 
+     * The Accumulate Bridge Contract is a smart contract that enables cross-chain transfers of ACME tokens between Ethereum and Accumulate blockchains.
+
+
+* Curve     | stACME/WACME            | [0x4424b4A37ba0088D8a718b8fc2aB7952C7e695F5](https://etherscan.io/address/0x4424b4A37ba0088D8a718b8fc2aB7952C7e695F5)  
+     * The stACME/WACME  contract is used by Accumulated Finance to incentivize liquidity providers in the stACME/WACME pool. Users who provide liquidity to this pool can earn rewards in the form of stACME or other tokens.                                                                           
+     
+* Curve     | WACME/frxETH                        | [0x7bbE7a17E501BB6542e975D8A163950149487fa3](https://etherscan.io/address/0x7bbE7a17E501BB6542e975D8A163950149487fa3)    
+     * The WACME/frxETH contract is used by Accumulated Finance to manage the exchange of WACME and frxETH tokens. Users can trade between these tokens through this contract, which enables them to take advantage of different features and benefits associated with each token.
+
