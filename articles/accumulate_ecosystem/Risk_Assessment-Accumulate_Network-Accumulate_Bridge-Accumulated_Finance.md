@@ -6,7 +6,7 @@
 - DefiDevs (Core Maintainer): https://defidevs.io/
 - Defacto (Core Maintainer): https://de-facto.pro/
 - Proposal: https://gov.curve.fi/t/proposal-to-add-wacme-frxeth-and-stacme-wacme-to-the-gauge-controller/9148
-- Analyist Spreadsheet: https://docs.google.com/spreadsheets/d/1gDlENkhPkzSvdi73ySq75VJgcsrvBOlSlTPtrFwS9_k/edit?usp=sharing
+- Analyist Spreadsheet: https://docs.google.com/spreadsheets/d/1wqXqaz74Y_SCg6GezSMuwuArHIfY9nEM5n0Z8_jLBk4/edit?usp=sharing
 
 
 **Accumulate Network**
@@ -88,7 +88,7 @@ The following diagram shows an overview of the relationship between the three ma
 
 ### Assets
 
-The assets relevant for this report can be summarised as follows: 
+The assets relevant for this report can be summarized as follows: 
 
 | Asset | Description |
 | --- | --- |
@@ -176,56 +176,6 @@ It also supports finality, which means that once a block has been added to the b
 Due to the absence of more granular analytics provided by the Accumulate Network, the author is unable to assess stability beyond a heuristical reference to Tendermint.
 
 
-#### Staking Rewards
-
-Validators are nodes that are responsible for verifying and validating transactions, and adding them to the blockchain. According to the [whitepaper (p. 21)](https://accumulatenetwork.io/Accumulate-Whitepaper-4-12-22.pdf), stakers and validators are compensated with freshly minted ACME:
-
->  "Every year, 16% of tokens in the unissued pool will be minted at intervals of approximately 1 week to compensate stakers and validators in the absence of a transaction fee"
-
-When a staker delegates to an Accumulate validator, the validator earns [10%](https://explorer.accumulatenetwork.io/validators) of the delegated stake. Therefore an approximate cost calculation for the security budget for a respective validator can be expressed as: 
-
-```
-Weekly Validator Reward = (16% * Total Unissued Tokens / 52) * (Validator Stake / Total Staked)
-``` 
-
-By doing a simple analysis using recent figures of ACME self-staked by validators and delegated stake, we can approximate the weekly staking rewards earned by each validator. Only 4 validators are earning >$1000 per week. De Facto, the validator run by the Accumulated Finance team and to which its ACME is delegated, has the 6th highest stake in the network and earns ~$800 per week.
-
-
-
-|![Weekly Validator Reward in USD(3)](https://user-images.githubusercontent.com/51072084/236271533-7fef5059-25b5-4c4b-b5f7-e6464c19aedf.png)|
-|------|
-|[Validation Rewards](https://docs.google.com/spreadsheets/d/1wqXqaz74Y_SCg6GezSMuwuArHIfY9nEM5n0Z8_jLBk4/edit?usp=sharing)|
-
-
-While this may seem like a low-security budget, it may be sufficient in the context of network activity, as Accumulate is essentially a new project. Given that ACME is relatively illiquid, an attacker will be unable to meaningfully cash out on a consensus level attack. This limits the risk at present, although additional liquidity in the Curve pools may increase this risk.
-
-
-#### Stake Diversity & Growth
-
-There are different types of agents listed as staking and validation participants. They are defined as follows: 
-
-- CoreValidator: A validator node that is responsible for proposing new blocks and validating transactions on the Accumulate Network. CoreValidators are selected through a consensus algorithm and have a significant role in maintaining the security and integrity of the network.
-- StakingValidator: A validator node that participates in the consensus process by validating transactions and adding them to the blockchain. Unlike CoreValidators, StakingValidators do not participate in block proposals, but they do earn rewards for their participation in the network.
-- CoreFollower: A node that follows a CoreValidator in the network. These nodes are responsible for replicating data and participating in the consensus process.
-- Delegate: An individual who holds tokens and delegates them to a validator in exchange for a share of the validator's rewards. Delegators do not participate directly in the consensus process, but they play an important role in securing the network by choosing trustworthy validators.
-
-There are 17 coreFollowers, 24 coreValidators, 145 delegates, and 3 stakingValidators. 
-
-|![](https://i.imgur.com/Ec7Xaxm.png)|
-|------|
-|[Count of Staker by Type](https://docs.google.com/spreadsheets/d/1gDlENkhPkzSvdi73ySq75VJgcsrvBOlSlTPtrFwS9_k/edit?usp=sharing)|
-
-CoreFollowers hold the lowest number of tokens, at 20,496,467, while the coreValidators hold the largest amount at 73,088,162 tokens. Delegates hold 32,159,501 tokens, and stakingValidators hold 42,458,526 tokens. 
-
-|![](https://i.imgur.com/ejAWyDP.png)|
-|------|
-|[Aggregated Balance of Stakers by Type](https://docs.google.com/spreadsheets/d/1gDlENkhPkzSvdi73ySq75VJgcsrvBOlSlTPtrFwS9_k/edit?usp=sharing)|
-
-This shows a nearly inverse relationship that likely indicates the relative token distribution between insiders and retail. Insiders are likely to be operating validators and retail users are likely to be delegates.
-
-Due to a lack of available analytics about Accumulate Network, limited insight on node distribution can be provided. The author encourages similar infrastructure to [Etherscan Node Tracker](https://etherscan.io/nodetracker) to be deployed by Accumulate Network. 
-
-*Note: In the current iteration of Accumulate consensus, all validator types (CoreValidator, StakingValidator, and CoreFollower) have equal weight in achieving consensus with a total of 44 validators. Weighting proportional to stake will be introduced in a later upgrade.*
 
 
 #### Client Diversity
@@ -281,6 +231,21 @@ Factom raised 579 Bitcoin in 2015. Relative to major recent launches, this is ti
 [Inveniam](https://www.inveniam.io/) purchased all the patents and [invested several million dollars](https://accumulatenetwork.io/2022/05/factom-transition-to-accumulate-guide-faq/) into Accumulate's development. An exact figure is not known. It's unlikely that the amount compares to funding of other layer 1 protocols.
 
 
+#### Governance Processes
+
+Accumulate's governance process is centered around [committees](https://gitlab.com/accumulatenetwork/governance/governance-docs/-/blob/main/Committees.md#committees) that manage critical workflows in the ecosystem. Committee members are selected by stakers and validators. There are four committes called the Governance Committe, the Core Development Committee, the Ecosystem Committee, and the Business Committee. Each is assigned a budget in ACME tokens to carry out operations. The committees manage tasks such as code development, managing the protocol, managing staking services, coordinating integrations with other communities, negotiating with exchanges, providing liquidity, and organizing marketing activities such as conferences and hackathons.
+
+The [grant request process](https://gitlab.com/accumulatenetwork/governance/governance-docs/-/blob/main/Grants.md) is initiated by an applicant who submits a proposal to the appropriate committee. The committee evaluates the proposal and approves or rejects it. Stakeholder voting is required for all grant proposals, and decisions by the committee cannot be appealed. The committee may appoint independent consultants to monitor the execution of awarded grants. The initial Accumulate Grant Pool is allocated 60 million ACME tokens.
+
+In general, the standard process can be summarized below:
+
+|![](https://i.imgur.com/0dwRgtM.png)|
+|----|
+|High-level Overview: Grant proposal flow|
+
+While Governance is fairly centralized, it is effective and well-documented, and seems appropriate given the current growth stage of the Accumulate Network. Initially, a core committee of individuals with technical expertise will make decisions about the protocol's implementation, but over time, node operators and delegators will have greater input in decision-making. Accumulate has plans to move towards a 100% [on-chain governance model](https://gitlab.com/accumulatenetwork/governance/governance-docs/-/blob/main/Governance.md#more-decentralization-over-time) over the next 2-5 years, with all decisions being made by all staking parties.  The community will eventually be able to vote on Accumulate Improvement Proposals and Grants for application/solution development. The move towards full decentralization is expected to be slower than the implementation of layer 2 grant proposal voting.
+
+
 ### Risk Vector 2: Token-based Risk
 
 #### ACME Tokenomics
@@ -294,6 +259,7 @@ Furthermore, every month, 1-2% of the tokens in the unissued pool will be minted
 In the first year, 100% of minted ACME tokens will be delivered to stakers and validators as a reward for securing the network. Later on, some of the minted ACME tokens will be added to the Grant Pool to support partnerships and development.
 
 The [staking process](https://gitlab.com/accumulatenetwork/governance/governance-docs/-/blob/main/Governance.md#lockup-period) in Accumulate aims to lower token velocity and increase predictability, with a goal of 60%-80% of circulating supply being staked. There are two staking methods: undelegated staking, which has no penalties or bonding, and delegated staking, which has higher rewards but with warm-up and cool-down periods and penalties for poor performance. One can choose to delegate stake between 3 months and 24 months. The longer you stake the higher the rewards percentage will be. There will be short-term and long-term lockup implementation, and delegators and operators can be slashed if the operator is not performing or acting maliciously. To incentivize the robustness of the network in its early days, operators may operate multiple active core validators, but this is a temporary measure that may be discontinued in the future.
+
 
 #### Initial Token Distribution of ACME
 
@@ -320,6 +286,55 @@ The [Developer Block](https://accumulatenetwork.io/2022/04/accumulate-tokenomics
 The initial allocation can be considered fair. In this distribution, DeFi Devs and Advisor can be considered protocol insiders putting the insider allocation to approximately 41% which on a relative basis can be considered low.
 
 
+#### Staking Rewards
+
+Validators are nodes that are responsible for verifying and validating transactions, and adding them to the blockchain. According to the [whitepaper (p. 21)](https://accumulatenetwork.io/Accumulate-Whitepaper-4-12-22.pdf), stakers and validators are compensated with freshly minted ACME:
+
+>  "Every year, 16% of tokens in the unissued pool will be minted at intervals of approximately 1 week to compensate stakers and validators in the absence of a transaction fee"
+
+When a staker delegates to an Accumulate validator, the validator earns [10%](https://explorer.accumulatenetwork.io/validators) of the delegated stake. Therefore an approximate cost calculation for the security budget for a respective validator can be expressed as: 
+
+```
+Weekly Validator Reward = (16% * Total Unissued Tokens / 52) * (Validator Stake / Total Staked)
+``` 
+
+By doing a simple analysis using recent figures of ACME self-staked by validators and delegated stake, we can approximate the weekly staking rewards earned by each validator. Only 4 validators are earning >$1000 per week. De Facto, the validator run by the Accumulated Finance team and to which its ACME is delegated, has the 6th highest stake in the network and earns ~$800 per week.
+
+|![Weekly Validator Reward in USD(3)](https://user-images.githubusercontent.com/51072084/236271533-7fef5059-25b5-4c4b-b5f7-e6464c19aedf.png)|
+|------|
+|[Validation Rewards](https://docs.google.com/spreadsheets/d/1wqXqaz74Y_SCg6GezSMuwuArHIfY9nEM5n0Z8_jLBk4/edit?usp=sharing)|
+
+While this may seem like a low-security budget, it may be sufficient in the context of network activity, as Accumulate is essentially a new project. Given that ACME is relatively illiquid, an attacker will be unable to meaningfully cash out on a consensus level attack. This limits the risk at present, although additional liquidity in the Curve pools may increase this risk.
+
+
+#### Stake Diversity & Growth
+
+There are different types of agents listed as staking and validation participants. They are defined as follows: 
+
+- CoreValidator: A validator node that is responsible for proposing new blocks and validating transactions on the Accumulate Network. CoreValidators are selected through a consensus algorithm and have a significant role in maintaining the security and integrity of the network.
+- StakingValidator: A validator node that participates in the consensus process by validating transactions and adding them to the blockchain. Unlike CoreValidators, StakingValidators do not participate in block proposals, but they do earn rewards for their participation in the network.
+- CoreFollower: A node that follows a CoreValidator in the network. These nodes are responsible for replicating data and participating in the consensus process.
+- Delegate: An individual who holds tokens and delegates them to a validator in exchange for a share of the validator's rewards. Delegators do not participate directly in the consensus process, but they play an important role in securing the network by choosing trustworthy validators.
+
+There are 17 coreFollowers, 24 coreValidators, 145 delegates, and 3 stakingValidators. 
+
+|![](https://i.imgur.com/Ec7Xaxm.png)|
+|------|
+|[Count of Staker by Type](https://docs.google.com/spreadsheets/d/1gDlENkhPkzSvdi73ySq75VJgcsrvBOlSlTPtrFwS9_k/edit?usp=sharing)|
+
+CoreFollowers hold the lowest number of tokens, at 20,496,467, while the coreValidators hold the largest amount at 73,088,162 tokens. Delegates hold 32,159,501 tokens, and stakingValidators hold 42,458,526 tokens. 
+
+|![](https://i.imgur.com/ejAWyDP.png)|
+|------|
+|[Aggregated Balance of Stakers by Type](https://docs.google.com/spreadsheets/d/1gDlENkhPkzSvdi73ySq75VJgcsrvBOlSlTPtrFwS9_k/edit?usp=sharing)|
+
+This shows a nearly inverse relationship that likely indicates the relative token distribution between insiders and retail. Insiders are likely to be operating validators and retail users are likely to be delegates.
+
+Due to a lack of available analytics about Accumulate Network, limited insight on node distribution can be provided. The author encourages similar infrastructure to [Etherscan Node Tracker](https://etherscan.io/nodetracker) to be deployed by Accumulate Network. 
+
+*Note: In the current iteration of Accumulate consensus, all validator types (CoreValidator, StakingValidator, and CoreFollower) are whitelisted, and have equal weight in achieving consensus with a total of 44 validators. Weighting proportional to stake will be introduced in a later upgrade.*
+
+
 #### Token Ownership 
 
 In Delegated Proof of Stake (DPoS), the delegated tokens play a crucial role in curating the validator selection process. DPoS networks are designed such that token holders can vote for delegates who will validate transactions and maintain the blockchain. In DPoS, the token holders' voting power is proportional to the number of tokens they hold or control through delegation. This means that token holders with a larger token balance or more delegated tokens have a greater say in the election of validators and hence the ordering of transactions and block construction. In addition, validators are rewarded with newly minted tokens and transaction fees for their efforts.
@@ -328,7 +343,7 @@ In essence, whoever controls more than 2/3 of the token stake effectively contro
 
 |![](https://i.imgur.com/R8fo1vn.png)|
 |------|
-|[Cumulative Percentage Share of Validator Delgation (incl. Self-Staking)](https://docs.google.com/spreadsheets/d/1gDlENkhPkzSvdi73ySq75VJgcsrvBOlSlTPtrFwS9_k/edit?usp=sharing)|
+|[Cumulative Percentage Share of Validator Delgation (incl. Self-Staking)](https://docs.google.com/spreadsheets/d/1wqXqaz74Y_SCg6GezSMuwuArHIfY9nEM5n0Z8_jLBk4/edit?usp=sharing)|
 
 From the chart, we can see that essentially two validators & their delegates controlled by 1) the DeFi Devs team ([acc://defidevs.acme](https://explorer.accumulatenetwork.io/acc/defidevs.acme)) and 2) the Accumulate Foundation ([acc://accumulate.acme](https://explorer.accumulatenetwork.io/acc/accumulate.acme)) effectively control the network. While not unusual for an early stage protocol, this represents a concerning level of centralization and a greater distribution of the token is needed. 
 
@@ -338,32 +353,13 @@ In the interest of decentralizing the influence of validators, stakers might rec
 
 |![](https://i.imgur.com/X3lAXp1.png)|
 |------|
-|[Cumulative Percentage Share of Validator Self-Stake (excl. Delegation)](https://docs.google.com/spreadsheets/d/1gDlENkhPkzSvdi73ySq75VJgcsrvBOlSlTPtrFwS9_k/edit?usp=sharing)|
+|[Cumulative Percentage Share of Validator Self-Stake (excl. Delegation)](https://docs.google.com/spreadsheets/d/1wqXqaz74Y_SCg6GezSMuwuArHIfY9nEM5n0Z8_jLBk4/edit?usp=sharing)|
 
 We recommend ideating about possible modifications to the validation mechanism. For instance, an option for balancing power more effectively for Accumulate Network might be achieved by implementing Quadratic Voting. For an example [see Axelar Network](https://axelar.network/blog/axelar-implements-quadratic-voting-with-maeve-upgrade). 
 
 Furthermore, as only 45% of the total supply have been issued at present, it may be worth considering an alternative distribution mechanism to distribute to a larger token holder base. 
 
-> *Note: Decentralisation is always a means to an end and not a goal in itself (i.e. most commonly blockchain systems are used to achieve the property of censorship resistance). Given this, the LP should ask him or herself whether the degree of decentralisation is sufficient for them in the context of Accumulate Network.*
-
-
-#### Governance Processes
-
-Accumulate's governance process is centered around [committees](https://gitlab.com/accumulatenetwork/governance/governance-docs/-/blob/main/Committees.md#committees) that manage critical workflows in the ecosystem. Committee members are selected by stakers and validators. There are four committes called the Governance Committe, the Core Development Committee, the Ecosystem Committee, and the Business Committee. Each is assigned a budget in ACME tokens to carry out operations. The committees manage tasks such as code development, managing the protocol, managing staking services, coordinating integrations with other communities, negotiating with exchanges, providing liquidity, and organizing marketing activities such as conferences and hackathons.
-
-The [grant request process](https://gitlab.com/accumulatenetwork/governance/governance-docs/-/blob/main/Grants.md) is initiated by an applicant who submits a proposal to the appropriate committee. The committee evaluates the proposal and approves or rejects it. Stakeholder voting is required for all grant proposals, and decisions by the committee cannot be appealed. The committee may appoint independent consultants to monitor the execution of awarded grants. The initial Accumulate Grant Pool is allocated 60 million ACME tokens.
-
-In general, the standard process can be summarised below:
-
-|![](https://i.imgur.com/0dwRgtM.png)|
-|----|
-|High-level Overview: Grant proposal flow|
-
-
-While Governance is fairly centralised, it is effective and well-documented, and seems appropriate given the current growth stage of the Accumulate Network. Initially, a core committee of individuals with technical expertise will make decisions about the protocol's implementation, but over time, node operators and delegators will have greater input in decision-making. Accumulate has plans to move towards a 100% [on-chain governance model](https://gitlab.com/accumulatenetwork/governance/governance-docs/-/blob/main/Governance.md#more-decentralization-over-time) over the next 2-5 years, with all decisions being made by all staking parties.  The community will eventually be able to vote on Accumulate Improvement Proposals and Grants for application/solution development. The move towards full decentralization is expected to be slower than the implementation of layer 2 grant proposal voting.
-
-
-- [ ] where are fund of respective committees held?
+*Note: Decentralisation is always a means to an end and not a goal in itself (i.e. most commonly blockchain systems are used to achieve the property of censorship resistance). Given this, the LP should ask him or herself whether the degree of decentralisation is sufficient for them in the context of Accumulate Network.*
 
 
 ### Risk Vector 3: Technical Security Risk
