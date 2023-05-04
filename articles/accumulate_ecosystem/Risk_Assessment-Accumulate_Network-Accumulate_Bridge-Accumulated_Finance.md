@@ -188,10 +188,11 @@ When a staker delegates to an Accumulate validator, the validator earns [10%](ht
 Weekly Validator Reward = (16% * Total Unissued Tokens / 52) * (Validator Stake / Total Staked)
 ``` 
 
-By doing a simple analysis using recent figures of ACME self-staked by validators and delegated stake, we can approximate the weekly staking rewards earned by each validator. Only 4 validators are earning >$1000 per week. De Facto, the validator run by the Accumulated Finance team and to which its ACME is delegated, has the 6th highest stake in the network and earns $700-800 per week.
+By doing a simple analysis using recent figures of ACME self-staked by validators and delegated stake, we can approximate the weekly staking rewards earned by each validator. Only 4 validators are earning >$1000 per week. De Facto, the validator run by the Accumulated Finance team and to which its ACME is delegated, has the 6th highest stake in the network and earns ~$800 per week.
 
 
-|![Weekly Validator Reward in USD(2)](https://user-images.githubusercontent.com/51072084/236078991-ddeedc78-b5cc-483b-85b0-44fed7361650.png)|
+
+|![Weekly Validator Reward in USD(3)](https://user-images.githubusercontent.com/51072084/236271533-7fef5059-25b5-4c4b-b5f7-e6464c19aedf.png)|
 |------|
 |[Validation Rewards](https://docs.google.com/spreadsheets/d/1wqXqaz74Y_SCg6GezSMuwuArHIfY9nEM5n0Z8_jLBk4/edit?usp=sharing)|
 
