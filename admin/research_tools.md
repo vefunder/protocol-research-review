@@ -1,5 +1,7 @@
 ### A List of helpful tools for conducting our research. Feel free to add to the list to help our fellow analysts
 
+#### Full on-chain investigations tools list https://github.com/OffcierCia/On-Chain-Investigations-Tools-List
+
 * Flow Charts: https://app.diagrams.net/
 * Access Control: https://pod.xyz/
 * Tx Explorer: https://explorer.phalcon.xyz/
@@ -20,6 +22,4 @@
 * AML onchain analytics: misttrack.io https://misttrack.io/
 * Human readable block explorer: https://www.onceupon.gg/
 * Chain analytics/comparisons: https://www.artemis.xyz/
-
-* Full on-chain investigations tools list https://github.com/OffcierCia/On-Chain-Investigations-Tools-List
 
