@@ -283,7 +283,7 @@ Factom raised 579 Bitcoin in 2015. Relative to major recent launches, this is ti
 
 ### Risk Vector 2: Token-based Risk
 
-#### Tokenomics $ACME
+#### ACME Tokenomics
 
 As [outlined in the whitepaper](https://accumulatenetwork.io/Accumulate-Whitepaper-4-12-22.pdf), Accumulate's ACME token is designed to follow a Burn and Mint Equilibrium (BME) model. The token is used as a means of exchanging value within the Accumulate network, with Credits being used to pay for blockchain services. The Credits are fixed to the USD value, allowing enterprise users to budget their data use long-term without worrying about market conditions.
 
@@ -295,39 +295,27 @@ In the first year, 100% of minted ACME tokens will be delivered to stakers and v
 
 The [staking process](https://gitlab.com/accumulatenetwork/governance/governance-docs/-/blob/main/Governance.md#lockup-period) in Accumulate aims to lower token velocity and increase predictability, with a goal of 60%-80% of circulating supply being staked. There are two staking methods: undelegated staking, which has no penalties or bonding, and delegated staking, which has higher rewards but with warm-up and cool-down periods and penalties for poor performance. One can choose to delegate stake between 3 months and 24 months. The longer you stake the higher the rewards percentage will be. There will be short-term and long-term lockup implementation, and delegators and operators can be slashed if the operator is not performing or acting maliciously. To incentivize the robustness of the network in its early days, operators may operate multiple active core validators, but this is a temporary measure that may be discontinued in the future.
 
-#### Initial Token Distribution of $ACME
+#### Initial Token Distribution of ACME
 
-The initial token distribution of $ACME is outlined in [this article](https://accumulatenetwork.io/2022/05/factom-transition-to-accumulate-guide-faq/): 
+The initial token distribution of ACME is outlined in [this article](https://accumulatenetwork.io/2022/05/factom-transition-to-accumulate-guide-faq/): 
 
-| Token Metrics | Value |
-| --- | --- |
-| Supply | 500M Tokens |
-| Release at Mainnet | 150M |
-| Grant Block | 60M |
-| Dev Block | 90M |
-| FCT Conversion to ACME | 50M |
-| Conversion plus Activation Block | 200M of the 500M Max Supply |
-| Uncirculated Pool | 300M tokens (60%) |
-| Monthly Mint Rate | 1-2% of uncirculated pool tokens will be minted as ACME to create credits. |
+![Screen Shot 2023-05-04 at 10 21 42 AM](https://user-images.githubusercontent.com/51072084/236281130-269218b9-0d9a-48a4-b30e-a0cf203d4c54.png)
 
 The [Grant Block](https://accumulatenetwork.io/2022/04/accumulate-tokenomics-model-part-2/) will be given to community members for improving the protocol.
 
-| Token Allocation | Amount |
-| --- | --- |
-| Governance | 30M |
-| Core Development | 15M |
-| Ecosystem Development | 6M |
-| Business Development | 9M |
+* Governance | 30M 
+* Core Development | 15M 
+* Ecosystem Development | 6M 
+* Business Development | 9M 
 
 The [Developer Block](https://accumulatenetwork.io/2022/04/accumulate-tokenomics-model-part-2/) will be allocated directly or indirectly to shareholders, advisors, protocol contributors, and team members. 
 
-| Token Allocation       | Amount      |
-|------------------------|------------|
-| DeFi Devs               | 79,200,000 |
-| Unpaid Work Compensation | 3,600,000   |
-| Advisors               | 1,800,000   |
-| External Contributors  | 3,600,000   |
-| Miscellaneous Expenses | 1,800,000   |
+
+* DeFi Devs               | 79,200,000 
+* Unpaid Work Compensation | 3,600,000 
+* Advisors               | 1,800,000
+* External Contributors  | 3,600,000
+* Miscellaneous Expenses | 1,800,000
 
 The initial allocation can be considered fair. In this distribution, DeFi Devs and Advisor can be considered protocol insiders putting the insider allocation to approximately 41% which on a relative basis can be considered low.
 
