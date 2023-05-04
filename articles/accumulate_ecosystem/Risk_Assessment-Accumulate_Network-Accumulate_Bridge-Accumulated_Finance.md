@@ -221,7 +221,7 @@ CoreFollowers hold the lowest number of tokens, at 20,496,467, while the coreVal
 |------|
 |[Aggregated Balance of Stakers by Type](https://docs.google.com/spreadsheets/d/1gDlENkhPkzSvdi73ySq75VJgcsrvBOlSlTPtrFwS9_k/edit?usp=sharing)|
 
-This shows a nearly inverse relationship which may suggest some disproportional power between different stakeholder groups.
+This shows a nearly inverse relationship likely indicates the relative token distribution between insiders and retail. Insiders are likely to be operating validators and retail users are likely to be delegates.
 
 *Note: In the following section on Token-based Risk we will elaborate further on centralised aspects of decision-making.*
 
