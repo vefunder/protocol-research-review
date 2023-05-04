@@ -241,15 +241,7 @@ The absolute figures are unclear. It is not uncommon to see empty blocks, althou
 |------|
 |[Snapshot of latest transactions](https://explorer.accumulatenetwork.io/)|
 
-Another measure of actual usage is the transaction volume of the native ACME token. The number of transactions of the token can be found on the [token page](https://explorer.accumulatenetwork.io/acc/ACME).
-
-|![](https://i.imgur.com/4EgkDfL.png)|
-|------|
-|[Snapshot of Total ACME Transfers](https://explorer.accumulatenetwork.io/acc/ACME)|
-
-At of this writing, the ACME token page displays 23191 transactions associated with it. Given that the Accumulate Network generated its Genesis block on 2022-10-31 20:11:52 [(see Block 1)](https://explorer.accumulatenetwork.io/), it has operated for approximately 6 months, which averages to (23191/6) = 3865 transactions involving ACME per month or 128 transactions per day. Relative to other blockchains, the activity is notably sparse (compare to this [Chain Comparison Dashboard](https://app.artemis.xyz/dashboard)). 
-
-> *Note: Our analysis excludes function call diversity and growth, as well as Internet Service Providers (ISPs), due to the absence of meaningful information available*
+Another measure of actual usage is the transaction volume of the native ACME token. The number of transactions of the token can be found on the [token page](https://explorer.accumulatenetwork.io/acc/ACME). At of this writing, the ACME token page displays 23191 transactions associated with it. Given that the Accumulate Network generated its Genesis block on 2022-10-31 20:11:52 [(see Block 1)](https://explorer.accumulatenetwork.io/), it has operated for approximately 6 months, which averages to (23191/6) = 3865 transactions involving ACME per month or 128 transactions per day. Relative to other blockchains, the activity is notably sparse (compare to this [Chain Comparison Dashboard](https://app.artemis.xyz/dashboard)). 
 
 
 #### User traction 
@@ -286,13 +278,7 @@ A substantial ecosystem fund is crucial for the success of a layer 1 blockchain.
 
 Factom raised 579 Bitcoin in 2015. Relative to major recent launches, this is tiny. For instance, Sui raised [336,000,000 USD in Series A and B](https://cryptorank.io/ico/sui), Avalanche raised [248,000,000 USD across funding rounds](https://cryptorank.io/ico/avalanche) and Solana raised [334,000,000 USD](https://cryptorank.io/ico/solana). While Accumulate Network allocated a 60M ACME Grant block (~0.04x60,000,000 = 2,400,000 USD), the minimal funding is a concern as bootstrapping a layer 1 protocol is expensive.
 
-The Accumulate team noted that Factom's tokenomics failed due to unlimited supply and inflation. [Inveniam](https://www.inveniam.io/) purchased all the patents and [invested several million dollars into Accumulate's development](https://accumulatenetwork.io/2022/05/factom-transition-to-accumulate-guide-faq/). An exact figure is not known. It's unlikely that the amount compares to funding of other layer 1 protocols.
-
-Potential evidence of this discrepancy in funding can be seen in the lack of community engagement, marketing, and communication. An excerpt for a discord shows the community's frustration and lack of engagement.  
-
-|![](https://i.imgur.com/NrQ6AOC.png)|
-|-----|
-|Discord Message Snapshot|
+[Inveniam](https://www.inveniam.io/) purchased all the patents and [invested several million dollars](https://accumulatenetwork.io/2022/05/factom-transition-to-accumulate-guide-faq/) into Accumulate's development. An exact figure is not known. It's unlikely that the amount compares to funding of other layer 1 protocols.
 
 
 ### Risk Vector 2: Token-based Risk
