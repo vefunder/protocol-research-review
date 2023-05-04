@@ -587,11 +587,11 @@ Although there are significant trust assumptions that warrants caution, the move
 ### Contract glossary
 
 
-* Accumulated Finance     | Gnosis Safe Multisig Admin          | [0xaBaEBBd34E7F79352F55B0Acea9516F6CDB94BB5](https://etherscan.io/address/0xaBaEBBd34E7F79352F55B0Acea9516F6CDB94BB5)
-     * The Gnosis Safe Multisig Admin is a smart contract used by Accumulated Finance to manage multisig wallets for the platform. Specifically, this contract is used for the Accumulated Finance multisig wallet. 
+* Accumulated Finance     | Gnosis Safe Multi-sig Admin          | [0xaBaEBBd34E7F79352F55B0Acea9516F6CDB94BB5](https://etherscan.io/address/0xaBaEBBd34E7F79352F55B0Acea9516F6CDB94BB5)
+     * The Gnosis Safe 2-of-3 Multi-sig is used by Accumulated Finance to manage smart contracts for the platform. Specifically, this contract owns the liquid staking and stACME contracts. 
  
 * Accumulated Finance   | Accumulate Deployer      | [0x5e95454F33F9C88C9a967531CD48192dEb2Fd4fd](https://etherscan.io/address/0x5e95454f33f9c88c9a967531cd48192deb2fd4fd)         
-     * Accumulate Deployer is used to deploy and manage smart contracts on the Ethereum network. In particular, it manages stACME staking rewards
+     * Accumulate Deployer is used to deploy and manage smart contracts on the Ethereum network. In particular, it manages stACME staking rewards.
 
 * Accumulated Finance   | stACME | [0x7AC168c81F4F3820Fa3F22603ce5864D6aB3C547](https://etherscan.io/token/0x7AC168c81F4F3820Fa3F22603ce5864D6aB3C547) 
      * stACME is a liquid staking derivative token of WACME, representing staked ACME in a liquid form. 
@@ -600,7 +600,7 @@ Although there are significant trust assumptions that warrants caution, the move
      * The ACME Liquid Staking (Deposits) contract is used by Accumulated Finance to manage the staking of ACME tokens in a way that allows them to be used for other purposes while still earning rewards. 
                                                                                                                           
 * Accumulated Finance    | ACME Liquid Staking (Rewards)       | [0xe194d30aFDbae89b3118b8b7bc7B331Cc3333b88](https://etherscan.io/address/0xe194d30aFDbae89b3118b8b7bc7B331Cc3333b88)    
-     * The ACME Liquid Staking (Rewards) contract is used by Accumulated Finance to distribute rewards to users who stake their ACME tokens in the liquid staking pool managed by the platform.                                                                                                             
+     * The ACME Liquid Staking (Rewards) contract is used by Accumulated Finance to distribute rewards to users who stake their WACME tokens in the liquid staking pool managed by the platform.                                                                                                             
 
 * Accumulated Finance | Accumulated Account               | [accumulated.acme](https://explorer.accumulatenetwork.io/acc/accumulated.acme) 
      * Accumulated.acme is the parent account for all Accumulated Finance addresses on Accumulate Network.
@@ -619,9 +619,9 @@ Although there are significant trust assumptions that warrants caution, the move
 
 
 * Accumulate Bridge    | Accumulate Bridge Multi-sig      | [0x76b1E2d258CC4297e7708345E5d99e8ECa967BB1](https://etherscan.io/address/0x76b1E2d258CC4297e7708345E5d99e8ECa967BB1#readProxyContract)       
-     * The Accumulate Bridge Multi-sig is a secure way for bridge operators to manage and authorize cross-chain token transfers.    
+     * The Accumulate Bridge 2-of-3 Multi-sig authorizes cross-chain token transfers and generally manages the bridge.    
 
-* Accumulate Bridge              | Wrapped ACME (wACME) |[0xDF4Ef6EE483953fE3B84ABd08C6A060445c01170](https://etherscan.io/address/0xDF4Ef6EE483953fE3B84ABd08C6A060445c01170)
+* Accumulate Bridge              | Wrapped ACME (WACME) |[0xDF4Ef6EE483953fE3B84ABd08C6A060445c01170](https://etherscan.io/address/0xDF4Ef6EE483953fE3B84ABd08C6A060445c01170)
      * Wrapped ACME (WACME) is a token that represents ACME on the Ethereum blockchain, allowing it to be used in decentralized finance (DeFi) applications.
 
 * Accumulate Bridge    | Accumulate Bridge Contract         | [0xbA050938970C8eAeDA3e970B571a6fe463Db7d0e](https://etherscan.io/address/0xbA050938970C8eAeDA3e970B571a6fe463Db7d0e#writeContract) 
