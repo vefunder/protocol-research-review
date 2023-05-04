@@ -1,4 +1,6 @@
-# Risk Assessment: Accumulated Network, Accumulate Bridge & Accumulated Finance 
+# Asset Risk Assessment: Accumulated Finance (stWACME)
+
+### A look into the Accumulate network, the Accumulate bridge, and the liquid staking platform built on Ethereum: Accumulated Finance
 
 **General:**
 - DefiDevs (Core Maintainer): https://defidevs.io/
@@ -174,29 +176,25 @@ It also supports finality, which means that once a block has been added to the b
 Due to the absence of more granular analytics provided by the Accumulate Network, the author is unable to assess stability beyond a heuristical reference to Tendermint.
 
 
-#### Mining Rewards
+#### Staking Rewards
 
 Validators are nodes that are responsible for verifying and validating transactions, and adding them to the blockchain. According to the [whitepaper (p. 21)](https://accumulatenetwork.io/Accumulate-Whitepaper-4-12-22.pdf), stakers and validators are compensated with freshly minted ACME:
 
->  "Every year, 16% of tokens in the unissued pool will be minted at intervals of approximately 1 month to compensate stakers and validators in the absence of a transaction fee"
+>  "Every year, 16% of tokens in the unissued pool will be minted at intervals of approximately 1 week to compensate stakers and validators in the absence of a transaction fee"
 
-Accumulate validators earn [10% of staking rewards](https://explorer.accumulatenetwork.io/validators), while 90% goes to stakers. Therefore an approximate cost calculation for the security budget for a respective validator can be expressed as: 
+When a staker delegates to an Accumulate validator, the validator earns [10%](https://explorer.accumulatenetwork.io/validators) of the delegated stake. Therefore an approximate cost calculation for the security budget for a respective validator can be expressed as: 
 
 ```
-Monthly Validator Reward = (16% * Total Unissued Tokens / 12) * 10% * (Validator Stake / Total Staked)
+Weekly Validator Reward = (16% * Total Unissued Tokens / 52) * (Validator Stake / Total Staked)
 ``` 
 
-By doing a simple analysis, we see that of the 40 listed validators, only two make more than $2000 a month from pure validation of blocks and transactions.
+By doing a simple analysis using recent figures of ACME self-staked by validators and delegated stake, we can approximate the weekly staking rewards earned by each validator. Only 4 validators are earning >$1000 per week. De Facto, the validator run by the Accumulated Finance team and to which its ACME is delegated, has the 6th highest stake in the network and earns $700-800 per week.
 
-|![](https://i.imgur.com/vP0Z8fF.png)|
+
+|![Weekly Validator Reward in USD(2)](https://user-images.githubusercontent.com/51072084/236078991-ddeedc78-b5cc-483b-85b0-44fed7361650.png)|
 |------|
-|[Validation Rewards](https://docs.google.com/spreadsheets/d/1gDlENkhPkzSvdi73ySq75VJgcsrvBOlSlTPtrFwS9_k/edit?usp=sharing)|
+|[Validation Rewards](https://docs.google.com/spreadsheets/d/1wqXqaz74Y_SCg6GezSMuwuArHIfY9nEM5n0Z8_jLBk4/edit?usp=sharing)|
 
-Most validators self-stake as well, which makes their total reward significantly higher. Nevertheless, only six validators earn more than $2000 in USD value. 
-
-|![](https://i.imgur.com/DxUW5Xy.png)|
-|------|
-|[Validation Rewards incl. Self-Staking](https://docs.google.com/spreadsheets/d/1gDlENkhPkzSvdi73ySq75VJgcsrvBOlSlTPtrFwS9_k/edit?usp=sharing)|
 
 While this may seem like a low-security budget, it may be sufficient in the context of network activity, as Accumulate is essentially a new project. Given that ACME is relatively illiquid, an attacker will be unable to meaningfully cash out on a consensus level attack. This limits the risk at present, although additional liquidity in the Curve pools may increase this risk.
 
