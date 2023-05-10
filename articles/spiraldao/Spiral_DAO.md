@@ -30,14 +30,16 @@ With no cap on the total supply for COIL and SPR tokens, a significant portion o
 * The governance model appears sufficiently decentralized, with a high multi-sig threshold and a range of external contributors.
 
 ## Relation to Curve
-On April 5th, SpiralDAO introduced a [COIL/FRAXBP Factory Pool](https://curve.fi/#/ethereum/pools/factory-crypto-236) on Curve, which includes COIL, FRAX, and USDC. The pool was [bootstrapped by the SpiralDAO Treasury](https://etherscan.io/tx/0x64a21d845769e774b6a39fa7706a8299d9e24a124c0c739711d1d46af9582d0d) Multisig and currently holds approximately $2 million in assets. A [gauge proposal](https://gov.curve.fi/t/proposal-to-add-coil-fraxbp-to-the-gauge-controller/9119) was submitted on April 13th and subsequently voted on. [The vote concluded on March 23rd](https://dao.curve.fi/vote/ownership/314), with a unanimous outcome of 100% (312,840,515 veCRV) in favor of the proposal.
+On April 5th, SpiralDAO introduced a [COIL/FRAXBP Factory Pool](https://curve.fi/#/ethereum/pools/factory-crypto-236) on Curve, which includes COIL, FRAX, and USDC. The pool was initially [bootstrapped by the SpiralDAO Treasury](https://etherscan.io/tx/0x64a21d845769e774b6a39fa7706a8299d9e24a124c0c739711d1d46af9582d0d) Multisig and currently holds approximately $1.8 million in assets. A [gauge proposal](https://gov.curve.fi/t/proposal-to-add-coil-fraxbp-to-the-gauge-controller/9119) was submitted on April 13th and subsequently voted on. [The vote concluded on March 23rd](https://dao.curve.fi/vote/ownership/314), with a unanimous outcome of 100% (312,840,515 veCRV) in favor of the proposal.
 
 Gauge: https://etherscan.io/address/0x06b30d5f2341c2fb3f6b48b109685997022bd272
 
-SpiralDAO participates in Curve Governance, currently holding 1,415,869 sdCRV (Stake DAO). Approximately 8% of the treasury funds are presently allocated to providing liquidity to the COIL/FRAXBP pool.
+Approximately 8% of the treasury funds are presently allocated to providing liquidity to the COIL/FRAXBP pool. Spiral DAO remains the primary liquidity provider of this pool, and earns over 100% APY by staking their LP token into the COILFRAX-f Gauge.
 
-![](https://i.imgur.com/ogaoMZp.png)
+![](https://hackmd.io/_uploads/rkrd3ZOEh.png)
 https://curve.fi/#/ethereum/pools/factory-crypto-236
+
+Spiral DAO also participates in Curve Governance, currently holding 1,415,869 sdCRV (Stake DAO). 
 
 ## The launch of Spiral DAO
 
@@ -248,6 +250,13 @@ Protocol treasury multi-sig has control over key parameters of the following con
 * [`GnosisSafeProxy.sol`](https://etherscan.io/address/0xC47eC74A753acb09e4679979AfC428cdE0209639): Treasury Multisig - Gnosis Safe 1.3.0 (behind proxy) 
 * [`GnosisSafeProxy.sol`](https://etherscan.io/address/0xF14eFC7E46D57E107dEE97239329Bd7F56361C38): Protocol Multisig - Gnosis Safe 1.3.0 (behind proxy) 
 * [`SpiralRedeem`](https://etherscan.io/address/0x4fe67fd442889d158c311de734f45339ed9f3db3): COIL redeem contract
+
+## Access Control
+We have reviewed the access control for Spiral DAO's deployed contracts. You can find the [details here](https://docs.google.com/spreadsheets/d/1FWMGGJIasCCaoircLtsBKiG4xnhr4hlf-JHlRSZANaU/edit#gid=0). Below are the key points:
+
+- The main functions, including the contract proxies, are under the control of the Protocol and Treasury multi-sig.
+- The Service role for the MasterMind contract and the Rewarder contracts are controlled by an EOA.
+- The Protocol multisig (4/7) is responsible for ensuring that the vault address is not set to an exploitable value to prevent infinite token minting.
 
 ### Timelock
 Spiral DAO opts not to use a Timelock for crucial protocol-related matters. Instead, the project employs a 4/7 multi-sig approach involving only two contributors. This decision stems from the challenges associated with gathering all signers for approval and the desire for signers to maintain control and cross-verification of all activities. While this approach may increase efficiency, it is essential to ensure adequate security measures and checks are in place to prevent potential risks.
