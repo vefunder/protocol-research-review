@@ -236,27 +236,60 @@ The `Service` role handles lower-level threats and non-impactful activities, whi
 `MasterMind` features two types of "Adapters": `XXXAdapter.sol`, consisting of hardcoded routes for zaps and view information of reward tokens for drains, and `XXDelegate.sol`, which holds the code `MasterMind` used for delegate calls of different protocols. The latter is crucial for security reasons. The `Rewarder` contract determines the token distribution for each user based on the allocated rewards per 1 LP token per pool. Reward rates are updated by the admin role, guided by off-chain scripts that calculate the price of Coil, collateral protocol yield, and the required APR to sustain per 1 LP for the target pool in `COIL`.
 
 ### Deployed Contracts
-Protocol treasury multi-sig has control over key parameters of the following contracts:
+
+The protocol has two tokens and a staking contract for the tokens:
 
 * [`SPR.sol`](https://etherscan.io/address/0x85b6ACaBa696B9E4247175274F8263F99b4B9180): Protocol wrap token (ERC20), 18 decimals
 * [`COIL.sol`](https://etherscan.io/address/0x823E1B82cE1Dc147Bbdb25a203f046aFab1CE918): Reward token (ERC20), 18 decimals
-* [`Staking.sol`](https://etherscan.io/address/0x6701E792b7CD344BaE763F27099eEb314A4b4943): Deposit COIL to get SPR (similar to OHM staking with rebase, but no forfeit functionality)
-* [`RewarderVault.sol`](https://etherscan.io/address/0x21fb7536afddaaaf59d65cc4f7336d4d812ec25f): Executes mints for Rewarder
-* [`Rewarder.sol`](https://etherscan.io/address/0x72614b5d6F388B089f343723fcc3a5B4Fc22B347): Multi-pool rewarder contract
-* [`Router.sol`](https://etherscan.io/address/0x0340d9491Fe7740aF9c643C3C2b4126d23058C3B)
-* [`UpgradableProxy.sol`](https://etherscan.io/address/0xFACE8DED582816E2f2cD4C6cc1cbD1aCCc9df65E): Proxy (OpenZeppelin fork)
-* [`ProxyAdmin.sol`](https://etherscan.io/address/0xae3f25462c06d21483738832b7160fae0ebf4f60): Proxy Admin (OpenZeppelin fork)
-* [`MasterMind.sol`](https://etherscan.io/address/0x087fd5d07907f864285dbd94acef8cfb5bd26804): Custom implementation
-* [`GnosisSafeProxy.sol`](https://etherscan.io/address/0xC47eC74A753acb09e4679979AfC428cdE0209639): Treasury Multisig - Gnosis Safe 1.3.0 (behind proxy) 
-* [`GnosisSafeProxy.sol`](https://etherscan.io/address/0xF14eFC7E46D57E107dEE97239329Bd7F56361C38): Protocol Multisig - Gnosis Safe 1.3.0 (behind proxy) 
-* [`SpiralRedeem`](https://etherscan.io/address/0x4fe67fd442889d158c311de734f45339ed9f3db3): COIL redeem contract
+* [`SpiralStaking.sol`](https://etherscan.io/address/0x6701E792b7CD344BaE763F27099eEb314A4b4943): Deposit COIL to get SPR (similar to OHM staking with rebase, but no forfeit functionality)
+
+The following contracts are related to the `MasterMind` contract, responsible for managing AMM farming pools and user deposits into those pools:
+
+* [`UpgradableProxy.sol`](https://etherscan.io/address/0xFACE8DED582816E2f2cD4C6cc1cbD1aCCc9df65E): MasterMind Proxy (OpenZeppelin fork)
+* [`MasterMind.sol`](https://etherscan.io/address/0x087fd5d07907f864285dbd94acef8cfb5bd26804): Current implementation
+* [`ProxyAdmin.sol`](https://etherscan.io/address/0xae3f25462c06d21483738832b7160fae0ebf4f60): Proxy Admin (OpenZeppelin fork) of MasterMind proxy contract
+* [`Rewarder.sol`](https://etherscan.io/address/0x72614b5d6F388B089f343723fcc3a5B4Fc22B347): Multi-pool rewarder contract that sets fees and reward rates for depositors. This contract is set by MasterMind.
+* [`RewarderVault.sol`](https://etherscan.io/address/0x31878EE03D3DeA8C3a81b78fddc864c0be6f415F): Executes mints for Rewarder with SPR reward token.
+
+Additional functionality include the SpiralSwap router and the SpiralRedeem contract:
+
+* [`Router.sol`](https://etherscan.io/address/0x0340d9491Fe7740aF9c643C3C2b4126d23058C3B): SpiralSwap router is a COIL liquidity aggregator that allows swaps between COIL/SPR and USDC.
+* [`SpiralRedeem`](https://etherscan.io/address/0x4fe67fd442889d158c311de734f45339ed9f3db3): Redeem contract allows users to redeem COIL for treasury USDC with a configurable penalty. Penalty is currently 10%
+
+
 
 ## Access Control
+
+There are two multi-sigs used within the SpiralDAO system, which each consist of SpiralDAO contributors and advisors. The [docs](https://docs.spiral.farm/risks-and-security/multi-sig) disclose the identity of each owner address, although a significant portion of the owners are pseudononymous.
+
+The treasury multi-sig manages the protocol treasury:
+
+* [`GnosisSafeProxy.sol`](https://etherscan.io/address/0xC47eC74A753acb09e4679979AfC428cdE0209639): Treasury Multisig - 3-of-6 Gnosis Safe 1.3.0 (behind proxy)
+     * VV - 0xC011240FAb026E08EC18E12a506f45b9aaEE84dD
+     * Cuttlefish - 0xC541A7b893eFD384d3E0013DfCb3e563a777fDBC
+     * [Farmer Brown](https://twitter.com/FarmerBrownDeFi) - 0xFBD9123f3CA030632C5fC5948dfebb38B0b115f2
+     * SuperChad - 0xDD9bF0A45452a4F22cfd2C963c15B191D97Ce106
+     * [Starny](https://starny.eth.limo/) - 0x79603115Df2Ba00659ADC63192325CF104ca529C
+     * [cp0x](https://debank.com/profile/0x6f9bb7e454f5b3eb2310343f0e99269dc2bb8a1d) - 0x53BD3C14e2a076EB55a7e2BE73Fa0fA7918CF300
+
+The Protocol owner multi-sig controls the majority of protocol contracts including `MasterMind`, `SpiralStaking`, and the token contracts:
+
+* [`GnosisSafeProxy.sol`](https://etherscan.io/address/0xF14eFC7E46D57E107dEE97239329Bd7F56361C38): Protocol Multisig - 4-of-7 Gnosis Safe 1.3.0 (behind proxy)
+     * VV - 0xC011240FAb026E08EC18E12a506f45b9aaEE84dD
+     * Ivan - 0xc0cbd3a183E634f630F4658526A1D8309008c6b8
+     * [Farmer Brown](https://twitter.com/FarmerBrownDeFi) - 0xFBD9123f3CA030632C5fC5948dfebb38B0b115f2
+     * [cp0x](https://debank.com/profile/0x6f9bb7e454f5b3eb2310343f0e99269dc2bb8a1d) - 0x53BD3C14e2a076EB55a7e2BE73Fa0fA7918CF300
+     * [CIA Officer](https://twitter.com/officer_cia) - 0xB25C5E8fA1E53eEb9bE3421C59F6A66B786ED77A
+     * [Sami](https://twitter.com/0xSami_) - 0x2AFb6A75Ee833A84d534C62894BB348234b5d219
+     * [Valentin Mihov](https://twitter.com/valentinmihov) - 0x3F0c2A4654A63110ED3b15cF9C0fa07476B389cF  
+
 We have reviewed the access control for Spiral DAO's deployed contracts. You can find the [details here](https://docs.google.com/spreadsheets/d/1FWMGGJIasCCaoircLtsBKiG4xnhr4hlf-JHlRSZANaU/edit#gid=0). Below are the key points:
 
-- The main functions, including the contract proxies, are under the control of the Protocol and Treasury multi-sig.
-- The Service role for the MasterMind contract and the Rewarder contracts are controlled by an EOA.
-- The Protocol multisig (4/7) is responsible for ensuring that the vault address is not set to an exploitable value to prevent infinite token minting.
+- The majority of functions, including the contract proxies, are under the control of the Protocol multi-sig.
+- It is possible to infinite mint COIL and/or SPR in case of irresponsible or malicious action taken by the owner multi-sig. The Protocol multisig (4/7) is responsible for ensuring that the vault address is not set to an exploitable value to prevent infinite token minting. It can call `setVault()` to set an arbitrary address as a designated vault, which has the power to call `mint()` to the token contract. Currently the `SpiralStaking` and `RewarderVault` contracts are set as vaults, and these have protected conditions for minting.  
+- The [Rewarder contract](https://etherscan.io/address/0x72614b5d6F388B089f343723fcc3a5B4Fc22B347) is controlled by an [EOA](https://etherscan.io/address/0x6E2e85Ee5bB7b4a85e904F1e0eD5b9C7b08e5384). It is responsible for setting pool parameters catalogued within the `MasterMind` contract and distributing fees from the `RewarderVault`.
+- The `SpiralRedeem` contract is owned by an [EOA](https://etherscan.io/address/0x6E2e85Ee5bB7b4a85e904F1e0eD5b9C7b08e5384), which can set parameters for redeeming COIL for USDC. It can also withdraw all USDC deposited in the contract (The contract is periodically topped up by the protocol treasury as seen [here](https://etherscan.io/tx/0x02849d8f22bd5780de4a49075e07a99243c7b354b1975e2d680340d3e58d97a0)).
+- All Spiral farming pool deposits are through the `MasterMind` contract, which is upgradeable by the 4/7 multi-sig. Depositors in the Spiral pools must trust the contract owner to responsibly custody funds in the Spiral farming pools. 
 
 ### Timelock
 Spiral DAO opts not to use a Timelock for crucial protocol-related matters. Instead, the project employs a 4/7 multi-sig approach involving only two contributors. This decision stems from the challenges associated with gathering all signers for approval and the desire for signers to maintain control and cross-verification of all activities. While this approach may increase efficiency, it is essential to ensure adequate security measures and checks are in place to prevent potential risks.
