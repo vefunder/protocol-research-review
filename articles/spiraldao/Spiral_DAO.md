@@ -191,23 +191,26 @@ Spiral DAO has partnered with Stake DAO to utilize their liquid lockers for vari
 
 Spiral DAO focuses on accumulating significant shares in DeFi blue chips like CRV, BAL, and FXS through Yield Bonding. Users deposit yield-earning assets and receive COIL in place of their underlying rewards, which are then deposited into yield-earning strategies in the Treasury. By incorporating SDT into their Initial Treasury Offering, Spiral DAO aims to enhance cooperation with Stake DAO and support the growth of the DeFi ecosystem.
 
-As the partnership progresses, both platforms expect to see an increase in SDT supply, which will be used to boost liquid lockers as the treasury value grows. The acquired SDT will be locked, reducing its circulating supply. The proposal for a COIL+FRAXBP Gauge can be[found here](https://votemarket.stakedao.org/advanced/crv/0x0000000895cB182E6f983eb4D8b4E0Aa0B31Ae4c/0
+As the partnership progresses, both platforms expect to see an increase in SDT supply, which will be used to boost liquid lockers as the treasury value grows. The acquired SDT will be locked, reducing its circulating supply. The proposal for a COIL+FRAXBP Gauge can be [found here](https://votemarket.stakedao.org/advanced/crv/0x0000000895cB182E6f983eb4D8b4E0Aa0B31Ae4c/0
 ).
 
+
 ## Governance
+
 ### Team
+
 While most contributors are anonymous, the team behind the project possesses diverse backgrounds in the crypto industry, including market making on CEXs, quantitative analysis, angel investing, arbitrage, and yield farming. 
 
-The team members have been involved in the space since 2012-2013, which previous projects built, including a yield farming aggregator (2020) and an NFT project around gobblers NFT collection (2022). The team also benefits from the advice and guidance of notable figures in the DeFi space, such as cp0x's founder. A core contributor was also involved in a white hat attack in 2021, where over $1m of assets were returned.
+Several contributors have been involved in the space since 2012-2013 and have previously built projects such as a yield farming aggregator (2020). The team also benefits from the advice and guidance of notable figures in the DeFi space, such as Redacted Cartel founder, Sami. A core contributor was also involved in a white hat attack in 2021, where over $1m of assets were returned.
 
 We asked Spiral DAO for more information about contributors' roles. We were told that the DAO plans to make its structure more transparent at a later stage. Below is a partial list of contributors based on the latest information obtained:
 
-Core team:
+Contributors:
 * VaeVictis
 * Cuttlefish
 * Ivan
-  
-Other contributors:
+
+Advisors:
 * [Farmer Brown](https://twitter.com/FarmerBrownDeFi) - Advisor
 * SuperChad - Advisor
 * [Starny](https://starny.eth.limo/)
@@ -310,7 +313,7 @@ The COIL & SPR tokens represent a share of all Spiral DAO's Treasury assets. As 
 The potential for de-pegging in DeFi liquidity lockers, such as AuraBal, presents a risk that stakeholders must be aware of, as it can disrupt Spiral DAO's underlying holdings. Users should consider the mechanics specific to each asset and understand the implications of a de-pegging event on the Treasury's value. 
 
 ### Smart Contract Risks
-Smart contract vulnerabilities pose risks for Spiral DAO, especially since it is unclear which contracts were changed post-audit. To counter potential threats, the project offers a bug bounty program with rewards up to $250k or 15% of the affected funds for critical findings. Furthermore, Spiral DAO plans to launch an official Immunefi bug bounty program soon, enhancing security and encouraging continuous monitoring.
+Smart contract vulnerabilities pose risks for Spiral DAO, especially since it is unclear which contracts were changed post-audit. To counter potential threats, the project offers a bug bounty program with rewards up to $250k or 15% of the affected funds for critical findings. Furthermore, Spiral DAO has recently voted to launch a bounty program with [Hats.finance](https://hats.finance/) with the goal to incentivize responsible vulnerability disclosure for Spiral DAO. As per the [Snapshot vote](https://snapshot.org/#/spiralgov.eth/proposal/0x9852988e836c847d1bf52e303712411a0230af0c900d866f1ce6c93a2dfaa743), the protocol treasury sent 30K SPR, currently valued ~$77k at this [tx](https://etherscan.io/tx/0x5a0d24d172e5e6aa00c848fb7270e8fc22f53e5f35889466d73e1043d4a5a6d1).
 
 ### Potential Bank Run and Redeem limitations
 While Spiral DAO has implemented a backstop mechanism for redemption, there remains a risk of COIL becoming illiquid. The USDC balance in the SpiralRedeem contract is overseen by the protocol's multi-sig. The majority of the Treasury's assets are liquid, with the exception of approximately $50k in locked SDT. Although COIL's market cap could decline below the Treasury's value, the redemption smart contract serves as a safeguard by ensuring the drop does not exceed 10% of the total.
@@ -325,7 +328,7 @@ To mitigate these risks, it is essential for Spiral DAO to maintain a sufficient
 https://spiral.farm/redeem
 
 ## Potential positive impacts
-Adding Spiral DAO's liquidity lockers to the Curve ecosystem is expected to positive impact. With the small flywheel built into the system, overall bribe yields for all veCRV holders are likely to increase, while sell pressure on CRV should decrease and future emissions buy-pressure should increase. Furthermore, Spiral DAO's distributed solutions and potential to attract many veCRV holders may benefit the future of veCRV wars. Overall, Spiral DAO's liquidity lockers have the potential to be an excellent addition to the Curve ecosystem.
+Adding Spiral DAO's liquidity pools to the Curve ecosystem is expected to positive impact. With the small flywheel built into the system, overall bribe yields for all veCRV holders are likely to increase, while sell pressure on CRV should decrease and future emissions buy-pressure should increase. Furthermore, Spiral DAO's distributed solutions and potential to attract many veCRV holders may benefit the future of veCRV wars. Overall, Spiral DAO's liquidity lockers have the potential to be an excellent addition to the Curve ecosystem.
 
 ### Conclusion
 In summary, Spiral DAO offers an innovative approach to yield farming, bribe markets, and veTokenomics in the DeFi ecosystem. With a robust treasury and attractive yields, it distinguishes itself from traditional yield aggregators by retaining third-party protocol rewards within the DAO treasury. This structure reduces selling pressure and circulating supply while optimizing risk-adjusted yields for farmers and rationalizing the bribe market.
