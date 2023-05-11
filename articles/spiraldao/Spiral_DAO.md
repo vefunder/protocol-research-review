@@ -116,16 +116,21 @@ Yield Bonding is a spin on the bonding concept popularized by OHM. Instead of a 
 
 Yield Bonding only works when the COIL market cap is significantly larger than the Treasury value, making it a deflationary measure. Spiral DAO's Treasury grows exponentially, outpacing the natural inflation of the token and corresponding reward tokens. Spiral DAO aims to resolve issues faced by competitors, such as inflation, cannibalization, lack of steady supply, poor fund utilization, and overexposure to one token. 
 
+
 ### Rebase
-Rebasing is the process of minting new COIL tokens paid to stakers. For Spiral DAO, this is done via `Rebase,` a permissionless function in the `Staking` contract called automatically at each staking/unstaking event without relying on off-chain scripts. This differs from other protocols that may require permissioned actions or off-chain scripts to perform rebases.
+
+Rebasing is the process of minting new COIL tokens paid to stakers. For Spiral DAO, this is done via `Rebase,` a permissionless function in the `SpiralStaking` contract called automatically at each staking/unstaking event without relying on off-chain scripts. This differs from other protocols that may require permissioned actions or off-chain scripts to perform rebases.
 
 ![](https://i.imgur.com/DThKgBa.png)
-https://etherscan.deth.net/address/0x6701E792b7CD344BaE763F27099eEb314A4b4943
 
-### Redemption and exit liquidity
-Both COIL and SPR tokens are inflationary, but the Treasury backing creates some assurance of a price floor via [treasury redemptions](https://spiral.farm/redeem). Spiral DAO aims to offer an additional exit strategy for users through its redemption page; this page uses the USDC treasury reserve and provides users with the option to exit the DAO by redeeming 90% of the Treasury backing value of COIL. 
+Source: [Etherscan: SpiralStaking Contract](https://etherscan.deth.net/address/0x6701E792b7CD344BaE763F27099eEb314A4b4943)
 
-[`SpiralRedeem`](https://etherscan.io/address/0x4fe67fd442889d158c311de734f45339ed9f3db3) holds a certain amount of Spiral DAO Treasury's USDC, with a `penalty` variable (from 0 to 100%) that can be changed by the owner (Spiral DAO). At the time of writing this report, the contract held 312,000 USDC against a total supply of 4,091,200 COIL, worth approximately $9,8m.
+
+### Redemption and Exit Liquidity
+
+Both COIL and SPR tokens are inflationary, but the Treasury backing creates some assurance of a price floor via treasury redemptions. Spiral DAO aims to offer an additional exit strategy for users through its [redemption page](https://spiral.farm/redeem); this page uses the USDC treasury reserve and provides users with the option to exit the DAO by redeeming the Treasury backing with a 10% penalty (this penalty is configurable by the `SpiralRedeem` contract owner, currently set to a team-controlled [EOA](https://etherscan.io/address/0x6E2e85Ee5bB7b4a85e904F1e0eD5b9C7b08e5384). The penalty serves to dissuade treasury redemptions (users should opt to swap in normal circumstances), unless the COIL market price has significantly dropped below the fair value of its treasury backing.
+
+[`SpiralRedeem`](https://etherscan.io/address/0x4fe67fd442889d158c311de734f45339ed9f3db3) is seeded with an arbitrary amount of Spiral DAO Treasury's USDC (simply transferred at the discretion of the treasury management multi-sig). At the time of writing this report, the contract held 312,000 USDC against a total supply of 4,091,200 COIL, worth approximately $9,8m.
 
 ![](https://i.imgur.com/1REuxzT.png)
 https://etherscan.deth.net/address/0x4fe67fd442889d158c311de734f45339ed9f3db3
