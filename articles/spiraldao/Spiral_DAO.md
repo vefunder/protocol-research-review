@@ -108,15 +108,6 @@ Source: [Spiral Dao Docs: Tokenomics](https://docs.spiral.farm/protocol/tokenomi
 Spiral DAO uses several mechanisms first introduced and popularised by [Olympus DAO](https://www.olympusdao.finance/) (OHM), such as rebasing, treasury management, and bonding. Spiral DAO addresses issues from OHM-like protocols by tackling a key concern: the possibility that the executive team could "slow-rug" by passively underperforming against token emissions and restricting treasury redemption, ultimately putting the token value below the Treasury backing.
 
 
-### Yield Bonding
-
-Yield Bonding is a spin on the bonding concept popularized by OHM. Instead of a user selling their token to the protocol in exchange for the discounted protocol token, Spiral DAO does not require users to relinquish ownership of their principle. Instead, users exchange the yield farming rewards they would have earned from their Curve/Balancer LP token, and in return the protocol distributes outsized yield in the native token SPR. The additional yield rates are adjusted daily based on the COIL market cap and the Treasury value. Users are free to withdraw their LP tokens at any time.
-
-![Yield_Bonding_Strategy](https://github.com/vefunder/protocol-research-review/assets/51072084/ec428256-744d-4e87-b8d1-cc3fb27d5592)
-
-Yield Bonding only works when the COIL market cap is significantly larger than the Treasury value, making it a deflationary measure. Spiral DAO's Treasury grows exponentially, outpacing the natural inflation of the token and corresponding reward tokens. Spiral DAO aims to resolve issues faced by competitors, such as inflation, cannibalization, lack of steady supply, poor fund utilization, and overexposure to one token. 
-
-
 ### Rebase
 
 Rebasing is the process of minting new COIL tokens paid to stakers. For Spiral DAO, this is done via `Rebase,` a permissionless function in the `SpiralStaking` contract called automatically at each staking/unstaking event without relying on off-chain scripts. This differs from other protocols that may require permissioned actions or off-chain scripts to perform rebases.
@@ -126,23 +117,35 @@ Rebasing is the process of minting new COIL tokens paid to stakers. For Spiral D
 Source: [Etherscan: SpiralStaking Contract](https://etherscan.deth.net/address/0x6701E792b7CD344BaE763F27099eEb314A4b4943)
 
 
+### Yield Bonding
+
+Yield Bonding is a spin on the bonding concept popularized by OHM. Instead of a user selling their token to the protocol in exchange for the discounted protocol token, Spiral DAO does not require users to relinquish ownership of their principle. Instead, users exchange the yield farming rewards they would have earned from their Curve/Balancer LP token, and in return the protocol distributes outsized yield in the native token SPR. The additional yield rates are adjusted daily based on the COIL market cap and the Treasury value. Users are free to withdraw their LP tokens at any time.
+
+![Yield_Bonding_Strategy](https://github.com/vefunder/protocol-research-review/assets/51072084/ec428256-744d-4e87-b8d1-cc3fb27d5592)
+
+Yield Bonding only works when the COIL market cap is significantly larger than the Treasury value, making it a deflationary measure. Spiral DAO's Treasury grows exponentially, outpacing the natural inflation of the token and corresponding reward tokens. Spiral DAO aims to resolve issues faced by competitors, such as inflation, cannibalization, lack of steady supply, poor fund utilization, and overexposure to one token. 
+
+
 ### Redemption and Exit Liquidity
 
-Both COIL and SPR tokens are inflationary, but the Treasury backing creates some assurance of a price floor via treasury redemptions. Spiral DAO aims to offer an additional exit strategy for users through its [redemption page](https://spiral.farm/redeem); this page uses the USDC treasury reserve and provides users with the option to exit the DAO by redeeming the Treasury backing with a 10% penalty (this penalty is configurable by the `SpiralRedeem` contract owner, currently set to a team-controlled [EOA](https://etherscan.io/address/0x6E2e85Ee5bB7b4a85e904F1e0eD5b9C7b08e5384). The penalty serves to dissuade treasury redemptions (users should opt to swap in normal circumstances), unless the COIL market price has significantly dropped below the fair value of its treasury backing.
+Both COIL and SPR tokens are inflationary, but the Treasury backing creates some assurance of a price floor via treasury redemptions. Spiral DAO aims to offer an additional exit strategy for users through its [redemption page](https://spiral.farm/redeem); this page uses the USDC treasury reserve and provides users with the option to exit the DAO by redeeming the Treasury backing with a 10% penalty (this penalty is configurable by the `SpiralRedeem` contract owner, currently set to a team-controlled [EOA](https://etherscan.io/address/0x6E2e85Ee5bB7b4a85e904F1e0eD5b9C7b08e5384)).
 
 [`SpiralRedeem`](https://etherscan.io/address/0x4fe67fd442889d158c311de734f45339ed9f3db3) is seeded with an arbitrary amount of Spiral DAO Treasury's USDC (simply transferred at the discretion of the treasury management multi-sig). At the time of writing this report, the contract held 312,000 USDC against a total supply of 4,091,200 COIL, worth approximately $9,8m.
 
 ![](https://i.imgur.com/1REuxzT.png)
-https://etherscan.deth.net/address/0x4fe67fd442889d158c311de734f45339ed9f3db3
+
+Source: [Etherscan: SpiralRedeem contract](https://etherscan.deth.net/address/0x4fe67fd442889d158c311de734f45339ed9f3db3)
 
 Although it is typically irrational for users to redeem (since it's more advantageous to sell via Curve's [COIL/FRAXBP](https://curve.fi/#/ethereum/pools/factory-crypto-236) Factory pool), the redemption page serves as an ultimate price floor in specific situations, ensuring users have a secure exit strategy.
 
 The Treasury composition of Spiral DAO is said to ensure ample exit liquidity for every user should they choose to leave the protocol, even if the COIL price trades below its backing. The Spiral DAO Treasury is structured to allocate a portion of its reserves to prevent the COIL price from falling more than 10% below its actual backing, enabling the protocol to arbitrage Spiral tokens when their value dips below the fair value. 
 
-### Project Own Liquidity (POL) and Treasury
-Spiral DAO's Treasury deploys liquidity across various diversified strategies, using multiple governance tokens and stablecoins to support host protocols and optimize yields for token holders and users. The unique treasury rebalancing mechanism and tokenomics enable Spiral DAO to exploit bribe market inefficiencies, enhancing bribe yields and liquidity depth.
 
-The Treasury Management in Spiral DAO pursues three primary objectives:
+### Protocol Owned Liquidity (POL) and Treasury Management
+
+Spiral DAO's Treasury deploys liquidity across various diversified strategies, using multiple governance tokens and stablecoins to support host protocols and optimize yields for token holders and users. The unique treasury rebalancing mechanism and tokenomics enable Spiral DAO to exploit bribe market inefficiencies, enhancing both bribe yields and liquidity depth.
+
+The treasury management in Spiral DAO pursues three primary objectives:
 
 * Sustaining market share
 * Ensuring balanced Treasury exposure
@@ -150,22 +153,27 @@ The Treasury Management in Spiral DAO pursues three primary objectives:
 
 Spiral DAO strives to increase the market share of relevant tokens continually. For instance, if the DAO attains a 10% market share of a token, it aims to raise its share and prevent it from dropping below 10% unless decided otherwise by the community.
 
-## Rebalancing Mechanism
-Spiral DAO's innovative Treasury rebalancing mechanism plays a crucial role in maintaining a balanced Treasury exposure by taking advantage of bribe markets for arbitrage purposes.
 
-For example, if the DAO intends to increase the BAL portion in the Treasury while decreasing CRV, it proceeds as follows:
+#### Rebalancing Mechanism: Bribe Strategy
+
+Spiral DAO's treasury rebalancing mechanism plays a crucial role in maintaining a balanced treasury exposure by taking advantage of bribe markets for arbitrage purposes.
+
+For example, if the DAO intends to increase the BAL weighting in the Treasury in relation to CRV, it proceeds as follows:
 
 1. Sell CRV votes in the bribe market to acquire stablecoins
 2. Use those stablecoins to buy votes in the Aura/BAL bribe market
 3. Allocate the acquired votes to the POL gauge
 4. Receive additional BAL/AURA emissions
 
-The rebalancing mechanism is designed to adjust the Treasury's holdings according to market dynamics and the Spiral community's preferred risk profile. Specifically, it increases the exposure to BAL-AURA tokens, thereby relatively increasing their weighting in the Treasury. This process does not reduce the exposure to CRV tokens but rather adjusts the balance in favor of BAL-AURA. This ensures fairness and inherent liquidity for Spiral tokens while adapting to changing market conditions.
+The rebalancing mechanism is designed to adjust the Treasury's holdings according to market dynamics and the Spiral community's preferred risk profile. Specifically, it increases the exposure to BAL-AURA tokens, thereby relatively increasing their weighting in the Treasury. This process does not reduce the exposure to CRV tokens but rather adjusts the balance in favor of BAL-AURA. This ensures liquidity for Spiral tokens while adapting to changing market conditions.
 
 ![](https://i.imgur.com/ZhNTw4S.png)
-https://docs.spiral.farm/protocol/bribes-market
 
-### Treasury composition
+Source: [Docs: Bribes Market](https://docs.spiral.farm/protocol/bribes-market)
+
+
+#### Treasury Composition
+
 Guidelines for future treasury composition were proposed and voted on via a [snapshot vote](https://snapshot.org/#/spiralgov.eth/proposal/0x2c83dbf3dd2a77d9eb71978d8cae41f17567b0213c916bc2970810fbc4671846). A core contributor presented a plan addressing future token weights in the DAO, focusing on two main aspects: 1) setting a target treasury composition to enable rebalancing using various methods, and 2) determining the handling of byproducts and additional rewards, such as GEAR tokens.
 
 The proposal suggests modifying the existing treasury composition over the coming months to increase exposure to CRV/BAL and potentially cultivate external partnerships. Furthermore, the proposal advises adopting a default practice of retaining, rather than selling, other tokens until they account for less than 1% of the Treasury. At this point, a reevaluation would occur. This strategy aims to prevent protocol cannibalization while maximizing potential yields.
@@ -173,7 +181,6 @@ The proposal suggests modifying the existing treasury composition over the comin
 The Treasury composition (including Redeem contract), as of early May 2023, is as follows:
 
 ![](https://i.imgur.com/qFnzZQC.png)
-Source of data: [etherscan](https://etherscan.io/)
 
 The target asset mix to be achieved in the next few months is as follows:
 * 45% Stables/USDC
@@ -185,7 +192,9 @@ The target asset mix to be achieved in the next few months is as follows:
 
 The DAO plans to submit any significant changes to a snapshot vote, whether it involves increasing, decreasing, or maintaining a specific asset exposure. Concerning Spiral's risk framework, they intend to have the following ratios: ~10-15% for potentially risky assets, 20-30% for medium-level risks, and 50-70% for a safe risk profile. Proactive measures are taken, and continuous monitoring is conducted; for instance, Spiral eliminated Conic finance exposure due to its excessive size and experimental nature.
 
+
 ### Other Gauge (Balancer)
+
 Pool: https://app.balancer.fi/#/ethereum/pool/0x42fbd9f666aacc0026ca1b88c94259519e03dd67000200000000000000000507
 Gauge Proposal: https://snapshot.org/#/balancer.eth/proposal/0x89cb22ba735a4f5e145648306f381816759fbec5200a4c482b8c6e06c82b9d83
 
