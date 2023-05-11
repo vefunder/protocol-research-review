@@ -81,32 +81,36 @@ To encourage adoption, Spiral DAO planned a two-phase Airdrop:
 - Phase 2 will be distributed among the most active community participators. 
 
 
-## Spiral DAO Mechanics: The Dual COIL/SPR Token Model
+## The Dual COIL/SPR Token Model
 
 ### 1- COIL Token: A share of the Treasury Assets
 
 The [COIL token](https://www.coingecko.com/en/coins/spiraldao-coil) is an 18-decimal ERC-20 token representing a user's share in the growing DAO treasury. Newly issued COIL is dispensed at preferential rates as a reward that attracts users to deposit their yield-bearing LP tokens with Spiral DAO (e.g. [B-auraBAL-STABLE](https://etherscan.io/token/0x3dd0843a028c86e0b760b1a76929d1c5ef93a2dd), [pax-usdp3CRV-f](https://etherscan.io/token/0xc270b3b858c335b6ba5d5b10e2da8a09976005ad), etc.). COIL can be [redeemed directly](https://spiral.farm/redeem) for a share of the treasury's USDC with the protocol's `SpiralRedeem` contract (with a penalty) or via the [SpiralSwap](https://spiral.farm/swap) liquidity aggregator that swaps COIL for USDC at the best rate.
 
-COIL can be staked to receive SPR, which grows periodically via a "share price" logic, meaning that the exchange rate is ever-increasing based on the value of the underlying treasury assets. Current data on staking APR is viewable on the [Staking page](https://spiral.farm/staking) or directly on the `SpiralStaking` [contract](https://etherscan.io/address/0x6701E792b7CD344BaE763F27099eEb314A4b4943#readContract#F3). COIL has an unlimited supply and is highly inflationary. The tokenomics of Spiral DAO addresses dilutionary pressure via wrapped COIL (SPR tokens). This structure protects users from COIL's inflation while offering a derivative that is intended to outperform staked and non-staked veTokens. As a result, virtually all unstaked circulating COIL is POL in the Curve and Balancer pools.
+COIL can be staked to receive SPR, which grows periodically via a "share price" logic, meaning that the exchange rate is ever-increasing based on the value of the underlying treasury assets. Current data on staking APY is viewable on the [Staking page](https://spiral.farm/staking) or directly on the `SpiralStaking` [contract](https://etherscan.io/address/0x6701E792b7CD344BaE763F27099eEb314A4b4943#readContract#F3). COIL has an unlimited supply and is highly inflationary. The tokenomics of Spiral DAO addresses dilutionary pressure via wrapped COIL (SPR tokens). This structure protects users from COIL's inflation while offering a derivative that is intended to outperform staked and non-staked veTokens. As a result, virtually all unstaked circulating COIL is POL in the Curve and Balancer pools.
 
 
-#### 2- SPR Token: The Rebasing Asset
+### 2- SPR Token: The Rebasing Asset
 
 SPR tokens are obtained by staking COIL. It is used for governance over the Spiral DAO system and treasury. The token is distributed as rewards to users that stake their LP tokens on Spiral DAO. SPR can be unwrapped to the native COIL asset via the `SpiralStaking` smart contract at an exchange rate (`index` [variable](https://etherscan.io/address/0x6701E792b7CD344BaE763F27099eEb314A4b4943#readContract#F5)). Spiral DAO plans on having the option to lock SPR in the future to allow boosted yields in the manner popularized by veTokens.
 
-Adjustments to staking APR are governable parameters via the `changeAPR()` and `changeLength()` functions in the `SpiralStaking` contract. However, it appears to currently be a decision managed by the 4-of-7 protocol multi-sig composed of core contributors. A [Twitter post](https://twitter.com/Spiral_DAO/status/1653803095439331328) on May 2nd promoted an update to the APR from [100% to 271.828%](), and did not appear to be a decision that went through a governance process.
+Adjustments to staking APR are governable parameters via the `changeAPR()` and `changeLength()` functions in the `SpiralStaking` contract. However, it appears to currently be a decision managed by the 4-of-7 protocol multi-sig composed of core contributors. A [Twitter post](https://twitter.com/Spiral_DAO/status/1653803095439331328) on May 2nd promoted an update to the APR from [100% to 271.828%](https://etherscan.io/tx/0xfc6889a04586b83f1847e4b7346fb3eb1e388062e2f05ec0975830bbe509c1a1#statechange), and did not appear to be a decision that went through a governance process.
 
-With time, treasury gains are expected to outpace the SPR emitted:
+With time, treasury gains are intended to outpace the SPR emitted:
 
 ![](https://i.imgur.com/nHyeYM4.png)
 
 Source: [Spiral Dao Docs: Tokenomics](https://docs.spiral.farm/protocol/tokenomics)
 
+
 ## Protocol Mechanics
-Spiral DAO uses several mechanisms first introduced and popularised by [Olympus DAO](https://www.olympusdao.finance/) (OHM), such as rebasing, treasury management, and bonding. Spiral DAO addresses issues from OHM-like protocols by tackling a key concern: the possibility that the executive team could "slow-rug" and passively underperform, ultimately putting the token value below the Treasury backing.
+
+Spiral DAO uses several mechanisms first introduced and popularised by [Olympus DAO](https://www.olympusdao.finance/) (OHM), such as rebasing, treasury management, and bonding. Spiral DAO addresses issues from OHM-like protocols by tackling a key concern: the possibility that the executive team could "slow-rug" by passively underperforming against token emissions and restricting treasury redemption, ultimately putting the token value below the Treasury backing.
+
 
 ### Yield Bonding
-Yield Bonding works similarly to classic bonding but distributes the native token COIL with additional yield as a discount. The benefits of Yield Bonding include securing new tokens upon minting, easy onboarding for new users, and potentially setting a new reward token standard.
+
+Yield Bonding is spin on the bonding concept popularized by OHM. Instead of a user selling their token to the protocol in exchange for the discounted protocol token, Spiral DAO does not require users to relinquish ownership of their principle. Instead, users exchange the yield farming rewards they would have earned from their Curve/Balancer LP token, and in return the protocol distributes outsized yield in the native token SPR.
 
 Users receive boosted Spiral (SPR) token yields by staking via Spiral DAO. The additional yield rates are adjusted daily based on the COIL market cap and the Treasury value. The platform has mechanisms to ensure buybacks when the COIL market cap falls below 90% of the Treasury's value, maintaining an incentive to stake.
 
