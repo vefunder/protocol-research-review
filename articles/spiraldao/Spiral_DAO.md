@@ -29,44 +29,48 @@ This report aims to investigate the inner workings of Spiral DAO, review its des
 * Access control for most system contracts are with the [4-of-7 protocol multi-sig](https://etherscan.io/address/0xF14eFC7E46D57E107dEE97239329Bd7F56361C38). This multi-sig controls critical functionality and is responsible for user deposits in its yield bonding strategy and protecting against an infinite mint of COIL and SPR tokens.
 * The COIL/FraxBP pool is almost entirely POL, as the COIL tokenomics incentivize users to stake their COIL for SPR. Spiral DAO uses bribes and its own governance power to increase CRV emissions to its pool, which is currently earning >100% CRV APY on $1.8M of liquidity. 
 * The protocol borrows many mechanics from Olympus DAO, a well-proven codebase with numerous forks.
-* There is no cap on COIL and SPR tokens; while Spiral DAO aims to grow its Treasury backing quickly enough to offset emissions for stability and sustainability, caution should be exercised due to the model’s reliance on momentum and inherent risk of failure.
-* COIL and SPR holders are exposed to the performance of Spiral DAO’s [Treasury](https://debank.com/profile/0xC47eC74A753acb09e4679979AfC428cdE0209639), including exposure to smart contract risk from several different protocols (Aura, StakeDAO, Convex, Balancer, Curve, Silo etc.).
-* Composed of anonymous team members, the seasoned DeFi native contributors of Spiral DAO have attracted significant demand through their Initial Treasury Offering (ITO) and successfully partnered with StakeDAO.
-* The governance is somewhat decentralized. SPR is used in Snapshot voting, multi-sigs are set with reasonable thresholds, and owners of the multi-sigs are all disclosed (though many are pseduonymous). However, several contracts have EOA's in privileged roles and timelocks are not used. 
+* There is no cap on COIL and SPR tokens; while Spiral DAO aims to grow its Treasury backing quickly enough to offset emissions for stability and sustainability, caution should be exercised due to the model’s reliance on momentum that carries risk of failure.
+* COIL and SPR holders depend on the performance of Spiral DAO’s [Treasury](https://debank.com/profile/0xC47eC74A753acb09e4679979AfC428cdE0209639), which is exposed to smart contract risk from several different protocols (Aura, StakeDAO, Convex, Balancer, Curve, Silo etc.).
+* SpiralDAO is composed of mostly anonymous contributors who are seasoned DeFi natives and have attracted significant demand through their Initial Treasury Offering (ITO) and have partnered with StakeDAO.
+* The governance is reasonably decentralized for an early stage project, but leaves much to be improved. SPR is used in Snapshot voting, multi-sigs are set with reasonable thresholds, and owners of the multi-sigs are all disclosed (though many are pseduonymous). However, several contracts have EOA's in privileged roles and timelocks are not used. 
 
 
-## Abstract
+## Introduction to Spiral DAO
 
-Spiral DAO is a capital-efficient yield aggregator designed to optimize yield farming, bribe markets, and veTokenomics within the DeFi ecosystem. Unlike traditional aggregators such as Yearn and Beefy, SpiralDAO retains reward tokens from third-party protocols within the DAO treasury, reducing selling pressure and circulating supply. While the protocol borrows much of its smart contract design from Olympus DAO, it introduces a novel concept of "Yield Bonding". The protocol accepts LP token deposits to farm rewards to its treasury and issues an excess value of its native tokens to depositors as compensation.
+Spiral DAO is a capital-efficient yield aggregator designed to optimize yield farming and bribe markets across applications that employ veTokenomics (ie. Curve and Balancer). Unlike traditional aggregators such as Yearn and Beefy, SpiralDAO retains reward tokens from third-party protocols within the DAO treasury, reducing sell pressure and circulating supply. While the protocol borrows much of its smart contract design from Olympus DAO, it introduces a novel concept of "Yield Bonding". The protocol accepts LP token deposits to farm rewards to its treasury and issues an excess value of its native token to depositors as compensation.
 
-The two-token model of Spiral DAO consists of the COIL and SPR tokens. COIL is an inflationary token primarily useful for staking as SPR. The vast majority of unstaked COIL supply is protocol-owned liquidity (POL) in the Curve and Balancer pools. The rebasing SPR token is a governance token that incentivizes liquidity providers to contribute their yields to the Spiral DAO treasury through a process called “Yield Bonding.” This structure enables users to obtain SPR governance rights while safeguarding them from COIL’s inflationary nature. By distributing a greater USD value in COIL tokens than the rewards attainable via existing protocols, Spiral DAO incentivizes user engagement. It aims to grow its treasury backing fast enough to offset emissions, ensuring the stability and sustainability of the protocol. 
+The two-token model of Spiral DAO consists of the COIL and SPR tokens. COIL is an inflationary token primarily useful for staking as SPR. The vast majority of unstaked COIL supply is protocol-owned liquidity (POL) in the Curve and Balancer pools. The rebasing SPR token is a governance token that incentivizes liquidity providers to contribute their yields to the Spiral DAO treasury through Yield Bonding. This structure enables users to obtain SPR governance rights while safeguarding them from COIL’s inflationary nature. By distributing a greater yield in SPR tokens than the rewards attainable via existing protocols, Spiral DAO incentivizes user engagement. It aims to grow its treasury backing fast enough to offset emissions, ensuring the stability and sustainability of the protocol. 
 
-Spiral DAO claims to support the DeFi ecosystem by reducing selling pressure on farming tokens such as CRV and BAL, offering improved risk-adjusted yields for farmers, and optimizing the bribe market. 
-
-
+Spiral DAO claims to support the DeFi ecosystem by reducing sell pressure on farming tokens such as CRV and BAL, offering improved risk-adjusted yields for farmers, and optimizing the bribe market. 
 
 
+### The Launch of Spiral DAO
 
+Spiral DAO was launched in March 2023 through an [Initial Treasury Offering (ITO)](https://spiral.farm/ito), aiming to accumulate a large share of USDC, CRV, BAL, FXS, and SDT tokens. The protocol was bootstrapped by an initial oversubscription auction for 2.6m COIL tokens between April 3rd and 5th. 
 
+The initial timeline for the Spiral DAO launch:
 
-## The launch of Spiral DAO
-
-Spiral DAO was launched in March 2023 through an Initial Treasury Offering (ITO), aiming to accumulate a large share of CRV, BAL, and FXS tokens and other DeFi blue chips. The protocol was bootstrapped by an initial oversubscription auction for 2.6m COIL tokens between April 3rd and 5th. 
-
-The initial timeline for the Spiral DAO launch
 ![](https://i.imgur.com/3g1Sq69.png)
-https://twitter.com/Spiral_DAO/status/1642530107112955904?s=20
 
-### ITO outcome
+Source: [Twitter](https://twitter.com/Spiral_DAO/status/1642530107112955904?s=20)
+
 The [ITO](https://spiral.farm/ito) resulted from the Treasury holding the following position:
 
-* 4,240,516 USDC
-* 1,588,208 CRV
-* 126,018 BAL
-* 40,247 FXS
-* 561,657 SDT
+* 4,240,516 USDC ([tx](https://etherscan.io/tx/0x3f087003b3cf627620358408e26bae8201532406e0fca93f9aa90f6029b045b1))
+* 956,810 CRV ([tx](https://etherscan.io/tx/0xf31380dafd073532509a73427cdfcefb0742e278280a54c2423d8be6a0db5fce))
+* 114,797 BAL ([tx](https://etherscan.io/tx/0x897aa59415558ddb2fdfae067683e647a268a5dbe6af5c397d27f04aa37a1e2b))
+* 37,391 FXS ([tx](https://etherscan.io/tx/0xa6f1e64828f52105ba627156140fe168156e4f832cbf674600d26805cf3f0604))
+* 561,657 SDT ([tx](https://etherscan.io/tx/0xd303b3f1b1e50c4b870b5ac1b3b686da23d5316470ede92e366b5d542f599294))
 
-The protocol then deployed its Protocol Owned liquidity (POL) to various protocols, including Aura Finance, Convex, Stake DAO, Aave V3, Balancer V2, Curve, and Silo Finance.
+Unpurchased COIL from the auction was [burned](https://etherscan.io/tx/0xf3e179e213285fca12fc0c5c4e39d7923414a589514f6dd098677752dff9b5e1) and initial liquidity was [seeded](https://etherscan.io/tx/0x64a21d845769e774b6a39fa7706a8299d9e24a124c0c739711d1d46af9582d0d) to the COIL/FraxBP Curve pool with 730,360 USDC and 235,600 COIL.
+
+The protocol then deployed its Protocol Owned liquidity (POL) to various other protocols, including Aura Finance, Convex, Conic, Aave V3, Balancer V2, and Silo Finance. It acquired an initial stake of [955,854 sdCRV](https://etherscan.io/tx/0x1190a7321495a17940674761e67c4faa222514dfecfe9a1f2422bc631b3bc165) to participate in Curve gauge voting. It has since increased its stake to 1,415,869 sdCRV as of this writing.
+
+A quick overview of the current treasury exposure to various protocols can be found on [DeBank](https://debank.com/profile/0xc47ec74a753acb09e4679979afc428cde0209639).
+
+![Screen Shot 2023-05-11 at 10 07 35 AM](https://github.com/vefunder/protocol-research-review/assets/51072084/c0c6404e-02a9-444e-b505-e811a756d1d8)
+
+Source: [DeBank](https://debank.com/profile/0xc47ec74a753acb09e4679979afc428cde0209639)
 
 ### Airdrop
 To encourage adoption, Spiral DAO plans to hold a two-phase Airdrop:
