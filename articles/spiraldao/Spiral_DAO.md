@@ -193,13 +193,6 @@ The target asset mix to be achieved in the next few months is as follows:
 The DAO plans to submit any significant changes to a snapshot vote, whether it involves increasing, decreasing, or maintaining a specific asset exposure. Concerning Spiral's risk framework, they intend to have the following ratios: ~10-15% for potentially risky assets, 20-30% for medium-level risks, and 50-70% for a safe risk profile. Proactive measures are taken, and continuous monitoring is conducted; for instance, Spiral eliminated Conic finance exposure due to its excessive size and experimental nature.
 
 
-### Other Gauge (Balancer)
-
-Pool: https://app.balancer.fi/#/ethereum/pool/0x42fbd9f666aacc0026ca1b88c94259519e03dd67000200000000000000000507
-Gauge Proposal: https://snapshot.org/#/balancer.eth/proposal/0x89cb22ba735a4f5e145648306f381816759fbec5200a4c482b8c6e06c82b9d83
-
-Spiral DAO proposed a new gauge for the COIL/USDC pool on Balancer. The voting concluded with a unanimous decision of 100% support (3.6M veBAL) in favor of the proposal. The quorum requirement of 2M veBAL was met, and the new COIL/USDC pool gauge will be implemented.
-
 ### Emissions
 Spiral DAO's protocol is designed to incentivize users to maintain their investment by ensuring that, under normal conditions, the value of emitted SPR tokens surpasses the treasury backing. The protocol undergoes periodic weight updates for new SPR token emissions, adjusting them to achieve an emission value equal to 100% of the underlying yields plus 40% of the "additional overValue" parameter. This approach aims to attract more yield farmers by offering a higher APR than a mere 5% discount on SPR tokens.
 
