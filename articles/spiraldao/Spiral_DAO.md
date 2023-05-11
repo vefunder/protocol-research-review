@@ -326,43 +326,55 @@ We have reviewed the access control for Spiral DAO's deployed contracts. You can
 - The `SpiralRedeem` contract is owned by an [EOA](https://etherscan.io/address/0x6E2e85Ee5bB7b4a85e904F1e0eD5b9C7b08e5384), which can set parameters for redeeming COIL for USDC. It can also withdraw all USDC deposited in the contract (The contract is periodically topped up by the protocol treasury as seen [here](https://etherscan.io/tx/0x02849d8f22bd5780de4a49075e07a99243c7b354b1975e2d680340d3e58d97a0)).
 - All Spiral farming pool deposits are through the `MasterMind` contract, which is upgradeable by the 4-of-7 multi-sig. Depositors in the Spiral pools must trust the contract owner to responsibly custody funds in the Spiral farming pools. 
 
+
 ### Timelock
-Spiral DAO opts not to use a Timelock for crucial protocol-related matters. Instead, the project employs a 4/7 multi-sig approach involving only two contributors. This decision stems from the challenges associated with gathering all signers for approval and the desire for signers to maintain control and cross-verification of all activities. While this approach may increase efficiency, it is essential to ensure adequate security measures and checks are in place to prevent potential risks.
 
-### Audits
-An [audit report](https://github.com/pessimistic-io/audits/blob/main/Spiral%20DAO%20Security%20Analysis%20by%20Pessimistic.pdf
-) from Pessimistic was made public in January 2023. The audit of Spiral DAO's smart contracts revealed one critical issue concerning deleting a logic contract via `delegatecall`. Several medium-severity issues were identified, such as outdated addresses, overpowered roles, test issues, incorrect variable values, skipped operators, and inaccurate reward calculations. Additionally, multiple low-severity issues were found. 
+Spiral DAO opts not to use a Timelock for crucial protocol-related matters. Instead, the project employs a 4-of-7 multi-sig approach involving only two contributors. This decision stems from the challenges associated with gathering all signers for approval and the desire for signers to maintain control and cross-verification of all activities. While this approach may increase efficiency, it is essential to ensure adequate security measures and checks are in place to prevent potential risks.
 
-Spiral Dao confirmed that all findings had been addressed. Some changes and additions (e.g., the `SpiralRedeem` contract) appear to have been made after the audit. 
 
 ## Risk Analysis
+
 Given that Spiral DAO introduces novel mechanics on top of the Olympus DAO model, it is essential to analyze its potential risks.
 
-### Underlining treasury assets
-The COIL & SPR tokens represent a share of all Spiral DAO's Treasury assets. As such, we've examined the risks to which token holders are exposed. These tokens carry the associated risks of every asset the Treasury holds, including the potential fluctuations in the value of these assets, exposure to market volatility, and any other risks inherent to the individual assets themselves. 
 
-### Liquid Lockers Depeg
+### Underlying Treasury Assets
+
+The COIL & SPR tokens represent a share of all Spiral DAO's Treasury assets. As such, we've examined the risks to which token holders are exposed. These tokens carry the associated risks of every asset the Treasury holds, including the potential fluctuations in the value of these assets, exposure to market volatility, and any other risks inherent to the individual assets themselves.
+
+The treasury composition can by audited [here](https://debank.com/profile/0xC47eC74A753acb09e4679979AfC428cdE0209639), and is curently exposed to 7 additional protocols (Aura, StakeDAO, Convex, Aave, Balancer, Curve, and Silo). Each protocol has different risk profiles, and COIL/SPR holders are exposed to them all. 
+
+In addition to smart contract risk associated with each underlying protocol, there is a reliance on the 3-of-6 treasury multi-sig to responsibly manage the investment strategies.
+
 The potential for de-pegging in DeFi liquidity lockers, such as AuraBal, presents a risk that stakeholders must be aware of, as it can disrupt Spiral DAO's underlying holdings. Users should consider the mechanics specific to each asset and understand the implications of a de-pegging event on the Treasury's value. 
 
+
 ### Smart Contract Risks
-Smart contract vulnerabilities pose risks for Spiral DAO, especially since it is unclear which contracts were changed post-audit. To counter potential threats, the project offers a bug bounty program with rewards up to $250k or 15% of the affected funds for critical findings. Furthermore, Spiral DAO has recently voted to launch a bounty program with [Hats.finance](https://hats.finance/) with the goal to incentivize responsible vulnerability disclosure for Spiral DAO. As per the [Snapshot vote](https://snapshot.org/#/spiralgov.eth/proposal/0x9852988e836c847d1bf52e303712411a0230af0c900d866f1ce6c93a2dfaa743), the protocol treasury sent 30K SPR, currently valued ~$77k at this [tx](https://etherscan.io/tx/0x5a0d24d172e5e6aa00c848fb7270e8fc22f53e5f35889466d73e1043d4a5a6d1).
+
+An [audit report](https://github.com/pessimistic-io/audits/blob/main/Spiral%20DAO%20Security%20Analysis%20by%20Pessimistic.pdf) from Pessimistic was made public in January 2023. The audit of Spiral DAO's smart contracts revealed one critical issue concerning deleting a logic contract via `delegatecall`. Several medium-severity issues were identified, such as outdated addresses, overpowered roles, test issues, incorrect variable values, skipped operators, and inaccurate reward calculations. Additionally, multiple low-severity issues were found. 
+
+Spiral Dao confirmed that all findings had been addressed. Some changes and additions (e.g., the `SpiralRedeem` contract) appear to have been made after the audit. 
+Smart contract vulnerabilities pose risks for Spiral DAO, especially since it is unclear which contracts were changed post-audit. 
+
+To counter potential threats, the project offers a bug bounty program with rewards up to $250k or 15% of the affected funds for critical findings. Furthermore, Spiral DAO has recently voted to launch a bounty program with [Hats.finance](https://hats.finance/) with the goal to incentivize responsible vulnerability disclosure for Spiral DAO. As per the [Snapshot vote](https://snapshot.org/#/spiralgov.eth/proposal/0x9852988e836c847d1bf52e303712411a0230af0c900d866f1ce6c93a2dfaa743), the protocol treasury sent 30K SPR, currently valued ~$77k at this [tx](https://etherscan.io/tx/0x5a0d24d172e5e6aa00c848fb7270e8fc22f53e5f35889466d73e1043d4a5a6d1).
+
 
 ### Potential Bank Run and Redeem limitations
+
 While Spiral DAO has implemented a backstop mechanism for redemption, there remains a risk of COIL becoming illiquid. The USDC balance in the SpiralRedeem contract is overseen by the protocol's multi-sig. The majority of the Treasury's assets are liquid, with the exception of approximately $50k in locked SDT. Although COIL's market cap could decline below the Treasury's value, the redemption smart contract serves as a safeguard by ensuring the drop does not exceed 10% of the total.
 
 However, there are certain limitations to the redemption mechanism that should be taken into consideration. First, if a large number of users choose to redeem their COIL tokens simultaneously, the USDC reserve in the SpiralRedeem contract could be depleted, resulting in reduced exit liquidity for remaining users. This scenario could potentially trigger a bank run-like event, where users rush to redeem their tokens before the reserve is exhausted.
 
-Second, the redemption penalty rate, which can range from 0 to 100%, is controlled by the Spiral DAO. While this flexibility allows the protocol to adapt to varying market conditions, it also introduces uncertainty for users regarding the actual redemption rate they will receive upon exit.
+Second, the redemption penalty rate, which can range from 0 to 100%, is controlled by a team-owned [EOA](https://etherscan.io/address/0x6E2e85Ee5bB7b4a85e904F1e0eD5b9C7b08e5384). While this flexibility allows the protocol to adapt to varying market conditions, it also introduces uncertainty for users regarding the actual redemption rate they will receive upon exit.
 
-To mitigate these risks, it is essential for Spiral DAO to maintain a sufficiently sized USDC reserve in the SpiralRedeem contract, as well as implement clear guidelines on how the redemption penalty rate will be determined and adjusted. 
+To mitigate these risks, it is essential for Spiral DAO to maintain a sufficiently sized USDC reserve in the SpiralRedeem contract, as well as implement clear guidelines on how the redemption penalty rate will be determined and adjusted. Ideally, the EOA owner should be replaced with the 4-of-7 protocol multi-sig for greater user assurances.
 
 ![](https://i.imgur.com/Bp3vXM3.png)
-https://spiral.farm/redeem
 
-## Potential positive impacts
-Adding Spiral DAO's liquidity pools to the Curve ecosystem is expected to positive impact. With the small flywheel built into the system, overall bribe yields for all veCRV holders are likely to increase, while sell pressure on CRV should decrease and future emissions buy-pressure should increase. Furthermore, Spiral DAO's distributed solutions and potential to attract many veCRV holders may benefit the future of veCRV wars. Overall, Spiral DAO's liquidity lockers have the potential to be an excellent addition to the Curve ecosystem.
+Source: [Spiral Redeem](https://spiral.farm/redeem)
 
-### Conclusion
+
+## Conclusion
+
 In summary, Spiral DAO offers an innovative approach to yield farming, bribe markets, and veTokenomics in the DeFi ecosystem. With a robust treasury and attractive yields, it distinguishes itself from traditional yield aggregators by retaining third-party protocol rewards within the DAO treasury. This structure reduces selling pressure and circulating supply while optimizing risk-adjusted yields for farmers and rationalizing the bribe market.
 
 Spiral DAO's unique treasury rebalancing mechanism and tokenomics allow it to capitalize on bribe market inefficiencies, improving bribe yields and liquidity depth. Although the protocol aims for quick treasury growth to offset emissions and maintain stability, users should consider the risks associated with underlying treasury assets, potential bank runs, and smart contract vulnerabilities. Overall, Spiral DAO's innovative approach holds the potential to positively impact the DeFi ecosystem and reshape the future of veCRV wars.
