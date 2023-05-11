@@ -209,7 +209,7 @@ As the partnership progresses, both platforms expect to see an increase in SDT s
 
 While most contributors are anonymous, the team behind the project possesses diverse backgrounds in the crypto industry, including market making on CEXs, quantitative analysis, angel investing, arbitrage, and yield farming. 
 
-Several contributors have been involved in the space since 2012-2013 and have previously built projects such as a yield farming aggregator (2020). The team also benefits from the advice and guidance of notable figures in the DeFi space, such as Redacted Cartel founder, Sami. A core contributor was also involved in a white hat attack in 2021, where over $1m of assets were returned.
+Several contributors have been involved in the space since 2012-2013 and have previously built projects such as the [Dracula](https://defillama.com/protocol/dracula) yield farming aggregator (2020). The team also benefits from the advice and guidance of notable figures in the DeFi space, such as the founder of cp0x (validators in multiple DeFi applications) and Sami (Redacted Cartel founder). A core contributor was also involved in a white hat attack in 2021, where over $1m of assets were returned.
 
 We asked Spiral DAO for more information about contributors' roles. We were told that the DAO plans to make its structure more transparent at a later stage. Below is a partial list of contributors based on the latest information obtained:
 
@@ -227,15 +227,41 @@ Advisors:
 * [Sami](https://twitter.com/0xSami_) - Founder of Redacted Cartel
 * [Valentin Mihov](https://twitter.com/valentinmihov) - Co-founder of Daedalus
 
-### Multi-sig
+
+### Gov Process and Voting
+
+Governance proposals can be made on the [Governance channel](https://discord.com/channels/1054724431404089445/1093490553120903261) of the Spiral DAO Discord server. According to guidelines in the [docs](https://docs.spiral.farm/dao/governance-process), a proposal should be active for at least 24 hours before going to a vote. Voting is done [via Snapshot](https://snapshot.org/#/spiralgov.eth) with votes being recognized based on SPR holdings.
+
+As Snapshot votes are non-binding, in most cases the protocol or treasury multi-sig will be responsible for executing the outcome of the vote.
+
+
+### Multi-sigs
+
 #### [Treasury](https://etherscan.io/address/0xc47ec74a753acb09e4679979afc428cde0209639) (3/6)
-[VV](https://etherscan.io/address/0xC011240FAb026E08EC18E12a506f45b9aaEE84dD), [Cuttlefish](https://etherscan.io/address/0xC541A7b893eFD384d3E0013DfCb3e563a777fDBC), [Farmer Brown](https://etherscan.io/address/0xFBD9123f3CA030632C5fC5948dfebb38B0b115f2), [SuperChad](https://etherscan.io/address/0xDD9bF0A45452a4F22cfd2C963c15B191D97Ce106), [Starny](https://etherscan.io/address/0x79603115df2ba00659adc63192325cf104ca529c) & [cp0x](https://etherscan.io/address/0x53BD3C14e2a076EB55a7e2BE73Fa0fA7918CF300)
+
+The treasury multi-sig manages the protocol treasury:
+
+* [`GnosisSafeProxy.sol`](https://etherscan.io/address/0xC47eC74A753acb09e4679979AfC428cdE0209639): Treasury Multisig - 3-of-6 Gnosis Safe 1.3.0 (behind proxy)
+     * VV - [0xC011240FAb026E08EC18E12a506f45b9aaEE84dD](https://etherscan.io/address/0xC011240FAb026E08EC18E12a506f45b9aaEE84dD)
+     * Cuttlefish - [0xC541A7b893eFD384d3E0013DfCb3e563a777fDBC](https://etherscan.io/address/0xC541A7b893eFD384d3E0013DfCb3e563a777fDBC)
+     * [Farmer Brown](https://twitter.com/FarmerBrownDeFi) - [0xFBD9123f3CA030632C5fC5948dfebb38B0b115f2](https://etherscan.io/address/0xFBD9123f3CA030632C5fC5948dfebb38B0b115f2)
+     * SuperChad - [0xDD9bF0A45452a4F22cfd2C963c15B191D97Ce106](https://etherscan.io/address/0xDD9bF0A45452a4F22cfd2C963c15B191D97Ce106)
+     * [Starny](https://starny.eth.limo/) - [0x79603115Df2Ba00659ADC63192325CF104ca529C](https://etherscan.io/address/0x79603115df2ba00659adc63192325cf104ca529c)
+     * [cp0x](https://debank.com/profile/0x6f9bb7e454f5b3eb2310343f0e99269dc2bb8a1d) - [0x53BD3C14e2a076EB55a7e2BE73Fa0fA7918CF300](https://etherscan.io/address/0x53BD3C14e2a076EB55a7e2BE73Fa0fA7918CF300)
 
 #### [Protocol](https://etherscan.io/address/0xf14efc7e46d57e107dee97239329bd7f56361c38) (4/7)
-[VV](https://etherscan.io/address/0xC011240FAb026E08EC18E12a506f45b9aaEE84dD), [Ivan](https://etherscan.io/address/0xc0cbd3a183E634f630F4658526A1D8309008c6b8), [Farmer Brown](https://etherscan.io/address/0xFBD9123f3CA030632C5fC5948dfebb38B0b115f2), [cp0x](https://etherscan.io/address/0x53BD3C14e2a076EB55a7e2BE73Fa0fA7918CF300), [CIA Officer](https://etherscan.io/address/0xb25c5e8fa1e53eeb9be3421c59f6a66b786ed77a), [Sami](https://etherscan.io/address/0x2AFb6A75Ee833A84d534C62894BB348234b5d219) & [Valentin Mihov](https://etherscan.io/address/0x3F0c2A4654A63110ED3b15cF9C0fa07476B389cF)
 
-#### Voting
-On-chain voting is done [via Snapshot](https://snapshot.org/#/spiralgov.eth) with votes being recognized based on SPR holdings.
+The Protocol owner multi-sig controls the majority of protocol contracts including `MasterMind`, `SpiralStaking`, and the token contracts:
+
+* [`GnosisSafeProxy.sol`](https://etherscan.io/address/0xF14eFC7E46D57E107dEE97239329Bd7F56361C38): Protocol Multisig - 4-of-7 Gnosis Safe 1.3.0 (behind proxy)
+     * VV - [0xC011240FAb026E08EC18E12a506f45b9aaEE84dD](https://etherscan.io/address/0xC011240FAb026E08EC18E12a506f45b9aaEE84dD)
+     * Ivan - [0xc0cbd3a183E634f630F4658526A1D8309008c6b8](https://etherscan.io/address/0xc0cbd3a183E634f630F4658526A1D8309008c6b8)
+     * [Farmer Brown](https://twitter.com/FarmerBrownDeFi) - [0xFBD9123f3CA030632C5fC5948dfebb38B0b115f2](https://etherscan.io/address/0xFBD9123f3CA030632C5fC5948dfebb38B0b115f2)
+     * [cp0x](https://debank.com/profile/0x6f9bb7e454f5b3eb2310343f0e99269dc2bb8a1d) - [0x53BD3C14e2a076EB55a7e2BE73Fa0fA7918CF300](https://etherscan.io/address/0x53BD3C14e2a076EB55a7e2BE73Fa0fA7918CF300)
+     * [CIA Officer](https://twitter.com/officer_cia) - [0xB25C5E8fA1E53eEb9bE3421C59F6A66B786ED77A](https://etherscan.io/address/0xb25c5e8fa1e53eeb9be3421c59f6a66b786ed77a)
+     * [Sami](https://twitter.com/0xSami_) - [0x2AFb6A75Ee833A84d534C62894BB348234b5d219](https://etherscan.io/address/0x2AFb6A75Ee833A84d534C62894BB348234b5d219)
+     * [Valentin Mihov](https://twitter.com/valentinmihov) - [0x3F0c2A4654A63110ED3b15cF9C0fa07476B389cF](https://etherscan.io/address/0x3F0c2A4654A63110ED3b15cF9C0fa07476B389cF)  
+
 
 ## Smart Contracts Overview
 
@@ -271,33 +297,10 @@ Additional functionality include the SpiralSwap router and the SpiralRedeem cont
 
 ## Access Control
 
-There are two multi-sigs used within the SpiralDAO system, which each consist of SpiralDAO contributors and advisors. The [docs](https://docs.spiral.farm/risks-and-security/multi-sig) disclose the identity of each owner address, although a significant portion of the owners are pseudononymous.
-
-The treasury multi-sig manages the protocol treasury:
-
-* [`GnosisSafeProxy.sol`](https://etherscan.io/address/0xC47eC74A753acb09e4679979AfC428cdE0209639): Treasury Multisig - 3-of-6 Gnosis Safe 1.3.0 (behind proxy)
-     * VV - 0xC011240FAb026E08EC18E12a506f45b9aaEE84dD
-     * Cuttlefish - 0xC541A7b893eFD384d3E0013DfCb3e563a777fDBC
-     * [Farmer Brown](https://twitter.com/FarmerBrownDeFi) - 0xFBD9123f3CA030632C5fC5948dfebb38B0b115f2
-     * SuperChad - 0xDD9bF0A45452a4F22cfd2C963c15B191D97Ce106
-     * [Starny](https://starny.eth.limo/) - 0x79603115Df2Ba00659ADC63192325CF104ca529C
-     * [cp0x](https://debank.com/profile/0x6f9bb7e454f5b3eb2310343f0e99269dc2bb8a1d) - 0x53BD3C14e2a076EB55a7e2BE73Fa0fA7918CF300
-
-The Protocol owner multi-sig controls the majority of protocol contracts including `MasterMind`, `SpiralStaking`, and the token contracts:
-
-* [`GnosisSafeProxy.sol`](https://etherscan.io/address/0xF14eFC7E46D57E107dEE97239329Bd7F56361C38): Protocol Multisig - 4-of-7 Gnosis Safe 1.3.0 (behind proxy)
-     * VV - 0xC011240FAb026E08EC18E12a506f45b9aaEE84dD
-     * Ivan - 0xc0cbd3a183E634f630F4658526A1D8309008c6b8
-     * [Farmer Brown](https://twitter.com/FarmerBrownDeFi) - 0xFBD9123f3CA030632C5fC5948dfebb38B0b115f2
-     * [cp0x](https://debank.com/profile/0x6f9bb7e454f5b3eb2310343f0e99269dc2bb8a1d) - 0x53BD3C14e2a076EB55a7e2BE73Fa0fA7918CF300
-     * [CIA Officer](https://twitter.com/officer_cia) - 0xB25C5E8fA1E53eEb9bE3421C59F6A66B786ED77A
-     * [Sami](https://twitter.com/0xSami_) - 0x2AFb6A75Ee833A84d534C62894BB348234b5d219
-     * [Valentin Mihov](https://twitter.com/valentinmihov) - 0x3F0c2A4654A63110ED3b15cF9C0fa07476B389cF  
-
 We have reviewed the access control for Spiral DAO's deployed contracts. You can find the [details here](https://docs.google.com/spreadsheets/d/1FWMGGJIasCCaoircLtsBKiG4xnhr4hlf-JHlRSZANaU/edit#gid=0). Below are the key points:
 
-- The majority of functions, including the contract proxies, are under the control of the Protocol multi-sig.
-- It is possible to infinite mint COIL and/or SPR in case of irresponsible or malicious action taken by the owner multi-sig. The Protocol multisig (4/7) is responsible for ensuring that the vault address is not set to an exploitable value to prevent infinite token minting. It can call `setVault()` to set an arbitrary address as a designated vault, which has the power to call `mint()` to the token contract. Currently the `SpiralStaking` and `RewarderVault` contracts are set as vaults, and these have protected conditions for minting.  
+- The majority of contracts are owned by the 4-of-7 protocol multi-sig, which has extensive privileges to upgrade contracts, add and remove privileged addresses, and is generally responsible for critical system functionality.
+- It is possible to infinite mint COIL and/or SPR in case of irresponsible or malicious action taken by the owner multi-sig. The protocol multi-sig must ensure that the vault address is not set to an exploitable address. It can call `setVault()` to set an arbitrary address as a designated vault, which then has the power to call `mint()` to the token contract. Currently the `SpiralStaking` and `RewarderVault` contracts are set as vaults, and these have protected conditions for minting.  
 - The [Rewarder contract](https://etherscan.io/address/0x72614b5d6F388B089f343723fcc3a5B4Fc22B347) is controlled by an [EOA](https://etherscan.io/address/0x6E2e85Ee5bB7b4a85e904F1e0eD5b9C7b08e5384). It is responsible for setting pool parameters catalogued within the `MasterMind` contract and distributing fees from the `RewarderVault`.
 - The `SpiralRedeem` contract is owned by an [EOA](https://etherscan.io/address/0x6E2e85Ee5bB7b4a85e904F1e0eD5b9C7b08e5384), which can set parameters for redeeming COIL for USDC. It can also withdraw all USDC deposited in the contract (The contract is periodically topped up by the protocol treasury as seen [here](https://etherscan.io/tx/0x02849d8f22bd5780de4a49075e07a99243c7b354b1975e2d680340d3e58d97a0)).
 - All Spiral farming pool deposits are through the `MasterMind` contract, which is upgradeable by the 4/7 multi-sig. Depositors in the Spiral pools must trust the contract owner to responsibly custody funds in the Spiral farming pools. 
