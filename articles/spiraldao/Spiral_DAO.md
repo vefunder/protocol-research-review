@@ -373,6 +373,31 @@ To mitigate these risks, it is essential for Spiral DAO to maintain a sufficient
 Source: [Spiral Redeem](https://spiral.farm/redeem)
 
 
+## Llama Risk Gauge Criteria
+
+Centralization Factors
+
+**1. Is it possible for a single entity to rug its users?**
+
+User funds in the treasury are custodied by the 3-of-6 treasury multi-sig and other system funds (including COIL/SPR token security) are custodied by the 4-of-7 protocol multi-sig. Both multi-sigs include core contributors of the protocol in addition to project advisors. The address owners are disclosed, and while the majority are pseudonymous, they include many known actors with a long history working in crypto. It is possible to rug user funds, although appears reasonably secure at this stage.
+
+**2. If the team vanishes, can the project continue?**
+
+Depends how "team" is defined. If the 3 core contributors disappeared, the project advisors would still be able to reach the multi-sig threshold required to recover treasury funds. In case the majority of multi-sig signers disappear, it would no longer be possible to access the treasury and the project would be unable to continue. 
+
+Economic Factors
+
+**1. Does the project's viability depend on additional incentives?**
+
+A core mechanic of Spiral DAO involves the use of bribes to expand the treasury. That includes bribes for the COIL/FraxBP pool, which is almost entirely POL and is earning the treasury >100% APY on $1.8M of liquidity. The Yield Bonding strategy depends on being able to farm ecosystem reward tokens from a variety of Curve and Balancer pools. 
+
+**2. If demand falls to 0 tomorrow, can all users be made whole?**
+
+Users farming in the Yield Bonding pools should always be able to redeem their LP tokens, regardless of market conditions. On the other hand, COIL holders may no be able to redeem treasury assets. Only 312K USDC is in the `SpiralRedeem` contract, in addition to 900K USDC in the Curve pool and 800K USDC in the Balancer pool. Once all USDC is drained, remaining treasury funds would need to be distributed by the treasury multi-sig.
+
+Security Factors
+**1. Do audits reveal any concerning signs?**
+
 ## Conclusion
 
 In summary, Spiral DAO offers an innovative approach to yield farming, bribe markets, and veTokenomics in the DeFi ecosystem. With a robust treasury and attractive yields, it distinguishes itself from traditional yield aggregators by retaining third-party protocol rewards within the DAO treasury. This structure reduces selling pressure and circulating supply while optimizing risk-adjusted yields for farmers and rationalizing the bribe market.
