@@ -17,9 +17,9 @@
 
 ## Relation to Curve
 
-On April 5th, Spiral DAO introduced a [COIL/FRAXBP](https://curve.fi/#/ethereum/pools/factory-crypto-236) V2 factory pool on Curve, which includes COIL, FRAX, and USDC. The pool currently holds approximately $1.8 million in assets was initially [bootstrapped by the SpiralDAO Treasury](https://etherscan.io/tx/0x64a21d845769e774b6a39fa7706a8299d9e24a124c0c739711d1d46af9582d0d). A [gauge proposal](https://gov.curve.fi/t/proposal-to-add-coil-fraxbp-to-the-gauge-controller/9119) was submitted on April 13th. An [on-chain vote](https://dao.curve.fi/vote/ownership/314) concluded on March 23rd in favor of the proposal.
+On April 5th, Spiral DAO introduced a [COIL/FRAXBP](https://curve.fi/#/ethereum/pools/factory-crypto-236) V2 factory pool on Curve, which includes COIL, FRAX, and USDC. The pool currently holds approximately $1.8 million in assets and was initially [bootstrapped by the SpiralDAO Treasury](https://etherscan.io/tx/0x64a21d845769e774b6a39fa7706a8299d9e24a124c0c739711d1d46af9582d0d). A [gauge proposal](https://gov.curve.fi/t/proposal-to-add-coil-fraxbp-to-the-gauge-controller/9119) was submitted on April 13th. An [on-chain vote](https://dao.curve.fi/vote/ownership/314) concluded on March 23rd in favor of the proposal.
 
-Approximately 8% of the treasury funds are presently allocated to providing liquidity to the COIL/FRAXBP pool. Spiral DAO remains the primary liquidity provider of this pool, and earns over 100% APY by staking their LP token into the COILFRAX-f Gauge. Spiral DAO also participates in Curve Governance, currently holding 1,415,869 sdCRV (Stake DAO). 
+Approximately 25% of the treasury TVL is presently allocated to providing liquidity to the Curve COIL/FRAXBP pool. Spiral DAO remains the primary liquidity provider of this pool, and earns over 100% APY by staking their LP token into the COILFRAX-f Gauge. Spiral DAO also participates in Curve Governance, currently holding 1,415,869 sdCRV (Stake DAO). 
 
 This report aims to investigate the inner workings of Spiral DAO, review its design trade-offs, and examine the potential implications in the [ongoing curve wars](https://www.defiwars.xyz/wars/curve) and global DeFi bribes ecosystem.
 
@@ -29,8 +29,8 @@ This report aims to investigate the inner workings of Spiral DAO, review its des
 * Access control for most system contracts are with the [4-of-7 protocol multi-sig](https://etherscan.io/address/0xF14eFC7E46D57E107dEE97239329Bd7F56361C38). This multi-sig controls critical functionality and is responsible for user deposits in its yield bonding strategy and protecting against an infinite mint of COIL and SPR tokens.
 * The COIL/FraxBP pool is almost entirely POL, as the COIL tokenomics incentivize users to stake their COIL for SPR. Spiral DAO uses bribes and its own governance power to increase CRV emissions to its pool, which is currently earning >100% CRV APY on $1.8M of liquidity. 
 * The protocol borrows many mechanics from Olympus DAO, a well-proven codebase with numerous forks.
-* There is no cap on COIL and SPR tokens; while Spiral DAO aims to grow its Treasury backing quickly enough to offset emissions for stability and sustainability, caution should be exercised due to the model’s reliance on momentum that carries risk of failure.
-* COIL and SPR holders depend on the performance of Spiral DAO’s [Treasury](https://debank.com/profile/0xC47eC74A753acb09e4679979AfC428cdE0209639), which is exposed to smart contract risk from several different protocols (Aura, StakeDAO, Convex, Balancer, Curve, Silo etc.).
+* There is no cap on COIL and SPR tokens; while Spiral DAO aims to grow its treasury backing quickly enough to offset emissions for stability and sustainability, caution should be exercised due to the model’s reliance on momentum that carries risk of failure.
+* COIL and SPR holders depend on the performance of Spiral DAO’s [Treasury](https://debank.com/profile/0xC47eC74A753acb09e4679979AfC428cdE0209639), which is exposed to smart contract risk from several different protocols (Aura, StakeDAO, Convex, Balancer, Curve, Silo etc.) and is managed by the [3-of-6 treasury multi-sig](https://etherscan.io/address/0xc47ec74a753acb09e4679979afc428cde0209639).
 * SpiralDAO is composed of mostly anonymous contributors who are seasoned DeFi natives and have attracted significant demand through their Initial Treasury Offering (ITO) and have partnered with StakeDAO.
 * The governance is reasonably decentralized for an early stage project, but leaves much to be improved. SPR is used in Snapshot voting, multi-sigs are set with reasonable thresholds, and owners of the multi-sigs are all disclosed (though many are pseduonymous). However, several contracts have EOA's in privileged roles and timelocks are not used. 
 
@@ -64,7 +64,7 @@ The [ITO](https://spiral.farm/ito) resulted from the Treasury holding the follow
 
 Unpurchased COIL from the auction was [burned](https://etherscan.io/tx/0xf3e179e213285fca12fc0c5c4e39d7923414a589514f6dd098677752dff9b5e1) and initial liquidity was [seeded](https://etherscan.io/tx/0x64a21d845769e774b6a39fa7706a8299d9e24a124c0c739711d1d46af9582d0d) to the COIL/FraxBP Curve pool with 730,360 USDC and 235,600 COIL.
 
-The protocol then deployed its Protocol Owned liquidity (POL) to various other protocols, including Aura Finance, Convex, Conic, Aave V3, Balancer V2, and Silo Finance. It acquired an initial stake of [955,854 sdCRV](https://etherscan.io/tx/0x1190a7321495a17940674761e67c4faa222514dfecfe9a1f2422bc631b3bc165) to participate in Curve gauge voting. It has since increased its stake to 1,415,869 sdCRV as of this writing.
+The protocol then deployed its POL to various other protocols, including Aura Finance, Convex, Conic, Aave V3, Balancer V2, and Silo Finance. It acquired an initial stake of [955,854 sdCRV](https://etherscan.io/tx/0x1190a7321495a17940674761e67c4faa222514dfecfe9a1f2422bc631b3bc165) to participate in Curve gauge voting. It has since increased its stake to 1,415,869 sdCRV as of this writing.
 
 A quick overview of the current treasury exposure to various protocols can be found on [DeBank](https://debank.com/profile/0xc47ec74a753acb09e4679979afc428cde0209639).
 
@@ -288,7 +288,7 @@ The Protocol owner multi-sig has ownership privileges for the majority of protoc
 
 Spiral DAO's smart contract architecture is designed to incentivize users to stake in selected yield bonding pools while maintaining necessary relative inflation. 
 
-The `MasterMind` contract is an upgradeable proxy yield aggregator central to the yield bonding system and comprises three roles: `Service`, `Drainers`, and `Owner`. The `Service` role handles lower-level threats and non-impactful activities, while the `Drainers` can take corresponding rewards (CRV/BAL/other) to the DAO/Treasury address. The `Owner` role, Spiral DAO's multi-sig, can add pools, change delegate-call adapters, and increase withdrawal fees.
+The `MasterMind` contract is an upgradeable proxy yield aggregator central to the yield bonding system and comprises three roles: `Service`, `Drainers`, and `Owner`. The `Service` role handles lower-level threats and non-impactful activities, while the `Drainers` can take corresponding rewards (CRV/BAL/other) to the DAO/Treasury address. The `Owner` role, Spiral DAO's multi-sig, can add pools, change delegate-call adapters, and increase withdrawal fees (in addiiton to privileges of other roles).
 
 `MasterMind` features two types of "Adapters": `XXXAdapter.sol`, consisting of hardcoded routes for zaps and view information of reward tokens for drains, and `XXDelegate.sol`, which holds the code `MasterMind` used for delegate calls of different protocols. The latter is crucial for security reasons. The `MasterMind` contract owner can set the `Rewarder` contract address, which determines the token distribution for each user based on the allocated rewards per 1 LP token per pool. Reward rates are updated by the admin role, guided by off-chain scripts that calculate the price of Coil, collateral protocol yield, and the required APR to sustain per 1 LP for the target pool in `COIL`.
 
@@ -343,10 +343,15 @@ The COIL & SPR tokens represent a share of all Spiral DAO's Treasury assets. As 
 
 The treasury composition can by audited [here](https://debank.com/profile/0xC47eC74A753acb09e4679979AfC428cdE0209639), and is curently exposed to 7 additional protocols (Aura, StakeDAO, Convex, Aave, Balancer, Curve, and Silo). Each protocol has different risk profiles, and COIL/SPR holders are exposed to them all. The potential for de-pegging in DeFi liquidity lockers, such as AuraBal and sdCRV, presents a risk that stakeholders must be aware of, as it can disrupt Spiral DAO's underlying holdings. Users should consider the mechanics specific to each asset and understand the implications of a de-pegging event on the Treasury's value. 
 
-In addition to smart contract risk associated with each underlying protocol, there is a reliance on the 3-of-6 treasury multi-sig to responsibly manage the investment strategies. Although Spiral DAO attests to a treasury target of 45% stablecoin as of this [Snapshot vote](https://snapshot.org/#/spiralgov.eth/proposal/0x2c83dbf3dd2a77d9eb71978d8cae41f17567b0213c916bc2970810fbc4671846), users should be aware of market risk to the underlying strategies. Currently only 30% of the treasury is in stables without exposure to market risk. Nearly 40% of the stablecoin portion of the treasury is deployed as Curve and Balancer LPs paired with COIL. 
+Although Spiral DAO attests to a treasury target of 45% stablecoin as of this [Snapshot vote](https://snapshot.org/#/spiralgov.eth/proposal/0x2c83dbf3dd2a77d9eb71978d8cae41f17567b0213c916bc2970810fbc4671846), users should be aware of market risk to the underlying strategies. Currently only 30% of the treasury is in stables without exposure to market risk (eg. USDC as collateral in Aave). Nearly 40% of the stablecoin portion of the treasury is deployed as Curve and Balancer LPs paired with COIL. This greatly increases the market risk of the stable portion of the portfolio, and isn't adequately conveyed in Spiral DAO's own [dashboard](https://spiral.farm/dashboard).
 
 ![Spiral DAO Treasury Composition 5_12_23](https://github.com/vefunder/protocol-research-review/assets/51072084/35527721-7786-45cc-a5aa-39c6fe6ce97e)
 
+![Screen Shot 2023-05-12 at 12 23 59 PM](https://github.com/vefunder/protocol-research-review/assets/51072084/bf8eaf2d-9fee-46c4-84e0-edd7771ab426)
+
+Source: [Spiral DAO Dashboard](https://spiral.farm/dashboard)
+
+In addition to smart contract risk and economic risks associated with each underlying protocol, there is a reliance on the 3-of-6 treasury multi-sig to responsibly manage the investment strategies.
 
 ### Smart Contract Risks
 
@@ -360,11 +365,11 @@ To counter potential threats, the project offers a bug bounty program with rewar
 
 ### Potential Bank Run and Redeem limitations
 
-While Spiral DAO has implemented a backstop mechanism for redemption, there remains a risk of COIL becoming illiquid. The USDC balance in the SpiralRedeem contract is overseen by the protocol's multi-sig. The majority of the Treasury's assets are liquid, with the exception of approximately $50k in locked SDT. Although COIL's market cap could decline below the Treasury's value, the redemption smart contract serves as a safeguard by ensuring the drop does not exceed 10% of the total.
+While Spiral DAO has implemented a backstop mechanism for redemption, there remains a risk of COIL becoming illiquid. The USDC balance in the SpiralRedeem contract is overseen by the treasury multi-sig. The majority of the treasury's assets are liquid, with the exception of approximately $50k in locked SDT. Although COIL's market cap could decline below the Treasury's value, the redemption smart contract serves as a safeguard by ensuring the drop does not exceed 10% of the total.
 
 However, there are certain limitations to the redemption mechanism that should be taken into consideration. First, if a large number of users choose to redeem their COIL tokens simultaneously, the USDC reserve in the SpiralRedeem contract could be depleted, resulting in reduced exit liquidity for remaining users. This scenario could potentially trigger a bank run-like event, where users rush to redeem their tokens before the reserve is exhausted.
 
-Second, the redemption penalty rate, which can range from 0 to 100%, is controlled by a team-owned [EOA](https://etherscan.io/address/0x6E2e85Ee5bB7b4a85e904F1e0eD5b9C7b08e5384). While this flexibility allows the protocol to adapt to varying market conditions, it also introduces uncertainty for users regarding the actual redemption rate they will receive upon exit.
+Second, the redemption penalty rate, which can range from 0 to 100%, is controlled by a team-owned [EOA](https://etherscan.io/address/0x6E2e85Ee5bB7b4a85e904F1e0eD5b9C7b08e5384). While this flexibility allows the protocol to adapt to varying market conditions, it also introduces uncertainty for users regarding the actual redemption rate they will receive upon exit. 
 
 To mitigate these risks, it is essential for Spiral DAO to maintain a sufficiently sized USDC reserve in the SpiralRedeem contract, as well as implement clear guidelines on how the redemption penalty rate will be determined and adjusted. Ideally, the EOA owner should be replaced with the 4-of-7 protocol multi-sig for greater user assurances.
 
@@ -393,7 +398,7 @@ A core mechanic of Spiral DAO involves the use of bribes to expand the treasury.
 
 **2. If demand falls to 0 tomorrow, can all users be made whole?**
 
-Users farming in the Yield Bonding pools should always be able to redeem their LP tokens, regardless of market conditions. On the other hand, COIL holders may no be able to redeem treasury assets. Only 312K USDC is in the `SpiralRedeem` contract, in addition to 900K USDC in the Curve pool and 800K USDC in the Balancer pool. Once all USDC is drained, remaining treasury funds would need to be distributed by the treasury multi-sig.
+Users farming in the Yield Bonding pools are always be able to redeem their LP tokens, regardless of market conditions. On the other hand, COIL holders may no be able to redeem treasury assets. Only 312K USDC is in the `SpiralRedeem` contract, in addition to 900K USDC in the Curve pool and 800K USDC in the Balancer pool. Once all USDC is drained, remaining treasury funds would need to be distributed by the treasury multi-sig.
 
 Security Factors
 
