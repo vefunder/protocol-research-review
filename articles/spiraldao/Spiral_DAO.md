@@ -13,6 +13,7 @@
 - [Medium blog](https://medium.com/spiral-dao)
 - [Discord](https://discord.com/invite/spiraldao)
 - [Snapshot](https://snapshot.org/#/spiralgov.eth)
+- [Access Controls Google Sheet](https://docs.google.com/spreadsheets/d/1FWMGGJIasCCaoircLtsBKiG4xnhr4hlf-JHlRSZANaU/edit?usp=sharing)
 
 
 ## Relation to Curve
