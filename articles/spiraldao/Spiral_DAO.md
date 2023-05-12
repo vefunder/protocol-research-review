@@ -99,7 +99,7 @@ COIL can be staked to receive SPR, which grows periodically via a "share price" 
 
 SPR tokens are obtained by staking COIL. It is used for governance over the Spiral DAO system and treasury. The token is distributed as rewards to users that stake their LP tokens on Spiral DAO. SPR can be unwrapped to the native COIL asset via the `SpiralStaking` smart contract at an exchange rate (`index` [variable](https://etherscan.io/address/0x6701E792b7CD344BaE763F27099eEb314A4b4943#readContract#F5)). Spiral DAO plans on having the option to lock SPR in the future to allow boosted yields in the manner popularized by veTokens.
 
-Adjustments to staking APR are governable parameters via the `changeAPR()` and `changeLength()` functions in the `SpiralStaking` contract. However, it appears to currently be a decision managed by the 4-of-7 protocol multi-sig composed of core contributors. A [Twitter post](https://twitter.com/Spiral_DAO/status/1653803095439331328) on May 2nd promoted an update to the APR from [100% to 271.828%](https://etherscan.io/tx/0xfc6889a04586b83f1847e4b7346fb3eb1e388062e2f05ec0975830bbe509c1a1#statechange), and did not appear to be a decision that went through a governance process.
+Adjustments to staking APR are governable parameters via the `changeAPR()` and `changeLength()` functions in the `SpiralStaking` contract with execution done by the contract owner (currently the 4-of-7 protocol multi-sig composed of core contributors). A [Twitter post](https://twitter.com/Spiral_DAO/status/1653803095439331328) on May 2nd promoted an update to the APR from [100% to 271.828%](https://etherscan.io/tx/0xfc6889a04586b83f1847e4b7346fb3eb1e388062e2f05ec0975830bbe509c1a1#statechange), and was a decision that went through a [Snapshot](https://snapshot.org/#/spiralgov.eth/proposal/0xb54f1e41de10a13e36eaec662df5f0e84bf0e9c96abab2665cf67b935d971c5f) governance process.
 
 With time, treasury gains are intended to outpace the SPR emitted:
 
@@ -396,7 +396,11 @@ A core mechanic of Spiral DAO involves the use of bribes to expand the treasury.
 Users farming in the Yield Bonding pools should always be able to redeem their LP tokens, regardless of market conditions. On the other hand, COIL holders may no be able to redeem treasury assets. Only 312K USDC is in the `SpiralRedeem` contract, in addition to 900K USDC in the Curve pool and 800K USDC in the Balancer pool. Once all USDC is drained, remaining treasury funds would need to be distributed by the treasury multi-sig.
 
 Security Factors
+
 **1. Do audits reveal any concerning signs?**
+
+An [audit report](https://github.com/pessimistic-io/audits/blob/main/Spiral%20DAO%20Security%20Analysis%20by%20Pessimistic.pdf) from Pessimistic in January 2023 revealed severtal issues, including a critical issue. All issues found in the report were fixed or addressed. The project has a bug bounty program up to $250K for critical findings, and recently established a 30K SPR ($77K) bounty program with Hats.Finance. 
+
 
 ## Conclusion
 
