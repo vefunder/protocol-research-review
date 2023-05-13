@@ -227,9 +227,7 @@ The DAO plans to submit any significant changes to a snapshot vote, whether it i
 
 ### Contributors
 
-While most contributors are anonymous, the team behind the project possesses diverse backgrounds in the crypto industry, including market making on CEXs, quantitative analysis, angel investing, arbitrage, and yield farming. 
-
-Several contributors have been involved in the space since 2012-2013 and have previously built projects such as the [Dracula](https://defillama.com/protocol/dracula) yield farming aggregator (2020). The team also benefits from the advice and guidance of notable figures in the DeFi space, such as the founder of cp0x (validators in multiple DeFi applications) and Sami (Redacted Cartel founder). A core contributor was also involved in a white hat attack in 2021, where over $1m of assets were returned.
+While most contributors are anonymous, the team behind the project possesses diverse backgrounds in the crypto industry, including market making on CEXs, quantitative analysis, angel investing, arbitrage, and yield farming. Several contributors have been involved in the space since 2012-2013. The project also benefits from the advice and guidance of notable figures in the DeFi space, such as the founder of cp0x (validators in multiple DeFi applications) and Sami (Redacted Cartel founder). A core contributor was also involved in a white hat attack in 2021, where over $1m of assets were returned.
 
 We asked Spiral DAO for more information about contributors' roles. We were told that the DAO plans to make its structure more transparent at a later stage. Below is a partial list of contributors based on the latest information obtained:
 
@@ -405,13 +403,13 @@ Security Factors
 
 **1. Do audits reveal any concerning signs?**
 
-An [audit report](https://github.com/pessimistic-io/audits/blob/main/Spiral%20DAO%20Security%20Analysis%20by%20Pessimistic.pdf) from Pessimistic in January 2023 revealed severtal issues, including a critical issue. All issues found in the report were fixed or addressed. The project has a bug bounty program up to $250K for critical findings, and recently established a 30K SPR ($77K) bounty program with Hats.Finance. 
+An [audit report](https://github.com/pessimistic-io/audits/blob/main/Spiral%20DAO%20Security%20Analysis%20by%20Pessimistic.pdf) from Pessimistic in January 2023 revealed several issues, including a critical issue. All issues found in the report were fixed or addressed. The project has a bug bounty program up to $250K for critical findings, and recently established a 30K SPR ($77K) bounty program with Hats.Finance. 
 
 
 ## Conclusion
 
 Spiral DAO offers an innovative approach to yield farming, bribe markets, and veTokenomics in the DeFi ecosystem. With a robust treasury and attractive yields, it distinguishes itself from traditional yield aggregators by retaining third-party protocol rewards within the DAO treasury. Spiral DAO's unique treasury rebalancing mechanism and tokenomics allow it to capitalize on bribe market inefficiencies, improving bribe yields and liquidity depth.
 
-Although the protocol aims for quick treasury growth to offset emissions and maintain stability, users should consider the risks associated with underlying treasury assets, potential bank runs, and smart contract vulnerabilities. While Spiral DAO appears to be formed by DeFi natives with a community-driven ethos, users should be aware there are significant privileges granted to the 3-of-6 treasury multi-sig and the 4-of-7 protocol multi-sig that make them responsible for user and protocol funds. 
+Although the protocol aims for quick treasury growth to offset emissions and maintain stability, users should consider the risks associated with underlying treasury assets/management, potential bank runs, and smart contract vulnerabilities. While Spiral DAO appears to be formed by DeFi natives with a community-driven ethos, users should be aware there are significant privileges granted to the 3-of-6 treasury multi-sig and the 4-of-7 protocol multi-sig that give them responsibility over user and protocol funds. 
 
-The rebasing tokenomics (paying 1410% APY to SPR staker currently) disincentivize users from LP-ing in the Curve COIL/FraxBP pool, so practically the entire pool is POL. The pool has a Curve gauge that is paying up to 170% CRV APY currently to the Spiral DAO treasury. There have been debates in the past about approving gauges to protocols such as OHM and BTRFLY with similar mechanics. Notably, both of these protocols have Curve gauges and both have transitioned to a low APY rebasing model. Curve DAO voters should consider whether this strategy constitutes a legitimate use of the gauge. 
+The rebasing tokenomics (currently paying 1410% APY to SPR stakers) disincentivize users from LP-ing in the Curve COIL/FraxBP pool, so practically the entire pool is POL. The pool has a Curve gauge that is paying up to 170% CRV APY currently to the Spiral DAO treasury. There have been debates in the past about approving gauges to protocols such as OHM and BTRFLY with similar mechanics. Notably, both of these protocols have Curve gauges and both have transitioned to a low APY rebasing model. Curve DAO voters should consider whether this strategy constitutes a legitimate use of the gauge. 
