@@ -69,6 +69,8 @@ The OUSG token is notably permissioned due to regulatory requirements associated
 
 [Ondo Finance](https://ondo.finance/) is a blockchain services company that creates and manages institutional-grade financial products such as US Treasuries and money market funds, and builds DeFi protocols around those products. As for its constituent applications, Ondo seeks to develop decentralized, composable protocols and offer tailored services catering to organizations, DAOs, and high-net-worth individuals. The platform aims to bridge the gap between traditional finance (TradFi) and decentralized finance (DeFi) by onboarding real-world assets (RWAs) to DeFi.
 
+Ondo Finance was founded in 2021 by [Nathan Allman](https://www.linkedin.com/in/nathanlallman) and has so far raised $24 million from  investors that include Pantera Capital, Founders Fund, Coinbase Ventures, and Tiger Global. Team members have backgrounds in a variety of institutions and protocols like Goldman Sachs, Fortress, Bridgewater, and MakerDAO.
+
 
 ### Legal Structure
 
@@ -104,7 +106,20 @@ The following diagram shows shows the relationship between these entities with a
 The Fund has established access controls to ensure security, especially for third-party transfers. Accounts at Coinbase are only permitted to send US dollar wire transfers to the Fund's account at Clear Street. The Clear Street account wires are sent and received through its bank, BMO Harris, while Coinbase wires are sent and received through its bank, Silvergate Bank. To approve another account for wire transfers, the Fund must first receive a wire transfer from that bank account to the Fund's Coinbase account and then work with a Coinbase representative to configure the bank as a trusted withdrawal destination. Additionally, Ondo maintains criteria for approving new bank accounts as transfer destinations.
 
 
+### Ondo I LP: The OUSG Fund
+
+The Ondo I LP Fund was created in February 2023 with its initial product: the [Ondo Short-Term US Government Bond](https://ondo.finance/ousg) (OUSG). The single underlying asset that the Fund invests into is the [iShares Short Treasury Bond ETF](https://www.ishares.com/us/products/239466/ishares-short-treasury-bond-etf) (SHV), which is an index of U.S. Treasury bonds with a maturity of under a year. As of May 15, the ETF has $23.4 billion net assets and an average daily trade volume over $300 million. The Fund automatically reinvests dividends.
+
+NAV Consulting provides daily attestations of account balances and statements of assets and liabilities. Ondo updates the contract price of OUSG daily based on this calculation. OUSG investors additionally receive monthly update reports on the NAV from NAV Consulting, and the Fund undergoes an annual audit.
+
+Shares of OUSG are issued as tokens on the Ethereum blockchain and can be minted/redeemed on U.S. business days. These actions are processed by the Fund administrator (NAV Consulting) and calculated based on the next daily NAV. During times of heavy redemption demand, the Fund may not have sufficient liquidity on hand, and Ondo anticipates that it is possible redemption requests can take 2-3 days to process. 
+
+Fees for the fund include ETF management fees of the underlying assets (0.15%) and a management fee charged by Ondo (0.15%) with an overall fee capped at 0.3%
+
+
 ### Investment Workflow
+
+OUSG can be minted from USDC or DAI with a minimum investment of $100,000. It is available to both U.S. and non-U.S. persons, although access to mint and transfer OUSG is permissioned. Ondo uses smart contracts to enforce these transfer restrictions. Investors must undergo KYC/AML/CFT screening and be both “accredited investors” and “qualified purchasers”. Permissioned token holders may redeem their tokens daily and also may transfer their tokens on-chain to other permissioned investors. 
 
 The following workflows outline the subscription and redemption process for investors contributing stablecoins, although fiat is also supported. and outline the subscription and redemption process for Ondo I LP
 
