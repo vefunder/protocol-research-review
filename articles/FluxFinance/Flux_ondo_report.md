@@ -1,6 +1,6 @@
 # Asset Risk Assessment: Ondo and Flux Finance (OUSG)
 
-## A look into the utility and challenges of tokenizing U.S. Treasuries
+### A look into the utility and challenges of tokenizing U.S. Treasuries
 
 
 Resources (Useful links):
@@ -50,19 +50,19 @@ Flux Finance submitted a [proposal](https://gov.curve.fi/t/proposal-to-add-fusdc
 
 ## TLDR
 
-Flux Finance is a special-purpose lending protocol facilitating stablecoin loans against tokenized US Treasuries collateral. It was developed by Ondo Finance and now owned by Flux Finance. The protocol is governed by the Ondo DAO, with discussions taking place on the governance forum and votes held on Tally.
+[Ondo Finance](https://ondo.finance/) is a DeFi platform offering various financial services, including tokenized securities (OUSG). Its flagship product, [OUSG](https://ondo.finance/ousg), is a tokenized security backed by the [SHV ETF](https://www.ishares.com/us/products/239466/ishares-short-treasury-bond-etf), offering users exposure to short-duration US Treasuries. 
 
-[Ondo Finance](https://ondo.finance/) is a DeFi platform offering various financial services, including tokenized securities (OUSG). Its flagship product, [OUSG](https://ondo.finance/ousg), is a tokenized security backed by the [SHV ETF](https://www.ishares.com/us/products/239466/ishares-short-treasury-bond-etf), providing users exposure to short-duration US Treasury securities.[ Flux Finance](https://fluxfinance.com/), a lending protocol, is designed to complement Ondo's products by offering flexible lending services. LlamaRisk conducted an extensive risk analysis on Ondo Finance and Flux Finance, revealing several risk vectors:
+[Flux Finance](https://fluxfinance.com/) is a lending protocol designed to complement Ondo's products with additional utility. Flux Finance facilitates stablecoin loans against Ondo's tokenized US Treasuries collateral. It was developed by Ondo Finance and is now owned by Flux Finance. The protocol is governed by the Ondo DAO, with discussions taking place on the governance forum and votes held on Tally.
 
-
+LlamaRisk conducted an extensive risk analysis on Ondo Finance and Flux Finance, revealing several risk vectors:
 
 1. Smart Contract Risk: Ondo's smart contracts underwent an audit by C4A, identifying one high-severity vulnerability, five medium-severity vulnerabilities, and numerous low-severity and non-critical issues. The Ondo team worked with C4A to resolve these vulnerabilities, particularly the high-risk related to "Loss of user funds when completing CASH redemptions".
 2. Governance Risk: Ondo employs a two-stage governance process to ensure community involvement and reduce potential risks. Despite this, voting power distribution appears highly centralized, with two governors, "Glass markets" and "vexmachina.eth," holding a significant share of voting power. A treasury multi-sig arrangement controls 88% of the ONDO token total supply, raising concerns about centralized decision-making.
 3. Centralization Risk: Ondo Finance relies on centralized exchanges like Coinbase and third-party service providers like NAV Consulting. Many of its products are held in third-party ETFs such as the Blackrock's iShares Short Treasury Bond ETF. This reliance could expose the platform to additional risks associated with centralized institutions.
-4. Collateral/Solvency Risk: Flux Finance faces potential risks during extreme market volatility, even though it primarily supports stablecoins. The liquidation process ensures compliance with underlying asset permissions but may be slowed down, increasing the risk of bad debt accrual. Additionally, relying on third-party liquidators might not guarantee timely liquidations.
+4. Collateral/Solvency Risk: Flux Finance faces potential risks during extreme market volatility, even though it primarily supports stablecoins. The liquidation process ensures compliance with underlying asset permissions but may have slow response times, increasing the risk of bad debt accrual. Additionally, relying on third-party liquidators may not ensure timely liquidations.
 5. Oracle Risk: Ondo Finance uses NAV Consulting for daily price feeds and its custom price oracle, OndoPriceOraclev2, for managing markets. However, third-party oracle providers introduce potential risks to the protocol as there is no on-chain feed for the price of its assets.
 
-LlamaRisk Gauge Criteria assessed the centralization, economic, and security factors of Ondo Finance, highlighting possible exploitation risks by single entities and the project's dependence on the current team. The OUSG token's backing by the SHV ETF ensures redemptions even during sudden surges, and proactive measures taken by the Ondo team make it a suitable addition to the curve gauge.
+The OUSG token is notably permissioned due to regulatory requirements associated with its underlying positions. However, Flux's fTokens, representing a variety of stablecoin lending deposits (like Compound cTokens), are permissionless.  This creates an opportunity for the Curve DAO to consider if and when permissioned/semi-permissioned protocols should be incentivized by the Curve gauge.
 
 
 ## Introduction to Ondo Finance
