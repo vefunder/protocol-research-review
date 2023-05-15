@@ -67,7 +67,7 @@ The OUSG token is notably permissioned due to regulatory requirements associated
 
 ## Introduction to Ondo Finance
 
-Ondo Finance is a decentralized platform that provides various DeFi services, such as designing, creating, and managing investment fund products. The platform aims to bridge the gap between traditional finance (TradFi) and decentralized finance (DeFi) by onboarding real-world assets (RWAs) in the form of tokenized securities.
+[Ondo Finance](https://ondo.finance/) is a platform that provides institutional-grade financial products such as US Treasuries and money market funds, and builds DeFi protocols around those products. The platform aims to bridge the gap between traditional finance (TradFi) and decentralized finance (DeFi) by onboarding real-world assets (RWAs) in the form of tokenized securities.
 
 Additionally, Ondo Finance seeks to develop decentralized, composable protocols and offer tailored services catering to organizations, DAOs, and high-net-worth individuals. A comprehensive understanding of the platform's approach, its ability to serve a diverse range of stakeholders, and the challenges that may arise is essential when evaluating its overall impact on the DeFi ecosystem.
 
