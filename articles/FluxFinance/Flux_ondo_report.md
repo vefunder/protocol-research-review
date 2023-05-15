@@ -44,9 +44,13 @@ Adresses
 * [KYC Registry](https://etherscan.io/address/0x7cE91291846502D50D635163135B2d40a602dc70#code)
 
 
+## Relation to Curve
+
+Flux Finance submitted a [proposal](https://gov.curve.fi/t/proposal-to-add-fusdc-fdai-to-the-curve-gauge-controller/9098) to add the [fUSDC-fDAI pool](https://curve.fi/#/ethereum/pools/factory-crypto-237/deposit) to the Curve Gauge Controller, allowing users to assign gauge weight and mint CRV. This proposal aims to enhance liquidity and usage of the pool, which provides additional utility to Flux Finance users (fDAI or fUSDC holders). The proposal successfully passed an [on-chain vote](https://dao.curve.fi/vote/ownership/313) on April 22nd, 2023.
+
 ## TLDR
 
-Flux Finance has [proposed adding the fUSDC-fDAI pool](https://gov.curve.fi/t/proposal-to-add-fusdc-fdai-to-the-curve-gauge-controller/9098) to the Curve Gauge Controller, allowing users to assign gauge weight and mint CRV. This proposal aims to enhance liquidity and scale usage of the pool, which enables fDAI or fUSDC holders to benefit from additional instant liquidity through swapping and is currently in the discussion phase in [Curve forum](https://gov.curve.fi/t/proposal-to-add-fusdc-fdai-to-the-curve-gauge-controller/9098). Flux Finance currently does not have any active pools within Curve. Flux Finance will incentivize the pool to attract liquidity providers. Flux is a special-purpose lending protocol facilitating stablecoin loans against tokenized US Treasuries collateral, developed by Ondo and now owned by Flux Finance. The protocol is governed by the Ondo DAO, with discussions taking place on the governance forum and votes held on Tally.
+Flux Finance is a special-purpose lending protocol facilitating stablecoin loans against tokenized US Treasuries collateral. It was developed by Ondo Finance and now owned by Flux Finance. The protocol is governed by the Ondo DAO, with discussions taking place on the governance forum and votes held on Tally.
 
 [Ondo Finance](https://ondo.finance/) is a DeFi platform offering various financial services, including tokenized securities (OUSG). Its flagship product, [OUSG](https://ondo.finance/ousg), is a tokenized security backed by the [SHV ETF](https://www.ishares.com/us/products/239466/ishares-short-treasury-bond-etf), providing users exposure to short-duration US Treasury securities.[ Flux Finance](https://fluxfinance.com/), a lending protocol, is designed to complement Ondo's products by offering flexible lending services. LlamaRisk conducted an extensive risk analysis on Ondo Finance and Flux Finance, revealing several risk vectors:
 
