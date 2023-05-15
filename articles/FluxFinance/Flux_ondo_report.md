@@ -50,9 +50,9 @@ Flux Finance submitted a [proposal](https://gov.curve.fi/t/proposal-to-add-fusdc
 
 ## TLDR
 
-[Ondo Finance](https://ondo.finance/) is a DeFi platform offering various financial services, including tokenized securities (OUSG). Its flagship product, [OUSG](https://ondo.finance/ousg), is a tokenized security backed by the [SHV ETF](https://www.ishares.com/us/products/239466/ishares-short-treasury-bond-etf), offering users exposure to short-duration US Treasuries. 
+[Ondo Finance](https://ondo.finance/) is a blockchain company that tokenizes various financial products, including tokenized securities (OUSG). Its flagship product, [OUSG](https://ondo.finance/ousg), is a tokenized security backed by the [SHV ETF](https://www.ishares.com/us/products/239466/ishares-short-treasury-bond-etf), offering users exposure to short-duration US Treasuries. 
 
-[Flux Finance](https://fluxfinance.com/) is a lending protocol designed to complement Ondo's products with additional utility. Flux Finance facilitates stablecoin loans against Ondo's tokenized US Treasuries collateral. It was developed by Ondo Finance and is now owned by Flux Finance. The protocol is governed by the Ondo DAO, with discussions taking place on the governance forum and votes held on Tally.
+[Flux Finance](https://fluxfinance.com/) is a lending protocol developed by the technology arm of Ondo. It is designed to complement Ondo's products with additional utility. Flux Finance facilitates stablecoin loans against Ondo's tokenized US Treasuries collateral. The protocol is governed by the Ondo DAO, with discussions taking place on the governance forum and votes held on Tally.
 
 LlamaRisk conducted an extensive risk analysis on Ondo Finance and Flux Finance, revealing several risk vectors:
 
@@ -67,19 +67,46 @@ The OUSG token is notably permissioned due to regulatory requirements associated
 
 ## Introduction to Ondo Finance
 
-[Ondo Finance](https://ondo.finance/) is a platform that provides institutional-grade financial products such as US Treasuries and money market funds, and builds DeFi protocols around those products. The platform aims to bridge the gap between traditional finance (TradFi) and decentralized finance (DeFi) by onboarding real-world assets (RWAs) in the form of tokenized securities.
+[Ondo Finance](https://ondo.finance/) is a blockchain services company that creates and manages institutional-grade financial products such as US Treasuries and money market funds, and builds DeFi protocols around those products. As for its constituent applications, Ondo seeks to develop decentralized, composable protocols and offer tailored services catering to organizations, DAOs, and high-net-worth individuals. The platform aims to bridge the gap between traditional finance (TradFi) and decentralized finance (DeFi) by onboarding real-world assets (RWAs) to DeFi.
 
-Additionally, Ondo Finance seeks to develop decentralized, composable protocols and offer tailored services catering to organizations, DAOs, and high-net-worth individuals. A comprehensive understanding of the platform's approach, its ability to serve a diverse range of stakeholders, and the challenges that may arise is essential when evaluating its overall impact on the DeFi ecosystem.
 
-The OUSG token, a tokenized fund that invests in short-term US Treasuries, is one of Ondo Finance's key offerings. A careful examination of this innovative approach to incorporating real-world assets into DeFi is crucial for understanding the associated challenges and potential implications for the broader decentralized finance ecosystem.
+### Legal Structure
 
-Ondo Finance operates with a standard fund structure that includes a limited and general partner, as well as third-party service providers such as qualified custodians, a fund administrator, and a financial auditor. In this section, we provide an overview of the main parties involved and outline the subscription and redemption process for Ondo I LP.
+Ondo Finance operates with a standard fund structure that includes a limited and general partner, as well as third-party service providers such as qualified custodians, a fund administrator, and a financial auditor. 
 
-In terms of off-chain protection, OUSG holders have [SIPC coverage](https://www.sipc.org/for-investors/what-sipc-protects) that is capped at $500k, as Ondo Finance has an account with Clear Street, a brokerage firm that is a [member of SIPC](https://clearstreet.io/regulatory). However, the amount covered by SIPC is irrelevant if we compare it with the value of the Ondo I LP fund assets. Worth mentioning that account on the “Ondo I LP” name is a “cash account” (not a “margin account”), so Clear Street can't use account securities for rehypothecation.
+Below is an overview of Ondo's own legal structure:
 
-Investment Workflow:
+* Ondo Finance Inc.: The parent company
+* Ondo I GP: The General Partner (GP) who manages the fund and instructs service providers.
+* Ondo Capital Management LLC: The Investment Manager (Ondo IM) who collaborates with the GP to manage the fund.
+* Ondo I LP: The Delaware limited partnership receiving investor capital contributions and holding assets with a third party service provider. It is the issuer of OUSG.
 
-The following workflows outline the subscription and redemption process for investors contributing stablecoins, although fiat is also supported.
+Ondo Finance implements extensive security measures to ensure the safe and efficient management of funds, collaborating with reputable service providers like Coinbase and Clear Street. Qualified Custodians are Regulator-approved institutions holding client assets in separate accounts under the client's name. Ondo makes use of the following third-party fund service providers:
+
+* [Clear Street](https://clearstreet.io/): The securities brokerage and qualified custodian managing off-chain assets and trade orders for the fund.
+* [NAV Consulting Inc.](https://www.navconsulting.net/): Performs third-party administration services including a daily calculation of the Fund’s net asset value
+* [Coinbase Prime](https://prime.coinbase.com/): Holds stablecoins, convert stablecoins to USD, and wire funds to Clear Street, as directed by the Investment Manager  
+
+The following diagram shows shows the relationship between these entities with an explanation from the MakerDAO [forum proposal](https://forum.makerdao.com/t/mip119-onboard-dai-funds-to-the-flux-finance-dai-lending-pool/19885/9):
+
+![image](https://github.com/vefunder/protocol-research-review/assets/51072084/20bb04e4-58c7-40f6-bf98-caec2051f2b8)
+
+(source: [MakerDAO Governance Forum](https://forum.makerdao.com/t/mip119-onboard-dai-funds-to-the-flux-finance-dai-lending-pool/19885/9))
+
+> 1) Ondo Finance wholly owns the Investment Manager and GP
+> 2) The Investment Manager is responsible for the purchase and sale of ETFs
+> 3) The GP acts as the General Partner of the Fund
+> 4) OUSG Investors send stablecoins to the Fund’s Coinbase account, purchasing OUSG tokens, which the Fund sends to the OUSG Investors
+> 5) The Fund has engaged Coinbase to hold stablecoins, convert stablecoins to USD, and wire funds to Clear Street, as directed by the Investment Manager
+> 6) The Fund has engaged Clear Street for prime brokerage services and utilizes Clear Street to hold and trade assets
+> 7) The Investment Manager instructs Clear Street (CS), which executes trades, clears, and custodies the Fund’s assets in the Fund’s CS Account 
+
+The Fund has established access controls to ensure security, especially for third-party transfers. Accounts at Coinbase are only permitted to send US dollar wire transfers to the Fund's account at Clear Street. The Clear Street account wires are sent and received through its bank, BMO Harris, while Coinbase wires are sent and received through its bank, Silvergate Bank. To approve another account for wire transfers, the Fund must first receive a wire transfer from that bank account to the Fund's Coinbase account and then work with a Coinbase representative to configure the bank as a trusted withdrawal destination. Additionally, Ondo maintains criteria for approving new bank accounts as transfer destinations.
+
+
+### Investment Workflow
+
+The following workflows outline the subscription and redemption process for investors contributing stablecoins, although fiat is also supported. and outline the subscription and redemption process for Ondo I LP
 
 Subscription (issuance) Process:
 
@@ -108,21 +135,13 @@ Redemption Process:
 
 (Redemption process)
 
-Key Parties Involved:
+The Llama risk team has examined Ondo Finance's documentation, including the trial balance, account statement, and balance sheet, comparing them to the on-chain data. It was noted that there are no material differences between NAV Consulting reporting and on-chain data.
 
-* Ondo I GP: The General Partner (GP) who manages the fund and instructs service providers.
-* Ondo Capital Management: The Investment Manager (Ondo IM) who collaborates with the GP to manage the fund.
-* Ondo Finance Inc.: The technology services company assisting with fund tokenization.
-* Ondo I LP: The Delaware limited partnership holding the fund assets and receiving investor capital contributions.
-* OUSG, OSTB, OHYG: Tokens representing various share classes ownership in the fund, each with a separate strategy and assets in distinct sub-accounts at the custodians.
-* Qualified Custodians: Regulator-approved institutions holding client assets in separate accounts under the client's name.
-* Clear Street: The securities brokerage and qualified custodian managing off-chain assets and trade orders for the fund.
+### OUSG
 
-![image](https://github.com/vefunder/protocol-research-review/assets/51072084/20bb04e4-58c7-40f6-bf98-caec2051f2b8)
+The OUSG token, a tokenized fund that invests in short-term US Treasuries, is one of Ondo Finance's key offerings. A careful examination of this innovative approach to incorporating real-world assets into DeFi is crucial for understanding the associated challenges and potential implications for the broader decentralized finance ecosystem.
 
-(source: [MakerDAO Governance Forum](https://forum.makerdao.com/t/mip119-onboard-dai-funds-to-the-flux-finance-dai-lending-pool/19885/9))
-
-Ondo Finance implements extensive security measures to ensure the safe and efficient management of funds, collaborating with reputable service providers like Coinbase and Clear Street. The Fund has established access controls to ensure security, especially for third-party transfers. Accounts at Coinbase are only permitted to send US dollar wire transfers to the Fund's account at Clear Street. The Clear Street account wires are sent and received through its bank, BMO Harris, while Coinbase wires are sent and received through its bank, Silvergate Bank. To approve another account for wire transfers, the Fund must first receive a wire transfer from that bank account to the Fund's Coinbase account and then work with a Coinbase representative to configure the bank as a trusted withdrawal destination. Additionally, Ondo maintains criteria for approving new bank accounts as transfer destinations.
+In terms of off-chain protection, OUSG holders have [SIPC coverage](https://www.sipc.org/for-investors/what-sipc-protects) that is capped at $500k, as Ondo Finance has an account with Clear Street, a brokerage firm that is a [member of SIPC](https://clearstreet.io/regulatory). However, the amount covered by SIPC is irrelevant if we compare it with the value of the Ondo I LP fund assets. Worth mentioning that account on the “Ondo I LP” name is a “cash account” (not a “margin account”), so Clear Street can't use account securities for rehypothecation.
 
 ![image](https://github.com/vefunder/protocol-research-review/assets/51072084/0fbb9b64-ba56-4d31-b772-5c4a4e49508a)
 
@@ -135,9 +154,6 @@ Ondo Finance implements extensive security measures to ensure the safe and effic
 ![image](https://github.com/vefunder/protocol-research-review/assets/51072084/84760d55-5c04-4702-b4b6-acd50c50f804)
 
 (source:[NAV Consulting](https://www.dropbox.com/sh/m6s7l9tiex7hex1/AACiqtviGv274DiEHiJGMO8va?dl=0))
-
-The Llama risk team has examined Ondo Finance's documentation, including the trial balance, account statement, and balance sheet, comparing them to the on-chain data. It was noted that there are no material differences between NAV Consulting reporting and on-chain data.
-
 
 ## Introduction to Flux Finance
 
