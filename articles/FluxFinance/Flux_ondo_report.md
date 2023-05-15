@@ -124,6 +124,8 @@ The following images shows a recent attestation by the Fund Administrator, which
 
 In terms of off-chain protection, OUSG holders have [SIPC coverage](https://www.sipc.org/for-investors/what-sipc-protects) that is capped at $500k, as Ondo Finance has an account with Clear Street, a brokerage firm that is a [member of SIPC](https://clearstreet.io/regulatory). However, the amount covered by SIPC is irrelevant if we compare it with the value of the Ondo I LP fund assets. Also worth mentioning is that the “Ondo I LP” account is a “cash account” (not a “margin account”), so Clear Street can't use account securities for rehypothecation.
 
+Legal documentation involving the fund are made available at this [Dropbox](https://www.dropbox.com/scl/fo/g6yw3y1wu1e0p4kx05u32/h?dl=0&rlkey=u3b64grnv253u8km27bs1hck3), including a detailed disclosure of risk factors pertaining to the Fund in the Private Placement Memorandum (PPM). 
+
 
 ### Investment Workflow
 
@@ -159,6 +161,29 @@ The following workflows outline the subscription and redemption process for inve
 ![image](https://github.com/vefunder/protocol-research-review/assets/51072084/f5e56545-8d54-43d4-a323-6a4c51bce448)
 
 (Redemption process)
+
+
+### OUSG Access Control
+
+Ondo authorizes the flow of funds between the blockchain and its Fund account service providers (Coinbase Prime for stablecoin <> USD conversion, and Clear Street brokerage account for custody and trading of ETFs). Custody agreements have been made between Ondo, Coinbase, and Clear Street on permissions and approvals for money transfers. Measures have been taken to structure access securely between brokerage and bank accounts to minimize employee access to Fund accounts.
+
+There are two multi-sigs Ondo uses to manage the on-chain portion of their system. The team say that each member is an employee of Ondo and required to use a hardware wallet for signing. 
+
+[Ondo 3-of-6 Cash Management Multi-sig](https://etherscan.io/address/0xAEd4caF2E535D964165B4392342F71bac77e8367)
+
+* Configure minimum redemption and subscription amounts on the CashManager contract.
+* Configure rate limiter parameters on the CashManager contract. (i.e. what quantity of subscriptions and redemptions can be serviced in a single day)
+* Configure fee recipients on the CashManager contract (fees are currently turned off).
+* Set exchange rates for the minting of OUSG.
+* Mint OUSG to service subscriptions.
+* Pause functionality on the CashManager contract in the event of an emergency
+* Burn OUSG in the event of an emergency.
+* Upgrade the OUSG implementation contract in the event of an emergency.
+* Execute a multicall function in the CashManager contract for the scenario in which a user accidentally transfers tokens to the CashManager contract.
+
+[Ondo 3-of-7 Redemption Multi-sig](https://etherscan.io/address/0x72Be8C14B7564f7a61ba2f6B7E50D18DC1D4B63D)
+
+* Can send stablecoins it has possession of through the CashManager contract to service redemptions.
 
 
 ## Introduction to Flux Finance
