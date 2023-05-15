@@ -108,22 +108,32 @@ The Fund has established access controls to ensure security, especially for thir
 
 ### Ondo I LP: The OUSG Fund
 
-The Ondo I LP Fund was created in February 2023 with its initial product: the [Ondo Short-Term US Government Bond](https://ondo.finance/ousg) (OUSG). The single underlying asset that the Fund invests into is the [iShares Short Treasury Bond ETF](https://www.ishares.com/us/products/239466/ishares-short-treasury-bond-etf) (SHV), which is an index of U.S. Treasury bonds with a maturity of under a year. As of May 15, the ETF has $23.4 billion net assets and an average daily trade volume over $300 million. The Fund automatically reinvests dividends.
+The Ondo I LP Fund was created in February 2023 with its initial product: the [Ondo Short-Term US Government Bond](https://ondo.finance/ousg) (OUSG). The single underlying asset that the Fund invests into is the [iShares Short Treasury Bond ETF](https://www.ishares.com/us/products/239466/ishares-short-treasury-bond-etf) (SHV), which is an index of U.S. Treasury bonds with a maturity of under a year. As of May 15, the ETF has $23.4 billion net assets and an average daily trade volume over $300 million. 
 
-NAV Consulting provides daily attestations of account balances and statements of assets and liabilities. Ondo updates the contract price of OUSG daily based on this calculation. OUSG investors additionally receive monthly update reports on the NAV from NAV Consulting, and the Fund undergoes an annual audit.
+The Fund automatically reinvests dividends earned by the underlying position. Fees for the fund include ETF management fees of the underlying assets (0.15%) and a management fee charged by Ondo (0.15%) with an overall fee capped at 0.3%
 
-Shares of OUSG are issued as tokens on the Ethereum blockchain and can be minted/redeemed on U.S. business days. These actions are processed by the Fund administrator (NAV Consulting) and calculated based on the next daily NAV. During times of heavy redemption demand, the Fund may not have sufficient liquidity on hand, and Ondo anticipates that it is possible redemption requests can take 2-3 days to process. 
+NAV Consulting provides [daily attestations](https://www.dropbox.com/sh/m6s7l9tiex7hex1/AACiqtviGv274DiEHiJGMO8va?dl=0) of account balances and statements of assets and liabilities. Ondo updates the contract price of OUSG daily based on this calculation. OUSG investors additionally receive monthly update reports on the NAV from NAV Consulting, and the Fund undergoes an annual audit.
 
-Fees for the fund include ETF management fees of the underlying assets (0.15%) and a management fee charged by Ondo (0.15%) with an overall fee capped at 0.3%
+The Llama Risk team has examined Ondo Finance's documentation, including the trial balance, account statement, and balance sheet, comparing them to the on-chain data. It was noted that there are no material differences between NAV Consulting reporting and on-chain data.)
+
+The following images shows a recent attestation by the Fund Administrator, which shows the portfolio assets account ("Long Portfolio Value") and various cash accounts against the Fund liabilities. The attestation can be compared against the OUSG [outstanding supply](https://etherscan.io/token/0x1b19c19393e2d034d8ff31ff34c81252fcbbee92) and the most recent update to the on-chain share price ([lastSetMintExchangeRate()](https://etherscan.io/address/0x3501883a646f1F8417BcB62162372550954D618f#readContract#F32) in the CashManager contract). The current value on-chain value is $118.4M, which corroborates the attestation of the NAV shown in the image below.
+
+<img width="1142" alt="Screen Shot 2023-05-15 at 3 13 09 PM" src="https://github.com/vefunder/protocol-research-review/assets/51072084/9afb8c26-ee20-482a-8cdf-352898031d25">
+
+(source:[NAV Consulting](https://www.dropbox.com/sh/81aevv8ufzghd9p/AAApEqp7gwNUm7pFQUHJsdAta/2023-05-11?dl=0&preview=BalanceSheet_Ondo+I_20230511.PDF&subfolder_nav_tracking=1))
+
+In terms of off-chain protection, OUSG holders have [SIPC coverage](https://www.sipc.org/for-investors/what-sipc-protects) that is capped at $500k, as Ondo Finance has an account with Clear Street, a brokerage firm that is a [member of SIPC](https://clearstreet.io/regulatory). However, the amount covered by SIPC is irrelevant if we compare it with the value of the Ondo I LP fund assets. Also worth mentioning is that the “Ondo I LP” account is a “cash account” (not a “margin account”), so Clear Street can't use account securities for rehypothecation.
 
 
 ### Investment Workflow
 
+Shares of OUSG are issued as tokens on the Ethereum blockchain and can be minted/redeemed on U.S. business days. These actions are processed by the Fund administrator (NAV Consulting) and calculated based on the next daily NAV. During times of heavy redemption demand, the Fund may not have sufficient liquidity on hand, and Ondo anticipates that it is possible redemption requests can take 2-3 days to process. 
+
 OUSG can be minted from USDC or DAI with a minimum investment of $100,000. It is available to both U.S. and non-U.S. persons, although access to mint and transfer OUSG is permissioned. Ondo uses smart contracts to enforce these transfer restrictions. Investors must undergo KYC/AML/CFT screening and be both “accredited investors” and “qualified purchasers”. Permissioned token holders may redeem their tokens daily and also may transfer their tokens on-chain to other permissioned investors. 
 
-The following workflows outline the subscription and redemption process for investors contributing stablecoins, although fiat is also supported. and outline the subscription and redemption process for Ondo I LP
+The following workflows outline the subscription and redemption process for investors contributing stablecoins:
 
-Subscription (issuance) Process:
+**Subscription (issuance) Process:**
 
 1. Complete KYC/AML process with Ondo by providing the required documents and passing automated screenings.
 2. Review and sign fund documents.
@@ -138,7 +148,7 @@ Subscription (issuance) Process:
 
 (Subscription Process)
 
-Redemption Process:
+**Redemption Process:**
 
 1. Submit a redemption request by sending OUSG tokens to the Cash Manager’s smart contract.
 2. The smart contract logs your redemption request.
@@ -150,25 +160,6 @@ Redemption Process:
 
 (Redemption process)
 
-The Llama risk team has examined Ondo Finance's documentation, including the trial balance, account statement, and balance sheet, comparing them to the on-chain data. It was noted that there are no material differences between NAV Consulting reporting and on-chain data.
-
-### OUSG
-
-The OUSG token, a tokenized fund that invests in short-term US Treasuries, is one of Ondo Finance's key offerings. A careful examination of this innovative approach to incorporating real-world assets into DeFi is crucial for understanding the associated challenges and potential implications for the broader decentralized finance ecosystem.
-
-In terms of off-chain protection, OUSG holders have [SIPC coverage](https://www.sipc.org/for-investors/what-sipc-protects) that is capped at $500k, as Ondo Finance has an account with Clear Street, a brokerage firm that is a [member of SIPC](https://clearstreet.io/regulatory). However, the amount covered by SIPC is irrelevant if we compare it with the value of the Ondo I LP fund assets. Worth mentioning that account on the “Ondo I LP” name is a “cash account” (not a “margin account”), so Clear Street can't use account securities for rehypothecation.
-
-![image](https://github.com/vefunder/protocol-research-review/assets/51072084/0fbb9b64-ba56-4d31-b772-5c4a4e49508a)
-
-(source:[NAV Consulting](https://www.dropbox.com/sh/m6s7l9tiex7hex1/AACiqtviGv274DiEHiJGMO8va?dl=0))
-
-![image](https://github.com/vefunder/protocol-research-review/assets/51072084/b5fb0e31-f05b-43e0-9f45-1f4134b0f5bc)
-
-(source:[NAV Consulting](https://www.dropbox.com/sh/m6s7l9tiex7hex1/AACiqtviGv274DiEHiJGMO8va?dl=0))
-
-![image](https://github.com/vefunder/protocol-research-review/assets/51072084/84760d55-5c04-4702-b4b6-acd50c50f804)
-
-(source:[NAV Consulting](https://www.dropbox.com/sh/m6s7l9tiex7hex1/AACiqtviGv274DiEHiJGMO8va?dl=0))
 
 ## Introduction to Flux Finance
 
