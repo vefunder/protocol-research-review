@@ -137,6 +137,8 @@ The following workflows outline the subscription and redemption process for inve
 
 **Subscription (issuance) Process:**
 
+![image](https://github.com/vefunder/protocol-research-review/assets/51072084/57aa676f-5bd9-4d28-8031-0173fc66c32a)
+
 1. Complete KYC/AML process with Ondo by providing the required documents and passing automated screenings.
 2. Review and sign fund documents.
 3. Provide an Ethereum wallet address for whitelisting to make subscriptions, receive fund tokens, and perform redemptions.
@@ -146,21 +148,15 @@ The following workflows outline the subscription and redemption process for inve
 7. Ondo IM uses the USD at Clear Street to purchase the ETF.
 8. ETF dividends are reinvested by purchasing more ETF shares, increasing the fund's value.
 
-![image](https://github.com/vefunder/protocol-research-review/assets/51072084/57aa676f-5bd9-4d28-8031-0173fc66c32a)
-
-(Subscription Process)
-
 **Redemption Process:**
+
+![image](https://github.com/vefunder/protocol-research-review/assets/51072084/f5e56545-8d54-43d4-a323-6a4c51bce448)
 
 1. Submit a redemption request by sending OUSG tokens to the Cash Manager’s smart contract.
 2. The smart contract logs your redemption request.
 3. Once the next daily NAV is computed and your redemption request is accepted, Ondo IM sells sufficient ETF shares to cover your redemption.
 4. Clear Street will wire the resulting USD to Coinbase, who will convert it to USDC.
 5. Ondo IM will complete the redemption request and distribute the USDC to the user's wallet.
-
-![image](https://github.com/vefunder/protocol-research-review/assets/51072084/f5e56545-8d54-43d4-a323-6a4c51bce448)
-
-(Redemption process)
 
 
 ### OUSG Access Control
