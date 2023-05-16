@@ -323,7 +323,7 @@ In addition to the two multi-sigs employed by Ondo for management of the OUSG as
 
 ### Smart Contract Risk
 
-Ondo Finance's smart contracts have undergone an audit performed by C4A, which assessed the security and potential vulnerabilities of the code. The audit evaluated 19 smart contracts, five abstracts, and six interfaces, totaling 4,365 lines of Solidity code.
+Ondo Finance's smart contracts have undergone an [audit](https://code4rena.com/reports/2023-01-ondo/) performed by code4rena, which assessed the security and potential vulnerabilities of the code. The audit evaluated 19 smart contracts, five abstracts, and six interfaces, totaling 4,365 lines of Solidity code.
 
 The Ondo team has worked alongside C4A to resolve any critical vulnerabilities in the smart contracts. The C4A auditors identified six unique vulnerabilities, with one classified as high severity and five as medium severity. Additionally, the audit included 54 reports detailing low-severity or non-critical issues and 24 reports recommending gas optimizations.
 
@@ -339,7 +339,7 @@ Flux Finance maintains an active [bug bounty program](https://immunefi.com/bount
 
 Source: [ImmuneFi](https://immunefi.com/bounty/fluxfinance/)
 
-Ondo Finance already paid one bug bounty reward of $25,000 for identifying a [high-risk vulnerability](https://iosiro.com/blog/high-risk-vulnerability-disclosed-to-ondo-finance) to security researcher [Ashiq Amien](https://ashiq.co.za/) on 26 January 2022. That issue was related to the [TrancheToken smart contract](https://etherscan.io/address/0xb279d1ed3848cee8ba6dba426be620a289ccef10#readContract), part of the first Ondo Finance product - [Ondo Vaults](https://v1.ondo.finance/). It was structured finance protocol on Ethereum, built on top of Uniswap.
+Ondo Finance already paid one bug bounty reward of $25,000 for identifying a [high-risk vulnerability](https://iosiro.com/blog/high-risk-vulnerability-disclosed-to-ondo-finance) to security researcher [Ashiq Amien](https://ashiq.co.za/) on 26 January 2022. That issue was related to the [TrancheToken smart contract](https://etherscan.io/address/0xb279d1ed3848cee8ba6dba426be620a289ccef10#readContract), part of the first Ondo Finance product - [Ondo Vaults](https://v1.ondo.finance/). It was a finance protocol on Ethereum, built on top of Uniswap.
 
 
 ### Governance Risk
@@ -354,7 +354,8 @@ Key DAO parameters include:
 * Voting Period: A 3-day window during which community members can cast their votes.
 * Quorum: Proposals require at least 1,000,000 ONDO in voting power to pass.
 * Timelock: A 1-day delay period between the end of the voting period and the execution of successful proposals.
-* This governance structure ensures community engagement, minimizes risks, and promotes transparency in Flux Finance's decision-making process.
+
+This governance structure ensures community engagement, minimizes risks, and promotes transparency in Flux Finance's decision-making process.
 
 Upon examining Ondo DAO's voting power distribution on Tally, we observe that the governance appears to be highly centralized. The two governors, "[glassmarkets.eth](https://etherscan.io/address/0x78A8AE116443B61Dadb88D186A0d9d6630F61259)" and "[vexmachina.eth](https://etherscan.io/name-lookup-search?id=vexmachina.eth)," collectively hold approximately 34.91 million ONDO tokens (including delegated tokens). In comparison to the [proposal with the highest participation rate](https://www.tally.xyz/gov/ondo-dao/proposal/3), these two accounts collectively hold a substantial share of voting power, amounting to approximately 73.57%.
 
@@ -367,11 +368,11 @@ This centralization of voting power raises concerns about these entities' influe
 Source: [Tally - Ondo DAO profile](https://www.tally.xyz/gov/ondo-dao/proposals)
 
 
-### Centralization Risk
+### Custody Risk
 
-When assessing centralization risks, it's crucial to consider the underlying assets and infrastructure supporting the Ondo Finance ecosystem. OUSG is not directly backed by US Treasuries but by the SHV ETF, which tracks the ICE Short US Treasury Security Index. SHV is the[ iShares Short Treasury Bond ETF](https://www.ishares.com/us/products/239466/ishares-short-treasury-bond-etf) managed by Blackrock, with approximately $23 billion in assets and a 30-day average trading volume of $2,817,732.
+When assessing centralization risks, it's crucial to consider the underlying assets and infrastructure supporting the Ondo Finance ecosystem. OUSG is not directly backed by US Treasuries but by the SHV ETF, which tracks the ICE Short US Treasury Security Index. SHV is the [iShares Short Treasury Bond ETF](https://www.ishares.com/us/products/239466/ishares-short-treasury-bond-etf) managed by Blackrock, with approximately $23 billion in assets.
 
-Another aspect of centralization risk within the Ondo Finance platform is its reliance on centralized exchanges like Coinbase and Clear Street brokerage platform. This dependency on centralized service providers could expose the platform to additional risks from these institutions.
+Another aspect of centralization risk within the Ondo Finance platform is its reliance on centralized exchanges like Coinbase and the Clear Street brokerage platform. This dependency on centralized service providers could expose the platform to additional counterparty risks from these institutions and exposure to regulatory uncertainty.
 
 To address concerns about token backing and transparency, Ondo Finance leverages third-party service providers like NAV Consulting, a fund administration firm responsible for validating the fund's assets directly from its bank and custody accounts. Additionally, the fund undergoes an independent year-end audit by Richey May. While Ondo Finance manages the tokenization through its smart contracts, the fund administrator is responsible for maintaining off-chain records and providing monthly reports to investors. This process ensures that the token records and off-chain records are reconciled daily.
 
@@ -384,9 +385,15 @@ Flux Finance primarily supports stablecoins, which are less volatile by nature, 
 
 In Flux Finance, liquidations are designed to be rare, since currently it only supports stablecoin markets, which are typically not very volatile. Nevertheless, in extreme scenarios where a borrower's equity becomes too low, some of its collateral may be sold off to pay back the debt. Third-party liquidators, are incentivized to assume this role by purchasing the collateral at a small discount compared to the oracle price.
 
-Liquidations on Flux are similar to those on Compound V2, with accounts becoming subject to liquidation when their liquidity turns negative. At that point, a third-party liquidator can pay off some of the borrower's debt and seize the corresponding collateral at a discount. Unlike Compound, however, Flux liquidations respect the underlying asset's permissions, such as KYC requirements. For instance, to liquidate an account using OUSG as collateral, the liquidator must be KYC'd and whitelisted to hold that token.
+Liquidations on Flux are similar to those on Compound V2, with accounts becoming subject to liquidation when their LTV becomes insufficient. At that point, a third-party liquidator can pay off some of the borrower's debt and seize the corresponding collateral at a discount. Unlike Compound, however, Flux liquidations respect OUSG's KYC requirements. **To liquidate an account using OUSG as collateral, the liquidator must be KYC'd and whitelisted to hold that token.**
 
 In scenarios of extreme volatility, an account's equity might become negative when the LTV increases too quickly before it can be liquidated, causing the protocol and its lenders to accrue bad debt. Flux Finance's assets are generally very stable, making bad debt accrual extremely unlikely. As an additional safety mechanism, Flux's stablecoin oracles never price stablecoins above 1 USDC, reducing the risk of external oracle manipulation.
+
+The Flux team on their assessment of the liklihood to experience bad debt:
+
+> Bad debt accrual should be extremely unlikely on Flux since its assets, tokenized Treasuries, are generally very stable. The greatest weekly move ever in SHV, the short-term Treasuries ETF that OUSG invests into, is less than 0.5% since its inception in 2007. Considering that liquidations of loans against OUSG begin at 92% LTV, this provides a tremendous margin of safety to lenders on Flux.
+
+Source: [MakerDAO Forum](https://forum.makerdao.com/t/mip119-onboard-dai-funds-to-the-flux-finance-dai-lending-pool/19885)
 
 In the unlikely event of bad debt accrual, Flux's reserves in that market are first used to cover the losses. If there aren't enough reserves, some lenders may not be able to withdraw their assets.
 
