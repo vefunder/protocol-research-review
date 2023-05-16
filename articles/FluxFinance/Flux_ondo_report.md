@@ -197,7 +197,9 @@ The figure below depicts how Ondo and Flux ecosystems interact with each other:
 
 ### fTokens
 
-fTokens are analogous to Compound's commonly recognized [cToken standard](https://docs.compound.finance/v2/ctokens/). Flux Finance allows lenders to earn interest on their stablecoins by supplying them to the platform and minting fTokens. These ERC-20 tokens represent balances on the protocol and earn interest through the fToken/Token exchange rate. Each market has a Supply interest rate that increases the value of the fToken while the quantity remains constant in the user's wallet. fTokens have additional functionality to support permissioned token restictions, so fOUSG can only be transferred between addresses that are whitelisted to own OUSG.
+fTokens are analogous to Compound's commonly recognized [cToken standard](https://docs.compound.finance/v2/ctokens/). Flux Finance allows lenders to earn interest on their stablecoins by supplying them to the platform and minting fTokens. These ERC-20 tokens represent balances on the protocol and earn interest through the fToken/Token exchange rate. The interest earned by the protocol is not directly distributed to lenders. Instead, the fToken exchange rate increases over time, allowing users to redeem more assets as interest accrues. Supply and borrow rates on Flux Finance are algorithmically determined based on supply and demand.
+
+fTokens have additional functionality to support permissioned token restictions, so fOUSG can only be transferred between addresses that are whitelisted to own OUSG. Any interaction with fOUSG, including mint, redeem, or transfer involves a check to the [kycRegistry](https://etherscan.io/address/0x7cE91291846502D50D635163135B2d40a602dc70) contract where whitelisted addresses are stored. Additionally, transfers that would result in negative account liquidity for borrowers will fail, ensuring the stability and security of the protocol.
 
 Several parameters are set in the [Unitroller contract](https://etherscan.io/address/0x95Af143a021DF745bc78e845b54591C53a8B3A51#code) that affect the OUSG lending market:
 
@@ -207,23 +209,33 @@ Several parameters are set in the [Unitroller contract](https://etherscan.io/add
 
 At the moment, the OUSG Collateral Factor is set to [92%](https://fluxfinance.com/market/ousg), Close Factor to [50%](https://etherscan.io/address/0x95Af143a021DF745bc78e845b54591C53a8B3A51#readProxyContract) and Liquidation Premium to [5%](https://etherscan.io/address/0x95Af143a021DF745bc78e845b54591C53a8B3A51#readProxyContract).
 
-Supply and borrow rates on Flux Finance are algorithmically determined based on supply and demand, following a model similar to Compound. The interest earned by the protocol is not directly distributed to lenders. Instead, the fToken exchange rate increases over time, allowing users to redeem more assets as interest accrues.
-
-Notably, fTokens represent an enhanced version of Compound V2's cTokens, incorporating advanced features to accommodate permissioned assets such as OUSG. Borrowers can leverage fTokens as collateral for securing loans in other assets, while simultaneously earning interest on the collateralized fTokens. This mechanism could counterbalance a portion of the borrowing expenses.
-
-While fTokens are generally transferable, they respect the underlying asset's transfer restrictions for permissioned assets. Transfers that would result in negative account liquidity for borrowers will fail, ensuring the stability and security of the protocol.
-
-Addresses (Token contracts):
+The following tokens are available to lend on Flux (with fToken contract):
 
 * Flux USDC ([fUSDC](https://etherscan.io/token/0x465a5a630482f3abD6d3b84B39B29b07214d19e5))
 * Flux DAI ([fDAI](https://etherscan.io/token/0xe2bA8693cE7474900A045757fe0efCa900F6530b))
 * Flux USDT ([fUSDT](https://etherscan.io/token/0x81994b9607e06ab3d5cF3AffF9a67374f05F27d7))
 * Flux FRAX ([fFRAX](https://etherscan.io/token/0x1C9A2d6b33B4826757273D47ebEe0e2DddcD978B))
+
+The following token is available as collateral on Flux (with fToken contract):
+
 * Flux OUSG ([fOUSG](https://etherscan.io/token/0x1dD7950c266fB1be96180a8FDb0591F70200E018))
 
-According to the Defi Llama and TVL calculation method that includes the borrowed amount (the Flux protocol has separate lending and borrowing parties - isolated permissions), the Flux protocol has a TVL of $57.95m of which 60% is OUSG.
+According to the Defi Llama which uses a TVL calculation method that includes the borrowed amount, in early May 2023 the Flux protocol has a TVL of $57.95m. of which 60% is OUSG. USDC is by far the most supplied asset, followed by DAI. 
 
 ![image](https://github.com/vefunder/protocol-research-review/assets/51072084/bf64d33c-2472-4e7c-be55-15387b8b87bf)
+
+### Curve fUSDC/fDAI Pool
+
+The [Flux Curve pool](https://curve.fi/#/ethereum/pools/factory-crypto-237/deposit) has so far had minimal usage, although it was only deployed a month before this writing. The pool was seeded with $2M by a [team multi-sig](https://etherscan.io/address/0x7fbe0de6ffa86f4b9528aa27029595429b0c74a9#tokentxns). It has not yet received any meaningful trade volume.
+
+The pool was deployed as a V2 pool meant for assets that do not keep a 1:1 peg. This was done to account for variation in interest accrual between fUSDC and fDAI. The team was interested in a pool with parameters as close to XY=k as possible while still rebalancing liquidity. They opted to use minimum values for A and gamma parameters, which is an unusual choice that the team felt is most suitable for the purpose of this pool. 
+
+The protocol targets an optimal borrowing rate, beyond which the borrowing rate rapidly increases. The Curve pool can help arbitrage the fTokens around the optimal rate and additional incentives on Curve may contribute to increased demand for lending on Flux.
+
+<img width="1586" alt="Screen Shot 2023-05-16 at 10 18 44 AM" src="https://github.com/vefunder/protocol-research-review/assets/51072084/dbda1d27-d05b-4f19-9262-6f3daad9be63">
+
+Source: [Flux Markets](https://fluxfinance.com/markets)
+
 
 
 ### Overview of the Flux Finance Ecosystem
