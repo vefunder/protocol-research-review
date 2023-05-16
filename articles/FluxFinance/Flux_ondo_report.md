@@ -237,49 +237,36 @@ The protocol targets an optimal borrowing rate, beyond which the borrowing rate 
 Source: [Flux Markets](https://fluxfinance.com/markets)
 
 
-
 ### Overview of the Flux Finance Ecosystem
 
 ![image](https://github.com/vefunder/protocol-research-review/assets/51072084/0671dcae-d6a5-42b9-b9b0-c31d0e9914b8)
 
 (source: [Flux finance markets](https://fluxfinance.com/markets) )
 
-The illustration above reveals around 90% utilization rate for permissionless fTokens as an equilibrium where OUSG yield (underlying asset - SHV ETF yield) matches the borrowing cost of supported stablecoins. Given that the permissioned token OUSG is exclusively used as collateral (permissionless fTokens can only be borrowed) it can be deduced that permissionless fTokens at a 90% utilization rate signifies the maximum capacity at which OUSG lenders can borrow without experiencing losses or negative annual percentage yields (APY).
+The illustration above reveals around 90% utilization rate for permissionless fTokens as an equilibrium where OUSG yield (underlying asset - SHV ETF yield) matches the borrowing cost of supported stablecoins. Given that the permissioned token OUSG is exclusively used as collateral (permissionless fTokens can only be borrowed) it can be deduced that permissionless fTokens at a 90% utilization rate signifies the maximum capacity at which OUSG lenders can borrow without experiencing a negative APY on their loan.
 
-**A** - Urate 90% - Borrow APY = 4.41%
+* Borrow APY when utilization rate is 90%: 4.41%
 
-**B** - Urate 91% - Borrow APY = 4.78%
-
-**C** - SHV ETF (underlying asset yield) - 4.65% - annual fee cost 0.15% (Ondo management fees), 0.15% max fee for fund expenses and 0.15% management fees from ETF fund (BlackRock)
-
-**D** - Current Borrow APY for Flux stablecoins (average) - 4.575% (lowest USDC - 3.85% and highest USDT 5.6%)
+* Borrow APY 91% when utilization rate is 91%: 4.78%
 
 ![image](https://github.com/vefunder/protocol-research-review/assets/51072084/d3f0924d-4739-4c36-9fdd-6e3ccb478829)
 
 (source: [Ondo Finance Twitter](https://twitter.com/OndoFinance/status/1649051019756847105))
 
-By accounting for management costs (0.45%) and reducing the underlying collateral APY accordingly, OUSG depositors currently experience a borrowing rate of 4.65%, which results in a loss or negative APY for USDT, DAI and FRAX and positive for USDC borrowers. 
+By accounting for management costs and reducing the underlying collateral APY accordingly, OUSG depositors currently experience a yield of 4.3%. By comparison, the average cost of borrowing is 4.575%, incurring a minimal overall cost to borrowers.
 
-![image](https://github.com/vefunder/protocol-research-review/assets/51072084/cb8d416f-5b33-4273-a582-302879f5f099)
+Given the current lending protocol (and respectively fTokens) utilization rate, it is beneficial to add/assign some extrinsic productivity to fTokens to fulfill the demand for using OUSG as collateral. 
 
-(source: [Flux Finance markets](https://fluxfinance.com/markets))
-
-![image](https://github.com/vefunder/protocol-research-review/assets/51072084/25719b47-65a5-4fe2-b5af-36366191f337)
-
-(source: [Flux Finance markets](https://fluxfinance.com/markets))
-
-Given the current lending protocol (and respectively fTokens) utilization rate, it is necessary to add/assign some extrinsic productivity to fTokens to fulfill the demand for using OUSG as collateral. 
-
-Ondo Finance team already works on fTokens composability; aside from the current Curve proposal, they also made a [proposal to MakerDAO](https://forum.makerdao.com/t/mip119-onboard-dai-funds-to-the-flux-finance-dai-lending-pool/19885). MIP119 proposes to create a DAI 500MM vault for lending to the Flux Finance DAI Lending Pool, a decentralized lending protocol developed by Ondo Finance. 
+Ondo Finance team already works on fTokens composability; aside from the current Curve proposal, they also made a [proposal to MakerDAO](https://forum.makerdao.com/t/mip119-onboard-dai-funds-to-the-flux-finance-dai-lending-pool/19885). MIP119 proposes to create a DAI 500MM vault for lending to the Flux Finance DAI Lending Pool. 
 
 At the moment, there are [33 OUSG token holders](https://etherscan.io/token/0x1b19c19393e2d034d8ff31ff34c81252fcbbee92#balances). The largest holder is Flux Finance (fOUSG) with a ~31.05% share of the total supply. Given that currently the OUSG token is capital productive only as collateral on the Flux protocol, the relationship between the fOUSG supply and total OUSG supply can serve as an indicator of how much capacity is utilized in relation to the potential (maximum) OUSG capacity.
 
-Regarding the permissionless side of the protocol, fUSDC has [420](https://etherscan.io/token/0x465a5a630482f3abd6d3b84b39b29b07214d19e5#balances) token holders, fDAI [160](https://etherscan.io/token/0xe2bA8693cE7474900A045757fe0efCa900F6530b), fUSDT [76](https://etherscan.io/token/0x81994b9607e06ab3d5cf3afff9a67374f05f27d7), and fFRAX only [7](https://etherscan.io/token/0x1c9a2d6b33b4826757273d47ebee0e2dddcd978b) holders. Although supplying (lending) [Interest Rates are competitive](https://defillama.com/yields?token=USDC&category=Lending&category=CDP) against larger money market protocols, on-chain adoption seems quite low. 
+Regarding the permissionless side of the protocol, fUSDC has [420](https://etherscan.io/token/0x465a5a630482f3abd6d3b84b39b29b07214d19e5#balances) token holders, fDAI [160](https://etherscan.io/token/0xe2bA8693cE7474900A045757fe0efCa900F6530b), fUSDT [76](https://etherscan.io/token/0x81994b9607e06ab3d5cf3afff9a67374f05f27d7), and fFRAX only [7](https://etherscan.io/token/0x1c9a2d6b33b4826757273d47ebee0e2dddcd978b) holders. Although supplying (lending) [interest rates are competitive](https://defillama.com/yields?token=USDC&category=Lending&category=CDP) against larger money market protocols, on-chain adoption seems relatively low. 
 
 
 ### Flux Finance Governance
 
-Flux Finance is governed by [Ondo DAO](https://www.tally.xyz/gov/ondo-dao), more precisely by ONDO token holders who have control over protocol economic parameters, smart contract upgrades through on-chain proposals, control OUSG oracle and lending protocol interest rate model contracts. Although the ONDO token is still non-transferable, users can use the token to vote on DAO proposals or delegate voting power to another account.
+Flux Finance is governed by the [Ondo DAO](https://www.tally.xyz/gov/ondo-dao). ONDO token holders have control over protocol economic parameters, smart contract upgrades through on-chain proposals, and control the OUSG oracle and lending protocol interest rate model contracts. Although the ONDO token is still non-transferable, users can use the token to vote on DAO proposals or delegate voting power to another account.
 
 Ondo DAO governance follows a standard two-step process:
 
@@ -318,29 +305,18 @@ The two accounts with the highest voting power possess 202,806,000 ONDO, contrib
 2. [0xcd7979e12E2A502a280270827077Fd7f206f9a44](https://boardroom.io/voter/0xcd7979e12E2A502a280270827077Fd7f206f9a44) (inactive during previous proposals) - 20.52m VP (193 delegators)
 3. [vexmachina.eth](https://boardroom.io/voter/0xF8dFC5643A1d76900E823433a2a2F486559Db62A) - 12.164m VP (33 delegators)
 
-The voting restrictions for the two above-mentioned accounts are set by the admins in the settings on the Tally page. Please note that Ondo uses role-based access control (RBAC) in its smart contracts and reserves the right to deploy additional multisigs to utilize a more secure and granular RBAC scheme.
-
-Ondo Finance currently maintains three multi-signature wallets. Prior to the implementation of [FIP-04](https://forum.fluxfinance.com/t/fip-04-removing-trust-for-daily-rwa-price-and-yield-curve-updates/306/3), there were four wallets, but the privileges from the Neptune Foundation have since been transferred to the DAO. These wallets consist of the following:
-
-**Flux protocol treasury [3/6 multi-sig](https://etherscan.io/address/0x677fd4ed8ae623f2f625deb2d64f2070e46ca1a1#readProxyContract)** holds over 88.7% of ONDO token supply
-
-**Neptune Foundation (fluxfinance.eth) [3/6 multi-sig](https://etherscan.io/address/0x118919e891d0205a7492650ad32e727617fa9452#code)** - control Flux protocol Interest Rate Model and Oracle contracts, but voting on governance proposal [FIP-04](https://forum.fluxfinance.com/t/fip-04-removing-trust-for-daily-rwa-price-and-yield-curve-updates/306/3) is in progress and if proposal passed, ownership of these contracts will be transferred to the DAO.
-
-**Ondo Cash Management [multi-sig 3/6](https://etherscan.io/address/0xAEd4caF2E535D964165B4392342F71bac77e8367)** has following capabilities (source: [MakerDAO forum](https://forum.makerdao.com/t/mip119-onboard-dai-funds-to-the-flux-finance-dai-lending-pool/19885)):
-
-* Configure minimum redemption and subscription amounts on the CashManager contract.
-* Configure rate limiter parameters on the CashManager contract. (i.e. what quantity of subscriptions and redemptions can be serviced in a single day)
-* Configure fee recipients on the CashManager contract (fees are currently turned off).
-* Set exchange rates for the minting of OUSG.
-* Mint OUSG to service subscriptions.
-* Pause functionality on the CashManager contract in the event of an emergency
-* Burn OUSG in the event of an emergency.
-* Upgrade the OUSG implementation contract in the event of an emergency.
-* Execute a multicall function in the CashManager contract for the scenario in which a user accidentally transfers tokens to the CashManager contract.
-
-**Ondo Redemption [multi-sig 3/7](https://etherscan.io/address/0x72Be8C14B7564f7a61ba2f6B7E50D18DC1D4B63D#readProxyContract)** can send stablecoins received by [Coinbase Prime custody wallet](https://etherscan.io/address/0xF67416a2C49f6A46FEe1c47681C5a3832cf8856c) to Cash Manager contract to service redemption.
+The voting restrictions for the two above-mentioned accounts are set by the admins in the settings on the Tally page. 
 
 It is evident that the Ondo Finance team has control over all decisions related to the Flux protocol. Although it is stated on the Tally page that the two accounts with the highest voting power are non-voting accounts, the same is not implemented (restricted) in Governor smart contract. In this case, "non-voting" accounts can be included in the voting process at any time.
+
+
+### Flux Finance Multi-sigs
+
+In addition to the two multi-sigs employed by Ondo for management of the OUSG asset, Flux utilizes two multi-sigs for treasury and operational management. Flux says that all members are employees of Flux Finance (a BVI company). These wallets consist of:
+
+**Flux Protocol Treasury [3/6 multi-sig](https://etherscan.io/address/0x677fd4ed8ae623f2f625deb2d64f2070e46ca1a1#readProxyContract)** holds over 88.7% of ONDO token supply.
+
+**Neptune Foundation (fluxfinance.eth) [3/6 multi-sig](https://etherscan.io/address/0x118919e891d0205a7492650ad32e727617fa9452#code)** controls Flux protocol Interest Rate Model and Oracle contracts. Following the implementation of [FIP-04](https://forum.fluxfinance.com/t/fip-04-removing-trust-for-daily-rwa-price-and-yield-curve-updates/306/3), privileges from the Neptune Foundation have since been transferred to the DAO. It regularly supplies updated price data for OUSG with the constraint that the price cannot change more than 100bps per day.
 
 
 ## Risk Vectors
