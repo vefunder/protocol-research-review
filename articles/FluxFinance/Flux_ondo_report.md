@@ -184,18 +184,28 @@ There are two multi-sigs Ondo uses to manage the on-chain portion of their syste
 
 ## Introduction to Flux Finance
 
-Flux Finance, a project developed by the Ondo Finance team, is a decentralized peer-to-pool lending protocol overseen by the Ondo DAO ([ONDO token](https://www.coingecko.com/en/coins/ondo-finance) holders). As a fork of Compound V2, the protocol has various tokens available such as USDC, DAI, USDT, FRAX, and also permissioned tokens like OUSG. Flux Finance's primary goal is to support OUSG as the exclusive collateral, which cannot be borrowed against, in order to facilitate the onboarding of real-world assets onto the blockchain in a compliant manner. The figure below depicts how Ondo and Flux ecosystems interact with each other.
+Flux Finance is a decentralized lending protocol developed by the Ondo Finance team and governed by the Ondo DAO ([ONDO](https://www.coingecko.com/en/coins/ondo-finance) token holders). It is a fork of Compound V2 with minor modificications to handle permissioned tokens like OUSG. The protocol has various tokens available for lending such as USDC, DAI, USDT, and FRAX. OUSG is the only collateral asset and can not be borrowed. 
+
+Flux's primary goal is to create utility for the OUSG asset, and generally to facilitate the onboarding of real-world assets onto the blockchain in a compliant manner. This approach to decentralized finance (DeFi) seeks to ensure that every token operates within a suitable framework, promoting an environment that balances accessibility and compliance. 
+
+The figure below depicts how Ondo and Flux ecosystems interact with each other:
 
 ![image](https://github.com/vefunder/protocol-research-review/assets/51072084/9ce86712-ed9c-415a-b539-c1493bb423cb)
 
-(source: [MakerDAO Governance Forum](https://forum.makerdao.com/t/mip119-onboard-dai-funds-to-the-flux-finance-dai-lending-pool/19885/9))
-
-In its attempt to integrate various assets, Flux Finance aims to address the diverse requirements of each asset class. This approach to decentralized finance (DeFi) seeks to ensure that every token operates within a suitable framework, promoting an environment that balances accessibility and compliance. 
+(source: [MakerDAO Governance Forum](https://forum.makerdao.com/t/mip119-onboard-dai-funds-to-the-flux-finance-dai-lending-pool/19885/9)) 
 
 
 ### fTokens
 
-Users can deposit stablecoins such as USDC, DAI, USDT, and FRAX, which become available for borrowing by those who post OUSG as collateral. Flux Finance allows lenders to earn interest on their stablecoins by supplying them to the platform and minting fTokens. These ERC-20 tokens represent balances on the protocol and function similarly to Compound Finance's cTokens. At the moment OUSG Collateral Factor (CR=LTV) is set to [92%](https://fluxfinance.com/market/ousg), Close Factor to[ 50%](https://etherscan.io/address/0x95Af143a021DF745bc78e845b54591C53a8B3A51#readProxyContract) and Liquidation Premium to [5%](https://etherscan.io/address/0x95Af143a021DF745bc78e845b54591C53a8B3A51#readProxyContract).
+fTokens are analogous to Compound's commonly recognized [cToken standard](https://docs.compound.finance/v2/ctokens/). Flux Finance allows lenders to earn interest on their stablecoins by supplying them to the platform and minting fTokens. These ERC-20 tokens represent balances on the protocol and earn interest through the fToken/Token exchange rate. Each market has a Supply interest rate that increases the value of the fToken while the quantity remains constant in the user's wallet. fTokens have additional functionality to support permissioned token restictions, so fOUSG can only be transferred between addresses that are whitelisted to own OUSG.
+
+Several parameters are set in the [Unitroller contract](https://etherscan.io/address/0x95Af143a021DF745bc78e845b54591C53a8B3A51#code) that affect the OUSG lending market:
+
+* Collateral Factor: A value set between 0 and 98% that represents the value that can be borrowed against value supplied.
+* Close Factor: A value between 5% and 90% that represents the amount of a liquidatable account’s borrow that can be repaid in a single liquidate transaction.
+* Liquidation Premium: An additional percent share of a liquidated value sent to the liquidator as compensation.
+
+At the moment, the OUSG Collateral Factor is set to [92%](https://fluxfinance.com/market/ousg), Close Factor to [50%](https://etherscan.io/address/0x95Af143a021DF745bc78e845b54591C53a8B3A51#readProxyContract) and Liquidation Premium to [5%](https://etherscan.io/address/0x95Af143a021DF745bc78e845b54591C53a8B3A51#readProxyContract).
 
 Supply and borrow rates on Flux Finance are algorithmically determined based on supply and demand, following a model similar to Compound. The interest earned by the protocol is not directly distributed to lenders. Instead, the fToken exchange rate increases over time, allowing users to redeem more assets as interest accrues.
 
