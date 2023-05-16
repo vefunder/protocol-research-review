@@ -316,7 +316,7 @@ In addition to the two multi-sigs employed by Ondo for management of the OUSG as
 
 **Flux Protocol Treasury [3/6 multi-sig](https://etherscan.io/address/0x677fd4ed8ae623f2f625deb2d64f2070e46ca1a1#readProxyContract)** holds over 88.7% of ONDO token supply.
 
-**Neptune Foundation (fluxfinance.eth) [3/6 multi-sig](https://etherscan.io/address/0x118919e891d0205a7492650ad32e727617fa9452#code)** controls Flux protocol Interest Rate Model and Oracle contracts. Following the implementation of [FIP-04](https://forum.fluxfinance.com/t/fip-04-removing-trust-for-daily-rwa-price-and-yield-curve-updates/306/3), privileges from the Neptune Foundation have since been transferred to the DAO. It regularly supplies updated price data for OUSG with the constraint that the price cannot change more than 100bps per day.
+**Neptune Foundation (fluxfinance.eth) [3/6 multi-sig](https://etherscan.io/address/0x118919e891d0205a7492650ad32e727617fa9452#code)** controls Flux protocol Interest Rate Model and Oracle contracts. Following the implementation of [FIP-04](https://forum.fluxfinance.com/t/fip-04-removing-trust-for-daily-rwa-price-and-yield-curve-updates/306/3), privileges from the Neptune Foundation have since been transferred to the DAO. It regularly supplies updated price data for OUSG with the constraint that the price cannot change more than 100bps per day. With the recent implementation of FIP-04, the 100bps constraint is done by [this address](https://etherscan.io/address/0xc53e6824480d976180A65415c19A6931D17265BA).
 
 
 ## Risk Vectors
@@ -410,7 +410,7 @@ NAV Consulting has limited API access to the Fund's accounts at Coinbase and Cle
 
 Using NAV Consulting calculation, Ondo updates the contract price on daily basis.
 
-On Flux protocol, Ondo employs its custom price oracle, [OndoPriceOraclev2](https://etherscan.io/address/0x50ce56a3239671ab62f185704caedf626352741e#readContract), for managing markets. This contract enables the setting of the underlying asset price directly within the contract storage, which is currently the method Flux oracle utilizes for all fTokens across Flux lending markets. Additionally, the contract offers options to configure Compound or Chainlink oracles and establish a price cap for the underlying assets of fTokens.
+On Flux protocol, Ondo employs its custom price oracle, [OndoPriceOracleV2](https://etherscan.io/address/0xba9b10f90b0ef26711373a0d8b6e7741866a7ef2), for managing markets. This contract enables the setting of the underlying asset price directly within the contract storage, which is currently the method Flux oracle utilizes for all fTokens across Flux lending markets. Additionally, the contract offers options to configure Compound or Chainlink oracles and establish a price cap for the underlying assets of fTokens.
 
 ![image](https://github.com/vefunder/protocol-research-review/assets/51072084/efdf1412-f2fa-4dca-a198-8abb26514477)
 
@@ -420,7 +420,9 @@ Source: [Etherscan](https://etherscan.io/address/0x50ce56a3239671ab62f185704caed
 
 Source: [GitHub](https://github.com/flux-finance/contracts/blob/main/contracts/lending/OndoPriceOracleV2.sol)
 
-Flux Finance has introduced a [governance proposal](https://www.tally.xyz/gov/ondo-dao/proposal/7) to increase transparency in price feeds and reduce the protocol's dependence on Ondo DAO. One of the proposal's key components is the deployment of a new oracle under the control of Ondo DAO. This oracle will serve as the Flux Finance protocol's primary mechanism to retrieve underlying asset prices. The proposal also suggests the implementation of new smart contracts that limit daily price fluctuations of OUSG to 100 basis points, effectively mitigating risks associated with price volatility.
+Flux Finance has recently implemented a [governance proposal](https://www.tally.xyz/gov/ondo-dao/proposal/7) to increase transparency in price feeds and reduce the protocol's dependence on the team. One of the proposal's key components is the deployment of a new oracle under the control of Ondo DAO. This oracle will serve as the Flux Finance protocol's primary mechanism to retrieve underlying asset prices. The proposal also suggests the implementation of new smart contracts that limit daily price fluctuations of OUSG to 100 basis points, effectively mitigating risks associated with price volatility.
+
+Flux also have been testing a Chainlink price feed for SHV/USD. This price feed has been deployed and they have a contract being tested on mainnet that constrains price updates based on the SHV/USD feed. [This contract](https://etherscan.io/address/0x0502c5ae08E7CD64fe1AEDA7D6e229413eCC6abe#code) will be used by the official Flux Oracle in the near future.
 
 
 ## Llama Risk Gauge Criteria
@@ -429,17 +431,15 @@ Centralization Factors
 
 **1. Is it possible for a single entity to rug its users?**
 
-While it is possible for a single entity to exploit the protocol, several safeguards are in place to minimize this risk. Ondo Finance employs three multi-signature wallets (Ondo management multi-sig, OUSG redemption multi-sig, and ONDO token holder multi-sig), each with a minimum execution threshold of three signatures. The same three addresses are signers for each wallet:
-
-1. 0x3c6Fdc07A3280B79F82610525bCA7DcEb9D2F7F4
-2. 0x8cc5e5E8E2EA561DB672F8eb1191336bd5C11bc7
-3. 0x9019295cA2dCdC4BCFf323b562e87FC922e34C32
+While it is possible for a single entity to exploit the protocol, several safeguards are in place to minimize this risk. Ondo Finance employs three multi-signature wallets (Ondo management multi-sig, OUSG redemption multi-sig, and ONDO token holder multi-sig), each with a minimum execution threshold of three signatures. 
 
 Although this setup theoretically allows for the coordination of the three multi-signature signers to exploit the system, the requirement of multiple signatories adds an additional layer of security. This structure helps to mitigate the risk of a single entity compromising the protocol and ensures that decision-making power is distributed among multiple parties.
 
 **2. If the team vanishes, can the project continue?**
 
-The reliance on third-party service providers and the use of smart contracts might enable the project to continue in the short term. However, long-term maintenance and development would likely be affected and it would be difficult to continue operations without the current team being present. Furthermore, in the event of the team vanishing the redemptions of Ondo Finance assets will be impacted causing major issues to its stakeholders.
+As a RWA issuer, OUSG is wholly dependent on the team's continued operation for management of Ondo I LP (the Fund). 
+
+The Flux protocol currently requires manual price updates from the team, although this may transition to a Chainlink price feed in the near future. At that point, Flux could continue fully autonomously (although since the Flux team is also the Ondo team, the project is still reliant on Ondo's continued operation).
 
 Economic Factors
 
@@ -449,9 +449,9 @@ Ondo Finance does not depend on additional incentives for its continued viabilit
 
 **2. If demand falls to 0 tomorrow, can all users be made whole?**
 
-If demand falls to zero tomorrow, the OUSG token's backing by the SHV ETF aims to provide a foundation for redemptions. In such an event, the SHV ETF backing is designed to ensure that Ondo Finance has the capacity to continue honoring redemption requests, making all users whole and offering a level of financial security and reassurance. However, it is crucial to understand that market risk and interest rate risk still persist.
+If demand falls to zero tomorrow, the OUSG token's backing by the SHV ETF aims to provide a foundation for redemptions. In such an event, the SHV ETF backing is designed to ensure that Ondo Finance has the capacity to continue honoring redemption requests, making all users whole and offering a level of financial security and reassurance. SHV is highly liquid, with >$300m/day in average volume, and the short-duration bonds are less susceptible to changing interest rates.
 
-Usual fixed income risks remain present, with interest-rate and credit risks being among the primary concerns. Generally, as interest rates increase, there is a tendency for bond values to decrease. Credit risk pertains to the possibility that the bond issuer may not fulfill their obligations concerning principal and interest payments. It is essential for investors to understand that investments in the fund are not insured or guaranteed by the Federal Deposit Insurance Corporation or any other government agency. It is important to note that the following risks are associated with the US Treasury market in general and not with Blackrock/Ondo.
+Usual fixed income risks remain present, with interest-rate and credit risks being among the primary concerns. Generally, as interest rates increase, there is a tendency for bond values to decrease. Credit risk pertains to the possibility that the bond issuer may not fulfill their obligations concerning principal and interest payments. It is essential for investors to understand that investments in the fund are not insured or guaranteed by the FDIC or any other government agency. These risks are associated with the US Treasury market in general and not with Blackrock/Ondo.
 
 Security Factors
 
@@ -461,7 +461,7 @@ The audit conducted by C4A on Ondo Finance's smart contracts did reveal several 
 
 However, it is important to note that the Ondo team has worked closely with C4A to address and resolve any critical vulnerabilities in the smart contracts. The key high-risk finding, titled "Loss of user funds when completing CASH redemptions," has been resolved in collaboration with the auditing team.
 
-While the presence of vulnerabilities is a concern, the proactive approach taken by the Ondo team to rectify these issues demonstrates their commitment to ensuring the security and stability of the platform.
+The proactive approach taken by the Ondo team to rectify these issues demonstrates their commitment to ensuring the security and stability of the platform.
 
 
 ## Risk Team Recommendation
@@ -472,4 +472,4 @@ Upon evaluating Ondo Finance and Flux Protocol, we recognize that there are area
 2. Improve the security and stability of Ondo Finance by addressing potential risks in the smart contracts, oracles, and collateral. Regular audits and updates to the platform's security features will contribute to a more robust and reliable ecosystem. It is essential to ensure all identified vulnerabilities are resolved and measures are in place to prevent future issues.
 3. Enhance the transparency of Ondo Finance's operations by providing more detailed documentation on the platform's functionality, risks, and mitigation strategies. This will allow users to make informed decisions about participating in the platform and contribute to a better understanding of the project's goals and potential risks.
 
-We recommend that Curve treats the current gauge as a starting point for assessing Ondo Finance's risk profile, while closely monitoring the project's progress in decentralization, platform security improvements, and transparency enhancements. The project's long-term success and the sustainability of the gauge will be determined by its ability to address these critical aspects effectively.
+Overall, Ondo and Flux appear to be refreshingly professional and take every reasonable precaution to ensure the security of their system and provide assurances to their users. Our view is that Flux constitutes an excellent example of onboarding regulatory compliant RWAs into DeFi and we would like to see further integrations with Curve.
