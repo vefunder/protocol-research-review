@@ -410,19 +410,27 @@ NAV Consulting has limited API access to the Fund's accounts at Coinbase and Cle
 
 Using NAV Consulting calculation, Ondo updates the contract price on daily basis.
 
-On Flux protocol, Ondo employs its custom price oracle, [OndoPriceOracleV2](https://etherscan.io/address/0xba9b10f90b0ef26711373a0d8b6e7741866a7ef2), for managing markets. This contract enables the setting of the underlying asset price directly within the contract storage, which is currently the method Flux oracle utilizes for all fTokens across Flux lending markets. Additionally, the contract offers options to configure Compound or Chainlink oracles and establish a price cap for the underlying assets of fTokens.
+Flux Finance has recently implemented a [governance proposal](https://www.tally.xyz/gov/ondo-dao/proposal/7) to increase transparency in price feeds and reduce the protocol's dependence on the team. One of the proposal's key components is the deployment of a new oracle under the control of Ondo DAO. This oracle will serve as the Flux Finance protocol's primary mechanism to retrieve underlying asset prices. The proposal also implements a 100bps limit for daily price fluctuations of OUSG, effectively mitigating risks associated with price volatility.
 
-![image](https://github.com/vefunder/protocol-research-review/assets/51072084/efdf1412-f2fa-4dca-a198-8abb26514477)
+The newly implemented price oracle, [FluxOracle](https://etherscan.io/address/0xa42e17f72aefc6ae585a08e6058a38ec036d37ec#code), is used for managing markets. This contract implements a hardcoded price for underlying asset of stablecoin fTokens (OracleType - 1), and RWAOracleRateCheck for checking underlying asset price of “permissioned” fTokens, currently only fOUSG (OracleType - 2). Additionally, the contract offers options to configure Chainlink oracles (OracleType - 3).
 
-Source: [Etherscan](https://etherscan.io/address/0x50ce56a3239671ab62f185704caedf626352741e#readContract)
+<img width="522" alt="Screen Shot 2023-05-17 at 6 49 27 AM" src="https://github.com/vefunder/protocol-research-review/assets/51072084/c78f007c-5ee4-4f75-bacf-be9ff4be4af8">
 
-![image](https://github.com/vefunder/protocol-research-review/assets/51072084/957b41e2-a69e-46e7-ab56-bcc5a2975cac)
+Source: [Contract Reader- FluxOracle](https://www.contractreader.io/contract/mainnet/0xA42e17F72aEFC6Ae585A08E6058A38ec036D37ec#fluxoracle-1-14-80)
 
-Source: [GitHub](https://github.com/flux-finance/contracts/blob/main/contracts/lending/OndoPriceOracleV2.sol)
+FluxOracle contract also has implemented role-based access control with DEFAULT_ADMIN_ROLE that can set roles to an arbitrary address for each for each OracleType: 
 
-Flux Finance has recently implemented a [governance proposal](https://www.tally.xyz/gov/ondo-dao/proposal/7) to increase transparency in price feeds and reduce the protocol's dependence on the team. One of the proposal's key components is the deployment of a new oracle under the control of Ondo DAO. This oracle will serve as the Flux Finance protocol's primary mechanism to retrieve underlying asset prices. The proposal also suggests the implementation of new smart contracts that limit daily price fluctuations of OUSG to 100 basis points, effectively mitigating risks associated with price volatility.
+* "STABLECOIN_HARDCODE_SETTER_ROLE"
+* "TOKENIZED_RWA_SETTER_ROLE"
+* "CHAINLINK_ORACLE_SETTER_ROLE"
 
-Flux also have been testing a Chainlink price feed for SHV/USD. This price feed has been deployed and they have a contract being tested on mainnet that constrains price updates based on the SHV/USD feed. [This contract](https://etherscan.io/address/0x0502c5ae08E7CD64fe1AEDA7D6e229413eCC6abe#code) will be used by the official Flux Oracle in the near future.
+All roles are set to the timelock contract controlled by Ondo DAO.
+
+<img width="978" alt="Screen Shot 2023-05-17 at 6 50 27 AM" src="https://github.com/vefunder/protocol-research-review/assets/51072084/5f76b362-74c0-4d6d-8a0a-4c3e054d473d">
+
+Source: [Contract Reader- FluxOracle](https://www.contractreader.io/contract/mainnet/0xA42e17F72aEFC6Ae585A08E6058A38ec036D37ec#fluxoracle-1-14-44)
+
+Flux have been testing a Chainlink price feed for SHV/USD. This price feed has been deployed and they have a contract being tested on mainnet that constrains price updates based on the SHV/USD feed. [This contract](https://etherscan.io/address/0x0502c5ae08E7CD64fe1AEDA7D6e229413eCC6abe#code) will be used by the official Flux Oracle in the near future.
 
 
 ## Llama Risk Gauge Criteria
