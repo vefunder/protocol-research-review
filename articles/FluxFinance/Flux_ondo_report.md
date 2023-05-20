@@ -129,7 +129,7 @@ Legal documentation involving the fund are made available at this [Dropbox](http
 
 ### Investment Workflow
 
-Shares of OUSG are issued as tokens on the Ethereum blockchain and can be minted/redeemed on U.S. business days. These actions are processed by the Fund administrator (NAV Consulting) and calculated based on the next daily NAV. During times of heavy redemption demand, the Fund may not have sufficient liquidity on hand, and Ondo anticipates that it is possible redemption requests can take 2-3 days to process. 
+Shares of OUSG are issued as tokens on the Ethereum blockchain and can be minted/redeemed on U.S. business days. These actions are processed by the Ondo Ops team as calculated by the Fund administrator (NAV Consulting). During times of heavy redemption demand, the Fund may not have sufficient liquidity on hand, and Ondo anticipates that it is possible redemption requests can take 2-3 days to process. 
 
 OUSG can be minted from USDC or DAI with a minimum investment of $100,000. It is available to both U.S. and non-U.S. persons, although access to mint and transfer OUSG is permissioned. Ondo uses smart contracts to enforce these transfer restrictions. Investors must undergo KYC/AML/CFT screening and be both “accredited investors” and “qualified purchasers”. Permissioned token holders may redeem their tokens daily and also may transfer their tokens on-chain to other permissioned investors. 
 
