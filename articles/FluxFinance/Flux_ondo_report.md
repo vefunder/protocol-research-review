@@ -257,7 +257,7 @@ By accounting for management costs and reducing the underlying collateral APY ac
 
 Given the current lending protocol (and respectively fTokens) utilization rate, it is beneficial to add/assign some extrinsic productivity to fTokens to fulfill the demand for using OUSG as collateral. 
 
-Ondo Finance team already works on fTokens composability; aside from the current Curve proposal, they also made a [proposal to MakerDAO](https://forum.makerdao.com/t/mip119-onboard-dai-funds-to-the-flux-finance-dai-lending-pool/19885). MIP119 proposes to create a DAI 500MM vault for lending to the Flux Finance DAI Lending Pool. 
+Ondo Finance team already works on fTokens composability; aside from the current Curve proposal, they have made a [proposal to MakerDAO](https://forum.makerdao.com/t/mip119-onboard-dai-funds-to-the-flux-finance-dai-lending-pool/19885). MIP119 proposes to create a DAI 500MM vault for lending to the Flux Finance DAI Lending Pool. Another proposal with Frax recently passed a [Snapshot vote](https://snapshot.org/#/frax.eth/proposal/0x11e285e59830fe2a6dec50138e335d7ba69036da2f915db465b38a64623b3717) to activate an AMO that lends up to 2 million FRAX on Flux. Funds from this proposal are still awaiting deployment.
 
 At the moment, there are [33 OUSG token holders](https://etherscan.io/token/0x1b19c19393e2d034d8ff31ff34c81252fcbbee92#balances). The largest holder is Flux Finance (fOUSG) with a ~31.05% share of the total supply. Given that currently the OUSG token is capital productive only as collateral on the Flux protocol, the relationship between the fOUSG supply and total OUSG supply can serve as an indicator of how much capacity is utilized in relation to the potential (maximum) OUSG capacity.
 
