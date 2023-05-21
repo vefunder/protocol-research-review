@@ -339,7 +339,7 @@ Flux Finance maintains an active [bug bounty program](https://immunefi.com/bount
 
 Source: [ImmuneFi](https://immunefi.com/bounty/fluxfinance/)
 
-Ondo Finance already paid one bug bounty reward of $25,000 for identifying a [high-risk vulnerability](https://iosiro.com/blog/high-risk-vulnerability-disclosed-to-ondo-finance) to security researcher [Ashiq Amien](https://ashiq.co.za/) on 26 January 2022. That issue was related to the [TrancheToken smart contract](https://etherscan.io/address/0xb279d1ed3848cee8ba6dba426be620a289ccef10#readContract), part of the first Ondo Finance product - [Ondo Vaults](https://v1.ondo.finance/). It was a finance protocol on Ethereum, built on top of Uniswap.
+Ondo Finance already paid one bug bounty reward of $25,000 for identifying a [high-risk vulnerability](https://iosiro.com/blog/high-risk-vulnerability-disclosed-to-ondo-finance) to security researcher [Ashiq Amien](https://ashiq.co.za/) on 26 January 2022. That issue was related to the [TrancheToken smart contract](https://etherscan.io/address/0xb279d1ed3848cee8ba6dba426be620a289ccef10#readContract), part of the first Ondo Finance product - [Ondo Vaults](https://v1.ondo.finance/). This was a finance protocol built on top of Uniswap that predates OUSG and has since been decomissioned.
 
 
 ### Governance Risk
