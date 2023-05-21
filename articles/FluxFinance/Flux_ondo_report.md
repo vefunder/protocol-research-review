@@ -374,7 +374,7 @@ When assessing centralization risks, it's crucial to consider the underlying ass
 
 Another aspect of centralization risk within the Ondo Finance platform is its reliance on centralized exchanges like Coinbase and the Clear Street brokerage platform. This dependency on centralized service providers could expose the platform to additional counterparty risks from these institutions and exposure to regulatory uncertainty.
 
-To address concerns about token backing and transparency, Ondo Finance leverages third-party service providers like NAV Consulting, a fund administration firm responsible for validating the fund's assets directly from its bank and custody accounts. Additionally, the fund undergoes an independent year-end audit by Richey May. While Ondo Finance manages the tokenization through its smart contracts, the fund administrator is responsible for maintaining off-chain records and providing monthly reports to investors. This process ensures that the token records and off-chain records are reconciled daily.
+To address concerns about token backing and transparency, Ondo Finance leverages third-party service providers like NAV Consulting, a fund administration firm responsible for validating the fund's assets directly from its bank and custody accounts. Additionally, the fund undergoes an independent year-end audit. While Ondo Finance manages the tokenization through its smart contracts, the fund administrator is responsible for maintaining off-chain records and providing monthly reports to investors. This process ensures that the token records and off-chain records are reconciled daily.
 
 
 ### Collateral Risk/Solvency Risk
@@ -470,10 +470,10 @@ The proactive approach taken by the Ondo team to rectify these issues demonstrat
 
 ## Risk Team Recommendation
 
-Upon evaluating Ondo Finance and Flux Protocol, we recognize that there are areas where improvements can be made to enhance the platform's security, decentralization, and transparency. As Ondo Finance progresses, we advise the Curve DAO and community members to closely monitor its development. 
+Upon evaluating Ondo Finance and Flux Protocol, we believe they operate well witihn acceptable risk parameters, but we recognize that there are areas where improvements can be made to enhance the platform's security, decentralization, and transparency: 
 
 1. Address the centralization of governance and voting power in Ondo DAO. Implementing mechanisms to reduce the concentration of voting power can help promote a more decentralized and democratic governance system. It is crucial to ensure that decision-making processes are more inclusive and that influence is distributed among a larger group of participants.
 2. Improve the security and stability of Ondo Finance by addressing potential risks in the smart contracts, oracles, and collateral. Regular audits and updates to the platform's security features will contribute to a more robust and reliable ecosystem. It is essential to ensure all identified vulnerabilities are resolved and measures are in place to prevent future issues.
 3. Enhance the transparency of Ondo Finance's operations by providing more detailed documentation on the platform's functionality, risks, and mitigation strategies. This will allow users to make informed decisions about participating in the platform and contribute to a better understanding of the project's goals and potential risks.
 
-Overall, Ondo and Flux appear to be refreshingly professional and take every reasonable precaution to ensure the security of their system and provide assurances to their users. Our view is that Flux constitutes an excellent example of onboarding regulatory compliant RWAs into DeFi and we would like to see further integrations with Curve.
+In our experience with the Ondo and Flux team, we have found them to be refreshingly professional and take every reasonable precaution to ensure the security of their system and provide assurances to their users. Our view is that Flux constitutes an excellent example of onboarding regulatory compliant RWAs into DeFi and we look forward to further integrations with Curve.
