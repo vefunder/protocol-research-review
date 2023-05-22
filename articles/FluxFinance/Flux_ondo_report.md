@@ -1,47 +1,6 @@
 # Asset Risk Assessment: Ondo and Flux Finance (OUSG)
 
-### A look into the utility and challenges of tokenizing U.S. Treasuries
-
-
-Resources (Useful links):
-
-* [Proposal to add fUSDC-fDAI to the Curve Gauge Controller](https://gov.curve.fi/t/proposal-to-add-fusdc-fdai-to-the-curve-gauge-controller/9098)
-* [Flux finance website](https://fluxfinance.com/)
-* [Flux Finance documentation](https://docs.fluxfinance.com/)
-* **Legal docs** - [Terms of Services](https://docs.fluxfinance.com/legal/terms-of-service), [Privacy Policy](https://docs.fluxfinance.com/legal/privacy-policy), [CoinList Risk factors](https://docs.fluxfinance.com/legal/coinlist-risk-factors), [Cookies policy](https://docs.fluxfinance.com/legal/cookies-policy)
-* [Github Flux finance](https://github.com/flux-finance)
-* [DefiLlama - Flux Finance](https://defillama.com/protocol/flux-finance)
-* [Flux Finance audit](https://code4rena.com/reports/2023-01-ondo/) (additional to Compound “reputation”)
-* [Flux Finance Bug Bounty on ImmuneFi](https://immunefi.com/bounty/fluxfinance/)
-* Flux Finance - [governance forum](https://forum.fluxfinance.com/)
-* [Flux finance blog](https://blog.fluxfinance.com/)
-* [Ondo Finance website](https://ondo.finance/)
-* [Ondo Finance - OUSG](https://ondo.finance/ousg)
-* [Ondo Finance docs](https://docs.ondo.finance/)
-* [Ondo DAO - Tally](https://www.tally.xyz/gov/ondo-dao)
-* [Compound cTokens docs](https://docs.compound.finance/v2/ctokens/#ctokens)
-* [MakerDAO Proposal (MIP119)](https://forum.makerdao.com/t/mip119-onboard-dai-funds-to-the-flux-finance-dai-lending-pool/19885)
-* [Curve DAO Proposal (Gauge proposal)](https://gov.curve.fi/t/proposal-to-add-fusdc-fdai-to-the-curve-gauge-controller/9098)
-
-Articles, posts, tweets and other useful content:
-
-* [The Defiant article](https://thedefiant.io/flux-lending-tokenized-treasuries)
-* [Short Term Government Bond ETF List](https://etfdb.com/themes/short-term-government-bond-etfs/)
-* [Crypto Economy post](https://crypto-economy.com/defi-platform-flux-finance-rolls-out-lending-token-collateralized-by-u-s-treasury-debt/)
-* [iShares Short Treasury Bond ETF](https://www.ishares.com/us/literature/fact-sheet/shv-ishares-short-treasury-bond-etf-fund-fact-sheet-en-us.pdf) - Fact Sheet
-* [Twitter thread - why Bond ETF and not directly exposure](https://twitter.com/nathanlallman/status/1640773058825953280)
-
-Adresses
-
-* [Flux OUSG (fOUSG)](https://etherscan.io/token/0x1dD7950c266fB1be96180a8FDb0591F70200E018#code)
-* [OUSG](https://etherscan.io/token/0x1B19C19393e2d034D8Ff31ff34c81252FcBbee92)
-* [Timelock](https://etherscan.io/address/0x2c5898da4df1d45eab2b7b192a361c3b9eb18d9c#readContract)
-* [ONDO token](https://www.contractreader.io/contract/mainnet/0xfAbA6f8e4a5E8Ab82F62fe7C39859FA577269BE3)
-* [Ondo Finance Cash Manager](https://etherscan.io/address/0x3501883a646f1F8417BcB62162372550954D618f#code)
-* [Coinbase Prime address](https://etherscan.io/address/0xF67416a2C49f6A46FEe1c47681C5a3832cf8856c)
-* [Management multisig](https://etherscan.io/address/0xAEd4caF2E535D964165B4392342F71bac77e8367#code)
-* [OUSG redemption multi-sig](https://etherscan.io/address/0x72Be8C14B7564f7a61ba2f6B7E50D18DC1D4B63D)
-* [KYC Registry](https://etherscan.io/address/0x7cE91291846502D50D635163135B2d40a602dc70#code)
+### Exploring the utility and challenges of tokenizing U.S. Treasuries
 
 
 ## Relation to Curve
@@ -477,3 +436,51 @@ Upon evaluating Ondo Finance and Flux Protocol, we believe they operate well wit
 3. Enhance the transparency of Ondo Finance's operations by providing more detailed documentation on the platform's functionality, risks, and mitigation strategies. This will allow users to make informed decisions about participating in the platform and contribute to a better understanding of the project's goals and potential risks.
 
 In our experience with the Ondo and Flux team, we have found them to be refreshingly professional and take every reasonable precaution to ensure the security of their system and provide assurances to their users. Our view is that Flux constitutes an excellent example of onboarding regulatory compliant RWAs into DeFi and we look forward to further integrations with Curve.
+
+## Resources
+
+Ondo Resources:
+
+* [Ondo Finance website](https://ondo.finance/)
+* [Ondo Finance - OUSG](https://ondo.finance/ousg)
+* [Ondo Finance docs](https://docs.ondo.finance/)
+* [Ondo DAO - Tally](https://www.tally.xyz/gov/ondo-dao)
+
+Flux Resources:
+
+* [Flux Finance website](https://fluxfinance.com/)
+* [Flux Finance documentation](https://docs.fluxfinance.com/)
+* [Flux Github](https://github.com/flux-finance)
+* [Flux Finance audit](https://code4rena.com/reports/2023-01-ondo/)
+* [Flux Finance Bug Bounty on ImmuneFi](https://immunefi.com/bounty/fluxfinance/)
+* [Governance forum](https://forum.fluxfinance.com/)
+* [Flux Finance blog](https://blog.fluxfinance.com/)
+* [DefiLlama - Flux Finance](https://defillama.com/protocol/flux-finance)
+* Legal
+     * [Terms of Services](https://docs.fluxfinance.com/legal/terms-of-service)
+     * [Privacy Policy](https://docs.fluxfinance.com/legal/privacy-policy)
+     * [CoinList Risk factors](https://docs.fluxfinance.com/legal/coinlist-risk-factors)
+     * [Cookies policy](https://docs.fluxfinance.com/legal/cookies-policy)
+
+DeFi Proposals:
+
+* [Curve Gauge Proposal for fUSDC-fDAI](https://gov.curve.fi/t/proposal-to-add-fusdc-fdai-to-the-curve-gauge-controller/9098)
+* [MakerDAO Proposal (MIP119)](https://forum.makerdao.com/t/mip119-onboard-dai-funds-to-the-flux-finance-dai-lending-pool/19885)
+* [Frax Proposal (FIP-216)](https://gov.frax.finance/t/fip-216-activate-amo-that-lends-frax-to-flux-finance/2259#contents-2)
+
+Articles, posts, tweets and other useful content:
+
+* [The Defiant article](https://thedefiant.io/flux-lending-tokenized-treasuries)
+* [Short Term Government Bond ETF List](https://etfdb.com/themes/short-term-government-bond-etfs/)
+* [Crypto Economy post](https://crypto-economy.com/defi-platform-flux-finance-rolls-out-lending-token-collateralized-by-u-s-treasury-debt/)
+* [iShares Short Treasury Bond ETF](https://www.ishares.com/us/literature/fact-sheet/shv-ishares-short-treasury-bond-etf-fund-fact-sheet-en-us.pdf) - Fact Sheet
+* [Twitter thread - why Bond ETF and not directly exposure](https://twitter.com/nathanlallman/status/1640773058825953280)
+
+Smart Contract Addresses
+
+* [Ondo Contract Addresses](https://docs.ondo.finance/addresses)
+* [Flux Contract Addresses](https://docs.fluxfinance.com/addresses)
+     * [Comptroller](https://etherscan.io/address/0x95Af143a021DF745bc78e845b54591C53a8B3A51)
+     * [Governance](https://etherscan.io/address/0x336505EC1BcC1A020EeDe459f57581725D23465A)
+     * [Timelock](https://etherscan.io/address/0x2c5898da4DF1d45EAb2B7B192a361C3b9EB18d9c)
+     * [FluxOracle](https://etherscan.io/address/0xA42e17F72aEFC6Ae585A08E6058A38ec036D37ec#code)
