@@ -42,17 +42,17 @@ Below is an overview of Ondo's own legal structure:
 * Ondo Capital Management LLC: The Investment Manager (Ondo IM) who collaborates with the GP to manage the fund.
 * Ondo I LP: The Delaware limited partnership receiving investor capital contributions and holding assets with a third party service provider. It is the issuer of OUSG.
 
-Ondo Finance implements extensive security measures to ensure the safe and efficient management of funds, collaborating with reputable service providers like Coinbase and Clear Street. Qualified Custodians are Regulator-approved institutions holding client assets in separate accounts under the client's name. Ondo makes use of the following third-party fund service providers:
+Ondo Finance implements extensive security measures to ensure the safe and efficient management of funds, collaborating with reputable service providers like Coinbase and Clear Street. Qualified Custodians are Regulator-approved institutions holding client assets in separate accounts under the client's name. 
+
+Ondo makes use of the following third-party fund service providers:
 
 * [Clear Street](https://clearstreet.io/): The securities brokerage and qualified custodian managing off-chain assets and trade orders for the fund.
 * [NAV Consulting Inc.](https://www.navconsulting.net/): Performs third-party administration services including a daily calculation of the Fund’s net asset value
-* [Coinbase Prime](https://prime.coinbase.com/): Holds stablecoins, convert stablecoins to USD, and wire funds to Clear Street, as directed by the Investment Manager  
+* [Coinbase Prime](https://prime.coinbase.com/): Holds stablecoins, converts stablecoins to USD, and wires funds to Clear Street, as directed by the Investment Manager  
 
 The following diagram shows shows the relationship between these entities with an explanation from the MakerDAO [forum proposal](https://forum.makerdao.com/t/mip119-onboard-dai-funds-to-the-flux-finance-dai-lending-pool/19885/9):
 
 ![image](https://github.com/vefunder/protocol-research-review/assets/51072084/20bb04e4-58c7-40f6-bf98-caec2051f2b8)
-
-(source: [MakerDAO Governance Forum](https://forum.makerdao.com/t/mip119-onboard-dai-funds-to-the-flux-finance-dai-lending-pool/19885/9))
 
 > 1) Ondo Finance wholly owns the Investment Manager and GP
 > 2) The Investment Manager is responsible for the purchase and sale of ETFs
@@ -61,6 +61,8 @@ The following diagram shows shows the relationship between these entities with a
 > 5) The Fund has engaged Coinbase to hold stablecoins, convert stablecoins to USD, and wire funds to Clear Street, as directed by the Investment Manager
 > 6) The Fund has engaged Clear Street for prime brokerage services and utilizes Clear Street to hold and trade assets
 > 7) The Investment Manager instructs Clear Street (CS), which executes trades, clears, and custodies the Fund’s assets in the Fund’s CS Account 
+
+(source: [MakerDAO Governance Forum](https://forum.makerdao.com/t/mip119-onboard-dai-funds-to-the-flux-finance-dai-lending-pool/19885/9))
 
 The Fund has established access controls to ensure security, especially for third-party transfers. Accounts at Coinbase are only permitted to send US dollar wire transfers to the Fund's account at Clear Street. The Clear Street account wires are sent and received through its bank, BMO Harris, while Coinbase wires are sent and received through its bank, Customer's Bank. To approve another account for wire transfers, the Fund must first receive a wire transfer from that bank account to the Fund's Coinbase account and then work with a Coinbase representative to configure the bank as a trusted withdrawal destination. Additionally, Ondo maintains criteria for approving new bank accounts as transfer destinations.
 
@@ -75,7 +77,7 @@ NAV Consulting provides [daily attestations](https://www.dropbox.com/sh/m6s7l9ti
 
 The Llama Risk team has examined Ondo Finance's documentation, including the trial balance, account statement, and balance sheet, comparing them to the on-chain data. It was noted that there are no material differences between NAV Consulting reporting and on-chain data.)
 
-The following images shows a recent attestation by the Fund Administrator, which shows the portfolio assets account ("Long Portfolio Value") and various cash accounts against the Fund liabilities. The attestation can be compared against the OUSG [outstanding supply](https://etherscan.io/token/0x1b19c19393e2d034d8ff31ff34c81252fcbbee92) and the most recent update to the on-chain share price ([lastSetMintExchangeRate()](https://etherscan.io/address/0x3501883a646f1F8417BcB62162372550954D618f#readContract#F32) in the CashManager contract). The current value on-chain value is $118.4M, which corroborates the attestation of the NAV shown in the image below.
+The following image shows a recent attestation by the Fund Administrator. It discloses the portfolio assets account ("Long Portfolio Value") and various cash accounts against the Fund liabilities. The attestation can be compared against the OUSG [outstanding supply](https://etherscan.io/token/0x1b19c19393e2d034d8ff31ff34c81252fcbbee92) and the most recent update to the on-chain share price ([lastSetMintExchangeRate()](https://etherscan.io/address/0x3501883a646f1F8417BcB62162372550954D618f#readContract#F32) in the CashManager contract). The current value on-chain value is $118.4M, which corroborates the attestation of the NAV shown in the image below.
 
 <img width="1142" alt="Screen Shot 2023-05-15 at 3 13 09 PM" src="https://github.com/vefunder/protocol-research-review/assets/51072084/9afb8c26-ee20-482a-8cdf-352898031d25">
 
