@@ -181,24 +181,15 @@ The following token is available as collateral on Flux (with fToken contract):
 
 * Flux OUSG ([fOUSG](https://etherscan.io/token/0x1dD7950c266fB1be96180a8FDb0591F70200E018))
 
-According to the Defi Llama which uses a TVL calculation method that includes the borrowed amount, in early May 2023 the Flux protocol has a TVL of $57.95m. of which 60% is OUSG. USDC is by far the most supplied asset, followed by DAI. 
+According to the Defi Llama which uses a TVL calculation method that includes the borrowed amount, in early May 2023 the Flux protocol has a TVL of $57.95m, of which 60% is OUSG. USDC is by far the most supplied (borrowable) asset, followed by DAI. 
 
 ![image](https://github.com/vefunder/protocol-research-review/assets/51072084/bf64d33c-2472-4e7c-be55-15387b8b87bf)
 
-### Curve fUSDC/fDAI Pool
+### OUSG/fToken Market Dynamics
 
-The [Flux Curve pool](https://curve.fi/#/ethereum/pools/factory-crypto-237/deposit) has so far had minimal usage, although it was only deployed a month before this writing. The pool was seeded with $2M by a [team multi-sig](https://etherscan.io/address/0x7fbe0de6ffa86f4b9528aa27029595429b0c74a9#tokentxns). It has not yet received any meaningful trade volume.
+At the moment, there are [33 OUSG token holders](https://etherscan.io/token/0x1b19c19393e2d034d8ff31ff34c81252fcbbee92#balances). The largest holder is Flux Finance (fOUSG) with a ~31.05% share of the total supply. Given that currently the OUSG token is capital productive only as collateral on the Flux protocol, the relationship between the fOUSG supply and total OUSG supply can serve as an indicator of how much capacity is utilized in relation to the potential (maximum) OUSG capacity.
 
-The pool was deployed as a V2 pool meant for assets that do not keep a 1:1 peg. This was done to account for variation in interest accrual between fUSDC and fDAI. The team was interested in a pool with parameters as close to XY=k as possible while still rebalancing liquidity. They opted to use minimum values for A and gamma parameters, which is an unusual choice that the team felt is most suitable for the purpose of this pool. 
-
-The protocol targets an optimal borrowing rate, beyond which the borrowing rate rapidly increases. The Curve pool can help arbitrage the fTokens around the optimal rate and additional incentives on Curve may contribute to increased demand for lending on Flux.
-
-<img width="1586" alt="Screen Shot 2023-05-16 at 10 18 44 AM" src="https://github.com/vefunder/protocol-research-review/assets/51072084/dbda1d27-d05b-4f19-9262-6f3daad9be63">
-
-Source: [Flux Markets](https://fluxfinance.com/markets)
-
-
-### Overview of the Flux Finance Ecosystem
+Regarding the permissionless side of the protocol, fUSDC has [420](https://etherscan.io/token/0x465a5a630482f3abd6d3b84b39b29b07214d19e5#balances) token holders, fDAI [160](https://etherscan.io/token/0xe2bA8693cE7474900A045757fe0efCa900F6530b), fUSDT [76](https://etherscan.io/token/0x81994b9607e06ab3d5cf3afff9a67374f05f27d7), and fFRAX only [7](https://etherscan.io/token/0x1c9a2d6b33b4826757273d47ebee0e2dddcd978b) holders. Although supplying (lending) [interest rates are competitive](https://defillama.com/yields?token=USDC&category=Lending&category=CDP) against larger money market protocols, on-chain adoption seems relatively low.
 
 ![image](https://github.com/vefunder/protocol-research-review/assets/51072084/0671dcae-d6a5-42b9-b9b0-c31d0e9914b8)
 
@@ -218,11 +209,25 @@ By accounting for management costs and reducing the underlying collateral APY ac
 
 Given the current lending protocol (and respectively fTokens) utilization rate, it is beneficial to add/assign some extrinsic productivity to fTokens to fulfill the demand for using OUSG as collateral. 
 
-Ondo Finance team already works on fTokens composability; aside from the current Curve proposal, they have made a [proposal to MakerDAO](https://forum.makerdao.com/t/mip119-onboard-dai-funds-to-the-flux-finance-dai-lending-pool/19885). MIP119 proposes to create a DAI 500MM vault for lending to the Flux Finance DAI Lending Pool. Another proposal with Frax recently passed a [Snapshot vote](https://snapshot.org/#/frax.eth/proposal/0x11e285e59830fe2a6dec50138e335d7ba69036da2f915db465b38a64623b3717) to activate an AMO that lends up to 2 million FRAX on Flux. Funds from this proposal are still awaiting deployment.
 
-At the moment, there are [33 OUSG token holders](https://etherscan.io/token/0x1b19c19393e2d034d8ff31ff34c81252fcbbee92#balances). The largest holder is Flux Finance (fOUSG) with a ~31.05% share of the total supply. Given that currently the OUSG token is capital productive only as collateral on the Flux protocol, the relationship between the fOUSG supply and total OUSG supply can serve as an indicator of how much capacity is utilized in relation to the potential (maximum) OUSG capacity.
+### Curve fUSDC/fDAI Pool
 
-Regarding the permissionless side of the protocol, fUSDC has [420](https://etherscan.io/token/0x465a5a630482f3abd6d3b84b39b29b07214d19e5#balances) token holders, fDAI [160](https://etherscan.io/token/0xe2bA8693cE7474900A045757fe0efCa900F6530b), fUSDT [76](https://etherscan.io/token/0x81994b9607e06ab3d5cf3afff9a67374f05f27d7), and fFRAX only [7](https://etherscan.io/token/0x1c9a2d6b33b4826757273d47ebee0e2dddcd978b) holders. Although supplying (lending) [interest rates are competitive](https://defillama.com/yields?token=USDC&category=Lending&category=CDP) against larger money market protocols, on-chain adoption seems relatively low. 
+The [Flux Curve pool](https://curve.fi/#/ethereum/pools/factory-crypto-237/deposit) has so far had minimal usage, although it was only deployed a month before this writing. The pool was seeded with $2M by a [team multi-sig](https://etherscan.io/address/0x7fbe0de6ffa86f4b9528aa27029595429b0c74a9#tokentxns). It has not yet received any meaningful trade volume.
+
+The pool was deployed as a V2 pool meant for assets that do not keep a 1:1 peg. This was done to account for variation in interest accrual between fUSDC and fDAI. The team was interested in a pool with parameters as close to XY=k as possible while still rebalancing liquidity. They opted to use minimum values for A and gamma parameters, which is an unusual choice that the team felt is most suitable for the purpose of this pool. 
+
+The protocol targets an optimal borrowing rate, beyond which the borrowing rate rapidly increases. The Curve pool can help arbitrage the fTokens around the optimal rate and additional incentives on Curve may contribute to increased demand for lending on Flux.
+
+<img width="1586" alt="Screen Shot 2023-05-16 at 10 18 44 AM" src="https://github.com/vefunder/protocol-research-review/assets/51072084/dbda1d27-d05b-4f19-9262-6f3daad9be63">
+
+Source: [Flux Markets](https://fluxfinance.com/markets)
+
+
+### Other DeFi Integrations
+
+Ondo Finance team already works on fTokens composability; aside from the current Curve proposal, they have made a [proposal to MakerDAO](https://forum.makerdao.com/t/mip119-onboard-dai-funds-to-the-flux-finance-dai-lending-pool/19885). MIP119 proposes to create a DAI 500MM vault for lending to the Flux Finance DAI Lending Pool. 
+
+Another proposal with Frax recently passed a [Snapshot vote](https://snapshot.org/#/frax.eth/proposal/0x11e285e59830fe2a6dec50138e335d7ba69036da2f915db465b38a64623b3717) to activate an AMO that lends up to 2 million FRAX on Flux. Funds from this proposal are still awaiting deployment.
 
 
 ### Flux Finance Governance
