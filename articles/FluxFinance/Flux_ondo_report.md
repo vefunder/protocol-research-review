@@ -5,7 +5,7 @@
 
 ## Relation to Curve
 
-Flux Finance submitted a [proposal](https://gov.curve.fi/t/proposal-to-add-fusdc-fdai-to-the-curve-gauge-controller/9098) to add the [fUSDC-fDAI pool](https://curve.fi/#/ethereum/pools/factory-crypto-237/deposit) to the Curve Gauge Controller, allowing users to assign gauge weight and mint CRV. This proposal aims to enhance liquidity and usage of the pool, which provides additional utility to Flux Finance users (fDAI or fUSDC holders). The proposal successfully passed an [on-chain vote](https://dao.curve.fi/vote/ownership/313) on April 22nd, 2023.
+Flux Finance submitted a [proposal](https://gov.curve.fi/t/proposal-to-add-fusdc-fdai-to-the-curve-gauge-controller/9098) to add the [fUSDC-fDAI pool](https://curve.fi/#/ethereum/pools/factory-crypto-237/deposit) to the Curve Gauge Controller, allowing users to assign gauge weight and mint CRV. This proposal aims to enhance liquidity and usage of the pool, which allows Flux Finance users to swap between interest earning stablecoin deposits on its lending platform (fUSDC and fDAI). The proposal successfully passed an [on-chain vote](https://dao.curve.fi/vote/ownership/313) on April 22nd, 2023.
 
 ## TLDR
 
