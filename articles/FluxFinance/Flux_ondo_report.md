@@ -225,7 +225,7 @@ Source: [Flux Markets](https://fluxfinance.com/markets)
 
 ### Other DeFi Integrations
 
-Ondo Finance team already works on fTokens composability; aside from the current Curve proposal, they have made a [proposal to MakerDAO](https://forum.makerdao.com/t/mip119-onboard-dai-funds-to-the-flux-finance-dai-lending-pool/19885). MIP119 proposes to create a DAI 500MM vault for lending to the Flux Finance DAI Lending Pool. 
+Ondo Finance team already works on fTokens composability. Aside from the current Curve proposal, they have made a [proposal to MakerDAO](https://forum.makerdao.com/t/mip119-onboard-dai-funds-to-the-flux-finance-dai-lending-pool/19885). MIP119 proposes to create a DAI 500MM vault for lending to the Flux Finance DAI Lending Pool. 
 
 Another proposal with Frax recently passed a [Snapshot vote](https://snapshot.org/#/frax.eth/proposal/0x11e285e59830fe2a6dec50138e335d7ba69036da2f915db465b38a64623b3717) to activate an AMO that lends up to 2 million FRAX on Flux. Funds from this proposal are still awaiting deployment.
 
@@ -280,16 +280,20 @@ It is evident that the Ondo Finance team has control over all decisions related 
 
 In addition to the two multi-sigs employed by Ondo for management of the OUSG asset, Flux utilizes two multi-sigs for treasury and operational management. Flux says that all members are employees of Flux Finance (a BVI company). These wallets consist of:
 
-**Flux Protocol Treasury [3/6 multi-sig](https://etherscan.io/address/0x677fd4ed8ae623f2f625deb2d64f2070e46ca1a1#readProxyContract)** holds over 88.7% of ONDO token supply.
+**Flux Protocol Treasury [3/6 multi-sig](https://etherscan.io/address/0x677fd4ed8ae623f2f625deb2d64f2070e46ca1a1#readProxyContract)** 
+* Holds over 88.7% of ONDO token supply.
 
-**Neptune Foundation (fluxfinance.eth) [3/6 multi-sig](https://etherscan.io/address/0x118919e891d0205a7492650ad32e727617fa9452#code)** controls Flux protocol Interest Rate Model and Oracle contracts. Following the implementation of [FIP-04](https://forum.fluxfinance.com/t/fip-04-removing-trust-for-daily-rwa-price-and-yield-curve-updates/306/3), privileges from the Neptune Foundation have since been transferred to the DAO. It regularly supplies updated price data for OUSG with the constraint that the price cannot change more than 100bps per day. With the recent implementation of FIP-04, the 100bps constraint is done by [this address](https://etherscan.io/address/0xc53e6824480d976180A65415c19A6931D17265BA).
+**Neptune Foundation (fluxfinance.eth) [3/6 multi-sig](https://etherscan.io/address/0x118919e891d0205a7492650ad32e727617fa9452#code)** 
+* Controlled Flux protocol Interest Rate Model and Oracle contracts until the implementation of [FIP-04](https://forum.fluxfinance.com/t/fip-04-removing-trust-for-daily-rwa-price-and-yield-curve-updates/306/3). Privileges from the Neptune Foundation have since been transferred to the DAO. 
+
+fluxfinance.eth continues to regularly supply updated price data for OUSG with the constraint that the price cannot change more than 100bps per day. The constraint is enforced by [this address](https://etherscan.io/address/0xc53e6824480d976180A65415c19A6931D17265BA). An integration with Chainlink is being tested on mainnet, and expected to be integrated in the near future.
 
 
 ## Risk Vectors
 
 ### Smart Contract Risk
 
-Ondo Finance's smart contracts have undergone an [audit](https://code4rena.com/reports/2023-01-ondo/) performed by code4rena, which assessed the security and potential vulnerabilities of the code. The audit evaluated 19 smart contracts, five abstracts, and six interfaces, totaling 4,365 lines of Solidity code.
+Ondo Finance's smart contracts have undergone an [audit](https://code4rena.com/reports/2023-01-ondo/) by code4rena, which assessed the security and potential vulnerabilities of the code. The audit evaluated 19 smart contracts, five abstracts, and six interfaces, totaling 4,365 lines of Solidity code.
 
 The Ondo team has worked alongside C4A to resolve any critical vulnerabilities in the smart contracts. The C4A auditors identified six unique vulnerabilities, with one classified as high severity and five as medium severity. Additionally, the audit included 54 reports detailing low-severity or non-critical issues and 24 reports recommending gas optimizations.
 
