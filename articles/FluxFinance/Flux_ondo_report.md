@@ -264,7 +264,7 @@ Ondo DAO governance follows a standard two-step process:
 
 The ONDO token has a max total supply set to 10,000,000,000 ONDO tokens with the following token allocation and vesting schedule:
 
-![image](https://github.com/vefunder/protocol-research-review/assets/51072084/96e37a19-9194-4dcd-a421-97be1aa19d91)
+![photo_2023-05-24 07 02 34](https://github.com/vefunder/protocol-research-review/assets/51072084/03cc2685-2d22-48ac-976d-728e6401b347)
 
 (source: [Vestlab](https://vestlab.io/ondo-finance))
 
