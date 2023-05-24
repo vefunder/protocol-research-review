@@ -1,16 +1,16 @@
 # Asset Risk Assessment: Ondo and Flux Finance (OUSG)
 
-### Exploring the utility and challenges of tokenizing U.S. Treasuries
+### A deep dive into the issuer of tokenized U.S. Treasuries and their strategy to bring regulatory-compliant RWAs to DeFi
 
 ### Links
 
-Ondo:
+Ondo (OUSG):
 
 * [Website- OUSG](https://ondo.finance/ousg)
 * [Docs](https://docs.ondo.finance/)
 * [Governance- Tally](https://www.tally.xyz/gov/ondo-dao)
 
-Flux:
+Flux Finance:
 
 * [Website](https://fluxfinance.com/)
 * [Docs](https://docs.fluxfinance.com/)
