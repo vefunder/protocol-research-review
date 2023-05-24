@@ -2,6 +2,25 @@
 
 ### Exploring the utility and challenges of tokenizing U.S. Treasuries
 
+### Links
+
+Ondo:
+
+* [Website- OUSG](https://ondo.finance/ousg)
+* [Docs](https://docs.ondo.finance/)
+* [Governance- Tally](https://www.tally.xyz/gov/ondo-dao)
+
+Flux:
+
+* [Website](https://fluxfinance.com/)
+* [Docs](https://docs.fluxfinance.com/)
+* [Governance forum](https://forum.fluxfinance.com/)
+* [Blog](https://blog.fluxfinance.com/)
+* [Github](https://github.com/flux-finance)
+* [Code4rena Audit](https://code4rena.com/reports/2023-01-ondo/)
+* [Bug Bounty on ImmuneFi](https://immunefi.com/bounty/fluxfinance/)
+
+
 
 ## Relation to Curve
 
@@ -448,7 +467,7 @@ Upon evaluating Ondo Finance and Flux Protocol, we believe they operate well wit
 
 In our experience with the Ondo and Flux team, we have found them to be refreshingly professional and take every reasonable precaution to ensure the security of their system and provide assurances to their users. Our view is that Flux constitutes an excellent example of onboarding regulatory compliant RWAs into DeFi and we look forward to further integrations with Curve.
 
-## Resources
+## Resources and Further Reading
 
 Ondo Resources:
 
@@ -487,7 +506,7 @@ Articles, posts, tweets and other useful content:
 * [iShares Short Treasury Bond ETF](https://www.ishares.com/us/literature/fact-sheet/shv-ishares-short-treasury-bond-etf-fund-fact-sheet-en-us.pdf) - Fact Sheet
 * [Twitter thread - why Bond ETF and not directly exposure](https://twitter.com/nathanlallman/status/1640773058825953280)
 
-Smart Contract Addresses
+Smart Contract Addresses:
 
 * [Ondo Contract Addresses](https://docs.ondo.finance/addresses)
 * [Flux Contract Addresses](https://docs.fluxfinance.com/addresses)
