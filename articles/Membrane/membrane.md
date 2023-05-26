@@ -20,6 +20,10 @@ This research was spearheaded by [@evmknows](https://twitter.com/evmknows).
  * [Runtime Verification Audit](https://github.com/runtimeverification/publications/blob/main/reports/smart-contracts/Euroe%20Stablecoin%20Audit.pdf)
  * [Curve Governance Proposal](https://gov.curve.fi/t/proposal-to-add-ageur-euroe-on-ethereum-to-the-gauge-controller/8894)
 
+## Relation to Curve
+
+A [gauge proposal](https://gov.curve.fi/t/proposal-to-add-ageur-euroe-on-ethereum-to-the-gauge-controller/8894) was submitted in February 2023 for the [agEUR/EUROe](https://curve.fi/#/ethereum/pools/factory-v2-273/deposit) pool on Ethereum. The pool seeks to combine fiat on/off-ramp capability (EUROe) with a permissionless euro token which has a number of DeFi integrations and arbitrage routes (agEUR). The proposal has not yet gone to a vote. 
+
 ## Abstract
 
 For readers interested in the regulatory details of e-money, a report by Monerium on the asset risk assessment of EURe and its compliance with e-money regulations is available for review below:
