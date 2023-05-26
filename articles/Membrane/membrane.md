@@ -20,15 +20,18 @@ This research was spearheaded by [@evmknows](https://twitter.com/evmknows).
  * [Runtime Verification Audit](https://github.com/runtimeverification/publications/blob/main/reports/smart-contracts/Euroe%20Stablecoin%20Audit.pdf)
  * [Curve Governance Proposal](https://gov.curve.fi/t/proposal-to-add-ageur-euroe-on-ethereum-to-the-gauge-controller/8894)
 
+
 ## Relation to Curve
 
 A [gauge proposal](https://gov.curve.fi/t/proposal-to-add-ageur-euroe-on-ethereum-to-the-gauge-controller/8894) was submitted in February 2023 for the [agEUR/EUROe](https://curve.fi/#/ethereum/pools/factory-v2-273/deposit) pool on Ethereum. The pool seeks to combine fiat on/off-ramp capability (EUROe) with a permissionless euro token which has a number of DeFi integrations and arbitrage routes (agEUR). The proposal has not yet gone to a vote. 
 
+
 ## Abstract
 
-For readers interested in the regulatory details of e-money, a report by Monerium on the asset risk assessment of EURe and its compliance with e-money regulations is available for review below:
+For readers interested in the regulatory details of e-money, Llama Risk has previously released an [asset risk assessment of Monerium EURe](https://cryptorisks.substack.com/p/asset-risk-assessment-monerium) and its compliance with e-money regulations.
 
 TL;DR of our findings:
+
 - EUROe is a centralized stablecoin issued by Membrane Finance under the e-money regime.
 - Membrane Finance is an authorized electronic money institution in Finland.
 - Membrane Finance is prepared for upcoming Markets in Crypto Assets Regulation (MiCA) requirements.
@@ -36,9 +39,17 @@ TL;DR of our findings:
 - EUROe's smart contracts have gone through two audits by PeckShield and Runtime Verification.
 - The operational security measures for EUROe are on par with industry standards.
 
+
 ## EUROe / Membrane Finance
 
-The EUROe is a centralized stablecoin issued by [Membrane Finance](https://www.membrane.fi/), a subsidiary of [Equilibrium Group](https://equilibrium.co/) - a blockchain development organization. Like EURe (Monerium), it is currently issued under the e-money regime. Membrane Finance is currently only onboarding institutions to directly mint and burn EUROe, as they do not initially wish to deal with high-volume KYC. However, natural persons can still acquire EUROe through other channels like DeFi, brokers, OTC, or centralized exchanges. As of writing, about 1.12m EUROe is issued across four chains, ETH Mainnet, Arbitrum, Polygon and Avalanche.
+EUROe is a MiCA-compliant, custodial stablecoin issued by [Membrane Finance](https://www.membrane.fi/), a subsidiary of the blockchain development organization [Equilibrium Group](https://equilibrium.co/). It [officially launched](https://www.euroe.com/blog/membrane-finance-launches-euroe-on-ethereum) to Ethereum mainnet on February 1st, 2023, and has since been deployed to Polygon, Arbitrum, Avalanche, and a handful of testnets. As of writing, about 1.64m EUROe is issued across four chains: [ETH Mainnet](https://etherscan.io/token/0x820802fa8a99901f52e39acd21177b0be6ee2974) (982,777 EUROe), [Arbitrum](https://arbiscan.io/token/0xcF985abA4647a432E60efcEeB8054BBd64244305) (96,873 EUROe), [Polygon](https://polygonscan.com/token/0x820802Fa8a99901F52e39acD21177b0BE6EE2974) (560,235 EUROe) and [Avalanche](https://snowtrace.io/token/0x820802Fa8a99901F52e39acD21177b0BE6EE2974) (25 EUROe).
+
+![EUROe Supply by Chain- May 26,2023](https://github.com/vefunder/protocol-research-review/assets/51072084/3f562fbd-0e6e-4993-967c-8185cd68b2f1)
+ 
+EUROe is currently issued under the e-money regime, a standard regulatory framework recognized in the EU. It is regulated by the Finnish Financial Supervisory Authority (FIN-FSA) where the status of Membrane Finance Oy can be [verified](https://www.finanssivalvonta.fi/en/registers/supervised-entities/). Furthermore, EUROe is fully MiCA-compliant in preparation for the new regulations coming into effect by summer 2024. 
+
+Membrane Finance is currently only onboarding institutions to directly mint and burn EUROe, although anyone can permissionlessly acquire and use EUROe from secondary markets. These channels include DeFi, brokers, OTC, or centralized exchanges. This decision was made to reduce the cost and security risk of storing large amounts of customer KYC data, and reduce the cost of processing mint/redemption requests.
+
 
 ### How does it work?
 
