@@ -51,11 +51,25 @@ EUROe is currently issued under the e-money regime, a standard regulatory framew
 Membrane Finance is currently only onboarding institutions to directly mint and burn EUROe, although anyone can permissionlessly acquire and use EUROe from secondary markets. These channels include DeFi, brokers, OTC, or centralized exchanges. This decision was made to reduce the cost and security risk of storing large amounts of customer KYC data, and reduce the cost of processing mint/redemption requests.
 
 
-### How does it work?
+### Issuance Overview
+
+Membrane is the sole issuer of EUROe. A Client of Membrane is an institution that has an account with Membrane and has undergone a due-diligence process including Know-Your-Business (KYB), Anti-Money Laundering (AML), Counter-Terrorism Financing (CTF), and Know-Your-Customer (KYC) reviews where applicable. An end-user is defined as anyone who uses EUROe without having an account with the issuer. The flowchart below shows the mint/burn process applicible to whitelisted Clients of Membrane:
 
 ![Mint and Burn Flow](https://dev.euroe.com/assets/images/mint-burn-flow-aaa798af286b07da46977c37cd4b9cef.png)([Source](https://dev.euroe.com/docs/Stablecoin/mint-and-burn-flow))
 
-The mint and burn mechanism works similarly to those of other centralized stablecoins, however with the distinction that the corporate clients may utilize a personal IBAN.
+The mint and burn mechanism works similarly to those of other centralized stablecoins, with the distinction that the corporate clients may utilize a personal IBAN.
+
+
+### Reserves Management
+
+In compliance with the European e-money regulations, the reserves backing e-money must be carefully managed by an Electronic Money Institution (EMI). Key requirements include maintaining a minimum capital of €350,000 or a 2% buffer based on average outstanding e-money (whichever is greater), segregating the EMI's own funds from the reserves, and safeguarding the reserves by investing in secure, low-risk assets.
+
+The reserves can be held in a segregated bank account or invested into secure, low-risk assets such as debt securities issued or guaranteed by central governments, central banks, international organisations, multilateral development banks, or regional or local authorities within Member States. In addition, investment in debt securities issued by AAA to A-rated financial institutions or corporates are also permissible. Furthermore, they can be covered by an insurance policy or some other comparable guarantee, providing an additional layer of security.
+
+As an alternative, the EMI can invest in Undertakings for Collective Investment in Transferable Securities (UCITS) funds that solely invest in the assets specified above. These funds, managed by entities like BlackRock, offer a means of "outsourcing" the operations of reserve management. For a more detailed overview of the reserve requirements imposed on e-money issuers, please refer to the [e-money section of our other review](https://cryptorisks.substack.com/p/asset-risk-assessment-monerium).
+
+Membrane provides monthly attestations of its reserve backing on its website, and also commits to be reviewed by a third-party on a quarterly basis. As per their [docs](https://dev.euroe.com/docs/Stablecoin/DueDiligence/customer-assets), they claim to be planning to implement "the publication of on-chain proof of reserves data as soon as feasible". As per the [latest reserve attestation](https://assets.ctfassets.net/pfn8eh7nfdk1/3wf9ISddP2wD48H1iBPApn/dbb211d81ba4192964be833e4e6cb336/2023-04_Reserve_Attestation.pdf) the reserves are held in cash at two different banks domiciled in the European Economic Area, [Bank Frick (Liechtenstein)](https://www.bankfrick.li/en) and [Osuuspankki (Finland)](https://www.op.fi/).
+
 
 ### Regulatory & Legal
 
@@ -69,15 +83,7 @@ Like other centralized stablecoins, Membrane Finance need to comply with laws an
 * Receiving a request to do so from the owner & controller of an address, given sufficient proof; or
 * Membrane deems denying access necessary to comply with a law, regulation, or legal order from a recognised Finnish or EU authority.
 
-### Reserves management
 
-In compliance with the European e-money regulations, the reserves backing e-money must be carefully managed by an Electronic Money Institution (EMI). Key requirements include maintaining a minimum capital of €350,000 or a 2% buffer based on average outstanding e-money (whichever is greater), segregating the EMI's own funds from the reserves, and safeguarding the reserves by investing in secure, low-risk assets.
-
-The reserves can be held in a segregated bank account or invested into secure, low-risk assets such as debt securities issued or guaranteed by central governments, central banks, international organisations, multilateral development banks, or regional or local authorities within Member States. In addition, investment in debt securities issued by AAA to A-rated financial institutions or corporates are also permissible. Furthermore, they can be covered by an insurance policy or some other comparable guarantee, providing an additional layer of security.
-
-As an alternative, the EMI can invest in Undertakings for Collective Investment in Transferable Securities (UCITS) funds that solely invest in the assets specified above. These funds, managed by entities like BlackRock, offer a means of "outsourcing" the operations of reserve management. For a more detailed overview of the reserve requirements imposed on e-money issuers, please refer to the [e-money section of our other review](https://cryptorisks.substack.com/p/asset-risk-assessment-monerium).
-
-As per the [latest reserve attestation](https://assets.ctfassets.net/pfn8eh7nfdk1/3wf9ISddP2wD48H1iBPApn/dbb211d81ba4192964be833e4e6cb336/2023-04_Reserve_Attestation.pdf) the reserves are held in cash at two different banks domiciled in the European Economic Area, [Bank Frick (Liechtenstein)](https://www.bankfrick.li/en) and [Osuuspankki (Finland)](https://www.op.fi/).
 
 #### Security & Control mechanisms
 
