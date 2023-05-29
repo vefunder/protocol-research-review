@@ -51,6 +51,8 @@ EUROe is currently issued under the e-money regime, a standard regulatory framew
 Membrane Finance is currently only onboarding institutions to directly mint and burn EUROe, although anyone can permissionlessly acquire and use EUROe from secondary markets. These channels include DeFi, brokers, OTC, or centralized exchanges. This decision was made to reduce the cost and security risk of storing large amounts of customer KYC data, and reduce the cost of processing mint/redemption requests.
 
 
+
+
 ### Issuance Overview
 
 Membrane is the sole issuer of EUROe. A Client of Membrane is an institution that has an account with Membrane and has undergone a due-diligence process including Know-Your-Business (KYB), Anti-Money Laundering (AML), Counter-Terrorism Financing (CTF), and Know-Your-Customer (KYC) reviews where applicable. An end-user is defined as anyone who uses EUROe without having an account with the issuer. The flowchart below shows the mint/burn process applicible to whitelisted Clients of Membrane:
@@ -58,6 +60,16 @@ Membrane is the sole issuer of EUROe. A Client of Membrane is an institution tha
 ![Mint and Burn Flow](https://dev.euroe.com/assets/images/mint-burn-flow-aaa798af286b07da46977c37cd4b9cef.png)([Source](https://dev.euroe.com/docs/Stablecoin/mint-and-burn-flow))
 
 The mint and burn mechanism works similarly to those of other centralized stablecoins, with the distinction that the corporate clients may utilize a personal IBAN.
+
+Mint/burn operations are handled by the EUROe MINTER_ROLE and BURNER_ROLE, and can be monitored through the assigned address on each respective chain ([Ethereum](https://etherscan.io/address/0x74424510108a8ad9AA6A5B506048948e6a16706b), [Polygon](https://polygonscan.com/address/0x74424510108a8ad9AA6A5B506048948e6a16706b), [Arbitrum](https://arbiscan.io/address/0x74424510108a8ad9AA6A5B506048948e6a16706b), and [Avalanche](https://snowtrace.io/address/0x74424510108a8ad9AA6A5B506048948e6a16706b)). The following chart shows the mint/burn events across all chains over time: 
+
+![EUROe Mint_Burn Events by Chain(1)](https://github.com/vefunder/protocol-research-review/assets/51072084/94a3ffa2-a50f-4285-b1a5-3b77a4eec8c9)
+
+Several Ethereum-based burn events coincide with a mint of equivalent value, which is likely a bridge operation facilitated by Membrane (60,000 EUROe to Polygon on March 20th, 60,000 EUROe to Arbitrum on April 14th, and 10,848 EUROe to Arbitrum on April 25th). According to the [Pricing](https://www.euroe.com/pricing) page, bridge operations (in addition to mint/burn operations) are a free service offered by Membrane.
+
+A small number of addresses have been responsible for the majority of EUROe minting to date. ~95% of circulating EUROe has been minted to 3 addresses. The following chart color-codes addresses by chain (Gray = Ethereum, Purple = Polygon, Blue = Arbitrum).
+
+![EUROe Minted by Address(1)](https://github.com/vefunder/protocol-research-review/assets/51072084/a2a7d6af-12c0-4a77-b0f4-af5e01de62a3)
 
 
 ### Reserves Management
