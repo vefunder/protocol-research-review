@@ -6,15 +6,15 @@ This research was spearheaded by [@evmknows](https://twitter.com/evmknows).
  
 ## Useful links
  
- * [Membrane Finance Homepage](https://www.membrane.fi/) / [Twitter](https://twitter.com/euroemoney)
+ * [Membrane Finance Homepage](https://www.membrane.fi/)
  * [EUROe Homepage](https://www.euroe.com/)
+ * [Twitter](https://twitter.com/euroemoney)
  * [Dev Docs](https://dev.euroe.com/)
  * [Audits](https://dev.euroe.com/docs/Stablecoin/audits)
  * [Github](https://github.com/membranefi/euroe-stablecoin)  
  * [Legal & Privacy](https://www.euroe.com/legal)
  * [Transparency & Regulation](https://www.euroe.com/transparency-and-regulation)
  * [FAQ](https://www.euroe.com/faq)
- * [EUROe contract](https://etherscan.io/token/0x820802fa8a99901f52e39acd21177b0be6ee2974)
  * [Contract addresses](https://dev.euroe.com/docs/Stablecoin/contract-addresses)
  * [Peckshield Audit](https://github.com/peckshield/publications/blob/master/audit_reports/PeckShield-Audit-Report-ERC20-eEURO-v1.0.pdf)
  * [Runtime Verification Audit](https://github.com/runtimeverification/publications/blob/main/reports/smart-contracts/Euroe%20Stablecoin%20Audit.pdf)
