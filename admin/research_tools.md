@@ -10,4 +10,16 @@
 * Tx Decoder: https://ethtx.info/
 * Curve pool data: https://llama.airforce/#/curve/pools
 * DeFi Project Data: https://defillama.com/
+<<<<<<< HEAD
 * Phalcon Blockchain Transaction Explorer: https://explorer.phalcon.xyz/ 
+=======
+* Arkham Intelligence
+* DeBank
+* GoPlusLabs Security detection
+* metadock extension
+* Dune Analytics
+* Flipside
+* breadcrumbs.app
+* misttrack.io
+
+>>>>>>> 948b5d4 (add apps)
