@@ -55,9 +55,11 @@ Membrane Finance is currently only onboarding institutions to directly mint and 
 
 ### Issuance Overview
 
-Membrane is the sole issuer of EUROe. A Client of Membrane is an institution that has an account with Membrane and has undergone a due-diligence process including Know-Your-Business (KYB), Anti-Money Laundering (AML), Counter-Terrorism Financing (CTF), and Know-Your-Customer (KYC) reviews where applicable. An end-user is defined as anyone who uses EUROe without having an account with the issuer. The flowchart below shows the mint/burn process applicible to whitelisted Clients of Membrane:
+Membrane is the sole issuer of EUROe. A "Client" of Membrane is an institution that has an account with Membrane and has undergone a due-diligence process including Know-Your-Business (KYB), Anti-Money Laundering (AML), Counter-Terrorism Financing (CTF), and Know-Your-Customer (KYC) reviews where applicable. An "end-user" is defined as anyone who uses EUROe without having an account with the issuer. The flowchart below shows the mint/burn process applicible to whitelisted Clients of Membrane:
 
-![Mint and Burn Flow](https://dev.euroe.com/assets/images/mint-burn-flow-aaa798af286b07da46977c37cd4b9cef.png)([Source](https://dev.euroe.com/docs/Stablecoin/mint-and-burn-flow))
+![Mint and Burn Flow](https://dev.euroe.com/assets/images/mint-burn-flow-aaa798af286b07da46977c37cd4b9cef.png)
+
+Source: [EUROe Docs: Mint and Burn Flow](https://dev.euroe.com/docs/Stablecoin/mint-and-burn-flow)
 
 The mint and burn mechanism works similarly to those of other centralized stablecoins, with the distinction that the corporate clients may utilize a personal IBAN.
 
