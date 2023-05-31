@@ -1,46 +1,47 @@
 # Asset Risk Assessment - UZD Zunami
 
-### (One sentence summary of the report)
+### Zunami is a stablecoin yield aggregator and an autocompounder. Currently they have high centralized control over the protocol which would change as per their future plans. The mechanisms are promising though their are high smartcontract risks.
 
 ## Index
 
-- ## TLDR
-  
+- Relation to Curve
+- Zunami Introduction
+  - Background
+  - Zunami Working
+  - Strategies
+- Token OVerview
+  - ZLP
+  - UZD
+- Algorithmic Peg Stabilizer
+- Zunami Protocol Economics
+- Risk Vectors
+  - Smart Contract Risks
+    - Audits
+    - Concerns
+  - Custody Risk
+  - Governance Risk
+  - Depeg Risk
+  - Collateral Risk
+- LlamaRisk Gauge Criteria
+- Risk Team Recommendations
 
-(Short explanation about the protocol's relation to Curve and reasons for conducting this report)
-(Short explanation of most important finding from the research. Include the most noteworthy risk factors here)
+## Relation to Curve
+  
+Zunami has a native stablecoin UZD which functions similar to OUSD. UZD is backed by ZLP which is a portfolio token representing positions in various yield strategies. As the value of ZLP increasses, the supply of UZD is increased through rebasing. Currently, UZD can be minted via depositing ZLP but this functionality would soon be unavailable.
+Zunami team is pursuing a mechanism where all minting and burning would happen through Algorithmic Peg Stabilizer(APS) vault. This APS would use [UZD/FRAXBP]() pool on curve to adjust UZD supply based on the demand.
 
 # Zunami Introduction
 
 ### Useful Links
 
-- Protocol Website
-  
-- Website: [https://www.zunami.io/](https://www.zunami.io/)
-  
-  dApp: [https://app.zunami.io/](https://app.zunami.io/)
-  
-  Github: [GitHub - ZunamiProtocol/ZunamiProtocol](https://github.com/ZunamiLab/ZunamiProtocol)
-  
-  Discord: [Zunami Protocol](https://discord.com/invite/BnC6kTWkUe)
-  
-  Twitter: https://twitter.com/zunamiprotocol?s=21
-  
-  Telegram: [Telegram: Contact @ZunamiCommunityChat](https://t.me/ZunamiCommunityChat)
-  
-  Blog: [https://zunamiprotocol.medium.com/](https://zunamiprotocol.medium.com/)
-  
-- Docs
-  
-- Github
-  
-- Important contracts
-  
-- Governance (Multisig address, gov contract, gov reference)
-  
-- [UZD/FraxBP Curve Pool](https://curve.fi/#/ethereum/pools/factory-v2-284/deposit) (Curve pool, analytics)
-  
-
+- Protocol Website: [Zunami.io](https://www.zunami.io/)
+- DAPP / Data Dashboard: [app.zunami.io](https://app.zunami.io/)
+- Blog: [Zunami Medium](https://zunamiprotocol.medium.com/)
+- Docs: [Introduction - Zunami Protocol Docs](https://zunamilab.gitbook.io/product-docs/)
+- Contracts: [Addresses - Zunami Protocol Docs](https://zunamilab.gitbook.io/product-docs/protocol-overview/addresses)
+- Governance: [Snapshot](https://snapshot.org/#/zunamidao.eth)
+- Audit: [Audits - Zunami Protocol Docs](https://zunamilab.gitbook.io/product-docs/risks-and-security/audits)
+- Curve Pool: [UZD/FraxBP Curve Pool
 ---
 
 - What problem does it solve?
@@ -60,7 +61,7 @@ Source: [Zunami docs](https://zunamilab.gitbook.io/product-docs/protocol-overvie
 
 The protocol operator regularly triggers the auto-compound method for Zunami, which collects and reinvests rewards from all strategies into Curve pools and reward contracts, boosting the value of ZLP and enabling compound interest for users. The protocol takes a cut in the form of performance fee which is sent to the protocol treasury.
 
-![](file://D:\🔴 Project\Markdown\Risk Report\assets\2023-05-23-02-39-35-image.png?msec=1685000807914)
+![](https://github.com/DiligentDeer/Assets/blob/main/Zunami/Untitled-2023-05-23-0124.png?raw=true)
 
 ### Strategies
 
@@ -72,7 +73,7 @@ Zunami simplifies the complex DeFi ecosystem by creating and automating strategi
 
 As of 15th May 2023, the strategy used and the breakdown is as follows:
 
-![](file://D:\🔴 Project\Markdown\Risk Report\assets\2023-05-15-17-53-22-image.png?msec=1685000807890)
+![](https://github.com/DiligentDeer/Assets/blob/main/Zunami/strategy.PNG?raw=true)
 
 Silo
 
@@ -102,7 +103,7 @@ ZLP can be redeemed with zero fees.
 
 UZD is a rebase stablecoin token that increases in quantity in proportion to the APY of the Zunami Protocol. It is backed by stablecoins that are allocated in the strategies i.e. Curve Finance pools. UZD is minted using ZLP, which are the liquidity provider (LP) tokens of the Zunami Protocol.
 
-![](file://D:\🔴 Project\Markdown\Risk Report\assets\2023-05-23-02-59-04-image.png?msec=1685000807835)
+![](https://github.com/DiligentDeer/Assets/blob/main/Zunami/UZDZLPholder.png?raw=true)
 
 UZD has mechanisms to keep it pegged to a $1. The buy side depeg (UZD > 1) can easily be arbed by minting more UZD. The sell side depeg (UZD < 1) can be resolved by redeeming UZD which has 0.5% fee.
 
@@ -112,7 +113,7 @@ With UZD 1.2, it has become a “pool-aware” token, meaning it stops rebasing 
 
 This prevents unwanted changes in the pool’s balance and reduces slippage. When a chunk of UZD (UZD in pools) are not rebasing, there is extra value in the system which can either be used to pay to the UZD holders or utilize in other operation that grows the protocol. Zunami opt for the later approach i.e. utilizing the extra value in bribing/locking/voting in favor of their protocol.
 
-![](file://D:\🔴 Project\Markdown\Risk Report\assets\2023-05-16-17-39-21-image.png?msec=1685000807836)
+![](https://github.com/DiligentDeer/Assets/blob/main/Zunami/discord1.PNG?raw=true)
 
 Moreover, UZD pool also earns rewards from Curve & Convex.<mark>The received CRV and CVX are locked to gain veCRV and vlCVX positions, which are the voting tokens from Curve and Convex respectively. These are used for voting on the best strategies for the Zunami Protocol.</mark>
 
@@ -120,7 +121,7 @@ Moreover, UZD pool also earns rewards from Curve & Convex.<mark>The received CRV
 
 APS is a recently launched mechanism that is used to balance the UZD in the UZD/FraxBP such that the depeg can be avoided.
 
-If there is an imbalance in the pool towards an increase in the FRAXBP proportion, APS withdraws USDC from the pool, deposits them into Zunami Protocol, mints UZD, and then deposits them ![🔙](https://abs-0.twimg.com/emoji/v2/svg/1f519.svg "Back with leftwards arrow above")back into the pool.
+If there is an imbalance in the pool towards an increase in the FRAXBP proportion, APS withdraws USDC from the pool, deposits them into Zunami Protocol, mints UZD, and then deposits them back into the pool.
 
 In case of an imbalance towards a large amount of UZD in the pool, APS either withdraws them to a vault strategy or performs UZD redemption, followed by withdrawing USDC and depositing them into the UZD/FRAXBP pool.
 
@@ -129,15 +130,15 @@ APS is also a yield destination where a user can deposit their UZD to earn more 
 APS is available through a new UZD Staking section on the website. 
 The benefits for the user include:
 
--  ![🫰](https://abs-0.twimg.com/emoji/v2/svg/1faf0.svg "Hand with index finger and thumb crossed") Inexpensive deposit/withdrawal of funds through the vault strategy.
--  ![🔁](https://abs-0.twimg.com/emoji/v2/svg/1f501.svg "Clockwise rightwards and leftwards open circle arrows") Rewards are automatically sold and reinvested.
--  ![⚖️](https://abs-0.twimg.com/emoji/v2/svg/2696.svg "Scales") Funds are diversified and rebalanced across UZD pools on various DEXs.
+-  Inexpensive deposit/withdrawal of funds through the vault strategy.
+-  Rewards are automatically sold and reinvested.
+-  Funds are diversified and rebalanced across UZD pools on various DEXs.
 
-Zunami team is pursuing to![🔐](https://abs-0.twimg.com/emoji/v2/svg/1f510.svg "Closed lock with key") close the ability for users to independently mint/redeem UZD and deposit directly into the APS. ![🏦](https://abs-0.twimg.com/emoji/v2/svg/1f3e6.svg "Bank") Those who wish to receive native UZD yield can simply buy it through a DEX, and for a yield boost, stake it in APS.![🤖](https://abs-0.twimg.com/emoji/v2/svg/1f916.svg "Robot face")
+Zunami team is pursuing to close the ability for users to independently mint/redeem UZD and deposit directly into the APS. Those who wish to receive native UZD yield can simply buy it through a DEX, and for a yield boost, stake it in APS.
 
 ### Zunami Protocol Economics
 
-![](file://D:\🔴 Project\Markdown\Risk Report\assets\2023-05-23-03-27-39-image.png?msec=1685000807888)
+![](https://github.com/DiligentDeer/Assets/blob/main/Zunami/APSUZD.png?raw=true)
 
 UZD is collateralized by stablecoins that are stored in Curve pools, generating income. UZD is also a rebase token, meaning that the quantity of UZD increases in proportion to the income generated by its collateral, equivalent to the APY of Zunami.
 
@@ -219,7 +220,7 @@ Users should also consider that there are high number of protocols involved, whi
 
 As quoted before Zunami highly depends on the owner’s account. Users using the project have to trust the owner and that the owner's account is properly secured. To counter this, their long term solution is to diversify the governance among the active and reputed DeFi users.
 
-![](file://D:\🔴 Project\Markdown\Risk Report\assets\2023-05-18-14-42-11-image.png?msec=1685000807838)
+![](https://github.com/DiligentDeer/Assets/blob/main/Zunami/fututrePlansDiscord2.PNG?raw=true)
 
 The protocol team is fully doxxed which is positive considering the above situation.
 
@@ -229,7 +230,7 @@ Zunami does not employ immutable governance but uses snapshot to conduct governa
 
 The majority proposals are focused on new strategies for ZLP.
 
-![](file://D:\🔴 Project\Markdown\Risk Report\assets\2023-05-21-15-45-24-image.png?msec=1684698324585?msec=1685000807839)
+![](https://github.com/DiligentDeer/Assets/blob/main/Zunami/priviledgesDiscord3.PNG?raw=true)
 
 Voting is still taking place in the form of ZLP/UZD
 
@@ -247,7 +248,7 @@ Moreover, Zunami has another mechanism that would adjust the UZD supply in the c
 
 MIM is resilient with it keeping the peg a well as recovering from a depeg. Since it would take time for the market to realize that UZD's value is compromised due a strategy token depeg, the effect of a sudden de-peg and recovery would have almost negligible impact on UZD pool on Curve.
 
-![](file://D:\🔴 Project\Markdown\Risk Report\assets\2023-05-21-16-28-02-image.png?msec=1685000807840)
+![](https://github.com/DiligentDeer/Assets/blob/main/Zunami/priceOfMIM.PNG?raw=true)
 
 ### ClevUSD
 
@@ -305,4 +306,4 @@ Economic Factors
 
 # Risk Team Recommendation
 
-(Don't worry about this section in the first draft, we will discuss together and with the protocol team to determine our final recommendation)
+
