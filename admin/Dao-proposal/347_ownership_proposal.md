@@ -37,7 +37,7 @@ The new stable price agg contract changes some functionality to aggregate stable
 
 ## **Specification**:
 
-- The following script can be used to verify the vote executes and test by creating a loan in the new market: https://gist.github.com/michwill/ad8da86fa81317b883218cb081e554d1
+- The following Brownie script can be used to verify the vote executes properly and test the new market by creating a loan: https://gist.github.com/michwill/ad8da86fa81317b883218cb081e554d1
 - Deployment logs for price oracles and monetary policies for wsteth: https://github.com/curvefi/curve-stablecoin/commit/ed1066b69c61933a711bd844a1ad39cee2c3b94a
 
 
