@@ -43,15 +43,18 @@
 -
 
 
-## TLDR
+## Relation to Curve
 
-In light of a recent forum post to add eUSD+FraxBP to the gauge controller, posted on[ March 6th, 2023](https://gov.curve.fi/t/proposal-to-add-eusd-fraxbp-gauge/8938), and subsequently deployed on [Curve](https://curve.fi/#/ethereum/pools/factory-v2-277/deposit) and [Convex](https://www.convexfinance.com/stake), this article aims to provide information about the functioning of eUSD (Electronic Dollars). To unpack Electronic Dollars ([eUSD](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F)), we’ll start with an overview of MobileCoin, a protocol for [confidential tokens that enables payment on mobile devices](https://mobilecoin.com/files-uploads/2022/10/MobileCoin_Stablecoin_Whitepaper_Final_Edits.pdf). We then introduce [Reserve Protocol](https://reserve.org/en/protocol/), a platform that enables permissionless creation of stablecoins, with Electronic Dollars (eUSD) as one of many stablecoins on the platform.
+A [proposal](https://gov.curve.fi/t/proposal-to-add-eusd-fraxbp-gauge/8938) to add the [eUSD+FraxBP](https://curve.fi/#/ethereum/pools/factory-v2-277/deposit) Curve pool to the gauge controller was posted on March 6th, 2023. A second gauge was [proposed](https://gov.curve.fi/t/proposal-to-add-hyusd-eusd-to-the-gauge-controller/9234/3) for the [hyUSD+eUSD](https://curve.fi/#/ethereum/pools/factory-crypto-252/deposit) pool on May 16th. Both proposals passed a DAO vote on [March 13th](https://dao.curve.fi/vote/ownership/293) and [May 31st](https://dao.curve.fi/vote/ownership/336).
 
-# MobileCoin Introduction
+This article aims to provide information relevant for Curve LPs about Reserve Protocol and the mechanics behind RTokens, with particular focus on its flagship stablecoin eUSD ([Electronic Dollar](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F)). To unpack eUSD, we’ll start with an overview of [MobileCoin](https://mobilecoin.com/files-uploads/2022/10/MobileCoin_Stablecoin_Whitepaper_Final_Edits.pdf), a protocol for confidential tokens that enables payment on mobile devices. We then introduce [Reserve Protocol](https://reserve.org/en/protocol/), a DeFi platform built on Ethereum that enables the permissionless creation of stablecoins. Finally, we will cover relevant risk parameters for the benefit of LPs exposed to RTokens, including eUSD and hyUSD.
+
+## MobileCoin Introduction
 
 MobleCoin started in 2017 as an attempt to [develop and integrate fast, private and easy-to-use cryptocurrency](https://mobilecoin.com/files-uploads/2022/09/MobileCoin_White_Paper.pdf) into mobile apps like WhatsApp or Signal. MobileCoin is a [directed acrylic graph (DAG) cryptocurrency blockchain](https://mobilecoin.com/files-uploads/2022/09/Mechanics-of-MobileCoin-v0-0-39-preview-10-11.pdf) that draws its roots from the Stellar Consensus Protocol and Monero, a cryptocurrency focused on privacy. Because of its focus on privacy, earlier technical developments from 2021 focused on cryptographic concepts like [ring signatures and secure enclaves](https://mobilecoin.com/files-uploads/2022/09/Mechanics-of-MobileCoin-v0-0-39-preview-10-11.pdf).
 
-**Electronic Dollars (eUSD)**
+
+### Electronic Dollars (eUSD)
 
 A year later in 2022, MobileCoin release the [white paper](https://mobilecoin.com/files-uploads/2022/10/MobileCoin_Stablecoin_Whitepaper_Final_Edits.pdf) for Electronic Dollars (eUSD), the first asset to natively use MobileCoin’s confidential tokens functionality, making it the first private digital dollar, circumventing the need to use “mixers'' as has been done on Ethereum and Bitcoin. 
 
@@ -68,7 +71,7 @@ In summary, while eUSD is intended to be a private digital dollar on the MobileC
 With that context, the next section will introduce the Reserve Protocol which facilitates full collateralization and liquidity for eUSD on Ethereum.
 
 
-# Reserve Protocol Introduction
+## Reserve Protocol Introduction
 
 The Reserve Protocol released their [original white paper](https://reserve.org/assets/files/whitepaper.pdf) in 2018 ([deprecated](https://reserve.org/en/protocol/2018_version/#-version-of-the-reserve-protocol)). Much of the foundation laid in the original paper remains today including the Reserve Dollar (RSV), the protocol’s native stablecoin; the Reserve Rights token (RSR), a token used to facilitate stability and Collateral Tokens, assets to back the RSV. 
 
@@ -103,7 +106,7 @@ All RTokens launched on Reserve Protocol are governed separately by their respec
 
 The analysis in this article will focus on [eUSD](https://etherscan.io/address/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F) and [eusdRSR](https://etherscan.io/address/0x18ba6e33ceb80f077DEb9260c9111e62f21aE7B8), as a specific implementation of RToken and RSR token, respectively, unless the latter are discussed as a general concept. 
 
-**Governance Asset**
+### Governance Asset
 
 Reserve Protocol has a modified version of the [OpenZeppelin Governor](https://docs.openzeppelin.com/contracts/4.x/api/governance) called [Governor Alexios](https://etherscan.io/address/0x7e880d8bD9c9612D6A9759F96aCD23df4A4650E6) which is suggested to all RToken deployers by default to [adjust](https://reserve.org/en/protocol/reserve_rights_rsr/?search=alexios#s-result) governance parameters as they see fit. Governor Alexios allows RSR holders to propose, vote and execute proposals. RSR holders can also delegate their voting power to other addresses. 
 
@@ -154,7 +157,7 @@ The capitalization and backing of eUSD can be characterized by [two distinct sta
 
 While the Reserve Protocol aims to be fully collateralized at all times, it won’t always be. For example, if governance decides to change the collateral basket or, in cases of market volatility (see USDC depeg scenario above), emergency collateral has to be swapped in as the defaulting collateral is auctioned off, eUSD may be fully funded (right amount of value), but not be fully collateralized (right amount of collateral tokens). Thus, only with full collateralization can a **_redemption mix_** can be made in depositing eUSD for its collateral backing. 
 
-**Stablecoin Peg Mechanisms**
+### Stablecoin Peg Mechanisms
 
 Once deployed, eUSD is designed to trade at $1.00 reflecting the market value of the entire collateral basket while 100% of revenue from earned interest is directed by governance to go towards eusdRSR stakers. Any deviation from $1.00 is designed to get arbitraged away.
 
@@ -166,7 +169,7 @@ This will happen through issuance and redemption mechanisms. The **eUSD RToken c
 - Redemption [throttle rate](https://etherscan.io/token/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F#readProxyContract) at 5.0% of eUSD supply
 - [Source](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F)
 
-**Advanced RToken parameters** 
+### Advanced RToken parameters
 
 In addition to issuance and redemption throttling, there are other RToken parameters as set in the [Backing Manager](https://etherscan.io/address/0xF014FEF41cCB703975827C8569a3f0940cFD80A4#readProxyContract) as part of protocol operations to regulate mint/redeem action including:
 
@@ -204,7 +207,7 @@ Although the Reserve Protocol intends for arbitragers to help restore peg, the v
 
 However, as long as the price discrepancy between eUSD and its underlying collateral tokens persists, arbitragers would continue to exploit the price discrepancy until eUSD returns to its peg value of $1.00 USD.
 
-**Market**
+### Market
 
 Electronic Dollars (eUSD) trading is currently limited to decentralized exchanges. [Coingecko](https://www.coingecko.com/en/coins/electronic-usd#markets) lists the DEX 4swap with trading pairs eUSD/USDC and eUSD/MOB. Although available on Uniswap, it is not frequently traded. Onchain data suggests most of the trading activity is on Curve, with the following pairs:
 
@@ -271,12 +274,12 @@ Finally, we see the largest spike in staked eusdRSR on March 23rd, following the
 [Query source](https://dune.com/queries/2465756/4055736)
 
 
-# Risk Vectors
+## Risk Vectors
 
 (Introduce the relevant risk vectors. Typical vectors listed as sections below, but modify to suit the findings from your research.)
 
 
-## Smart Contract Risk
+### Smart Contract Risk
 
 [Trail of Bits](https://github.com/reserve-protocol/protocol/blob/master/audits/Trail%20of%20Bits%20-%20Reserve%20Org%20-%20Final%20Report.pdf) submitted a security assessment on August 11, 2022. The audit found five high, two medium, three low severity and five informational issues. The high severity issues are summarized in the table below. The team has taken action to mitigate severity around Access Control (see Centralization Risk), but it is unclear how the other four high severity issues were addressed. 
 
@@ -310,7 +313,7 @@ One potential issue that could arise in the future is the upgradability of the c
 
 In summary, the Reserve Protocol team has subjected themselves to several rounds of audits. Two of the auditors found several high severity issues. **It is recommended the team takes steps to publicly report their progress in addressing these issues**.
 
-**Centralization Risk**
+### Centralization Risk
 
 The [Main contract](https://etherscan.io/address/0x7697aE4dEf3C3Cd52493Ba3a6F57fc6d8c59108a#code) is central to the functioning of [eUSD](https://etherscan.io/address/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F#code) (as [MainP1](https://etherscan.io/address/0x143C35bFe04720394eBd18AbECa83eA9D8BEdE2F#code), which Main is a proxy for is central to the Reserve Protocol). The Main contract is linked to other contracts essential to various protocol operations including: Asset Registry, Backing Manager, Basket Handler, eUSD, eusdRSR, Broker, Furnace, Distributor, RToken Trader and RSR Trader (see [Access Control sheet](https://docs.google.com/spreadsheets/d/1_tdf1WDr6QMAIVZcEJpMb1Pc43b0W5qRZeqq0ByeH6Y/edit?usp=sharing)). 
 
@@ -342,7 +345,7 @@ In summary, while certain addresses have significant privileges and control over
 
 ![mitigate_centralization_risk](https://github.com/PaulApivat/temp/assets/4058461/4d87cc85-d659-4035-87a5-8b8ab357e7ce)
 
-## Collateral Risk
+### Collateral Risk
 
 The Electronic Dollar (eUSD) is 100% backed by a basket of yield bearing stablecoins (cUSDC, cUSDT, ssUSDC, ssUSDT) with [emergency](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F) [collateral](https://etherscan.io/address/0x6d309297ddDFeA104A6E89a132e2f05ce3828e07#code) of pure stablecoins (USDC, USDT, USDP, TUSD, DAI). 
 
@@ -377,27 +380,17 @@ Nevertheless, as identified in the audit report from [Code4Arena](https://github
 [eUSD overcollateralization: May 25, 2023](https://dune.com/paulapivat/llama-risk-assessment-electronic-dollar-eusd)
 
 
-## 
-
-
-## 
-
-
-## 
-
-
-## Custody Risk
+### Custody Risk
 
 The prime basket collateral backing Electronic Dollars (eUSD) is handled by the [backing manager contract](https://etherscan.io/address/0xF014FEF41cCB703975827C8569a3f0940cFD80A4#code). This contract sits within the Main contract, which itself is controlled by a diversity of entities who have permission over the system including the TimelockController, two EOAs and two Multisigs (see Centralization section). The Reserve Protocol team has taken steps to mitigate potential custody risk. 
 
 
-## Oracle Risk
+### Oracle Risk
 
 The Reserve Protocol uses only [one Chainlink oracle](https://github.com/reserve-protocol/protocol/blob/master/contracts/plugins/assets/OracleLib.sol) price feed with no apparent backup. The Backing Manager contract has [maxTradeSlippage](https://etherscan.io/address/0xF014FEF41cCB703975827C8569a3f0940cFD80A4#code), setting maximum deviation from oracle prices that a trade can clear at. Moreover, the protocol has the pause, short and long freeze functions to mitigate any extensive oracle failure situation. 
 
 
-
-## Depeg Risk
+### Depeg Risk
 
 The Electronic Dollar (eUSD) is an overcollateralized stablecoin. While eUSD is designed to trade at the market value of the entire prime basket, it is overcollateralized through the staking of eusdRSR. This provides a level of issuance in case of collateral default as we saw when [USDC depegged in March 2023](https://medium.com/reserve-currency/eusd-emerges-strong-the-resilience-of-reserve-protocol-during-usdc-depegging-e5a698a990c9) and eusdRSR [stakers help re-collateralized](https://www.poap.delivery/reserve-eusd) eUSD to defend its peg. 
 
@@ -405,9 +398,8 @@ Anyone can bring an amount of collateral token value and [mint a corresponding v
 
 In summary, there are sufficient reserves from overcollateralization. There is no reliance on an external AMM as the mint and redeem operations are built into the protocol. Stability is maintained via market arbitrage, while bribery mechanisms via the recent voting for Curve gauge will be used to incentivize liquidity. While there is low risk of depeg at the moment, eUSD is relatively young and further monitoring of the peg is warranted as the stablecoin continues to increase in market cap.
 
-**LlamaRisk Gauge Criteria**
 
-(An analysis of all the above findings are used to answer the following questions, which we ultimately use to determine whether we recommend a gauge or not)
+## LlamaRisk Gauge Criteria
 
 **Centralization Factors**
 
@@ -438,7 +430,7 @@ Electronic Dollars (eUSD) is currently sufficiently overcollateralized such that
 The audits did not reveal any critical, major or minor issues to be concerned with. Although the code and protocol design is fairly complex, the team has made efforts to ensure high readability and clarity in their documentation and test coverage. 
 
 
-# Risk Team Recommendation
+## Risk Team Recommendation
 
 (Don't worry about this section in the first draft, we will discuss together and with the protocol team to determine our final recommendation)
 
