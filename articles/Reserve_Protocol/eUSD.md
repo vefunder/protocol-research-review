@@ -225,13 +225,13 @@ There are a multitude of other RToken parameters as set in the [Backing Manager]
 
 ### Stablecoin Peg Mechanisms
 
-eUSD is designed to trade at $1.00 reflecting the market value of the entire collateral basket while 100% of revenue from earned interest is directed by governance to go towards eusdRSR stakers. Any deviation from $1.00 is designed to get arbitraged away.
+eUSD is designed to trade at $1.00 reflecting the market value of the entire collateral basket while 100% of revenue from earned interest is directed by governance to go towards eusdRSR stakers. Any deviation from $1.00 is designed to get arbitraged toward the reference price.
 
 This will happen through issuance and redemption mechanisms. The eUSD RToken contract has specific functions to regulate the process of issuance and redemption. Issuance throttle limits how much eUSD can be issued, to limit value extraction in case of an exploit. After a large issuance, the issuance limit ‘recharges’ to the defined maximum. The redemption throttle works similarly where the protocol tries to ensure the net redemption for eUSD never exceeds an hourly limit. The specific parameters for eUSD are as follows: 
 
-- Issuance throttle ([1,000,000 eUSD](https://etherscan.io/token/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F#readProxyContract) maximum amount per the current block) 
+- Issuance throttle ([1,000,000 eUSD](https://etherscan.io/token/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F#readProxyContract) maximum amount per hour) 
 - Issuance [throttle rate](https://etherscan.io/token/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F#readProxyContract) at 2.5% of eUSD supply
-- Redemption throttle ([1,500,000 eUSD](https://etherscan.io/token/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F#readProxyContract) maximum amount per the current block)
+- Redemption throttle ([1,500,000 eUSD](https://etherscan.io/token/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F#readProxyContract) maximum amount per hour)
 - Redemption [throttle rate](https://etherscan.io/token/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F#readProxyContract) at 5.0% of eUSD supply
 - [Source](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F)
 
@@ -239,28 +239,19 @@ The following section provides case scenarios for when eUSD deviates from peg:
 
 **Scenario 1: eUSD trading below peg**
 
-Assume that eUSD is currently trading at $0.95 cents. An arbitrageur notices the price difference and decides to buy eUSD at the discounted price. The arbitrageur would need to buy at least $1,000 worth of eUSD (minimum trade volume) to execute the trade. However, they must wait for the 2 hour trading delay. Once the delay expires, the arbitrageur can execute the trade with a maximum trade slippage of 1%.
+Assume that eUSD is currently trading at $0.95 cents. An arbitrageur notices the price difference and decides to buy eUSD at the discounted price. The vast majority of liquidity for eUSD is in the [eUSD/FraxBP](https://etherscan.io/address/0xaeda92e6a3b1028edc139a4ae56ec881f3064d4f) Curve pool, so eUSD is most likely to be sourced there.
 
-After buying eUSD, the arbitrageur would then redeem it for the basket of collateral tokens backing its peg (see Prime basket). The redemption throttle limits the maximum amount that can be redeemed to 1,500,000 eUSD per block, so the arbitrageur would need to wait until the redemption throttle resets before redeeming more eUSD.
+After buying eUSD, the arbitrageur would then redeem it for the basket of collateral tokens backing its peg (see Prime basket). The redemption throttle limits the maximum amount that can be redeemed to 1,500,000 eUSD or 5% of the supply in a given hour. If the redemption throttle/throttle rate has been triggered, the arb may revert for up to an hour until the throttle becomes inactive (This is an unlikely scenario meant to mitigate losses during a potential exploit).
 
-The backing buffer is set at 0.01%, so the arbitrageur can be sure that the collateral backing the eUSD is sufficient to maintain the peg. In case the collateral value falls below the backing buffer of 0.01%, the eUSD issuer can take actions to replenish the collateral and maintain the peg.
+The arb would redeem a proportional share of the eUSD basket ie. $0.25 saUSDC, $0.25 saUSDT, $0.25 cUSDC, $0.25 cUSDT per 1 eUSD redeemed. This would net the arb a 5% profit - exchange fees and gas cost.
 
 Overall, arbitragers would help eUSD regain its peg by buying the stablecoin at a discount, redeeming it for the underlying collateral, and thereby reducing the supply of eUSD in circulation until its price returns to the peg.
 
 **Scenario 2: eUSD trading above peg**
 
-If eUSD is trading above peg at $1.05 cents, arbitragers would take advantage of this price discrepancy by selling eUSD on the market and buying its underlying collateral tokens to redeem eUSD at the peg value of $1.00 USD.
+If eUSD is trading above peg at $1.05 cents, arbitragers would take advantage of this price discrepancy by minting new eUSD and selling on the market (likely into the Curve eUSD/FraxBP pool) until regaining the peg value of $1.00 USD.
 
-To redeem eUSD at the peg value, arbitragers would first purchase the underlying collateral tokens in the market with the excess eUSD that they hold. They would then deposit these purchased collateral tokens to issue eUSD at the 1:1 peg value. The arbitragers would then sell the eUSD back on the market as long as it is trading above peg ($1.05).
-
-Although the Reserve Protocol intends for arbitragers to help restore peg, the various backing parameters could constrain how fast that happens. For example:
-
-- Trading delay (2 hours) could make it difficult for quickly buy/sell eUSD in response to market changes
-- The minimum trade volume of $1,000 could limit the ability of smaller arbitragers to trade and help restore peg
-- The RToken maximum trade volume at 1,000 eUSD could make it more difficult for arbitragers to take advantage of small price differences
-- The 15 minute auction length duration would limit the amount of time available for arbitragers to participate in the auction and help bring eUSD back to peg.
-
-However, as long as the price discrepancy between eUSD and its underlying collateral tokens persists, arbitragers would continue to exploit the price discrepancy until eUSD returns to its peg value of $1.00 USD.
+Arbitragers would first attain the underlying eUSD collateral tokens by swapping and wrapping to the correct propotion of the basket. They would then deposit these collateral tokens to mint eUSD at the 1:1 peg value. The arbitragers would then sell the eUSD back on the market as long as it is trading above peg.
 
 
 ### Market
