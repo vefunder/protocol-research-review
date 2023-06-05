@@ -116,7 +116,22 @@ Source: [Register App](https://register.app/#/)
 Since RTokens generate yield by lending their collateral assets and governance can direct a portion of revenue to RSR stakers, RTokens that generate and share revenue are the ones likely to attract stakers and be [protected](https://reserve.org/en/protocol/overall_design/?search=protected#s-result) by overcollateralization, as opposed to RToken governance that choose not to direct revenue to RSR stakers. Aside from being the [first](https://www.poap.delivery/reserve-eusd) RToken on the Reserve Protocol (not counting its native RSV), Electronic Dollars (eUSD) allocates 100% of its revenue to RSR stakers. This likely contributes to its considerably larger marketcap compared to other RTokens. 
 
 
-### RSR as eUSD Insurance
+#### Revenue for RToken Holders and RSR Stakers
+
+(Note: Links in this section use eUSD contracts as an example, as it is the predominant RToken and the main focus of this report)
+
+The basic process for sharing revenue begins with the [Backing Manager](https://etherscan.io/address/0xF014FEF41cCB703975827C8569a3f0940cFD80A4) contract where collateral assets are managed. When the yield-bearing basket increases in value relative to the outstanding RToken supply, the Backing Manager will either mint new RToken or trade profits from its backing for RToken or RSR through the [RToken Trader](https://etherscan.io/address/0x3d5EbB5399243412c7e895a7AA468c7cD4b1014A)/[RSR Trader](https://etherscan.io/address/0xE04C26F68E0657d402FA95377aa7a2838D6cBA6f) contract. Revenue shared with RToken holders is sent to the [Furnace](https://etherscan.io/address/0x57084b3a6317bea01bA8f7c582eD033d9345c2B2) contract where it gradually burns the RToken, increasing the redemption value. Revenue shared with RSR stakers is sent to the [stRSR pool](https://etherscan.io/address/0x18ba6e33ceb80f077deb9260c9111e62f21ae7b8) where it is slowly distributed as rewards to increase the stRSR/RSR value.
+
+ Note that it is also possible to share revenue additionally with an arbitrary address, such as to compensate the token deployer. For example, hyUSD makes a 3% allocation to the hyUSD treasury, which they provide an explanation for in the [Reserve proposal](https://forum.reserve.org/t/rfc-introducing-hyusd/404#what-will-the-initial-revenue-distribution-look-like-15).
+
+The following flowchart shows revenue distribution to RToken holders and RSR stakers with a theoretical 40/60 revenue split.
+
+![image](https://github.com/vefunder/protocol-research-review/assets/51072084/9b6070a5-9677-48ba-bbfb-836f3ae58f5f)
+
+Source: [Reserve Docs: Protocol Operations](https://reserve.org/protocol/protocol_operations/)
+
+
+#### RSR as eUSD Insurance
 
 eusdRSR stakers earn rewards based on three factors:
 
@@ -135,6 +150,16 @@ In this instance, eusdRSR stakers provided overcollateralization for eUSD as the
 Source: Reserve Docs: [Recapitalization](https://reserve.org/en/protocol/protocol_operations/#recapitalization)
 
 Unstaking eusdRSR requires a 2 week [delay](https://etherscan.io/address/0x18ba6e33ceb80f077DEb9260c9111e62f21aE7B8#readProxyContract) as specified by governance. This is necessary to prevent self interested actors from frontrunning an impending default event and provide additional assurances to anyone with eUSD exposure. During the delay, the staker does not earn rewards to prevent stakers from misusing the staking mechanic by repeatedly [unstaking and re-staking](https://reserve.org/protocol/reserve_rights_rsr/#reserve-rights-staking) into the contract.
+
+
+#### eUSD Basket Rebalancing
+
+The capitalization and backing of eUSD can be characterized by [two distinct states](https://reserve.org/en/protocol/protocol_operations/?search=redeem#s-result):
+
+- **Fully collateralized**: the [Backing Manager](https://etherscan.io/address/0xF014FEF41cCB703975827C8569a3f0940cFD80A4#code) contract holds the right balance of the collateral tokens to offer 100% redeemability.
+- **Fully funded**: there is the right amount of value, but not necessarily the right amount of collateral to offer 100% redeemability.
+
+While the Reserve Protocol aims to be fully collateralized at all times, it won’t always be. For example, if governance decides to change the collateral basket or, in cases of market volatility (see USDC depeg scenario above), emergency collateral has to be swapped in as the defaulting collateral is auctioned off. eUSD may be fully funded (right amount of value), but not be fully collateralized (right amount of collateral tokens). When not fully collateralized, the protocol will attempt to sell off the excess asset until the system is either fully collateralized or RSR is required to recapitalize the system.
 
 
 ### RToken Governance
@@ -182,16 +207,6 @@ eusdRSR stakers are in charge of registering, unregistering and swapping ERC20 a
 - Unregister: Removes asset from Asset Registry
 
 With eUSD’s prime basket of collateral defined, anyone can deposit the required collateral tokens (i.e., saUSDC, saUSDT, cUSDC, cUSDT) to issue eUSD and conversely, deposit eUSD to redeem the collateral tokens. 
-
-
-### eUSD Basket Rebalancing
-
-The capitalization and backing of eUSD can be characterized by [two distinct states](https://reserve.org/en/protocol/protocol_operations/?search=redeem#s-result):
-
-- **Fully collateralized**: the [Backing Manager](https://etherscan.io/address/0xF014FEF41cCB703975827C8569a3f0940cFD80A4#code) contract holds the right balance of the collateral tokens to offer 100% redeemability.
-- **Fully funded**: there is the right amount of value, but not necessarily the right amount of collateral to offer 100% redeemability.
-
-While the Reserve Protocol aims to be fully collateralized at all times, it won’t always be. For example, if governance decides to change the collateral basket or, in cases of market volatility (see USDC depeg scenario above), emergency collateral has to be swapped in as the defaulting collateral is auctioned off. eUSD may be fully funded (right amount of value), but not be fully collateralized (right amount of collateral tokens). When not fully collateralized, the protocol will attempt to sell off the excess asset until the system is either fully collateralized or RSR is required to recapitalize the system.
 
 
 ### Stablecoin Peg Mechanisms
