@@ -52,30 +52,31 @@ This article aims to provide information relevant for Curve LPs about Reserve Pr
 
 ## MobileCoin Introduction
 
-MobileCoin is a [directed acrylic graph (DAG) cryptocurrency blockchain](https://mobilecoin.com/files-uploads/2022/09/Mechanics-of-MobileCoin-v0-0-39-preview-10-11.pdf) based on the Stellar Consensus Protocol and Monero. It was launched in 2017 with the objective to develop a high-throughput, private and easy-to-use cryptocurrency that could be integrated into mobile apps like WhatsApp or Signal. Because of its focus on privacy, earlier technical developments from 2021 focused on cryptographic concepts like [ring signatures and secure enclaves](https://mobilecoin.com/files-uploads/2022/09/Mechanics-of-MobileCoin-v0-0-39-preview-10-11.pdf).
+[MobileCoin](https://mobilecoin.com/files-uploads/2022/09/Mechanics-of-MobileCoin-v0-0-39-preview-10-11.pdf) is a directed acrylic graph (DAG) cryptocurrency blockchain based on the Stellar Consensus Protocol and Monero. It was launched in 2017 with the objective to develop a high-throughput, private and easy-to-use cryptocurrency that could be integrated into mobile apps like WhatsApp or Signal. Because of its focus on privacy, earlier technical developments from 2021 focused on cryptographic concepts like [ring signatures and secure enclaves](https://mobilecoin.com/files-uploads/2022/09/Mechanics-of-MobileCoin-v0-0-39-preview-10-11.pdf).
 
 
 ### eUSD from Conception to Deployment
 
 In 2022, MobileCoin released the [white paper](https://mobilecoin.com/files-uploads/2022/10/MobileCoin_Stablecoin_Whitepaper_Final_Edits.pdf) for Electronic Dollars (eUSD). It would be the first asset to natively use MobileCoin’s confidential tokens functionality, making it the first private digital dollar and circumventing the need to use mixers as has been done on Ethereum and Bitcoin. 
 
-eUSD was deployed as a partnership between MobileCoin and Reserve Protocol to both Ethereum and MobileCoin on [February 24th, 2023](https://medium.com/reserve-currency/introducing-the-electronic-dollar-eusd-cb9d8f50aae), along with a KYC/AML-permissioned bridge. The architecture leverages the high security assurances and DeFi composability of Ethereum to support its basket of yield-bearing collateral types where eUSD can be minted, burned and governed by a DAO. MobileCoin then allows eUSD to scale as a medium of exchange by offeering low-fee, private transactions optimized for mobile devices. 
+eUSD was deployed as a partnership between MobileCoin and Reserve Protocol to both Ethereum and MobileCoin on [February 24th, 2023](https://medium.com/reserve-currency/introducing-the-electronic-dollar-eusd-cb9d8f50aae), along with a KYC/AML-permissioned bridge. The architecture combines the high security assurances and DeFi composability of Ethereum with the low-fee and privacy feature of MobileCoin. Ethereum secures eUSD's basket of collateral types where core protocol mechanics are governed by a DAO. eUSD can then be bridged to MobileCoin where it can scale as a medium of exchange by being an accessible payments platform optimized for mobile devices. 
 
-There are processes for wrapping and unwrapping eUSD from MobileCoin to Ethereum and vice versa, using a bridge with ed25519 public keys and an elliptic-curve signature system in either direction by pre-approved parties.
+### eUSD Bridge
 
-There is a [1:1 relationship](https://auditor.mobilecoin.foundation/) between wrapped eUSD tokens on the MobileCoin blockchain and eUSD ERC20 tokens stored in a [Gnosis Safe](https://app.safe.global/balances?safe=eth:0x30DA4EB397215cF407C46854CA7188f4e60F3402) multisig on Ethereum. Minting and burning of wrapped eUSD is [verifiable](https://auditor.mobilecoin.foundation/) on the MobileCoin blockchain, while correspondent deposits and withdrawals from the custodian multisig are verifiable on the Ethereum chain.
+The process for wrapping and unwrapping eUSD between MobileCoin and Ethereum involves a bridge managed by Reserve Protocol using elliptic-curve signatures co-signed by pre-approved liquidity providers. There is a 1:1 relationship between wrapped eUSD tokens on the MobileCoin blockchain and eUSD ERC20 tokens stored in a [Gnosis Safe](https://app.safe.global/balances?safe=eth:0x30DA4EB397215cF407C46854CA7188f4e60F3402) multisig on Ethereum. Minting and burning of wrapped eUSD is [verifiable](https://auditor.mobilecoin.foundation/) on the MobileCoin blockchain, while correspondent deposits and withdrawals from the custodian multisig are verifiable on the Ethereum chain.
 
-In summary, while eUSD is intended to be a private digital dollar on the MobileCoin network, its deployment includes a manual bridge tied to a Gnosis Safe contract containing a basket of collateral. The Reserve Protocol helps to make eUSD not only the first private digital dollar, but one that is a fully collateralized [US-dollar backed](https://mobilecoin.com/blog/mobilecoin-launches-eusd) stablecoin on Ethereum. This is achieved via a collateralized asset bridge operation where an operator facilitates locking/unlocking and minting/burning on either side of the bridge between MobileCoin and Ethereum. This includes [wrapping](https://medium.com/reserve-currency/introducing-the-electronic-dollar-eusd-cb9d8f50aae) eUSD from Ethereum to MobileCoin and unwrapping eUSD from MobileCoin to Ethereum. A visual diagram of the process is provided below:
+While eUSD is intended to be a private digital dollar on the MobileCoin network, its architecture includes a manual, permissioned bridge with core protocol functionality taking place on Ethereum. An operator (Reserve) manages locking/unlocking and minting/burning on either side of the bridge between MobileCoin and Ethereum. A visual diagram of the process is provided below:
 
 ![wrapping_eusd](https://github.com/PaulApivat/temp/assets/4058461/3a6a91c9-6a97-498f-9714-286f68693e42)
 
 [source](https://medium.com/reserve-currency/introducing-the-electronic-dollar-eusd-cb9d8f50aae)
 
-With that context, the next section will introduce the Reserve Protocol which facilitates full collateralization and liquidity for eUSD on Ethereum.
+With that context, the next section will introduce the Reserve Protocol and protocol mechanics for eUSD on Ethereum.
 
 
 ## Reserve Protocol Introduction
 
+The Reserve Protocol helps to make eUSD not only the first private digital dollar, but one that is a fully collateralized [US-dollar backed](https://mobilecoin.com/blog/mobilecoin-launches-eusd) stablecoin on Ethereum.
 The Reserve Protocol released their [original white paper](https://reserve.org/assets/files/whitepaper.pdf) in 2018 ([deprecated](https://reserve.org/en/protocol/2018_version/#-version-of-the-reserve-protocol)). Much of the foundation laid in the original paper remains today including the Reserve Dollar (RSV), the protocol’s native stablecoin; the Reserve Rights token (RSR), a token used to facilitate stability and Collateral Tokens, assets to back the RSV. 
 
 Changes that led to its current evolution involves the following:
