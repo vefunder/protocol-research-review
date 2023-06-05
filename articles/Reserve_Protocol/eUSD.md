@@ -116,13 +116,34 @@ Source: [Register App](https://register.app/#/)
 Since RTokens generate yield by lending their collateral assets and governance can direct a portion of revenue to RSR stakers, RTokens that generate and share revenue are the ones likely to attract stakers and be [protected](https://reserve.org/en/protocol/overall_design/?search=protected#s-result) by overcollateralization, as opposed to RToken governance that choose not to direct revenue to RSR stakers. Aside from being the [first](https://www.poap.delivery/reserve-eusd) RToken on the Reserve Protocol (not counting its native RSV), Electronic Dollars (eUSD) allocates 100% of its revenue to RSR stakers. This likely contributes to its considerably larger marketcap compared to other RTokens. 
 
 
-### Governance Asset
+### RSR as eUSD Insurance
 
-All RTokens launched on Reserve Protocol are governed separately by their respective communities. For example, eUSD (Electronic Dollars) will make governance choices independent of other RTokens like [RSV](https://register.app/#/overview?token=0x196f4727526eA7FB1e17b2071B3d8eAA38486988) (Reserve Protocol’s native stablecoin), [ETH+](https://register.app/#/overview?token=0xE72B141DF173b999AE7c1aDcbF60Cc9833Ce56a8) (an Ethereum-aligned Liquid Staking Token basket), or [hyUSD](https://register.app/#/overview?token=0xaCdf0DBA4B9839b96221a8487e9ca660a48212be) (a decentralized flatcoin that provides access to DeFi yields which also recently received a [Curve gauge](https://vote.convexfinance.com/#/proposal/0xbdb05edfcbdeececc5331d1194cae539a366cf37b4269faeb08d8305ea09568f)). 
+eusdRSR stakers earn rewards based on three factors:
 
-Reserve Protocol has a modified version of the [OpenZeppelin Governor](https://docs.openzeppelin.com/contracts/4.x/api/governance) called [Governor Alexios](https://etherscan.io/address/0x7e880d8bD9c9612D6A9759F96aCD23df4A4650E6) which is suggested to all RToken deployers by default to [adjust](https://reserve.org/en/protocol/reserve_rights_rsr/?search=alexios#s-result) governance parameters as they see fit. Governor Alexios allows RSR holders to propose, vote and execute proposals. RSR holders can also delegate their voting power to other addresses. 
+- Amount of revenue eUSD generates
+- Portion of revenue governance has directed to eusdRSR stakers
+- Portion of total eusdRSR staked on eUSD
 
-Accordingly, Governor Alexios, recommended to eUSD by default, includes the following [configurations](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F) as decided by [eusdRSR](https://etherscan.io/address/0x7e880d8bD9c9612D6A9759F96aCD23df4A4650E6#readContract) stakers:
+For eUSD, [100% of revenue earned is directed](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F) to eusdRSR stakers. With governance conducted by eusdRSR holders, there is an incentive to keep eUSD safe from unnecessary risk, as their funds are literally at stake. 
+
+In addition to their role in governance, eusdRSR stakers provide overcollateralization to eUSD and are subject to seizure in case the collateral backing for eUSD defaults. For example, [during USDC’s depegging in March 2023](https://medium.com/reserve-currency/eusd-emerges-strong-the-resilience-of-reserve-protocol-during-usdc-depegging-e5a698a990c9), eUSD required emergency action. Since it is 50% backed by USDC (approx 25% saUSDC, 25% cUSDC), the protocol had to sell off their backing for emergency collateral (USDT). Through the process, eusdRSR stakers helped [re-collateralized eUSD](https://www.poap.delivery/reserve-eusd) in defense of its peg. 
+
+In this instance, eusdRSR stakers provided overcollateralization for eUSD as the USDC portion of the backing collateral defaulted, thus serving as insurance. The general process of recapitalizing any RToken is shown below: 
+
+![image](https://github.com/vefunder/protocol-research-review/assets/51072084/12392892-1d1c-4a9a-b503-6a38e0efe1ea)
+
+Source: Reserve Docs: [Recapitalization](https://reserve.org/en/protocol/protocol_operations/#recapitalization)
+
+Unstaking eusdRSR requires a 2 week [delay](https://etherscan.io/address/0x18ba6e33ceb80f077DEb9260c9111e62f21aE7B8#readProxyContract) as specified by governance. This is necessary to prevent self interested actors from frontrunning an impending default event and provide additional assurances to anyone with eUSD exposure. During the delay, the staker does not earn rewards to prevent stakers from misusing the staking mechanic by repeatedly [unstaking and re-staking](https://reserve.org/protocol/reserve_rights_rsr/#reserve-rights-staking) into the contract.
+
+
+### RToken Governance
+
+All RTokens launched on Reserve Protocol are governed separately by their respective communities with governance parameters codified upon RToken deployment. For example, eUSD (Electronic Dollars) will make governance choices independent of other RTokens like [RSV](https://register.app/#/overview?token=0x196f4727526eA7FB1e17b2071B3d8eAA38486988) (Reserve Protocol’s native stablecoin), [ETH+](https://register.app/#/overview?token=0xE72B141DF173b999AE7c1aDcbF60Cc9833Ce56a8) (an Ethereum-aligned Liquid Staking Token basket), or [hyUSD](https://register.app/#/overview?token=0xaCdf0DBA4B9839b96221a8487e9ca660a48212be) (a decentralized flatcoin that provides access to DeFi yields which also recently received a [Curve gauge](https://vote.convexfinance.com/#/proposal/0xbdb05edfcbdeececc5331d1194cae539a366cf37b4269faeb08d8305ea09568f)). 
+
+Reserve Protocol has a modified version of the [OpenZeppelin Governor](https://docs.openzeppelin.com/contracts/4.x/api/governance) called [Governor Alexios](https://etherscan.io/address/0x7e880d8bD9c9612D6A9759F96aCD23df4A4650E6) which is suggested to RToken deployers by default. However, deployers are able to [specify](https://reserve.org/en/protocol/reserve_rights_rsr/?search=alexios#s-result) governance parameters as they see fit, from single EOA governance to any arbitrary DAO structure. Governor Alexios allows RSR holders to propose, vote and execute proposals. RSR holders can also delegate their voting power to other addresses. 
+
+Governor Alexios is the governance contract implemented by all RTokens relevant to Curve (eUSD, hyUSD, and ETH+). For example, eUSD's governable parameters are viewable [here](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F) and are configurable by [eusdRSR](https://etherscan.io/address/0x7e880d8bD9c9612D6A9759F96aCD23df4A4650E6#readContract) stakers (RSR stakers on the eUSD RToken):
 
 - Proposal threshold (0.01%)
 - Quorum (15%)
@@ -130,50 +151,54 @@ Accordingly, Governor Alexios, recommended to eUSD by default, includes the foll
 - Voting Period (3 days, 21,600 blocks)
 - Execution delay (3 days)
 
-In addition to their role in governance, eusdRSR stakers receive [100% of revenue distribution](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F) as reward for their willingness to provide overcollateralization and be subject to seizure in case the collateral backing for eUSD defaults. For example, [during USDC’s depegging in March 2023](https://medium.com/reserve-currency/eusd-emerges-strong-the-resilience-of-reserve-protocol-during-usdc-depegging-e5a698a990c9), eUSD, which is 50% backed by USDC (approx 25% saUSDC, 25% cUSDC) had to sell off their backing for emergency collateral (USDT) and through the process, eusdRSR stakers helped [re-collateralized eUSD](https://www.poap.delivery/reserve-eusd) in defense of its peg. 
+Governance contracts and privileged addresses for eUSD operation include:
 
-In this instance, eusdRSR stakers provided overcollateralization for eUSD as the USDC portion of the backing collateral defaulted, thus serving as insurance. To compensate, eusdRSR stakers earn rewards based on three factors:
+- [Timelock contract](https://etherscan.io/address/0xc8Ee187A5e5c9dC9b42414Ddf861FFc615446a2c)
+- [Governor Alexios contract](https://etherscan.io/address/0x7e880d8bD9c9612D6A9759F96aCD23df4A4650E6)
+- Pausers who can emergency pause the RToken ([1-of-3 msig](https://etherscan.io/address/0x7f9ffa8dea49647725ca6ce621e03aa20401ff63), [Timelock contract](https://etherscan.io/address/0xc8Ee187A5e5c9dC9b42414Ddf861FFc615446a2c), [EOA1](https://etherscan.io/address/0x4bad40e0d92ebc2620a0d5aff7887c7f2e67fdd8), [EOA2](https://etherscan.io/address/0xe45c3179b135288dd8e1e3c20eafebb2b2e7d771), [EOA3](https://etherscan.io/address/0x0d88776dd9a654cfe9c67b5b1d9ce2fddd815a34))
+- Short Freezers who can temporarily freeze the RToken for a short time ([Timelock contract](https://etherscan.io/address/0xc8Ee187A5e5c9dC9b42414Ddf861FFc615446a2c), [1-of-3 msig](https://etherscan.io/address/0x4986164f2fb9bb898b19382b1e835cd9c81eba46), [EOA1](https://etherscan.io/address/0x4bad40e0d92ebc2620a0d5aff7887c7f2e67fdd8), [EOA2](https://etherscan.io/address/0xe45c3179b135288dd8e1e3c20eafebb2b2e7d771), [EOA3](https://etherscan.io/address/0x0d88776dd9a654cfe9c67b5b1d9ce2fddd815a34))
+- Long Freezers who can temporarily freeze the RToken for a long time ([Timelock contract](https://etherscan.io/address/0xc8Ee187A5e5c9dC9b42414Ddf861FFc615446a2c), [2-of-3 msig](https://etherscan.io/address/0x0173e2965c1aec9d395eb14e3407ef95c2e1a47d))  
 
-- Amount of revenue eUSD generates
-- Portion of revenue governance has directed to eusdRSR stakers
-- Portion of total eusdRSR staked on eUSD
 
-For eUSD, [100% of revenue earned is directed](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F) to **eusdRSR** stakers. With governance conducted by eusdRSR holders, there is an incentive to keep eUSD safe from unnecessary risk as their funds are literally _at stake_. 
-
-Unstaking **eusdRSR** comes with a [2 weeks](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F) [delay](https://etherscan.io/address/0x18ba6e33ceb80f077DEb9260c9111e62f21aE7B8#readProxyContract) as currently decided by governance. This is necessary for staked eusdRSR to remain in the staking contract in case of collateral default so any eusdRSR can be seized to cover losses. During the delay, the staker does not earn rewards to prevent any potential [repeated withdrawing and re-depositing](https://reserve.org/protocol/reserve_rights_rsr/#reserve-rights-staking) interfering with the delay mechanism.  
+#### Governance Params: eUSD Collateral Basket
 
 In addition to providing overcollateralization, governance will also define the basket backing eUSD, as well as a list of emergency collateral. 
 
 Here is the configuration of ERC20 tokens that serve as collateral as proposed and voted by eusdRSR holders:
 
-- Static Aave Interest Bearing USDC ([ssUSDC](https://etherscan.io/address/0x60C384e226b120d93f3e0F4C502957b2B9C32B15)) (25%)
-- Static Aave Interest Bearing USDT ([ssUSDT](https://etherscan.io/address/0x21fe646D1Ed0733336F2D4d9b2FE67790a6099D9)) (25%)
+- Static Aave Interest Bearing USDC ([saUSDC](https://etherscan.io/address/0x60C384e226b120d93f3e0F4C502957b2B9C32B15)) (25%)
+- Static Aave Interest Bearing USDT ([saUSDT](https://etherscan.io/address/0x21fe646D1Ed0733336F2D4d9b2FE67790a6099D9)) (25%)
 - Compound USD Coin ([cUSDC](https://etherscan.io/address/0x39AA39c021dfbaE8faC545936693aC917d5E7563)) (25%)
 - Compound USDT ([cUSDT](https://etherscan.io/address/0xf650C3d88D12dB855b8bf7D11Be6C55A4e07dCC9)) (25%)
-- Source contracts:[ Basket Handler](https://etherscan.io/address/0x6d309297ddDFeA104A6E89a132e2f05ce3828e07#readProxyContract), [Prime Basket](https://register.app/#/overview?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F).
 
-The Prime Basket defines the collateral needed to be deposited for issuance and it consists of an array of triples: \`**&lt;collateral token, target unit, target amount>**\`. The logic is contained in the [basket handler contract](https://etherscan.io/address/0x6d309297ddDFeA104A6E89a132e2f05ce3828e07#code). For example, the interest bearing Aave USDC token (ssUSDC) is represented in the array as collateral token, target unit and target amount, (i.e., **&lt;ssUSDC, USD, 0.25>**) (see also [bytes32 serialization for USD](https://github.com/reserve-protocol/protocol/blob/master/docs/collateral.md)). In the case where the prime basket is updated by governance due to collateral defaults, the protocol will determine a new reference basket and make changes to the collateral makeup. Finally, the ordered list of [pre-defined emergency collateral](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F) consists of pure stablecoins including: USDC, USDT, USDP, TUSD and DAI. 
+Source contract: [Basket Handler](https://etherscan.io/address/0x6d309297ddDFeA104A6E89a132e2f05ce3828e07#readProxyContract)
 
-Electronic Dollars (eUSD) governance (eusdRSR stakers) is in charge of registering, unregistering and swapping ERC20 assets as either collateral or revenue assets. This is achieved through governance to interact with the [Asset Registry contract](https://etherscan.io/address/0x9B85aC04A09c8C813c37de9B3d563C2D3F936162#code), with the following functions:
+The Prime Basket defines the collateral needed to be deposited for issuance and it consists of an array of triples: <collateral token, target unit, target amount>. The logic is contained in the [basket handler contract](https://etherscan.io/address/0x6d309297ddDFeA104A6E89a132e2f05ce3828e07#code). For example, the interest bearing Aave USDC token (saUSDC) is represented in the array as <saUSDC, USD, 0.25> (see also [bytes32 serialization for USD](https://github.com/reserve-protocol/protocol/blob/master/docs/collateral.md)). In the case where the prime basket is updated by governance due to collateral defaults, the protocol will determine a new reference basket and make changes to the collateral makeup. Finally, the ordered list of [pre-defined emergency collateral](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F) consists of pure stablecoins including: USDC, USDT, USDP, TUSD and DAI.
+
+eusdRSR stakers are in charge of registering, unregistering and swapping ERC20 assets as either collateral or revenue assets. This is achieved through governance to interact with the [Asset Registry contract](https://etherscan.io/address/0x9B85aC04A09c8C813c37de9B3d563C2D3F936162#code), with the following functions:
 
 - Register: Add assets to Asset Registry
 - swapRegistered: Allows to modify/update details and functionality of previously registered asset
 - Unregister: Removes asset from Asset Registry
 
-With eUSD’s prime basket of collateral defined, anyone can deposit the required collateral tokens (i.e., ssUSDC, ssUSDT, cUSDC, cUSDT) to issue eUSD and conversely, deposit eUSD to redeem the collateral tokens. 
+With eUSD’s prime basket of collateral defined, anyone can deposit the required collateral tokens (i.e., saUSDC, saUSDT, cUSDC, cUSDT) to issue eUSD and conversely, deposit eUSD to redeem the collateral tokens. 
+
+
+### eUSD Basket Rebalancing
 
 The capitalization and backing of eUSD can be characterized by [two distinct states](https://reserve.org/en/protocol/protocol_operations/?search=redeem#s-result):
 
-- **Fully collateralized**: the [Backing Manager](https://etherscan.io/address/0xF014FEF41cCB703975827C8569a3f0940cFD80A4#code) contract holds the right balance of the collateral tokens to offer 100% redeemability (see above for the right mix eUSD’s collateral backing)
-- **Fully funded**: there is the right amount of _value_, but not necessarily the right amount of collateral to offer 100% redeemability.
+- **Fully collateralized**: the [Backing Manager](https://etherscan.io/address/0xF014FEF41cCB703975827C8569a3f0940cFD80A4#code) contract holds the right balance of the collateral tokens to offer 100% redeemability.
+- **Fully funded**: there is the right amount of value, but not necessarily the right amount of collateral to offer 100% redeemability.
 
-While the Reserve Protocol aims to be fully collateralized at all times, it won’t always be. For example, if governance decides to change the collateral basket or, in cases of market volatility (see USDC depeg scenario above), emergency collateral has to be swapped in as the defaulting collateral is auctioned off, eUSD may be fully funded (right amount of value), but not be fully collateralized (right amount of collateral tokens). Thus, only with full collateralization can a **_redemption mix_** can be made in depositing eUSD for its collateral backing. 
+While the Reserve Protocol aims to be fully collateralized at all times, it won’t always be. For example, if governance decides to change the collateral basket or, in cases of market volatility (see USDC depeg scenario above), emergency collateral has to be swapped in as the defaulting collateral is auctioned off. eUSD may be fully funded (right amount of value), but not be fully collateralized (right amount of collateral tokens). When not fully collateralized, the protocol will attempt to sell off the excess asset until the system is either fully collateralized or RSR is required to recapitalize the system.
+
 
 ### Stablecoin Peg Mechanisms
 
-Once deployed, eUSD is designed to trade at $1.00 reflecting the market value of the entire collateral basket while 100% of revenue from earned interest is directed by governance to go towards eusdRSR stakers. Any deviation from $1.00 is designed to get arbitraged away.
+eUSD is designed to trade at $1.00 reflecting the market value of the entire collateral basket while 100% of revenue from earned interest is directed by governance to go towards eusdRSR stakers. Any deviation from $1.00 is designed to get arbitraged away.
 
-This will happen through issuance and redemption mechanisms. The **eUSD RToken contract** has specific functions to regulate the process of issuance and redemption. **Issuance throttle** limits how much eUSD can be issued, to limit value extraction in case of an exploit. After a large issuance, the issuance limit ‘recharges’ to the defined maximum. The **redemption throttle** works similarly where the protocol tries to ensure the net redemption for eUSD never exceeds an hourly limit. The specific parameters for eUSD are as follows: 
+This will happen through issuance and redemption mechanisms. The eUSD RToken contract has specific functions to regulate the process of issuance and redemption. Issuance throttle limits how much eUSD can be issued, to limit value extraction in case of an exploit. After a large issuance, the issuance limit ‘recharges’ to the defined maximum. The redemption throttle works similarly where the protocol tries to ensure the net redemption for eUSD never exceeds an hourly limit. The specific parameters for eUSD are as follows: 
 
 - Issuance throttle ([1,000,000 eUSD](https://etherscan.io/token/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F#readProxyContract) maximum amount per the current block) 
 - Issuance [throttle rate](https://etherscan.io/token/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F#readProxyContract) at 2.5% of eUSD supply
