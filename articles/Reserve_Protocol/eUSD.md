@@ -122,7 +122,7 @@ Since RTokens generate yield by lending their collateral assets and governance c
 
 The basic process for sharing revenue begins with the [Backing Manager](https://etherscan.io/address/0xF014FEF41cCB703975827C8569a3f0940cFD80A4) contract where collateral assets are managed. When the yield-bearing basket increases in value relative to the outstanding RToken supply, the Backing Manager will either mint new RToken or trade profits from its backing for RToken or RSR through the [RToken Trader](https://etherscan.io/address/0x3d5EbB5399243412c7e895a7AA468c7cD4b1014A)/[RSR Trader](https://etherscan.io/address/0xE04C26F68E0657d402FA95377aa7a2838D6cBA6f) contract. Revenue shared with RToken holders is sent to the [Furnace](https://etherscan.io/address/0x57084b3a6317bea01bA8f7c582eD033d9345c2B2) contract where it gradually burns the RToken, increasing the redemption value. Revenue shared with RSR stakers is sent to the [stRSR pool](https://etherscan.io/address/0x18ba6e33ceb80f077deb9260c9111e62f21ae7b8) where it is slowly distributed as rewards to increase the stRSR/RSR value.
 
- Note that it is also possible to share revenue additionally with an arbitrary address, such as to compensate the token deployer. For example, hyUSD makes a 3% allocation to the hyUSD treasury, which they provide an explanation for in the [Reserve proposal](https://forum.reserve.org/t/rfc-introducing-hyusd/404#what-will-the-initial-revenue-distribution-look-like-15).
+Note that it is also possible to share revenue additionally with an arbitrary address, such as to compensate the token deployer. For example, hyUSD makes a 3% allocation to the hyUSD treasury, which they provide an explanation for in their [Reserve proposal](https://forum.reserve.org/t/rfc-introducing-hyusd/404#what-will-the-initial-revenue-distribution-look-like-15).
 
 The following flowchart shows revenue distribution to RToken holders and RSR stakers with a theoretical 40/60 revenue split.
 
@@ -160,6 +160,8 @@ The capitalization and backing of eUSD can be characterized by [two distinct sta
 - **Fully funded**: there is the right amount of value, but not necessarily the right amount of collateral to offer 100% redeemability.
 
 While the Reserve Protocol aims to be fully collateralized at all times, it won’t always be. For example, if governance decides to change the collateral basket or, in cases of market volatility (see USDC depeg scenario above), emergency collateral has to be swapped in as the defaulting collateral is auctioned off. eUSD may be fully funded (right amount of value), but not be fully collateralized (right amount of collateral tokens). When not fully collateralized, the protocol will attempt to sell off the excess asset until the system is either fully collateralized or RSR is required to recapitalize the system.
+
+Rebalancing during normal operation and recapitalizing during emergencies are conducted through [auctions](https://register.app/#/auctions?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F) conducted through [Gnosis Auctions](https://gnosis-auction.eth.link/#/start). The protocol uses a [Gnosis Trade](https://etherscan.io/address/0xAd4B0B11B041BB1342fEA16fc9c12Ef2a6443439) contract to trade against the Gnosis EasyAuction mechanism. Governance can set the auction length that strikes a balance between allowing time for arbitrage and swiftly executing trades. The default value is 15 minutes per auction. 
 
 
 ### RToken Governance
@@ -209,6 +211,18 @@ eusdRSR stakers are in charge of registering, unregistering and swapping ERC20 a
 With eUSD’s prime basket of collateral defined, anyone can deposit the required collateral tokens (i.e., saUSDC, saUSDT, cUSDC, cUSDT) to issue eUSD and conversely, deposit eUSD to redeem the collateral tokens. 
 
 
+#### Advanced RToken parameters
+
+There are a multitude of other RToken parameters as set in the [Backing Manager](https://etherscan.io/address/0xF014FEF41cCB703975827C8569a3f0940cFD80A4#readProxyContract) that regulate mint/redeem action including:
+
+- Trading delays(s) which define how many seconds should pass after the basket has been changed before a trade can be opened. For eUSD, this is set by the [Backing Manager](https://etherscan.io/address/0x6d309297ddDFeA104A6E89a132e2f05ce3828e07#code) contract to [2 hours](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F) or 7,200 seconds
+- Backing buffer (%) as collateral tokens appreciate, eUSD can be minted whenever the correct ratio of collateral tokens is gathered, providing revenue capture. Collateral tokens get sent to the [Revenue Trader](https://etherscan.io/address/0x3d5EbB5399243412c7e895a7AA468c7cD4b1014A#code) contract to mint additional eUSD that can be used as yield for [eusdRSR](https://etherscan.io/address/0x18ba6e33ceb80f077DEb9260c9111e62f21aE7B8) stakers. This is currently set to [0.01%](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F) 
+- Max trade slippage (%) is the maximum deviation from oracle prices that any trade the protocol can clear. Maximum trade slippage permits additional price movement beyond worst-case oracle pricing. The setting for eUSD is [1%](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F) 
+- Minimum trade volume represents the smallest amount of value worth executing a trade for; eUSD [minimum trade volume](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F) is set to $1,000 
+- RToken Maximum trade volume is the maximum sized trade for any trade involving eUSD, currently set to [1e29](https://etherscan.io/address/0x3d5EbB5399243412c7e895a7AA468c7cD4b1014A#readProxyContract#F2)
+- Auction Length(s) is determined by the [Broker](https://etherscan.io/address/0x90EB22A31b69C29C34162E0E9278cc0617aA2B50#code) contract and sets how long auctions stay open for. If set too low, arbitrageurs won’t have enough time to complete arbitrage loops; if set too high, fewer auctions will fill due to volatility risk. Currently, this is set to [900 seconds](https://etherscan.io/address/0x90EB22A31b69C29C34162E0E9278cc0617aA2B50#readProxyContract) [(15 minutes)](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F) for eUSD 
+
+
 ### Stablecoin Peg Mechanisms
 
 eUSD is designed to trade at $1.00 reflecting the market value of the entire collateral basket while 100% of revenue from earned interest is directed by governance to go towards eusdRSR stakers. Any deviation from $1.00 is designed to get arbitraged away.
@@ -220,17 +234,6 @@ This will happen through issuance and redemption mechanisms. The eUSD RToken con
 - Redemption throttle ([1,500,000 eUSD](https://etherscan.io/token/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F#readProxyContract) maximum amount per the current block)
 - Redemption [throttle rate](https://etherscan.io/token/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F#readProxyContract) at 5.0% of eUSD supply
 - [Source](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F)
-
-### Advanced RToken parameters
-
-In addition to issuance and redemption throttling, there are other RToken parameters as set in the [Backing Manager](https://etherscan.io/address/0xF014FEF41cCB703975827C8569a3f0940cFD80A4#readProxyContract) as part of protocol operations to regulate mint/redeem action including:
-
-- Trading delays(s) which define how many seconds should pass after the basket has been changed before a trade can be opened. For eUSD, this is set by the [Backing Manager](https://etherscan.io/address/0x6d309297ddDFeA104A6E89a132e2f05ce3828e07#code) contract to [2 hours](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F) or 7,200 seconds
-- Backing buffer (%) as collateral tokens appreciate, eUSD can be minted whenever the correct ratio of collateral tokens is gathered, providing revenue capture. Collateral tokens get sent to the [Revenue Trader](https://etherscan.io/address/0x3d5EbB5399243412c7e895a7AA468c7cD4b1014A#code) contract to mint additional eUSD that can be used as yield for [eusdRSR](https://etherscan.io/address/0x18ba6e33ceb80f077DEb9260c9111e62f21aE7B8) stakers. This is currently set to [0.01%](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F) 
-- Max trade slippage (%) is the maximum deviation from oracle prices that any trade the protocol can clear. Maximum trade slippage permits additional price movement beyond worst-case oracle pricing. The setting for eUSD is [1%](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F) 
-- Minimum trade volume represents the smallest amount of value worth executing a trade for; eUSD [minimum trade volume](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F) is set to $1,000 
-- RToken Maximum trade volume is the maximum sized trade for any trade involving eUSD, currently set to [1,000 eUSD](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F)
-- Auction Length(s) is determined by the [Broker](https://etherscan.io/address/0x90EB22A31b69C29C34162E0E9278cc0617aA2B50#code) contract and sets how long auctions stay open for. If set too low, arbitrageurs won’t have enough time to complete arbitrage loops; if set too high, fewer auctions will fill. Currently, this is set to [900 seconds](https://etherscan.io/address/0x90EB22A31b69C29C34162E0E9278cc0617aA2B50#readProxyContract) [(15 minutes)](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F) for eUSD 
 
 The following section provides case scenarios for when eUSD deviates from peg:
 
@@ -258,6 +261,7 @@ Although the Reserve Protocol intends for arbitragers to help restore peg, the v
 - The 15 minute auction length duration would limit the amount of time available for arbitragers to participate in the auction and help bring eUSD back to peg.
 
 However, as long as the price discrepancy between eUSD and its underlying collateral tokens persists, arbitragers would continue to exploit the price discrepancy until eUSD returns to its peg value of $1.00 USD.
+
 
 ### Market
 
