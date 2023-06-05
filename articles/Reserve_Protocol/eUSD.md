@@ -76,19 +76,25 @@ With that context, the next section will introduce the Reserve Protocol and prot
 
 ## Reserve Protocol Introduction
 
-The Reserve Protocol is a permissionless DeFi platform that allows the creation of assets (called "[RTokens](https://reserve.org/en/protocol/rtokens/)") backed by a user defined basket of ERC20 tokens. Once deployed, the RToken can be permissionlessly minted by depositing the correct proportion of all basket assets, and likewise redeemed for a proportional share of the basket assets. Holders of the Reserve Rights (RSR) governance token are incentivized with yield earnings to stake in various RTokens to provide additional overcollateralization of the RToken backing. The highest marketcap RToken as of June 4th is eUSD (~$17MM), followed by hyUSD (~$540K) and ETH+ (~$500K).
+The Reserve Protocol is a DeFi platform that allows the permissionless creation of assets (called "[RTokens](https://reserve.org/en/protocol/rtokens/)") backed by a user defined basket of ERC20 tokens. Once deployed, anyone can mint the RToken by depositing the specified proportion of all basket assets, and likewise redeemed for a proportional share of the basket assets. RTokens are mintable / redeemable for the ERC20 collateral basket at all times, so long as the Reserve Protocol is fully collateralized. Holders of the Reserve Rights (RSR) governance token are incentivized with yield earnings to stake in various RTokens to provide additional overcollateralization of the RToken backing. 
 
-The Reserve Protocol released their [original white paper](https://reserve.org/assets/files/whitepaper.pdf) in 2018 ([deprecated](https://reserve.org/en/protocol/2018_version/#-version-of-the-reserve-protocol)). Much of the foundation laid out in the original paper remains today, including the OG native stablecoin Reserve Dollar (RSV) and the Reserve Rights governance token (RSR). 
+Newly deployed RTokens can theoretically be pegged to any unit, with existing RTokens being denominated in [US Dollars (e.g. eUSD)](https://register.app/#/overview?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F) and [Ether (e.g. ETH+)](https://register.app/#/overview?token=0xE72B141DF173b999AE7c1aDcbF60Cc9833Ce56a8).  The highest marketcap RToken as of June 4th is eUSD (~$17MM), followed by hyUSD (\~$540K) and ETH+ (\~$500K).
 
-Changes that led to its current evolution involves the following:
 
-- The Reserve Dollar (RSV) is primarily used in the [Reserve Mobile App](https://play.google.com/store/apps/details?id=rsv.walletapp.reserve&hl=es&gl=US), and Reserve felt that RSV was [too centralized](https://twitter.com/reserveprotocol/status/1549429110811889667?s=20) and would need to be superceded by RTokens.  
+### History of Reserve
+
+The Reserve Protocol released their [original white paper](https://reserve.org/assets/files/whitepaper.pdf) in 2018 ([deprecated](https://reserve.org/en/protocol/2018_version/#-version-of-the-reserve-protocol)). Much of the protocol implementation first described in the original paper still exist today, including the OG native stablecoin Reserve Dollar (RSV) and the Reserve Rights governance token (RSR). 
+
+Changes that led to its current iteration of Reserve Protocol involves the following:
+
+- The Reserve Dollar (RSV) is primarily used in the [Reserve Mobile App](https://play.google.com/store/apps/details?id=rsv.walletapp.reserve&hl=es&gl=US), and Reserve felt that RSV was [too centralized](https://twitter.com/reserveprotocol/status/1549429110811889667?s=20) and would need to be superceded by decentralized RTokens.  
 - The Reserve Protocol has evolved into a platform to enable the permissionless [creation and governance of many stablecoins](https://register.app/#/deploy) (called “RTokens”). 
 - The Reserve Rights (RSR) token facilitates the stability of all RTokens created on the platform, not only RSV.
 
-Newly deployed RTokens can be pegged to any unit from [US Dollars (i.e., eUSD)](https://register.app/#/overview?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F), to [Ether (i.e., ETH+)](https://register.app/#/overview?token=0xE72B141DF173b999AE7c1aDcbF60Cc9833Ce56a8). RTokens are mintable / redeemable for the [ERC20 collateral basket that they are backed by](https://reserve.org/en/protocol/) at all times, so long as the Reserve Protocol is fully collateralized. 
 
-As Electronic Dollars (eUSD) are unwrapped from MobileCoin to Ethereum, they are deployed as stablecoins (RTokens) on the Reserve Protocol. Because the Reserve Protocol issues asset-backed, yield bearing stablecoins, eUSD is backed by a basket of interest earning stablecoin deposits in lending protocols like Aave and Compound. There are limitations to what can serve as collateral including [non-compatible](https://reserve.org/en/protocol/rtokens/) ERC20 assets like:
+### RToken Collateral
+
+Reserve Protocol incentivizes RSR staking (and therefore accelerated adoption of the RToken) by generating revenue from the yield-bearing collateral basket. RTokens are typically backed by interest earning receipt tokens, such as deposits in lending protocols like Aave and Compound. Available collateral tokens are included in the [AssetRegistry](https://etherscan.io/address/0x9B85aC04A09c8C813c37de9B3d563C2D3F936162). There are limitations to what can serve as collateral including [non-compatible](https://reserve.org/en/protocol/rtokens/) ERC20 assets like:
 
 - Rebasing tokens
 - Tokens that take a fee on transfer
@@ -97,19 +103,16 @@ As Electronic Dollars (eUSD) are unwrapped from MobileCoin to Ethereum, they are
 - Tokens with multiple addresses
 - Tokens that do not adhere to the ERC20 standard in general
 
-Tokens with any of these limitations will need to be [wrapped into a compatible ERC20](https://reserve.org/en/protocol/rtokens/) to qualify as back-up assets.
+Tokens with any of these limitations will need to be [wrapped into a compatible ERC20](https://reserve.org/en/protocol/rtokens/) to qualify as collateral assets. For example, eUSD uses wrapped Aave deposits (saTokens) rather than the standard aToken to prevent rebasing.
 
-In addition to the basket of ERC20 tokens that back each RToken (stablecoin), the protocol enables _overcollateralization_ by allowing its native token, **RSR** (Reserve Rights) to be _staked_ on any RToken ( _overcollateralization_ to that stablecoin.) 
+In addition to the basket of ERC20 tokens that back each RToken 1:1, the protocol enables overcollateralization by allowing its native token RSR (Reserve Rights) to be staked on any RToken. RSR holders may choose to stake to earn a share of yield generated by the collateral basket, a configurable parameter specific to each RToken. Staked RSR (stRSR) serves as insurance that can be seized in case of collateral default, as reported by onchain price-feeds that do not rely on governance nor human decision-making. Unstaking involves a cool-down time between 7 and 30 days, during which the protocol retains the right to seize the RSR in the event of default.
 
-Staked RSR (**stRSR**) can be seized in case of collateral default based on onchain price-feeds that does not rely on governance nor human decision-making. This provides an added layer of protection (“overcollateralization”) to each RToken.
+Since RTokens generate yield by lending their collateral assets and governance can direct a portion of revenue to RSR stakers, RTokens that generate and share revenue are the ones likely to attract stakers and be [protected](https://reserve.org/en/protocol/overall_design/?search=protected#s-result) by overcollateralization, as opposed to RToken governance that choose not to direct revenue to RSR stakers. Aside from being the [first](https://www.poap.delivery/reserve-eusd) RToken on the Reserve Protocol (not counting its native RSV), Electronic Dollars (eUSD) allocates 100% of its revenue to RSR stakers. This likely contributes to its considerably larger marketcap compared to other RTokens. 
 
-RTokens generate yield from lending out the backing collateral assets and governance for that RToken can _direct_ a portion of revenue to RSR stakers implying that RTokens that generate, and share, revenue are the ones likely to attract stakers and be [protected](https://reserve.org/en/protocol/overall_design/?search=protected#s-result) by overcollateralization, as opposed to RToken governance that choose not to direct revenue to RSR stakers. 
-
-All RTokens launched on Reserve Protocol are governed separately by their respective communities. For example, eUSD (Electronic Dollars) will make governance choices independent of other RTokens like [RSV](https://register.app/#/overview?token=0x196f4727526eA7FB1e17b2071B3d8eAA38486988) (Reserve Protocol’s native stablecoin), [ETH+](https://register.app/#/overview?token=0xE72B141DF173b999AE7c1aDcbF60Cc9833Ce56a8) (an Ethereum-aligned Liquid Staking Token basket), or [hyUSD](https://register.app/#/overview?token=0xaCdf0DBA4B9839b96221a8487e9ca660a48212be) (a decentralized flatcoin that provides access to DeFi yields; [also in process of getting a Curve gauge](https://vote.convexfinance.com/#/proposal/0xbdb05edfcbdeececc5331d1194cae539a366cf37b4269faeb08d8305ea09568f)). Aside from being the [first](https://www.poap.delivery/reserve-eusd) RToken on the Reserve Protocol (not counting its native RSV), Electronic Dollars (eUSD) enjoys the same benefits as other stablecoins launched on the platform. 
-
-The analysis in this article will focus on [eUSD](https://etherscan.io/address/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F) and [eusdRSR](https://etherscan.io/address/0x18ba6e33ceb80f077DEb9260c9111e62f21aE7B8), as a specific implementation of RToken and RSR token, respectively, unless the latter are discussed as a general concept. 
 
 ### Governance Asset
+
+All RTokens launched on Reserve Protocol are governed separately by their respective communities. For example, eUSD (Electronic Dollars) will make governance choices independent of other RTokens like [RSV](https://register.app/#/overview?token=0x196f4727526eA7FB1e17b2071B3d8eAA38486988) (Reserve Protocol’s native stablecoin), [ETH+](https://register.app/#/overview?token=0xE72B141DF173b999AE7c1aDcbF60Cc9833Ce56a8) (an Ethereum-aligned Liquid Staking Token basket), or [hyUSD](https://register.app/#/overview?token=0xaCdf0DBA4B9839b96221a8487e9ca660a48212be) (a decentralized flatcoin that provides access to DeFi yields which also recently received a [Curve gauge](https://vote.convexfinance.com/#/proposal/0xbdb05edfcbdeececc5331d1194cae539a366cf37b4269faeb08d8305ea09568f)). 
 
 Reserve Protocol has a modified version of the [OpenZeppelin Governor](https://docs.openzeppelin.com/contracts/4.x/api/governance) called [Governor Alexios](https://etherscan.io/address/0x7e880d8bD9c9612D6A9759F96aCD23df4A4650E6) which is suggested to all RToken deployers by default to [adjust](https://reserve.org/en/protocol/reserve_rights_rsr/?search=alexios#s-result) governance parameters as they see fit. Governor Alexios allows RSR holders to propose, vote and execute proposals. RSR holders can also delegate their voting power to other addresses. 
 
