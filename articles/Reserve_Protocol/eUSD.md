@@ -40,7 +40,6 @@
 
 - [MobileCoin Electronic Dollar Auditor](https://auditor.mobilecoin.foundation/)
 
--
 
 
 ## Relation to Curve
@@ -178,13 +177,12 @@ Governor Alexios is the governance contract implemented by all RTokens relevant 
 - Voting Period (3 days, 21,600 blocks)
 - Execution delay (3 days)
 
-Governance contracts and privileged addresses for eUSD operation include:
+Governance contracts significant for eUSD operation include:
 
 - [Timelock contract](https://etherscan.io/address/0xc8Ee187A5e5c9dC9b42414Ddf861FFc615446a2c)
 - [Governor Alexios contract](https://etherscan.io/address/0x7e880d8bD9c9612D6A9759F96aCD23df4A4650E6)
-- Pausers who can emergency pause the RToken ([1-of-3 msig](https://etherscan.io/address/0x7f9ffa8dea49647725ca6ce621e03aa20401ff63), [Timelock contract](https://etherscan.io/address/0xc8Ee187A5e5c9dC9b42414Ddf861FFc615446a2c), [EOA1](https://etherscan.io/address/0x4bad40e0d92ebc2620a0d5aff7887c7f2e67fdd8), [EOA2](https://etherscan.io/address/0xe45c3179b135288dd8e1e3c20eafebb2b2e7d771), [EOA3](https://etherscan.io/address/0x0d88776dd9a654cfe9c67b5b1d9ce2fddd815a34))
-- Short Freezers who can temporarily freeze the RToken for a short time ([Timelock contract](https://etherscan.io/address/0xc8Ee187A5e5c9dC9b42414Ddf861FFc615446a2c), [1-of-3 msig](https://etherscan.io/address/0x4986164f2fb9bb898b19382b1e835cd9c81eba46), [EOA1](https://etherscan.io/address/0x4bad40e0d92ebc2620a0d5aff7887c7f2e67fdd8), [EOA2](https://etherscan.io/address/0xe45c3179b135288dd8e1e3c20eafebb2b2e7d771), [EOA3](https://etherscan.io/address/0x0d88776dd9a654cfe9c67b5b1d9ce2fddd815a34))
-- Long Freezers who can temporarily freeze the RToken for a long time ([Timelock contract](https://etherscan.io/address/0xc8Ee187A5e5c9dC9b42414Ddf861FFc615446a2c), [2-of-3 msig](https://etherscan.io/address/0x0173e2965c1aec9d395eb14e3407ef95c2e1a47d))  
+
+The Governor Alexios contract, a modified version of [OpenZeppelin Governor](https://docs.openzeppelin.com/contracts/4.x/api/governance), allows [eusdRSR](https://etherscan.io/address/0x18ba6e33ceb80f077DEb9260c9111e62f21aE7B8) holders to propose, vote and execute proposals. The TimelockController mediates this process by introducing a timelock once a proposal is approved, adding a delay between approval and execution, giving RToken holders to make a decision before something is changed. The process of approving to execute is 8 days for eUSD (i.e., [voting snapshot delay: 2 days, voting period: 3 days, execution delay: 3 days](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F)). 
 
 
 #### Governance Params: eUSD Collateral Basket
@@ -321,22 +319,18 @@ A third of the total supply of eUSD is in the eUSD/FraxBP pool with another thir
 
 [Trail of Bits](https://github.com/reserve-protocol/protocol/blob/master/audits/Trail%20of%20Bits%20-%20Reserve%20Org%20-%20Final%20Report.pdf) submitted a security assessment on August 11, 2022. The audit found five high, two medium, three low severity and five informational issues. The high severity issues are summarized in the table below. The team has taken action to mitigate severity around Access Control (see Centralization Risk), but it is unclear how the other four high severity issues were addressed. 
 
-|                                                                                                                                                                                                                            |              |                 |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- |
-| **Description**                                                                                                                                                                                                            | **Severity** | **Type**        |
-| Lack of a two-step process for contract ownership changes                                                                                                                                                                  | High         | Data Validation |
-| All auction initiation attempts may fail (see [EasyAuction](https://etherscan.io/address/0x0b7fFc1f4AD541A4Ed16b40D8c37f0929158D101#code) contract)                                                                        | High         | Data Validation |
-| All attempts to initiate auction of defaulted collateral tokens will fail (affects Recapitalization strategy and [Backing Manager](https://etherscan.io/address/0xF014FEF41cCB703975827C8569a3f0940cFD80A4#code) contract) | High         | Data Validation |
-| An RSR seizure could leave the stRSR contract unusable                                                                                                                                                                     | High         | Data Validation |
-| System owner has excessive privileges. The owner of the [Main](https://etherscan.io/address/0x7697aE4dEf3C3Cd52493Ba3a6F57fc6d8c59108a#code) contract has excessive privileges (see next section for mitigation actions).  | High         | Access Control  |
+High severity issues found:
 
-A Code4Arena audit was conducted in April, 2023 and [two high and twenty seven medium severity](https://github.com/reserve-protocol/protocol/blob/master/audits/Code4rena%20Reserve%20Audit%20Report.md) issues were found. A table summarizing the status of the two high severity issues is provided here:
+- Lack of a two-step process for contract ownership changes
+- All auction initiation attempts may fail (see [EasyAuction](https://etherscan.io/address/0x0b7fFc1f4AD541A4Ed16b40D8c37f0929158D101#code) contract)
+- All attempts to initiate auction of defaulted collateral tokens will fail (affects Recapitalization strategy and [Backing Manager](https://etherscan.io/address/0xF014FEF41cCB703975827C8569a3f0940cFD80A4#code) contract)
+- An RSR seizure could leave the stRSR contract unusable
+- System owner has excessive privileges. The owner of the [Main](https://etherscan.io/address/0x7697aE4dEf3C3Cd52493Ba3a6F57fc6d8c59108a#code) contract has excessive privileges (see next section for mitigation actions).
 
-|                                                                                                                                              |              |                                    |
-| -------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | ---------------------------------- |
-| **Description**                                                                                                                              | **Severity** | **Status**                         |
-| Adversaries can abuse a quirk of Compound redemption to manipulate the underlying exchange rate and maliciously disable cToken collaterals.  | High         | Mitigation confirmed with comments |
-| Basket range formula is inefficient, leading to unnecessary haircuts for the protocol.                                                       | High         | Not fully mitigated.               |
+A [Code4Arena audit](https://github.com/reserve-protocol/protocol/blob/master/audits/Code4rena%20Reserve%20Audit%20Report.md) was conducted in April, 2023 and two high and twenty seven medium severity issues were found. The status of the two high severity issues is provided here:
+
+- Adversaries can abuse a quirk of Compound redemption to manipulate the underlying exchange rate and maliciously disable cToken collaterals. | [Mitigation confirmed](https://github.com/code-423n4/2023-02-reserve-mitigation-contest-findings/issues/35)
+- Basket range formula is inefficient, leading to unnecessary haircuts for the protocol. | [Not fully mitigated.](https://github.com/code-423n4/2023-02-reserve-mitigation-contest-findings/issues/49) 
 
 [Ackee Blockchain](https://github.com/reserve-protocol/protocol/blob/master/audits/Ackee%20-%20abch-reserve-protocol-report-1.1.pdf) also provided an audited report to the Reserve Protocol on October 7, 2022 finding three medium issues and six warnings. The issues have either been acknowledged or fixed. 
 
@@ -344,42 +338,41 @@ The Reserve Protocol has been audited by [Solidified](https://github.com/reserve
 
 [Halborn](https://github.com/reserve-protocol/protocol/blob/master/audits/Halborn%20-%20Reserve_Protocol_Smart_Contract_Security_Audit_Report_Halborn_Final.pdf) also conducted a Smart Contract Security Audit from August 28th, 2022 - October 10th, 2022 and did not find any critical flaws in the protocol. Any security risks found were mostly addressed by the Reserve team. 
 
-Finally, there is an on-going bug bounty program by [Immunefi that has been live since April 27, 2023](https://immunefi.com/bounty/reserve/). 
+Finally, there is an on-going bug bounty program by [Immunefi that has been live since April 27, 2023](https://immunefi.com/bounty/reserve/). The bounty program is offering $100,000 to a staggering $5,000,000 for discolsure of critical level bugs. 
 
-One potential issue that could arise in the future is the upgradability of the contracts with the [Owner](https://reserve.org/protocol/system_states_roles/) role having the ability to upgrade system contracts. Additional audits should be taken if and when there are future contract upgrades. 
+In summary, the Reserve Protocol team has subjected themselves to several rounds of audits. Two of the auditors found several high severity issues. It is recommended the team takes steps to publicly report their progress in addressing these issues.
 
-
-In summary, the Reserve Protocol team has subjected themselves to several rounds of audits. Two of the auditors found several high severity issues. **It is recommended the team takes steps to publicly report their progress in addressing these issues**.
 
 ### Centralization Risk
 
-The [Main contract](https://etherscan.io/address/0x7697aE4dEf3C3Cd52493Ba3a6F57fc6d8c59108a#code) is central to the functioning of [eUSD](https://etherscan.io/address/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F#code) (as [MainP1](https://etherscan.io/address/0x143C35bFe04720394eBd18AbECa83eA9D8BEdE2F#code), which Main is a proxy for is central to the Reserve Protocol). The Main contract is linked to other contracts essential to various protocol operations including: Asset Registry, Backing Manager, Basket Handler, eUSD, eusdRSR, Broker, Furnace, Distributor, RToken Trader and RSR Trader (see [Access Control sheet](https://docs.google.com/spreadsheets/d/1_tdf1WDr6QMAIVZcEJpMb1Pc43b0W5qRZeqq0ByeH6Y/edit?usp=sharing)). 
+Reserve Protocol uses Role Based Access Control (RBAC) to mitigate potential centralization risk. These are core [system states and roles](https://reserve.org/en/protocol/system_states_roles/) in Reserve Protocol’s RToken governance system. 
 
-There are certain contracts that have ownership and/or permissions over Main, shown below. Reserve Protocol has attempted to mitigate potential centralization risk by spreading out permissions over Main to two externally owned wallets (EOAs), two multisig wallets and the TimelockController contract.
-
-![Permissions_over_Main](https://github.com/PaulApivat/temp/assets/4058461/99dd225f-a4de-40bc-9176-7a055d223297)
-
-[TimelockController](https://etherscan.io/address/0xc8Ee187A5e5c9dC9b42414Ddf861FFc615446a2c#code) holds a host of [permissions on Main](https://pod.xyz/podarchy/0x7697aE4dEf3C3Cd52493Ba3a6F57fc6d8c59108a?lens=permissions&node=0x7697aE4dEf3C3Cd52493Ba3a6F57fc6d8c59108a) and plays a high authority role such as RToken [Pauser, Short Freeze and Long Freeze](https://reserve.org/en/protocol/system_states_roles/) ([source](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F)). These are core [system states and roles](https://reserve.org/en/protocol/system_states_roles/) in Reserve Protocol’s RToken governance system. 
-
-- RToken Pauser: can pause and unpause an RToken’s (i.e., eUSD) system in case of an emergency such as a Chainlink feed failing. False positives are acceptable as redemption remains enabled. There can be multiple Pausers and it can be robot-controlled. Pausing means RToken issuance, un-staking RSR, withdrawing RSR, trading and RToken melting are disabled 
+- Owner: The top level role that can grant/revoke roles to any address, pause/unpause the system, freeze/unfreeze the system, set governance parameters and upgrade smart contracts.
+- RToken Pauser: can pause and unpause an RToken’s (i.e., eUSD) system in case of an emergency such as a Chainlink feed failing. There can be multiple Pausers. Pausing means RToken issuance, un-staking RSR, withdrawing RSR, trading and RToken melting are disabled 
 - Short Freeze: can freeze an RToken’s system for three days, generally assigned to an entity that can spot bugs and react swiftly. There is some tolerance for false positives, though less than the Pauser role. There can be multiple Short Freezer, as is the case with [eUSD](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F), as well as robot-controlled entities. 
 - Long Freeze: can freeze an RToken’s system for one week. This role should be optimized for no false positives, and is expected to act slowly and surely. There are fewer Long Freezers, with TimelockController being one of two for eUSD.
 
-In an attempt to decentralize, it appears the eUSD team has assigned two entities (Alexios Governor and a Multisig_1_of_1), [permission over TimelockController](https://pod.xyz/podarchy/0xc8Ee187A5e5c9dC9b42414Ddf861FFc615446a2c) as shown here:
+The [Main contract](https://etherscan.io/address/0x7697aE4dEf3C3Cd52493Ba3a6F57fc6d8c59108a#code) is central to the functioning of [eUSD](https://etherscan.io/address/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F#code). The Main contract is linked to other contracts essential to various protocol operations including: Asset Registry, Backing Manager, Basket Handler, eUSD, eusdRSR, Broker, Furnace, Distributor, RToken Trader and RSR Trader (see [Access Control sheet](https://docs.google.com/spreadsheets/d/1_tdf1WDr6QMAIVZcEJpMb1Pc43b0W5qRZeqq0ByeH6Y/edit?usp=sharing)). 
+
+There are certain contracts that have ownership and/or permissions over Main, shown below. Critical ownership privileges are granted to the TimelockController contract for the Governor Alexios contract and additional roles are spread out to two  EOAs and two multisig wallets.
+
+- Pausers who can emergency pause eUSD: [1-of-3 msig](https://etherscan.io/address/0x7f9ffa8dea49647725ca6ce621e03aa20401ff63), [Timelock contract](https://etherscan.io/address/0xc8Ee187A5e5c9dC9b42414Ddf861FFc615446a2c), [EOA1](https://etherscan.io/address/0x4bad40e0d92ebc2620a0d5aff7887c7f2e67fdd8), [EOA2](https://etherscan.io/address/0xe45c3179b135288dd8e1e3c20eafebb2b2e7d771), [EOA3](https://etherscan.io/address/0x0d88776dd9a654cfe9c67b5b1d9ce2fddd815a34)
+- Short Freezers who can temporarily freeze eUSD for 3 days: [Timelock contract](https://etherscan.io/address/0xc8Ee187A5e5c9dC9b42414Ddf861FFc615446a2c), [1-of-3 msig](https://etherscan.io/address/0x4986164f2fb9bb898b19382b1e835cd9c81eba46), [EOA1](https://etherscan.io/address/0x4bad40e0d92ebc2620a0d5aff7887c7f2e67fdd8), [EOA2](https://etherscan.io/address/0xe45c3179b135288dd8e1e3c20eafebb2b2e7d771), [EOA3](https://etherscan.io/address/0x0d88776dd9a654cfe9c67b5b1d9ce2fddd815a34)
+- Long Freezers who can temporarily freeze eUSD for a week: [Timelock contract](https://etherscan.io/address/0xc8Ee187A5e5c9dC9b42414Ddf861FFc615446a2c), [2-of-3 msig](https://etherscan.io/address/0x0173e2965c1aec9d395eb14e3407ef95c2e1a47d)
+
+![Permissions_over_Main](https://github.com/PaulApivat/temp/assets/4058461/99dd225f-a4de-40bc-9176-7a055d223297)
+
+[TimelockController](https://etherscan.io/address/0xc8Ee187A5e5c9dC9b42414Ddf861FFc615446a2c#code) holds a host of [permissions on Main](https://pod.xyz/podarchy/0x7697aE4dEf3C3Cd52493Ba3a6F57fc6d8c59108a?lens=permissions&node=0x7697aE4dEf3C3Cd52493Ba3a6F57fc6d8c59108a) and plays a high authority role such as RToken [Pauser, Short Freeze and Long Freeze](https://reserve.org/en/protocol/system_states_roles/) ([source](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F)). 
+
+In an attempt to balance decentralization with precautionary levers, the eUSD team has assigned two entities (Alexios Governor and a Multisig_1_of_1) [permission over TimelockController](https://pod.xyz/podarchy/0xc8Ee187A5e5c9dC9b42414Ddf861FFc615446a2c). Alexios Governor has the TIMELOCK_ADMIN_ROLE and the multisig has the CANCELLER_ROLE. This allows the multisig to revert a potentially malicious governance action. Entity relationships are shown here:
 
 ![Permissions_over_TimelockController](https://github.com/PaulApivat/temp/assets/4058461/d053e783-7a6f-44b1-9aae-fa1adf3aa8f2)
 
-This implies that the OWNER role in the eUSD RToken system is shared between a governance contract and a multisig, as intended by the Reserve Protocol design:
+As the top decision maker, the Owner role should be reserved for a decentralized governance smart contract, as it is with the [Governor Alexios](https://etherscan.io/address/0x7e880d8bD9c9612D6A9759F96aCD23df4A4650E6) contract for eUSD. However, each RToken has a unique governance configuration, so each must be considered in isolation. Users should not assume that because eUSD has taken precautionary measures against centralization risk that another RToken will have the same assurances.
 
-- Owner: top decision maker, typically assigned to a decentralized governance smart contract, the [Governor Alexios](https://etherscan.io/address/0x7e880d8bD9c9612D6A9759F96aCD23df4A4650E6) contract for eUSD. This role has the power to grant and revolve roles to any Ethereum account, pause and unpause the system, freeze and unfreeze the [system](https://reserve.org/en/protocol/system_states_roles/), set governance parameters and upgrade system contracts. 
+As an additional point of concern, although Governor Alexios allows eusdRSR holders to directly participate in governance, it is unclear the nature of the relationship between the Governor contract and the [1-of-1 Multisig](https://etherscan.io/address/0x576ca79e46171a2B3E26F13a4334940eBcD72164#code) that shares [power over the TimelockController](https://pod.xyz/podarchy/0xc8Ee187A5e5c9dC9b42414Ddf861FFc615446a2c) ([Access Control](https://docs.google.com/spreadsheets/d/1_tdf1WDr6QMAIVZcEJpMb1Pc43b0W5qRZeqq0ByeH6Y/edit?usp=sharing)). Having one address potentially wield significant influence over the entire system, albeit with limited permissions, is a potential centralization risk. At the very least, the role of this address should be clearly described in the documentation.
 
-The Governor Alexios contract, a modified version of [OpenZeppelin Governor](https://docs.openzeppelin.com/contracts/4.x/api/governance), allows [eusdRSR](https://etherscan.io/address/0x18ba6e33ceb80f077DEb9260c9111e62f21aE7B8) holders to propose, vote and execute proposals. The TimelockController mediates this process by introducing a timelock once a proposal is approved, adding a delay between approval and execution, giving RToken holders to make a decision before something is changed. The process of approving to execute is 8 days (i.e., [voting snapshot delay: 2 days, voting period: 3 days, execution delay: 3 days](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F)). 
-
-Although Governor Alexios allows eusdRSR holders to directly participate in governance, it is unclear the nature of the relationship between the Governor contract and the [1-of-1 Multisig](https://etherscan.io/address/0x576ca79e46171a2B3E26F13a4334940eBcD72164#code) that shares [power over the TimelockController](https://pod.xyz/podarchy/0xc8Ee187A5e5c9dC9b42414Ddf861FFc615446a2c) ([Access Control](https://docs.google.com/spreadsheets/d/1_tdf1WDr6QMAIVZcEJpMb1Pc43b0W5qRZeqq0ByeH6Y/edit?usp=sharing)). Having one address potentially wield significant influence over the entire system, presumably constrained by eusdRSR holder, is nevertheless a _potential_ centralization risk. 
-
-On the other hand, it is the opinion of this author that the Reserve Protocol team has taken step to address this potential centralization risk by distributing permissions over Main, RToken_Pauser, Short_Freeze and Long_Freeze roles, across an additional four externally owned addresses (EOAs) and an additional two multisig natures wallets as depicted below (see [Access Control sheet](https://docs.google.com/spreadsheets/d/1_tdf1WDr6QMAIVZcEJpMb1Pc43b0W5qRZeqq0ByeH6Y/edit?usp=sharing)).
-
-In summary, while certain addresses have significant privileges and control over protocol operations and governance, there has been an attempt to mitigate potential centralization risk with a diversity of non-overlapping externally owned accounts (EOAs) and multisig wallets serving as a check and balance on power. Should any of the multisig signers disappear, there is sufficient distribution of permissions such that the protocol could continue functioning. The only entity that requires only one signature to exercise extensive power is the [1-of-1 multisig](https://etherscan.io/address/0x576ca79e46171a2B3E26F13a4334940eBcD72164#code) with permissions over the TimelockController contract. However, that is constrained by the power held by eusdRSR token holders through governance. **Nevertheless, it is recommended the team clarify whether that 1-of-1 multisig has the ability to veto proposals submitted by governance**.
+It is the opinion of this author that the Reserve Protocol team has taken step to address this potential centralization risk by distributing permissions over Main, RToken_Pauser, Short_Freeze and Long_Freeze roles, across an additional four externally owned addresses (EOAs) and an additional two multisig natures wallets as depicted below (see [Access Control sheet](https://docs.google.com/spreadsheets/d/1_tdf1WDr6QMAIVZcEJpMb1Pc43b0W5qRZeqq0ByeH6Y/edit?usp=sharing)). While certain addresses have significant privileges and control over protocol operations and governance, the system has been designed to mitigate potential centralization risk with a diversity of non-overlapping externally owned accounts (EOAs) and multisig wallets serving as a check and balance on power. Should any of the multisig signers disappear, there is sufficient distribution of permissions such that the protocol could continue functioning. 
 
 ![mitigate_centralization_risk](https://github.com/PaulApivat/temp/assets/4058461/4d87cc85-d659-4035-87a5-8b8ab357e7ce)
 
