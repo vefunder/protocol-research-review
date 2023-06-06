@@ -378,9 +378,9 @@ It is the opinion of this author that the Reserve Protocol team has taken step t
 
 ### Collateral Risk
 
-The Electronic Dollar (eUSD) is 100% backed by a basket of yield bearing stablecoins (cUSDC, cUSDT, ssUSDC, ssUSDT) with [emergency](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F) [collateral](https://etherscan.io/address/0x6d309297ddDFeA104A6E89a132e2f05ce3828e07#code) of pure stablecoins (USDC, USDT, USDP, TUSD, DAI). 
+The Electronic Dollar (eUSD) is 100% backed by a basket of yield bearing stablecoins (cUSDC, cUSDT, saUSDC, saUSDT) with [emergency](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F) [collateral](https://etherscan.io/address/0x6d309297ddDFeA104A6E89a132e2f05ce3828e07#code) of pure stablecoins (USDC, USDT, USDP, TUSD, DAI). 
 
-Additionally, eUSD is _overcollateralized_ with staked RSR (eusdRSR). As of this writing $13,223,011 in eUSD is backed by a collective prime basket and staked RSR valued at $15,292,097.
+Additionally, eUSD is overcollateralized with staked RSR (eusdRSR). As of this writing $13,223,011 in eUSD is backed by a collective prime basket and staked RSR valued at $15,292,097.
 
 -  $13,223,011 (eUSD)
 
@@ -404,30 +404,29 @@ This overcollateralization does not account for the emergency collateral. In tha
 
 Nevertheless, as identified in the audit report from [Code4Arena](https://github.com/reserve-protocol/protocol/blob/master/audits/Code4rena%20Reserve%20Audit%20Report.md), there is a quirk in Compound that could maliciously disable cToken collaterals in eUSD (currently: cUSDC and cUSDT). Therefore, there is collateral risk from exposure to external protocols like Compound and Aave. 
 
-\*Note: The values for Static Aave Interest Bearing USDC (saUSDC) and Static Aave Interest Bearing USDT (saUSDT) use USDC and USDT dollar values respectively as Dune Analytics currently does not make prices for saUSDC and saUSDT available.
+Governance can change the basket of assets backing eUSD, which can expose users to risk from the protocol shifting the allocation and potentially becoming undercollateralized. Users furthermore must remain aware of changes to the backing based on governance decisions to make informed decisions on their risk appetite. Yield-bearing DeFi instruments that depend on external protocols will always compound a user's exposure to risk from both the primary application (Reserve) and external application (e.g. Aave or Compound).
+
+Note: The values for Static Aave Interest Bearing USDC (saUSDC) and Static Aave Interest Bearing USDT (saUSDT) use USDC and USDT dollar values respectively as Dune Analytics currently does not make prices for saUSDC and saUSDT available.
 
 ![eUSD_overcollateralized_May25_2023](https://github.com/PaulApivat/temp/assets/4058461/d6fda070-b950-4fb7-ba6d-bb7ae7832a24)
 
 [eUSD overcollateralization: May 25, 2023](https://dune.com/paulapivat/llama-risk-assessment-electronic-dollar-eusd)
 
 
-### Custody Risk
-
-The prime basket collateral backing Electronic Dollars (eUSD) is handled by the [backing manager contract](https://etherscan.io/address/0xF014FEF41cCB703975827C8569a3f0940cFD80A4#code). This contract sits within the Main contract, which itself is controlled by a diversity of entities who have permission over the system including the TimelockController, two EOAs and two Multisigs (see Centralization section). The Reserve Protocol team has taken steps to mitigate potential custody risk. 
-
-
 ### Oracle Risk
 
-The Reserve Protocol uses only [one Chainlink oracle](https://github.com/reserve-protocol/protocol/blob/master/contracts/plugins/assets/OracleLib.sol) price feed with no apparent backup. The Backing Manager contract has [maxTradeSlippage](https://etherscan.io/address/0xF014FEF41cCB703975827C8569a3f0940cFD80A4#code), setting maximum deviation from oracle prices that a trade can clear at. Moreover, the protocol has the pause, short and long freeze functions to mitigate any extensive oracle failure situation. 
+The Reserve Protocol uses only [Chainlink](https://github.com/reserve-protocol/protocol/blob/master/contracts/plugins/assets/OracleLib.sol) price feeds with no apparent backup. The Backing Manager contract has [maxTradeSlippage](https://etherscan.io/address/0xF014FEF41cCB703975827C8569a3f0940cFD80A4#code), setting maximum deviation from oracle prices that a trade can clear at. Moreover, the protocol has the pause, short and long freeze functions to mitigate any extensive oracle failure situation. 
+
+The oracle is significant because it informs the system of collateral default, which will cause the system to sell collateral for emergency collateral alternatives or rebalance the collateral backing.
 
 
 ### Depeg Risk
 
-The Electronic Dollar (eUSD) is an overcollateralized stablecoin. While eUSD is designed to trade at the market value of the entire prime basket, it is overcollateralized through the staking of eusdRSR. This provides a level of issuance in case of collateral default as we saw when [USDC depegged in March 2023](https://medium.com/reserve-currency/eusd-emerges-strong-the-resilience-of-reserve-protocol-during-usdc-depegging-e5a698a990c9) and eusdRSR [stakers help re-collateralized](https://www.poap.delivery/reserve-eusd) eUSD to defend its peg. 
+The Electronic Dollar (eUSD) is an overcollateralized stablecoin. While eUSD is designed to trade at the market value of the entire prime basket, it is overcollateralized through the staking of eusdRSR. This provides some insurance in case of collateral default as we saw when [USDC depegged in March 2023](https://medium.com/reserve-currency/eusd-emerges-strong-the-resilience-of-reserve-protocol-during-usdc-depegging-e5a698a990c9) and eusdRSR [stakers help re-collateralized](https://www.poap.delivery/reserve-eusd) eUSD to defend its peg. 
 
-Anyone can bring an amount of collateral token value and [mint a corresponding value in RTokens](https://reserve.org/protocol/protocol_operations/) (eUSD) in exchange. The eUSD community currently has set an issuance throttle at (1,000,000 eUSD) and a redemption throttle at (1,500,000 eUSD) to [regulate mint and redeem](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F) supply and prevent attacks on the eUSD stablecoin. Moreover, governance has other tools such as pausing and freezing at its disposal to ensure normal protocol functioning. 
+It is unclear whether RSR can scale as an insurance instrument as eUSD marketcap expands. RSR has a relatively thin market, with only $1.3MM in the [RSR/FraxBP](https://curve.fi/#/ethereum/pools/factory-crypto-136/deposit) pool. An event requiring RSR staker to take a haircut will likely be met with reduced liquidity from marketmakers, making the prospect of recapitalizing the system from RSR quite tenuous. Furthermore, a major event that slashes RSR stakers may deteriorate community morale to the point that all RTokens face difficulty in recovering and attracting stakers in the future. The protocol mechanic is certainly a comforting feature, but the effectiveness at scale remains to be seen.
 
-In summary, there are sufficient reserves from overcollateralization. There is no reliance on an external AMM as the mint and redeem operations are built into the protocol. Stability is maintained via market arbitrage, while bribery mechanisms via the recent voting for Curve gauge will be used to incentivize liquidity. While there is low risk of depeg at the moment, eUSD is relatively young and further monitoring of the peg is warranted as the stablecoin continues to increase in market cap.
+In summary, there are currently sufficient reserves from overcollateralization. While there is low risk of depeg at the moment, eUSD is relatively young and further monitoring of the peg is warranted as the stablecoin continues to increase in market cap.
 
 
 ## LlamaRisk Gauge Criteria
@@ -436,29 +435,27 @@ In summary, there are sufficient reserves from overcollateralization. There is n
 
 1. Is it possible for a single entity to rug its users?
 
-The team has put in place a diverse set of externally owned accounts, multisigs and contracts that share permission over crucial functioning of the protocol, including the collateral in the backing manager. Although there is one entity with extensive privileges (see 1-of-1 multisig above), that influence is constrained by governance making it difficult for any single entity to rug users. 
+No. eUSD has put a DAO contract ([Governor Alexios](https://etherscan.io/address/0x7e880d8bD9c9612D6A9759F96aCD23df4A4650E6)) governed by eUSD stakers as the central governing entity. There is additionally a  diverse set of EOAs and multisigs that share precautionary permissions over the protocol (e.g. Pauser role). Users should be aware, however, that every RToken can establish its own governance, which could offer a different level of user assurances.  
 
 2. If the team vanishes, can the project continue?
 
-The Reserve Protocol platform is designed such that anyone can permissionlessly create a new RToken through a system of factory smart contracts such that the Electronic Dollars (eUSD) project on ethereum can continue.
-
-On the MobileCoin front, operations are more centralized and their functioning could be more reliant on the core team.
+Yes. The Reserve Protocol platform is designed such that anyone can permissionlessly create a new RToken through a system of factory smart contracts. The Electronic Dollars (eUSD) project is governed by eUSD stakers who can change parameters and upgrade contracts for eUSD.
 
 **Economic Factors**
 
 1. Does the project's viability depend on additional incentives?
 
-The project is currently viable without incentives, but a deeper Curve pool that combines eUSD with other stablecoins could further strengthen its peg.  
+No. The project is currently viable without incentives, but a deeper Curve pool that combines eUSD with other stablecoins could further strengthen its peg.  
 
 2. If demand falls to 0 tomorrow, can all users be made whole?
 
-Electronic Dollars (eUSD) is currently sufficiently overcollateralized such that users can be made whole if demand fell to 0.
+Yes. Electronic Dollars (eUSD) is currently sufficiently overcollateralized such that users can be made whole if demand fell to 0. The process of redemption is permissionless, including unwrapping the underlying collateral tokens (Aave and Compound deposits).
 
 **Security Factors**
 
 1. Do audits reveal any concerning signs?
 
-The audits did not reveal any critical, major or minor issues to be concerned with. Although the code and protocol design is fairly complex, the team has made efforts to ensure high readability and clarity in their documentation and test coverage. 
+Audits revealed a number of high severity issues, but Reserve appears to place a high priority on security. They have undergone multiple audits and have an active bug bounty program with a maximum $5MM payout. Although the code and protocol design is fairly complex, the team has made efforts to ensure high readability and clarity in their documentation and test coverage. 
 
 
 ## Risk Team Recommendation
