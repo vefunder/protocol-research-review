@@ -1,7 +1,7 @@
-# Asset Risk Assessment: \[Protocol Asset]
+# Asset Risk Assessment: Reserve Protocol (eUSD)
 
 
-### (One sentence summary of the report)
+### A look into the protocol for permissionless stablecoin deployment and its eUSD stablecoin
 
 **Useful Links**
 
@@ -22,7 +22,7 @@
 
 - Important contracts
 
-  - [eUSD ](https://etherscan.io/address/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F)
+  - [eUSD](https://etherscan.io/address/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F)
   - [eusdRSR](https://etherscan.io/address/0x18ba6e33ceb80f077DEb9260c9111e62f21aE7B8)
   - [RSR](https://etherscan.io/address/0x320623b8e4ff03373931769a31fc52a4e78b5d70#code)
 
@@ -46,7 +46,9 @@
 
 A [proposal](https://gov.curve.fi/t/proposal-to-add-eusd-fraxbp-gauge/8938) to add the [eUSD+FraxBP](https://curve.fi/#/ethereum/pools/factory-v2-277/deposit) Curve pool to the gauge controller was posted on March 6th, 2023. A second gauge was [proposed](https://gov.curve.fi/t/proposal-to-add-hyusd-eusd-to-the-gauge-controller/9234/3) for the [hyUSD+eUSD](https://curve.fi/#/ethereum/pools/factory-crypto-252/deposit) pool on May 16th. Both proposals passed a DAO vote on [March 13th](https://dao.curve.fi/vote/ownership/293) and [May 31st](https://dao.curve.fi/vote/ownership/336). Most recently, a third RToken pool has [proposed](https://gov.curve.fi/t/proposal-to-add-eth-eth-to-the-gauge-controller/9272) a gauge for the [ETH+/ETH](https://curve.fi/#/ethereum/pools/factory-crypto-256/deposit) pool.
 
-This article aims to provide information relevant for Curve LPs about Reserve Protocol and the mechanics behind RTokens, with particular focus on its flagship stablecoin eUSD ([Electronic Dollar](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F)). To unpack eUSD, we’ll start with an overview of [MobileCoin](https://mobilecoin.com/files-uploads/2022/10/MobileCoin_Stablecoin_Whitepaper_Final_Edits.pdf), a protocol for confidential tokens that enables payment on mobile devices. We then introduce [Reserve Protocol](https://reserve.org/en/protocol/), a DeFi platform built on Ethereum that enables the permissionless creation of stablecoins. Finally, we will cover relevant risk parameters for the benefit of LPs exposed to RTokens, including eUSD and hyUSD.
+This article aims to provide information relevant for Curve LPs about Reserve Protocol and the mechanics behind RTokens, with particular focus on its flagship stablecoin eUSD ([Electronic Dollar](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F)). To unpack eUSD, we’ll start with an overview of [MobileCoin](https://mobilecoin.com/files-uploads/2022/10/MobileCoin_Stablecoin_Whitepaper_Final_Edits.pdf), a protocol for confidential tokens that enables payment on mobile devices. We then introduce [Reserve Protocol](https://reserve.org/en/protocol/), a DeFi platform built on Ethereum that enables the permissionless creation of stablecoins. Finally, we will cover relevant risk parameters for the benefit of LPs exposed to eUSD.
+
+Many of the information in this report is applicable to the hyUSD and ETH+ RTokens, but for the sake of clarity, this report will focus primarily on eUSD.
 
 
 ## MobileCoin Introduction
