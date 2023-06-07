@@ -254,6 +254,25 @@ If eUSD is trading above peg at $1.05 cents, arbitragers would take advantage of
 Arbitragers would first attain the underlying eUSD collateral tokens by swapping and wrapping to the correct propotion of the basket. They would then deposit these collateral tokens to mint eUSD at the 1:1 peg value. The arbitragers would then sell the eUSD back on the market as long as it is trading above peg.
 
 
+### Token Distribution 
+
+Five entities account for [99% of eUSD supply](https://etherscan.io/token/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F#balances) on Ethereum:
+
+- ~6,100,000 eUSD in [eUSD/FraxBP](https://etherscan.io/address/0xaeda92e6a3b1028edc139a4ae56ec881f3064d4f) Curve pool
+
+- 5,990,000 eUSD in a [2-of-4 Multisig](https://etherscan.io/address/0x3c1d46c769f3c09b22c7e9c7144eb392102088b7)
+
+  - [One of the signers](https://etherscan.io/address/0x1871Cf6F04bD5dC3414B6EB0130B09712a6CF2F1) is also on Reserve’s [Slow Wallet Multisig](https://etherscan.io/address/0xA7b123D54BcEc14b4206dAb796982a6d5aaA6770#code)
+
+- ~4,400,000 eUSD in an [EOA](https://etherscan.io/token/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F?a=0x79e76c14b3bb6236dfc06d2d7ff219c8b070169c) that appears to do arbitrage operations.
+
+- 510,002 eUSD in a [2-of-2 multisig](https://app.safe.global/balances?safe=eth:0x30DA4EB397215cF407C46854CA7188f4e60F3402) that is [verifiable](https://auditor.mobilecoin.foundation/) as the MobileCoin bridge multisig managed by Reserve (There is a correspondent 510,002 eUSD on MobileCoin)
+     - This [2-of-2 multisig](https://etherscan.io/address/0x30da4eb397215cf407c46854ca7188f4e60f3402) is itself controlled by 2 additional multisigs. These two additional multisigs are held by a 1-of-3 and 2-of-3 multisigs themselves. 
+
+- ~500,000 eUSD in [eUSD/hyUSD](https://etherscan.io/address/0x8a8434a5952ac2cf4927bbea3ace255c6dd165cd) Curve pool
+
+A third of the total supply of eUSD is in the eUSD/FraxBP pool with another third controlled by a 2-of-4 multisig, in which one of the signers is also on Reserve’s Slow Wallet multisig ([SlowWallet](https://etherscan.io/address/0x6bab6EB87Aa5a1e4A8310C73bDAAA8A5dAAd81C1#code), [SlowWallet owner - Reserve Rights multisig](https://etherscan.io/address/0xA7b123D54BcEc14b4206dAb796982a6d5aaA6770)).
+
 ### Market
 
 Electronic Dollars (eUSD) trading is currently limited to decentralized exchanges. [Coingecko](https://www.coingecko.com/en/coins/electronic-usd#markets) lists the DEX 4swap with trading pairs eUSD/USDC and eUSD/MOB. Although available on Uniswap, it is not frequently traded. Onchain data suggests most of the trading activity is on Curve within the [eUSD/FraxBP pool](https://curve.fi/#/ethereum/pools/factory-v2-277/deposit) consisting of eUSD, FRAX, and USDC.
@@ -282,37 +301,17 @@ Examining buy and sell action across DEX (Curve), there has primarily been buyin
 
 [Query source](https://dune.com/queries/2458342/4041981)
 
-Since the first time eUSD was minted for its underlying collateral basket (saUSDC, saUSDT, cUSDC, cUSDC) on [February 23, 2023](https://etherscan.io/tx/0x949e6329b55a89b0874ef99256048ffde458bc4f2236e0e87331321a13a8bef8), eUSD supply has expanded to $17.6MM. A notable uptick in total supply occurred on March 23, 2023 with the passing of the [Curve gauge vote](https://etherscan.io/tx/0x5708af06b4f1514bc64dcfd9c8cee14c2aa0f5c1c7e2de914d1c2bdfa2726d31). 
+Since the first time eUSD was minted for its underlying collateral basket (saUSDC, saUSDT, cUSDC, cUSDC) on [February 23, 2023](https://etherscan.io/tx/0x949e6329b55a89b0874ef99256048ffde458bc4f2236e0e87331321a13a8bef8), eUSD supply has expanded to $18.6MM by June 7th. A notable uptick in total supply occurred on March 23, 2023 after the passing of the [Curve gauge vote](https://etherscan.io/tx/0x5708af06b4f1514bc64dcfd9c8cee14c2aa0f5c1c7e2de914d1c2bdfa2726d31). 
 
-![eUSD_supply](https://github.com/PaulApivat/temp/assets/4058461/85969d98-1a59-4f1d-94b8-329497577510)
+![Screen Shot 2023-06-07 at 9 05 51 AM](https://github.com/vefunder/protocol-research-review/assets/51072084/63be7c65-6f19-472a-9ec8-c94229eec9ca)
 
-[Query source](https://dune.com/queries/2454760/4035488)
+[Query source](https://dune.com/queries/2612639/4334228)
 
 Finally, we see the largest spike in staked eusdRSR on March 23rd, following the addition of the Curve gauge. For other additional charts showing the state of Electronic Dollars, we have created a [Dune Dashboard](https://dune.com/paulapivat/llama-risk-assessment-electronic-dollar-eusd).
 
 ![eusdRSR_staked_ts](https://github.com/PaulApivat/temp/assets/4058461/7a520b58-3168-42b9-b33c-d7020686658b)
 
 [Query source](https://dune.com/queries/2465756/4055736)
-
-
-### Token Distribution 
-
-Five entities account for [99% of eUSD supply](https://etherscan.io/token/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F#balances) on Ethereum:
-
-- ~6,100,000 eUSD in [eUSD/FraxBP](https://etherscan.io/address/0xaeda92e6a3b1028edc139a4ae56ec881f3064d4f) Curve pool
-
-- 5,990,000 eUSD in a [2-of-4 Multisig](https://etherscan.io/address/0x3c1d46c769f3c09b22c7e9c7144eb392102088b7)
-
-  - [One of the signers](https://etherscan.io/address/0x1871Cf6F04bD5dC3414B6EB0130B09712a6CF2F1) is also on Reserve’s [Slow Wallet Multisig](https://etherscan.io/address/0xA7b123D54BcEc14b4206dAb796982a6d5aaA6770#code)
-
-- ~4,400,000 eUSD in an [EOA](https://etherscan.io/token/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F?a=0x79e76c14b3bb6236dfc06d2d7ff219c8b070169c) that appears to do arbitrage operations.
-
-- 510,002 eUSD in a [2-of-2 multisig](https://app.safe.global/balances?safe=eth:0x30DA4EB397215cF407C46854CA7188f4e60F3402) that is [verifiable](https://auditor.mobilecoin.foundation/) as the MobileCoin bridge multisig managed by Reserve (There is a correspondent 510,002 eUSD on MobileCoin)
-     - This [2-of-2 multisig](https://etherscan.io/address/0x30da4eb397215cf407c46854ca7188f4e60f3402) is itself controlled by 2 additional multisigs. These two additional multisigs are held by a 1-of-3 and 2-of-3 multisigs themselves. 
-
-- ~500,000 eUSD in [eUSD/hyUSD](https://etherscan.io/address/0x8a8434a5952ac2cf4927bbea3ace255c6dd165cd) Curve pool
-
-A third of the total supply of eUSD is in the eUSD/FraxBP pool with another third controlled by a 2-of-4 multisig, in which one of the signers is also on Reserve’s Slow Wallet multisig ([SlowWallet](https://etherscan.io/address/0x6bab6EB87Aa5a1e4A8310C73bDAAA8A5dAAd81C1#code), [SlowWallet owner - Reserve Rights multisig](https://etherscan.io/address/0xA7b123D54BcEc14b4206dAb796982a6d5aaA6770)).
 
 
 ## Risk Vectors
