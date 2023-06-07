@@ -256,7 +256,11 @@ Arbitragers would first attain the underlying eUSD collateral tokens by swapping
 
 ### Token Distribution 
 
-Five entities account for [99% of eUSD supply](https://etherscan.io/token/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F#balances) on Ethereum:
+As of June 7th, five entities account for [99% of eUSD supply](https://etherscan.io/token/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F#balances) on Ethereum:
+
+![Screen Shot 2023-06-07 at 9 18 54 AM](https://github.com/vefunder/protocol-research-review/assets/51072084/1ebeabc8-c3ab-40fe-bc4a-d055fa28f1f4)
+
+Source: [Etherscan: eUSD Tokenholders](https://etherscan.io/token/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F#balances)
 
 - ~6,100,000 eUSD in [eUSD/FraxBP](https://etherscan.io/address/0xaeda92e6a3b1028edc139a4ae56ec881f3064d4f) Curve pool
 
@@ -264,18 +268,17 @@ Five entities account for [99% of eUSD supply](https://etherscan.io/token/0xA0d6
 
   - [One of the signers](https://etherscan.io/address/0x1871Cf6F04bD5dC3414B6EB0130B09712a6CF2F1) is also on Reserve’s [Slow Wallet Multisig](https://etherscan.io/address/0xA7b123D54BcEc14b4206dAb796982a6d5aaA6770#code)
 
-- ~4,400,000 eUSD in an [EOA](https://etherscan.io/token/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F?a=0x79e76c14b3bb6236dfc06d2d7ff219c8b070169c) that appears to do arbitrage operations.
+- ~5,400,000 eUSD in an [EOA](https://etherscan.io/token/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F?a=0x79e76c14b3bb6236dfc06d2d7ff219c8b070169c) that appears to do arbitrage operations.
 
 - 510,002 eUSD in a [2-of-2 multisig](https://app.safe.global/balances?safe=eth:0x30DA4EB397215cF407C46854CA7188f4e60F3402) that is [verifiable](https://auditor.mobilecoin.foundation/) as the MobileCoin bridge multisig managed by Reserve (There is a correspondent 510,002 eUSD on MobileCoin)
      - This [2-of-2 multisig](https://etherscan.io/address/0x30da4eb397215cf407c46854ca7188f4e60f3402) is itself controlled by 2 additional multisigs. These two additional multisigs are held by a 1-of-3 and 2-of-3 multisigs themselves. 
 
 - ~500,000 eUSD in [eUSD/hyUSD](https://etherscan.io/address/0x8a8434a5952ac2cf4927bbea3ace255c6dd165cd) Curve pool
 
-A third of the total supply of eUSD is in the eUSD/FraxBP pool with another third controlled by a 2-of-4 multisig, in which one of the signers is also on Reserve’s Slow Wallet multisig ([SlowWallet](https://etherscan.io/address/0x6bab6EB87Aa5a1e4A8310C73bDAAA8A5dAAd81C1#code), [SlowWallet owner - Reserve Rights multisig](https://etherscan.io/address/0xA7b123D54BcEc14b4206dAb796982a6d5aaA6770)).
 
 ### Market
 
-Electronic Dollars (eUSD) trading is currently limited to decentralized exchanges. [Coingecko](https://www.coingecko.com/en/coins/electronic-usd#markets) lists the DEX 4swap with trading pairs eUSD/USDC and eUSD/MOB. Although available on Uniswap, it is not frequently traded. Onchain data suggests most of the trading activity is on Curve within the [eUSD/FraxBP pool](https://curve.fi/#/ethereum/pools/factory-v2-277/deposit) consisting of eUSD, FRAX, and USDC.
+Electronic Dollars (eUSD) trading is currently limited to decentralized exchanges. [Coingecko](https://www.coingecko.com/en/coins/electronic-usd#markets) lists the DEX 4swap with trading pairs eUSD/USDC and eUSD/MOB, although liquidity these is very low. Onchain data suggests most of the trading activity is on Curve within the [eUSD/FraxBP pool](https://curve.fi/#/ethereum/pools/factory-v2-277/deposit) consisting of eUSD, FRAX, and USDC.
 
 The swap pairs have shown up in different pair patterns on DEXes as depicted here:
 
@@ -289,17 +292,11 @@ Date and amount traded between the pairs can be queried in the table below:
 
 [Query source](https://dune.com/queries/2458380/4042115)
 
-Given that eUSD only recently had its first transaction on Ethereum as of [February 23, 2023](https://etherscan.io/tx/0x949e6329b55a89b0874ef99256048ffde458bc4f2236e0e87331321a13a8bef8), we can check Coingecko for its price stability. For the most part, eUSD has maintained peg during its short life, with the exception of [March 11th](https://medium.com/reserve-currency/eusd-emerges-strong-the-resilience-of-reserve-protocol-during-usdc-depegging-e5a698a990c9), when USDC depegged bringing nearly all stablecoins in DeFi off their respective peg. Fortunately, [eusdRSR stakers](https://www.poap.delivery/reserve-eusd) were able to help eUSD regain peg as emergency collateral (USDT) was swapped in. 
+eUSD only recently had its first transaction on Ethereum as of [February 23, 2023](https://etherscan.io/tx/0x949e6329b55a89b0874ef99256048ffde458bc4f2236e0e87331321a13a8bef8), the starting date from which we can check Coingecko for its price stability. For the most part, eUSD has maintained peg during its short life, with the exception of [March 11th](https://medium.com/reserve-currency/eusd-emerges-strong-the-resilience-of-reserve-protocol-during-usdc-depegging-e5a698a990c9), when USDC depegged bringing nearly all stablecoins in DeFi off their respective peg. Fortunately, [eusdRSR stakers](https://www.poap.delivery/reserve-eusd) were able to help eUSD regain peg as emergency collateral (USDT) was swapped in. 
 
 ![eUSD_price_stability](https://github.com/PaulApivat/temp/assets/4058461/d899bf32-ae97-464a-a447-e9e64aaf0391)
 
 [Coingecko: Electronic USD price chart](https://www.coingecko.com/en/coins/electronic-usd)
-
-Examining buy and sell action across DEX (Curve), there has primarily been buying activity for eUSD with a notable uptrend since vote for a [Curve gauge passed on March 23, 2023](https://etherscan.io/tx/0x5708af06b4f1514bc64dcfd9c8cee14c2aa0f5c1c7e2de914d1c2bdfa2726d31).
-
-![eUSD_trade_vol_180d](https://github.com/PaulApivat/temp/assets/4058461/e230f041-cffb-453b-894a-488e86e38932)
-
-[Query source](https://dune.com/queries/2458342/4041981)
 
 Since the first time eUSD was minted for its underlying collateral basket (saUSDC, saUSDT, cUSDC, cUSDC) on [February 23, 2023](https://etherscan.io/tx/0x949e6329b55a89b0874ef99256048ffde458bc4f2236e0e87331321a13a8bef8), eUSD supply has expanded to $18.6MM by June 7th. A notable uptick in total supply occurred on March 23, 2023 after the passing of the [Curve gauge vote](https://etherscan.io/tx/0x5708af06b4f1514bc64dcfd9c8cee14c2aa0f5c1c7e2de914d1c2bdfa2726d31). 
 
@@ -307,12 +304,13 @@ Since the first time eUSD was minted for its underlying collateral basket (saUSD
 
 [Query source](https://dune.com/queries/2612639/4334228)
 
-Finally, we see the largest spike in staked eusdRSR on March 23rd, following the addition of the Curve gauge. For other additional charts showing the state of Electronic Dollars, we have created a [Dune Dashboard](https://dune.com/paulapivat/llama-risk-assessment-electronic-dollar-eusd).
+The following chart shows RSR that has been staked on eUSD as eusdRSR over time. We see the largest spike in staked eusdRSR on March 23rd, following the addition of the Curve gauge. 
 
 ![eusdRSR_staked_ts](https://github.com/PaulApivat/temp/assets/4058461/7a520b58-3168-42b9-b33c-d7020686658b)
 
 [Query source](https://dune.com/queries/2465756/4055736)
 
+For other additional charts showing the state of Electronic Dollars, we have created a [Dune Dashboard](https://dune.com/paulapivat/llama-risk-assessment-electronic-dollar-eusd).
 
 ## Risk Vectors
 
