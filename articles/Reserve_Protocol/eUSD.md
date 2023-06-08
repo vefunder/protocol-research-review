@@ -1,4 +1,6 @@
-### A look into the protocol for permissionless stablecoin deployment and its eUSD stablecoin
+# Asset Risk Assessment: Reserve Protocol (eUSD)
+
+### A look into the protocol for permissionless stablecoin deployment and Relevant Risks to Curve LPs
 
 **Useful Links**
 
@@ -419,7 +421,7 @@ No. eUSD has put a DAO contract ([Governor Alexios](https://etherscan.io/address
 
 2. If the team vanishes, can the project continue?
 
-Yes. The Reserve Protocol platform is designed such that anyone can permissionlessly create a new RToken through a system of factory smart contracts. The Electronic Dollars (eUSD) project is governed by eUSD stakers who can change parameters and upgrade contracts for eUSD.
+Yes. The Reserve Protocol platform is designed such that anyone can permissionlessly create a new RToken through a system of factory smart contracts. The Electronic Dollars (eUSD) project is permissionlessly governed by eusdRSR stakers who can change parameters, assign any necessary roles, and upgrade contracts for eUSD.
 
 **Economic Factors**
 
@@ -440,5 +442,9 @@ Audits revealed a number of high severity issues, but Reserve appears to place a
 
 ## Risk Team Recommendation
 
-(Don't worry about this section in the first draft, we will discuss together and with the protocol team to determine our final recommendation)
+Reserve Protocol have built a unique system for permissionlessly deploying a stablecoin that allows a high degree of customization in terms of the governance and risk profile. Of the three RTokens present on Curve (eUSD, hyUSD, and ETH+), eUSD is clearly the flagship product with highest marketcap and history. Each RToken must be evaluated independently, given the unique properties that can be assigned to each token. 
+
+In terms of centralization, Reserve has taken care to elimate central points of failure wherever possible. eUSD governance is secured by a DAO of eusdRSR stakers, and access controls are carefully shared between multisigs and EOAs that balances fast response times with system security. Core features such as recapitalization after a shorfall event have an algorithmic process to determine the shortfall and conduct the recapitalization process. There has even been an instance when USDC depegged and this functionality was tested in prod on a relatively small scale. Given the complexity of the processes involved, it remains to be seen how the system and its community are able to handle a large scale shortfall event.
+
+Reserve has done a great job, given the short history of this iteration of Reserve Protocol, to create a transparent system with good documentation and plenty of smart contract audits. It is, however, a unique system design with a great deal of complexity, and Reserve should be diligent to further explain the mechanics of the system to their users in detail. For the part of users and anyone with exposure to RTokens, be sure to review the parameters (of which there are many), the governance, and the collateral basket to ensure the token represents an acceptable risk. Overall, we believe eUSD has taken satisfactory measures and meets our requirements for a Curve gauge.
 
