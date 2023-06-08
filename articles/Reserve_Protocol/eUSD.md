@@ -1,6 +1,6 @@
 # Asset Risk Assessment: Reserve Protocol (eUSD)
 
-### A look into the protocol for permissionless stablecoin deployment and Relevant Risks to Curve LPs
+### A look into the protocol for permissionless stablecoin deployment and relevant risks to Curve LPs
 
 **Useful Links**
 
@@ -15,29 +15,12 @@
   - [Electronic Dollars (eUSD) Token Details](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F)
   - [Electronic Dollars (eUSD) Whitepaper](https://mobilecoin.com/files-uploads/2022/10/MobileCoin_Stablecoin_Whitepaper_Final_Edits.pdf)
 
-- Github
+- Important contracts / eUSD Access Control
 
-  - [Reserve Protocol](https://github.com/reserve-protocol/protocol)
+     - [Access Control Google Sheet](https://docs.google.com/spreadsheets/d/1LULGdPtJc148l2GgmoGT2Pum-hGOK-UzNlKJHLFbG70/edit?usp=sharing)
 
-- Important contracts
-
-  - [eUSD](https://etherscan.io/address/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F)
-  - [eusdRSR](https://etherscan.io/address/0x18ba6e33ceb80f077DEb9260c9111e62f21aE7B8)
-  - [RSR](https://etherscan.io/address/0x320623b8e4ff03373931769a31fc52a4e78b5d70#code)
-
-- [Access Control Google Sheet](https://docs.google.com/spreadsheets/d/1LULGdPtJc148l2GgmoGT2Pum-hGOK-UzNlKJHLFbG70/edit?usp=sharing)
-
-- Governance (Multisig address, gov contract, gov reference)
-
-  - [eUSD Guardian (Governor Alexios) (GnosisSafeProxy)](https://etherscan.io/address/0x576ca79e46171a2B3E26F13a4334940eBcD72164#code)
-  - [eUSD (Owner Address, TimelockController)](https://etherscan.io/address/0xc8Ee187A5e5c9dC9b42414Ddf861FFc615446a2c#code)
-
-- Market Data (Curve pool, analytics)
-
-  - [eUSD-3CRV Pool](https://etherscan.io/address/0xaeda92e6a3b1028edc139a4ae56ec881f3064d4f)
-  - [eUSD-3CRV Gauge](https://etherscan.io/address/0x8605dc0c339a2e7e85eea043bd29d42da2c6d784)
-
-- [MobileCoin Electronic Dollar Auditor](https://auditor.mobilecoin.foundation/)
+- [Github](https://github.com/reserve-protocol/protocol)
+- [Audits](https://github.com/reserve-protocol/protocol/tree/master/audits)
 
 
 
@@ -133,18 +116,18 @@ The following flowchart shows revenue distribution to RToken holders and RSR sta
 
 Source: [Reserve Docs: Protocol Operations](https://reserve.org/protocol/protocol_operations/)
 
+Stakers earn rewards based on three factors:
+
+- Amount of revenue the RToken generates
+- Portion of revenue governance has directed to stakers
+- Portion of total stake they have on the RToken
+
+For eUSD, [100% of revenue earned is directed](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F) to eusdRSR stakers. 
+
 
 #### stRSR to Overcollateralize eUSD
 
-eusdRSR stakers earn rewards based on three factors:
-
-- Amount of revenue eUSD generates
-- Portion of revenue governance has directed to eusdRSR stakers
-- Portion of total eusdRSR staked on eUSD
-
-For eUSD, [100% of revenue earned is directed](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F) to eusdRSR stakers. With governance conducted by eusdRSR holders, there is an incentive to keep eUSD safe from unnecessary risk, as their funds are literally at stake. 
-
-In addition to their role in governance, eusdRSR stakers provide overcollateralization to eUSD and are subject to seizure in case the collateral backing for eUSD defaults. For example, [during USDC’s depegging in March 2023](https://medium.com/reserve-currency/eusd-emerges-strong-the-resilience-of-reserve-protocol-during-usdc-depegging-e5a698a990c9), eUSD required emergency action. Since it is 50% backed by USDC (approx 25% saUSDC, 25% cUSDC), the protocol had to sell off their backing for emergency collateral (USDT). Through the process, eusdRSR stakers helped [re-collateralized eUSD](https://www.poap.delivery/reserve-eusd) in defense of its peg. 
+eusdRSR stakers provide overcollateralization to eUSD and are subject to seizure in case the collateral backing for eUSD defaults. For example, [during USDC’s depegging in March 2023](https://medium.com/reserve-currency/eusd-emerges-strong-the-resilience-of-reserve-protocol-during-usdc-depegging-e5a698a990c9), eUSD required emergency action. Since it is 50% backed by USDC (approx 25% saUSDC, 25% cUSDC), the protocol had to sell off their backing for emergency collateral (USDT). Through the process, eusdRSR stakers helped [re-collateralized eUSD](https://www.poap.delivery/reserve-eusd) in defense of its peg. 
 
 In this instance, eusdRSR stakers provided overcollateralization for eUSD as the USDC portion of the backing collateral defaulted. The general process of recapitalizing any RToken is shown below: 
 
@@ -164,10 +147,12 @@ The capitalization and backing of eUSD can be characterized by [two distinct sta
 
 While the Reserve Protocol aims to be fully collateralized at all times, it won’t always be. For example, if governance decides to change the collateral basket or, in cases of market volatility (see USDC depeg scenario above), emergency collateral has to be swapped in as the defaulting collateral is auctioned off. eUSD may be fully funded (right amount of value), but not be fully collateralized (right amount of collateral tokens). When not fully collateralized, the protocol will attempt to sell off the excess asset until the system is either fully collateralized or RSR is required to recapitalize the system.
 
-Rebalancing during normal operation and recapitalizing during emergencies are conducted through [auctions](https://register.app/#/auctions?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F) conducted through [Gnosis Auctions](https://gnosis-auction.eth.link/#/start). The protocol uses a [Gnosis Trade](https://etherscan.io/address/0xAd4B0B11B041BB1342fEA16fc9c12Ef2a6443439) contract to trade against the Gnosis EasyAuction mechanism. Governance can set the auction length that strikes a balance between allowing time for arbitrage and swiftly executing trades. The default value is 15 minutes per auction. 
+Rebalancing during normal operation and recapitalizing during emergencies are conducted through [Gnosis Auctions](https://gnosis-auction.eth.link/#/start). The protocol uses a [Gnosis Trade](https://etherscan.io/address/0xAd4B0B11B041BB1342fEA16fc9c12Ef2a6443439) contract to trade against the Gnosis EasyAuction mechanism. Governance can set the auction length that strikes a balance between allowing time for arbitrage and swiftly executing trades. The default value is 15 minutes per auction. 
 
 
 ### RToken Governance
+
+Governance is conducted by eusdRSR holders, so there is an incentive alignment to keep eUSD safe from unnecessary risk, as their funds are literally at stake. 
 
 All RTokens launched on Reserve Protocol are governed separately by their respective communities with governance parameters codified upon RToken deployment. For example, eUSD (Electronic Dollars) will make governance choices independent of other RTokens like [RSV](https://register.app/#/overview?token=0x196f4727526eA7FB1e17b2071B3d8eAA38486988) (Reserve Protocol’s native stablecoin), [ETH+](https://register.app/#/overview?token=0xE72B141DF173b999AE7c1aDcbF60Cc9833Ce56a8) (an Ethereum-aligned Liquid Staking Token basket), or [hyUSD](https://register.app/#/overview?token=0xaCdf0DBA4B9839b96221a8487e9ca660a48212be) (a decentralized flatcoin that provides access to DeFi yields which also recently received a [Curve gauge](https://vote.convexfinance.com/#/proposal/0xbdb05edfcbdeececc5331d1194cae539a366cf37b4269faeb08d8305ea09568f)). 
 
@@ -229,13 +214,13 @@ There are a multitude of other RToken parameters as set in the [Backing Manager]
 
 eUSD is designed to trade at $1.00 reflecting the market value of the entire collateral basket while 100% of revenue from earned interest is directed by governance to go towards eusdRSR stakers. Any deviation from $1.00 is designed to get arbitraged toward the reference price.
 
-This will happen through issuance and redemption mechanisms. The eUSD RToken contract has specific functions to regulate the process of issuance and redemption. Issuance throttle limits how much eUSD can be issued, to limit value extraction in case of an exploit. After a large issuance, the issuance limit ‘recharges’ to the defined maximum. The redemption throttle works similarly where the protocol tries to ensure the net redemption for eUSD never exceeds an hourly limit. The specific parameters for eUSD are as follows: 
+This will happen through issuance and redemption mechanisms. The eUSD RToken contract has specific functions to regulate the process of issuance and redemption. Issuance throttle limits how much eUSD can be issued, to limit value extraction in case of an exploit. After a large issuance, the issuance limit ‘recharges’ to the defined maximum. The redemption throttle works similarly where the protocol tries to ensure the net percentage redemption of outstanding eUSD never exceeds an hourly limit. The specific parameters for eUSD are as follows: 
 
-- Issuance throttle ([1,000,000 eUSD](https://etherscan.io/token/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F#readProxyContract) maximum amount per hour) 
-- Issuance [throttle rate](https://etherscan.io/token/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F#readProxyContract) at 2.5% of eUSD supply
-- Redemption throttle ([1,500,000 eUSD](https://etherscan.io/token/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F#readProxyContract) maximum amount per hour)
-- Redemption [throttle rate](https://etherscan.io/token/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F#readProxyContract) at 5.0% of eUSD supply
-- [Source](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F)
+- Issuance throttle: [1,000,000 eUSD](https://etherscan.io/token/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F#readProxyContract) maximum amount per hour 
+- Issuance throttle rate: at [2.5%](https://etherscan.io/token/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F#readProxyContract) of eUSD supply
+- Redemption throttle: [1,500,000 eUSD](https://etherscan.io/token/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F#readProxyContract) maximum amount per hour
+- Redemption throttle rate: [5.0%](https://etherscan.io/token/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F#readProxyContract) of eUSD supply
+
 
 The following section provides case scenarios for when eUSD deviates from peg:
 
@@ -280,7 +265,7 @@ Source: [Etherscan: eUSD Tokenholders](https://etherscan.io/token/0xA0d69E286B93
 
 ### Market
 
-Electronic Dollars (eUSD) trading is currently limited to decentralized exchanges. [Coingecko](https://www.coingecko.com/en/coins/electronic-usd#markets) lists the DEX 4swap with trading pairs eUSD/USDC and eUSD/MOB, although liquidity these is very low. Onchain data suggests most of the trading activity is on Curve within the [eUSD/FraxBP pool](https://curve.fi/#/ethereum/pools/factory-v2-277/deposit) consisting of eUSD, FRAX, and USDC.
+Electronic Dollars (eUSD) trading is currently limited to decentralized exchanges. [Coingecko](https://www.coingecko.com/en/coins/electronic-usd#markets) lists the DEX 4swap with trading pairs eUSD/USDC and eUSD/MOB, although liquidity there is very low. Onchain data suggests most of the trading activity is on Curve within the [eUSD/FraxBP pool](https://curve.fi/#/ethereum/pools/factory-v2-277/deposit) consisting of eUSD, FRAX, and USDC.
 
 The swap pairs have shown up in different pair patterns on DEXes as depicted here:
 
@@ -347,6 +332,14 @@ In summary, the Reserve Protocol team has subjected themselves to several rounds
 
 ### Centralization Risk
 
+The [Main contract](https://etherscan.io/address/0x7697aE4dEf3C3Cd52493Ba3a6F57fc6d8c59108a#code) is central to the functioning of [eUSD](https://etherscan.io/address/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F#code). The Main contract is linked to other contracts essential to various protocol operations including: Asset Registry, Backing Manager, Basket Handler, eUSD, eusdRSR, Broker, Furnace, Distributor, RToken Trader and RSR Trader (see [Access Control sheet](https://docs.google.com/spreadsheets/d/1LULGdPtJc148l2GgmoGT2Pum-hGOK-UzNlKJHLFbG70/edit?usp=sharing)). 
+
+The Owner role (add/remove permissions, change parameters, upgrade contracts) in eUSD is given to the [Governor Alexios](https://etherscan.io/address/0x7e880d8bD9c9612D6A9759F96aCD23df4A4650E6) contract. This is a DAO module that gives eusdRSR stakers goverance rights over the system. However, each RToken has a unique governance configuration, so each must be considered in isolation. Users should not assume that because eUSD has taken precautionary measures against centralization risk that another RToken will have the same assurances.
+
+In an attempt to balance decentralization with precautionary levers, the eUSD team has assigned two entities (Alexios Governor and a 2-of-3 Multisig) [permission over TimelockController](https://pod.xyz/podarchy/0xc8Ee187A5e5c9dC9b42414Ddf861FFc615446a2c), which is the timelock that governs the Main contract. Alexios Governor has the TIMELOCK_ADMIN_ROLE and the multisig has the CANCELLER_ROLE. This allows the multisig to revert a potentially malicious governance action.
+
+#### Access Control
+
 Reserve Protocol uses Role Based Access Control (RBAC) to mitigate potential centralization risk. These are core [system states and roles](https://reserve.org/en/protocol/system_states_roles/) in Reserve Protocol’s RToken governance system. 
 
 - Owner: The top level role that can grant/revoke roles to any address, pause/unpause the system, freeze/unfreeze the system, set governance parameters and upgrade smart contracts.
@@ -354,29 +347,15 @@ Reserve Protocol uses Role Based Access Control (RBAC) to mitigate potential cen
 - Short Freeze: can freeze an RToken’s system for three days, generally assigned to an entity that can spot bugs and react swiftly. There is some tolerance for false positives, though less than the Pauser role. There can be multiple Short Freezer, as is the case with [eUSD](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F), as well as robot-controlled entities. 
 - Long Freeze: can freeze an RToken’s system for one week. This role should be optimized for no false positives, and is expected to act slowly and surely. There are fewer Long Freezers, with TimelockController being one of two for eUSD.
 
-The [Main contract](https://etherscan.io/address/0x7697aE4dEf3C3Cd52493Ba3a6F57fc6d8c59108a#code) is central to the functioning of [eUSD](https://etherscan.io/address/0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F#code). The Main contract is linked to other contracts essential to various protocol operations including: Asset Registry, Backing Manager, Basket Handler, eUSD, eusdRSR, Broker, Furnace, Distributor, RToken Trader and RSR Trader (see [Access Control sheet](https://docs.google.com/spreadsheets/d/1LULGdPtJc148l2GgmoGT2Pum-hGOK-UzNlKJHLFbG70/edit?usp=sharing)). 
-
 There are certain contracts that have ownership and/or permissions over Main, shown below. Critical ownership privileges are granted to the TimelockController contract for the Governor Alexios contract and additional roles are spread out to two  EOAs and two multisig wallets.
 
 - Pausers who can emergency pause eUSD: [1-of-3 msig](https://etherscan.io/address/0x7f9ffa8dea49647725ca6ce621e03aa20401ff63), [Timelock contract](https://etherscan.io/address/0xc8Ee187A5e5c9dC9b42414Ddf861FFc615446a2c), [EOA1](https://etherscan.io/address/0x4bad40e0d92ebc2620a0d5aff7887c7f2e67fdd8), [EOA2](https://etherscan.io/address/0xe45c3179b135288dd8e1e3c20eafebb2b2e7d771), [EOA3](https://etherscan.io/address/0x0d88776dd9a654cfe9c67b5b1d9ce2fddd815a34)
 - Short Freezers who can temporarily freeze eUSD for 3 days: [Timelock contract](https://etherscan.io/address/0xc8Ee187A5e5c9dC9b42414Ddf861FFc615446a2c), [1-of-3 msig](https://etherscan.io/address/0x4986164f2fb9bb898b19382b1e835cd9c81eba46), [EOA1](https://etherscan.io/address/0x4bad40e0d92ebc2620a0d5aff7887c7f2e67fdd8), [EOA2](https://etherscan.io/address/0xe45c3179b135288dd8e1e3c20eafebb2b2e7d771), [EOA3](https://etherscan.io/address/0x0d88776dd9a654cfe9c67b5b1d9ce2fddd815a34)
 - Long Freezers who can temporarily freeze eUSD for a week: [Timelock contract](https://etherscan.io/address/0xc8Ee187A5e5c9dC9b42414Ddf861FFc615446a2c), [2-of-3 msig](https://etherscan.io/address/0x0173e2965c1aec9d395eb14e3407ef95c2e1a47d)
 
-![Permissions_over_Main](https://github.com/PaulApivat/temp/assets/4058461/99dd225f-a4de-40bc-9176-7a055d223297)
-
-[TimelockController](https://etherscan.io/address/0xc8Ee187A5e5c9dC9b42414Ddf861FFc615446a2c#code) holds a host of [permissions on Main](https://pod.xyz/podarchy/0x7697aE4dEf3C3Cd52493Ba3a6F57fc6d8c59108a?lens=permissions&node=0x7697aE4dEf3C3Cd52493Ba3a6F57fc6d8c59108a) and plays a high authority role such as RToken [Pauser, Short Freeze and Long Freeze](https://reserve.org/en/protocol/system_states_roles/) ([source](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F)). 
-
-In an attempt to balance decentralization with precautionary levers, the eUSD team has assigned two entities (Alexios Governor and a 2-of-3 Multisig) [permission over TimelockController](https://pod.xyz/podarchy/0xc8Ee187A5e5c9dC9b42414Ddf861FFc615446a2c). Alexios Governor has the TIMELOCK_ADMIN_ROLE and the multisig has the CANCELLER_ROLE. This allows the multisig to revert a potentially malicious governance action. Entity relationships are shown here:
-
-![Permissions_over_TimelockController](https://github.com/PaulApivat/temp/assets/4058461/d053e783-7a6f-44b1-9aae-fa1adf3aa8f2)
-
-As the top decision maker, the Owner role should be reserved for a decentralized governance smart contract, as it is with the [Governor Alexios](https://etherscan.io/address/0x7e880d8bD9c9612D6A9759F96aCD23df4A4650E6) contract for eUSD. However, each RToken has a unique governance configuration, so each must be considered in isolation. Users should not assume that because eUSD has taken precautionary measures against centralization risk that another RToken will have the same assurances.
-
 Although Governor Alexios allows eusdRSR holders to directly participate in governance, there are privileges granted to the [2-of-3 Multisig](https://etherscan.io/address/0x576ca79e46171a2B3E26F13a4334940eBcD72164#code) that shares [power over the TimelockController](https://pod.xyz/podarchy/0xc8Ee187A5e5c9dC9b42414Ddf861FFc615446a2c) (see: [Access Control](https://docs.google.com/spreadsheets/d/1LULGdPtJc148l2GgmoGT2Pum-hGOK-UzNlKJHLFbG70/edit?usp=sharing)). We were unable to find documentation on this address, although the Reserve team clarified to us that the multisig comprises members of the Reserve and Mobilecoin team, and its authority is limited to preventing malicious governance proposals. The role of this address should be clearly described in the documentation if not done so already.
 
-It is the opinion of this author that the Reserve Protocol team has taken step to address this potential centralization risk by distributing permissions over Main, RToken_Pauser, Short_Freeze and Long_Freeze roles, across an additional four externally owned addresses (EOAs) and an additional two multisig natures wallets as depicted below (see [Access Control sheet](https://docs.google.com/spreadsheets/d/1LULGdPtJc148l2GgmoGT2Pum-hGOK-UzNlKJHLFbG70/edit?usp=sharing)). While certain addresses have significant privileges and control over protocol operations and governance, the system has been designed to mitigate potential centralization risk with a diversity of non-overlapping externally owned accounts (EOAs) and multisig wallets serving as a check and balance on power. Should any of the multisig signers disappear, there is sufficient distribution of permissions such that the protocol could continue functioning. 
-
-![mitigate_centralization_risk](https://github.com/PaulApivat/temp/assets/4058461/4d87cc85-d659-4035-87a5-8b8ab357e7ce)
+It is the opinion of this author that the Reserve Protocol team has taken steps to address this potential centralization risk by distributing limited permissions over Main with RToken_Pauser, Short_Freeze and Long_Freeze roles to four EOAs and two multisig natures wallets as depicted in our [Access Control sheet](https://docs.google.com/spreadsheets/d/1LULGdPtJc148l2GgmoGT2Pum-hGOK-UzNlKJHLFbG70/edit?usp=sharing). While certain addresses have significant privileges for protocol operations and governance, the system has been designed to mitigate potential centralization risk with a diversity of non-overlapping EOAs and multisig wallets. Should any of the multisig signers disappear, there is sufficient distribution of permissions such that the protocol could continue functioning. 
 
 
 ### Collateral Risk
