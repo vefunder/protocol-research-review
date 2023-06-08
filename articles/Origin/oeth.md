@@ -61,10 +61,9 @@ OETH tokens minted by the AMO are unique as they aren't backed by collateral fro
 ![](https://hackmd.io/_uploads/H1WG5XA83.png)
 The AMO can mint up to 2x the amount of OETH ([ConvexEthMetaStrategy.sol](https://www.contractreader.io/contract/mainnet/0xA52C14701f7ad3E7B70D05078AE2ebE3Fd283449))
 
-
 ## Rebasing
 
-OETH generates yield, which is systematically passed on to token holders by rebasing. This process adjusts the total money supply in alignment with the yield earned by the protocol. OETH dynamically modifies its money supply to ensure its value stays equivalent to 1 ETH. In tandem, the token balance in holders' wallets fluctuates in real time, mirroring the yield the protocol accrues. The rebasing is "up-only". In case of losses due to strategies reallocation (trading fees and slippage), rebasing stops until the yield catches up to pay off the debt. ==@todo: what happens in case of a hack (e.g., Morpho strat goes to zero)?==
+OETH generates yield, which is systematically passed on to token holders by rebasing. This process adjusts the total money supply in alignment with the yield earned by the protocol. OETH dynamically modifies its money supply to ensure its value stays equivalent to 1 ETH. In tandem, the token balance in holders' wallets fluctuates in real time, mirroring the yield the protocol accrues. The rebasing is "up-only". In case of losses due to strategies reallocation (trading fees and slippage), rebasing stops until the yield catches up to pay off the debt. Other lossy events (e.g., a strategy suffering from a hack, or slashing event on a LSD) would result in a drop of OETH price on main liquidity venues.
 
 For yield to be earned, smart contracts must proactively opt into the protocol via the `rebaseOptIn()` function. This enables optimized capital use by the protocol, enhancing the integration with DeFi protocols that weren't originally designed to handle changing balances. Therefore, OETH operates as a conventional ERC-20 token within other DeFi protocols until an explicit request for change is made. Standard EOA wallets, on the other hand, are automatically enrolled in the system, circumventing the need for an explicit opt-in. The OETH managed by the AMO does not rebase. 
 
