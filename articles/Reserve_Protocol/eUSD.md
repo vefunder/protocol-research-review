@@ -312,6 +312,7 @@ The following chart shows RSR that has been staked on eUSD as eusdRSR over time.
 
 For other additional charts showing the state of Electronic Dollars, we have created a [Dune Dashboard](https://dune.com/paulapivat/llama-risk-assessment-electronic-dollar-eusd).
 
+
 ## Risk Vectors
 
 ### Smart Contract Risk
@@ -375,41 +376,30 @@ It is the opinion of this author that the Reserve Protocol team has taken step t
 
 ![mitigate_centralization_risk](https://github.com/PaulApivat/temp/assets/4058461/4d87cc85-d659-4035-87a5-8b8ab357e7ce)
 
+
 ### Collateral Risk
 
-The Electronic Dollar (eUSD) is 100% backed by a basket of yield bearing stablecoins (cUSDC, cUSDT, saUSDC, saUSDT) with [emergency](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F) [collateral](https://etherscan.io/address/0x6d309297ddDFeA104A6E89a132e2f05ce3828e07#code) of pure stablecoins (USDC, USDT, USDP, TUSD, DAI). 
+The Electronic Dollar (eUSD) is 100% backed by a basket of yield bearing stablecoins during normal operation (cUSDC, cUSDT, saUSDC, saUSDT) with [emergency collateral](https://register.app/#/settings?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F) of pure stablecoins (USDC, USDT, USDP, TUSD, DAI) that can be exchanged for prime basket assets in times of emergency. Additionally, eUSD is overcollateralized with staked RSR (eusdRSR). As of this writing, the eUSD supply is 20% overcollateralized with RSR. 
 
-Additionally, eUSD is overcollateralized with staked RSR (eusdRSR). As of this writing $13,223,011 in eUSD is backed by a collective prime basket and staked RSR valued at $15,292,097.
+Although eUSD backing is entirely made up of stable assets, certain circumstances can cause insolvency, necessitating the use of RSR to recapitalize the outstanding supply. This has indeed happened once in eUSD's short history, during the USDC depeg on March 10th, 2023. Reserve was fortunate that this black swan event occurred before the introduction of Curve gauge incentives and a consequent supply expansion. The total marketcap of eUSD was only ~1,000,000 at the time, and the shortfall required $32,000 worth of RSR to recapitalize. 
 
--  $13,223,011 (eUSD)
+![Screen Shot 2023-06-08 at 10 27 15 AM](https://github.com/vefunder/protocol-research-review/assets/51072084/b5ec7ada-999a-45dd-8b9b-28f373dcfd1b)
 
-- Prime basket
+The recapitalization process involved three steps:
 
-  - $2,380,019 (cUSDT)
-  - $3,125,261 (cUSDC)
-  - $3,047,063 (saUSDC)\*
-  - $2,974,599 (saUSDT)\*
-  - $11,526,942 (Total Prime Basket value)
+1) [Tx](https://etherscan.io/tx/0xaa8eef1a5810dd66e224a822cc3baa406ce63c2635dce343ede4bf2adbdf6a1c) | Call manageTokensSortedOrder() to the [Backing Manager](https://etherscan.io/address/0xF014FEF41cCB703975827C8569a3f0940cFD80A4 ). This is the contract that handles the eUSD collateral basket. It transfers 7,997,787 RSR from the [stRSR](https://etherscan.io/address/0x18ba6e33ceb80f077deb9260c9111e62f21ae7b8) contract, socializing losses to RSR stakers. Funds are transfered to the [Gnosis Trader](https://etherscan.io/address/0x547e5af53d8aad34361fa75ac29ccc027be68075) contract that handles auctions with [Gnosis EasyAuction](https://etherscan.io/address/0x0b7ffc1f4ad541a4ed16b40d8c37f0929158d101).
+2) [Tx](https://etherscan.io/tx/0x14a4a3a56ea17fd86c39b4be0766084057c92985562ab71933a1bc3dd4474d36) | A highest bid for the 7,997,787 RSR is made for 32,400 USDT.
+3) [Tx](https://etherscan.io/tx/0x69a6aaa14bb34a2176332ddde5870e5ae52ef347fb637612a3b53956e679b565) | settleTrade() is called to the Backing Manager, claiming the 32,400 USDT to the Backing Manager.
 
-- Staked RSR
+Interestingly, the address who placed the bid for RSR back in March 22nd has not claimed the funds and they still reside in the EasyAuction contract. This suggests perhaps that this was an internal bailout by either a team member or Reserve investor not necessarily motivated by profit opportunity from the action. 
 
-  - $3,765,155
+The event serves to demonstrate the performance of the recapitalization mechanic in prod and highlight possible issues that may arise during a larger scale event. The system may be too slow to react in transitioning to emergency collateral, and in the case of temporary depegs, may result in uneccesary losses by triggering changes to the basket at the most inopportune times. The auction process may be too slow during times of high volatility and network congestion, which are times when recapitalization is most likely to become necessary. Market participants may front run an expected recapitalization event, making it more difficult to raise necessary funding from RSR. 
 
-- Total Backing
+It is unclear whether RSR can scale as an insurance instrument as eUSD marketcap expands. RSR has a relatively thin market, with only $1.3MM in the [RSR/FraxBP](https://curve.fi/#/ethereum/pools/factory-crypto-136/deposit) pool. Furthermore, a major event that slashes RSR stakers may deteriorate community morale to the point that all RTokens face difficulty in recovering and attracting stakers in the future. The protocol mechanic is certainly a comforting feature, but the effectiveness at scale remains to be seen.
 
-  - $15,292,097
+As an additional point, as identified in the audit report from [Code4Arena](https://github.com/reserve-protocol/protocol/blob/master/audits/Code4rena%20Reserve%20Audit%20Report.md), there is a quirk in Compound that could maliciously disable cToken collaterals in eUSD (currently: cUSDC and cUSDT). There is always compounded collateral risk when making use of yield bearing assets by introducing exposure to external protocols like Compound and Aave. 
 
-This overcollateralization does not account for the emergency collateral. In that case, [staked eusdRSR](https://www.poap.delivery/reserve-eusd) and emergency collateral could serve as backstop.
-
-Nevertheless, as identified in the audit report from [Code4Arena](https://github.com/reserve-protocol/protocol/blob/master/audits/Code4rena%20Reserve%20Audit%20Report.md), there is a quirk in Compound that could maliciously disable cToken collaterals in eUSD (currently: cUSDC and cUSDT). Therefore, there is collateral risk from exposure to external protocols like Compound and Aave. 
-
-Governance can change the basket of assets backing eUSD, which can expose users to risk from the protocol shifting the allocation and potentially becoming undercollateralized. Users furthermore must remain aware of changes to the backing based on governance decisions to make informed decisions on their risk appetite. Yield-bearing DeFi instruments that depend on external protocols will always compound a user's exposure to risk from both the primary application (Reserve) and external application (e.g. Aave or Compound).
-
-Note: The values for Static Aave Interest Bearing USDC (saUSDC) and Static Aave Interest Bearing USDT (saUSDT) use USDC and USDT dollar values respectively as Dune Analytics currently does not make prices for saUSDC and saUSDT available.
-
-![eUSD_overcollateralized_May25_2023](https://github.com/PaulApivat/temp/assets/4058461/d6fda070-b950-4fb7-ba6d-bb7ae7832a24)
-
-[eUSD overcollateralization: May 25, 2023](https://dune.com/paulapivat/llama-risk-assessment-electronic-dollar-eusd)
+Governance can change the basket of assets backing eUSD, which can expose users to risk from the protocol shifting the allocation and potentially becoming undercollateralized. Users furthermore must remain aware of changes to the backing based on governance decisions to make informed decisions on their risk appetite.
 
 
 ### Oracle Risk
@@ -417,15 +407,6 @@ Note: The values for Static Aave Interest Bearing USDC (saUSDC) and Static Aave 
 The Reserve Protocol uses only [Chainlink](https://github.com/reserve-protocol/protocol/blob/master/contracts/plugins/assets/OracleLib.sol) price feeds with no apparent backup. The Backing Manager contract has [maxTradeSlippage](https://etherscan.io/address/0xF014FEF41cCB703975827C8569a3f0940cFD80A4#code), setting maximum deviation from oracle prices that a trade can clear at. Moreover, the protocol has the pause, short and long freeze functions to mitigate any extensive oracle failure situation. 
 
 The oracle is significant because it informs the system of collateral default, which will cause the system to sell collateral for emergency collateral alternatives or rebalance the collateral backing.
-
-
-### Depeg Risk
-
-The Electronic Dollar (eUSD) is an overcollateralized stablecoin. While eUSD is designed to trade at the market value of the entire prime basket, it is overcollateralized through the staking of eusdRSR. This provides some insurance in case of collateral default as we saw when [USDC depegged in March 2023](https://medium.com/reserve-currency/eusd-emerges-strong-the-resilience-of-reserve-protocol-during-usdc-depegging-e5a698a990c9) and eusdRSR [stakers help re-collateralized](https://www.poap.delivery/reserve-eusd) eUSD to defend its peg. 
-
-It is unclear whether RSR can scale as an insurance instrument as eUSD marketcap expands. RSR has a relatively thin market, with only $1.3MM in the [RSR/FraxBP](https://curve.fi/#/ethereum/pools/factory-crypto-136/deposit) pool. An event requiring RSR staker to take a haircut will likely be met with reduced liquidity from marketmakers, making the prospect of recapitalizing the system from RSR quite tenuous. Furthermore, a major event that slashes RSR stakers may deteriorate community morale to the point that all RTokens face difficulty in recovering and attracting stakers in the future. The protocol mechanic is certainly a comforting feature, but the effectiveness at scale remains to be seen.
-
-In summary, there are currently sufficient reserves from overcollateralization. While there is low risk of depeg at the moment, eUSD is relatively young and further monitoring of the peg is warranted as the stablecoin continues to increase in market cap.
 
 
 ## LlamaRisk Gauge Criteria
