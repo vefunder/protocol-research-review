@@ -54,13 +54,14 @@ Origin employs an Automated Market Operations (AMO) design [initially pioneered 
 
 The LP tokens are staked into the [Curve Gauge](https://etherscan.io/address/0xd03be91b1932715709e18021734fcb91bb431715) to maximize earned rewards (CRV & CVX). The resulting collateral is added to the vault when these rewards are swapped to ETH. Conversely, the protocol can remove excess OETH from the pool to preserve price stability. Ultimately, the AMO can independently institute monetary policies within a closed system, provided they don't negatively impact the peg. The protocol claims to remain entirely collateralized even as the money supply responsively expands and contracts based on market conditions. This is because the protocol-owned OETH supplied in the Curve pool is not backed by LSDs or other DeFi strategies.
 
-![]([https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/oeth_amo_flow.png)
+![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/oeth_amo_flow.png)
+
 
 Flowchart of deposit to Curve pool throught AMO ([Origin's github repo](https://github.com/OriginProtocol/origin-dollar/tree/master/contracts/docs/plantuml))
 
 OETH tokens minted by the AMO are unique as they aren't backed by collateral from the vault. One could think of this system as the vault pre-minting some OETH for Curve to sell on its behalf, with those tokens becoming 100% backed the minute they enter circulation. These tokens are self-backed and are only circulated once collateralized. Users adding or removing OETH from the Curve pool influences the balance like a minting or redemption process due to the strategy's ability to burn or create new supply. OETH token can be redeemed at any time for underlying collateral on a 1:1 basis, ensuring the protocol remains 100% collateralized.
 
-![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/oeth_amo_flow.png)
+![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/amo_contract.png)
 
 The AMO can mint up to 2x the amount of OETH ([ConvexEthMetaStrategy.sol](https://www.contractreader.io/contract/mainnet/0xA52C14701f7ad3E7B70D05078AE2ebE3Fd283449))
 
