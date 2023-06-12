@@ -1,4 +1,4 @@
-![](https://hackmd.io/_uploads/S1Fgg708n.png)
+![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/oeth_banner.png)
 
 # Asset Risk Assessment: Origin Ether (OETH)
 
