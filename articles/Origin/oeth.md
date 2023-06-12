@@ -30,7 +30,8 @@ In May 2023, the Origin Protocol launched Origin Ether (OETH). This rebasing tok
 
 Origin Protocol [submitted a proposal](https://gov.curve.fi/t/proposal-to-add-eth-oeth-to-the-gauge-controller/9188) to add the [OETH-ETH pool](https://curve.fi/#/ethereum/pools/factory-v2-298) to the Curve Gauge Controller, allowing users to assign gauge weight and mint CRV. This proposal aims to enhance liquidity and usage of the pool and boost the yield offered to OETH holders. Profits generated from the gauge represent a substantial part of OETH yield. The proposal successfully passed an [on-chain vote on April 22nd, 2023](https://dao.curve.fi/vote/ownership/323).
 
-![](https://hackmd.io/_uploads/ByBJHQRLh.png)
+![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/oeth_curve_pool_june_7.png)
+
 Gauge rewards are an important part of OETH yield ([OETH-ETH Pool](https://curve.fi/#/ethereum/pools/factory-v2-298) on June 7th, 2023)
 
 # Origin Ether (OETH) Introduction
@@ -53,12 +54,15 @@ Origin employs an Automated Market Operations (AMO) design [initially pioneered 
 
 The LP tokens are staked into the [Curve Gauge](https://etherscan.io/address/0xd03be91b1932715709e18021734fcb91bb431715) to maximize earned rewards (CRV & CVX). The resulting collateral is added to the vault when these rewards are swapped to ETH. Conversely, the protocol can remove excess OETH from the pool to preserve price stability. Ultimately, the AMO can independently institute monetary policies within a closed system, provided they don't negatively impact the peg. The protocol claims to remain entirely collateralized even as the money supply responsively expands and contracts based on market conditions. This is because the protocol-owned OETH supplied in the Curve pool is not backed by LSDs or other DeFi strategies.
 
-![](https://hackmd.io/_uploads/H1L8vmRL2.png)
+![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/oeth_amo_flow.png)
+
+
 Flowchart of deposit to Curve pool throught AMO ([Origin's github repo](https://github.com/OriginProtocol/origin-dollar/tree/master/contracts/docs/plantuml))
 
 OETH tokens minted by the AMO are unique as they aren't backed by collateral from the vault. One could think of this system as the vault pre-minting some OETH for Curve to sell on its behalf, with those tokens becoming 100% backed the minute they enter circulation. These tokens are self-backed and are only circulated once collateralized. Users adding or removing OETH from the Curve pool influences the balance like a minting or redemption process due to the strategy's ability to burn or create new supply. OETH token can be redeemed at any time for underlying collateral on a 1:1 basis, ensuring the protocol remains 100% collateralized.
 
-![](https://hackmd.io/_uploads/H1WG5XA83.png)
+![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/amo_contract.png)
+
 The AMO can mint up to 2x the amount of OETH ([ConvexEthMetaStrategy.sol](https://www.contractreader.io/contract/mainnet/0xA52C14701f7ad3E7B70D05078AE2ebE3Fd283449))
 
 ## Rebasing
@@ -69,7 +73,8 @@ For yield to be earned, smart contracts must proactively opt into the protocol v
 
 To verify whether a specific address is configured to receive yield, a public function on the OETH contract can be invoked. This function returns an indicator showing if the address has opted in or out, irrespective of the type of wallet to which the address pertains.
 
-![](https://hackmd.io/_uploads/SyeihXCI3.png)
+![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/oeth_rebasing.png)
+
 Rebasing param ([OETH docs](https://docs.oeth.com/core-concepts/elastic-supply/rebasing-and-smart-contracts)) 
 
 ### Wrapped OETH
@@ -78,7 +83,8 @@ Origin also offers wOETH, a [ERC-4626](https://ethereum.org/en/developers/docs/s
 
 wOETH remains a marginal token with very few holders:
 
-![](https://hackmd.io/_uploads/Sk0jRmAIn.png)
+![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/woeth.png)
+
 wOETH on June 7th, 2024 ([Etherscan](https://etherscan.io/token/0xDcEe70654261AF21C44c093C300eD3Bb97b78192))
 
 
@@ -94,10 +100,12 @@ The dripper contract is designed to gradually allocate all of the yield produced
 
 OETH primarily liquidity is found on Curve's [OETH-ETH pool](https://curve.fi/#/ethereum/pools/factory-v2-298), which boasts over 5,300 ETH worth of liquidity. On the contrary, the liquidity of OETH on Uniswap is relatively smaller, with approximately 100 ETH in the [Uniswap pool 0.05% (v3)](https://info.uniswap.org/#/pools/0x52299416c469843f4e0d54688099966a6c7d720f).
 
-![](https://hackmd.io/_uploads/rJ_uyVA82.png)
+![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/oeth_curve_pool_june_7_2.png)
+
 Curve OETH-ETH pool on June 7th, 2023 ([Curve](https://curve.fi/#/ethereum/pools/factory-v2-298))
 
-![](https://hackmd.io/_uploads/BkjuJV0I3.png)
+![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/oeth_univ3_pool_june_7.png)
+
 Uniswap V3 OETH/ETH 0.05% pool on June 7th, 2023 ([Uniswap](https://info.uniswap.org/#/pools/0x52299416c469843f4e0d54688099966a6c7d720f))
 
 ### Peg
@@ -105,33 +113,40 @@ Uniswap V3 OETH/ETH 0.05% pool on June 7th, 2023 ([Uniswap](https://info.uniswap
 OETH aims to remain pegged to the value of Ethereum, allowing holders to have exposure to Ethereum's price movements while earning a stable yield. Since launch, OETH has maintained peg reasonably well.
 
 ### Chart from Coingecko:
-![](https://hackmd.io/_uploads/ryr-z4R83.png)
+
+![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/oeth_coingecko.png)
 
 ### Chart from Curve on-chain data:
-![](https://hackmd.io/_uploads/r1wWEN0L3.png)
+
+![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/curve_peg.png)
 
 In early June, the peg was jeopardized by a large holder (victim of the atomic wallet hack) selling into the Curve pool. The pool balance was restored as other buyers quickly seized the opportunity to buy OETH at a discount, returning the pool to peg.
 
-![](https://hackmd.io/_uploads/S1yecECU3.png)
+![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/etherscan.png)
+
 Large transaction bringing the pool balance back [Etherscan](https://etherscan.io/tx/0x365e6584f604a7ccab360f7631e05e0cfcb54b612c5f7b4f036b1aae192e6c83))
 
 ### Stablecoin/pegged asset
 
-![](https://hackmd.io/_uploads/BkiglBALn.png)
+![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/pegged_asset.png)
+
 Collateral on June 7th, 2023 ([oeth.com](https://www.oeth.com))
 
 ## Sources of Yield
-![](https://hackmd.io/_uploads/B1PWWHR82.png)
+![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/alloc.png)
+
 Allocation of assets on June 7th, 2023 ([oeth.com](https://www.oeth.com))
 
 ### Curve/Convex Yield
 
 Convex ETH+OETH: Origin predominantly supplies liquidity to the ETH-OETH Curve pool. The liquidity provider (LP) token is contributed to the gauge, then staked on Convex, enabling Origin to collect trading fees and protocol token rewards (CRV and CVX). This approach, an algorithmic market operations controller (AMO), allows OETH to safely boost its deposits to enhance returns and sustain the pool's balance.
 
-![](https://hackmd.io/_uploads/Sy05yHAUn.png)
+![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/convex_alloc.png)
+
 OETH allocation for Convex Gauge on June 7th, 2023 ([oeth.com](https://www.oeth.com/))
 
-![](https://hackmd.io/_uploads/H1Cc1HA83.png)
+![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/convex.png)
+
 Convex finance for ETH+OETH staking on June 7th, 2023 ([convexfinance.com](https://www.convexfinance.com/stake))
 
 ### Liquid Staking Derivatives (LSDs) Yield
@@ -168,7 +183,8 @@ The contracts' access controls are managed by 5-of-8 (admin) and 2-of-8 (strateg
 
 **Admin (5 of 8)**: [0xbe2AB3d3d8F6a32b96414ebbd865dBD276d3d899](https://etherscan.io/address/0xbe2AB3d3d8F6a32b96414ebbd865dBD276d3d899)
 
-![](https://hackmd.io/_uploads/HymuMBCLn.png)
+![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/pod.png)
+
 Admin multi-sig permissions ([pod.xyz](https://pod.xyz/podarchy/0xbe2AB3d3d8F6a32b96414ebbd865dBD276d3d899?sidebar=0&selectedNode=%220xbe2AB3d3d8F6a32b96414ebbd865dBD276d3d899%22))
 
 The admin multi-sig currently has full ownership over the contracts, but all contract changes must go through the timelock. This is merely temporary since OETH is less than a month old, and the team wanted to be able to respond quickly to any unforeseen issues. Full governance will soon be transferred to veOGV stakers like OUSD today. Once that transfer happens, the admin multi-sig will have no special powers. 
@@ -208,7 +224,8 @@ Source: https://www.originprotocol.com/community
 
 ## Contract architecture
 
-![](https://hackmd.io/_uploads/B1VXQBAI3.png)
+![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/registry_flow.png)
+
 Extract from [Contract Registry and Dependencies Chart](https://docs.oeth.com/smart-contracts/registry/oeth-registry)
 
 ### Oracles
