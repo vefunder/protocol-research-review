@@ -44,25 +44,57 @@ A summary of our relevant findings:
 In July 2021, the Origin Protocol introduced the Origin Dollar (OUSD), a yield-bearing stablecoin that did not require staking or asset locking. OUSD has a total market cap of approximately $27m, down from an all-time high of $300m in early 2022 (pre-UST era). This was followed by the Origin Governance Token (OGV), fostering decentralization and inclusive decision-making applied to the OUSD token. In May 2023, the protocol expanded its offerings with Origin Ether (OETH), an interest-earning token linked to Ethereum's value, in an attempt to capitalize on the Liquid Staking Derivatives (LSDs) trend and to provide a hassle-free yield to its holders.
 
 
-### Protocol Mechanics
+### Team
 
-#### Mint and burn
+The core team at Origin Protocol comprises experienced professionals with backgrounds in various industries and companies, including Coinbase, YouTube, Google, Paypal, Dropbox, and Pinterest. The founders and several team members are serial entrepreneurs who have founded and exited successful ventures.
 
-OETH can be minted through the [Origin Dapp](https://app.oeth.com/) by supplying ETH, WETH, stETH, rETH, frxETH, or sfrxETH. The Dapp integrates several contracts (Curve pool, OETH vault, and OETH zapper) to find the optimal route, factoring in slippage and gas expenses. If OETH is trading below peg, the router acquires OETH already in circulation (from the Curve pool or through Uniswap) rather than minting new OETH tokens from the vault. OETH can be converted back to its composite or individual assets via the Dapp. 
+Here are brief profiles of the core team members:
 
-##### The Vault
+* **Josh Fraser**: Co-founder, co-founded three other venture-backed companies: EventVue, Torbit (acquired by Walmart Labs), and Forage.
+* **Matthew Liu**: Co-founder, was the 3rd Product Manager at YouTube (acquired by Google) and VP PM at Qwiki (acquired by Yahoo) and Bonobos (acquired by Walmart).
+* **Franck Chastagnol**: Head of Engineering - has led engineering teams at Inktomi, Paypal, YouTube, Google, and Dropbox.
+* **Micah Alcorn**: Director of Product, was the technical co-founder of WellAttended, a bootstrapped box office management platform.
+* **Linus Chung**: VP of Product, previously worked as Director of Product at Coinbase and lead product at companies like Tesla, Pinterest, and LinkedIn.
+* **Andra Nicolau**: Head of BD, OUSD. She was most recently the Head of Growth at 1inch, where she raised over $250M.
+* **Justin Charlton**: Head of Finance, Designed budgets for satellite launches and advised tech clients on M&A and strategy for seven years at PwC and KPMG.
+
+Source: [https://www.originprotocol.com/community](https://www.originprotocol.com/community)
+
+
+#### The OETH Dapp
+
+OETH can be minted through the [Origin Dapp](https://app.oeth.com/) by supplying ETH, WETH, stETH, rETH, frxETH, or sfrxETH. The Dapp integrates several contracts (Curve pool, OETH vault, and OETH zapper) to find the optimal route, factoring in slippage and gas expenses. If OETH is trading below peg, the router acquires OETH already in circulation (from the Curve pool or through Uniswap) rather than minting new OETH tokens from the vault. OETH can be converted back to its composite or individual assets via the Dapp.
+
+
+## OETH Protocol Overview
+
+### Contract architecture
+
+The contract architecture uses a familiar proxy pattern centered around the OETH Vault where assets are custodied and deployed into various strategies approved by governance and managed by authorized strategists.
+
+![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/registry_flow.png)
+
+Source: [Contract Registry and Dependencies Chart](https://docs.oeth.com/smart-contracts/registry/oeth-registry)
+
+
+#### The Vault
 
 The [OETH Vault](https://etherscan.io/address/0x39254033945aa2e4809cc2977e7087bee48bd7ab) mints and burns OETH from WETH, frxETH, rETH, and stETH. The supported assets can be queried in [getAllAssets](https://etherscan.io/address/0x39254033945aa2e4809cc2977e7087bee48bd7ab#readProxyContract#F6). The vault is also a core system contract that custodies the deposited funds and stores various strategies ([getAllStrategies](https://etherscan.io/address/0x39254033945aa2e4809cc2977e7087bee48bd7ab#readProxyContract#F7)) where the underlying assets are deployed to earn a yield. It calculates interest earned from the strategies and executes rebases of the OETH supply.
 
 OETH Redemptions from the vault will return an equal value of every supported asset to the user (WETH, frxETH, rETH, stETH). An exit fee of 0.5% is charged on direct redemptions from the vault and is returned to OETH holders. An additional fee is a performance fee assigned to a trusteeAddress, which receives a 20% fee on yield earned whenever the rebase function is called. This address is set to the Origin [2-of-8 strategist multisig](https://etherscan.io/address/0xF14BBdf064E3F67f51cd9BD646aE3716aD938FDC).
 
-##### The Zapper
+#### The Zapper
 
 The [OETH Zapper](https://etherscan.io/address/0x9858e47BCbBe6fBAC040519B02d7cd4B2C470C66) is a smart contract designed to assist users in minting OETH using Ether (ETH) and Frax Staked Ether (sfrxETH), as the [OETH Vault](https://etherscan.io/address/0x39254033945aa2e4809cc2977e7087bee48bd7ab) only supports WETH, frxETH, rETH, and stETH directly. This setup enhances system security and optimizes the gas cost during minting.
 
-The Zapper allows for minting OETH in a single transaction, automatically routing ETH/sfrxETH into the Vault, and sending newly minted OETH to the depositer. It is not possible to withdraw from the Zapper, but users can redeem their OETH through the OETH Vault for a combination of WETH, rETH, stETH, and frxETH, or by simply selling OETH for ETH in the Curve pool.   
+The Zapper allows for minting OETH in a single transaction, automatically routing ETH/sfrxETH into the Vault, and sending newly minted OETH to the depositer. It is not possible to withdraw from the Zapper, but users can redeem their OETH through the OETH Vault for a combination of WETH, rETH, stETH, and frxETH, or by simply selling OETH for ETH in the Curve pool. 
 
-#### Rebasing
+#### The Harvester and Dripper
+
+The [OETHHarvester](https://etherscan.io/address/0x0D017aFA83EAce9F10A8EC5B6E13941664A6785C) collects rewards earned by the strategies, sells them for WETH, and forwards the proceeds to the [rewardsProceedsAddress](https://etherscan.io/address/0x0D017aFA83EAce9F10A8EC5B6E13941664A6785C#readProxyContract#F3). This address is set to the [dripper](https://etherscan.io/address/0xc0F42F73b8f01849a2DD99753524d4ba14317EB3) contract, which is designed to gradually allocate all of the yield produced by the protocol to OETH holders over 3 days (as queried in [dripDuration](https://etherscan.io/address/0xc0F42F73b8f01849a2DD99753524d4ba14317EB3#readProxyContract#F3)). This method evens out any abrupt fluctuations in yield and deters potential attacks by eliminating the ability to anticipate significant liquidity events within the protocol. Anyone can call [harvest](https://etherscan.io/address/0x0D017aFA83EAce9F10A8EC5B6E13941664A6785C#writeProxyContract#F3) and earn 2% of the proceeds as an incentivization.
+
+
+### Rebasing
 
 OETH generates yield, which is systematically passed on to token holders by rebasing. This process adjusts the total money supply in alignment with the yield earned by the protocol. OETH dynamically modifies its money supply to ensure its value stays equivalent to 1 ETH. In tandem, the token balance in holders' wallets fluctuates in real time, mirroring the yield the protocol accrues. The rebasing is "up-only". In case of losses due to strategies reallocation (trading fees and slippage), rebasing stops until the yield catches up to pay off the debt. Other lossy events (e.g., a strategy suffering from a hack, or slashing event on a LSD) would result in a drop of OETH price on main liquidity venues.
 
@@ -85,12 +117,7 @@ wOETH remains a marginal token with very few holders:
 Source: [Etherscan](https://etherscan.io/token/0xDcEe70654261AF21C44c093C300eD3Bb97b78192). wOETH on June 7th, 2024.
 
 
-#### The Harvester and Dripper
-
-The [OETHHarvester](https://etherscan.io/address/0x0D017aFA83EAce9F10A8EC5B6E13941664A6785C) collects rewards earned by the strategies, sells them for WETH, and forwards the proceeds to the [rewardsProceedsAddress](https://etherscan.io/address/0x0D017aFA83EAce9F10A8EC5B6E13941664A6785C#readProxyContract#F3). This address is set to the [dripper](https://etherscan.io/address/0xc0F42F73b8f01849a2DD99753524d4ba14317EB3) contract, which is designed to gradually allocate all of the yield produced by the protocol to OETH holders over 3 days (as queried in [dripDuration](https://etherscan.io/address/0xc0F42F73b8f01849a2DD99753524d4ba14317EB3#readProxyContract#F3)). This method evens out any abrupt fluctuations in yield and deters potential attacks by eliminating the ability to anticipate significant liquidity events within the protocol. Anyone can call [harvest](https://etherscan.io/address/0x0D017aFA83EAce9F10A8EC5B6E13941664A6785C#writeProxyContract#F3) and earn 2% of the proceeds as an incentivization.
-
-
-#### AMO
+### AMO
 
 Origin employs an Automated Market Operations (AMO) design [initially pioneered by Frax](https://docs.frax.finance/amo/overview). The AMO is implemented as the [ConvexEthMetaStrategy](https://etherscan.io/address/0x1827F9eA98E0bf96550b2FC20F7233277FcD7E63) strategy employed by the OETH Vault. The AMO operates by depositing funds into the Curve pool and allocating liquidity to both sides of the pool (ETH and OETH). Its primary function is maintaining the peg, enhancing capital efficiency, and optimizing yields for OETH holders.
 
@@ -105,6 +132,22 @@ OETH tokens minted by the AMO are unique as they aren't backed by collateral fro
 ![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/amo_contract.png)
 
 Source: [ConvexEthMetaStrategy.sol](https://www.contractreader.io/contract/mainnet/0xA52C14701f7ad3E7B70D05078AE2ebE3Fd283449) The AMO can mint up to 2x the amount of OETH.
+
+
+### Oracles
+
+OETH relies on Chainlink oracles to ensure appropriate Liquid Staking Tokens (LSTs) pricing to avoid overpayment. As of April 2023, Chainlink provides pricing oracles for stETH and rETH, while frxETH is hardcoded to a 1:1 ratio. Origin's team plans to implement Curve's time-weighted price oracle for frxETH.
+
+The protocol also uses Chainlink oracles when selling reward tokens for additional yield. This helps ensure the sale price slippage remains within acceptable limits, which is also applied to OGV buybacks from protocol earnings.
+
+The contract call sets a minimum required amount for minting and redemption. This safeguards transactions from underperformance due to price changes, causing the process to fail if the output of OUSD/OETH or stablecoins/LSTs is insufficient.
+
+**Oracles addresses**:
+
+* stETH/ETH: [0x86392dc19c0b719886221c78ab11eb8cf5c52812](https://etherscan.io/address/0x86392dc19c0b719886221c78ab11eb8cf5c52812)
+* rETH/ETH: [0x536218f9e9eb48863970252233c8f271f554c2d0](https://etherscan.io/address/0x536218f9e9eb48863970252233c8f271f554c2d0)
+* CRV/ETH: [0x8a12be339b0cd1829b91adc01977caa5e9ac121e](https://etherscan.io/address/0x8a12be339b0cd1829b91adc01977caa5e9ac121e)
+* CVX/ETH: [0xC9CbF687f43176B302F03f5e58470b77D07c61c6](https://etherscan.io/address/0xC9CbF687f43176B302F03f5e58470b77D07c61c6)
 
 
 ### Sources of Yield
@@ -144,6 +187,70 @@ Other DeFi strategies, such as the [OETHMorphoAAVEStrategy](https://etherscan.io
 #### Unallocated Capital
 
 When OETH is minted, collateral is placed into the Origin Vault, where it remains until the allocate function is invoked. This process is automatic for more significant transactions, which aren't as affected by increased gas costs.
+
+
+### Governance
+
+The Origin Protocol uses the Origin DeFi Governance Token (OGV) to allow decentralized decision-making within its ecosystem. Like OUSD, Origin Ether is intended ultimately to be governed by veOGV holders, with any upgrades to the contracts being time-delayed by a 48-hour timelock. According to the team, a 5-of-8 multisig will control OETH for the next few weeks if any critical issues are discovered in the early deployment of OETH.
+
+As of this writing, the governor of the OETH Vault is set to the [Governor](https://etherscan.io/address/0x39254033945aa2e4809cc2977e7087bee48bd7ab#readProxyContract#F10) contract. This contract has an admin set to the [5-of-8 admin multisig](https://etherscan.io/address/0x72426BA137DEC62657306b12B1E869d43FeC6eC7#readContract#F5). The delay time to execute a vote is set to [1 day](https://etherscan.io/address/0x72426BA137DEC62657306b12B1E869d43FeC6eC7#readContract#F6). Only the admin can queue a proposal and execute a vote. As the OETH Vault is an upgradable proxy contract that contains all underlying assets and is the hub for all strategies, the 5-of-8 multisig effectively has custody of all user funds. 
+
+
+#### Multisig:
+
+The contracts' access controls are managed by 5-of-8 (admin) and 2-of-8 (strategist) multisigs. The identity of these signers is not disclosed. Origin claims they are all unique trusted individuals with close ties to Origin. 
+
+**Signers (same for both)**:
+
+* [0xAbBca8bA6d2142B6457185Bec33bBD1b22746231](https://etherscan.io/address/0xAbBca8bA6d2142B6457185Bec33bBD1b22746231)
+* [0xce96ae6De784181d8Eb2639F1E347fD40b4fD403](https://etherscan.io/address/0xce96ae6De784181d8Eb2639F1E347fD40b4fD403)
+* [0x336C02D3e3c759160E1E44fF0247f87F63086495](https://etherscan.io/address/0x336C02D3e3c759160E1E44fF0247f87F63086495)
+* [0x6AC8d65Dc698aE07263E3A98Aa698C33060b4A13](https://etherscan.io/address/0x6AC8d65Dc698aE07263E3A98Aa698C33060b4A13)
+* [0x617a3582bf134fe8eC600fF04A194604DcFB5Aab](https://etherscan.io/address/0x617a3582bf134fe8eC600fF04A194604DcFB5Aab)
+* [0x244df059d103347a054487Da7f8D42d52Cb29A55](https://etherscan.io/address/0x244df059d103347a054487Da7f8D42d52Cb29A55)
+* [0xab7C7E7ac51f70dd959f3541316dBd715773158B](https://etherscan.io/address/0xab7C7E7ac51f70dd959f3541316dBd715773158B)
+* [0xe5888Ed7EB24C7884e821b4283472b49832E02f2](https://etherscan.io/address/0xe5888Ed7EB24C7884e821b4283472b49832E02f2)
+
+**Admin 5-of-8 multisig**: [0xbe2AB3d3d8F6a32b96414ebbd865dBD276d3d899](https://etherscan.io/address/0xbe2AB3d3d8F6a32b96414ebbd865dBD276d3d899)
+
+![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/pod.png)
+
+Source: [pod.xyz](https://pod.xyz/podarchy/0xbe2AB3d3d8F6a32b96414ebbd865dBD276d3d899?sidebar=0&selectedNode=%220xbe2AB3d3d8F6a32b96414ebbd865dBD276d3d899%22) Admin multi-sig permissions for OUSD.
+
+The admin multisig currently has full ownership over the contracts and the underlying assets, but all contract changes must go through the timelock. This is a temporary situation since OETH is a new protocol, and the team wanted to be able to respond quickly to any unforeseen issues. Full governance will soon be transferred to veOGV stakers like OUSD today. Once that transfer happens, the admin multi-sig will have no special powers. 
+
+**Strategist 2-of-8 multisig**: [0xF14BBdf064E3F67f51cd9BD646aE3716aD938FDC](https://etherscan.io/address/0xF14BBdf064E3F67f51cd9BD646aE3716aD938FDC)
+
+Certain features (e.g. adjusting funds among strategies or temporarily stopping deposits) require less time and fewer authorizations, enabling the Origin team to respond swiftly to changes in market circumstances or potential security issues. Strategists can carry out a restricted set of functions with the approval of only 2 of 8 authorized signers. The strategist can only allocate funds between previously approved strategies.
+
+The strategist multisig can do the following actions on the vault:
+
+* `reallocate` - move funds between strategies
+* `setVaultBuffer` - adjust the funds held outside strategies for cheaper redeems.
+* `setAssetDefaultStrategy` - which strategy mints and redeems pull from for a particular strategy
+* `withdrawAllFromStrategy` - remove funds from a single strategy and send them to the vault
+* `withdrawAllFromStrategies` - remove funds from all active strategies and send them to the vault
+* `pauseRebase` - pause all rebases
+* `pauseCapital` - pause all mints and redeems
+* `unpauseCapital` - allow all mints and redeems
+
+
+### Audits
+
+A complete list of audits can be found here: https://github.com/OriginProtocol/security/tree/master/audits
+
+Two notable audits were explicitly made on OETH: 
+
+* [OpenZeppelin - Origin Dollar OETH Integration - May 2023](https://github.com/OriginProtocol/security/blob/master/audits/OpenZeppelin%20-%20Origin%20Dollar%20OETH%20Integration%20-%20May%202023.pdf)
+* [Narya - Origin OETH Report - May 2023](https://github.com/OriginProtocol/security/blob/master/audits/Narya%20-%20Origin%20OETH%20Report%20-%20May%202023%20-%20Initial%20Report.pdf)
+
+Only low-security findings, besides an Oracle issue (date feeds may be outdated), were brought up, which was corrected.
+Other audits on protocols systems and related strategies can be found here: https://docs.oeth.com/security-and-risks/audits
+
+
+### Bug Bounties
+
+Bug bounties are granted at the full discretion of Origin Protocol. The rewards range from $100 OUSD for minor issues to $250,000 OUSD for major vulnerabilities. Currently, the bounty program only applies to OUSD and OETH and not other products from Origin. The bounty program is currently administered by Immunefi. As of early June 2023, Origin has paid out $154,850 in bounties and has one of the fastest response times on Immunefi. More details here: https://immunefi.com/bounty/origindefi/ 
 
 
 ### Markets
@@ -186,107 +293,6 @@ In early June, the peg was jeopardized by a large holder (victim of the atomic w
 ![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/etherscan.png)
 
 Source: [Etherscan](https://etherscan.io/tx/0x365e6584f604a7ccab360f7631e05e0cfcb54b612c5f7b4f036b1aae192e6c83). Large transaction bringing the pool balance back.
-
-
-### Governance
-
-The Origin Protocol uses the Origin DeFi Governance Token (OGV) to allow decentralized decision-making within its ecosystem. Like OUSD, Origin Ether will ultimately be governed by veOGV holders, with any upgrades to the contracts being time-delayed by a 48-hour timelock. A 5-of-8 timelock will control OETH for the next few weeks if any critical issues are discovered. 
-
-
-#### Multisig:
-
-The contracts' access controls are managed by 5-of-8 (admin) and 2-of-8 (strategist) multi-sigs. The identity of these signers is not disclosed. Origin claims they are all unique trusted individuals with close ties to Origin. 
-
-**Signers (same for both)**:
-
-* [0xAbBca8bA6d2142B6457185Bec33bBD1b22746231](https://etherscan.io/address/0xAbBca8bA6d2142B6457185Bec33bBD1b22746231)
-* [0xce96ae6De784181d8Eb2639F1E347fD40b4fD403](https://etherscan.io/address/0xce96ae6De784181d8Eb2639F1E347fD40b4fD403)
-* [0x336C02D3e3c759160E1E44fF0247f87F63086495](https://etherscan.io/address/0x336C02D3e3c759160E1E44fF0247f87F63086495)
-* [0x6AC8d65Dc698aE07263E3A98Aa698C33060b4A13](https://etherscan.io/address/0x6AC8d65Dc698aE07263E3A98Aa698C33060b4A13)
-* [0x617a3582bf134fe8eC600fF04A194604DcFB5Aab](https://etherscan.io/address/0x617a3582bf134fe8eC600fF04A194604DcFB5Aab)
-* [0x244df059d103347a054487Da7f8D42d52Cb29A55](https://etherscan.io/address/0x244df059d103347a054487Da7f8D42d52Cb29A55)
-* [0xab7C7E7ac51f70dd959f3541316dBd715773158B](https://etherscan.io/address/0xab7C7E7ac51f70dd959f3541316dBd715773158B)
-* [0xe5888Ed7EB24C7884e821b4283472b49832E02f2](https://etherscan.io/address/0xe5888Ed7EB24C7884e821b4283472b49832E02f2)
-
-**Admin (5 of 8)**: [0xbe2AB3d3d8F6a32b96414ebbd865dBD276d3d899](https://etherscan.io/address/0xbe2AB3d3d8F6a32b96414ebbd865dBD276d3d899)
-
-![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/pod.png)
-
-Source: [pod.xyz](https://pod.xyz/podarchy/0xbe2AB3d3d8F6a32b96414ebbd865dBD276d3d899?sidebar=0&selectedNode=%220xbe2AB3d3d8F6a32b96414ebbd865dBD276d3d899%22) Admin multi-sig permissions.
-
-The admin multi-sig currently has full ownership over the contracts, but all contract changes must go through the timelock. This is merely temporary since OETH is less than a month old, and the team wanted to be able to respond quickly to any unforeseen issues. Full governance will soon be transferred to veOGV stakers like OUSD today. Once that transfer happens, the admin multi-sig will have no special powers. 
-
-**Strategist (2 of 8)**:
-
-[0xF14BBdf064E3F67f51cd9BD646aE3716aD938FDC](https://etherscan.io/address/0xF14BBdf064E3F67f51cd9BD646aE3716aD938FDC)
-Certain features, like adjusting funds among strategies or temporarily stopping deposits, require less time and fewer authorizations, enabling the team associated with Origin to respond swiftly to changes in market circumstances or potential security issues. Strategists can carry out a restricted set of functions with the approval of only 2 of 8 authorized signers. The strategist can only allocate funds between previously approved strategies.
-
-The strategist multi-sig can do the following actions on the vault:
-
-* `reallocate` - move funds between strategies
-* `setVaultBuffer` - adjust the funds held outside strategies for cheaper redeems.
-* `setAssetDefaultStrategy` - which strategy mints and redeems pull from for a particular strategy
-* `withdrawAllFromStrategy` - remove funds from a single strategy and send them to the vault
-* `withdrawAllFromStrategies` - remove funds from all active strategies and send them to the vault
-* `pauseRebase` - pause all rebases
-* `pauseCapital` - pause all mints and redeems
-* `unpauseCapital` - allow all mints and redeems
-
-
-### Team
-
-The core team at Origin Protocol comprises experienced professionals with backgrounds in various industries and companies, including Coinbase, YouTube, Google, Paypal, Dropbox, and Pinterest. The founders and several team members are serial entrepreneurs who have founded and exited successful ventures.
-Here are brief profiles of the core team members:
-* **Josh Fraser**: Co-founder, started coding at ten and has co-founded three other venture-backed companies: EventVue, Torbit (acquired by Walmart Labs), and Forage.
-* **Matthew Liu**: Co-founder, was the 3rd Product Manager at YouTube (acquired by Google) and VP PM at Qwiki (acquired by Yahoo) and Bonobos (acquired by Walmart).
-* **Franck Chastagnol**: Head of Engineering - has led engineering teams at Inktomi, Paypal, YouTube, Google, and Dropbox.
-* **Micah Alcorn**: Director of Product, was the technical co-founder of WellAttended, a bootstrapped box office management platform.
-* **Linus Chung**: VP of Product, previously worked as Director of Product at Coinbase and lead product at companies like Tesla, Pinterest, and LinkedIn.
-* **Andra Nicolau**: Head of BD, OUSD, is a longtime crypto veteran. She was most recently the Head of Growth at 1inch, where she raised over $250M.
-* **Justin Charlton**: Head of Finance, started investing in middle school, designed budgets for launching satellites into space, and advised tech clients on M&A and strategy for seven years at PwC and KPMG.
-Source: https://www.originprotocol.com/community
-
-
-### Smart Contracts
-
-#### Contract architecture
-
-![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/registry_flow.png)
-
-Source: [Contract Registry and Dependencies Chart](https://docs.oeth.com/smart-contracts/registry/oeth-registry)
-
-
-#### Oracles
-
-OETH relies on Chainlink oracles to ensure appropriate Liquid Staking Tokens (LSTs) pricing to avoid overpayment. As of April 2023, Chainlink provides pricing oracles for stETH and rETH, while frxETH is hardcoded to a 1:1 ratio. Origin's team plans to implement Curve's time-weighted price oracle for frxETH.
-The protocol also uses Chainlink oracles when selling reward tokens for additional yield. This helps ensure the sale price slippage remains within acceptable limits, which is also applied to OGV buybacks conducted using generated yield.
-The contract call sets a minimum required amount for minting and redemption. This safeguards transactions from underperformance due to price changes, causing the process to fail if the return of OUSD/OETH or stablecoins/LSTs is insufficient.
-
-**Oracles addresses**:
-
-* stETH/ETH: [0x86392dc19c0b719886221c78ab11eb8cf5c52812](https://etherscan.io/address/0x86392dc19c0b719886221c78ab11eb8cf5c52812)
-* rETH/ETH: [0x536218f9e9eb48863970252233c8f271f554c2d0](https://etherscan.io/address/0x536218f9e9eb48863970252233c8f271f554c2d0)
-* CRV/ETH: [0x8a12be339b0cd1829b91adc01977caa5e9ac121e](https://etherscan.io/address/0x8a12be339b0cd1829b91adc01977caa5e9ac121e)
-* CVX/ETH: [0xC9CbF687f43176B302F03f5e58470b77D07c61c6](https://etherscan.io/address/0xC9CbF687f43176B302F03f5e58470b77D07c61c6)
-
-
-### Audits
-
-A complete list of audits can be found here: https://github.com/OriginProtocol/security/tree/master/audits
-
-Two notable audits were explicitly made on OETH: 
-
-* [OpenZeppelin - Origin Dollar OETH Integration - May 2023](https://github.com/OriginProtocol/security/blob/master/audits/OpenZeppelin%20-%20Origin%20Dollar%20OETH%20Integration%20-%20May%202023.pdf)
-* [Narya - Origin OETH Report - May 2023](https://github.com/OriginProtocol/security/blob/master/audits/Narya%20-%20Origin%20OETH%20Report%20-%20May%202023%20-%20Initial%20Report.pdf)
-
-Only low-security findings, besides an Oracle issue (date feeds may be outdated), were brought up, which was corrected.
-Other audits on protocols systems and related strategies can be found here: https://docs.oeth.com/security-and-risks/audits
-
-
-### Bug Bounties
-
-Bug bounties are granted at the full discretion of Origin Protocol. The rewards range from $100 OUSD for minor issues to $250,000 OUSD for major vulnerabilities. Currently, the bounty program only applies to OUSD and OETH and not other products from Origin. The bounty program is currently administered by Immunefi. As of early June 2023, Origin has paid out $154,850 in bounties and has one of the fastest response times on Immunefi. More details here: https://immunefi.com/bounty/origindefi/ 
-
 
 ## Risks
 
