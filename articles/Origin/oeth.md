@@ -274,7 +274,7 @@ Since mid-May Origin has offered vote incentives for the ETH/OETH pool in both [
 
 ### Custody Risk
 
-The trust in the OETH system lies with the signers who hold the multi-sig keys. These signers are responsible for properly handling the assets within the system and must be trusted not to engage in actions such as infinite minting, which could destabilize the system. However, to provide a layer of security and trust, a 24-hour timelock mechanism is in place. This ensures that significant actions cannot be executed immediately, offering a window of time for potential issues to be identified and addressed. 
+The trust in the OETH system lies with the signers who hold the multisig keys. These signers are responsible for properly handling the assets within the system and must be trusted not to engage in actions such as infinite minting, which could destabilize the system. However, to provide a layer of security and trust, a 24-hour timelock mechanism is in place. This ensures that significant actions cannot be executed immediately, offering a window of time for potential issues to be identified and addressed. 
 
 OETH also leverages DeFi platforms such as Aave, Compound, and Curve, introducing notable smart contract risks. While we collaborate with platforms managing billions in assets and conduct due diligence regarding their security, there is no absolute certainty of their continued flawless operation. Any malfunction in these underlying strategies could potentially result in a loss for OETH holders.
 
@@ -284,7 +284,7 @@ The Origin Protocol uses the Origin DeFi Governance Token (OGV) to allow decentr
 
 As of this writing, the governor of the OETH Vault is set to the [Governor](https://etherscan.io/address/0x39254033945aa2e4809cc2977e7087bee48bd7ab#readProxyContract#F10) contract. This contract has an admin set to the [5-of-8 admin multisig](https://etherscan.io/address/0x72426BA137DEC62657306b12B1E869d43FeC6eC7#readContract#F5). The delay time to execute a vote is set to [1 day](https://etherscan.io/address/0x72426BA137DEC62657306b12B1E869d43FeC6eC7#readContract#F6). Only the admin can queue a proposal and execute a vote. As the OETH Vault is an upgradable proxy contract that contains all underlying assets and is the hub for all strategies, the 5-of-8 multisig effectively has custody of all user funds. 
 
-Multi-sigs can increase security if the key signing process is distributed and diversified across multiple participants. Including external entities in the list of signers can further amplify this security measure. However, a low threshold for signers, such as is the case for OETH, can present a risk, as it could potentially allow for the addition of a harmful strategy.
+Multisigs can increase security if the key signing process is distributed and diversified across multiple participants. Including external entities in the list of signers can further amplify this security measure. However, a low threshold for signers, such as is the case for OETH, can present a risk, as it could potentially allow for the addition of a harmful strategy.
 
 Another potential governance risk is the manual allocation of funds. Currently, the capability to change the composition of the collateral has yet to be added. Consequently, any deposited ETH either goes into Convex or remains idle. 
 
@@ -407,6 +407,13 @@ No. There were two audits done on OETH, similar in functionality to OUSD, which 
 
 ## Risk Team Recommendation
 
-==@todo==
+Although OETH is a new product, Origin Protocol has been integrated with Curve with their OUSD/3CRV pool since August 2021. The design for OETH has much in common with the previous product, and leverages the ETH liquid staking trend to create a diversified, yield-generating ETH token. 
+
+This initial iteration of OETH has certain centralization vectors that are not ideal, but are understandable given the early stage of the product and the need to respond quickly in case of emergency. The 5-of-8 admin multisig has a significant amount of control over the system, including custody of user funds. While it is unlikely the team-controlled multisig would become compromised or act maliciously, this does potentially expose the protocol to regulatory risk. There is an intention to pass control over to a DAO of veOGV tokenholders, and users should monitor that the team is actively taking steps to decentralize governance.
+
+Another weakness in the current design is the hardcoded price for frxETH. This makes users dependent on the strategist multisig to protect the protocol in case of a depeg by promptly withdrawing funds from the strategy. The team plans to implement the Curve EMA oracle from the frxETH/ETH pool, so users should monitor that this happens. In general, the performance of OETH is reliant on the responsible management by the strategist multisig, which manages deployment of funds into strategies and also has the power to pause mints/redemptions and pause rebases.
+
+There is a resonable pathway to overcome the centralization vectors that exist in OETH today, and the team has a track record of progressively decentralizing the protocol. The system is transparent with clear and thorough documentation. Users are able to independently verify the deployment of assets and determine whether the system suits their own risk profile, although they should remain vigilant as changes are made to the underlying strategies. OETH meets our criteria for a Curve gauge.
+
 
 
