@@ -48,34 +48,24 @@ In July 2021, the Origin Protocol introduced the Origin Dollar (OUSD), a yield-b
 
 #### Mint and burn
 
-OETH can be minted through the [Origin Dapp](https://app.oeth.com/) by supplying ETH, WETH, stETH, rETH, frxETH, or sfrxETH. The Dapp integrates several contracts (Curve OETH/ETH pool, OETH vault, and OETH zapper) to find the optimal route, factoring in slippage and gas expenses. If OETH is trading below peg, the router acquires OETH already in circulation (from the Curve pool or through Uniswap) rather than minting new OETH tokens from the vault. OETH can be converted back to its composite or individual assets via the Dapp. An exit fee of 0.5% is charged on withdrawal unless routed via the Curve pool (no fee aside from slippage) and returned to the OETH holders.
+OETH can be minted through the [Origin Dapp](https://app.oeth.com/) by supplying ETH, WETH, stETH, rETH, frxETH, or sfrxETH. The Dapp integrates several contracts (Curve pool, OETH vault, and OETH zapper) to find the optimal route, factoring in slippage and gas expenses. If OETH is trading below peg, the router acquires OETH already in circulation (from the Curve pool or through Uniswap) rather than minting new OETH tokens from the vault. OETH can be converted back to its composite or individual assets via the Dapp. 
+
+##### The Vault
+
+The [OETH Vault](https://etherscan.io/address/0x39254033945aa2e4809cc2977e7087bee48bd7ab) mints and burns OETH from WETH, frxETH, rETH, and stETH. The supported assets can be queried in [getAllAssets](https://etherscan.io/address/0x39254033945aa2e4809cc2977e7087bee48bd7ab#readProxyContract#F6). The vault is also a core system contract that custodies the deposited funds and stores various strategies ([getAllStrategies](https://etherscan.io/address/0x39254033945aa2e4809cc2977e7087bee48bd7ab#readProxyContract#F7)) where the underlying assets are deployed to earn a yield. It calculates interest earned from the strategies and executes rebases of the OETH supply.
+
+OETH Redemptions from the vault will return an equal value of every supported asset to the user (WETH, frxETH, rETH, stETH). An exit fee of 0.5% is charged on direct redemptions from the vault and is returned to OETH holders. An additional fee is a performance fee assigned to a trusteeAddress, which receives a 20% fee on yield earned whenever the rebase function is called. This address is set to the Origin [2-of-8 strategist multisig](https://etherscan.io/address/0xF14BBdf064E3F67f51cd9BD646aE3716aD938FDC).
 
 ##### The Zapper
 
-The [OETH Zapper](https://etherscan.io/address/0x9858e47BCbBe6fBAC040519B02d7cd4B2C470C66) is a smart contract designed to assist users in minting OETH using Ether (ETH) and Frax Staked Ether (sfrxETH). The [OETH Vault](https://etherscan.io/address/0x39254033945aa2e4809cc2977e7087bee48bd7ab)  only supports WETH, frxETH, rETH, and stETH directly, which can be queried in [getAllAssets](https://etherscan.io/address/0x39254033945aa2e4809cc2977e7087bee48bd7ab#readProxyContract#F6). Currently, minting OETH using ETH or sfrxETH can only be accomplished via the Zapper.
+The [OETH Zapper](https://etherscan.io/address/0x9858e47BCbBe6fBAC040519B02d7cd4B2C470C66) is a smart contract designed to assist users in minting OETH using Ether (ETH) and Frax Staked Ether (sfrxETH), as the [OETH Vault](https://etherscan.io/address/0x39254033945aa2e4809cc2977e7087bee48bd7ab) only supports WETH, frxETH, rETH, and stETH directly. This setup enhances system security and optimizes the gas cost during minting.
 
-This setup enhances system security and optimizes the gas cost during minting. The Zapper allows for minting OETH in a single transaction, automatically routing ETH/sfrxETH into the Vault, and sending newly minted OETH to the depositer. It is not possible to withdraw from the Zapper, but users can redeem their OETH through the OETH Vault for a combination of WETH, rETH, stETH, and frxETH, or by simply selling OETH for ETH in the Curve pool.   
+The Zapper allows for minting OETH in a single transaction, automatically routing ETH/sfrxETH into the Vault, and sending newly minted OETH to the depositer. It is not possible to withdraw from the Zapper, but users can redeem their OETH through the OETH Vault for a combination of WETH, rETH, stETH, and frxETH, or by simply selling OETH for ETH in the Curve pool.   
 
-#### AMO
-
-Origin employs an Automated Market Operations (AMO) design [initially pioneered by Frax](https://docs.frax.finance/amo/overview). The AMO operates by depositing funds into the Curve pool, allocating liquidity to both sides of the pool (ETH and OETH). Its primary function is maintaining the peg, enhancing capital efficiency, and optimizing yields for OETH holders.
-
-The LP tokens are staked into the [Curve Gauge](https://etherscan.io/address/0xd03be91b1932715709e18021734fcb91bb431715) to maximize earned rewards (CRV & CVX). The resulting collateral is added to the vault when these rewards are swapped to ETH. Conversely, the protocol can remove excess OETH from the pool to preserve price stability. Ultimately, the AMO can independently institute monetary policies within a closed system, provided they don't negatively impact the peg. The protocol claims to remain entirely collateralized even as the money supply responsively expands and contracts based on market conditions. This is because the protocol-owned OETH supplied in the Curve pool is not backed by LSDs or other DeFi strategies.
-
-![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/oeth_amo_flow.png)
-
-Source: [Origin's github repo](https://github.com/OriginProtocol/origin-dollar/tree/master/contracts/docs/plantuml). Flowchart of deposit to Curve pool throught AMO.
-
-OETH tokens minted by the AMO are unique as they aren't backed by collateral from the vault. One could think of this system as the vault pre-minting some OETH for Curve to sell on its behalf, with those tokens becoming 100% backed the minute they enter circulation. These tokens are self-backed and are only circulated once collateralized. Users adding or removing OETH from the Curve pool influences the balance like a minting or redemption process due to the strategy's ability to burn or create new supply. OETH token can be redeemed at any time for underlying collateral on a 1:1 basis, ensuring the protocol remains 100% collateralized.
-
-![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/amo_contract.png)
-
-Source: [ConvexEthMetaStrategy.sol](https://www.contractreader.io/contract/mainnet/0xA52C14701f7ad3E7B70D05078AE2ebE3Fd283449) The AMO can mint up to 2x the amount of OETH.
-
-
-### Rebasing
+#### Rebasing
 
 OETH generates yield, which is systematically passed on to token holders by rebasing. This process adjusts the total money supply in alignment with the yield earned by the protocol. OETH dynamically modifies its money supply to ensure its value stays equivalent to 1 ETH. In tandem, the token balance in holders' wallets fluctuates in real time, mirroring the yield the protocol accrues. The rebasing is "up-only". In case of losses due to strategies reallocation (trading fees and slippage), rebasing stops until the yield catches up to pay off the debt. Other lossy events (e.g., a strategy suffering from a hack, or slashing event on a LSD) would result in a drop of OETH price on main liquidity venues.
+
 For yield to be earned, smart contracts must proactively opt into the protocol via the `rebaseOptIn()` function. This enables optimized capital use by the protocol, enhancing the integration with DeFi protocols that weren't originally designed to handle changing balances. Therefore, OETH operates as a conventional ERC-20 token within other DeFi protocols until an explicit request for change is made. Standard EOA wallets, on the other hand, are automatically enrolled in the system, circumventing the need for an explicit opt-in. The OETH managed by the AMO does not rebase. 
 
 To verify whether a specific address is configured to receive yield, a public function on the OETH contract can be invoked. This function returns an indicator showing if the address has opted in or out, irrespective of the type of wallet to which the address pertains.
@@ -83,7 +73,6 @@ To verify whether a specific address is configured to receive yield, a public fu
 ![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/oeth_rebasing.png)
 
 Source: [OETH docs](https://docs.oeth.com/core-concepts/elastic-supply/rebasing-and-smart-contracts). Rebasing param. 
-
 
 #### Wrapped OETH
 
@@ -96,12 +85,61 @@ wOETH remains a marginal token with very few holders:
 Source: [Etherscan](https://etherscan.io/token/0xDcEe70654261AF21C44c093C300eD3Bb97b78192). wOETH on June 7th, 2024.
 
 
-#### The Dripper
+#### The Harvester and Dripper
 
-The dripper contract is designed to gradually allocate all of the yield produced by the protocol to OToken holders over one week. This method evens out any abrupt fluctuations in yield and deters potential attacks by eliminating the ability to anticipate significant liquidity events within the protocol.
+The [OETHHarvester](https://etherscan.io/address/0x0D017aFA83EAce9F10A8EC5B6E13941664A6785C) collects rewards earned by the strategies, sells them for WETH, and forwards the proceeds to the [rewardsProceedsAddress](https://etherscan.io/address/0x0D017aFA83EAce9F10A8EC5B6E13941664A6785C#readProxyContract#F3). This address is set to the [dripper](https://etherscan.io/address/0xc0F42F73b8f01849a2DD99753524d4ba14317EB3) contract, which is designed to gradually allocate all of the yield produced by the protocol to OETH holders over 3 days (as queried in [dripDuration](https://etherscan.io/address/0xc0F42F73b8f01849a2DD99753524d4ba14317EB3#readProxyContract#F3)). This method evens out any abrupt fluctuations in yield and deters potential attacks by eliminating the ability to anticipate significant liquidity events within the protocol. Anyone can call [harvest](https://etherscan.io/address/0x0D017aFA83EAce9F10A8EC5B6E13941664A6785C#writeProxyContract#F3) and earn 2% of the proceeds as an incentivization.
+
+
+### Sources of Yield
+
+![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/alloc.png)
+
+Source: [oeth.com](https://www.oeth.com). Allocation of assets on June 7th, 2023.
+
+
+#### Curve/Convex Yield
+
+Convex ETH+OETH: Origin predominantly supplies liquidity to the ETH-OETH Curve pool. The liquidity provider (LP) token is contributed to the gauge, then staked on Convex, enabling Origin to collect trading fees and protocol token rewards (CRV and CVX). This approach, an algorithmic market operations controller (AMO), allows OETH to safely boost its deposits to enhance returns and sustain the pool's balance.
+
+![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/convex_alloc.png)
+
+Source: [oeth.com](https://www.oeth.com/). OETH allocation for Convex Gauge on June 7th, 2023.
+
+![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/convex.png)
+
+Source: [convexfinance.com](https://www.convexfinance.com/stake). Convex finance for ETH+OETH staking on June 7th, 2023.
+
+
+#### Liquid Staking Derivatives (LSDs) Yield
+
+1. **Staked Frax Ether (sfrxETH)**: Employing a dual-token model, Frax amplifies yields from staking validators. OETH deposits frxETH into the Frax Ether staking contract to magnify this yield further.
+2. **Lido Staked Ether (stETH)**: As a liquid staking solution for Ethereum, Lido permits ETH staking without locking tokens or maintaining infrastructure. OETH holds stETH, earning staking rewards from the Ethereum network with the added advantage of automatic compounding.
+3. **Rocket Pool Ether (rETH)**: As a community-owned, decentralized protocol, Rocket Pool mints rETH, an ETH wrapper that accrues interest. OETH holds rETH to earn yield and manages the accounting by distributing additional tokens directly to the users' wallets.
+
+#### Yield from DeFi Strategies
+
+Other DeFi strategies, such as the Morpho AAVE WETH strategy, can power yield generation in the OETH protocol. Morpho augments platforms like Compound and Aave by integrating a peer-to-peer layer that optimizes the pairing of lenders and borrowers, thus offering superior interest rates. If no appropriate pairings exist, the funds are directed straight to the base protocol. 
+### Unallocated Capital
+When OETH is minted, collateral is placed into the Origin Vault, where it remains until the allocate function is invoked. This process is automatic for more significant transactions, which aren't as affected by increased gas costs.
 
 
 ### Markets
+
+#### AMO
+
+Origin employs an Automated Market Operations (AMO) design [initially pioneered by Frax](https://docs.frax.finance/amo/overview). The AMO is implemented as the [ConvexEthMetaStrategy](https://etherscan.io/address/0x1827F9eA98E0bf96550b2FC20F7233277FcD7E63) strategy employed by the OETH Vault. The AMO operates by depositing funds into the Curve pool and allocating liquidity to both sides of the pool (ETH and OETH). Its primary function is maintaining the peg, enhancing capital efficiency, and optimizing yields for OETH holders.
+
+The LP tokens are staked into the [Curve Gauge](https://etherscan.io/address/0xd03be91b1932715709e18021734fcb91bb431715) to maximize earned rewards (CRV & CVX). The resulting collateral is added to the vault when these rewards are swapped to ETH. Conversely, the protocol can remove excess OETH from the pool to preserve price stability. Ultimately, the AMO can independently institute monetary policies within a closed system, provided they don't negatively impact the peg. The protocol claims to remain entirely collateralized even as the money supply responsively expands and contracts based on market conditions. This is because the protocol-owned OETH supplied in the Curve pool is not backed by LSDs or other DeFi strategies.
+
+![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/oeth_amo_flow.png)
+
+Source: [Origin's GitHub repo](https://github.com/OriginProtocol/origin-dollar/tree/master/contracts/docs/plantuml). Flowchart of deposit to Curve pool throught AMO.
+
+OETH tokens minted by the AMO are unique as they aren't backed by collateral from the vault. One could think of this system as the vault pre-minting some OETH for Curve to sell on its behalf, with those tokens becoming 100% backed when they enter circulation. These tokens are self-backed and are only circulated once collateralized. Users adding or removing OETH from the Curve pool are counterbalanced by the strategy's ability to burn or mint new supply, making the action similar to a minting or redemption process. OETH token can be redeemed at any time for underlying collateral on a 1:1 basis, ensuring the protocol remains 100% collateralized.
+
+![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/amo_contract.png)
+
+Source: [ConvexEthMetaStrategy.sol](https://www.contractreader.io/contract/mainnet/0xA52C14701f7ad3E7B70D05078AE2ebE3Fd283449) The AMO can mint up to 2x the amount of OETH.
 
 OETH primarily liquidity is found on Curve's [OETH-ETH pool](https://curve.fi/#/ethereum/pools/factory-v2-298), which boasts over 5,300 ETH worth of liquidity. On the contrary, the liquidity of OETH on Uniswap is relatively smaller, with approximately 100 ETH in the [Uniswap pool 0.05% (v3)](https://info.uniswap.org/#/pools/0x52299416c469843f4e0d54688099966a6c7d720f).
 
@@ -140,39 +178,6 @@ Source: [Etherscan](https://etherscan.io/tx/0x365e6584f604a7ccab360f7631e05e0cfc
 ![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/pegged_asset.png)
 
 Source: [oeth.com](https://www.oeth.com). Collateral on June 7th, 2023.
-
-
-### Sources of Yield
-
-![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/alloc.png)
-
-Source: [oeth.com](https://www.oeth.com). Allocation of assets on June 7th, 2023.
-
-
-#### Curve/Convex Yield
-
-Convex ETH+OETH: Origin predominantly supplies liquidity to the ETH-OETH Curve pool. The liquidity provider (LP) token is contributed to the gauge, then staked on Convex, enabling Origin to collect trading fees and protocol token rewards (CRV and CVX). This approach, an algorithmic market operations controller (AMO), allows OETH to safely boost its deposits to enhance returns and sustain the pool's balance.
-
-![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/convex_alloc.png)
-
-Source: [oeth.com](https://www.oeth.com/). OETH allocation for Convex Gauge on June 7th, 2023.
-
-![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/convex.png)
-
-Source: [convexfinance.com](https://www.convexfinance.com/stake). Convex finance for ETH+OETH staking on June 7th, 2023.
-
-
-#### Liquid Staking Derivatives (LSDs) Yield
-
-1. **Staked Frax Ether (sfrxETH)**: Employing a dual-token model, Frax amplifies yields from staking validators. OETH deposits frxETH into the Frax Ether staking contract to magnify this yield further.
-2. **Lido Staked Ether (stETH)**: As a liquid staking solution for Ethereum, Lido permits ETH staking without locking tokens or maintaining infrastructure. OETH holds stETH, earning staking rewards from the Ethereum network with the added advantage of automatic compounding.
-3. **Rocket Pool Ether (rETH)**: As a community-owned, decentralized protocol, Rocket Pool mints rETH, an ETH wrapper that accrues interest. OETH holds rETH to earn yield and manages the accounting by distributing additional tokens directly to the users' wallets.
-
-#### Yield from DeFi Strategies
-
-Other DeFi strategies, such as the Morpho AAVE WETH strategy, can power yield generation in the OETH protocol. Morpho augments platforms like Compound and Aave by integrating a peer-to-peer layer that optimizes the pairing of lenders and borrowers, thus offering superior interest rates. If no appropriate pairings exist, the funds are directed straight to the base protocol. 
-### Unallocated Capital
-When OETH is minted, collateral is placed into the Origin Vault, where it remains until the allocate function is invoked. This process is automatic for more significant transactions, which aren't as affected by increased gas costs.
 
 
 ### Governance
