@@ -48,7 +48,13 @@ In July 2021, the Origin Protocol introduced the Origin Dollar (OUSD), a yield-b
 
 #### Mint and burn
 
-OETH can be minted through [Origin Dapp](https://app.oeth.com/) by supplying ETH, WETH, stETH, rETH, frxETH, or sfrxETH. The Dapp integrates several contracts (Curve, OETH vault, and OETH zapper) to find the optimal route, factoring in slippage and gas expenses. Rather than creating new OETH coins from the vault, the router acquires OETH already in circulation, for instance, from the Curve pool or through Uniswap. OETH can be converted back to its composite or individual assets via the Dapp. An exit fee of 0.5% is charged on withdrawal unless routed via the Curve pool (no fee aside from slippage) and returned to the OETH holders.
+OETH can be minted through the [Origin Dapp](https://app.oeth.com/) by supplying ETH, WETH, stETH, rETH, frxETH, or sfrxETH. The Dapp integrates several contracts (Curve OETH/ETH pool, OETH vault, and OETH zapper) to find the optimal route, factoring in slippage and gas expenses. If OETH is trading below peg, the router acquires OETH already in circulation (from the Curve pool or through Uniswap) rather than minting new OETH tokens from the vault. OETH can be converted back to its composite or individual assets via the Dapp. An exit fee of 0.5% is charged on withdrawal unless routed via the Curve pool (no fee aside from slippage) and returned to the OETH holders.
+
+##### The Zapper
+
+The [OETH Zapper](https://etherscan.io/address/0x9858e47BCbBe6fBAC040519B02d7cd4B2C470C66) is a smart contract designed to assist users in minting OETH using Ether (ETH) and Frax Staked Ether (sfrxETH). The [OETH Vault](https://etherscan.io/address/0x39254033945aa2e4809cc2977e7087bee48bd7ab)  only supports WETH, frxETH, rETH, and stETH directly, which can be queried in [getAllAssets](https://etherscan.io/address/0x39254033945aa2e4809cc2977e7087bee48bd7ab#readProxyContract#F6). Currently, minting OETH using ETH or sfrxETH can only be accomplished via the Zapper.
+
+This setup enhances system security and optimizes the gas cost during minting. The Zapper allows for minting OETH in a single transaction, automatically routing ETH/sfrxETH into the Vault, and sending newly minted OETH to the depositer. It is not possible to withdraw from the Zapper, but users can redeem their OETH through the OETH Vault for a combination of WETH, rETH, stETH, and frxETH, or by simply selling OETH for ETH in the Curve pool.   
 
 #### AMO
 
@@ -90,10 +96,8 @@ wOETH remains a marginal token with very few holders:
 Source: [Etherscan](https://etherscan.io/token/0xDcEe70654261AF21C44c093C300eD3Bb97b78192). wOETH on June 7th, 2024.
 
 
-### The Zapper
+#### The Dripper
 
-The OETH Zapper is a smart contract designed to assist users in minting OETH using Ether (ETH) and Frax Staked Ether (sfrxETH). This setup enhances system security and optimizes the gas cost during minting. The Zapper allows for minting OETH in a single transaction, automatically routing ETH transactions toward the contract that provides the best outcome. This can either be an exchange of ETH for OETH via the Curve protocol or depositing ETH into the Zapper, which, in turn, deposits WETH into the Vault to create OETH. Currently, minting OETH using sfrxETH can only be accomplished via the Zapper. 
-### The Dripper
 The dripper contract is designed to gradually allocate all of the yield produced by the protocol to OToken holders over one week. This method evens out any abrupt fluctuations in yield and deters potential attacks by eliminating the ability to anticipate significant liquidity events within the protocol.
 
 
