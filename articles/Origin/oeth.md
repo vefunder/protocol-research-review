@@ -90,41 +90,6 @@ Source: [Etherscan](https://etherscan.io/token/0xDcEe70654261AF21C44c093C300eD3B
 The [OETHHarvester](https://etherscan.io/address/0x0D017aFA83EAce9F10A8EC5B6E13941664A6785C) collects rewards earned by the strategies, sells them for WETH, and forwards the proceeds to the [rewardsProceedsAddress](https://etherscan.io/address/0x0D017aFA83EAce9F10A8EC5B6E13941664A6785C#readProxyContract#F3). This address is set to the [dripper](https://etherscan.io/address/0xc0F42F73b8f01849a2DD99753524d4ba14317EB3) contract, which is designed to gradually allocate all of the yield produced by the protocol to OETH holders over 3 days (as queried in [dripDuration](https://etherscan.io/address/0xc0F42F73b8f01849a2DD99753524d4ba14317EB3#readProxyContract#F3)). This method evens out any abrupt fluctuations in yield and deters potential attacks by eliminating the ability to anticipate significant liquidity events within the protocol. Anyone can call [harvest](https://etherscan.io/address/0x0D017aFA83EAce9F10A8EC5B6E13941664A6785C#writeProxyContract#F3) and earn 2% of the proceeds as an incentivization.
 
 
-### Sources of Yield
-
-![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/alloc.png)
-
-Source: [oeth.com](https://www.oeth.com). Allocation of assets on June 7th, 2023.
-
-
-#### Curve/Convex Yield
-
-Convex ETH+OETH: Origin predominantly supplies liquidity to the ETH-OETH Curve pool. The liquidity provider (LP) token is contributed to the gauge, then staked on Convex, enabling Origin to collect trading fees and protocol token rewards (CRV and CVX). This approach, an algorithmic market operations controller (AMO), allows OETH to safely boost its deposits to enhance returns and sustain the pool's balance.
-
-![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/convex_alloc.png)
-
-Source: [oeth.com](https://www.oeth.com/). OETH allocation for Convex Gauge on June 7th, 2023.
-
-![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/convex.png)
-
-Source: [convexfinance.com](https://www.convexfinance.com/stake). Convex finance for ETH+OETH staking on June 7th, 2023.
-
-
-#### Liquid Staking Derivatives (LSDs) Yield
-
-1. **Staked Frax Ether (sfrxETH)**: Employing a dual-token model, Frax amplifies yields from staking validators. OETH deposits frxETH into the Frax Ether staking contract to magnify this yield further.
-2. **Lido Staked Ether (stETH)**: As a liquid staking solution for Ethereum, Lido permits ETH staking without locking tokens or maintaining infrastructure. OETH holds stETH, earning staking rewards from the Ethereum network with the added advantage of automatic compounding.
-3. **Rocket Pool Ether (rETH)**: As a community-owned, decentralized protocol, Rocket Pool mints rETH, an ETH wrapper that accrues interest. OETH holds rETH to earn yield and manages the accounting by distributing additional tokens directly to the users' wallets.
-
-#### Yield from DeFi Strategies
-
-Other DeFi strategies, such as the Morpho AAVE WETH strategy, can power yield generation in the OETH protocol. Morpho augments platforms like Compound and Aave by integrating a peer-to-peer layer that optimizes the pairing of lenders and borrowers, thus offering superior interest rates. If no appropriate pairings exist, the funds are directed straight to the base protocol. 
-### Unallocated Capital
-When OETH is minted, collateral is placed into the Origin Vault, where it remains until the allocate function is invoked. This process is automatic for more significant transactions, which aren't as affected by increased gas costs.
-
-
-### Markets
-
 #### AMO
 
 Origin employs an Automated Market Operations (AMO) design [initially pioneered by Frax](https://docs.frax.finance/amo/overview). The AMO is implemented as the [ConvexEthMetaStrategy](https://etherscan.io/address/0x1827F9eA98E0bf96550b2FC20F7233277FcD7E63) strategy employed by the OETH Vault. The AMO operates by depositing funds into the Curve pool and allocating liquidity to both sides of the pool (ETH and OETH). Its primary function is maintaining the peg, enhancing capital efficiency, and optimizing yields for OETH holders.
@@ -140,6 +105,48 @@ OETH tokens minted by the AMO are unique as they aren't backed by collateral fro
 ![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/amo_contract.png)
 
 Source: [ConvexEthMetaStrategy.sol](https://www.contractreader.io/contract/mainnet/0xA52C14701f7ad3E7B70D05078AE2ebE3Fd283449) The AMO can mint up to 2x the amount of OETH.
+
+
+### Sources of Yield
+
+There are 3 strategies active in the OETH vault. Additionally, an allocation of ETH LSDs are held directly in the OETH Vault earning interest from staking. A portion of the deposits are unallocated as WETH. The recent allocation of assets on June 7th are as follows: 
+
+![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/alloc.png)
+
+Source: [oeth.com](https://www.oeth.com). Allocation of assets on June 7th, 2023.
+
+
+#### Curve/Convex Yield
+
+Convex ETH+OETH: Origin predominantly supplies liquidity to the ETH-OETH Curve pool through the [ConvexEthMetaStrategy](0x1827F9eA98E0bf96550b2FC20F7233277FcD7E63). The LP token is deposited into the gauge, then staked on Convex, enabling Origin to collect trading fees and protocol token rewards (CRV and CVX). This AMO strategy allows OETH to safely boost its deposits to enhance returns and sustain the pool's balance.
+
+![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/convex_alloc.png)
+
+Source: [oeth.com](https://www.oeth.com/). OETH allocation for Convex Gauge on June 7th, 2023.
+
+![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/convex.png)
+
+Source: [convexfinance.com](https://www.convexfinance.com/stake). Convex finance for ETH+OETH staking on June 7th, 2023.
+
+
+#### Liquid Staking Derivatives (LSDs) Yield
+
+1. **Staked Frax Ether (sfrxETH)**: Employing a dual-token model, Frax amplifies yields from staking validators. OETH deposits frxETH into the Frax Ether staking contract to magnify this yield further. These funds are managed within the [FraxETHStrategy](https://etherscan.io/address/0x3fF8654D633D4Ea0faE24c52Aec73B4A20D0d0e5) as one of the the three OETH vault strategies.
+2. **Lido Staked Ether (stETH)**: As a liquid staking solution for Ethereum, Lido permits ETH staking without locking tokens or maintaining infrastructure. OETH holds stETH, earning staking rewards from the Ethereum network with the added advantage of automatic compounding. The stETH balance is held directly in the OETH Vault.
+3. **Rocket Pool Ether (rETH)**: As a community-owned, decentralized protocol, Rocket Pool mints rETH, an ETH wrapper that accrues interest. OETH holds rETH to earn yield and manages the accounting by distributing additional tokens directly to the users' wallets. The rETH balance is held directly in the OETH Vault.
+
+
+#### Yield from DeFi Strategies
+
+Other DeFi strategies, such as the [OETHMorphoAAVEStrategy](https://etherscan.io/address/0xc1fc9E5eC3058921eA5025D703CBE31764756319), can power yield generation in the OETH protocol. Morpho augments platforms like Compound and Aave by integrating a peer-to-peer layer that optimizes the pairing of lenders and borrowers, thus offering superior interest rates. If no appropriate pairings exist, the funds are directed straight to the base protocol.
+
+
+#### Unallocated Capital
+
+When OETH is minted, collateral is placed into the Origin Vault, where it remains until the allocate function is invoked. This process is automatic for more significant transactions, which aren't as affected by increased gas costs.
+
+
+### Markets
 
 OETH primarily liquidity is found on Curve's [OETH-ETH pool](https://curve.fi/#/ethereum/pools/factory-v2-298), which boasts over 5,300 ETH worth of liquidity. On the contrary, the liquidity of OETH on Uniswap is relatively smaller, with approximately 100 ETH in the [Uniswap pool 0.05% (v3)](https://info.uniswap.org/#/pools/0x52299416c469843f4e0d54688099966a6c7d720f).
 
