@@ -284,6 +284,12 @@ The Origin Protocol uses the Origin DeFi Governance Token (OGV) to allow decentr
 
 As of this writing, the governor of the OETH Vault is set to the [Governor](https://etherscan.io/address/0x39254033945aa2e4809cc2977e7087bee48bd7ab#readProxyContract#F10) contract. This contract has an admin set to the [5-of-8 admin multisig](https://etherscan.io/address/0x72426BA137DEC62657306b12B1E869d43FeC6eC7#readContract#F5). The delay time to execute a vote is set to [1 day](https://etherscan.io/address/0x72426BA137DEC62657306b12B1E869d43FeC6eC7#readContract#F6). Only the admin can queue a proposal and execute a vote. As the OETH Vault is an upgradable proxy contract that contains all underlying assets and is the hub for all strategies, the 5-of-8 multisig effectively has custody of all user funds. 
 
+Multi-sigs can increase security if the key signing process is distributed and diversified across multiple participants. Including external entities in the list of signers can further amplify this security measure. However, a low threshold for signers, such as is the case for OETH, can present a risk, as it could potentially allow for the addition of a harmful strategy.
+
+Another potential governance risk is the manual allocation of funds. Currently, the capability to change the composition of the collateral has yet to be added. Consequently, any deposited ETH either goes into Convex or remains idle. 
+
+In terms of future governance, additional strategies are anticipated, but these could introduce new risks. (For instance, a Morpho strategy was recently added, which was promptly halted due to a possible vulnerability being detected.)
+
 
 #### Access Control
 
@@ -347,8 +353,19 @@ There are several scenarios in which OETH could risk depegging from its intended
 
 OETH holders are exposed to the underlying strategies and LSD tokens (e.g., slashing) deployed within the system, making risk assessment challenging. Given the intricate and evolving nature of these strategies and LSDs, understanding and quantifying the potential risk factors can be complex. Users must closely monitor the underlying assets and remain vigilant to system strategy changes. While the system is designed with robustness and security in mind, the complexity of its elements underscores the importance of cautious engagement and a thorough understanding of its operational mechanics.
 
-The security of OETH collateral could significantly depend on the multisig's prompt response. For instance, on June 2nd, 2023, the strategist multisig temporarily halted funding to the newly launched Morpho strategy to address a potential issue with their interest rate model. It's important to note that there is no collateral buffer.
-Origin also makes available risk analysis for some of their LSDs: 
+![oethValueFlows-allocate](https://github.com/vefunder/protocol-research-review/assets/51072084/bacde457-ded8-44a7-8074-99d34c12c3f2)
+
+Source: [Origin GitHub](https://github.com/OriginProtocol/origin-dollar/blob/master/contracts/docs/plantuml/oethValueFlows-allocate.png)
+
+The security of OETH collateral could significantly depend on the multisig's prompt response. For instance, on June 2nd, 2023, the strategist multisig temporarily withdrew funds from the newly launched Morpho strategy back to the OETH Vault by calling withdrawAllFromStrategy ([tx](https://etherscan.io/tx/0xa3145b6046fd4368ed938c058439a7260e87fad5d307c1d9e45901dbc41c082d)) to address a potential issue with their interest rate model. The funds were redeposited on June 14th ([tx](https://etherscan.io/tx/0xde85f6626eef0ab182de631784ea78784843ac7a112bff842b3d6734b3a858a5)). 
+
+![Screen Shot 2023-06-15 at 12 48 42 PM](https://github.com/vefunder/protocol-research-review/assets/51072084/d4e3051c-914d-444c-a913-36b1d6955eb1)
+
+Source: Origin Discord Server: [#DeFi-Governance-Forum](https://discord.com/channels/404673842007506945/1080502855720513557/1115408300616458381)
+
+Actions taken by the strategists are communicated in the "Strategy Allocations" thread of the #DeFi-Governance-Forum channel of the Origin Discord server.
+
+Origin also makes risk analyses available for some of their LSDs: 
 
 **frxeth-sfrxeth**:
 
@@ -359,13 +376,6 @@ https://docs.oeth.com/security-and-risks/risk-reports/frxeth-sfrxeth
 https://docs.oeth.com/security-and-risks/risk-reports/reth
 
 
-### Governance Risk
-
-A crucial aspect of this risk is associated with multi-signature wallets (multi-sigs). Multi-sigs can increase security if the key signing process is distributed and diversified across multiple participants. Including external entities in the list of signers can further amplify this security measure. However, a low threshold for signers, such as is the case for OETH, can present a risk, as it could potentially allow for the addition of a harmful strategy.
-
-Manual allocation of funds is another potential governance risk. Currently, the capability to change the composition of the collateral has yet to be added. Consequently, any deposited ETH either goes into Convex or remains idle. 
-
-In terms of future governance, additional strategies are anticipated, but these could introduce new risks—for instance, the recent inclusion of Morpho, which was promptly halted.
 
 
 ## LlamaRisk Gauge Criteria
