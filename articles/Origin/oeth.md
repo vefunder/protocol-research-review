@@ -189,70 +189,6 @@ Other DeFi strategies, such as the [OETHMorphoAAVEStrategy](https://etherscan.io
 When OETH is minted, collateral is placed into the Origin Vault, where it remains until the allocate function is invoked. This process is automatic for more significant transactions, which aren't as affected by increased gas costs.
 
 
-### Governance
-
-The Origin Protocol uses the Origin DeFi Governance Token (OGV) to allow decentralized decision-making within its ecosystem. Like OUSD, Origin Ether is intended ultimately to be governed by veOGV holders, with any upgrades to the contracts being time-delayed by a 48-hour timelock. According to the team, a 5-of-8 multisig will control OETH for the next few weeks if any critical issues are discovered in the early deployment of OETH.
-
-As of this writing, the governor of the OETH Vault is set to the [Governor](https://etherscan.io/address/0x39254033945aa2e4809cc2977e7087bee48bd7ab#readProxyContract#F10) contract. This contract has an admin set to the [5-of-8 admin multisig](https://etherscan.io/address/0x72426BA137DEC62657306b12B1E869d43FeC6eC7#readContract#F5). The delay time to execute a vote is set to [1 day](https://etherscan.io/address/0x72426BA137DEC62657306b12B1E869d43FeC6eC7#readContract#F6). Only the admin can queue a proposal and execute a vote. As the OETH Vault is an upgradable proxy contract that contains all underlying assets and is the hub for all strategies, the 5-of-8 multisig effectively has custody of all user funds. 
-
-
-#### Multisig:
-
-The contracts' access controls are managed by 5-of-8 (admin) and 2-of-8 (strategist) multisigs. The identity of these signers is not disclosed. Origin claims they are all unique trusted individuals with close ties to Origin. 
-
-**Signers (same for both)**:
-
-* [0xAbBca8bA6d2142B6457185Bec33bBD1b22746231](https://etherscan.io/address/0xAbBca8bA6d2142B6457185Bec33bBD1b22746231)
-* [0xce96ae6De784181d8Eb2639F1E347fD40b4fD403](https://etherscan.io/address/0xce96ae6De784181d8Eb2639F1E347fD40b4fD403)
-* [0x336C02D3e3c759160E1E44fF0247f87F63086495](https://etherscan.io/address/0x336C02D3e3c759160E1E44fF0247f87F63086495)
-* [0x6AC8d65Dc698aE07263E3A98Aa698C33060b4A13](https://etherscan.io/address/0x6AC8d65Dc698aE07263E3A98Aa698C33060b4A13)
-* [0x617a3582bf134fe8eC600fF04A194604DcFB5Aab](https://etherscan.io/address/0x617a3582bf134fe8eC600fF04A194604DcFB5Aab)
-* [0x244df059d103347a054487Da7f8D42d52Cb29A55](https://etherscan.io/address/0x244df059d103347a054487Da7f8D42d52Cb29A55)
-* [0xab7C7E7ac51f70dd959f3541316dBd715773158B](https://etherscan.io/address/0xab7C7E7ac51f70dd959f3541316dBd715773158B)
-* [0xe5888Ed7EB24C7884e821b4283472b49832E02f2](https://etherscan.io/address/0xe5888Ed7EB24C7884e821b4283472b49832E02f2)
-
-**Admin 5-of-8 multisig**: [0xbe2AB3d3d8F6a32b96414ebbd865dBD276d3d899](https://etherscan.io/address/0xbe2AB3d3d8F6a32b96414ebbd865dBD276d3d899)
-
-![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/pod.png)
-
-Source: [pod.xyz](https://pod.xyz/podarchy/0xbe2AB3d3d8F6a32b96414ebbd865dBD276d3d899?sidebar=0&selectedNode=%220xbe2AB3d3d8F6a32b96414ebbd865dBD276d3d899%22) Admin multi-sig permissions for OUSD.
-
-The admin multisig currently has full ownership over the contracts and the underlying assets, but all contract changes must go through the timelock. This is a temporary situation since OETH is a new protocol, and the team wanted to be able to respond quickly to any unforeseen issues. Full governance will soon be transferred to veOGV stakers like OUSD today. Once that transfer happens, the admin multi-sig will have no special powers. 
-
-**Strategist 2-of-8 multisig**: [0xF14BBdf064E3F67f51cd9BD646aE3716aD938FDC](https://etherscan.io/address/0xF14BBdf064E3F67f51cd9BD646aE3716aD938FDC)
-
-Certain features (e.g. adjusting funds among strategies or temporarily stopping deposits) require less time and fewer authorizations, enabling the Origin team to respond swiftly to changes in market circumstances or potential security issues. Strategists can carry out a restricted set of functions with the approval of only 2 of 8 authorized signers. The strategist can only allocate funds between previously approved strategies.
-
-The strategist multisig can do the following actions on the vault:
-
-* `reallocate` - move funds between strategies
-* `setVaultBuffer` - adjust the funds held outside strategies for cheaper redeems.
-* `setAssetDefaultStrategy` - which strategy mints and redeems pull from for a particular strategy
-* `withdrawAllFromStrategy` - remove funds from a single strategy and send them to the vault
-* `withdrawAllFromStrategies` - remove funds from all active strategies and send them to the vault
-* `pauseRebase` - pause all rebases
-* `pauseCapital` - pause all mints and redeems
-* `unpauseCapital` - allow all mints and redeems
-
-
-### Audits
-
-A complete list of audits can be found here: https://github.com/OriginProtocol/security/tree/master/audits
-
-Two notable audits were explicitly made on OETH: 
-
-* [OpenZeppelin - Origin Dollar OETH Integration - May 2023](https://github.com/OriginProtocol/security/blob/master/audits/OpenZeppelin%20-%20Origin%20Dollar%20OETH%20Integration%20-%20May%202023.pdf)
-* [Narya - Origin OETH Report - May 2023](https://github.com/OriginProtocol/security/blob/master/audits/Narya%20-%20Origin%20OETH%20Report%20-%20May%202023%20-%20Initial%20Report.pdf)
-
-Only low-security findings, besides an Oracle issue (date feeds may be outdated), were brought up, which was corrected.
-Other audits on protocols systems and related strategies can be found here: https://docs.oeth.com/security-and-risks/audits
-
-
-### Bug Bounties
-
-Bug bounties are granted at the full discretion of Origin Protocol. The rewards range from $100 OUSD for minor issues to $250,000 OUSD for major vulnerabilities. Currently, the bounty program only applies to OUSD and OETH and not other products from Origin. The bounty program is currently administered by Immunefi. As of early June 2023, Origin has paid out $154,850 in bounties and has one of the fastest response times on Immunefi. More details here: https://immunefi.com/bounty/origindefi/ 
-
-
 ### Markets
 
 #### Stablecoin/pegged asset
@@ -300,33 +236,118 @@ Source: [Etherscan](https://etherscan.io/tx/0x365e6584f604a7ccab360f7631e05e0cfc
 
 Despite having undergone rigorous audits and being based on the OUSD code base, the OETH protocol encompasses many complex elements, increasing the potential smart contract risk. Additionally, the DeFi strategies employed within the system constantly evolve, with Origin capable of implementing or removing strategies as needed. This dynamic nature of the strategy adds another layer of complexity and potential risk. 
 
+OUSD had previously experienced a [$7MM exploit](https://medium.com/@matthewliu/urgent-ousd-has-hacked-and-there-has-been-a-loss-of-funds-7b8c4a7d534c) in November 2020 due to a previously undetected reentrancy bug. Origin Dollar was relaunched in December after completing multiple audits and security upgrades. You can learn more about the steps taken to secure the protocol in their [relaunch announcement](https://medium.com/@joshfraser/origin-dollar-ousd-relaunches-to-offer-hassle-free-defi-returns-b8ee0c601dad). All users were made whole from the Origin community fund. 
+
+#### Audits
+
+A complete list of Orgin audits (including for OUSD) can be found here: [https://github.com/OriginProtocol/security/tree/master/audits](https://github.com/OriginProtocol/security/tree/master/audits)
+
+Two notable audits were explicitly made on OETH: 
+
+* [OpenZeppelin - Origin Dollar OETH Integration - May 2023](https://github.com/OriginProtocol/security/blob/master/audits/OpenZeppelin%20-%20Origin%20Dollar%20OETH%20Integration%20-%20May%202023.pdf)
+* [Narya - Origin OETH Report - May 2023](https://github.com/OriginProtocol/security/blob/master/audits/Narya%20-%20Origin%20OETH%20Report%20-%20May%202023%20-%20Initial%20Report.pdf)
+
+Only low-security findings, besides an Oracle issue (date feeds may be outdated), were brought up, which was corrected.
+
+Other audits on protocols systems and related strategies can be found here: [https://docs.oeth.com/security-and-risks/audits](https://docs.oeth.com/security-and-risks/audits)
+
+
+#### Bug Bounties
+
+Bug bounties are granted at the full discretion of Origin Protocol. The rewards range from $100 OUSD for minor issues to $250,000 OUSD for major vulnerabilities. Currently, the bounty program only applies to OUSD and OETH and not other products from Origin. The bounty program is currently administered by Immunefi. As of early June 2023, Origin has paid out $154,850 in bounties and has one of the fastest response times on Immunefi. More details here: [https://immunefi.com/bounty/origindefi/](https://immunefi.com/bounty/origindefi/) 
+
 
 ### Risks and tradeoffs with the AMO system
 
-Origin uses the AMO system to provide large amounts of liquidity at a lower cost to the protocol. Yet, it's crucial to remember the risk of bad debt. The system's ability to prevent bad debt from infiltrating largely hinges on the effectiveness of the AMO's interactions with the OETH/ETH Curve pool. If the overall impact of the AMO's transactions with the pool (i.e., deposits and withdrawals) results in positive slippage, they generate a profit and maintain full financial backing. Importantly, while the AMO funnels all yield farming revenue towards OETH, it also has the potential to generate additional profits or suffer losses through arbitrage within the pool.
+Origin uses the AMO system to provide large amounts of liquidity at a lower cost to the protocol. Yet, it's crucial to remember the risk of bad debt. The system's ability to prevent bad debt largely hinges on the effectiveness of the AMO's interactions with the OETH/ETH Curve pool. If the overall impact of the AMO's transactions with the pool (i.e., deposits and withdrawals) results in positive slippage, they generate a profit and maintain full financial backing. Importantly, while the AMO funnels all yield farming revenue towards OETH, it also has the potential to generate additional profits or suffer losses through arbitrage within the pool.
+
 Liquidity Providers (LPs) also face certain risks within this system. For instance, if a substantial amount of ETH is removed from the pool, as seen in early June, the ensuing imbalance can amplify the profit opportunity for the AMO through arbitrage. Conversely, bad debt can creep into the system if the AMO's transactions lead to an imbalance in the pool, thereby causing negative slippage. In such circumstances, the AMO's best strategy is to let the pool imbalance escalate. Eventually, they can capitalize on this situation by restoring balance to the pool while profiting from the losses sustained by those who withdrew their ETH.
+
+As of June 15, Origin's POL in the Curve ETH/OETH pool amounts to 83% of the pool composition. This can be determined by comparing the value in the [ConvexEthMetaStrategy](https://debank.com/profile/0x1827f9ea98e0bf96550b2fc20f7233277fcd7e63) with the [OETH pool liquidity](https://etherscan.io/address/0x94b17476a93b3262d87b9a326965d1e91f9c13e7).
+
+![Screen Shot 2023-06-15 at 10 59 54 AM](https://github.com/vefunder/protocol-research-review/assets/51072084/274eb6d1-23d0-4004-800d-43c57fbfe7bd)
+
+Source: Curve pool total liquidity vs. OETH AMO liquidity
+
+Since mid-May Origin has offered vote incentives for the ETH/OETH pool in both [Votium](https://llama.airforce/#/bribes/rounds/votium/cvx-crv/46) and [StakeDAO Votemarket](https://votemarket.stakedao.org/analytics). Incentives are paid in the OGV governance token and amounts to ~$40k/week in the most recent epoch (week of June 14). The incentives allow Origin to exchange their native token for CRV/CVX emissions, of which 83% are currently being recouped by the AMO strategy. Emissions are sold for WETH and allocated to the Dripper contract where they increase returns to OETH holders. A significant portion of the yield earned by OETH is therefore dependent on Curve emissions.
 
 
 ### Custody Risk
 
-The trust in the OETH system lies with the signers who hold the multi-sig keys. These signers are responsible for properly handling the assets within the system and must be trusted not to engage in actions such as infinite minting, which could destabilize the system. However, to provide a layer of security and trust, a 48-hour timelock mechanism is in place. This ensures that significant actions cannot be executed immediately, offering a window of time for potential issues to be identified and addressed. 
+The trust in the OETH system lies with the signers who hold the multi-sig keys. These signers are responsible for properly handling the assets within the system and must be trusted not to engage in actions such as infinite minting, which could destabilize the system. However, to provide a layer of security and trust, a 24-hour timelock mechanism is in place. This ensures that significant actions cannot be executed immediately, offering a window of time for potential issues to be identified and addressed. 
+
 OETH also leverages DeFi platforms such as Aave, Compound, and Curve, introducing notable smart contract risks. While we collaborate with platforms managing billions in assets and conduct due diligence regarding their security, there is no absolute certainty of their continued flawless operation. Any malfunction in these underlying strategies could potentially result in a loss for OETH holders.
 
+#### Governance
+
+The Origin Protocol uses the Origin DeFi Governance Token (OGV) to allow decentralized decision-making within its ecosystem. Like OUSD, Origin Ether is intended ultimately to be governed by veOGV holders, with any upgrades to the contracts being time-delayed by a 48-hour timelock. According to the team, a 5-of-8 multisig will control OETH for the next few weeks if any critical issues are discovered in the early deployment of OETH.
+
+As of this writing, the governor of the OETH Vault is set to the [Governor](https://etherscan.io/address/0x39254033945aa2e4809cc2977e7087bee48bd7ab#readProxyContract#F10) contract. This contract has an admin set to the [5-of-8 admin multisig](https://etherscan.io/address/0x72426BA137DEC62657306b12B1E869d43FeC6eC7#readContract#F5). The delay time to execute a vote is set to [1 day](https://etherscan.io/address/0x72426BA137DEC62657306b12B1E869d43FeC6eC7#readContract#F6). Only the admin can queue a proposal and execute a vote. As the OETH Vault is an upgradable proxy contract that contains all underlying assets and is the hub for all strategies, the 5-of-8 multisig effectively has custody of all user funds. 
+
+
+#### Access Control
+
+The contracts' access controls are managed by 5-of-8 (admin) and 2-of-8 (strategist) multisigs. The identity of these signers is not disclosed. Origin claims they are all unique trusted individuals with close ties to Origin. 
+
+**Signers (same for both)**:
+
+* [0xAbBca8bA6d2142B6457185Bec33bBD1b22746231](https://etherscan.io/address/0xAbBca8bA6d2142B6457185Bec33bBD1b22746231)
+* [0xce96ae6De784181d8Eb2639F1E347fD40b4fD403](https://etherscan.io/address/0xce96ae6De784181d8Eb2639F1E347fD40b4fD403)
+* [0x336C02D3e3c759160E1E44fF0247f87F63086495](https://etherscan.io/address/0x336C02D3e3c759160E1E44fF0247f87F63086495)
+* [0x6AC8d65Dc698aE07263E3A98Aa698C33060b4A13](https://etherscan.io/address/0x6AC8d65Dc698aE07263E3A98Aa698C33060b4A13)
+* [0x617a3582bf134fe8eC600fF04A194604DcFB5Aab](https://etherscan.io/address/0x617a3582bf134fe8eC600fF04A194604DcFB5Aab)
+* [0x244df059d103347a054487Da7f8D42d52Cb29A55](https://etherscan.io/address/0x244df059d103347a054487Da7f8D42d52Cb29A55)
+* [0xab7C7E7ac51f70dd959f3541316dBd715773158B](https://etherscan.io/address/0xab7C7E7ac51f70dd959f3541316dBd715773158B)
+* [0xe5888Ed7EB24C7884e821b4283472b49832E02f2](https://etherscan.io/address/0xe5888Ed7EB24C7884e821b4283472b49832E02f2)
+
+**Admin 5-of-8 multisig**: [0xbe2AB3d3d8F6a32b96414ebbd865dBD276d3d899](https://etherscan.io/address/0xbe2AB3d3d8F6a32b96414ebbd865dBD276d3d899)
+
+![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/pod.png)
+
+Source: [pod.xyz](https://pod.xyz/podarchy/0xbe2AB3d3d8F6a32b96414ebbd865dBD276d3d899?sidebar=0&selectedNode=%220xbe2AB3d3d8F6a32b96414ebbd865dBD276d3d899%22) Admin multi-sig permissions for OUSD.
+
+The admin multisig currently has full ownership over the contracts and the underlying assets, but all contract changes must go through the timelock. This is a temporary situation since OETH is a new protocol, and the team wanted to be able to respond quickly to any unforeseen issues. Full governance will soon be transferred to veOGV stakers like OUSD today. Once that transfer happens, the admin multi-sig will have no special powers. 
+
+**Strategist 2-of-8 multisig**: [0xF14BBdf064E3F67f51cd9BD646aE3716aD938FDC](https://etherscan.io/address/0xF14BBdf064E3F67f51cd9BD646aE3716aD938FDC)
+
+Certain features (e.g. adjusting funds among strategies or temporarily stopping deposits) require less time and fewer authorizations, enabling the Origin team to respond swiftly to changes in market circumstances or potential security issues. Strategists can carry out a restricted set of functions with the approval of only 2 of 8 authorized signers. The strategist can only allocate funds between previously approved strategies.
+
+The strategist multisig can do the following actions on the vault:
+
+* `reallocate` - move funds between strategies
+* `setVaultBuffer` - adjust the funds held outside strategies for cheaper redeems.
+* `setAssetDefaultStrategy` - which strategy mints and redeems pull from for a particular strategy
+* `withdrawAllFromStrategy` - remove funds from a single strategy and send them to the vault
+* `withdrawAllFromStrategies` - remove funds from all active strategies and send them to the vault
+* `pauseRebase` - pause all rebases
+* `pauseCapital` - pause all mints and redeems
+* `unpauseCapital` - allow all mints and redeems
 
 ### Oracle Risk
 
-A key concern regarding oracles is Origin using a hard-coded 1:1 ratio for frxETH/ETH. The implications are that the Strategists' multi-sig would need to manually pause deposits if frxETH were to experience a major de-pegging. Losses could be incurred if the multi-sig takes too long to react or if the de-peg perdures. ==@todo need to expand on this==
+The [OETHOracleRouter](https://etherscan.io/address/0x3cCD26E82F7305B12742fBb36708B42f82B61dBa#code) contract is set as [priceProvider](https://etherscan.io/address/0x39254033945AA2E4809Cc2977E7087BEE48bd7Ab#readProxyContract#F17) in the OETH Vault. This contract sources Chainlink pricefeeds for all underlying assets and reward assets (CRV/ETH, CVX/ETH, rETH/ETH, cbETH/ETH, stETH/ETH) with the notable exception that frxETH/ETH is programmed to always be worth 1 ETH.
+
+![Screen Shot 2023-06-15 at 11 41 57 AM](https://github.com/vefunder/protocol-research-review/assets/51072084/e6e15050-9d92-4254-b9a1-a2110412c794)
+
+Source: [Etherscan: OETHOracleRouter](https://etherscan.io/address/0x3cCD26E82F7305B12742fBb36708B42f82B61dBa#code)
+
+The purpose of the pricefeeds are to make sure the protocol does not overpay for LSTs that may be trading below peg. Since 1 OETH is intended to always be backed by 1 ETH, it may need to adjust the quantity minted or redeemed against based on current market data. Additionally, when tokens are sold for additional yield, the protocol uses pricefeeds to check that price slippage does not exceed a reasonable bound.
+
+A key concern regarding oracles is Origin using a hard-coded 1:1 ratio for frxETH/ETH. The implications are that the Strategists' multisig would need to manually pause deposits if frxETH were to experience a major depeg. Losses could be incurred if the multisig takes too long to react or if the depeg perdures. The Origin team say they plan to implement Curve's EMA oracle from the frxETH/ETH pool. This trust assumption and risk to the protocol is clearly disclosed in the [Origin Protocol docs](https://docs.oeth.com/core-concepts/price-oracles).  
 
 
 ### Depeg Risk
 
-There are several scenarios in which OETH could risk de-pegging from its intended value. These include significant additions or removals from the Curve pool, a strategy becoming loss-inducing, or an exploit related to the Automated Market Maker Operations (AMO). For instance, if a large holder were to sell into the Curve pool, it could temporarily destabilize the peg. However, the AMO is designed to restore the peg in such circumstances, and all funds remain secure during this process. Additionally, if the amount of ETH in the pool decreases, it becomes more profitable for the AMO strategy to increase its allocation to restore balance. This serves as a dynamic response mechanism to maintain the stability of the OETH value.
+The AMO is designed to restore the peg in ordinary circumstances, and all funds remain secure during this process. Additionally, if the amount of ETH in the pool decreases, it becomes more profitable for the AMO strategy to increase its allocation to restore balance. This serves as a dynamic response mechanism to maintain the stability of the OETH value. As a significant (>80%) of the Curve pool consists of protocol owned liquidity from the AMO, it is unlikely that a depeg could possibly persist except from an underlying protocol failure (e.g. smart contract exploit resulting in loss of user funds).
+
+There are several scenarios in which OETH could risk depegging from its intended value. These include significant additions or removals from the Curve pool, a strategy becoming loss-inducing, or an exploit related to the Automated Market Maker Operations (AMO). For instance, if a large holder were to sell into the Curve pool, it could temporarily destabilize the peg. 
 
 
 ### Collateral Risk
 
-OETH holders are exposed to the underlying strategies and Liquid Derivative Staking (LDS) tokens (e.g., slashing) deployed within the system, making risk assessment challenging. Given the intricate and evolving nature of these strategies and LDSs, understanding and quantifying the potential risk factors can be complex. Users must closely monitor the underlying assets and remain vigilant to system strategy changes. While the system is designed with robustness and security in mind, the complexity of its elements underscores the importance of cautious engagement and a thorough understanding of its operational mechanics.
-The security of OETH collateral could significantly depend on the multi-sig's prompt response. For instance, on June 2nd, 2023, the strategist multi-sig temporarily halted funding to the newly launched Morpho strategy to address a potential issue with their interest rate model. It's important to note that there is no collateral buffer.
+OETH holders are exposed to the underlying strategies and LSD tokens (e.g., slashing) deployed within the system, making risk assessment challenging. Given the intricate and evolving nature of these strategies and LSDs, understanding and quantifying the potential risk factors can be complex. Users must closely monitor the underlying assets and remain vigilant to system strategy changes. While the system is designed with robustness and security in mind, the complexity of its elements underscores the importance of cautious engagement and a thorough understanding of its operational mechanics.
+
+The security of OETH collateral could significantly depend on the multisig's prompt response. For instance, on June 2nd, 2023, the strategist multisig temporarily halted funding to the newly launched Morpho strategy to address a potential issue with their interest rate model. It's important to note that there is no collateral buffer.
 Origin also makes available risk analysis for some of their LSDs: 
 
 **frxeth-sfrxeth**:
