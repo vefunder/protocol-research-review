@@ -148,7 +148,15 @@ When OETH is minted, collateral is placed into the Origin Vault, where it remain
 
 ### Markets
 
-OETH primarily liquidity is found on Curve's [OETH-ETH pool](https://curve.fi/#/ethereum/pools/factory-v2-298), which boasts over 5,300 ETH worth of liquidity. On the contrary, the liquidity of OETH on Uniswap is relatively smaller, with approximately 100 ETH in the [Uniswap pool 0.05% (v3)](https://info.uniswap.org/#/pools/0x52299416c469843f4e0d54688099966a6c7d720f).
+#### Stablecoin/pegged asset
+
+As of June 7th, the circulating OETH was backed by a total of ~12,000 ETH.
+
+![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/pegged_asset.png)
+
+Source: [oeth.com](https://www.oeth.com). Collateral on June 7th, 2023.
+
+OETH is primarily liquid in Curve's [OETH-ETH pool](https://curve.fi/#/ethereum/pools/factory-v2-298), which boasts over 5,300 ETH worth of liquidity, or around 44% of circulating OETH. On the contrary, the amount of OETH on Uniswap is comparatively small, with approximately 100 ETH in the [Uniswap pool 0.05% (v3)](https://info.uniswap.org/#/pools/0x52299416c469843f4e0d54688099966a6c7d720f).
 
 ![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/oeth_curve_pool_june_7_2.png)
 
@@ -161,7 +169,7 @@ Source: [Uniswap](https://info.uniswap.org/#/pools/0x52299416c469843f4e0d5468809
 
 #### Peg
 
-OETH aims to remain pegged to the value of Ethereum, allowing holders to have exposure to Ethereum's price movements while earning a stable yield. Since launch, OETH has maintained peg reasonably well.
+OETH aims to remain pegged to the price of ETH, allowing holders to have exposure to Ethereum's price movements while earning a stable yield. Since launch, OETH has maintained peg reasonably well.
 
 
 #### Chart from Coingecko:
@@ -178,13 +186,6 @@ In early June, the peg was jeopardized by a large holder (victim of the atomic w
 ![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/etherscan.png)
 
 Source: [Etherscan](https://etherscan.io/tx/0x365e6584f604a7ccab360f7631e05e0cfcb54b612c5f7b4f036b1aae192e6c83). Large transaction bringing the pool balance back.
-
-
-#### Stablecoin/pegged asset
-
-![](https://github.com/vefunder/protocol-research-review/blob/main/articles/Origin/media/pegged_asset.png)
-
-Source: [oeth.com](https://www.oeth.com). Collateral on June 7th, 2023.
 
 
 ### Governance
