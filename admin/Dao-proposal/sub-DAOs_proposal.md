@@ -27,40 +27,40 @@ Note that the proposed sub-DAO model is not intended to supersede the existing G
 
 ## **Specification**:
 
-**Curve Research**
-Budget: 6m CRV vested over 365 days for operations from Q1 '24 to Q1 '26
-3-of-5 multisig: 0x2Ba80b37e0beF5c92A0C3cb780f8583372D773Ac
-Naga - Curve Researcher
-Chanho - Curve Researcher 
-Fiddy - Curve Team
-PilotVietnam - Curve Team
-Michael - Curve Founder
+### **Curve Research**
+- Budget: 6m CRV vested over 365 days for operations from Q1 '24 to Q1 '26
+- 3-of-5 multisig: 0x2Ba80b37e0beF5c92A0C3cb780f8583372D773Ac
+    - Naga - Curve Researcher
+    - Chanho - Curve Researcher 
+    - Fiddy - Curve Team
+    - PilotVietnam - Curve Team
+    - Michael - Curve Founder
 
 The Curve Research Sub-DAO currently consists of researchers Chanho, Naga, 0xStan, 0xMc, and Paco with additional support from Xenophon Labs.
 
-**Llama Risk**
-Budget: 2m CRV vested over 365 days for operations from Q1 '24 to Q1 '26
-3-of-6 multisig: 0xa2482aA1376BEcCBA98B17578B17EcE82E6D9E86
-Wormhole - Head Llama Herder
-Knows - Asst. Head Llama Herder
-Naga - Curve Researcher
-Chanho - Curve Researcher
-Fiddy - Curve Team
-Amadeo - Grants Council Member
+### **Llama Risk**
+- Budget: 2m CRV vested over 365 days for operations from Q1 '24 to Q1 '26
+- 3-of-6 multisig: 0xa2482aA1376BEcCBA98B17578B17EcE82E6D9E86
+     - Wormhole - Head Llama Herder
+     - Knows - Asst. Head Llama Herder
+     - Naga - Curve Researcher
+     - Chanho - Curve Researcher
+     - Fiddy - Curve Team
+     - Amadeo - Grants Council Member
 
 Llama Risk currently consists of managers Wormhole and Knows, technical lead Marin, legal counsel Svetlin and our Llama Risk analyst team. 
 
-**Curve Analytics**
-Budget: 2m CRV vested over 365 days for operations from Q1 '24 to Q1 '26
-2-of-3 multisig: 0xAeF6ea60f6443BAD046E825C1d2b0C0B5eBC1f16
-Benny - Curve Monitor Lead
-Alunara - Curve Monitor front end
-Phillip - Curve Monitor back end
+### **Curve Analytics**
+- Budget: 2m CRV vested over 365 days for operations from Q1 '24 to Q1 '26
+- 2-of-3 multisig: 0xAeF6ea60f6443BAD046E825C1d2b0C0B5eBC1f16
+     - Benny - Curve Monitor Lead
+     - Alunara - Curve Monitor front end
+     - Phillip - Curve Monitor back end
 
 Curve Analytics currently consists of developers Benny, Alunara, and Phillip.
 
-**Dev Tooling**
-Budget: 2m CRV vested over 365 days for operations from Q1 '24 to Q1 '26
+### **Dev Tooling**
+- Budget: 2m CRV vested over 365 days for operations from Q1 '24 to Q1 '26
 
-**Curve Ventures**
-Budget: 20m CRV vested over 365 days for operations from Q1 '24 to Q1 '26
+### **Curve Ventures**
+- Budget: 20m CRV vested over 365 days for operations from Q1 '24 to Q1 '26
