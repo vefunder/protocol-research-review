@@ -64,3 +64,15 @@ Curve Analytics currently consists of developers Benny, Alunara, and Phillip.
 
 ### **Curve Ventures**
 - Budget: 20m CRV vested over 365 days for operations from Q1 '24 to Q1 '26
+- [TODO: multisig]
+
+**Responsibilities**
+
+Curve Ventures will invest in Curve ecosystem projects that have a token and continue a relationship with its portfolio projects to support their success. The sub-DAO will have fixed operational costs to pay manager salaries, but otherwise, the CRV in its treasury will be used to purchase a stake in Curve ecosystem projects. It seeks to earn a return on its initial investment for the benefit of the Curve DAO. Profits from its activities belong to the Curve DAO to be directed either to the treasury or tokenholders as the DAO sees fit. 
+- funding projects that are aligned with the long-term growth of the Curve ecosystem
+- provide guidance on integration (pool parameter setting, oracle use, working with Vyper contracts, etc.) & technical support (for instance on migrating to Vyper if the team wants to do solidity)
+- feedback on protocol design 
+- recommendations on security, quality audit firms
+- access to a network within the larger curve ecosystem and community engagement
+- seal of approval from the curve brand
+
