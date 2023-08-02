@@ -15,7 +15,7 @@ The vests will fund operations for each sub-DAO for a period of 2 years from Q1 
 
 Vests can be initiated by calling `deploy_vesting_contract()` to the Vesting Escrow Factory with a minimum duration of 365 days. The DAO can disable the vest by calling `toggle_disable()` on the deployed Simple Vesting Escrow contract during the vesting period.  
 
-Each sub-DAO will receive their vest to a multisig composed of trusted individuals working in the respective discipline. Some of these sub-DAOs already have a long history working on behalf of the DAO (Curve Research, Llama Risk, and Curve Analytics) and some proposed sub-DAOs will be newly created as part of this proposal (Dev Tooling and Curve Ventures). The responsibilities of each sub-DAO is described in the Specifications section.
+Each sub-DAO will receive their vest to a multisig composed of trusted individuals working in the respective discipline. Some of these sub-DAOs already have a long history working on behalf of the DAO (Curve Research, Llama Risk, and Curve Analytics) and some proposed sub-DAOs will be newly created as part of this proposal (Dev Tooling and Curve Ventures). The responsibilities of each sub-DAO are described in the Specifications section.
  
 ## **Motivation**:
 
@@ -35,8 +35,8 @@ Note that the proposed sub-DAO model is not intended to supersede the existing G
     - Fiddy - Curve Team
     - PilotVietnam - Curve Team
     - Michael - Curve Founder
-
-The Curve Research Sub-DAO currently consists of researchers Chanho, Naga, 0xStan, 0xMc, and Paco with additional support from Xenophon Labs.
+- Team: The Curve Research Sub-DAO currently consists of researchers Chanho, Naga, 0xStan, 0xMc, and Paco with additional support from Xenophon Labs.
+- [TODO: responsibilities]
 
 ### **Llama Risk**
 - Budget: 2m CRV vested over 365 days for operations from Q1 '24 to Q1 '26
@@ -47,8 +47,13 @@ The Curve Research Sub-DAO currently consists of researchers Chanho, Naga, 0xSta
      - Chanho - Curve Researcher
      - Fiddy - Curve Team
      - Amadeo - Grants Council Member
-
-Llama Risk currently consists of managers Wormhole and Knows, technical lead Marin, legal counsel Svetlin and our Llama Risk analyst team. 
+- Team: Llama Risk currently consists of managers Wormhole and Knows, technical lead Marin, legal counsel Svetlin, and our Llama Risk analyst team.
+- Responsibilities: Llama Risk conducts risk assessments and analysis relevant to Curve and its LPs. It began its operations in Q4 '21 as a community initiative and has been operating as a DAO-funded non-profit since then. It typically reviews stablecoin and LSD protocols that have Curve pools and has recently begun assessing existing and prospective collateral types for crvUSD. In addition to its own in-house assessments, it works with third-party risk and analytics teams to provide relevant risk-related services to Curve. It has also recently begun work in regulatory affairs to help regulators understand the state of DeFi and the projects building in it.
+     - Investigate and publish risk assessments relevant to Curve DAO, LPs, and crvUSD users
+     - Point of contact with protocol teams integrating with Curve
+     - DAO housekeeping- monitor the state of gauges and DAO votes for issues requiring action
+     - Regulatory Affairs- outreach with regulators and web3 working groups
+     - Fund risk analysis teams to provide dashboards/analytics for Curve users 
 
 ### **Curve Analytics**
 - Budget: 2m CRV vested over 365 days for operations from Q1 '24 to Q1 '26
@@ -56,23 +61,24 @@ Llama Risk currently consists of managers Wormhole and Knows, technical lead Mar
      - Benny - Curve Monitor Lead
      - Alunara - Curve Monitor front end
      - Phillip - Curve Monitor back end
-
-Curve Analytics currently consists of developers Benny, Alunara, and Phillip.
+- Team: Curve Analytics currently consists of developers Benny, Alunara, and Phillip.
+- [TODO: responsibilities]
 
 ### **Dev Tooling**
 - Budget: 2m CRV vested over 365 days for operations from Q1 '24 to Q1 '26
+- [TODO: multisig]
+- [TODO: team]
+- [TODO: responsibilities]
 
 ### **Curve Ventures**
 - Budget: 20m CRV vested over 365 days for operations from Q1 '24 to Q1 '26
 - [TODO: multisig]
-
-**Responsibilities**
-
-Curve Ventures will invest in Curve ecosystem projects that have a token and continue a relationship with its portfolio projects to support their success. The sub-DAO will have fixed operational costs to pay manager salaries, but otherwise, the CRV in its treasury will be used to purchase a stake in Curve ecosystem projects. It seeks to earn a return on its initial investment for the benefit of the Curve DAO. Profits from its activities belong to the Curve DAO to be directed either to the treasury or tokenholders as the DAO sees fit. 
-- funding projects that are aligned with the long-term growth of the Curve ecosystem
-- provide guidance on integration (pool parameter setting, oracle use, working with Vyper contracts, etc.) & technical support (for instance on migrating to Vyper if the team wants to do solidity)
-- feedback on protocol design 
-- recommendations on security, quality audit firms
-- access to a network within the larger curve ecosystem and community engagement
-- seal of approval from the curve brand
+- [TODO: team]
+- Responsibilities: Curve Ventures will invest in Curve ecosystem projects that have a token and continue a relationship with its portfolio projects to support their success. The sub-DAO will have fixed operational costs to pay manager salaries, but otherwise, the CRV in its treasury will be used to purchase a stake in Curve ecosystem projects. It seeks to earn a return on its initial investment for the benefit of the Curve DAO. Profits from its activities belong to the Curve DAO to be directed either to the treasury or tokenholders as the DAO sees fit. 
+    - funding projects that are aligned with the long-term growth of the Curve ecosystem
+    - provide guidance on integration (pool parameter setting, oracle use, working with Vyper contracts, etc.) & technical support (for instance on migrating to Vyper if the team wants to do solidity)
+    - feedback on protocol design 
+    - recommendations on security, quality audit firms
+    - access to a network within the larger curve ecosystem and community engagement
+    - seal of approval from the curve brand
 
