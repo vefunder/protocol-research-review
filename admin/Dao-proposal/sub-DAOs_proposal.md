@@ -62,7 +62,15 @@ Note that the proposed sub-DAO model is not intended to supersede the existing G
      - Alunara - Curve Monitor front end
      - Phillip - Curve Monitor back end
 - Team: Curve Analytics currently consists of developers Benny, Alunara, and Phillip.
-- [TODO: responsibilities]
+- The Analytics team was established in Q2 '23 with the objective of providing open, transparent and reliable data streams encompassing all aspects of the Curve ecosystem. Our work includes the development of an analytics platform <a href="http://www.curvemonitor.com">Curve Monitor<a/>, which offers real time dashboards featuring pool metrics, MEV monitoring, revenue tracking, and information on crvUSD rates and markets. Additionally, we are responsible for developing and maintaining back-end services which are used by Curve's official front-end, Curve sub-DAOs and third party protocols working within the Curve ecosystem. We also maintain bots on messaging apps that provide real time tracking of user activity and MEV on Curve.
+     - Develop and maintain user-facing analytics services through Curve Monitor and messaging app bots.
+     - Develop and maintain back-end API services (such as curve-prices API, Llama Airforce API, subgraphs), ensuring their reliability and performance while providing detailed, up-to-date documentation for each.
+     - Collaborate with the Curve core team, Curve sub-DAOs, third party protocols and the wider Curve community to ascertain existing and upcoming data requirements, as well as gather feedback for potential improvements to Curve Monitor and other analytics services.
+     - Conduct regular reviews and audits of the data presented to ensure its accuracy.
+     - Monitor inaccurate Curve-related metrics on other platforms and liaise with said platforms to provide corrections when needed.
+     - Use data to provide insights and reports on MEV, gas usage, user behavior, etc. to core team and DAO.
+     - Maintain an open codebase and onboard new analysts and contributors
+
 
 ### **Dev Tooling**
 - Budget: 2m CRV vested over 365 days for operations from Q1 '24 to Q1 '26
