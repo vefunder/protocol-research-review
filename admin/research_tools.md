@@ -21,5 +21,7 @@
 * Onchain analytics: breadcrumbs.app https://www.breadcrumbs.app/
 * AML onchain analytics: misttrack.io https://misttrack.io/
 * Human readable block explorer: https://www.onceupon.gg/
-* Chain analytics/comparisons: https://www.artemis.xyz/ 
+* Chain analytics/comparisons: https://www.artemis.xyz/
+* Address/tx analysis: https://metasleuth.io/
+* Contract storage with timeline: https://evm.storage/
 
