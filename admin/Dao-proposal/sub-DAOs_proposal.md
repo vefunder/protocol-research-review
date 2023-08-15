@@ -7,25 +7,28 @@ This proposal is to create multiple CRV vests from the [Curve Community Fund](ht
 - Curve Risk | 2m CRV
 - Curve Analytics | 2m CRV
 - Dev Tooling | 2m CRV
-- Curve Ventures | 20m CRV
 
 The vests will fund operations for each sub-DAO for a period of 2 years from Q1 '24 until Q1 '26.
 
 ## **Abstract**:
 
-Vests can be initiated by calling `deploy_vesting_contract()` to the Vesting Escrow Factory with a minimum duration of 365 days. The DAO can disable the vest by calling `toggle_disable()` on the deployed Simple Vesting Escrow contract during the vesting period.  
+The responsibilities of each sub-DAO are described in the Specifications section. In general, each sub-DAO will fund its own core operations as well as other teams and projects working within the Curve ecosystem. At times there may be crossover between each sub-DAO's area of focus, in which case multiple sub-DAOs may coordinate on funding and project management responsibilities. As a recent example, Llama Risk, Curve Research, and Curve Monitor recently worked together to manage a project by Xenophon Labs to conduct research on predicting stablecoin depegs with deliverables being a research paper and API that could be integrated into a risk dashboard.  
 
-Each sub-DAO will receive their vest to a multisig composed of trusted individuals working in the respective discipline. Some of these sub-DAOs already have a long history working on behalf of the DAO (Curve Research, Llama Risk, and Curve Analytics) and some proposed sub-DAOs will be newly created as part of this proposal (Dev Tooling and Curve Ventures). The responsibilities of each sub-DAO are described in the Specifications section.
- 
+Each sub-DAO will receive a vest to a multisig composed of trusted individuals working in the respective discipline. Some of these sub-DAOs already have a long history working on behalf of the DAO (Curve Research, Llama Risk, and Curve Analytics) and one proposed sub-DAO will be newly created as part of this proposal (Dev Tooling). The CRV will vest linearly over 365 days as per the requirement of the Community Fund, and the DAO retains the right to cancel the remainder of the vest at any point.
+
 ## **Motivation**:
 
-Over the years, we have recognized an apparent need for various departments to support the continued development of Curve. The current funding process for these groups involves proposing a scope of work to the Curve Grant Council to periodically secure budgets, usually on a quarterly or annual basis depending on the requested budget size. There are a couple of downsides to this approach: less direct oversight of sub-DAOs from the Curve DAO directly and less certainty about continued sub-DAO funding.
+Over the years, we have recognized an apparent need for various departments to support the continued development of Curve. The current funding process for these groups involves proposing a scope of work to the Curve Grant Council to periodically secure budgets, usually on a quarterly or annual basis depending on the requested budget size. There are a couple of downsides to this approach: less direct oversight of sub-DAOs from the Curve DAO directly and less certainty about continued funding for these essential groups.
 
 This alternative approach would give sub-DAOs greater autonomy, not only to conduct their own internal operations but also to additionally fund other projects related to their focus area. They would be allocated a discretionary budget to act as a discipline-focused grant council. For instance, independent teams conducting Curve research could petition the Curve Research sub-DAO for funding their project. The expectation is that teams coordinating in this way, within a particular discipline, are better suited to recognize value adds and produce useful collaborations. Well-managed sub-DAOs should attract talent within the community and experience contributor growth.
 
 Note that the proposed sub-DAO model is not intended to supersede the existing Grant Council. Rather sub-DAOs are meant to supplement it by making more opportunities available to potential Curve contributors.
 
 ## **Specification**:
+
+Vests can be initiated by calling `deploy_vesting_contract()` to the Vesting Escrow Factory with a minimum duration of 365 days. The DAO can disable the vest by calling `toggle_disable()` on the deployed Simple Vesting Escrow contract during the vesting period. 
+
+Details about each proposed sub-DAO are below:
 
 ### **Curve Research**
 - Budget: 6m CRV vested over 365 days for operations from Q1 '24 to Q1 '26
@@ -73,25 +76,17 @@ Note that the proposed sub-DAO model is not intended to supersede the existing G
 
 
 ### **Dev Tooling**
-- Budget: 2m CRV vested over 365 days for operations from Q1 '24 to Q1 '26
+- **Budget**: 2m CRV vested over 365 days for operations from Q1 '24 to Q1 '26
 - 3-of-5 multisig [TODO: multisig]
      - Fiddy - Curve Dev Tooling Lead
      - Charles - Vyper Dev
      - Fubuloubu - Vyper and ApeWorx Dev
      - Wavey - Yearn Dev
      - Pascal - Vyper (Snekmate) Dev
-- [TODO: team]
-- [TODO: responsibilities]
-
-### **Curve Ventures**
-- Budget: 20m CRV vested over 365 days for operations from Q1 '24 to Q1 '26
-- [TODO: multisig]
-- [TODO: team]
-- Responsibilities: Curve Ventures will invest in Curve ecosystem projects that have a token and continue a relationship with its portfolio projects to support their success. The sub-DAO will have fixed operational costs to pay manager salaries, but otherwise, the CRV in its treasury will be used to purchase a stake in Curve ecosystem projects. It seeks to earn a return on its initial investment for the benefit of the Curve DAO. Profits from its activities belong to the Curve DAO to be directed either to the treasury or tokenholders as the DAO sees fit. 
-    - funding projects that are aligned with the long-term growth of the Curve ecosystem
-    - provide guidance on integration (pool parameter setting, oracle use, working with Vyper contracts, etc.) & technical support (for instance on migrating to Vyper if the team wants to do solidity)
-    - feedback on protocol design 
-    - recommendations on security, quality audit firms
-    - access to a network within the larger curve ecosystem and community engagement
-    - seal of approval from the curve brand
+- **Team**: Dev Tooling will be a newly formed group composed of developers working within the Curve ecosystem.
+- **Responsibilities**: Dev Tooling intends to support developers building essential tooling for Curve including Vyper, ApeWorx, and others. The group will identify the most significant needs and manage the allocation of funds toward creating and maintaining such tools. Its priority is to ensure Vyper is adequately funded and supervise its development, as the programming language is a core technology underpinning Curve.
+     - Coordinate with teams and people building tooling for Curve
+     - Allocate funds toward developers, audits, and bug bounty programs as needed
+     - Supervise progress of teams receiving funding
+     - Monitor for future dev tooling needs and proactively explore suitability for Curve 
 
