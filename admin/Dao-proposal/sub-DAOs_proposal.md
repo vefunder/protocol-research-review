@@ -12,9 +12,13 @@ The vests will fund operations for each sub-DAO for a period of 2 years from Q1 
 
 ## **Abstract**:
 
-The responsibilities of each sub-DAO are described in the Specifications section. In general, each sub-DAO will fund its own core operations as well as other teams and projects working within the Curve ecosystem. At times there may be crossover between each sub-DAO's area of focus, in which case multiple sub-DAOs may coordinate on funding and project management responsibilities. As a recent example, Llama Risk, Curve Research, and Curve Monitor recently worked together to manage a project by Xenophon Labs to conduct research on predicting stablecoin depegs with deliverables being a research paper and API that could be integrated into a risk dashboard.  
+The responsibilities of each sub-DAO are described in the Specifications section. In general, each sub-DAO will fund its own core operations as well as other teams and projects working within the Curve ecosystem. At times there may be a crossover between each sub-DAO's area of focus, in which case multiple sub-DAOs may coordinate on funding and project management responsibilities. As a recent example, Llama Risk, Curve Research, and Curve Monitor recently worked together to manage a project by Xenophon Labs to conduct research on predicting stablecoin depegs with deliverables being a research paper and API that could be integrated into a risk dashboard.  
 
 Each sub-DAO will receive a vest to a multisig composed of trusted individuals working in the respective discipline. Some of these sub-DAOs already have a long history working on behalf of the DAO (Curve Research, Llama Risk, and Curve Analytics) and one proposed sub-DAO will be newly created as part of this proposal (Dev Tooling). The CRV will vest linearly over 365 days as per the requirement of the Community Fund, and the DAO retains the right to cancel the remainder of the vest at any point.
+
+In case not all funds have been used by Q1 '26, sub-DAOs will either return the remainder to the Curve community fund or roll the remaining funds over to a subsequent round, pending DAO approval. Furthermore, any revenue generated from sub-DAO activity will be converted into CRV and sent to the Curve community fund. Each sub-DAO is primarily a public good, although they may at times be contracted for consultancy or other services by a third party. In such cases, the revenue they generate from activities related to the sub-DAO rightfully belongs to the DAO.
+
+Each sub-DAO is responsible for any legal wrapper they require to conduct their operations and handling the IP ownership for any product produced by the sub-DAO. Each sub-DAO is expected to share quarterly operations updates to ensure continued accountability to the DAO. 
 
 ## **Motivation**:
 
@@ -31,27 +35,33 @@ Vests can be initiated by calling `deploy_vesting_contract()` to the Vesting Esc
 Details about each proposed sub-DAO are below:
 
 ### **Curve Research**
-- Budget: 6m CRV vested over 365 days for operations from Q1 '24 to Q1 '26
-- 3-of-5 multisig: 0x2Ba80b37e0beF5c92A0C3cb780f8583372D773Ac
+- **Budget**: 10m CRV vested over 365 days for operations from Q1 '24 to Q1 '26. Estimated USD-denominated budget required is $2m/year
+- **3-of-5 multisig**: 0x2Ba80b37e0beF5c92A0C3cb780f8583372D773Ac
     - Naga - Curve Researcher
     - Chanho - Curve Researcher 
     - Fiddy - Curve Team
     - PilotVietnam - Curve Team
     - Michael - Curve Founder
-- Team: The Curve Research Sub-DAO currently consists of researchers Chanho, Naga, 0xStan, 0xMc, and Paco with additional support from Xenophon Labs.
-- [TODO: responsibilities]
+- **Team**: The Curve Research Sub-DAO currently consists of researchers Chanho, Naga, 0xStan, 0xMc, and Paco with additional support from Xenophon Labs.
+- **Responsibilities**: Curve research identifies and focuses on high-impact quantitative initiatives throughout the Curve ecosystem. In addition to providing the Curvesim simulation tool to ease analysis and integration with Curve, the research team liaisons with multiple Curve ecosystem participants to help configure Curve products and resolve quantitative issues arising from unexpected market events. Finally, Curve Research aims to improve users' understanding and usage of Curve products by publishing user guides, explainers, and market-relevant analyses.
+     - Develop and maintain the Curvesim simulation package
+     - Perform simulations and risk assessments of parameter change proposals
+     - Liaison with other protocols to optimize parameters for new and already-existing pools
+     - Collaborate with Llama Risk, Curve Analytics, and third-party research teams on quantitative aspects of their respective work
+     - Publish practical guides and in-depth explainers of Curve products, as well as quantitative analyses of developments in the Curve ecosystem
+
 
 ### **Curve Risk**
-- Budget: 2m CRV vested over 365 days for operations from Q1 '24 to Q1 '26
-- 3-of-6 multisig: 0xa2482aA1376BEcCBA98B17578B17EcE82E6D9E86
+- **Budget**: 5m CRV vested over 365 days for operations from Q1 '24 to Q1 '26. Estimated USD-denominated budget is $1m/year
+- **3-of-6 multisig**: 0xa2482aA1376BEcCBA98B17578B17EcE82E6D9E86
      - Wormhole - Head Llama Herder
      - Knows - Asst. Head Llama Herder
      - Naga - Curve Researcher
      - Chanho - Curve Researcher
      - Fiddy - Curve Team
      - Amadeo - Grants Council Member
-- Team: Llama Risk currently consists of managers Wormhole and Knows, technical lead Marin, legal counsel Svetlin, and our Llama Risk analyst team.
-- Responsibilities: Llama Risk conducts risk assessments and analysis relevant to Curve and its LPs. It began its operations in Q4 '21 as a community initiative and has been operating as a DAO-funded non-profit since then. It typically reviews stablecoin and LSD protocols that have Curve pools and has recently begun assessing existing and prospective collateral types for crvUSD. In addition to its own in-house assessments, it works with third-party risk and analytics teams such as Xenophon Labs and Chaos Labs to provide relevant risk-related services to Curve. It has also recently begun work in regulatory affairs to help regulators understand the state of DeFi and the projects building in it.
+- **Team**: Llama Risk currently consists of managers Wormhole and Knows, technical lead Marin, legal counsel Svetlin, and our Llama Risk analyst team.
+- **Responsibilities**: Llama Risk conducts risk assessments and analysis relevant to Curve and its LPs. It began its operations in Q4 '21 as a community initiative and has been operating as a DAO-funded non-profit since then. It typically reviews stablecoin and LSD protocols that have Curve pools and has recently begun assessing existing and prospective collateral types for crvUSD. In addition to its own in-house assessments, it works with third-party risk and analytics teams such as Xenophon Labs and Chaos Labs to provide relevant risk-related services to Curve. It has also recently begun work in regulatory affairs to help regulators understand the state of DeFi and the projects building in it.
      - Investigate and publish risk assessments relevant to Curve DAO, LPs, and crvUSD users
      - Point of contact with protocol teams integrating with Curve
      - DAO housekeeping- monitor the state of gauges and DAO votes for issues requiring action
@@ -59,13 +69,13 @@ Details about each proposed sub-DAO are below:
      - Fund risk analysis teams to provide dashboards/analytics for Curve users 
 
 ### **Curve Analytics**
-- Budget: 2m CRV vested over 365 days for operations from Q1 '24 to Q1 '26
-- 2-of-3 multisig: 0xAeF6ea60f6443BAD046E825C1d2b0C0B5eBC1f16
+- **Budget**: 5m CRV vested over 365 days for operations from Q1 '24 to Q1 '26. Estimated USD-denominated budget required is $1m/year
+- **2-of-3 multisig**: 0xAeF6ea60f6443BAD046E825C1d2b0C0B5eBC1f16
      - Benny - Curve Monitor Lead
      - Alunara - Curve Monitor front end
      - Phillip - Curve Monitor back end
-- Team: Curve Analytics currently consists of developers Benny, Alunara, and Phillip.
-- Responsibilities: The Analytics team was established in Q2 '23 with the objective of providing open, transparent, and reliable data streams encompassing all aspects of the Curve ecosystem. Our work includes the development of an analytics platform <a href="http://www.curvemonitor.com">Curve Monitor<a/>, which offers real-time dashboards featuring pool metrics, MEV monitoring, revenue tracking, and information on crvUSD rates and markets. Additionally, we are responsible for developing and maintaining back-end services which are used by Curve's official front-end, Curve sub-DAOs, and third-party protocols working within the Curve ecosystem. We also maintain bots on messaging apps that provide real-time tracking of user activity and MEV on Curve.
+- **Team**: Curve Analytics currently consists of developers Benny, Alunara, and Phillip.
+- **Responsibilities**: The Analytics team was established in Q2 '23 with the objective of providing open, transparent, and reliable data streams encompassing all aspects of the Curve ecosystem. Our work includes the development of an analytics platform <a href="http://www.curvemonitor.com">Curve Monitor<a/>, which offers real-time dashboards featuring pool metrics, MEV monitoring, revenue tracking, and information on crvUSD rates and markets. Additionally, we are responsible for developing and maintaining back-end services which are used by Curve's official front-end, Curve sub-DAOs, and third-party protocols working within the Curve ecosystem. We also maintain bots on messaging apps that provide real-time tracking of user activity and MEV on Curve.
      - Develop and maintain user-facing analytics services through Curve Monitor and messaging app bots.
      - Develop and maintain back-end API services (such as curve-prices API, Llama Airforce API, and subgraphs), ensuring their reliability and performance while providing detailed, up-to-date documentation for each.
      - Collaborate with the Curve core team, Curve sub-DAOs, third-party protocols, and the wider Curve community to ascertain existing and upcoming data requirements and gather feedback for potential improvements to Curve Monitor and other analytics services.
@@ -76,10 +86,10 @@ Details about each proposed sub-DAO are below:
 
 
 ### **Dev Tooling**
-- **Budget**: 2m CRV vested over 365 days for operations from Q1 '24 to Q1 '26
-- 3-of-5 multisig [TODO: multisig]
+- **Budget**: 10m CRV vested over 365 days for operations from Q1 '24 to Q1 '26. Estimated USD-denominated budget required is $2m/year
+- **3-of-5 multisig**: [TODO: multisig]
      - Fiddy - Curve Dev Tooling Lead
-     - Charles - Vyper Dev
+     - Charles - Lead Vyper Dev
      - Fubuloubu - Vyper and ApeWorx Dev
      - Wavey - Yearn Dev
      - Pascal - Vyper (Snekmate) Dev
