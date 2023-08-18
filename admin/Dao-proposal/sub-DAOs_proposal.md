@@ -86,15 +86,24 @@ Details about each proposed sub-DAO are below:
 
 
 ### **Dev Tooling**
-- **Budget**: 10m CRV vested over 365 days for operations from Q1 '24 to Q1 '26. Estimated USD-denominated budget required is $2m/year
-- **3-of-5 multisig**: [TODO: multisig]
+- **Budget**: 10m CRV vested over 365 days for operations from Q1 '24 to Q1 '26
+- 3-of-5 multisig [TODO: multisig]
      - Fiddy - Curve Dev Tooling Lead
-     - Charles - Lead Vyper Dev
-     - Fubuloubu - Vyper and ApeWorx Dev
+     - Charles - Vyper + Titanoboa Lead
+     - Fubuloubu - Vyper, Yearn Dev and ApeWorx Founder
      - Wavey - Yearn Dev
      - Pascal - Vyper (Snekmate) Dev
-- **Team**: Dev Tooling will be a newly formed group composed of developers working within the Curve ecosystem.
-- **Responsibilities**: Dev Tooling intends to support developers building essential tooling for Curve including Vyper, ApeWorx, and others. The group will identify the most significant needs and manage the allocation of funds toward creating and maintaining such tools. Its priority is to ensure Vyper is adequately funded and supervise its development, as the programming language is a core technology underpinning Curve.
+- **Team**: Dev Tooling will be a newly formed group composed of developers working within the Curve and Vyper ecosystem.
+- **Responsibilities**: The Dev Tooling group will be responsible for building and maintaining essential tooling for Curve including Vyper, ApeWorx and others. The group will identify the most significant needs and manage the allocation of funds toward creating and maintaining such tools. Its priority is to ensure Vyper is adequately funded and supervise its development, as the programming language and its associated tooling is a core technology underpinning Curve. Currently, funds are planned to be used for the following endeavors:
+     - Fund development and maintenance of the Vyper language and associated Titanoboa interpreter, including bugfixes, maintenance, features and performance improvements
+         - Ongoing, regular audits of the Vyper compiler from multiple tier 1 audit firms (tentatively: ChainSecurity, Statemind, Ottersec and Certora)
+         - Funding support from FV tools and static analyzers, including Certora, Slither, Halmos, Mythril and HEVM
+         - Regular audit/review competitions from Codehawks, Sherlock and Code4rena
+         - Bug bounty programs administered through Immunefi
+     - Otherwise allocating funds toward developers, audits, and bug bounty programs as needed
+     - Supervise progress of teams receiving funding
+     - Coordinate with teams and people building tooling for Curve
+     - Monitor for future dev tooling needs and proactively explore suitability for Curve
      - Coordinate with teams and people building tooling for Curve
      - Allocate funds toward developers, audits, and bug bounty programs as needed
      - Supervise progress of teams receiving funding
