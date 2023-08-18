@@ -3,10 +3,10 @@
 ## **Summary**: 
 
 This proposal is to create multiple CRV vests from the [Curve Community Fund](https://etherscan.io/token/0xD533a949740bb3306d119CC777fa900bA034cd52?a=0xe3997288987e6297ad550a69b31439504f513267) to fund the operations for the following Curve sub-DAOs:
-- Curve Research | 6m CRV
-- Curve Risk | 2m CRV
-- Curve Analytics | 2m CRV
-- Dev Tooling | 2m CRV
+- Curve Research | 10m CRV
+- Curve Risk | 5m CRV
+- Curve Analytics | 5m CRV
+- Dev Tooling | 10m CRV
 
 The vests will fund operations for each sub-DAO for a period of 2 years from Q1 '24 until Q1 '26.
 
