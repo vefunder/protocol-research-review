@@ -1,32 +1,30 @@
-# Proposal to Fund Several Curve Sub-DAOs from the Community Fund
+# Proposal to Fund Several Curve SubDAOs from the Community Fund
 
 ## **Summary**: 
 
-This proposal is to create multiple CRV vests from the [Curve Community Fund](https://etherscan.io/token/0xD533a949740bb3306d119CC777fa900bA034cd52?a=0xe3997288987e6297ad550a69b31439504f513267) to fund the operations for the following Curve sub-DAOs:
+This proposal is to create multiple CRV vests from the [Curve Community Fund](https://etherscan.io/token/0xD533a949740bb3306d119CC777fa900bA034cd52?a=0xe3997288987e6297ad550a69b31439504f513267) to fund the following Curve subDAOs:
 - Curve Research | 10m CRV
 - Curve Risk | 5m CRV
 - Curve Analytics | 5m CRV
 - Dev Tooling | 10m CRV
 
-The vests will fund operations for each sub-DAO for a period of 2 years from Q1 '24 until Q1 '26.
+The vests will fund subDAOs for a period of 2 years from Q1 '24 until Q1 '26.
 
 ## **Abstract**:
 
-The responsibilities of each sub-DAO are described in the Specifications section. In general, each sub-DAO will fund its own core operations as well as other teams and projects working within the Curve ecosystem. At times there may be a crossover between each sub-DAO's area of focus, in which case multiple sub-DAOs may coordinate on funding and project management responsibilities. As a recent example, Llama Risk, Curve Research, and Curve Monitor recently worked together to manage a project by Xenophon Labs to conduct research on predicting stablecoin depegs with deliverables being a research paper and API that could be integrated into a risk dashboard.  
+The responsibilities of each subDAO are described in the Specifications section. In general, each subDAO will fund its own core operations as well as other teams and projects working within the Curve ecosystem. At times there may be a crossover between each subDAO's area of focus, in which case multiple subDAOs may coordinate on funding and project management responsibilities. As a recent example, Llama Risk, Curve Research, and Curve Monitor recently worked together to manage a project by Xenophon Labs to conduct research on predicting stablecoin depegs with deliverables being a research paper and API that could be integrated into a risk dashboard.  
 
-Each sub-DAO will receive a vest to a multisig composed of trusted individuals working in the respective discipline. Some of these sub-DAOs already have a long history working on behalf of the DAO (Curve Research, Llama Risk, and Curve Analytics) and one proposed sub-DAO will be newly created as part of this proposal (Dev Tooling). The CRV will vest linearly over 365 days as per the requirement of the Community Fund, and the DAO retains the right to cancel the remainder of the vest at any point.
+Each subDAO will receive a vest to a multisig composed of trusted individuals working in the respective discipline. Some of these subDAOs already have a long history working on behalf of the DAO (Curve Research, Curve Risk, and Curve Analytics) and one proposed subDAO will be newly created as part of this proposal (Dev Tooling). The CRV will vest linearly over 365 days as per the requirement of the Community Fund, and the DAO retains the right to cancel the remainder of the vest at any point.
 
-In case not all funds have been used by Q1 '26, sub-DAOs will either return the remainder to the Curve community fund or roll the remaining funds over to a subsequent round, pending DAO approval. Furthermore, any revenue generated from sub-DAO activity will be converted into CRV and sent to the Curve community fund. Each sub-DAO is primarily a public good, although they may at times be contracted for consultancy or other services by a third party. In such cases, the revenue they generate from activities related to the sub-DAO rightfully belongs to the DAO.
+In case not all funds have been used by Q1 '26, subDAOs will either return the remainder to the Curve community fund or roll the remaining funds over to a subsequent round, pending DAO approval. Furthermore, any revenue generated from subDAO activity will be converted into CRV and sent to the Curve community fund. Each subDAO is making contributions that would primarily be described as public goods, however, they may at times be contracted for consultancy or other services by a third party. In such cases, the revenue they generate from activities related to the subDAO rightfully belongs to the DAO.
 
-Each sub-DAO is responsible for any legal wrapper they require to conduct their operations and handling the IP ownership for any product produced by the sub-DAO. Each sub-DAO is expected to share quarterly operations updates to ensure continued accountability to the DAO. 
+Each subDAO is responsible for any legal wrapper they require to conduct their operations and handling the IP ownership for any product produced by the subDAO. Each subDAO is expected to share quarterly operations updates to ensure continued accountability to the DAO. 
 
 ## **Motivation**:
 
-Over the years, we have recognized an apparent need for various departments to support the continued development of Curve. The current funding process for these groups involves proposing a scope of work to the Curve Grant Council to periodically secure budgets, usually on a quarterly or annual basis depending on the requested budget size. There are a couple of downsides to this approach: less direct oversight of sub-DAOs from the Curve DAO directly and less certainty about continued funding for these essential groups.
+Over the years, we have recognized an apparent need for various departments to support the continued development of Curve. The current funding process for these groups involves proposing a scope of work to the Curve Grant Council to periodically secure budgets, usually on a quarterly or annual basis depending on the requested budget size. There are a couple of downsides to this approach: less direct oversight of subDAOs from the Curve DAO and less certainty about continued funding for these essential groups. Furthermore, subDAOs are meant to supplement the existing Grants Council by making more opportunities available to potential Curve contributors.
 
-This alternative approach would give sub-DAOs greater autonomy, not only to conduct their own internal operations but also to additionally fund other projects related to their focus area. They would be allocated a discretionary budget to act as a discipline-focused grant council. For instance, independent teams conducting Curve research could petition the Curve Research sub-DAO for funding their project. The expectation is that teams coordinating in this way, within a particular discipline, are better suited to recognize value adds and produce useful collaborations. Well-managed sub-DAOs should attract talent within the community and experience contributor growth.
-
-Note that the proposed sub-DAO model is not intended to supersede the existing Grant Council. Rather sub-DAOs are meant to supplement it by making more opportunities available to potential Curve contributors.
+This alternative approach would give subDAOs greater autonomy, not only to conduct their own internal operations but also to fund other projects related to their focus area. They would be allocated a discretionary budget to act as a discipline-focused grant council. For instance, independent teams conducting Curve research could petition the Curve Research subDAO for funding their project. The expectation is that teams coordinating in this way, within a particular discipline, are better suited to recognize value adds and produce useful collaborations. Well-managed subDAOs should attract talent within the community and experience contributor growth.
 
 ## **Specification**:
 
@@ -35,7 +33,7 @@ Vests can be initiated by calling `deploy_vesting_contract()` to the Vesting Esc
 Details about each proposed sub-DAO are below:
 
 ### **Curve Research**
-- **Budget**: 10m CRV vested over 365 days for operations from Q1 '24 to Q1 '26. Estimated USD-denominated budget required is $2m/year
+- **Budget**: 10m CRV vested over 365 days for operations from Q1 '24 to Q1 '26.
 - **3-of-5 multisig**: 0x2Ba80b37e0beF5c92A0C3cb780f8583372D773Ac
     - Naga - Curve Researcher
     - Chanho - Curve Researcher 
@@ -52,7 +50,7 @@ Details about each proposed sub-DAO are below:
 
 
 ### **Curve Risk**
-- **Budget**: 5m CRV vested over 365 days for operations from Q1 '24 to Q1 '26. Estimated USD-denominated budget is $1m/year
+- **Budget**: 5m CRV vested over 365 days for operations from Q1 '24 to Q1 '26.
 - **3-of-6 multisig**: 0xa2482aA1376BEcCBA98B17578B17EcE82E6D9E86
      - Wormhole - Head Llama Herder
      - Knows - Asst. Head Llama Herder
@@ -69,7 +67,7 @@ Details about each proposed sub-DAO are below:
      - Fund risk analysis teams to provide dashboards/analytics for Curve users 
 
 ### **Curve Analytics**
-- **Budget**: 5m CRV vested over 365 days for operations from Q1 '24 to Q1 '26. Estimated USD-denominated budget required is $1m/year
+- **Budget**: 5m CRV vested over 365 days for operations from Q1 '24 to Q1 '26.
 - **2-of-3 multisig**: 0xAeF6ea60f6443BAD046E825C1d2b0C0B5eBC1f16
      - Benny - Curve Monitor Lead
      - Alunara - Curve Monitor front end
@@ -101,11 +99,9 @@ Details about each proposed sub-DAO are below:
          - Regular audit/review competitions from Codehawks, Sherlock and Code4rena
          - Bug bounty programs administered through Immunefi
      - Otherwise allocating funds toward developers, audits, and bug bounty programs as needed
-     - Supervise progress of teams receiving funding
+     - Supervise the progress of teams receiving funding
      - Coordinate with teams and people building tooling for Curve
      - Monitor for future dev tooling needs and proactively explore suitability for Curve
-     - Coordinate with teams and people building tooling for Curve
      - Allocate funds toward developers, audits, and bug bounty programs as needed
-     - Supervise progress of teams receiving funding
-     - Monitor for future dev tooling needs and proactively explore suitability for Curve 
+  
 
