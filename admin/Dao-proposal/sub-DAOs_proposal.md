@@ -6,17 +6,19 @@ This proposal is to create multiple CRV vests from the [Curve Community Fund](ht
 - Curve Research | 10m CRV
 - Curve Risk | 5m CRV
 - Curve Analytics | 5m CRV
-- Dev Tooling | 10m CRV
+- Dev Tools | 10m CRV
 
 The vests will fund subDAOs for a period of 2 years from Q1 '24 until Q1 '26.
 
 ## **Abstract**:
 
-The responsibilities of each subDAO are described in the Specifications section. In general, each subDAO will fund its core operations and other teams and projects working within the Curve ecosystem. At times there may be a crossover between each subDAO's area of focus, in which case multiple subDAOs may coordinate on funding and project management responsibilities. For example, Llama Risk, Curve Research, and Curve Monitor recently worked together to manage a project by Xenophon Labs to conduct research on predicting stablecoin depegs with deliverables being a research paper and API that could be integrated into a risk dashboard (see: [arvix](https://arxiv.org/abs/2306.10612), [github](https://github.com/xenophonlabs/curve-lp-metrics/tree/1a62de3bce4962c2be09676e996ea927fd5714ed), [tweet](https://twitter.com/XenophonLabs/status/1671549347174154242)).  
+The responsibilities of each subDAO are described in the Specifications section. In general, each subDAO will fund its core operations and other teams and projects working within the Curve ecosystem. At times there may be a crossover between each subDAO's area of focus, in which case multiple subDAOs may coordinate on funding and project management responsibilities. For example, Llama Risk, Curve Research, and Curve Monitor recently worked together to manage a project by Xenophon Labs, conducting research on predicting stablecoin depegs with deliverables being a research paper and API that could be integrated into a risk dashboard (see: [arvix](https://arxiv.org/abs/2306.10612), [github](https://github.com/xenophonlabs/curve-lp-metrics/tree/1a62de3bce4962c2be09676e996ea927fd5714ed), [tweet](https://twitter.com/XenophonLabs/status/1671549347174154242)).  
 
 Each subDAO will receive a vest to a multisig composed of trusted individuals working in the respective discipline. Some of these subDAOs already have a long history working on behalf of the DAO (Curve Research, Curve Risk, and Curve Analytics). The Dev Tools subDAO has been recently created, as seen in the [announcement](https://gov.curve.fi/t/introducing-the-dev-tools-subdao/9565). The CRV will vest linearly over 365 days from the Community Fund, and the DAO retains the right to cancel the remainder of the vest at any point. In case not all funds have been used by Q1 '26, subDAOs agree to either return the remainder to the Curve community fund or roll the remaining funds over to a subsequent round, pending DAO approval.
 
-Each subDAO is responsible for any legal wrapper they require to conduct their operations and handling the IP ownership for any product produced by the subDAO. Each subDAO is expected to share quarterly operations updates to ensure continued accountability to the DAO. 
+Each subDAO is expected to ensure continued accountability to the DAO by being available for feedback and making appropriate transparency efforts. Details of subDAO operations, including expenditures, operations, and accomplishments, should be publicly shared on a quarterly basis.
+
+Each subDAO is responsible for any legal wrapper they require to conduct their operations and handling the IP ownership for any product produced by the subDAO. Llama Risk legal counsel, Svetlin, is currently conducting comprehensive research into potential legal structures for subDAOs in several jurisdictions. This will cover U.S. legal structures, European legal structures, and offshore jurisdictions. The research will delve into the requirements, benefits, and drawbacks of each legal entity and will give an overview and comparison of different legal structures, addressing key aspects such as formation requirements, decision-making, liability and duties of members, and tax implications.
 
 ## **Motivation**:
 
@@ -26,7 +28,7 @@ This alternative approach would give subDAOs greater autonomy, not only to condu
 
 ## **Specification**:
 
-Vests can be initiated by calling `deploy_vesting_contract()` to the Vesting Escrow Factory with a minimum duration of 365 days. The DAO can disable the vest by calling `toggle_disable()` on the deployed Simple Vesting Escrow contract during the vesting period. 
+Vests can be initiated by calling `deploy_vesting_contract()` to the [Vesting Escrow Factory](https://etherscan.io/address/0xe3997288987e6297ad550a69b31439504f513267) with a minimum duration of 365 days. The DAO can disable the vest by calling `toggle_disable()` on the deployed Simple Vesting Escrow contract during the vesting period. 
 
 Details about each proposed sub-DAO are below:
 
@@ -87,16 +89,16 @@ Details about each proposed sub-DAO are below:
 - **3-of-6 multisig**: 0x637351b0a32bC7bb7F6A19686a76D84233710Ad9
      - Fiddy - Curve Dev Tools Lead
      - Charles - Vyper + Titanoboa Lead
-     - Fubuloubu - Vyper, Yearn Dev and ApeWorx Founder
+     - Fubuloubu - Vyper, Yearn Dev, and ApeWorx Founder
      - Wavey - Yearn Dev
      - Pascal - Vyper (Snekmate) Dev
      - Wormhole - Dev Tools Advisor
 - **Team**: Dev Tools will be a newly formed group composed of developers working within the Curve and Vyper ecosystem.
-- **Responsibilities**: The Dev Tools group will be responsible for building and maintaining essential tooling for Curve including Vyper, ApeWorx and others. The group will identify the most significant needs and manage the allocation of funds toward creating and maintaining such tools. Its priority is to ensure Vyper is adequately funded and supervise its development, as the programming language and its associated tooling is a core technology underpinning Curve. Currently, funds are planned to be used for the following endeavors:
-     - Fund development and maintenance of the Vyper language and associated Titanoboa interpreter, including bugfixes, maintenance, features and performance improvements
-         - Ongoing, regular audits of the Vyper compiler from multiple tier 1 audit firms (tentatively: ChainSecurity, Statemind, Ottersec and Certora)
-         - Funding support from FV tools and static analyzers, including Certora, Slither, Halmos, Mythril and HEVM
-         - Regular audit/review competitions from Codehawks, Sherlock and Code4rena
+- **Responsibilities**: The Dev Tools group will be responsible for building and maintaining essential tooling for Curve including Vyper, ApeWorx, and others. The group will identify the most significant needs and manage the allocation of funds toward creating and maintaining such tools. Its priority is to ensure Vyper is adequately funded and supervises its development, as the programming language and its associated tooling is a core technology underpinning Curve. Currently, funds are planned to be used for the following endeavors:
+     - Fund development and maintenance of the Vyper language and associated Titanoboa interpreter, including bugfixes, maintenance, features, and performance improvements
+         - Ongoing, regular audits of the Vyper compiler from multiple tier 1 audit firms (tentatively: ChainSecurity, Statemind, Ottersec, and Certora)
+         - Funding support from FV tools and static analyzers, including Certora, Slither, Halmos, Mythril, and HEVM
+         - Regular audit/review competitions from Codehawks, Sherlock, and Code4rena
          - Bug bounty programs administered through Immunefi
      - Otherwise allocating funds toward developers, audits, and bug bounty programs as needed
      - Supervise the progress of teams receiving funding
